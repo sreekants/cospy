@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_ground</Name>
+<Class>Grounding</Class>
+<Module>maritime.conduct.grounding.Grounding</Module>
+<Description>Event handler for ground</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Grounding.py</SourceFile>
+<SourceLine>64</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>rule_ctxt</Name>
+<Type></Type>
+<Description>Rule context</Description>
+</Argument>
+<Argument>
+<Name>info</Name>
+<Type></Type>
+<Description>String of name-value pair attributes</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Opaque argument passed to the callback</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

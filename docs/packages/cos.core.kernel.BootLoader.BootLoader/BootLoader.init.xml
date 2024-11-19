@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>init</Name>
+<Class>BootLoader</Class>
+<Module>cos.core.kernel.BootLoader</Module>
+<Description>Initializes the simulation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BootLoader.py</SourceFile>
+<SourceLine>93</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>sim</Name>
+<Type></Type>
+<Description>Reference ot the simulation</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

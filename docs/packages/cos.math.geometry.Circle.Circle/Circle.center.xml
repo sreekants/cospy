@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>center</Name>
+<Class>Circle</Class>
+<Module>cos.math.geometry.Circle</Module>
+<Description>Returns the center</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Circle.py</SourceFile>
+<SourceLine>27</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

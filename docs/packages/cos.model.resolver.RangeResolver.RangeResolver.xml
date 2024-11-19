@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>RangeResolver</Name>
+<Description>Implementation of the RangeResolver class</Description>
+<SourceFile>RangeResolver.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.model.resolver.RangeResolver</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

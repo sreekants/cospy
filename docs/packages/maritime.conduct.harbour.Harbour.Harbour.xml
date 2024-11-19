@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Harbour</Name>
+<Description>Implementation of the Harbour class</Description>
+<SourceFile>Harbour.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>maritime.conduct.harbour.Harbour</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>maritime.conduct.harbour.Harbour.Harbour/Harbour.on_start</OutputFile>
+</Function>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.conduct.harbour.Harbour.Harbour/Harbour.evaluate</OutputFile>
+</Function>
+<Function>
+<Name>setup</Name>
+<Description>Sets up the parameters of the situations</Description>
+<OutputFile>maritime.conduct.harbour.Harbour.Harbour/Harbour.setup</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>NOT</Name>
+<Description>Basic logical expressions used in a decision tree</Description>
+<SourceFile>Expression.py</SourceFile>
+<SourceLine>204</SourceLine>
+<Module>cos.model.rule.Expression</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>cos.model.rule.Expression.NOT/NOT.evaluate</OutputFile>
+</Function>
+</Functions>
+</Class>

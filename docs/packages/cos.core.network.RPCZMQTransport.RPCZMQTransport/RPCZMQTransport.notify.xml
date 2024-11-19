@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>notify</Name>
+<Class>RPCZMQTransport</Class>
+<Module>cos.core.network.RPCZMQTransport</Module>
+<Description>Notifies events remotely</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCZMQTransport.py</SourceFile>
+<SourceLine>209</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>events</Name>
+<Type></Type>
+<Description>Events to dispatch</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

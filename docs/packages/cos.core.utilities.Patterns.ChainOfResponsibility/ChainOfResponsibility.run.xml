@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>run</Name>
+<Class>ChainOfResponsibility</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Runs the chain (or pipeline)</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>281</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

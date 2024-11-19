@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>find_id</Name>
+<Class>Manager</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Checks if an object with a key exists. Returns True if found, else False</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>128</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Key to match</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

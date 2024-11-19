@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>velocity</Name>
+<Class>Vehicle</Class>
+<Module>cos.model.vehicle.Vehicle</Module>
+<Description>Returns the object velocity</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vehicle.py</SourceFile>
+<SourceLine>97</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

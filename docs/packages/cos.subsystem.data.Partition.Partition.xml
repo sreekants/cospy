@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Partition</Name>
+<Description>Implementation of the Partition class</Description>
+<SourceFile>Partition.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.subsystem.data.Partition</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add</Name>
+<Description>Queues data for write</Description>
+<OutputFile>cos.subsystem.data.Partition.Partition/Partition.add</OutputFile>
+</Function>
+<Function>
+<Name>flush</Name>
+<Description>Flushes data into the file system</Description>
+<OutputFile>cos.subsystem.data.Partition.Partition/Partition.flush</OutputFile>
+</Function>
+<Function>
+<Name>serialize</Name>
+<Description>Serializes a record into the database</Description>
+<OutputFile>cos.subsystem.data.Partition.Partition/Partition.serialize</OutputFile>
+</Function>
+</Functions>
+</Class>

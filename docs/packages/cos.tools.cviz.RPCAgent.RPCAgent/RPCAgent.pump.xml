@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>pump</Name>
+<Class>RPCAgent</Class>
+<Module>cos.tools.cviz.RPCAgent</Module>
+<Description>Pupms messages to from the event queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCAgent.py</SourceFile>
+<SourceLine>33</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>dispatcher</Name>
+<Type></Type>
+<Description>Reference to the dispatcher</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

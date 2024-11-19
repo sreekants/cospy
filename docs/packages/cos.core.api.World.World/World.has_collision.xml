@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>has_collision</Name>
+<Class>World</Class>
+<Module>cos.core.api.World</Module>
+<Description>Checks for collisions in a region</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>World.py</SourceFile>
+<SourceLine>24</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>shape</Name>
+<Type></Type>
+<Description>Shape of the region</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

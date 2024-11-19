@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>push_msg</Name>
+<Class>Object</Class>
+<Module>cos.core.kernel.Object</Module>
+<Description>Pushes a message to the IPC queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Object.py</SourceFile>
+<SourceLine>49</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>msg</Name>
+<Type></Type>
+<Description>Message string</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Message properties (name-value pairs)</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

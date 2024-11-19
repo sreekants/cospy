@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Automata</Name>
+<Description>Impelementation of a rule automata</Description>
+<SourceFile>Automata.py</SourceFile>
+<SourceLine>14</SourceLine>
+<Module>cos.model.rule.Automata</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>cos.model.rule.Automata.Automata/Automata.evaluate</OutputFile>
+</Function>
+</Functions>
+</Class>

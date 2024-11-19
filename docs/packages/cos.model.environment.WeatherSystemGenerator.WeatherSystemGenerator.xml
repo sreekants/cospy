@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>WeatherSystemGenerator</Name>
+<Description>Implementation of the WeatherSystemGenerator class</Description>
+<SourceFile>WeatherSystemGenerator.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>cos.model.environment.WeatherSystemGenerator</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

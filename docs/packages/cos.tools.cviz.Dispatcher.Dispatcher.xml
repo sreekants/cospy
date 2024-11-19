@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Dispatcher</Name>
+<Description>Implementation of the Dispatcher class</Description>
+<SourceFile>Dispatcher.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>cos.tools.cviz.Dispatcher</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>subscribe</Name>
+<Description>Register a handler on the dispatcher</Description>
+<OutputFile>cos.tools.cviz.Dispatcher.Dispatcher/Dispatcher.subscribe</OutputFile>
+</Function>
+<Function>
+<Name>notify</Name>
+<Description>Notifies an event on the dispatcher</Description>
+<OutputFile>cos.tools.cviz.Dispatcher.Dispatcher/Dispatcher.notify</OutputFile>
+</Function>
+</Functions>
+</Class>

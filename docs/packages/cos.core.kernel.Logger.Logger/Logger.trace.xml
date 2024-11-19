@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>trace</Name>
+<Class>Logger</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Traces a message</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>213</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>module</Name>
+<Type></Type>
+<Description>module Name</Description>
+</Argument>
+<Argument>
+<Name>text</Name>
+<Type></Type>
+<Description>text to print or write to file</Description>
+</Argument>
+<Argument>
+<Name>log_to_file</Name>
+<Type></Type>
+<Description>true if 'text' is to be written to log file</Description>
+</Argument>
+<Argument>
+<Name>log_to_file_only</Name>
+<Type></Type>
+<Description>true if 'text' is not to be printed but to be written to log file</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

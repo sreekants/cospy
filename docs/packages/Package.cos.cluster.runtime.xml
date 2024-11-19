@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.cluster.runtime</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>3</ClassCount>
+<FunctionCount>5</FunctionCount>
+<Classes>
+<Class>
+<Name>ScenarioGenerator</Name>
+<OutputFile>cos.cluster.runtime.ScenarioGenerator.ScenarioGenerator</OutputFile>
+<Description>Implementation of the ScenarioGenerator class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Declarations</Name>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.Declarations</OutputFile>
+<Description>Helper class to generate code from a meta-programming template</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>TemplateReplicator</Name>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.TemplateReplicator</OutputFile>
+<Description>Helper class to generate code from a meta-programming template</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+</Classes>
+</Module>

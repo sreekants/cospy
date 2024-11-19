@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>addkv</Name>
+<Class>TransactionalDatabase</Class>
+<Module>cos.core.utilities.TransactionalDatabase</Module>
+<Description>Adds values to the database</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>TransactionalDatabase.py</SourceFile>
+<SourceLine>130</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>self</Name>
+<Type></Type>
+<Description>reference to this instance</Description>
+</Argument>
+<Argument>
+<Name>keys</Name>
+<Type></Type>
+<Description>Keys to add to the database</Description>
+</Argument>
+<Argument>
+<Name>values</Name>
+<Type></Type>
+<Description>Values to add to the database</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

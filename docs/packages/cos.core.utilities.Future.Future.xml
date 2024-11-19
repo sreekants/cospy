@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Future</Name>
+<Description>Implementation of a futures class.</Description>
+<SourceFile>Future.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.core.utilities.Future</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>execute</Name>
+<Description>Executes the task</Description>
+<OutputFile>cos.core.utilities.Future.Future/Future.execute</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Returns the result on completion</Description>
+<OutputFile>cos.core.utilities.Future.Future/Future.get</OutputFile>
+</Function>
+<Function>
+<Name>wait</Name>
+<Description>Waits for the task to complete</Description>
+<OutputFile>cos.core.utilities.Future.Future/Future.wait</OutputFile>
+</Function>
+<Function>
+<Name>valid</Name>
+<Description>Checks if the task has completed</Description>
+<OutputFile>cos.core.utilities.Future.Future/Future.valid</OutputFile>
+</Function>
+<Function>
+<Name>error</Name>
+<Description>Returns the error</Description>
+<OutputFile>cos.core.utilities.Future.Future/Future.error</OutputFile>
+</Function>
+</Functions>
+</Class>

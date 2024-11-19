@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>add</Name>
+<Class>GenericManager</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Adds an object to the collection</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>14</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>obj</Name>
+<Type></Type>
+<Description>Object to add to the collection</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

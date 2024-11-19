@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>throw_not_impl</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Helper function to throw an exception for an unimplemented function</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>28</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

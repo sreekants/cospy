@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.situation.crossing</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>2</FunctionCount>
+<Classes>
+<Class>
+<Name>Crossing</Name>
+<OutputFile>maritime.situation.crossing.Crossing.Crossing</OutputFile>
+<Description>Implementation of the Crossing class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+</Classes>
+</Module>

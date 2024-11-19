@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Cloud</Name>
+<Description>Implementation of the cloud class</Description>
+<SourceFile>Cloud.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.model.geography.Cloud</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

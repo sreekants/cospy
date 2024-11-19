@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.ui.game</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>18</ClassCount>
+<FunctionCount>25</FunctionCount>
+<Classes>
+<Class>
+<Name>AnimatedSprite</Name>
+<OutputFile>cos.ui.game.AnimatedSprite.AnimatedSprite</OutputFile>
+<Description>Implementation of a base class for animated sprites</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Arrow</Name>
+<OutputFile>cos.ui.game.Arrow.Arrow</OutputFile>
+<Description>Renders an arrow</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>BeaconSprite</Name>
+<OutputFile>cos.ui.game.BeaconSprite.BeaconSprite</OutputFile>
+<Description></Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>BoundingBox</Name>
+<OutputFile>cos.ui.game.BoundingBox.BoundingBox</OutputFile>
+<Description>IImplementation of a rectangular bounding box for simulation objects</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>LandSprite</Name>
+<OutputFile>cos.ui.game.LandSprite.LandSprite</OutputFile>
+<Description>Land shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PolygonSprite</Name>
+<OutputFile>cos.ui.game.PolygonSprite.PolygonSprite</OutputFile>
+<Description>Basic polygon shape</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>SeaSprite</Name>
+<OutputFile>cos.ui.game.SeaSprite.SeaSprite</OutputFile>
+<Description>Sea shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SkySprite</Name>
+<OutputFile>cos.ui.game.SkySprite.SkySprite</OutputFile>
+<Description>Sky shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Sprite</Name>
+<OutputFile>cos.ui.game.Sprite.Sprite</OutputFile>
+<Description>Base class for all sprite</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>SpriteController</Name>
+<OutputFile>cos.ui.game.SpriteController.SpriteController</OutputFile>
+<Description>Implementation of a controller for a sprite behavior.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>VectorSprite</Name>
+<OutputFile>cos.ui.game.VectorSprite.VectorSprite</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>VectorField</Name>
+<OutputFile>cos.ui.game.VectorSprite.VectorField</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.WeatherSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaCurrentSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.SeaCurrentSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WindCurrentSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.WindCurrentSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaWaveSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.SeaWaveSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>VehicleSprite</Name>
+<OutputFile>cos.ui.game.VehicleSprite.VehicleSprite</OutputFile>
+<Description>Implementation of mobile vehicle sprites.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>VesselSprite</Name>
+<OutputFile>cos.ui.game.VesselSprite.VesselSprite</OutputFile>
+<Description>Implementation of mobile vessel sprites.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+</Classes>
+</Module>

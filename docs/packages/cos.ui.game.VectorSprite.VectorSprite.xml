@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>VectorSprite</Name>
+<Description>Vector shapes</Description>
+<SourceFile>VectorSprite.py</SourceFile>
+<SourceLine>14</SourceLine>
+<Module>cos.ui.game.VectorSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>render</Name>
+<Description>Renders the vector</Description>
+<OutputFile>cos.ui.game.VectorSprite.VectorSprite/VectorSprite.render</OutputFile>
+</Function>
+</Functions>
+</Class>

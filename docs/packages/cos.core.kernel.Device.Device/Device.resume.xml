@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>resume</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Resumes the device</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>256</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

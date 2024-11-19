@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>route</Name>
+<Class>Topic</Class>
+<Module>cos.core.api.Topic</Module>
+<Description>Route a message from a source to a destination</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Topic.py</SourceFile>
+<SourceLine>77</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>src</Name>
+<Type></Type>
+<Description>Source path</Description>
+</Argument>
+<Argument>
+<Name>dest</Name>
+<Type></Type>
+<Description>Destination path</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

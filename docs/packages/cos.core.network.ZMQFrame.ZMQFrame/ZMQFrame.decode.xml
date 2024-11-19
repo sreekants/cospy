@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>decode</Name>
+<Class>ZMQFrame</Class>
+<Module>cos.core.network.ZMQFrame</Module>
+<Description>Decodes a frame</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ZMQFrame.py</SourceFile>
+<SourceLine>24</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>frame</Name>
+<Type></Type>
+<Description>Frame to decode</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

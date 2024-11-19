@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Encounter</Name>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<SourceFile>Encounter.py</SourceFile>
+<SourceLine>30</SourceLine>
+<Module>maritime.regulation.colreg.Encounter</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter/Encounter.evaluate</OutputFile>
+</Function>
+<Function>
+<Name>on_encounter</Name>
+<Description>Event handler for encounter</Description>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter/Encounter.on_encounter</OutputFile>
+</Function>
+<Function>
+<Name>situate</Name>
+<Description>Triggers a situation event</Description>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter/Encounter.situate</OutputFile>
+</Function>
+<Function>
+<Name>maneuver</Name>
+<Description>Compute the maneuver of two ships</Description>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter/Encounter.maneuver</OutputFile>
+</Function>
+<Function>
+<Name>trigger_maneuver</Name>
+<Description>Trigger a maneuver event</Description>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter/Encounter.trigger_maneuver</OutputFile>
+</Function>
+<Function>
+<Name>for_each_in_range</Name>
+<Description>Helper function to process permutations of two list of objects</Description>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter/Encounter.for_each_in_range</OutputFile>
+</Function>
+</Functions>
+</Class>

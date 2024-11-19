@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Plateau</Name>
+<Description>Implementation of the plateau class</Description>
+<SourceFile>Plateau.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.model.geography.Plateau</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>register</Name>
+<Class>ObjectManager</Class>
+<Module>cos.core.service.ObjectManager</Module>
+<Description>Registers an object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ObjectManager.py</SourceFile>
+<SourceLine>27</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the object</Description>
+</Argument>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Name of the object</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>objref</Name>
+<Type></Type>
+<Description>Reference to an object</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

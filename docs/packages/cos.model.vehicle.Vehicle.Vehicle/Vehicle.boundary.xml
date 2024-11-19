@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>boundary</Name>
+<Class>Vehicle</Class>
+<Module>cos.model.vehicle.Vehicle</Module>
+<Description>REturns the bounding rectangle of the object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vehicle.py</SourceFile>
+<SourceLine>115</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

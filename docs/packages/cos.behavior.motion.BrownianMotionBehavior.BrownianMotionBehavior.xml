@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>BrownianMotionBehavior</Name>
+<Description>Random walk motion behavior</Description>
+<SourceFile>BrownianMotionBehavior.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.behavior.motion.BrownianMotionBehavior</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>move</Name>
+<Description>Moves the vehicle</Description>
+<OutputFile>cos.behavior.motion.BrownianMotionBehavior.BrownianMotionBehavior/BrownianMotionBehavior.move</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>silent</Name>
+<Class>LoggerSettings</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Checks if operation is in silent mode</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>138</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

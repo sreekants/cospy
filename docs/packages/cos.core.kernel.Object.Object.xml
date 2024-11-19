@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Object</Name>
+<Description>Base class for all the objects in the simulation</Description>
+<SourceFile>Object.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.core.kernel.Object</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>listen</Name>
+<Description>Sets the object to listen to an IPC topic</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.listen</OutputFile>
+</Function>
+<Function>
+<Name>topic</Name>
+<Description>Returns the IPC topic the object listens to</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.topic</OutputFile>
+</Function>
+<Function>
+<Name>push_msg</Name>
+<Description>Pushes a message to the IPC queue</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.push_msg</OutputFile>
+</Function>
+<Function>
+<Name>pop_msg</Name>
+<Description>Pops a message from the IPC queue</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.pop_msg</OutputFile>
+</Function>
+<Function>
+<Name>notify</Name>
+<Description>Triggers a method</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.notify</OutputFile>
+</Function>
+<Function>
+<Name>subscribe</Name>
+<Description>Assign a handler to a notification method</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.subscribe</OutputFile>
+</Function>
+<Function>
+<Name>on_init</Name>
+<Description>Callback for simulation initialization</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.on_init</OutputFile>
+</Function>
+<Function>
+<Name>initalize</Name>
+<Description>Initializes the object</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.initalize</OutputFile>
+</Function>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_run</Name>
+<Description>Event handler for run</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.on_run</OutputFile>
+</Function>
+<Function>
+<Name>on_suspend</Name>
+<Description>Callback for simulation suspension</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.on_suspend</OutputFile>
+</Function>
+<Function>
+<Name>on_stop</Name>
+<Description>Callback for simulation shutdown</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.on_stop</OutputFile>
+</Function>
+<Function>
+<Name>on_term</Name>
+<Description>Callback for simulation termination</Description>
+<OutputFile>cos.core.kernel.Object.Object/Object.on_term</OutputFile>
+</Function>
+</Functions>
+</Class>

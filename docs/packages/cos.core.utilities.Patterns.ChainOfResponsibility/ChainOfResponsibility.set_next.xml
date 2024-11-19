@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set_next</Name>
+<Class>ChainOfResponsibility</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Adds a new command to the chain</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>290</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>nextcmd</Name>
+<Type></Type>
+<Description>The command following this command</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

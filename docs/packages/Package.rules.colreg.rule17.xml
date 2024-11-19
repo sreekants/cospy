@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>rules.colreg.rule17</Name>
+<Description></Description>
+<Layer>rules</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>4</FunctionCount>
+<Classes>
+<Class>
+<Name>Rule17</Name>
+<OutputFile>rules.colreg.rule17.Rule17.Rule17</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+</Classes>
+</Module>

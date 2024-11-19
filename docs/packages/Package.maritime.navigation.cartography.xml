@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.navigation.cartography</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>Cartography</Name>
+<OutputFile>maritime.navigation.cartography.Cartography.Cartography</OutputFile>
+<Description>Fasade for Cartography related classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

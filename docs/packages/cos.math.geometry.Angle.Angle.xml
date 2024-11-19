@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Angle</Name>
+<Description>Implementation of the angle functions</Description>
+<SourceFile>Angle.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.math.geometry.Angle</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>norm</Name>
+<Description>REturns the normalized vector between two points</Description>
+<OutputFile>cos.math.geometry.Angle.Angle/Angle.norm</OutputFile>
+</Function>
+</Functions>
+</Class>

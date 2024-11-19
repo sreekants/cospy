@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>bind</Name>
+<Class>ZMQTransport</Class>
+<Module>cos.core.network.ZMQTransport</Module>
+<Description>Binds the</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ZMQTransport.py</SourceFile>
+<SourceLine>50</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>host</Name>
+<Type></Type>
+<Description>Host address</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

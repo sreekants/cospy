@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>NullDevice</Name>
+<Description>Base class for all devices</Description>
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.core.device.NullDevice</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>type</Name>
+<Description>Returns the type name of the object</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.type</OutputFile>
+</Function>
+<Function>
+<Name>open</Name>
+<Description>Opens the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.open</OutputFile>
+</Function>
+<Function>
+<Name>bind</Name>
+<Description>Binds the device to an address</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.bind</OutputFile>
+</Function>
+<Function>
+<Name>listen</Name>
+<Description>Sets the device to a listening mode</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.listen</OutputFile>
+</Function>
+<Function>
+<Name>accept</Name>
+<Description>Accepts a new connection</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.accept</OutputFile>
+</Function>
+<Function>
+<Name>connect</Name>
+<Description>Connects to an address</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.connect</OutputFile>
+</Function>
+<Function>
+<Name>close</Name>
+<Description>Closes the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.close</OutputFile>
+</Function>
+<Function>
+<Name>set</Name>
+<Description>Sets a property on the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.set</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Returns a property on the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.get</OutputFile>
+</Function>
+<Function>
+<Name>ioctl</Name>
+<Description>Performs an IO control operation</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.ioctl</OutputFile>
+</Function>
+<Function>
+<Name>is_accept_pending</Name>
+<Description>Checks if a connection is pending on the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.is_accept_pending</OutputFile>
+</Function>
+<Function>
+<Name>is_read_pending</Name>
+<Description>Checks if any data is available on the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.is_read_pending</OutputFile>
+</Function>
+<Function>
+<Name>is_open</Name>
+<Description>Checks if the device is open</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.is_open</OutputFile>
+</Function>
+<Function>
+<Name>extension</Name>
+<Description>Gets an extension interface on the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.extension</OutputFile>
+</Function>
+<Function>
+<Name>send</Name>
+<Description>Sends data on the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.send</OutputFile>
+</Function>
+<Function>
+<Name>receive</Name>
+<Description>Receives data from the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.receive</OutputFile>
+</Function>
+<Function>
+<Name>sendto</Name>
+<Description>Sends data to a specific adddress</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.sendto</OutputFile>
+</Function>
+<Function>
+<Name>recvfrom</Name>
+<Description>Reveives data from an address</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.recvfrom</OutputFile>
+</Function>
+<Function>
+<Name>read_port</Name>
+<Description>Reads raw data from the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.read_port</OutputFile>
+</Function>
+<Function>
+<Name>write_port</Name>
+<Description>Writes raw data to the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.write_port</OutputFile>
+</Function>
+<Function>
+<Name>write</Name>
+<Description>Writes data to the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.write</OutputFile>
+</Function>
+<Function>
+<Name>read</Name>
+<Description>Reads data from the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.read</OutputFile>
+</Function>
+<Function>
+<Name>readex</Name>
+<Description>Read with no wait timeout</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.readex</OutputFile>
+</Function>
+<Function>
+<Name>startio</Name>
+<Description>Starts I.O operations</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.startio</OutputFile>
+</Function>
+<Function>
+<Name>unload</Name>
+<Description>Unloads the device</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.unload</OutputFile>
+</Function>
+<Function>
+<Name>dispatch</Name>
+<Description>Dispatches events to the driver</Description>
+<OutputFile>cos.core.device.NullDevice.NullDevice/NullDevice.dispatch</OutputFile>
+</Function>
+</Functions>
+</Class>

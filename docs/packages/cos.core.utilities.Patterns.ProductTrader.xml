@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ProductTrader</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>400</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Creates a product</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductTrader/ProductTrader.create</OutputFile>
+</Function>
+<Function>
+<Name>lookup</Name>
+<Description>Finds a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductTrader/ProductTrader.lookup</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductTrader/ProductTrader.add</OutputFile>
+</Function>
+<Function>
+<Name>substitute</Name>
+<Description>Substitutes a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductTrader/ProductTrader.substitute</OutputFile>
+</Function>
+<Function>
+<Name>remove</Name>
+<Description>Removes a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductTrader/ProductTrader.remove</OutputFile>
+</Function>
+</Functions>
+</Class>

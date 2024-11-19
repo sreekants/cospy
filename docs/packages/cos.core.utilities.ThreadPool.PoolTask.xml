@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>PoolTask</Name>
+<Description>Helper thread pool class</Description>
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>execute</Name>
+<Description>Executes the task</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolTask/PoolTask.execute</OutputFile>
+</Function>
+<Function>
+<Name>type</Name>
+<Description>Returns the type of the task</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolTask/PoolTask.type</OutputFile>
+</Function>
+<Function>
+<Name>can_exit</Name>
+<Description>Indicates that the thread pool can delete this task on exit.</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolTask/PoolTask.can_exit</OutputFile>
+</Function>
+<Function>
+<Name>complete</Name>
+<Description>Checks if the thread has completed</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolTask/PoolTask.complete</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>RPCAgent</Name>
+<Description>Agent servicing RPC requests</Description>
+<SourceFile>RPCAgent.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.tools.cviz.RPCAgent</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>connect</Name>
+<Description>Cpmmects to the server</Description>
+<OutputFile>cos.tools.cviz.RPCAgent.RPCAgent/RPCAgent.connect</OutputFile>
+</Function>
+<Function>
+<Name>pump</Name>
+<Description>Pupms messages to from the event queue</Description>
+<OutputFile>cos.tools.cviz.RPCAgent.RPCAgent/RPCAgent.pump</OutputFile>
+</Function>
+</Functions>
+</Class>

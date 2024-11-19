@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>serialize</Name>
+<Class>Partition</Class>
+<Module>cos.subsystem.data.Partition</Module>
+<Description>Serializes a record into the database</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Partition.py</SourceFile>
+<SourceLine>40</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>db</Name>
+<Type></Type>
+<Description>Database to write to</Description>
+</Argument>
+<Argument>
+<Name>data</Name>
+<Type></Type>
+<Description>Record to write</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

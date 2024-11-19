@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>plural</Name>
+<Class>Ticker</Class>
+<Module>cos.core.time.Ticker</Module>
+<Description>Pluralizes a noun</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>37</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>noun</Name>
+<Type></Type>
+<Description>Noun to pluralize</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

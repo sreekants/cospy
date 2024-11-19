@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Manager</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>81</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add</Name>
+<Description>Adds an object to the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.add</OutputFile>
+</Function>
+<Function>
+<Name>remove</Name>
+<Description>Removes an object from the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.remove</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Returns the object identified by a key</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.get</OutputFile>
+</Function>
+<Function>
+<Name>set</Name>
+<Description>Adds an object to the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.set</OutputFile>
+</Function>
+<Function>
+<Name>find_id</Name>
+<Description>Checks if an object with a key exists. Returns True if found, else False</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.find_id</OutputFile>
+</Function>
+<Function>
+<Name>find_object_id</Name>
+<Description>Finds the key of an object</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.find_object_id</OutputFile>
+</Function>
+<Function>
+<Name>size</Name>
+<Description>Number of objects in the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.size</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Removes all objects from the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.clear</OutputFile>
+</Function>
+<Function>
+<Name>for_each</Name>
+<Description>Iterates through each entity in the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.Manager/Manager.for_each</OutputFile>
+</Function>
+</Functions>
+</Class>

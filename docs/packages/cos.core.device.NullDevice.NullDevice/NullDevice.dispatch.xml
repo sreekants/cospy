@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>dispatch</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Dispatches events to the driver</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>217</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>command</Name>
+<Type></Type>
+<Description>Command to dispatch</Description>
+</Argument>
+<Argument>
+<Name>event</Name>
+<Type></Type>
+<Description>Event to handle</Description>
+</Argument>
+<Argument>
+<Name>irp</Name>
+<Type></Type>
+<Description>I/O request packet</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

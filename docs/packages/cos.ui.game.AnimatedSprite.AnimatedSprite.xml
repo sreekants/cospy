@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>AnimatedSprite</Name>
+<Description>Implementation of a base class for animated sprites</Description>
+<SourceFile>AnimatedSprite.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.ui.game.AnimatedSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>update</Name>
+<Description>Updates the world</Description>
+<OutputFile>cos.ui.game.AnimatedSprite.AnimatedSprite/AnimatedSprite.update</OutputFile>
+</Function>
+</Functions>
+</Class>

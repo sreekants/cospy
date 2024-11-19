@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>init</Name>
+<Class>MotionBehavior</Class>
+<Module>cos.behavior.motion.MotionBehavior</Module>
+<Description>Initializes the behavior</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MotionBehavior.py</SourceFile>
+<SourceLine>27</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>currpos</Name>
+<Type></Type>
+<Description>Start position of the vehicle</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

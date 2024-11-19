@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>notify</Name>
+<Class>Dispatcher</Class>
+<Module>cos.tools.cviz.Dispatcher</Module>
+<Description>Notifies an event on the dispatcher</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Dispatcher.py</SourceFile>
+<SourceLine>24</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>evt</Name>
+<Type></Type>
+<Description>Event data</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

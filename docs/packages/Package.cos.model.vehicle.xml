@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.model.vehicle</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>5</ClassCount>
+<FunctionCount>9</FunctionCount>
+<Classes>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Type</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Operation</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Operation</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Status</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Status</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Restriction</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Restriction</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Vehicle</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+</Classes>
+</Module>

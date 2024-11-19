@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>BeaconSprite</Name>
+<Description></Description>
+<SourceFile>BeaconSprite.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.ui.game.BeaconSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>update</Name>
+<Description>Update the sprite in the next time loop</Description>
+<OutputFile>cos.ui.game.BeaconSprite.BeaconSprite/BeaconSprite.update</OutputFile>
+</Function>
+</Functions>
+</Class>

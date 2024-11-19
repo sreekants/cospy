@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Flyweight</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>225</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>get_flyweight</Name>
+<Description>Returns a flyweight object for a given key</Description>
+<OutputFile>cos.core.utilities.Patterns.Flyweight/Flyweight.get_flyweight</OutputFile>
+</Function>
+<Function>
+<Name>add_flyweight</Name>
+<Description>Internal function to add the flyweight obect</Description>
+<OutputFile>cos.core.utilities.Patterns.Flyweight/Flyweight.add_flyweight</OutputFile>
+</Function>
+<Function>
+<Name>remove_flyweight</Name>
+<Description>Removes a flyweight object matching a key</Description>
+<OutputFile>cos.core.utilities.Patterns.Flyweight/Flyweight.remove_flyweight</OutputFile>
+</Function>
+<Function>
+<Name>create_flyweight</Name>
+<Description>Overridable function to create a new objects for a key</Description>
+<OutputFile>cos.core.utilities.Patterns.Flyweight/Flyweight.create_flyweight</OutputFile>
+</Function>
+</Functions>
+</Class>

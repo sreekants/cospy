@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Rule17</Name>
+<Description>Implementation of COLREG Rule</Description>
+<SourceFile>Rule17.py</SourceFile>
+<SourceLine>25</SourceLine>
+<Module>rules.colreg.rule17.Rule17</Module>
+<Layer>rules</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>rules.colreg.rule17.Rule17.Rule17/Rule17.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_standon</Name>
+<Description>Event handler for standon</Description>
+<OutputFile>rules.colreg.rule17.Rule17.Rule17/Rule17.on_standon</OutputFile>
+</Function>
+<Function>
+<Name>on_giveway</Name>
+<Description>Event handler for giveway</Description>
+<OutputFile>rules.colreg.rule17.Rule17.Rule17/Rule17.on_giveway</OutputFile>
+</Function>
+<Function>
+<Name>on_crossing</Name>
+<Description>Event handler for crossing</Description>
+<OutputFile>rules.colreg.rule17.Rule17.Rule17/Rule17.on_crossing</OutputFile>
+</Function>
+</Functions>
+</Class>

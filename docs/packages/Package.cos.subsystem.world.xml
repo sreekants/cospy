@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.subsystem.world</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>8</FunctionCount>
+<Classes>
+<Class>
+<Name>World</Name>
+<OutputFile>cos.subsystem.world.World.World</OutputFile>
+<Description>Class that holds the entire universe of objects in the simulation</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+</Classes>
+</Module>

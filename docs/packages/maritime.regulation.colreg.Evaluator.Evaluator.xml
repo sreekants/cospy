@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Evaluator</Name>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<SourceFile>Evaluator.py</SourceFile>
+<SourceLine>12</SourceLine>
+<Module>maritime.regulation.colreg.Evaluator</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator/Evaluator.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_timer</Name>
+<Description>Callback handling timer events</Description>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator/Evaluator.on_timer</OutputFile>
+</Function>
+<Function>
+<Name>init_config</Name>
+<Description>Initializes the configuration</Description>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator/Evaluator.init_config</OutputFile>
+</Function>
+<Function>
+<Name>init_faculties</Name>
+<Description>Initializes the faculties</Description>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator/Evaluator.init_faculties</OutputFile>
+</Function>
+<Function>
+<Name>init_objects</Name>
+<Description>Initializes the simulation objects</Description>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator/Evaluator.init_objects</OutputFile>
+</Function>
+<Function>
+<Name>monitor</Name>
+<Description>Monitors events on the simulation</Description>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator/Evaluator.monitor</OutputFile>
+</Function>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator/Evaluator.evaluate</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>attach_root</Name>
+<Class>Tree</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Attaches a new root node</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>564</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>node</Name>
+<Type></Type>
+<Description>new root node</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

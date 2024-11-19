@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>init</Name>
+<Class>Actor</Class>
+<Module>cos.core.simulation.Actor</Module>
+<Description>Initializes an actor</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Actor.py</SourceFile>
+<SourceLine>30</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>rect</Name>
+<Type></Type>
+<Description>Bounding box of the initial position of the actor body</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>MessageQueue</Name>
+<Description>Implemention of an in-memory message queue for inter-process communication</Description>
+<SourceFile>MessageQueue.py</SourceFile>
+<SourceLine>26</SourceLine>
+<Module>cos.core.kernel.MessageQueue</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>pump</Name>
+<Description>Pumps pending messages at a given throttle rate</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.pump</OutputFile>
+</Function>
+<Function>
+<Name>pump_node</Name>
+<Description>Pumps pending messages on a node at a given throttle rate</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.pump_node</OutputFile>
+</Function>
+<Function>
+<Name>get_node</Name>
+<Description>Returns a node dereferencing routes</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.get_node</OutputFile>
+</Function>
+<Function>
+<Name>subscribe</Name>
+<Description>Subscribes to messages at a path</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.subscribe</OutputFile>
+</Function>
+<Function>
+<Name>route</Name>
+<Description>Sets up a route to a destination queue</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.route</OutputFile>
+</Function>
+<Function>
+<Name>unroute</Name>
+<Description>Unroutes a from a route path</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.unroute</OutputFile>
+</Function>
+<Function>
+<Name>unsubscribe</Name>
+<Description>Unsubscribes a listener from a queue</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.unsubscribe</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Purges all messages from a queue</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.clear</OutputFile>
+</Function>
+<Function>
+<Name>pop</Name>
+<Description>Pops the next available message from a queue, None if empty</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.pop</OutputFile>
+</Function>
+<Function>
+<Name>push</Name>
+<Description>Pushs a message to a queue</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.push</OutputFile>
+</Function>
+<Function>
+<Name>empty</Name>
+<Description>Checks if a queue is empty</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.empty</OutputFile>
+</Function>
+<Function>
+<Name>exists</Name>
+<Description>Checks if a queue exists</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.exists</OutputFile>
+</Function>
+<Function>
+<Name>count</Name>
+<Description>Returns the number of messages pending in a queue</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.count</OutputFile>
+</Function>
+<Function>
+<Name>info</Name>
+<Description>Returns properties of a queue</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.info</OutputFile>
+</Function>
+<Function>
+<Name>find</Name>
+<Description>Locates a set of queues with a property</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.find</OutputFile>
+</Function>
+<Function>
+<Name>dump</Name>
+<Description>Dumps a list of all queues with a particular prefix</Description>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue/MessageQueue.dump</OutputFile>
+</Function>
+</Functions>
+</Class>

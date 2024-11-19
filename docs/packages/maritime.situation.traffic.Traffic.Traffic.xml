@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Traffic</Name>
+<Description>Implementation of the Traffic class</Description>
+<SourceFile>Traffic.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>maritime.situation.traffic.Traffic</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>maritime.situation.traffic.Traffic.Traffic/Traffic.on_start</OutputFile>
+</Function>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.situation.traffic.Traffic.Traffic/Traffic.evaluate</OutputFile>
+</Function>
+<Function>
+<Name>setup</Name>
+<Description>Sets up the parameters of the situation</Description>
+<OutputFile>maritime.situation.traffic.Traffic.Traffic/Traffic.setup</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_port</Name>
+<Class>RPCZMQTransport</Class>
+<Module>cos.core.network.RPCZMQTransport</Module>
+<Description>Returns the port address</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCZMQTransport.py</SourceFile>
+<SourceLine>55</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

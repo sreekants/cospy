@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>intersect</Name>
+<Class>ScreenArea</Class>
+<Module>cos.core.simulation.CollisionDetector</Module>
+<Description>Checks of a rectangle intersects with the screen area</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>CollisionDetector.py</SourceFile>
+<SourceLine>22</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>rect</Name>
+<Type></Type>
+<Description>Rectangle to evaluate</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

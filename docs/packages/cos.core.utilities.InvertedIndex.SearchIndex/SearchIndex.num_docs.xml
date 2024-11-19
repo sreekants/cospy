@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>num_docs</Name>
+<Class>SearchIndex</Class>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Description>Returns the number of documents</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>212</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

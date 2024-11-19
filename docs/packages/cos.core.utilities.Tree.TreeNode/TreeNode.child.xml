@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>child</Name>
+<Class>TreeNode</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Returns a child node with a matching name</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>308</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Name of the node to search for</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

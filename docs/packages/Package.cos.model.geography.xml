@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.model.geography</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>28</ClassCount>
+<FunctionCount>8</FunctionCount>
+<Classes>
+<Class>
+<Name>AbyssalPlain</Name>
+<OutputFile>cos.model.geography.AbyssalPlain.AbyssalPlain</OutputFile>
+<Description>Implementation of the abyssal plain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Builder</Name>
+<OutputFile>cos.model.geography.Builder.Builder</OutputFile>
+<Description>Base class for all geography builders</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Cloud</Name>
+<OutputFile>cos.model.geography.Cloud.Cloud</OutputFile>
+<Description>Implementation of the cloud class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ContinentalShelfPlain</Name>
+<OutputFile>cos.model.geography.ContinentalShelfPlain.ContinentalShelfPlain</OutputFile>
+<Description>Implementation of the continental_shelf_plain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ContinentalSlope</Name>
+<OutputFile>cos.model.geography.ContinentalSlope.ContinentalSlope</OutputFile>
+<Description>Implementation of the continental_slope class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Desert</Name>
+<OutputFile>cos.model.geography.Desert.Desert</OutputFile>
+<Description>Implementation of the desert class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Fjord</Name>
+<OutputFile>cos.model.geography.Fjord.Fjord</OutputFile>
+<Description>Implementation of the fjord class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Fog</Name>
+<OutputFile>cos.model.geography.Fog.Fog</OutputFile>
+<Description>Implementation of the fog weather system class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Geography</Name>
+<OutputFile>cos.model.geography.Geography.Geography</OutputFile>
+<Description>Helper class to manage a collections of geographic assets</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.geography.Land.Type</OutputFile>
+<Description>Implementation of the land class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Land</Name>
+<OutputFile>cos.model.geography.Land.Land</OutputFile>
+<Description>Implementation of the land class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>LandBuilder</Name>
+<OutputFile>cos.model.geography.LandBuilder.LandBuilder</OutputFile>
+<Description>Builder class for land assets</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>MarineMountain</Name>
+<OutputFile>cos.model.geography.MarineMountain.MarineMountain</OutputFile>
+<Description>Implementation of the marine mountain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MarineValley</Name>
+<OutputFile>cos.model.geography.MarineValley.MarineValley</OutputFile>
+<Description>Implementation of the marine valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeZone</Name>
+<OutputFile>cos.model.geography.MaritimeZone.MaritimeZone</OutputFile>
+<Description>Implementation of the base class for maritime zones class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeTrafficZone</Name>
+<OutputFile>cos.model.geography.MaritimeZone.MaritimeTrafficZone</OutputFile>
+<Description>Implementation of the base class for maritime zones class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Mountain</Name>
+<OutputFile>cos.model.geography.Mountain.Mountain</OutputFile>
+<Description>Implementation of the mountain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Plain</Name>
+<OutputFile>cos.model.geography.Plain.Plain</OutputFile>
+<Description>Implementation of the plain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Plateau</Name>
+<OutputFile>cos.model.geography.Plateau.Plateau</OutputFile>
+<Description>Implementation of the plateau class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.geography.Sea.Type</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Sea</Name>
+<OutputFile>cos.model.geography.Sea.Sea</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>SeaBuilder</Name>
+<OutputFile>cos.model.geography.SeaBuilder.SeaBuilder</OutputFile>
+<Description>builder class for marine assets</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Shape</Name>
+<OutputFile>cos.model.geography.Shape.Shape</OutputFile>
+<Description>Implementation of the Shape class</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.geography.Sky.Type</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Sky</Name>
+<OutputFile>cos.model.geography.Sky.Sky</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>SkyBuilder</Name>
+<OutputFile>cos.model.geography.SkyBuilder.SkyBuilder</OutputFile>
+<Description>Builder class for aerial assets</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Strandflat</Name>
+<OutputFile>cos.model.geography.Strandflat.Strandflat</OutputFile>
+<Description>Implementation of the strandflat class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TrafficZone</Name>
+<OutputFile>cos.model.geography.TrafficZone.TrafficZone</OutputFile>
+<Description>Implementation of the traffic zones class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

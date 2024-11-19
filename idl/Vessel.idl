@@ -1,0 +1,15 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : Vessel.idl
+// Function         : ROVCore - Simulation Vessel
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+interface Vessel
+{
+	object 		describe( string id );
+	void 		init( string id, object config );
+	object		update( string id );
+	void		ioctl( string id, int op, object arg );
+};
+

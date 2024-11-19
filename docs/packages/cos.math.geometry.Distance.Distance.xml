@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Distance</Name>
+<Description>Implementation of the distance functions</Description>
+<SourceFile>Distance.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.math.geometry.Distance</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>euclidean</Name>
+<Description>Returns euclidean distance</Description>
+<OutputFile>cos.math.geometry.Distance.Distance/Distance.euclidean</OutputFile>
+</Function>
+<Function>
+<Name>euclidean_squared</Name>
+<Description>Returns euclidean squared distance</Description>
+<OutputFile>cos.math.geometry.Distance.Distance/Distance.euclidean_squared</OutputFile>
+</Function>
+<Function>
+<Name>manhattan</Name>
+<Description>Returns manhattan distance</Description>
+<OutputFile>cos.math.geometry.Distance.Distance/Distance.manhattan</OutputFile>
+</Function>
+<Function>
+<Name>chebyshev</Name>
+<Description>Returns the chebyshev distance</Description>
+<OutputFile>cos.math.geometry.Distance.Distance/Distance.chebyshev</OutputFile>
+</Function>
+<Function>
+<Name>octile</Name>
+<Description>Returns the octile distance</Description>
+<OutputFile>cos.math.geometry.Distance.Distance/Distance.octile</OutputFile>
+</Function>
+<Function>
+<Name>norm</Name>
+<Description>Returns the normized distance</Description>
+<OutputFile>cos.math.geometry.Distance.Distance/Distance.norm</OutputFile>
+</Function>
+</Functions>
+</Class>

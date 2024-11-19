@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Graph</Name>
+<Description>Helper class to visualize graph planning algorithms using bitmaps images</Description>
+<SourceFile>ImageGridGraph.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>cai.planning.utilities.ImageGridGraph</Module>
+<Layer>cai</Layer>
+<Functions>
+<Function>
+<Name>get_list_of_nodes</Name>
+<Description>Returns the nodes in the graph</Description>
+<OutputFile>cai.planning.utilities.ImageGridGraph.Graph/Graph.get_list_of_nodes</OutputFile>
+</Function>
+<Function>
+<Name>get_neighbors</Name>
+<Description>Returns the neighbours of a node</Description>
+<OutputFile>cai.planning.utilities.ImageGridGraph.Graph/Graph.get_neighbors</OutputFile>
+</Function>
+<Function>
+<Name>visualize_map</Name>
+<Description>Visualizes the graph on a screen</Description>
+<OutputFile>cai.planning.utilities.ImageGridGraph.Graph/Graph.visualize_map</OutputFile>
+</Function>
+<Function>
+<Name>add_visited_node</Name>
+<Description>Marks a node as visited</Description>
+<OutputFile>cai.planning.utilities.ImageGridGraph.Graph/Graph.add_visited_node</OutputFile>
+</Function>
+<Function>
+<Name>add_shortest_path</Name>
+<Description>Renders the shortest path on the graph</Description>
+<OutputFile>cai.planning.utilities.ImageGridGraph.Graph/Graph.add_shortest_path</OutputFile>
+</Function>
+<Function>
+<Name>get_start_node</Name>
+<Description>Returns the start node</Description>
+<OutputFile>cai.planning.utilities.ImageGridGraph.Graph/Graph.get_start_node</OutputFile>
+</Function>
+<Function>
+<Name>get_goal_node</Name>
+<Description>Returns the goal node</Description>
+<OutputFile>cai.planning.utilities.ImageGridGraph.Graph/Graph.get_goal_node</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,17 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : Actor.idl
+// Function         : ROVCore - Simulation Actor
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+interface Actor
+{
+    int         create( object config );
+    void        init( int id, object shape );
+    object      update( int id );
+    object      get_pose( int id );
+    void        get_pose( int id, object pose );
+
+	string      describe( string id );
+};

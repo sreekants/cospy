@@ -1,0 +1,142 @@
+packages:
+  modules:  # Sea & underwater mapping
+     - name: Builder.STRANDFLAT
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.STRANDFLAT
+       args: Type=STRANDFLAT
+       database: $(MAP)/sea.s3db
+
+     - name: Builder.CONTINENTAL_SLOPE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.CONTINENTAL_SLOPE
+       args: Type=CONTINENTAL_SLOPE
+       database: $(MAP)/sea.s3db
+  
+     - name: Builder.MARINE_VALLEY
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.MARINE_VALLEY
+       args: Type=MARINE_VALLEY
+       database: $(MAP)/sea.s3db
+
+     - name: FJORD
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.FJORD
+       args: Type=FJORD
+       database: $(MAP)/sea.s3db
+
+     - name: ABYSSAL_PLAIN
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.ABYSSAL_PLAIN
+       args: Type=ABYSSAL_PLAIN
+       database: $(MAP)/sea.s3db
+
+     - name: CONTINENTAL_SHELF_PLAIN
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.CONTINENTAL_SHELF_PLAIN
+       args: Type=CONTINENTAL_SHELF_PLAIN
+       database: $(MAP)/sea.s3db
+
+     - name: MARINE_MOUNTAIN
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.MARINE_MOUNTAIN
+       args: Type=MARINE_MOUNTAIN
+       database: $(MAP)/sea.s3db
+
+     - name: EXCLUSIVE_ECONOMIC_ZONE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.EXCLUSIVE_ECONOMIC_ZONE
+       args: Type=EXCLUSIVE_ECONOMIC_ZONE
+       database: $(MAP)/sea.s3db
+
+     - name: CONTIGUOUS_ZONE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.CONTIGUOUS_ZONE
+       args: Type=CONTIGUOUS_ZONE
+       database: $(MAP)/sea.s3db
+
+     - name: TERRITORIAL_SEA
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.TERRITORIAL_SEA
+       args: Type=TERRITORIAL_SEA
+       database: $(MAP)/sea.s3db
+
+     - name: INTERNAL_WATERS
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.INTERNAL_WATERS
+       args: Type=INTERNAL_WATERS
+       database: $(MAP)/sea.s3db
+
+     - name: MARITIME_EXCLUSION_ZONE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.MARITIME_EXCLUSION_ZONE
+       args: Type=MARITIME_EXCLUSION_ZONE
+       database: $(MAP)/sea.s3db
+
+     - name: HARBOUR
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.HARBOUR
+       args: Type=HARBOUR
+       database: $(MAP)/sea.s3db
+
+     - name: WATERWAY
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.WATERWAY
+       args: Type=WATERWAY
+       database: $(MAP)/sea.s3db
+
+     - name: TRAFFIC_SEPARATION_SCHEME
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.TRAFFIC_SEPARATION_SCHEME
+       args: Type=TRAFFIC_SEPARATION_SCHEME
+       database: $(MAP)/sea.s3db
+
+     - name: TRAFFIC_LANE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.TRAFFIC_LANE
+       args: Type=TRAFFIC_LANE
+       database: $(MAP)/sea.s3db
+
+     - name: SEPARATION_ZONE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.SEPARATION_ZONE
+       args: Type=SEPARATION_ZONE
+       database: $(MAP)/sea.s3db
+
+     - name: ROUNDABOUT
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.ROUNDABOUT
+       args: Type=ROUNDABOUT
+       database: $(MAP)/sea.s3db
+
+     - name: INSHORE_TRAFFIC_ZONE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.INSHORE_TRAFFIC_ZONE
+       args: Type=INSHORE_TRAFFIC_ZONE
+       database: $(MAP)/sea.s3db
+
+     - name: RECOMMENDED_ROUTE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.RECOMMENDED_ROUTE
+       args: Type=RECOMMENDED_ROUTE
+       database: $(MAP)/sea.s3db
+
+     - name: DEEP_WATER_ROUTE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.DEEP_WATER_ROUTE
+       args: Type=DEEP_WATER_ROUTE
+       database: $(MAP)/sea.s3db
+
+     - name: PRECAUTIONARY_AREA
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.PRECAUTIONARY_AREA
+       args: Type=PRECAUTIONARY_AREA
+       database: $(MAP)/sea.s3db
+
+     - name: AREA_TO_AVOID
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.AREA_TO_AVOID
+       args: Type=AREA_TO_AVOID
+       database: $(MAP)/sea.s3db
+
+
+

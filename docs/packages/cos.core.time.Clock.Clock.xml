@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Clock</Name>
+<Description>Implementation of the Clock class</Description>
+<SourceFile>Clock.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.core.time.Clock</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>utc</Name>
+<Description>Returns the UTC time</Description>
+<OutputFile>cos.core.time.Clock.Clock/Clock.utc</OutputFile>
+</Function>
+<Function>
+<Name>tickcount</Name>
+<Description>Returns the tick count</Description>
+<OutputFile>cos.core.time.Clock.Clock/Clock.tickcount</OutputFile>
+</Function>
+</Functions>
+</Class>

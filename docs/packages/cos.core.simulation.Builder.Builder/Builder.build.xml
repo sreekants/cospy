@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>build</Name>
+<Class>Builder</Class>
+<Module>cos.core.simulation.Builder</Module>
+<Description>Builds an object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Builder.py</SourceFile>
+<SourceLine>46</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the database with the objects</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

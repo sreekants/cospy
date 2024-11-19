@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>notify</Name>
+<Class>Object</Class>
+<Module>cos.core.kernel.Object</Module>
+<Description>Triggers a method</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Object.py</SourceFile>
+<SourceLine>67</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>method</Name>
+<Type></Type>
+<Description>Method name</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Message argumnt</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

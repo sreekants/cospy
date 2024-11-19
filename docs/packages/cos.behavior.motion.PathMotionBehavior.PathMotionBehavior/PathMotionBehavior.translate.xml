@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>translate</Name>
+<Class>PathMotionBehavior</Class>
+<Module>cos.behavior.motion.PathMotionBehavior</Module>
+<Description>Moves the vehicle to a new point</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>PathMotionBehavior.py</SourceFile>
+<SourceLine>128</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>t</Name>
+<Type></Type>
+<Description>Time on the simulation clock</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

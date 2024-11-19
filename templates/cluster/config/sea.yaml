@@ -1,0 +1,43 @@
+packages:
+  modules:  # Sea & underwater mapping
+     - name: Builder.STRANDFLAT
+       module: cos.model.geography.SeaBuilder
+       service: Builder.STRANDFLAT
+       args: Type=STRANDFLAT
+       database: $(DB)/map/$$LOCATION$$/sea.s3db
+
+     - name: Builder.CONTINENTAL_SLOPE
+       module: cos.model.geography.SeaBuilder
+       service: Builder.CONTINENTAL_SLOPE
+       args: Type=CONTINENTAL_SLOPE
+       database: $(DB)/map/$$LOCATION$$/sea.s3db
+  
+     - name: Builder.MARINE_VALLEY
+       module: cos.model.geography.SeaBuilder
+       service: Builder.MARINE_VALLEY
+       args: Type=MARINE_VALLEY
+       database: $(DB)/map/$$LOCATION$$/sea.s3db
+
+     - name: FJORD
+       module: cos.model.geography.SeaBuilder
+       service: Builder.FJORD
+       args: Type=FJORD
+       database: $(DB)/map/$$LOCATION$$/sea.s3db
+
+     - name: ABYSSAL_PLAIN
+       module: cos.model.geography.SeaBuilder
+       service: Builder.ABYSSAL_PLAIN
+       args: Type=ABYSSAL_PLAIN
+       database: $(DB)/map/$$LOCATION$$/sea.s3db
+
+     - name: CONTINENTAL_SHELF_PLAIN
+       module: cos.model.geography.SeaBuilder
+       service: Builder.CONTINENTAL_SHELF_PLAIN
+       args: Type=CONTINENTAL_SHELF_PLAIN
+       database: $(DB)/map/$$LOCATION$$/sea.s3db
+
+     - name: MARINE_MOUNTAIN
+       module: cos.model.geography.SeaBuilder
+       service: Builder.MARINE_MOUNTAIN
+       args: Type=MARINE_MOUNTAIN
+       database: $(DB)/map/$$LOCATION$$/sea.s3db

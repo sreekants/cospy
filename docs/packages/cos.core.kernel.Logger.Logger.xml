@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Logger</Name>
+<Description>Log subsysten for the simulation</Description>
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>143</SourceLine>
+<Module>cos.core.kernel.Logger</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>set_silent</Name>
+<Description>Sets the tracing to silent mode (no dump on the console)</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.set_silent</OutputFile>
+</Function>
+<Function>
+<Name>error</Name>
+<Description>Dumps an error</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.error</OutputFile>
+</Function>
+<Function>
+<Name>warning</Name>
+<Description>Dumps a warning</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.warning</OutputFile>
+</Function>
+<Function>
+<Name>info</Name>
+<Description>Dumps a log information</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.info</OutputFile>
+</Function>
+<Function>
+<Name>debug</Name>
+<Description>Prints a debug message</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.debug</OutputFile>
+</Function>
+<Function>
+<Name>trace</Name>
+<Description>Traces a message</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.trace</OutputFile>
+</Function>
+<Function>
+<Name>print_generic</Name>
+<Description>Prints an generic text</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.print_generic</OutputFile>
+</Function>
+<Function>
+<Name>print_console</Name>
+<Description>Prints text to console</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.print_console</OutputFile>
+</Function>
+<Function>
+<Name>format_text</Name>
+<Description>Formats a text</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.format_text</OutputFile>
+</Function>
+<Function>
+<Name>is_log_enabled</Name>
+<Description>Checks if a module is enabled for logging</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.is_log_enabled</OutputFile>
+</Function>
+<Function>
+<Name>get_timestamp</Name>
+<Description>Generates a time stamp for the log</Description>
+<OutputFile>cos.core.kernel.Logger.Logger/Logger.get_timestamp</OutputFile>
+</Function>
+</Functions>
+</Class>

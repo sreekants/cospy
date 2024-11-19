@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.model.rule</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>2</FunctionCount>
+<Classes>
+<Class>
+<Name>COLREG</Name>
+<OutputFile>maritime.model.rule.COLREG.COLREG</OutputFile>
+<Description>Base class for all COLREG rules</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+</Classes>
+</Module>

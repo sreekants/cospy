@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>LandSprite</Name>
+<Description>Land shapes</Description>
+<SourceFile>LandSprite.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.ui.game.LandSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>WeatherSystem</Name>
+<Description>Implementation of the WeatherSystem class</Description>
+<SourceFile>WeatherSystem.py</SourceFile>
+<SourceLine>21</SourceLine>
+<Module>cos.model.environment.WeatherSystem</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>sim_update</Name>
+<Description>Updates the simulation</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.sim_update</OutputFile>
+</Function>
+<Function>
+<Name>generate</Name>
+<Description>Helper function to generate a weather system and safe it to a file</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.generate</OutputFile>
+</Function>
+<Function>
+<Name>update_actors</Name>
+<Description>Updates all the actors in the simulation with weather vectors</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.update_actors</OutputFile>
+</Function>
+<Function>
+<Name>notify</Name>
+<Description>Notifies all clients about an update to the weather force fields</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.notify</OutputFile>
+</Function>
+<Function>
+<Name>init_config</Name>
+<Description>Initializes the weather system configurations</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.init_config</OutputFile>
+</Function>
+<Function>
+<Name>scale_vector</Name>
+<Description>Scales a weather vector</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.scale_vector</OutputFile>
+</Function>
+<Function>
+<Name>describe</Name>
+<Description>Describes the weather system</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.describe</OutputFile>
+</Function>
+<Function>
+<Name>at</Name>
+<Description>Returns the force vector at a particular location</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.at</OutputFile>
+</Function>
+<Function>
+<Name>nearest</Name>
+<Description>Identifies the nearest vector in a force field</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.nearest</OutputFile>
+</Function>
+<Function>
+<Name>update_vectors</Name>
+<Description>Updates all the vectors in the force fields of a weather system</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.update_vectors</OutputFile>
+</Function>
+<Function>
+<Name>update_vehicle</Name>
+<Description>Overridable method to update a simulation vehicle</Description>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem/WeatherSystem.update_vehicle</OutputFile>
+</Function>
+</Functions>
+</Class>

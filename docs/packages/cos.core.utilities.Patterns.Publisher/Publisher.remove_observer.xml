@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>remove_observer</Name>
+<Class>Publisher</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Removes an observer from the list</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>209</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>obj</Name>
+<Type></Type>
+<Description>Observer to remove</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

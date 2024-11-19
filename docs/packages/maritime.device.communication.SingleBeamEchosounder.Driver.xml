@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Driver</Name>
+<Description>Implementation of the SingleBeamEchosounder device</Description>
+<SourceFile>SingleBeamEchosounder.py</SourceFile>
+<SourceLine>168</SourceLine>
+<Module>maritime.device.communication.SingleBeamEchosounder</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

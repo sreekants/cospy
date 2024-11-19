@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ExponentialGrowth</Name>
+<Description>Implementation of the DecayFunctions class</Description>
+<SourceFile>GrowthFunction.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.physics.force.GrowthFunction</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>doubling_time</Name>
+<Description>Doubling time for the growth</Description>
+<OutputFile>cos.physics.force.GrowthFunction.ExponentialGrowth/ExponentialGrowth.doubling_time</OutputFile>
+</Function>
+<Function>
+<Name>folding_time</Name>
+<Description>Folding time for the growth</Description>
+<OutputFile>cos.physics.force.GrowthFunction.ExponentialGrowth/ExponentialGrowth.folding_time</OutputFile>
+</Function>
+<Function>
+<Name>growth_constant</Name>
+<Description>Growth constant</Description>
+<OutputFile>cos.physics.force.GrowthFunction.ExponentialGrowth/ExponentialGrowth.growth_constant</OutputFile>
+</Function>
+</Functions>
+</Class>

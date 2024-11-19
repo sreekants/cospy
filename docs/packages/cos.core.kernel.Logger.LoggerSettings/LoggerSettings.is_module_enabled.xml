@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>is_module_enabled</Name>
+<Class>LoggerSettings</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Check if a module can be logged</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>130</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>module</Name>
+<Type></Type>
+<Description>Module name</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cai.planning.path</Name>
+<Description></Description>
+<Layer>cai</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>RRTCtxt</Name>
+<OutputFile>cai.planning.path.RRT.RRTCtxt</OutputFile>
+<Description>Implementation of the RRT Path Planning Algorithm</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

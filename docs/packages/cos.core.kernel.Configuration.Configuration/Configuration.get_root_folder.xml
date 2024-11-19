@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_root_folder</Name>
+<Class>Configuration</Class>
+<Module>cos.core.kernel.Configuration</Module>
+<Description>Returns the root folder</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Configuration.py</SourceFile>
+<SourceLine>74</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

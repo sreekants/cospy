@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>replicate</Name>
+<Class>TemplateReplicator</Class>
+<Module>cos.cluster.runtime.TemplateReplicator</Module>
+<Description>Repliate a template to an output directory from a template directory</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>TemplateReplicator.py</SourceFile>
+<SourceLine>84</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>TemplateDir</Name>
+<Type></Type>
+<Description>template directory</Description>
+</Argument>
+<Argument>
+<Name>OutputDir</Name>
+<Type></Type>
+<Description>Generated output directory</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>clear</Name>
+<Class>ThreadPool</Class>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Description>Clears all pending tasks</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>329</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

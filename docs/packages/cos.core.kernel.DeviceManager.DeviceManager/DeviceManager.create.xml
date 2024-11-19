@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create</Name>
+<Class>DeviceManager</Class>
+<Module>cos.core.kernel.DeviceManager</Module>
+<Description>Creates a device</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>DeviceManager.py</SourceFile>
+<SourceLine>45</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Name of the object</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>info</Name>
+<Type></Type>
+<Description>String of name-value pair attributes</Description>
+</Argument>
+<Argument>
+<Name>data</Name>
+<Type></Type>
+<Description>Additional arguments passed to the device during construction</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

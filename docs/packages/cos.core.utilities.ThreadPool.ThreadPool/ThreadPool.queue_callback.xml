@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>queue_callback</Name>
+<Class>ThreadPool</Class>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Description>Queues a function callback as a task on the thread pool</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>352</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>fn</Name>
+<Type></Type>
+<Description>Callback function to invoke to process the task</Description>
+</Argument>
+<Argument>
+<Name>data</Name>
+<Type></Type>
+<Description>Context data to pass to the callback</Description>
+</Argument>
+<Argument>
+<Name>priority=PoolTask.NORMAL</Name>
+<Type></Type>
+<Description>Priority of the task</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

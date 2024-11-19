@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>restrict</Name>
+<Class>Vessel</Class>
+<Module>maritime.model.vessel.Vessel</Module>
+<Description>Sets the vessel in a restricted state</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vessel.py</SourceFile>
+<SourceLine>99</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>restriction</Name>
+<Type></Type>
+<Description>Type of restriction</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

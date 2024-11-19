@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Builder</Name>
+<Description>Builder class for the visualization environment</Description>
+<SourceFile>Builder.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.tools.cviz.Builder</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>build</Name>
+<Description>Builds the world</Description>
+<OutputFile>cos.tools.cviz.Builder.Builder/Builder.build</OutputFile>
+</Function>
+<Function>
+<Name>create_environ</Name>
+<Description>Builds the environment</Description>
+<OutputFile>cos.tools.cviz.Builder.Builder/Builder.create_environ</OutputFile>
+</Function>
+<Function>
+<Name>create_cos</Name>
+<Description>Builds the simulation actors</Description>
+<OutputFile>cos.tools.cviz.Builder.Builder/Builder.create_cos</OutputFile>
+</Function>
+<Function>
+<Name>create_actors</Name>
+<Description>Builds the actors</Description>
+<OutputFile>cos.tools.cviz.Builder.Builder/Builder.create_actors</OutputFile>
+</Function>
+<Function>
+<Name>create_landscape</Name>
+<Description>Builds the landscape</Description>
+<OutputFile>cos.tools.cviz.Builder.Builder/Builder.create_landscape</OutputFile>
+</Function>
+<Function>
+<Name>create_physics</Name>
+<Description>Builds the physics engine</Description>
+<OutputFile>cos.tools.cviz.Builder.Builder/Builder.create_physics</OutputFile>
+</Function>
+</Functions>
+</Class>

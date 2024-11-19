@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>evaluate</Name>
+<Class>Operator</Class>
+<Module>cos.model.logic.Symbol</Module>
+<Description>Evaluates the expression</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Symbol.py</SourceFile>
+<SourceLine>142</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

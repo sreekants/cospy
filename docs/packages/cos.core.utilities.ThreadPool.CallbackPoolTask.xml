@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>CallbackPoolTask</Name>
+<Description>Helper thread pool class</Description>
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>109</SourceLine>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>execute</Name>
+<Description>Executes the task</Description>
+<OutputFile>cos.core.utilities.ThreadPool.CallbackPoolTask/CallbackPoolTask.execute</OutputFile>
+</Function>
+</Functions>
+</Class>

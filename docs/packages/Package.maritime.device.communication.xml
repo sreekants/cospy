@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.device.communication</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>13</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>AIS</Name>
+<OutputFile>maritime.device.communication.AIS.AIS</OutputFile>
+<Description>Implementation of the AIS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Creator</Name>
+<OutputFile>maritime.device.communication.AIS.Creator</OutputFile>
+<Description>Implementation of the AIS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.AIS.Driver</OutputFile>
+<Description>Implementation of the AIS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>GPS</Name>
+<OutputFile>maritime.device.communication.GPS.GPS</OutputFile>
+<Description>Implementation of the GPS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.GPS.Driver</OutputFile>
+<Description>Implementation of the GPS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>GyroCompass</Name>
+<OutputFile>maritime.device.communication.GyroCompass.GyroCompass</OutputFile>
+<Description>Implementation of the GyroCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.GyroCompass.Driver</OutputFile>
+<Description>Implementation of the GyroCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MagneticCompass</Name>
+<OutputFile>maritime.device.communication.MagneticCompass.MagneticCompass</OutputFile>
+<Description>Implementation of the MagneticCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.MagneticCompass.Driver</OutputFile>
+<Description>Implementation of the MagneticCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Radar</Name>
+<OutputFile>maritime.device.communication.Radar.Radar</OutputFile>
+<Description>Implementation of the Radar device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.Radar.Driver</OutputFile>
+<Description>Implementation of the Radar device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SingleBeamEchosounder</Name>
+<OutputFile>maritime.device.communication.SingleBeamEchosounder.SingleBeamEchosounder</OutputFile>
+<Description>Implementation of the SingleBeamEchosounder device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.SingleBeamEchosounder.Driver</OutputFile>
+<Description>Implementation of the SingleBeamEchosounder device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

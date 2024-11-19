@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>VesselSprite</Name>
+<Description>Implementation of mobile vessel sprites.</Description>
+<SourceFile>VesselSprite.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.ui.game.VesselSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>commit</Name>
+<Description>Renders the sprite to thescreen</Description>
+<OutputFile>cos.ui.game.VesselSprite.VesselSprite/VesselSprite.commit</OutputFile>
+</Function>
+</Functions>
+</Class>

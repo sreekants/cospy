@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.situation.standon</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>2</FunctionCount>
+<Classes>
+<Class>
+<Name>Standon</Name>
+<OutputFile>maritime.situation.standon.Standon.Standon</OutputFile>
+<Description>Implementation of the Standon class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+</Classes>
+</Module>

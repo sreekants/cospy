@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>PolygonSprite</Name>
+<Description>Basic polygon shape</Description>
+<SourceFile>PolygonSprite.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.ui.game.PolygonSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>render</Name>
+<Description>Renders the polygon</Description>
+<OutputFile>cos.ui.game.PolygonSprite.PolygonSprite/PolygonSprite.render</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Updates the polygon</Description>
+<OutputFile>cos.ui.game.PolygonSprite.PolygonSprite/PolygonSprite.update</OutputFile>
+</Function>
+<Function>
+<Name>commit</Name>
+<Description>Updates the screen</Description>
+<OutputFile>cos.ui.game.PolygonSprite.PolygonSprite/PolygonSprite.commit</OutputFile>
+</Function>
+<Function>
+<Name>getcolor</Name>
+<Description>Returns the color of the polygon</Description>
+<OutputFile>cos.ui.game.PolygonSprite.PolygonSprite/PolygonSprite.getcolor</OutputFile>
+</Function>
+<Function>
+<Name>getpolygon</Name>
+<Description>Returns the polygon path</Description>
+<OutputFile>cos.ui.game.PolygonSprite.PolygonSprite/PolygonSprite.getpolygon</OutputFile>
+</Function>
+</Functions>
+</Class>

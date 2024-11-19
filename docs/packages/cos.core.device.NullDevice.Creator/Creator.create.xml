@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create</Name>
+<Class>Creator</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Creates the Null device</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>227</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Name of the object</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>info</Name>
+<Type></Type>
+<Description>String of name-value pair attributes</Description>
+</Argument>
+<Argument>
+<Name>data</Name>
+<Type></Type>
+<Description>Additional data to create the device</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

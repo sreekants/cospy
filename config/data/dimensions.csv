@@ -1,0 +1,8 @@
+Dimension,Name,Parent,Type,Display Name,Description
+Location,Country,,string,Country,Country name
+Location,State,Country,string,State,State name
+Location,District,State,string,District,District name
+Location,County,District,string,County,County name
+Location,PostalCode,County,string,PostalCode,PostalCode of the port
+Location,Port,PostalCode,string,Port,Port name
+Location,gps,,string,gps,Gps location

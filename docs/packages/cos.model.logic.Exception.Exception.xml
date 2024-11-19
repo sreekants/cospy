@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Exception</Name>
+<Description>Base class for an decision exception</Description>
+<SourceFile>Exception.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.model.logic.Exception</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates an expression</Description>
+<OutputFile>cos.model.logic.Exception.Exception/Exception.evaluate</OutputFile>
+</Function>
+</Functions>
+</Class>

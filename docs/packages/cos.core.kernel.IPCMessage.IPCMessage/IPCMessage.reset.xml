@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>reset</Name>
+<Class>IPCMessage</Class>
+<Module>cos.core.kernel.IPCMessage</Module>
+<Description>Resets a flag</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>IPCMessage.py</SourceFile>
+<SourceLine>66</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>flag</Name>
+<Type></Type>
+<Description>Binary 32-bit flag</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

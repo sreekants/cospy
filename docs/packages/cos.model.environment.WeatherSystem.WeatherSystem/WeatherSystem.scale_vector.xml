@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>scale_vector</Name>
+<Class>WeatherSystem</Class>
+<Module>cos.model.environment.WeatherSystem</Module>
+<Description>Scales a weather vector</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>WeatherSystem.py</SourceFile>
+<SourceLine>111</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>V</Name>
+<Type></Type>
+<Description>Force vector</Description>
+</Argument>
+<Argument>
+<Name>scale</Name>
+<Type></Type>
+<Description>Scaling factor vector</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

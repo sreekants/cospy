@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>listen</Name>
+<Class>Object</Class>
+<Module>cos.core.kernel.Object</Module>
+<Description>Sets the object to listen to an IPC topic</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Object.py</SourceFile>
+<SourceLine>32</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>topic</Name>
+<Type></Type>
+<Description>Path of the IPC topic</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Decision</Name>
+<Description>Base class for an decision</Description>
+<SourceFile>Decision.py</SourceFile>
+<SourceLine>19</SourceLine>
+<Module>cos.model.logic.Decision</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>apply</Name>
+<Description>Applies a rule in the decision tree</Description>
+<OutputFile>cos.model.logic.Decision.Decision/Decision.apply</OutputFile>
+</Function>
+<Function>
+<Name>is_any</Name>
+<Description>Checks if any expression is satisfied.</Description>
+<OutputFile>cos.model.logic.Decision.Decision/Decision.is_any</OutputFile>
+</Function>
+<Function>
+<Name>IF</Name>
+<Description>Adds a condition.</Description>
+<OutputFile>cos.model.logic.Decision.Decision/Decision.IF</OutputFile>
+</Function>
+<Function>
+<Name>ASSURE</Name>
+<Description>Adds an assurance.</Description>
+<OutputFile>cos.model.logic.Decision.Decision/Decision.ASSURE</OutputFile>
+</Function>
+<Function>
+<Name>EXCEPT</Name>
+<Description>Adds an exception.</Description>
+<OutputFile>cos.model.logic.Decision.Decision/Decision.EXCEPT</OutputFile>
+</Function>
+</Functions>
+</Class>

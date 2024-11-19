@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_timestamp</Name>
+<Class>Logger</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Generates a time stamp for the log</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>328</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

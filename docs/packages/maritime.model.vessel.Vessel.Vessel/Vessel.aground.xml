@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>aground</Name>
+<Class>Vessel</Class>
+<Module>maritime.model.vessel.Vessel</Module>
+<Description>Sets the vessel state to aground</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vessel.py</SourceFile>
+<SourceLine>130</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

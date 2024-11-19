@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>monitor</Name>
+<Class>Evaluator</Class>
+<Module>maritime.regulation.colreg.Evaluator</Module>
+<Description>Monitors events on the simulation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Evaluator.py</SourceFile>
+<SourceLine>114</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,10 @@
+$$// confirm.inf = the text emitted to the confirmation dialog for
+$$//    this configuration
+
+Description: Simulule generation template
+
+Source & coniguration files for a simulation capsule. 
+
+Includes configuration files in yaml and json format.
+
+Main source code in: cos.ini

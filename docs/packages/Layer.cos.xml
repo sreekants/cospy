@@ -1,0 +1,1540 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos</Name>
+<Description></Description>
+<ClassCount>255</ClassCount>
+<FunctionCount>673</FunctionCount>
+<Classes>
+<Class>
+<Name>BasicHydrodynamicBehavior</Name>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior</OutputFile>
+<Description>Implementation of the BasicHydrodynamicBehavior class</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>BrownianMotionBehavior</Name>
+<OutputFile>cos.behavior.motion.BrownianMotionBehavior.BrownianMotionBehavior</OutputFile>
+<Description>Random walk motion behavior</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>PID_controller</Name>
+<OutputFile>cos.behavior.motion.HydrodynamicModel.PID_controller</OutputFile>
+<Description>Implementation of the HydrodynamicModel class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Ship</Name>
+<OutputFile>cos.behavior.motion.HydrodynamicModel.Ship</OutputFile>
+<Description>Implementation of the HydrodynamicModel class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>LinearMotionBehavior</Name>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior</OutputFile>
+<Description>Default motion behavior uses the linear vectors defined in the configuration to move the object</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>MotionBehavior</Name>
+<OutputFile>cos.behavior.motion.MotionBehavior.MotionBehavior</OutputFile>
+<Description>Base class for all motion behavior</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>PathMotionBehavior</Name>
+<OutputFile>cos.behavior.motion.PathMotionBehavior.PathMotionBehavior</OutputFile>
+<Description>A path motion based on path file</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>ScenarioGenerator</Name>
+<OutputFile>cos.cluster.runtime.ScenarioGenerator.ScenarioGenerator</OutputFile>
+<Description>Implementation of the ScenarioGenerator class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Declarations</Name>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.Declarations</OutputFile>
+<Description>Helper class to generate code from a meta-programming template</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>TemplateReplicator</Name>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.TemplateReplicator</OutputFile>
+<Description>Helper class to generate code from a meta-programming template</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>World</Name>
+<OutputFile>cos.core.api.Beacon.World</OutputFile>
+<Description></Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>MQ</Name>
+<OutputFile>cos.core.api.MQ.MQ</OutputFile>
+<Description></Description>
+<FunctionCount>18</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectManager</Name>
+<OutputFile>cos.core.api.ObjectManager.ObjectManager</OutputFile>
+<Description></Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Port</Name>
+<OutputFile>cos.core.api.Port.Port</OutputFile>
+<Description></Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Radar</Name>
+<OutputFile>cos.core.api.Radar.Radar</OutputFile>
+<Description></Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Sea</Name>
+<OutputFile>cos.core.api.Sea.Sea</OutputFile>
+<Description></Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Service</Name>
+<OutputFile>cos.core.api.Service.Service</OutputFile>
+<Description></Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>Service</Name>
+<OutputFile>cos.core.api.Simulation.Service</OutputFile>
+<Description></Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>Timer</Name>
+<OutputFile>cos.core.api.Timer.Timer</OutputFile>
+<Description></Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Topic</Name>
+<OutputFile>cos.core.api.Topic.Topic</OutputFile>
+<Description></Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>Vessel</Name>
+<OutputFile>cos.core.api.Vessel.Vessel</OutputFile>
+<Description></Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>World</Name>
+<OutputFile>cos.core.api.World.World</OutputFile>
+<Description></Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>NullDevice</Name>
+<OutputFile>cos.core.device.NullDevice.NullDevice</OutputFile>
+<Description>Base class for all devices</Description>
+<FunctionCount>26</FunctionCount>
+</Class>
+<Class>
+<Name>Creator</Name>
+<OutputFile>cos.core.device.NullDevice.Creator</OutputFile>
+<Description>Base class for all devices</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Action</Name>
+<OutputFile>cos.core.kernel.Action.Action</OutputFile>
+<Description>Base class for COS actions</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>FileSystem</Name>
+<OutputFile>cos.core.kernel.BootImage.FileSystem</OutputFile>
+<Description>Implementation of the BootImage class</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>BootLoader</Name>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader</OutputFile>
+<Description>Implementation of the boot loader for the simulation engine</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>CompositeService</Name>
+<OutputFile>cos.core.kernel.CompositeService.CompositeService</OutputFile>
+<Description>Base class for all COS composite services</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Configuration</Name>
+<OutputFile>cos.core.kernel.Configuration.Configuration</OutputFile>
+<Description>Master configuration file for the simulation</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>Context</Name>
+<OutputFile>cos.core.kernel.Context.Context</OutputFile>
+<Description>Runtime Context  of the simulation</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Device</Name>
+<OutputFile>cos.core.kernel.Device.Device</OutputFile>
+<Description>Base class for all devices</Description>
+<FunctionCount>32</FunctionCount>
+</Class>
+<Class>
+<Name>DeviceManager</Name>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager</OutputFile>
+<Description>Implementation of a generic device manager</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>Event</Name>
+<OutputFile>cos.core.kernel.Event.Event</OutputFile>
+<Description>A class for an IPC Event in the simulation environment</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Faculty</Name>
+<OutputFile>cos.core.kernel.Faculty.Faculty</OutputFile>
+<Description>Base class for all faculties</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>FileSystem</Name>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem</OutputFile>
+<Description>Implementation of the FileSystem class</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>IPCFlags</Name>
+<OutputFile>cos.core.kernel.IPCMessage.IPCFlags</OutputFile>
+<Description>Message used for inter-process communication</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>IPCMessage</Name>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage</OutputFile>
+<Description>Message used for inter-process communication</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>Kernel</Name>
+<OutputFile>cos.core.kernel.Kernel.Kernel</OutputFile>
+<Description>A class for micro kernel in the simulation environment</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>LogFile</Name>
+<OutputFile>cos.core.kernel.Logger.LogFile</OutputFile>
+<Description>Log subsysten for the simulation</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>LoggerSettings</Name>
+<OutputFile>cos.core.kernel.Logger.LoggerSettings</OutputFile>
+<Description>Log subsysten for the simulation</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Logger</Name>
+<OutputFile>cos.core.kernel.Logger.Logger</OutputFile>
+<Description>Log subsysten for the simulation</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>PumpCtxt</Name>
+<OutputFile>cos.core.kernel.MessageQueue.PumpCtxt</OutputFile>
+<Description>Implemention of an in-memory message queue for inter-process communication</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MessageQueue</Name>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue</OutputFile>
+<Description>Implemention of an in-memory message queue for inter-process communication</Description>
+<FunctionCount>16</FunctionCount>
+</Class>
+<Class>
+<Name>Object</Name>
+<OutputFile>cos.core.kernel.Object.Object</OutputFile>
+<Description>Base class for all the objects in the simulation</Description>
+<FunctionCount>13</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectType</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectType</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectNode</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectNode</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectTree</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectTree</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectManager</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectManager</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ParameterManager</Name>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager</OutputFile>
+<Description>A parameter subsystem is a shared, dictionary that is accessible via APIs.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Service</Name>
+<OutputFile>cos.core.kernel.Service.Service</OutputFile>
+<Description>Base class for all COS services</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Subsystem</Name>
+<OutputFile>cos.core.kernel.Subsystem.Subsystem</OutputFile>
+<Description>Base class for all COS subsystems</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Thread</Name>
+<OutputFile>cos.core.kernel.Thread.Thread</OutputFile>
+<Description>Base class for all kernel threads</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PoolThread</Name>
+<OutputFile>cos.core.kernel.ThreadPool.PoolThread</OutputFile>
+<Description>Implementation of a kernel thread pool to run client services.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ThreadPool</Name>
+<OutputFile>cos.core.kernel.ThreadPool.ThreadPool</OutputFile>
+<Description>Implementation of a kernel thread pool to run client services.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Topic</Name>
+<OutputFile>cos.core.kernel.Topic.Topic</OutputFile>
+<Description>A message topic on the message queue</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ORPCProxy</Name>
+<OutputFile>cos.core.network.ORPCProxy.ORPCProxy</OutputFile>
+<Description>Base class for all RPC proxy classes</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>ORPCService</Name>
+<OutputFile>cos.core.network.ORPCService.ORPCService</OutputFile>
+<Description>The base class for all API services</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RPCZMQTransport</Name>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport</OutputFile>
+<Description>Implementation of the RPC Transport for ZMQ</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>ZMQFrame</Name>
+<OutputFile>cos.core.network.ZMQFrame.ZMQFrame</OutputFile>
+<Description>Implementation of an COS network frame for ZMQ tranport</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>ZMQTransport</Name>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport</OutputFile>
+<Description>Transport layer class for ZMQ support.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Beacon</Name>
+<OutputFile>cos.core.service.Beacon.Beacon</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Land</Name>
+<OutputFile>cos.core.service.Land.Land</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MQ</Name>
+<OutputFile>cos.core.service.MQ.MQ</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>16</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectManager</Name>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Port</Name>
+<OutputFile>cos.core.service.Port.Port</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Radar</Name>
+<OutputFile>cos.core.service.Radar.Radar</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Sea</Name>
+<OutputFile>cos.core.service.Sea.Sea</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Service</Name>
+<OutputFile>cos.core.service.Service.Service</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Service</Name>
+<OutputFile>cos.core.service.Simulation.Service</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Timer</Name>
+<OutputFile>cos.core.service.Timer.Timer</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Topic</Name>
+<OutputFile>cos.core.service.Topic.Topic</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectQuery</Name>
+<OutputFile>cos.core.service.Vessel.ObjectQuery</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Vessel</Name>
+<OutputFile>cos.core.service.Vessel.Vessel</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>World</Name>
+<OutputFile>cos.core.service.World.World</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WorldObject</Name>
+<OutputFile>cos.core.service.WorldObject.WorldObject</OutputFile>
+<Description>Web service implementation.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ActorBehavior</Name>
+<OutputFile>cos.core.simulation.Actor.ActorBehavior</OutputFile>
+<Description>Impmenentation of a controller class for all sumulation objectsRunnerThread</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Actor</Name>
+<OutputFile>cos.core.simulation.Actor.Actor</OutputFile>
+<Description>Impmenentation of a controller class for all sumulation objectsRunnerThread</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Builder</Name>
+<OutputFile>cos.core.simulation.Builder.Builder</OutputFile>
+<Description>Helper class to build the simulation environment</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>ScreenArea</Name>
+<OutputFile>cos.core.simulation.CollisionDetector.ScreenArea</OutputFile>
+<Description>Simple 2D collision detector</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>CollisionDetector</Name>
+<OutputFile>cos.core.simulation.CollisionDetector.CollisionDetector</OutputFile>
+<Description>Simple 2D collision detector</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>RunnerThread</Name>
+<OutputFile>cos.core.simulation.Runner.RunnerThread</OutputFile>
+<Description>The main kernel thread running its internal actions.</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Runner</Name>
+<OutputFile>cos.core.simulation.Runner.Runner</OutputFile>
+<Description>The main kernel thread running its internal actions.</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Simulation</Name>
+<OutputFile>cos.core.simulation.Simulation.Simulation</OutputFile>
+<Description>Global singleton object that implements the simulation</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SimulationThread</Name>
+<OutputFile>cos.core.simulation.SimulationThread.SimulationThread</OutputFile>
+<Description>Base class for all general threads used in the simulation</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>SimulationPoolThread</Name>
+<OutputFile>cos.core.simulation.SimulationThreadPool.SimulationPoolThread</OutputFile>
+<Description>Implementation of the thread pool used in simulation</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>SimulationThreadPool</Name>
+<OutputFile>cos.core.simulation.SimulationThreadPool.SimulationThreadPool</OutputFile>
+<Description>Implementation of the thread pool used in simulation</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Clock</Name>
+<OutputFile>cos.core.time.Clock.Clock</OutputFile>
+<Description>Implementation of the Clock class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Ticker</Name>
+<OutputFile>cos.core.time.Ticker.Ticker</OutputFile>
+<Description>Implementation of the Ticker class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>ActiveRecord</Name>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord</OutputFile>
+<Description>Active record design pattern for ORM DB access</Description>
+<FunctionCount>22</FunctionCount>
+</Class>
+<Class>
+<Name>ArgList</Name>
+<OutputFile>cos.core.utilities.ArgList.ArgList</OutputFile>
+<Description>Implementation of a name value argument list class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>ErrorCode</Name>
+<OutputFile>cos.core.utilities.Errors.ErrorCode</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Future</Name>
+<OutputFile>cos.core.utilities.Future.Future</OutputFile>
+<Description>Implementation of a futures class.</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>DocInfo</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.DocInfo</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SearchNode</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchNode</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SearchTrie</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchTrie</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>SearchIndexParseCallbacks</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndexParseCallbacks</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>SearchIndex</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>KeyStore</Name>
+<OutputFile>cos.core.utilities.KeyStore.KeyStore</OutputFile>
+<Description>Implementation of a key store database.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>GenericManager</Name>
+<OutputFile>cos.core.utilities.Patterns.GenericManager</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Manager</Name>
+<OutputFile>cos.core.utilities.Patterns.Manager</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>Composite</Name>
+<OutputFile>cos.core.utilities.Patterns.Composite</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Publisher</Name>
+<OutputFile>cos.core.utilities.Patterns.Publisher</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Flyweight</Name>
+<OutputFile>cos.core.utilities.Patterns.Flyweight</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>ChainOfResponsibility</Name>
+<OutputFile>cos.core.utilities.Patterns.ChainOfResponsibility</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>ProductCreator</Name>
+<OutputFile>cos.core.utilities.Patterns.ProductCreator</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>ProductRegistry</Name>
+<OutputFile>cos.core.utilities.Patterns.ProductRegistry</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>ProductTrader</Name>
+<OutputFile>cos.core.utilities.Patterns.ProductTrader</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>PoolTask</Name>
+<OutputFile>cos.core.utilities.ThreadPool.PoolTask</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>CallbackPoolTask</Name>
+<OutputFile>cos.core.utilities.ThreadPool.CallbackPoolTask</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>PoolThread</Name>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>ThreadPool</Name>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>TransactionalDatabase</Name>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase</OutputFile>
+<Description>Utility class to process SQLite records in a transactional batches</Description>
+<FunctionCount>10</FunctionCount>
+</Class>
+<Class>
+<Name>TreeFindCtxt</Name>
+<OutputFile>cos.core.utilities.Tree.TreeFindCtxt</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TreeNode</Name>
+<OutputFile>cos.core.utilities.Tree.TreeNode</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>22</FunctionCount>
+</Class>
+<Class>
+<Name>Tree</Name>
+<OutputFile>cos.core.utilities.Tree.Tree</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>Angle</Name>
+<OutputFile>cos.math.geometry.Angle.Angle</OutputFile>
+<Description>Implementation of the angle functions</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Circle</Name>
+<OutputFile>cos.math.geometry.Circle.Circle</OutputFile>
+<Description>Implementation of the Circle class</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Distance</Name>
+<OutputFile>cos.math.geometry.Distance.Distance</OutputFile>
+<Description>Implementation of the distance functions</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>Polygon</Name>
+<OutputFile>cos.math.geometry.Polygon.Polygon</OutputFile>
+<Description>Implementation of the Polygon class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Rectangle</Name>
+<OutputFile>cos.math.geometry.Rectangle.Rectangle</OutputFile>
+<Description>Implementation of the Rectangle class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Triangle</Name>
+<OutputFile>cos.math.geometry.Triangle.Triangle</OutputFile>
+<Description>Implementation of the Triangle class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Delaunator</Name>
+<OutputFile>cos.math.partition.Delaunator.Delaunator</OutputFile>
+<Description>Implementation of the Delunay triangulator</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ActorType</Name>
+<OutputFile>cos.model.environment.Actors.ActorType</OutputFile>
+<Description>Implementation of an orchestrator class that conducts the simulation</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Actors</Name>
+<OutputFile>cos.model.environment.Actors.Actors</OutputFile>
+<Description>Implementation of an orchestrator class that conducts the simulation</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Builder</Name>
+<OutputFile>cos.model.environment.Builder.Builder</OutputFile>
+<Description>Base class for all environment builders</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Environment</Name>
+<OutputFile>cos.model.environment.Environment.Environment</OutputFile>
+<Description>Implementation of the Environment class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>EnvironmentService</Name>
+<OutputFile>cos.model.environment.EnvironmentService.EnvironmentService</OutputFile>
+<Description>Implementation of the EnvironmentService class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Scales</Name>
+<OutputFile>cos.model.environment.Scales.Scales</OutputFile>
+<Description>Implementation of the Scales class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaCurrent</Name>
+<OutputFile>cos.model.environment.SeaCurrent.SeaCurrent</OutputFile>
+<Description>Implementation of the SeaCurrent class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaWave</Name>
+<OutputFile>cos.model.environment.SeaWave.SeaWave</OutputFile>
+<Description>Implementation of the SeaWave class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>DynamicForce</Name>
+<OutputFile>cos.model.environment.Types.DynamicForce</OutputFile>
+<Description>Implementation of the Types class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherType</Name>
+<OutputFile>cos.model.environment.Weather.WeatherType</OutputFile>
+<Description>Implementation of the Weather class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ElementType</Name>
+<OutputFile>cos.model.environment.Weather.ElementType</OutputFile>
+<Description>Implementation of the Weather class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Weather</Name>
+<OutputFile>cos.model.environment.Weather.Weather</OutputFile>
+<Description>Implementation of the Weather class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherBuilder</Name>
+<OutputFile>cos.model.environment.WeatherBuilder.WeatherBuilder</OutputFile>
+<Description>Implementation of the WeatherBuilder class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherSystem</Name>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem</OutputFile>
+<Description>Implementation of the WeatherSystem class</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherSystemGenerator</Name>
+<OutputFile>cos.model.environment.WeatherSystemGenerator.WeatherSystemGenerator</OutputFile>
+<Description>Implementation of the WeatherSystemGenerator class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WindCurrent</Name>
+<OutputFile>cos.model.environment.WindCurrent.WindCurrent</OutputFile>
+<Description>Implementation of the WindCurrent class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>AbyssalPlain</Name>
+<OutputFile>cos.model.geography.AbyssalPlain.AbyssalPlain</OutputFile>
+<Description>Implementation of the abyssal plain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Builder</Name>
+<OutputFile>cos.model.geography.Builder.Builder</OutputFile>
+<Description>Base class for all geography builders</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Cloud</Name>
+<OutputFile>cos.model.geography.Cloud.Cloud</OutputFile>
+<Description>Implementation of the cloud class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ContinentalShelfPlain</Name>
+<OutputFile>cos.model.geography.ContinentalShelfPlain.ContinentalShelfPlain</OutputFile>
+<Description>Implementation of the continental_shelf_plain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ContinentalSlope</Name>
+<OutputFile>cos.model.geography.ContinentalSlope.ContinentalSlope</OutputFile>
+<Description>Implementation of the continental_slope class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Desert</Name>
+<OutputFile>cos.model.geography.Desert.Desert</OutputFile>
+<Description>Implementation of the desert class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Fjord</Name>
+<OutputFile>cos.model.geography.Fjord.Fjord</OutputFile>
+<Description>Implementation of the fjord class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Fog</Name>
+<OutputFile>cos.model.geography.Fog.Fog</OutputFile>
+<Description>Implementation of the fog weather system class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Geography</Name>
+<OutputFile>cos.model.geography.Geography.Geography</OutputFile>
+<Description>Helper class to manage a collections of geographic assets</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.geography.Land.Type</OutputFile>
+<Description>Implementation of the land class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Land</Name>
+<OutputFile>cos.model.geography.Land.Land</OutputFile>
+<Description>Implementation of the land class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>LandBuilder</Name>
+<OutputFile>cos.model.geography.LandBuilder.LandBuilder</OutputFile>
+<Description>Builder class for land assets</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>MarineMountain</Name>
+<OutputFile>cos.model.geography.MarineMountain.MarineMountain</OutputFile>
+<Description>Implementation of the marine mountain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MarineValley</Name>
+<OutputFile>cos.model.geography.MarineValley.MarineValley</OutputFile>
+<Description>Implementation of the marine valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeZone</Name>
+<OutputFile>cos.model.geography.MaritimeZone.MaritimeZone</OutputFile>
+<Description>Implementation of the base class for maritime zones class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeTrafficZone</Name>
+<OutputFile>cos.model.geography.MaritimeZone.MaritimeTrafficZone</OutputFile>
+<Description>Implementation of the base class for maritime zones class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Mountain</Name>
+<OutputFile>cos.model.geography.Mountain.Mountain</OutputFile>
+<Description>Implementation of the mountain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Plain</Name>
+<OutputFile>cos.model.geography.Plain.Plain</OutputFile>
+<Description>Implementation of the plain class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Plateau</Name>
+<OutputFile>cos.model.geography.Plateau.Plateau</OutputFile>
+<Description>Implementation of the plateau class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.geography.Sea.Type</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Sea</Name>
+<OutputFile>cos.model.geography.Sea.Sea</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>SeaBuilder</Name>
+<OutputFile>cos.model.geography.SeaBuilder.SeaBuilder</OutputFile>
+<Description>builder class for marine assets</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Shape</Name>
+<OutputFile>cos.model.geography.Shape.Shape</OutputFile>
+<Description>Implementation of the Shape class</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.geography.Sky.Type</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Sky</Name>
+<OutputFile>cos.model.geography.Sky.Sky</OutputFile>
+<Description>Implementation of the sea class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>SkyBuilder</Name>
+<OutputFile>cos.model.geography.SkyBuilder.SkyBuilder</OutputFile>
+<Description>Builder class for aerial assets</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Strandflat</Name>
+<OutputFile>cos.model.geography.Strandflat.Strandflat</OutputFile>
+<Description>Implementation of the strandflat class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TrafficZone</Name>
+<OutputFile>cos.model.geography.TrafficZone.TrafficZone</OutputFile>
+<Description>Implementation of the traffic zones class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Assurance</Name>
+<OutputFile>cos.model.logic.Assurance.Assurance</OutputFile>
+<Description>Base class for an decision assurance</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Condition</Name>
+<OutputFile>cos.model.logic.Condition.Condition</OutputFile>
+<Description>Base class for an decision conditions</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>DecisionType</Name>
+<OutputFile>cos.model.logic.Decision.DecisionType</OutputFile>
+<Description>Base class for an decision</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Decision</Name>
+<OutputFile>cos.model.logic.Decision.Decision</OutputFile>
+<Description>Base class for an decision</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>EvaluateCtxt</Name>
+<OutputFile>cos.model.logic.DecisionTree.EvaluateCtxt</OutputFile>
+<Description>Base class for an decision tree and supporting classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>DecisionTree</Name>
+<OutputFile>cos.model.logic.DecisionTree.DecisionTree</OutputFile>
+<Description>Base class for an decision tree and supporting classes</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Exception</Name>
+<OutputFile>cos.model.logic.Exception.Exception</OutputFile>
+<Description>Base class for an decision exception</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Expression</Name>
+<OutputFile>cos.model.logic.Expression.Expression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>CompositeExpression</Name>
+<OutputFile>cos.model.logic.Expression.CompositeExpression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>UnaryExpression</Name>
+<OutputFile>cos.model.logic.Expression.UnaryExpression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>BinaryExpression</Name>
+<OutputFile>cos.model.logic.Expression.BinaryExpression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.logic.Symbol.Type</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SymbolType</Name>
+<OutputFile>cos.model.logic.Symbol.SymbolType</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Symbol</Name>
+<OutputFile>cos.model.logic.Symbol.Symbol</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Variable</Name>
+<OutputFile>cos.model.logic.Symbol.Variable</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Float</Name>
+<OutputFile>cos.model.logic.Symbol.Float</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Integer</Name>
+<OutputFile>cos.model.logic.Symbol.Integer</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>List</Name>
+<OutputFile>cos.model.logic.Symbol.List</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Operator</Name>
+<OutputFile>cos.model.logic.Symbol.Operator</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Function</Name>
+<OutputFile>cos.model.logic.Symbol.Function</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Range</Name>
+<OutputFile>cos.model.logic.Symbol.Range</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>CompositeResolverContext</Name>
+<OutputFile>cos.model.resolver.CompositeResolver.CompositeResolverContext</OutputFile>
+<Description>Implementation of the CompositeResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>CompositeResolver</Name>
+<OutputFile>cos.model.resolver.CompositeResolver.CompositeResolver</OutputFile>
+<Description>Implementation of the CompositeResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ListResolver</Name>
+<OutputFile>cos.model.resolver.ListResolver.ListResolver</OutputFile>
+<Description>Implementation of the ListResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MappingResolver</Name>
+<OutputFile>cos.model.resolver.MappingResolver.MappingResolver</OutputFile>
+<Description>Implementation of the MappingResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PriorityResolver</Name>
+<OutputFile>cos.model.resolver.PriorityResolver.PriorityResolver</OutputFile>
+<Description>Implementation of the PriorityResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RangeResolver</Name>
+<OutputFile>cos.model.resolver.RangeResolver.RangeResolver</OutputFile>
+<Description>Implementation of the RangeResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Resolver</Name>
+<OutputFile>cos.model.resolver.Resolver.Resolver</OutputFile>
+<Description>Implementation of the base class for all resolvers</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>NamedResolver</Name>
+<OutputFile>cos.model.resolver.Resolver.NamedResolver</OutputFile>
+<Description>Implementation of the base class for all resolvers</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Automata</Name>
+<OutputFile>cos.model.rule.Automata.Automata</OutputFile>
+<Description>Impelementation of a rule automata</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Clause</Name>
+<OutputFile>cos.model.rule.Clause.Clause</OutputFile>
+<Description>A rule clause decision</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Context</Name>
+<OutputFile>cos.model.rule.Context.Context</OutputFile>
+<Description>Implementation of the Context class</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>Definition</Name>
+<OutputFile>cos.model.rule.Definition.Definition</OutputFile>
+<Description>Definitions used by the rules</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ALL</Name>
+<OutputFile>cos.model.rule.Expression.ALL</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>ANY</Name>
+<OutputFile>cos.model.rule.Expression.ANY</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NONE</Name>
+<OutputFile>cos.model.rule.Expression.NONE</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>ABORT</Name>
+<OutputFile>cos.model.rule.Expression.ABORT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>IS</Name>
+<OutputFile>cos.model.rule.Expression.IS</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>IN</Name>
+<OutputFile>cos.model.rule.Expression.IN</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NOT_IN</Name>
+<OutputFile>cos.model.rule.Expression.NOT_IN</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>IS_NOT</Name>
+<OutputFile>cos.model.rule.Expression.IS_NOT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NOT</Name>
+<OutputFile>cos.model.rule.Expression.NOT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>GT</Name>
+<OutputFile>cos.model.rule.Expression.GT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>LT</Name>
+<OutputFile>cos.model.rule.Expression.LT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>LTE</Name>
+<OutputFile>cos.model.rule.Expression.LTE</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>GTE</Name>
+<OutputFile>cos.model.rule.Expression.GTE</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>EQ</Name>
+<OutputFile>cos.model.rule.Expression.EQ</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NEQ</Name>
+<OutputFile>cos.model.rule.Expression.NEQ</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Rule</Name>
+<OutputFile>cos.model.rule.Rule.Rule</OutputFile>
+<Description>Base class for all rules</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>RuleSet</Name>
+<OutputFile>cos.model.rule.RuleSet.RuleSet</OutputFile>
+<Description>A coolection of rules</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Situation</Name>
+<OutputFile>cos.model.rule.Situation.Situation</OutputFile>
+<Description>Implementation of the Rule Situation class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>EncounterSituation</Name>
+<OutputFile>cos.model.situation.EncounterSituation.EncounterSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in traffic</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Situation</Name>
+<OutputFile>cos.model.situation.Situation.Situation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Type</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Operation</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Operation</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Status</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Status</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Restriction</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Restriction</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Vehicle</Name>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>ExponentialDecay</Name>
+<OutputFile>cos.physics.force.DecayFunction.ExponentialDecay</OutputFile>
+<Description>Implementation of the DecayFunctions class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>ExponentialGrowth</Name>
+<OutputFile>cos.physics.force.GrowthFunction.ExponentialGrowth</OutputFile>
+<Description>Implementation of the DecayFunctions class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>DataManagerThread</Name>
+<OutputFile>cos.subsystem.data.DataManager.DataManagerThread</OutputFile>
+<Description>Implementation of the datamanager subsystem</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>DataManager</Name>
+<OutputFile>cos.subsystem.data.DataManager.DataManager</OutputFile>
+<Description>Implementation of the datamanager subsystem</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>Partition</Name>
+<OutputFile>cos.subsystem.data.Partition.Partition</OutputFile>
+<Description>Implementation of the Partition class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>NetworkManager</Name>
+<OutputFile>cos.subsystem.network.NetworkManager.NetworkManager</OutputFile>
+<Description>Network manager kernel subsystem</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RPCBrokerThread</Name>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBrokerThread</OutputFile>
+<Description>RPC broker thread and supporting classes</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>RPCBroker</Name>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBroker</OutputFile>
+<Description>RPC broker thread and supporting classes</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>World</Name>
+<OutputFile>cos.subsystem.world.World.World</OutputFile>
+<Description>Class that holds the entire universe of objects in the simulation</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>Builder</Name>
+<OutputFile>cos.tools.cviz.Builder.Builder</OutputFile>
+<Description>Builder class for the visualization environment</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>Dispatcher</Name>
+<OutputFile>cos.tools.cviz.Dispatcher.Dispatcher</OutputFile>
+<Description>Implementation of the Dispatcher class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>RPCAgent</Name>
+<OutputFile>cos.tools.cviz.RPCAgent.RPCAgent</OutputFile>
+<Description>Agent servicing RPC requests</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>VirtualWorld</Name>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld</OutputFile>
+<Description>Implementation of the virtual world.</Description>
+<FunctionCount>13</FunctionCount>
+</Class>
+<Class>
+<Name>AnimatedSprite</Name>
+<OutputFile>cos.ui.game.AnimatedSprite.AnimatedSprite</OutputFile>
+<Description>Implementation of a base class for animated sprites</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Arrow</Name>
+<OutputFile>cos.ui.game.Arrow.Arrow</OutputFile>
+<Description>Renders an arrow</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>BeaconSprite</Name>
+<OutputFile>cos.ui.game.BeaconSprite.BeaconSprite</OutputFile>
+<Description></Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>BoundingBox</Name>
+<OutputFile>cos.ui.game.BoundingBox.BoundingBox</OutputFile>
+<Description>IImplementation of a rectangular bounding box for simulation objects</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>LandSprite</Name>
+<OutputFile>cos.ui.game.LandSprite.LandSprite</OutputFile>
+<Description>Land shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PolygonSprite</Name>
+<OutputFile>cos.ui.game.PolygonSprite.PolygonSprite</OutputFile>
+<Description>Basic polygon shape</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>SeaSprite</Name>
+<OutputFile>cos.ui.game.SeaSprite.SeaSprite</OutputFile>
+<Description>Sea shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SkySprite</Name>
+<OutputFile>cos.ui.game.SkySprite.SkySprite</OutputFile>
+<Description>Sky shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Sprite</Name>
+<OutputFile>cos.ui.game.Sprite.Sprite</OutputFile>
+<Description>Base class for all sprite</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>SpriteController</Name>
+<OutputFile>cos.ui.game.SpriteController.SpriteController</OutputFile>
+<Description>Implementation of a controller for a sprite behavior.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>VectorSprite</Name>
+<OutputFile>cos.ui.game.VectorSprite.VectorSprite</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>VectorField</Name>
+<OutputFile>cos.ui.game.VectorSprite.VectorField</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.WeatherSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaCurrentSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.SeaCurrentSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WindCurrentSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.WindCurrentSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaWaveSystem</Name>
+<OutputFile>cos.ui.game.VectorSprite.SeaWaveSystem</OutputFile>
+<Description>Vector shapes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>VehicleSprite</Name>
+<OutputFile>cos.ui.game.VehicleSprite.VehicleSprite</OutputFile>
+<Description>Implementation of mobile vehicle sprites.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>VesselSprite</Name>
+<OutputFile>cos.ui.game.VesselSprite.VesselSprite</OutputFile>
+<Description>Implementation of mobile vessel sprites.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+</Classes>
+</Module>

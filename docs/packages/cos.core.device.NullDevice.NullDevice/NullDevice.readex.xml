@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>readex</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Read with no wait timeout</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>193</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>flags</Name>
+<Type></Type>
+<Description>Binary 32-bit flag</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

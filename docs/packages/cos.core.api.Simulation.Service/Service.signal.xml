@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>signal</Name>
+<Class>Service</Class>
+<Module>cos.core.api.Simulation</Module>
+<Description>Sends an event to the simulation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Simulation.py</SourceFile>
+<SourceLine>75</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>event</Name>
+<Type></Type>
+<Description>Event data</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

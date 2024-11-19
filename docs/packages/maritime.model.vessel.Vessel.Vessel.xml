@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Vessel</Name>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<SourceFile>Vessel.py</SourceFile>
+<SourceLine>55</SourceLine>
+<Module>maritime.model.vessel.Vessel</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>heading</Name>
+<Description>Returns the object heading</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.heading</OutputFile>
+</Function>
+<Function>
+<Name>describe</Name>
+<Description>Returns a description of the vessel</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.describe</OutputFile>
+</Function>
+<Function>
+<Name>restrict</Name>
+<Description>Sets the vessel in a restricted state</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.restrict</OutputFile>
+</Function>
+<Function>
+<Name>state</Name>
+<Description>Sets the status of the vessel</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.state</OutputFile>
+</Function>
+<Function>
+<Name>anchored</Name>
+<Description>Sets the vessel state to anchored</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.anchored</OutputFile>
+</Function>
+<Function>
+<Name>under_way</Name>
+<Description>Sets the vessel state to under_way</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.under_way</OutputFile>
+</Function>
+<Function>
+<Name>moored</Name>
+<Description>Sets the vessel state to moored</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.moored</OutputFile>
+</Function>
+<Function>
+<Name>aground</Name>
+<Description>Sets the vessel state to aground</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.aground</OutputFile>
+</Function>
+<Function>
+<Name>force</Name>
+<Description>Updates he force vector on the vessel</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.force</OutputFile>
+</Function>
+<Function>
+<Name>init</Name>
+<Description>Initializes the vessel</Description>
+<OutputFile>maritime.model.vessel.Vessel.Vessel/Vessel.init</OutputFile>
+</Function>
+</Functions>
+</Class>

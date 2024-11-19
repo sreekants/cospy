@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>DataManager</Name>
+<Description>Implementation of the datamanager subsystem</Description>
+<SourceFile>DataManager.py</SourceFile>
+<SourceLine>46</SourceLine>
+<Module>cos.subsystem.data.DataManager</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_init</Name>
+<Description>Callback for simulation initialization</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManager/DataManager.on_init</OutputFile>
+</Function>
+<Function>
+<Name>on_timer</Name>
+<Description>Callback handling timer events</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManager/DataManager.on_timer</OutputFile>
+</Function>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManager/DataManager.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_stop</Name>
+<Description>Callback for simulation shutdown</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManager/DataManager.on_stop</OutputFile>
+</Function>
+<Function>
+<Name>push</Name>
+<Description>Posts amessage to an IPC topic</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManager/DataManager.push</OutputFile>
+</Function>
+<Function>
+<Name>flush</Name>
+<Description>Flushes all the cached data to the file system.</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManager/DataManager.flush</OutputFile>
+</Function>
+</Functions>
+</Class>

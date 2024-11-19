@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>end</Name>
+<Class>Rule</Class>
+<Module>cos.model.rule.Rule</Module>
+<Description>Triggers the conclusion of a situation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Rule.py</SourceFile>
+<SourceLine>51</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>situation</Name>
+<Type></Type>
+<Description>Situation reference</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

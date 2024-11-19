@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ActiveRecord</Name>
+<Description>Active record design pattern for ORM DB access</Description>
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>48</SourceLine>
+<Module>cos.core.utilities.ActiveRecord</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Creates an active record with an SQLite connection to a database file</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.create</OutputFile>
+</Function>
+<Function>
+<Name>connect</Name>
+<Description>Creates an SQLite connection to a database file</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.connect</OutputFile>
+</Function>
+<Function>
+<Name>tables</Name>
+<Description>Returns the tables in a database</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.tables</OutputFile>
+</Function>
+<Function>
+<Name>fields</Name>
+<Description>Returns the fields of a table</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.fields</OutputFile>
+</Function>
+<Function>
+<Name>backup</Name>
+<Description>Creates a backup the database</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.backup</OutputFile>
+</Function>
+<Function>
+<Name>restore</Name>
+<Description>Restores a database from a backup</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.restore</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Deletes all records and vacuum's the database</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.clear</OutputFile>
+</Function>
+<Function>
+<Name>execute_sql</Name>
+<Description>Executes an SQL command with no result</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.execute_sql</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds values to the database</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.add</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Updates values of an object</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.update</OutputFile>
+</Function>
+<Function>
+<Name>get_object_list</Name>
+<Description>Returns the ID of objects matching a criteria</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.get_object_list</OutputFile>
+</Function>
+<Function>
+<Name>get_object_count</Name>
+<Description>Returns the number of objects matching a criteria</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.get_object_count</OutputFile>
+</Function>
+<Function>
+<Name>get_object_list_by</Name>
+<Description>Returns the fields of objects matching a criteria</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.get_object_list_by</OutputFile>
+</Function>
+<Function>
+<Name>find</Name>
+<Description>Finds an object with a matching ID</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.find</OutputFile>
+</Function>
+<Function>
+<Name>find_by</Name>
+<Description>Finds the first object with a matching field and value</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.find_by</OutputFile>
+</Function>
+<Function>
+<Name>set</Name>
+<Description>Sets the value of the object</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.set</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Returns the field value of an object</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.get</OutputFile>
+</Function>
+<Function>
+<Name>get_by</Name>
+<Description>Returns the list of field value of the all object matching a field an value</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.get_by</OutputFile>
+</Function>
+<Function>
+<Name>get_unique_by</Name>
+<Description>Returns the field value of the first object matching a field an value</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.get_unique_by</OutputFile>
+</Function>
+<Function>
+<Name>get_all</Name>
+<Description>Returns all fields of objects matching a criteria</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.get_all</OutputFile>
+</Function>
+<Function>
+<Name>delete</Name>
+<Description>Deletes an object with a matching ID</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.delete</OutputFile>
+</Function>
+<Function>
+<Name>delete_by</Name>
+<Description>Deletes all objects matching a field and value</Description>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord/ActiveRecord.delete_by</OutputFile>
+</Function>
+</Functions>
+</Class>

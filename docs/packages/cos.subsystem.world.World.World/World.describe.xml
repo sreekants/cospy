@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>describe</Name>
+<Class>World</Class>
+<Module>cos.subsystem.world.World</Module>
+<Description>Describes a class of objects in the simulation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>World.py</SourceFile>
+<SourceLine>89</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

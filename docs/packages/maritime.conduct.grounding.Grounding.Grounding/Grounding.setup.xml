@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>setup</Name>
+<Class>Grounding</Class>
+<Module>maritime.conduct.grounding.Grounding</Module>
+<Description>Sets up the parameters of the situations</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Grounding.py</SourceFile>
+<SourceLine>54</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

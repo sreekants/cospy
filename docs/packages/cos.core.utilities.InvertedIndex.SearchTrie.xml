@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SearchTrie</Name>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>35</SourceLine>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>find</Name>
+<Description>Finds a word node in the trie</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchTrie/SearchTrie.find</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds a word to the trie</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchTrie/SearchTrie.add</OutputFile>
+</Function>
+<Function>
+<Name>create_node</Name>
+<Description>Overridable function to create a node on the trie</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchTrie/SearchTrie.create_node</OutputFile>
+</Function>
+</Functions>
+</Class>

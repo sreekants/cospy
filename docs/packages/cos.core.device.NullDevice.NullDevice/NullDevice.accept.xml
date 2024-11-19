@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>accept</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Accepts a new connection</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>47</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>info</Name>
+<Type></Type>
+<Description>String of name-value pair attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

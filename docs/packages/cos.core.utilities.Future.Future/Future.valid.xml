@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>valid</Name>
+<Class>Future</Class>
+<Module>cos.core.utilities.Future</Module>
+<Description>Checks if the task has completed</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Future.py</SourceFile>
+<SourceLine>94</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

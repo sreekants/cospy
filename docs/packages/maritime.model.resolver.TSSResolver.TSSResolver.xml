@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>TSSResolver</Name>
+<Description>Implementation of the TSSResolver class</Description>
+<SourceFile>TSSResolver.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>maritime.model.resolver.TSSResolver</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SailingVessel</Name>
+<Description>Implementation of a simulation object for a saling vessel</Description>
+<SourceFile>SailingVessel.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>maritime.model.vessel.SailingVessel</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

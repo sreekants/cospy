@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>push</Name>
+<Class>MessageQueue</Class>
+<Module>cos.core.kernel.MessageQueue</Module>
+<Description>Pushs a message to a queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MessageQueue.py</SourceFile>
+<SourceLine>193</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the queue</Description>
+</Argument>
+<Argument>
+<Name>msg</Name>
+<Type></Type>
+<Description>Message to push</Description>
+</Argument>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Context argumen</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Argument to the message</Description>
+</Argument>
+<Argument>
+<Name>depth</Name>
+<Type></Type>
+<Description>Number of de-references on routes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

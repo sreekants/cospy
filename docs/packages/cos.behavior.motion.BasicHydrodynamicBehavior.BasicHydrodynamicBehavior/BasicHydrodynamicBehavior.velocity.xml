@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>velocity</Name>
+<Class>BasicHydrodynamicBehavior</Class>
+<Module>cos.behavior.motion.BasicHydrodynamicBehavior</Module>
+<Description>Returns the current velocity</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BasicHydrodynamicBehavior.py</SourceFile>
+<SourceLine>164</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

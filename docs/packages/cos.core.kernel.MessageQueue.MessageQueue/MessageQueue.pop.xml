@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>pop</Name>
+<Class>MessageQueue</Class>
+<Module>cos.core.kernel.MessageQueue</Module>
+<Description>Pops the next available message from a queue, None if empty</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MessageQueue.py</SourceFile>
+<SourceLine>179</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the queue</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

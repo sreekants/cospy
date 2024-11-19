@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>nearest</Name>
+<Class>WeatherSystem</Class>
+<Module>cos.model.environment.WeatherSystem</Module>
+<Description>Identifies the nearest vector in a force field</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>WeatherSystem.py</SourceFile>
+<SourceLine>191</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>x</Name>
+<Type></Type>
+<Description>X coordinate</Description>
+</Argument>
+<Argument>
+<Name>y</Name>
+<Type></Type>
+<Description>Y coordinate</Description>
+</Argument>
+<Argument>
+<Name>z</Name>
+<Type></Type>
+<Description>Z coordinate</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

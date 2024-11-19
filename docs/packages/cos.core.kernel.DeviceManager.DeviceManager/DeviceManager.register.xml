@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>register</Name>
+<Class>DeviceManager</Class>
+<Module>cos.core.kernel.DeviceManager</Module>
+<Description>Register a factory for a device type</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>DeviceManager.py</SourceFile>
+<SourceLine>95</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>creator</Name>
+<Type></Type>
+<Description>Factory for the device</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

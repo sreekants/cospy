@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ListResolver</Name>
+<Description>Implementation of the ListResolver class</Description>
+<SourceFile>ListResolver.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.model.resolver.ListResolver</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>add_word</Name>
+<Class>SearchIndexParseCallbacks</Class>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Description>Adds a word to the index</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>88</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>word_id</Name>
+<Type></Type>
+<Description>Word ID</Description>
+</Argument>
+<Argument>
+<Name>word</Name>
+<Type></Type>
+<Description>Word</Description>
+</Argument>
+<Argument>
+<Name>word_info</Name>
+<Type></Type>
+<Description>Word information</Description>
+</Argument>
+<Argument>
+<Name>db</Name>
+<Type></Type>
+<Description>Database to add record to</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

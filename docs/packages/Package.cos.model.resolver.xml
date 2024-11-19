@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.model.resolver</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>8</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>CompositeResolverContext</Name>
+<OutputFile>cos.model.resolver.CompositeResolver.CompositeResolverContext</OutputFile>
+<Description>Implementation of the CompositeResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>CompositeResolver</Name>
+<OutputFile>cos.model.resolver.CompositeResolver.CompositeResolver</OutputFile>
+<Description>Implementation of the CompositeResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ListResolver</Name>
+<OutputFile>cos.model.resolver.ListResolver.ListResolver</OutputFile>
+<Description>Implementation of the ListResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MappingResolver</Name>
+<OutputFile>cos.model.resolver.MappingResolver.MappingResolver</OutputFile>
+<Description>Implementation of the MappingResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PriorityResolver</Name>
+<OutputFile>cos.model.resolver.PriorityResolver.PriorityResolver</OutputFile>
+<Description>Implementation of the PriorityResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RangeResolver</Name>
+<OutputFile>cos.model.resolver.RangeResolver.RangeResolver</OutputFile>
+<Description>Implementation of the RangeResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Resolver</Name>
+<OutputFile>cos.model.resolver.Resolver.Resolver</OutputFile>
+<Description>Implementation of the base class for all resolvers</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>NamedResolver</Name>
+<OutputFile>cos.model.resolver.Resolver.NamedResolver</OutputFile>
+<Description>Implementation of the base class for all resolvers</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

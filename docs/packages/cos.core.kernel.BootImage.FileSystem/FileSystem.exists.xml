@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>exists</Name>
+<Class>FileSystem</Class>
+<Module>cos.core.kernel.BootImage</Module>
+<Description>Checks if a file exists in an image</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BootImage.py</SourceFile>
+<SourceLine>61</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the file in the image</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>FileSystem</Name>
+<Description>Implementation of the BootImage class</Description>
+<SourceFile>BootImage.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.core.kernel.BootImage</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Adds a directory to the image</Description>
+<OutputFile>cos.core.kernel.BootImage.FileSystem/FileSystem.create</OutputFile>
+</Function>
+<Function>
+<Name>open</Name>
+<Description>Dummy function for compatibility - Opens a file</Description>
+<OutputFile>cos.core.kernel.BootImage.FileSystem/FileSystem.open</OutputFile>
+</Function>
+<Function>
+<Name>close</Name>
+<Description>Closes a file stream</Description>
+<OutputFile>cos.core.kernel.BootImage.FileSystem/FileSystem.close</OutputFile>
+</Function>
+<Function>
+<Name>exists</Name>
+<Description>Checks if a file exists in an image</Description>
+<OutputFile>cos.core.kernel.BootImage.FileSystem/FileSystem.exists</OutputFile>
+</Function>
+<Function>
+<Name>read_file</Name>
+<Description>Returns the content of a file as text</Description>
+<OutputFile>cos.core.kernel.BootImage.FileSystem/FileSystem.read_file</OutputFile>
+</Function>
+<Function>
+<Name>read_file_as_bytes</Name>
+<Description>Returns the content of a file as bytes</Description>
+<OutputFile>cos.core.kernel.BootImage.FileSystem/FileSystem.read_file_as_bytes</OutputFile>
+</Function>
+</Functions>
+</Class>

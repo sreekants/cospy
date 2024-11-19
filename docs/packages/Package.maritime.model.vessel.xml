@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.model.vessel</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>11</ClassCount>
+<FunctionCount>15</FunctionCount>
+<Classes>
+<Class>
+<Name>Builder</Name>
+<OutputFile>maritime.model.vessel.Builder.Builder</OutputFile>
+<Description>Builder class for vessels</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>PowerDrivenVessel</Name>
+<OutputFile>maritime.model.vessel.PowerDrivenVessel.PowerDrivenVessel</OutputFile>
+<Description>Implementation of a simulation object for a power driven vessel</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SailingVessel</Name>
+<OutputFile>maritime.model.vessel.SailingVessel.SailingVessel</OutputFile>
+<Description>Implementation of a simulation object for a saling vessel</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaPlane</Name>
+<OutputFile>maritime.model.vessel.SeaPlane.SeaPlane</OutputFile>
+<Description>Implementation of a simulation object for a sea plane</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>maritime.model.vessel.Vessel.Type</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Operation</Name>
+<OutputFile>maritime.model.vessel.Vessel.Operation</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Status</Name>
+<OutputFile>maritime.model.vessel.Vessel.Status</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Restriction</Name>
+<OutputFile>maritime.model.vessel.Vessel.Restriction</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Vessel</Name>
+<OutputFile>maritime.model.vessel.Vessel.Vessel</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>10</FunctionCount>
+</Class>
+<Class>
+<Name>VesselComposer</Name>
+<OutputFile>maritime.model.vessel.VesselComposer.VesselComposer</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>WIG</Name>
+<OutputFile>maritime.model.vessel.WIG.WIG</OutputFile>
+<Description>Implementation of a simulation object for a WIG</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

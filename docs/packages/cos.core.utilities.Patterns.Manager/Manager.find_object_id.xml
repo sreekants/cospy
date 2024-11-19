@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>find_object_id</Name>
+<Class>Manager</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Finds the key of an object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>135</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>obj</Name>
+<Type></Type>
+<Description>Object to match</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

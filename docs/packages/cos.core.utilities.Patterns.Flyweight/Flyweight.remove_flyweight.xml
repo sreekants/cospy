@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>remove_flyweight</Name>
+<Class>Flyweight</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Removes a flyweight object matching a key</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>258</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Key to search for</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

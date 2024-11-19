@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create_thread</Name>
+<Class>SimulationThreadPool</Class>
+<Module>cos.core.simulation.SimulationThreadPool</Module>
+<Description>Overridable to create the pool thread instance</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>SimulationThreadPool.py</SourceFile>
+<SourceLine>38</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

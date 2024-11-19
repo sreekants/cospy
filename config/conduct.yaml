@@ -1,0 +1,22 @@
+packages:
+  modules:  # Situation analysis modules
+     - name: NarrowChannel
+       module: maritime.conduct.channel.NarrowChannel
+       arg: 
+
+     - name: Collision
+       module: maritime.conduct.collision.Collision
+       arg: 
+
+     - name: Harbour
+       module: maritime.conduct.harbour.Harbour
+       arg: 
+
+     - name: obstruction
+       module: maritime.conduct.obstruction.Obstruction
+       arg: 
+
+     - name: grounding
+       module: maritime.conduct.grounding.Grounding
+       arg: 
+

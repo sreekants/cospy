@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>EXCEPT</Name>
+<Class>Decision</Class>
+<Module>cos.model.logic.Decision</Module>
+<Description>Adds an exception.</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Decision.py</SourceFile>
+<SourceLine>105</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>expression</Name>
+<Type></Type>
+<Description>Expression to evaluate</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

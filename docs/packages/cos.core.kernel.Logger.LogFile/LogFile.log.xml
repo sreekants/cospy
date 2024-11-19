@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>log</Name>
+<Class>LogFile</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Adds a log entry</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>44</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>module</Name>
+<Type></Type>
+<Description>Module to log for</Description>
+</Argument>
+<Argument>
+<Name>log_type</Name>
+<Type></Type>
+<Description>Type of the log</Description>
+</Argument>
+<Argument>
+<Name>text</Name>
+<Type></Type>
+<Description>Text of the log</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

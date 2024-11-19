@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Service</Name>
+<Description>Web service implementation.</Description>
+<SourceFile>Service.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.core.service.Service</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

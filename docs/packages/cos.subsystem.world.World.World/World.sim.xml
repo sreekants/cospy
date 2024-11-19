@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>sim</Name>
+<Class>World</Class>
+<Module>cos.subsystem.world.World</Module>
+<Description>Returns the simulation object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>World.py</SourceFile>
+<SourceLine>35</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Rule36</Name>
+<Description>Implementation of COLREG Rule</Description>
+<SourceFile>Rule36.py</SourceFile>
+<SourceLine>18</SourceLine>
+<Module>rules.colreg.rule36.Rule36</Module>
+<Layer>rules</Layer>
+<Functions>
+</Functions>
+</Class>

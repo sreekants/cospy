@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.core.utilities</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>27</ClassCount>
+<FunctionCount>152</FunctionCount>
+<Classes>
+<Class>
+<Name>ActiveRecord</Name>
+<OutputFile>cos.core.utilities.ActiveRecord.ActiveRecord</OutputFile>
+<Description>Active record design pattern for ORM DB access</Description>
+<FunctionCount>22</FunctionCount>
+</Class>
+<Class>
+<Name>ArgList</Name>
+<OutputFile>cos.core.utilities.ArgList.ArgList</OutputFile>
+<Description>Implementation of a name value argument list class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>ErrorCode</Name>
+<OutputFile>cos.core.utilities.Errors.ErrorCode</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Future</Name>
+<OutputFile>cos.core.utilities.Future.Future</OutputFile>
+<Description>Implementation of a futures class.</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>DocInfo</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.DocInfo</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SearchNode</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchNode</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SearchTrie</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchTrie</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>SearchIndexParseCallbacks</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndexParseCallbacks</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>SearchIndex</Name>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex</OutputFile>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>KeyStore</Name>
+<OutputFile>cos.core.utilities.KeyStore.KeyStore</OutputFile>
+<Description>Implementation of a key store database.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>GenericManager</Name>
+<OutputFile>cos.core.utilities.Patterns.GenericManager</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Manager</Name>
+<OutputFile>cos.core.utilities.Patterns.Manager</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>Composite</Name>
+<OutputFile>cos.core.utilities.Patterns.Composite</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Publisher</Name>
+<OutputFile>cos.core.utilities.Patterns.Publisher</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Flyweight</Name>
+<OutputFile>cos.core.utilities.Patterns.Flyweight</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>ChainOfResponsibility</Name>
+<OutputFile>cos.core.utilities.Patterns.ChainOfResponsibility</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>ProductCreator</Name>
+<OutputFile>cos.core.utilities.Patterns.ProductCreator</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>ProductRegistry</Name>
+<OutputFile>cos.core.utilities.Patterns.ProductRegistry</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>ProductTrader</Name>
+<OutputFile>cos.core.utilities.Patterns.ProductTrader</OutputFile>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>PoolTask</Name>
+<OutputFile>cos.core.utilities.ThreadPool.PoolTask</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>CallbackPoolTask</Name>
+<OutputFile>cos.core.utilities.ThreadPool.CallbackPoolTask</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>PoolThread</Name>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>ThreadPool</Name>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool</OutputFile>
+<Description>Helper thread pool class</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>TransactionalDatabase</Name>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase</OutputFile>
+<Description>Utility class to process SQLite records in a transactional batches</Description>
+<FunctionCount>10</FunctionCount>
+</Class>
+<Class>
+<Name>TreeFindCtxt</Name>
+<OutputFile>cos.core.utilities.Tree.TreeFindCtxt</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TreeNode</Name>
+<OutputFile>cos.core.utilities.Tree.TreeNode</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>22</FunctionCount>
+</Class>
+<Class>
+<Name>Tree</Name>
+<OutputFile>cos.core.utilities.Tree.Tree</OutputFile>
+<Description>Generic implementation of a tree data structure</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+</Classes>
+</Module>

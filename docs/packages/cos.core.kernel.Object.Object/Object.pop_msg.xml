@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>pop_msg</Name>
+<Class>Object</Class>
+<Module>cos.core.kernel.Object</Module>
+<Description>Pops a message from the IPC queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Object.py</SourceFile>
+<SourceLine>59</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Message properties (name-value pairs)</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

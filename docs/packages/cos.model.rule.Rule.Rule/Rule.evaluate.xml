@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>evaluate</Name>
+<Class>Rule</Class>
+<Module>cos.model.rule.Rule</Module>
+<Description>Evaluates the expression</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Rule.py</SourceFile>
+<SourceLine>61</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>situation</Name>
+<Type></Type>
+<Description>Situation reference</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,478 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime</Name>
+<Description></Description>
+<ClassCount>78</ClassCount>
+<FunctionCount>69</FunctionCount>
+<Classes>
+<Class>
+<Name>NarrowChannel</Name>
+<OutputFile>maritime.conduct.channel.NarrowChannel.NarrowChannel</OutputFile>
+<Description>Implementation of the NarrowChannel class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Collision</Name>
+<OutputFile>maritime.conduct.collision.Collision.Collision</OutputFile>
+<Description>Implementation of the Collision class</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>Event</Name>
+<OutputFile>maritime.conduct.grounding.Grounding.Event</OutputFile>
+<Description>Implementation of the Grounding class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Grounding</Name>
+<OutputFile>maritime.conduct.grounding.Grounding.Grounding</OutputFile>
+<Description>Implementation of the Grounding class</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Harbour</Name>
+<OutputFile>maritime.conduct.harbour.Harbour.Harbour</OutputFile>
+<Description>Implementation of the Harbour class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Obstruction</Name>
+<OutputFile>maritime.conduct.obstruction.Obstruction.Obstruction</OutputFile>
+<Description>Implementation of the Obstruction class</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Event</Name>
+<OutputFile>maritime.core.situation.Events.Event</OutputFile>
+<Description>Types of maritime events</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>EncounterEvent</Name>
+<OutputFile>maritime.core.situation.Events.EncounterEvent</OutputFile>
+<Description>Types of maritime events</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Maneuver</Name>
+<OutputFile>maritime.core.situation.Maneuver.Maneuver</OutputFile>
+<Description>Implementation of the Maneuver class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeConductSituation</Name>
+<OutputFile>maritime.core.situation.MaritimeConductSituation.MaritimeConductSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeEncounterSituation</Name>
+<OutputFile>maritime.core.situation.MaritimeEncounterSituation.MaritimeEncounterSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeSituation</Name>
+<OutputFile>maritime.core.situation.MaritimeSituation.MaritimeSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Encounter</Name>
+<OutputFile>maritime.core.situation.Types.Encounter</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>EncounterStage</Name>
+<OutputFile>maritime.core.situation.Types.EncounterStage</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>AIS</Name>
+<OutputFile>maritime.device.communication.AIS.AIS</OutputFile>
+<Description>Implementation of the AIS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Creator</Name>
+<OutputFile>maritime.device.communication.AIS.Creator</OutputFile>
+<Description>Implementation of the AIS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.AIS.Driver</OutputFile>
+<Description>Implementation of the AIS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>GPS</Name>
+<OutputFile>maritime.device.communication.GPS.GPS</OutputFile>
+<Description>Implementation of the GPS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.GPS.Driver</OutputFile>
+<Description>Implementation of the GPS device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>GyroCompass</Name>
+<OutputFile>maritime.device.communication.GyroCompass.GyroCompass</OutputFile>
+<Description>Implementation of the GyroCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.GyroCompass.Driver</OutputFile>
+<Description>Implementation of the GyroCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MagneticCompass</Name>
+<OutputFile>maritime.device.communication.MagneticCompass.MagneticCompass</OutputFile>
+<Description>Implementation of the MagneticCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.MagneticCompass.Driver</OutputFile>
+<Description>Implementation of the MagneticCompass device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Radar</Name>
+<OutputFile>maritime.device.communication.Radar.Radar</OutputFile>
+<Description>Implementation of the Radar device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.Radar.Driver</OutputFile>
+<Description>Implementation of the Radar device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SingleBeamEchosounder</Name>
+<OutputFile>maritime.device.communication.SingleBeamEchosounder.SingleBeamEchosounder</OutputFile>
+<Description>Implementation of the SingleBeamEchosounder device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Driver</Name>
+<OutputFile>maritime.device.communication.SingleBeamEchosounder.Driver</OutputFile>
+<Description>Implementation of the SingleBeamEchosounder device</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>AreaToAvoid</Name>
+<OutputFile>maritime.model.geography.AreaToAvoid.AreaToAvoid</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ContiguousZone</Name>
+<OutputFile>maritime.model.geography.ContiguousZone.ContiguousZone</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>DeepWaterRoute</Name>
+<OutputFile>maritime.model.geography.DeepwaterRoute.DeepWaterRoute</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ExclusiveEconomicZone</Name>
+<OutputFile>maritime.model.geography.ExclusiveEconomicZone.ExclusiveEconomicZone</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Harbour</Name>
+<OutputFile>maritime.model.geography.Harbour.Harbour</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>InshoreTrafficZone</Name>
+<OutputFile>maritime.model.geography.InshoreTrafficZone.InshoreTrafficZone</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>InternalWaters</Name>
+<OutputFile>maritime.model.geography.InternalWaters.InternalWaters</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeExclusionZone</Name>
+<OutputFile>maritime.model.geography.MaritimeExclusionZone.MaritimeExclusionZone</OutputFile>
+<Description>Implementation of the maritime exclusion class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PrecautionaryRoute</Name>
+<OutputFile>maritime.model.geography.PrecautionaryRoute.PrecautionaryRoute</OutputFile>
+<Description>Implementation of the precautionary routes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RecommendedRoute</Name>
+<OutputFile>maritime.model.geography.RecommendedRoute.RecommendedRoute</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Roundabout</Name>
+<OutputFile>maritime.model.geography.Roundabout.Roundabout</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeparationZone</Name>
+<OutputFile>maritime.model.geography.SeparationZone.SeparationZone</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TerritorialSea</Name>
+<OutputFile>maritime.model.geography.TerritorialSea.TerritorialSea</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TrafficLane</Name>
+<OutputFile>maritime.model.geography.TrafficLane.TrafficLane</OutputFile>
+<Description>Implementation of the maritme traffic lane class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TrafficSeparationScheme</Name>
+<OutputFile>maritime.model.geography.TrafficSeparationScheme.TrafficSeparationScheme</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ColregResolver</Name>
+<OutputFile>maritime.model.resolver.ColregResolver.ColregResolver</OutputFile>
+<Description>Implementation of the ColregResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>EEZResolver</Name>
+<OutputFile>maritime.model.resolver.EEZResolver.EEZResolver</OutputFile>
+<Description>Implementation of the EEZResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>HarbourResolver</Name>
+<OutputFile>maritime.model.resolver.HarbourResolver.HarbourResolver</OutputFile>
+<Description>Implementation of the HarbourResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MEZResolver</Name>
+<OutputFile>maritime.model.resolver.MEZResolver.MEZResolver</OutputFile>
+<Description>Implementation of the MEZResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TargetResolver</Name>
+<OutputFile>maritime.model.resolver.TargetResolver.TargetResolver</OutputFile>
+<Description>Implementation of the TargetResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TSSResolver</Name>
+<OutputFile>maritime.model.resolver.TSSResolver.TSSResolver</OutputFile>
+<Description>Implementation of the TSSResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>LaneResolver</Name>
+<OutputFile>maritime.model.resolver.TSSResolver.LaneResolver</OutputFile>
+<Description>Implementation of the TSSResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>VesselResolver</Name>
+<OutputFile>maritime.model.resolver.VesselResolver.VesselResolver</OutputFile>
+<Description>Implementation of the VesselResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>OwnShipResolver</Name>
+<OutputFile>maritime.model.resolver.VesselResolver.OwnShipResolver</OutputFile>
+<Description>Implementation of the VesselResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TargetShipResolver</Name>
+<OutputFile>maritime.model.resolver.VesselResolver.TargetShipResolver</OutputFile>
+<Description>Implementation of the VesselResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ZoneResolver</Name>
+<OutputFile>maritime.model.resolver.ZoneResolver.ZoneResolver</OutputFile>
+<Description>Implementation of the ZoneResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeZoneResolver</Name>
+<OutputFile>maritime.model.resolver.ZoneResolver.MaritimeZoneResolver</OutputFile>
+<Description>Implementation of the ZoneResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>COLREG</Name>
+<OutputFile>maritime.model.rule.COLREG.COLREG</OutputFile>
+<Description>Base class for all COLREG rules</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Builder</Name>
+<OutputFile>maritime.model.vessel.Builder.Builder</OutputFile>
+<Description>Builder class for vessels</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>PowerDrivenVessel</Name>
+<OutputFile>maritime.model.vessel.PowerDrivenVessel.PowerDrivenVessel</OutputFile>
+<Description>Implementation of a simulation object for a power driven vessel</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SailingVessel</Name>
+<OutputFile>maritime.model.vessel.SailingVessel.SailingVessel</OutputFile>
+<Description>Implementation of a simulation object for a saling vessel</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaPlane</Name>
+<OutputFile>maritime.model.vessel.SeaPlane.SeaPlane</OutputFile>
+<Description>Implementation of a simulation object for a sea plane</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>maritime.model.vessel.Vessel.Type</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Operation</Name>
+<OutputFile>maritime.model.vessel.Vessel.Operation</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Status</Name>
+<OutputFile>maritime.model.vessel.Vessel.Status</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Restriction</Name>
+<OutputFile>maritime.model.vessel.Vessel.Restriction</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Vessel</Name>
+<OutputFile>maritime.model.vessel.Vessel.Vessel</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>10</FunctionCount>
+</Class>
+<Class>
+<Name>VesselComposer</Name>
+<OutputFile>maritime.model.vessel.VesselComposer.VesselComposer</OutputFile>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>WIG</Name>
+<OutputFile>maritime.model.vessel.WIG.WIG</OutputFile>
+<Description>Implementation of a simulation object for a WIG</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Cartography</Name>
+<OutputFile>maritime.navigation.cartography.Cartography.Cartography</OutputFile>
+<Description>Fasade for Cartography related classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Route</Name>
+<OutputFile>maritime.navigation.route.Route.Route</OutputFile>
+<Description>Fasade for route planning related classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Event</Name>
+<OutputFile>maritime.regulation.colreg.Encounter.Event</OutputFile>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Encounter</Name>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter</OutputFile>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>Evaluator</Name>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator</OutputFile>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Resolver</Name>
+<OutputFile>maritime.regulation.colreg.Resolver.Resolver</OutputFile>
+<Description>Implementation of the COLREG master resolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Crossing</Name>
+<OutputFile>maritime.situation.crossing.Crossing.Crossing</OutputFile>
+<Description>Implementation of the Crossing class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Giveway</Name>
+<OutputFile>maritime.situation.giveway.Giveway.Giveway</OutputFile>
+<Description>Implementation of the Giveway class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Headon</Name>
+<OutputFile>maritime.situation.headon.Headon.Headon</OutputFile>
+<Description>Implementation of the Headon class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Overtaking</Name>
+<OutputFile>maritime.situation.overtaking.Overtaking.Overtaking</OutputFile>
+<Description>Implementation of the Overtaking class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Standon</Name>
+<OutputFile>maritime.situation.standon.Standon.Standon</OutputFile>
+<Description>Implementation of the Standon class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Traffic</Name>
+<OutputFile>maritime.situation.traffic.Traffic.Traffic</OutputFile>
+<Description>Implementation of the Traffic class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+</Classes>
+</Module>

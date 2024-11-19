@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>extension</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Gets an extension interface on the device</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>118</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the interface</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,25 @@
+packages:
+  modules:  # Land & geographical mapping
+     - name: Builder.MOUNTAIN
+       module: cos.model.geography.LandBuilder
+       service: Builder.MOUNTAIN
+       args: Type=MOUNTAIN
+       database: $(DB)/map/$$LOCATION$$/land.s3db
+
+     - name: Builder.PLAIN
+       module: cos.model.geography.LandBuilder
+       service: Builder.PLAIN
+       args: Type=PLAIN
+       database: $(DB)/map/$$LOCATION$$/land.s3db
+
+     - name: Builder.PLATEAU
+       module: cos.model.geography.LandBuilder
+       service: Builder.PLATEAU
+       args: Type=PLATEAU
+       database: $(DB)/map/$$LOCATION$$/land.s3db
+
+     - name: Builder.DESERT
+       module: cos.model.geography.LandBuilder
+       service: Builder.DESERT
+       args: Type=DESERT
+       database: $(DB)/map/$$LOCATION$$/land.s3db

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ProductRegistry</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>358</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add</Name>
+<Description>Adds a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductRegistry/ProductRegistry.add</OutputFile>
+</Function>
+<Function>
+<Name>remove</Name>
+<Description>Removes a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductRegistry/ProductRegistry.remove</OutputFile>
+</Function>
+<Function>
+<Name>substitute</Name>
+<Description>Substitutes a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductRegistry/ProductRegistry.substitute</OutputFile>
+</Function>
+<Function>
+<Name>lookup</Name>
+<Description>Finds a product specification</Description>
+<OutputFile>cos.core.utilities.Patterns.ProductRegistry/ProductRegistry.lookup</OutputFile>
+</Function>
+</Functions>
+</Class>

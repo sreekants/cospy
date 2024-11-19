@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_object_count</Name>
+<Class>ActiveRecord</Class>
+<Module>cos.core.utilities.ActiveRecord</Module>
+<Description>Returns the number of objects matching a criteria</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>250</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>criteria</Name>
+<Type></Type>
+<Description>Criteria to match on all objects</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

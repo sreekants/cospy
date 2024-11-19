@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get</Name>
+<Class>Future</Class>
+<Module>cos.core.utilities.Future</Module>
+<Description>Returns the result on completion</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Future.py</SourceFile>
+<SourceLine>53</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

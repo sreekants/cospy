@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set_parent</Name>
+<Class>TreeNode</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Sets the parent of this node</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>401</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>parent</Name>
+<Type></Type>
+<Description>Parent node</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Tree</Name>
+<Description>Generic implementation of a tree data structure</Description>
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>440</SourceLine>
+<Module>cos.core.utilities.Tree</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add</Name>
+<Description>Adds a child node to a node a path</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.add</OutputFile>
+</Function>
+<Function>
+<Name>remove</Name>
+<Description>Reemoves a node identifed by a path</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.remove</OutputFile>
+</Function>
+<Function>
+<Name>match</Name>
+<Description>Searches for a node with a matching name</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.match</OutputFile>
+</Function>
+<Function>
+<Name>find</Name>
+<Description>Finds a node at a particular path</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.find</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Gets a node using a path notation. (New nodes are created if none exists).</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.get</OutputFile>
+</Function>
+<Function>
+<Name>traverse</Name>
+<Description>Helper function to iterate through child nodes of a node and invoke a callback</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.traverse</OutputFile>
+</Function>
+<Function>
+<Name>dump</Name>
+<Description>Dumps the tree to an output stream</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.dump</OutputFile>
+</Function>
+<Function>
+<Name>root</Name>
+<Description>Sets a new root node</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.root</OutputFile>
+</Function>
+<Function>
+<Name>attach_root</Name>
+<Description>Attaches a new root node</Description>
+<OutputFile>cos.core.utilities.Tree.Tree/Tree.attach_root</OutputFile>
+</Function>
+</Functions>
+</Class>

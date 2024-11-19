@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>flush</Name>
+<Class>Partition</Class>
+<Module>cos.subsystem.data.Partition</Module>
+<Description>Flushes data into the file system</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Partition.py</SourceFile>
+<SourceLine>26</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>db</Name>
+<Type></Type>
+<Description>Database to write to</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

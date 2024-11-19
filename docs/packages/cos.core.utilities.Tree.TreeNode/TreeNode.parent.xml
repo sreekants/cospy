@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>parent</Name>
+<Class>TreeNode</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Returns the parent of this node</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>395</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

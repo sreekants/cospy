@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>PID_controller</Name>
+<Description>Implementation of the HydrodynamicModel class</Description>
+<SourceFile>HydrodynamicModel.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.behavior.motion.HydrodynamicModel</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

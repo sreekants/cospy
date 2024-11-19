@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set_silent</Name>
+<Class>Logger</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Sets the tracing to silent mode (no dump on the console)</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>153</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>is_silent</Name>
+<Type></Type>
+<Description>Sets the silent mode</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

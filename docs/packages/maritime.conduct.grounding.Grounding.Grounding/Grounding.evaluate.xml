@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>evaluate</Name>
+<Class>Grounding</Class>
+<Module>maritime.conduct.grounding.Grounding</Module>
+<Description>Evaluates the expression</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Grounding.py</SourceFile>
+<SourceLine>41</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>rule_ctxt</Name>
+<Type></Type>
+<Description>Rule context</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

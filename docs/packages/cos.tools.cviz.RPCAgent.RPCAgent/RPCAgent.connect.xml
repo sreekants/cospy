@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>connect</Name>
+<Class>RPCAgent</Class>
+<Module>cos.tools.cviz.RPCAgent</Module>
+<Description>Cpmmects to the server</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCAgent.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

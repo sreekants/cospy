@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>LandBuilder</Name>
+<Description>Builder class for land assets</Description>
+<SourceFile>LandBuilder.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.model.geography.LandBuilder</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Creates a land artifact from the database</Description>
+<OutputFile>cos.model.geography.LandBuilder.LandBuilder/LandBuilder.create</OutputFile>
+</Function>
+</Functions>
+</Class>

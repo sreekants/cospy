@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Fjord</Name>
+<Description>Implementation of the fjord class</Description>
+<SourceFile>Fjord.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.model.geography.Fjord</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

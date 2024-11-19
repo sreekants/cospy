@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SymbolType</Name>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<SourceFile>Symbol.py</SourceFile>
+<SourceLine>22</SourceLine>
+<Module>cos.model.logic.Symbol</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>tostring</Name>
+<Description>A string representation of the object</Description>
+<OutputFile>cos.model.logic.Symbol.SymbolType/SymbolType.tostring</OutputFile>
+</Function>
+</Functions>
+</Class>

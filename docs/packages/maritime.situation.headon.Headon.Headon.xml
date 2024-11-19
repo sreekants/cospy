@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Headon</Name>
+<Description>Implementation of the Headon class</Description>
+<SourceFile>Headon.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.situation.headon.Headon</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>maritime.situation.headon.Headon.Headon/Headon.on_start</OutputFile>
+</Function>
+<Function>
+<Name>setup</Name>
+<Description>Sets up the parameters of the situation</Description>
+<OutputFile>maritime.situation.headon.Headon.Headon/Headon.setup</OutputFile>
+</Function>
+</Functions>
+</Class>

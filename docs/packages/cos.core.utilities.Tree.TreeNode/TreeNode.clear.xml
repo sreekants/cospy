@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>clear</Name>
+<Class>TreeNode</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Deletes all child nodes</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>95</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

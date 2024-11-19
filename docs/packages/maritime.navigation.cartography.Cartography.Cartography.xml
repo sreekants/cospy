@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Cartography</Name>
+<Description>Fasade for Cartography related classes</Description>
+<SourceFile>Cartography.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>maritime.navigation.cartography.Cartography</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

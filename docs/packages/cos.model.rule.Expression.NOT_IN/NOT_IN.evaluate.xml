@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>evaluate</Name>
+<Class>NOT_IN</Class>
+<Module>cos.model.rule.Expression</Module>
+<Description>Evaluates the expression</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Expression.py</SourceFile>
+<SourceLine>165</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>World</Name>
+<Description></Description>
+<SourceFile>World.py</SourceFile>
+<SourceLine>4</SourceLine>
+<Module>cos.core.api.World</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>init</Name>
+<Description>Initializes the world</Description>
+<OutputFile>cos.core.api.World.World/World.init</OutputFile>
+</Function>
+<Function>
+<Name>has_collision</Name>
+<Description>Checks for collisions in a region</Description>
+<OutputFile>cos.core.api.World.World/World.has_collision</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds an object to the world</Description>
+<OutputFile>cos.core.api.World.World/World.add</OutputFile>
+</Function>
+<Function>
+<Name>play</Name>
+<Description>Runs a play loop</Description>
+<OutputFile>cos.core.api.World.World/World.play</OutputFile>
+</Function>
+<Function>
+<Name>describe</Name>
+<Description>Describes the world</Description>
+<OutputFile>cos.core.api.World.World/World.describe</OutputFile>
+</Function>
+</Functions>
+</Class>

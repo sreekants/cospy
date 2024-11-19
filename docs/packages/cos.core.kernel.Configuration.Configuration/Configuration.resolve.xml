@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>resolve</Name>
+<Class>Configuration</Class>
+<Module>cos.core.kernel.Configuration</Module>
+<Description>Resolves a value with configuration variables</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Configuration.py</SourceFile>
+<SourceLine>139</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>value</Name>
+<Type></Type>
+<Description>Path to resolve</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

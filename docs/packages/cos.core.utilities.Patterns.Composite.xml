@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Composite</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>169</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add_component</Name>
+<Description>Adds a component to the composite</Description>
+<OutputFile>cos.core.utilities.Patterns.Composite/Composite.add_component</OutputFile>
+</Function>
+<Function>
+<Name>remove_component</Name>
+<Description>Removes an object from the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.Composite/Composite.remove_component</OutputFile>
+</Function>
+</Functions>
+</Class>

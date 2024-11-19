@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set</Name>
+<Class>IPCMessage</Class>
+<Module>cos.core.kernel.IPCMessage</Module>
+<Description>Sets a flag</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>IPCMessage.py</SourceFile>
+<SourceLine>58</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>flag</Name>
+<Type></Type>
+<Description>Binary 32-bit flag</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

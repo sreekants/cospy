@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ObjectManager</Name>
+<Description>Web service implementation.</Description>
+<SourceFile>ObjectManager.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.core.service.ObjectManager</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Creates an object</Description>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager/ObjectManager.create</OutputFile>
+</Function>
+<Function>
+<Name>register</Name>
+<Description>Registers an object</Description>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager/ObjectManager.register</OutputFile>
+</Function>
+<Function>
+<Name>link</Name>
+<Description>Creates a symbolic link to an object</Description>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager/ObjectManager.link</OutputFile>
+</Function>
+<Function>
+<Name>unregister</Name>
+<Description>Unregisters an object or link</Description>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager/ObjectManager.unregister</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Returns a reference to the object</Description>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager/ObjectManager.get</OutputFile>
+</Function>
+<Function>
+<Name>find</Name>
+<Description>Finds an object</Description>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager/ObjectManager.find</OutputFile>
+</Function>
+<Function>
+<Name>exists</Name>
+<Description>Unregisters an object or link</Description>
+<OutputFile>cos.core.service.ObjectManager.ObjectManager/ObjectManager.exists</OutputFile>
+</Function>
+</Functions>
+</Class>

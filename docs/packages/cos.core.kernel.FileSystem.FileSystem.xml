@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>FileSystem</Name>
+<Description>Implementation of the FileSystem class</Description>
+<SourceFile>FileSystem.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>cos.core.kernel.FileSystem</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>mount</Name>
+<Description>Mounts the file system</Description>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem/FileSystem.mount</OutputFile>
+</Function>
+<Function>
+<Name>umount</Name>
+<Description>Unmounts the file system</Description>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem/FileSystem.umount</OutputFile>
+</Function>
+<Function>
+<Name>open</Name>
+<Description>Opens a file and returns a stream</Description>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem/FileSystem.open</OutputFile>
+</Function>
+<Function>
+<Name>close</Name>
+<Description>Closes a file stream</Description>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem/FileSystem.close</OutputFile>
+</Function>
+<Function>
+<Name>write_file</Name>
+<Description>Dumps text into a file</Description>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem/FileSystem.write_file</OutputFile>
+</Function>
+<Function>
+<Name>read_file</Name>
+<Description>Returns the content of a file as text</Description>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem/FileSystem.read_file</OutputFile>
+</Function>
+<Function>
+<Name>read_file_as_bytes</Name>
+<Description>Returns the content of a file as bytes</Description>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem/FileSystem.read_file_as_bytes</OutputFile>
+</Function>
+</Functions>
+</Class>

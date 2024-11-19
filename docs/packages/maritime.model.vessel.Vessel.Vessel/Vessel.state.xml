@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>state</Name>
+<Class>Vessel</Class>
+<Module>maritime.model.vessel.Vessel</Module>
+<Description>Sets the status of the vessel</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vessel.py</SourceFile>
+<SourceLine>107</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>status</Name>
+<Type></Type>
+<Description>New status of the vessel</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

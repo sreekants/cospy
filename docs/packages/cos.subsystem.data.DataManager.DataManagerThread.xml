@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>DataManagerThread</Name>
+<Description>Implementation of the datamanager subsystem</Description>
+<SourceFile>DataManager.py</SourceFile>
+<SourceLine>17</SourceLine>
+<Module>cos.subsystem.data.DataManager</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>run</Name>
+<Description>Runs the data manager loop</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManagerThread/DataManagerThread.run</OutputFile>
+</Function>
+<Function>
+<Name>stop</Name>
+<Description>Stops the simulation</Description>
+<OutputFile>cos.subsystem.data.DataManager.DataManagerThread/DataManagerThread.stop</OutputFile>
+</Function>
+</Functions>
+</Class>

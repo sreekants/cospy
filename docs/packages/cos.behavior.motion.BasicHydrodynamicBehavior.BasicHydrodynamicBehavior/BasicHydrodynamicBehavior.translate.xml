@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>translate</Name>
+<Class>BasicHydrodynamicBehavior</Class>
+<Module>cos.behavior.motion.BasicHydrodynamicBehavior</Module>
+<Description>Translates the vector</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BasicHydrodynamicBehavior.py</SourceFile>
+<SourceLine>128</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>t</Name>
+<Type></Type>
+<Description>Time on the simulation clock</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

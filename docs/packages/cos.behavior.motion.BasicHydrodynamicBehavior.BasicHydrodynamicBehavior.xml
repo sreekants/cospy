@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>BasicHydrodynamicBehavior</Name>
+<Description>Implementation of the BasicHydrodynamicBehavior class</Description>
+<SourceFile>BasicHydrodynamicBehavior.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>cos.behavior.motion.BasicHydrodynamicBehavior</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>initialize_dynamics</Name>
+<Description>Initializes the dynamics vector</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.initialize_dynamics</OutputFile>
+</Function>
+<Function>
+<Name>get_file</Name>
+<Description>Returns the content of a simulation file</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.get_file</OutputFile>
+</Function>
+<Function>
+<Name>load_model</Name>
+<Description>Loads a simulation model</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.load_model</OutputFile>
+</Function>
+<Function>
+<Name>move</Name>
+<Description>Moves the vehicle</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.move</OutputFile>
+</Function>
+<Function>
+<Name>translate</Name>
+<Description>Translates the vector</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.translate</OutputFile>
+</Function>
+<Function>
+<Name>get_wind</Name>
+<Description>Returns the wind vector</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.get_wind</OutputFile>
+</Function>
+<Function>
+<Name>position</Name>
+<Description>Returns the current position</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.position</OutputFile>
+</Function>
+<Function>
+<Name>velocity</Name>
+<Description>Returns the current velocity</Description>
+<OutputFile>cos.behavior.motion.BasicHydrodynamicBehavior.BasicHydrodynamicBehavior/BasicHydrodynamicBehavior.velocity</OutputFile>
+</Function>
+</Functions>
+</Class>

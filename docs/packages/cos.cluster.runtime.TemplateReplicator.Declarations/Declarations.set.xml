@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set</Name>
+<Class>Declarations</Class>
+<Module>cos.cluster.runtime.TemplateReplicator</Module>
+<Description>Sets a meta tag value</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>TemplateReplicator.py</SourceFile>
+<SourceLine>31</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Name of meta-tag</Description>
+</Argument>
+<Argument>
+<Name>value</Name>
+<Type></Type>
+<Description>value of the meta-tag</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

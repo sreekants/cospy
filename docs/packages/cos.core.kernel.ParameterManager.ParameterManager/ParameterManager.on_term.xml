@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_term</Name>
+<Class>ParameterManager</Class>
+<Module>cos.core.kernel.ParameterManager</Module>
+<Description>Callback for simulation termination</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ParameterManager.py</SourceFile>
+<SourceLine>40</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>module</Name>
+<Type></Type>
+<Description>Module information</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

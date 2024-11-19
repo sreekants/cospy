@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SearchIndexParseCallbacks</Name>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>73</SourceLine>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add_word</Name>
+<Description>Adds a word to the index</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndexParseCallbacks/SearchIndexParseCallbacks.add_word</OutputFile>
+</Function>
+<Function>
+<Name>add_doc</Name>
+<Description>Adds a document to the index</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndexParseCallbacks/SearchIndexParseCallbacks.add_doc</OutputFile>
+</Function>
+<Function>
+<Name>add_index</Name>
+<Description>Adds an index to the database</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndexParseCallbacks/SearchIndexParseCallbacks.add_index</OutputFile>
+</Function>
+</Functions>
+</Class>

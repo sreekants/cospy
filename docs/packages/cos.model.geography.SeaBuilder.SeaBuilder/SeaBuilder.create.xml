@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create</Name>
+<Class>SeaBuilder</Class>
+<Module>cos.model.geography.SeaBuilder</Module>
+<Description>Creates a sea artifact from the database</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>SeaBuilder.py</SourceFile>
+<SourceLine>50</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>klass</Name>
+<Type></Type>
+<Description>Class object</Description>
+</Argument>
+<Argument>
+<Name>rec</Name>
+<Type></Type>
+<Description>Database record of the object</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

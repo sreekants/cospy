@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.situation.giveway</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>2</FunctionCount>
+<Classes>
+<Class>
+<Name>Giveway</Name>
+<OutputFile>maritime.situation.giveway.Giveway.Giveway</OutputFile>
+<Description>Implementation of the Giveway class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+</Classes>
+</Module>

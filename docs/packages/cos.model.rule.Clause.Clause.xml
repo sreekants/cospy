@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Clause</Name>
+<Description>A rule clause decision</Description>
+<SourceFile>Clause.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.model.rule.Clause</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

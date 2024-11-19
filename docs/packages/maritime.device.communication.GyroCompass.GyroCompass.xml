@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>GyroCompass</Name>
+<Description>Implementation of the GyroCompass device</Description>
+<SourceFile>GyroCompass.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.device.communication.GyroCompass</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

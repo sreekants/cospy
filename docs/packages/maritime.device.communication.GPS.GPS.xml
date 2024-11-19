@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>GPS</Name>
+<Description>Implementation of the GPS device</Description>
+<SourceFile>GPS.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.device.communication.GPS</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

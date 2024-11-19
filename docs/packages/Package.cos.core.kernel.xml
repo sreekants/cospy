@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.core.kernel</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>31</ClassCount>
+<FunctionCount>156</FunctionCount>
+<Classes>
+<Class>
+<Name>Action</Name>
+<OutputFile>cos.core.kernel.Action.Action</OutputFile>
+<Description>Base class for COS actions</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>FileSystem</Name>
+<OutputFile>cos.core.kernel.BootImage.FileSystem</OutputFile>
+<Description>Implementation of the BootImage class</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>BootLoader</Name>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader</OutputFile>
+<Description>Implementation of the boot loader for the simulation engine</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>CompositeService</Name>
+<OutputFile>cos.core.kernel.CompositeService.CompositeService</OutputFile>
+<Description>Base class for all COS composite services</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Configuration</Name>
+<OutputFile>cos.core.kernel.Configuration.Configuration</OutputFile>
+<Description>Master configuration file for the simulation</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>Context</Name>
+<OutputFile>cos.core.kernel.Context.Context</OutputFile>
+<Description>Runtime Context  of the simulation</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Device</Name>
+<OutputFile>cos.core.kernel.Device.Device</OutputFile>
+<Description>Base class for all devices</Description>
+<FunctionCount>32</FunctionCount>
+</Class>
+<Class>
+<Name>DeviceManager</Name>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager</OutputFile>
+<Description>Implementation of a generic device manager</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>Event</Name>
+<OutputFile>cos.core.kernel.Event.Event</OutputFile>
+<Description>A class for an IPC Event in the simulation environment</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Faculty</Name>
+<OutputFile>cos.core.kernel.Faculty.Faculty</OutputFile>
+<Description>Base class for all faculties</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>FileSystem</Name>
+<OutputFile>cos.core.kernel.FileSystem.FileSystem</OutputFile>
+<Description>Implementation of the FileSystem class</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>IPCFlags</Name>
+<OutputFile>cos.core.kernel.IPCMessage.IPCFlags</OutputFile>
+<Description>Message used for inter-process communication</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>IPCMessage</Name>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage</OutputFile>
+<Description>Message used for inter-process communication</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>Kernel</Name>
+<OutputFile>cos.core.kernel.Kernel.Kernel</OutputFile>
+<Description>A class for micro kernel in the simulation environment</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>LogFile</Name>
+<OutputFile>cos.core.kernel.Logger.LogFile</OutputFile>
+<Description>Log subsysten for the simulation</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>LoggerSettings</Name>
+<OutputFile>cos.core.kernel.Logger.LoggerSettings</OutputFile>
+<Description>Log subsysten for the simulation</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Logger</Name>
+<OutputFile>cos.core.kernel.Logger.Logger</OutputFile>
+<Description>Log subsysten for the simulation</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>PumpCtxt</Name>
+<OutputFile>cos.core.kernel.MessageQueue.PumpCtxt</OutputFile>
+<Description>Implemention of an in-memory message queue for inter-process communication</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MessageQueue</Name>
+<OutputFile>cos.core.kernel.MessageQueue.MessageQueue</OutputFile>
+<Description>Implemention of an in-memory message queue for inter-process communication</Description>
+<FunctionCount>16</FunctionCount>
+</Class>
+<Class>
+<Name>Object</Name>
+<OutputFile>cos.core.kernel.Object.Object</OutputFile>
+<Description>Base class for all the objects in the simulation</Description>
+<FunctionCount>13</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectType</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectType</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectNode</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectNode</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectTree</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectTree</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ObjectManager</Name>
+<OutputFile>cos.core.kernel.ObjectManager.ObjectManager</OutputFile>
+<Description>Inplementation of the COS kernel object manager</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ParameterManager</Name>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager</OutputFile>
+<Description>A parameter subsystem is a shared, dictionary that is accessible via APIs.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Service</Name>
+<OutputFile>cos.core.kernel.Service.Service</OutputFile>
+<Description>Base class for all COS services</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Subsystem</Name>
+<OutputFile>cos.core.kernel.Subsystem.Subsystem</OutputFile>
+<Description>Base class for all COS subsystems</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Thread</Name>
+<OutputFile>cos.core.kernel.Thread.Thread</OutputFile>
+<Description>Base class for all kernel threads</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PoolThread</Name>
+<OutputFile>cos.core.kernel.ThreadPool.PoolThread</OutputFile>
+<Description>Implementation of a kernel thread pool to run client services.</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ThreadPool</Name>
+<OutputFile>cos.core.kernel.ThreadPool.ThreadPool</OutputFile>
+<Description>Implementation of a kernel thread pool to run client services.</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Topic</Name>
+<OutputFile>cos.core.kernel.Topic.Topic</OutputFile>
+<Description>A message topic on the message queue</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

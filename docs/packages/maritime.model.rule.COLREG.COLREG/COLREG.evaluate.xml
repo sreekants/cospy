@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>evaluate</Name>
+<Class>COLREG</Class>
+<Module>maritime.model.rule.COLREG</Module>
+<Description>Evaluates the expression</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>COLREG.py</SourceFile>
+<SourceLine>22</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>rule_ctxt</Name>
+<Type></Type>
+<Description>Rule context</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

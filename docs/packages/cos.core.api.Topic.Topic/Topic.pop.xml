@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>pop</Name>
+<Class>Topic</Class>
+<Module>cos.core.api.Topic</Module>
+<Description>Pops a message from the queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Topic.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>IPC Topic path</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

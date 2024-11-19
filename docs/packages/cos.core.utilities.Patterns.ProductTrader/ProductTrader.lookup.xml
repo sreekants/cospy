@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>lookup</Name>
+<Class>ProductTrader</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Finds a product specification</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>419</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>spec</Name>
+<Type></Type>
+<Description>Product specification</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

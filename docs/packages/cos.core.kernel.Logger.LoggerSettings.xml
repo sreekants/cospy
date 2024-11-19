@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>LoggerSettings</Name>
+<Description>Log subsysten for the simulation</Description>
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>103</SourceLine>
+<Module>cos.core.kernel.Logger</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>disable_module</Name>
+<Description>Disables module from logging</Description>
+<OutputFile>cos.core.kernel.Logger.LoggerSettings/LoggerSettings.disable_module</OutputFile>
+</Function>
+<Function>
+<Name>is_module_enabled</Name>
+<Description>Check if a module can be logged</Description>
+<OutputFile>cos.core.kernel.Logger.LoggerSettings/LoggerSettings.is_module_enabled</OutputFile>
+</Function>
+<Function>
+<Name>silent</Name>
+<Description>Checks if operation is in silent mode</Description>
+<OutputFile>cos.core.kernel.Logger.LoggerSettings/LoggerSettings.silent</OutputFile>
+</Function>
+</Functions>
+</Class>

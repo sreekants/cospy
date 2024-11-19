@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Rule13</Name>
+<Description>Implementation of COLREG Rule</Description>
+<SourceFile>Rule13.py</SourceFile>
+<SourceLine>24</SourceLine>
+<Module>rules.colreg.rule13.Rule13</Module>
+<Layer>rules</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>rules.colreg.rule13.Rule13.Rule13/Rule13.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_overtaking</Name>
+<Description>Event handler for overtaking</Description>
+<OutputFile>rules.colreg.rule13.Rule13.Rule13/Rule13.on_overtaking</OutputFile>
+</Function>
+<Function>
+<Name>on_crossing</Name>
+<Description>Event handler for crossing</Description>
+<OutputFile>rules.colreg.rule13.Rule13.Rule13/Rule13.on_crossing</OutputFile>
+</Function>
+<Function>
+<Name>on_close_encounter</Name>
+<Description>Event handler for close encounters</Description>
+<OutputFile>rules.colreg.rule13.Rule13.Rule13/Rule13.on_close_encounter</OutputFile>
+</Function>
+</Functions>
+</Class>

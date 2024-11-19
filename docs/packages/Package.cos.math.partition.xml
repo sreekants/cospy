@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.math.partition</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>Delaunator</Name>
+<OutputFile>cos.math.partition.Delaunator.Delaunator</OutputFile>
+<Description>Implementation of the Delunay triangulator</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

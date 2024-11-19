@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ZMQFrame</Name>
+<Description>Implementation of an COS network frame for ZMQ tranport</Description>
+<SourceFile>ZMQFrame.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.core.network.ZMQFrame</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>encode</Name>
+<Description>Encodes a frame</Description>
+<OutputFile>cos.core.network.ZMQFrame.ZMQFrame/ZMQFrame.encode</OutputFile>
+</Function>
+<Function>
+<Name>decode</Name>
+<Description>Decodes a frame</Description>
+<OutputFile>cos.core.network.ZMQFrame.ZMQFrame/ZMQFrame.decode</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_init</Name>
+<Class>Subsystem</Class>
+<Module>cos.core.kernel.Subsystem</Module>
+<Description>Callback for simulation initialization</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Subsystem.py</SourceFile>
+<SourceLine>18</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>module</Name>
+<Type></Type>
+<Description>Module information</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

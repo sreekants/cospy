@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>add_doc</Name>
+<Class>SearchIndexParseCallbacks</Class>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Description>Adds a document to the index</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>105</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>doc_id</Name>
+<Type></Type>
+<Description>Document ID</Description>
+</Argument>
+<Argument>
+<Name>filename</Name>
+<Type></Type>
+<Description>File name of the document</Description>
+</Argument>
+<Argument>
+<Name>desc</Name>
+<Type></Type>
+<Description>Description of the document</Description>
+</Argument>
+<Argument>
+<Name>doc_info</Name>
+<Type></Type>
+<Description>Document source information</Description>
+</Argument>
+<Argument>
+<Name>db</Name>
+<Type></Type>
+<Description>Database to add record to</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

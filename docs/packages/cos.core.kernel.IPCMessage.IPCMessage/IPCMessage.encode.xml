@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>encode</Name>
+<Class>IPCMessage</Class>
+<Module>cos.core.kernel.IPCMessage</Module>
+<Description>Encodes the message for transmission</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>IPCMessage.py</SourceFile>
+<SourceLine>79</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

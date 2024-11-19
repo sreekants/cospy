@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Action</Name>
+<Description>Base class for COS actions</Description>
+<SourceFile>Action.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.core.kernel.Action</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>cos.core.kernel.Action.Action/Action.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_timer</Name>
+<Description>Callback handling timer events</Description>
+<OutputFile>cos.core.kernel.Action.Action/Action.on_timer</OutputFile>
+</Function>
+</Functions>
+</Class>

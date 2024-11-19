@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Runner</Name>
+<Description>The main kernel thread running its internal actions.</Description>
+<SourceFile>Runner.py</SourceFile>
+<SourceLine>64</SourceLine>
+<Module>cos.core.simulation.Runner</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>run</Name>
+<Description>Starts the simulation thread</Description>
+<OutputFile>cos.core.simulation.Runner.Runner/Runner.run</OutputFile>
+</Function>
+<Function>
+<Name>stop</Name>
+<Description>Stops the simulation thread</Description>
+<OutputFile>cos.core.simulation.Runner.Runner/Runner.stop</OutputFile>
+</Function>
+</Functions>
+</Class>

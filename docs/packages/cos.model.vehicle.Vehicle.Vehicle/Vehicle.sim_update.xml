@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>sim_update</Name>
+<Class>Vehicle</Class>
+<Module>cos.model.vehicle.Vehicle</Module>
+<Description>Updates the simulation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vehicle.py</SourceFile>
+<SourceLine>123</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>world</Name>
+<Type></Type>
+<Description>Reference ot the simulation world</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

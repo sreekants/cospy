@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Sky</Name>
+<Description>Implementation of the sea class</Description>
+<SourceFile>Sky.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>cos.model.geography.Sky</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>nominal_height</Name>
+<Description>Returns the nominal height of the sky</Description>
+<OutputFile>cos.model.geography.Sky.Sky/Sky.nominal_height</OutputFile>
+</Function>
+</Functions>
+</Class>

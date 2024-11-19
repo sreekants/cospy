@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.subsystem.data</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>3</ClassCount>
+<FunctionCount>11</FunctionCount>
+<Classes>
+<Class>
+<Name>DataManagerThread</Name>
+<OutputFile>cos.subsystem.data.DataManager.DataManagerThread</OutputFile>
+<Description>Implementation of the datamanager subsystem</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>DataManager</Name>
+<OutputFile>cos.subsystem.data.DataManager.DataManager</OutputFile>
+<Description>Implementation of the datamanager subsystem</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>Partition</Name>
+<OutputFile>cos.subsystem.data.Partition.Partition</OutputFile>
+<Description>Implementation of the Partition class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+</Classes>
+</Module>

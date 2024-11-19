@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Triangle</Name>
+<Description>Implementation of the Triangle class</Description>
+<SourceFile>Triangle.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.math.geometry.Triangle</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>circumcenter</Name>
+<Description>Returns the circumcenter of the triangle</Description>
+<OutputFile>cos.math.geometry.Triangle.Triangle/Triangle.circumcenter</OutputFile>
+</Function>
+<Function>
+<Name>centeroid</Name>
+<Description>Returns the centeroid of the triangle</Description>
+<OutputFile>cos.math.geometry.Triangle.Triangle/Triangle.centeroid</OutputFile>
+</Function>
+<Function>
+<Name>encloses</Name>
+<Description>Checks if a point is enclosed by the triangle</Description>
+<OutputFile>cos.math.geometry.Triangle.Triangle/Triangle.encloses</OutputFile>
+</Function>
+</Functions>
+</Class>

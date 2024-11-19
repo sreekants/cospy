@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>info</Name>
+<Class>Logger</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Dumps a log information</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>189</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>module</Name>
+<Type></Type>
+<Description>Module information</Description>
+</Argument>
+<Argument>
+<Name>text</Name>
+<Type></Type>
+<Description>Log text</Description>
+</Argument>
+<Argument>
+<Name>log_to_file</Name>
+<Type></Type>
+<Description>Flag to enable logging</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

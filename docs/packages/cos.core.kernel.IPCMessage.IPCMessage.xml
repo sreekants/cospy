@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>IPCMessage</Name>
+<Description>Message used for inter-process communication</Description>
+<SourceFile>IPCMessage.py</SourceFile>
+<SourceLine>18</SourceLine>
+<Module>cos.core.kernel.IPCMessage</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>isset</Name>
+<Description>Checsks if all flags are set</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.isset</OutputFile>
+</Function>
+<Function>
+<Name>isanyset</Name>
+<Description>Checks if any flag is set</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.isanyset</OutputFile>
+</Function>
+<Function>
+<Name>set</Name>
+<Description>Sets a flag</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.set</OutputFile>
+</Function>
+<Function>
+<Name>reset</Name>
+<Description>Resets a flag</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.reset</OutputFile>
+</Function>
+<Function>
+<Name>failed</Name>
+<Description>Checks if the message is an exception</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.failed</OutputFile>
+</Function>
+<Function>
+<Name>encode</Name>
+<Description>Encodes the message for transmission</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.encode</OutputFile>
+</Function>
+<Function>
+<Name>decode</Name>
+<Description>Decodes the message for transmission</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.decode</OutputFile>
+</Function>
+<Function>
+<Name>RemoveNulls</Name>
+<Description>Compact the mesage removing nulls</Description>
+<OutputFile>cos.core.kernel.IPCMessage.IPCMessage/IPCMessage.RemoveNulls</OutputFile>
+</Function>
+</Functions>
+</Class>

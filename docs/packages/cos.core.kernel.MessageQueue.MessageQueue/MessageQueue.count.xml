@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>count</Name>
+<Class>MessageQueue</Class>
+<Module>cos.core.kernel.MessageQueue</Module>
+<Description>Returns the number of messages pending in a queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MessageQueue.py</SourceFile>
+<SourceLine>256</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the queue</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>position</Name>
+<Class>LinearMotionBehavior</Class>
+<Module>cos.behavior.motion.LinearMotionBehavior</Module>
+<Description>Returns the current position</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>LinearMotionBehavior.py</SourceFile>
+<SourceLine>139</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

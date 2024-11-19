@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>disable_module</Name>
+<Class>LoggerSettings</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Disables module from logging</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>122</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Module name</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>folding_time</Name>
+<Class>ExponentialGrowth</Class>
+<Module>cos.physics.force.GrowthFunction</Module>
+<Description>Folding time for the growth</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>GrowthFunction.py</SourceFile>
+<SourceLine>24</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>scale</Name>
+<Type></Type>
+<Description>Scale of the growth</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

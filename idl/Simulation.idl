@@ -1,0 +1,19 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : Simulation.idl
+// Function         : ROVCore - Simulation manager
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+interface Service
+{
+	string 	start( string args );
+	void 	stop( string id, string args );
+	void	suspend( string id, string args );
+	void	resume( string id, string args );
+
+	int 	command( string id, string name, string args );
+	int 	signal( string id, int event, string args );
+	object 	describe( string query, string scope, string args );
+};
+

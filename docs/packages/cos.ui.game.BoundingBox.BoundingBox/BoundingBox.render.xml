@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>render</Name>
+<Class>BoundingBox</Class>
+<Module>cos.ui.game.BoundingBox</Module>
+<Description>Renders the bounding box</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BoundingBox.py</SourceFile>
+<SourceLine>22</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>screen</Name>
+<Type></Type>
+<Description>Reference ot the simulation screen</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

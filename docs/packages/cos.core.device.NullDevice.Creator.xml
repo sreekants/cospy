@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Creator</Name>
+<Description>Base class for all devices</Description>
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>226</SourceLine>
+<Module>cos.core.device.NullDevice</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Creates the Null device</Description>
+<OutputFile>cos.core.device.NullDevice.Creator/Creator.create</OutputFile>
+</Function>
+</Functions>
+</Class>

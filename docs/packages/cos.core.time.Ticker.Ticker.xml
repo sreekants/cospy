@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Ticker</Name>
+<Description>Implementation of the Ticker class</Description>
+<SourceFile>Ticker.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.core.time.Ticker</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>signaled</Name>
+<Description>Checks if the ticker is signaled.</Description>
+<OutputFile>cos.core.time.Ticker.Ticker/Ticker.signaled</OutputFile>
+</Function>
+<Function>
+<Name>regex_rules</Name>
+<Description>Matches rules in a colleciton of regular expressions</Description>
+<OutputFile>cos.core.time.Ticker.Ticker/Ticker.regex_rules</OutputFile>
+</Function>
+<Function>
+<Name>plural</Name>
+<Description>Pluralizes a noun</Description>
+<OutputFile>cos.core.time.Ticker.Ticker/Ticker.plural</OutputFile>
+</Function>
+</Functions>
+</Class>

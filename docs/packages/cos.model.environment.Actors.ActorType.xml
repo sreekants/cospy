@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ActorType</Name>
+<Description>Implementation of an orchestrator class that conducts the simulation</Description>
+<SourceFile>Actors.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>cos.model.environment.Actors</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ThreadPool</Name>
+<Description>Implementation of a kernel thread pool to run client services.</Description>
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>19</SourceLine>
+<Module>cos.core.kernel.ThreadPool</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create_thread</Name>
+<Description>Overridable to create the pool thread instance</Description>
+<OutputFile>cos.core.kernel.ThreadPool.ThreadPool/ThreadPool.create_thread</OutputFile>
+</Function>
+</Functions>
+</Class>

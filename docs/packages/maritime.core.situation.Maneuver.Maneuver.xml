@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Maneuver</Name>
+<Description>Implementation of the Maneuver class</Description>
+<SourceFile>Maneuver.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.core.situation.Maneuver</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.core.situation.Maneuver.Maneuver/Maneuver.evaluate</OutputFile>
+</Function>
+<Function>
+<Name>on_trigger</Name>
+<Description>Event handler for trigger</Description>
+<OutputFile>maritime.core.situation.Maneuver.Maneuver/Maneuver.on_trigger</OutputFile>
+</Function>
+</Functions>
+</Class>

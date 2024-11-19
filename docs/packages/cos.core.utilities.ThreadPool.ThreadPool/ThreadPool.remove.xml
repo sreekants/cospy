@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>remove</Name>
+<Class>ThreadPool</Class>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Description>Removes a task with a identifier from the queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>387</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>tid</Name>
+<Type></Type>
+<Description>Task identifier</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

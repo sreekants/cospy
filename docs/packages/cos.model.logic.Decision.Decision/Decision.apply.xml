@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>apply</Name>
+<Class>Decision</Class>
+<Module>cos.model.logic.Decision</Module>
+<Description>Applies a rule in the decision tree</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Decision.py</SourceFile>
+<SourceLine>35</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

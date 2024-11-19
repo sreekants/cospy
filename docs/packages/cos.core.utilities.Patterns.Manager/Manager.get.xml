@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get</Name>
+<Class>Manager</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Returns the object identified by a key</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>112</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Key to match</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

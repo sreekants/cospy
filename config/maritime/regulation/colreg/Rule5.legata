@@ -1,0 +1,39 @@
+# COLREG.Rule5:
+
+define: {
+    OS: OwnShip
+    TS: TargetShip
+}
+
+# Look-out
+# Every vessel shall at all times maintain a proper look-out by sight and hearing as well as by all
+# available means appropriate in the prevailing circumstances and conditions so as to make a full
+# appraisal of the situation and of the risk of collision.
+
+condition: {
+    : (OS, TS).Distance in Vessel.Collision.TimeToEncounter.AlertRange
+
+    # Trigger rule 5 overriding other conditions. Useful for rules in cross-reference.
+    : OS.Restriction in ['COLREG.Rule5.*']  
+}
+
+clause['COLREG.Rule5/Sight']:{
+    : {
+        condition: (OS, TS).Distance in Vessel.Collision.TimeToEncounter.VisibleRange
+        assure: { :OS.Intent in ['Operation.Lookout.*'] }
+    }
+}
+
+clause['COLREG.Rule5/Radar']:{
+    : {
+        condition: (OS, TS).Distance in Vessel.Collision.TimeToEncounter.RadioRange
+        assure: { :OS.Intent in ['Operation.Lookout.Radio*'] }
+    }
+}
+
+clause['COLREG.Rule5/Sonar']:{
+    : {
+        condition: (OS, TS).Distance in Vessel.Collision.TimeToEncounter.SonicRange
+        assure: { :OS.Intent in ['Operation.Lookout.Sonar*'] }
+    }
+}

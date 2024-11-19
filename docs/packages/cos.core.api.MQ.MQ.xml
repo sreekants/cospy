@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>MQ</Name>
+<Description></Description>
+<SourceFile>MQ.py</SourceFile>
+<SourceLine>6</SourceLine>
+<Module>cos.core.api.MQ</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>push</Name>
+<Description>Pushes a message to queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.push</OutputFile>
+</Function>
+<Function>
+<Name>pop</Name>
+<Description>Pops a message from the queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.pop</OutputFile>
+</Function>
+<Function>
+<Name>peek</Name>
+<Description>Reads a message from a queue without popping it.</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.peek</OutputFile>
+</Function>
+<Function>
+<Name>move</Name>
+<Description>Moves a queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.move</OutputFile>
+</Function>
+<Function>
+<Name>is_empty</Name>
+<Description>Checks if a queue is empty</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.is_empty</OutputFile>
+</Function>
+<Function>
+<Name>getcount</Name>
+<Description>Returns the number of messages in the queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.getcount</OutputFile>
+</Function>
+<Function>
+<Name>exists</Name>
+<Description>Checks if a queue exists</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.exists</OutputFile>
+</Function>
+<Function>
+<Name>purge</Name>
+<Description>Removes all messages from a queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.purge</OutputFile>
+</Function>
+<Function>
+<Name>create</Name>
+<Description>Creates a new queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.create</OutputFile>
+</Function>
+<Function>
+<Name>delete</Name>
+<Description>Deletes a queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.delete</OutputFile>
+</Function>
+<Function>
+<Name>locate</Name>
+<Description>Finds a queue given a criteria</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.locate</OutputFile>
+</Function>
+<Function>
+<Name>list</Name>
+<Description>List all queue within a scope</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.list</OutputFile>
+</Function>
+<Function>
+<Name>get_property</Name>
+<Description>Returns a property of a queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.get_property</OutputFile>
+</Function>
+<Function>
+<Name>set_property</Name>
+<Description>Sets a property of the queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.set_property</OutputFile>
+</Function>
+<Function>
+<Name>describe</Name>
+<Description>Describes a queue</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.describe</OutputFile>
+</Function>
+<Function>
+<Name>add_route</Name>
+<Description>Adds a queue route</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.add_route</OutputFile>
+</Function>
+<Function>
+<Name>delete_route</Name>
+<Description>deletes a queue route</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.delete_route</OutputFile>
+</Function>
+<Function>
+<Name>is_route</Name>
+<Description>Checks if a route exists between a queue and a path</Description>
+<OutputFile>cos.core.api.MQ.MQ/MQ.is_route</OutputFile>
+</Function>
+</Functions>
+</Class>

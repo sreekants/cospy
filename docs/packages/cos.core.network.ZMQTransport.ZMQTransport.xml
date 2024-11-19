@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ZMQTransport</Name>
+<Description>Transport layer class for ZMQ support.</Description>
+<SourceFile>ZMQTransport.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Module>cos.core.network.ZMQTransport</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>set_host</Name>
+<Description>Sets the host of the transport</Description>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport/ZMQTransport.set_host</OutputFile>
+</Function>
+<Function>
+<Name>is_open</Name>
+<Description>Checks if the transport is open</Description>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport/ZMQTransport.is_open</OutputFile>
+</Function>
+<Function>
+<Name>set_timeout</Name>
+<Description>Sets the timeout for the transport</Description>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport/ZMQTransport.set_timeout</OutputFile>
+</Function>
+<Function>
+<Name>bind</Name>
+<Description>Binds the</Description>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport/ZMQTransport.bind</OutputFile>
+</Function>
+<Function>
+<Name>close</Name>
+<Description>Closes the transport</Description>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport/ZMQTransport.close</OutputFile>
+</Function>
+<Function>
+<Name>invoke</Name>
+<Description>Invokes a method on the transport</Description>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport/ZMQTransport.invoke</OutputFile>
+</Function>
+<Function>
+<Name>invoke_raw</Name>
+<Description>Low level method to invoke a method</Description>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport/ZMQTransport.invoke_raw</OutputFile>
+</Function>
+</Functions>
+</Class>

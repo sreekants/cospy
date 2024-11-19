@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>link</Name>
+<Class>ObjectManager</Class>
+<Module>cos.core.api.ObjectManager</Module>
+<Description>Creates a symbolic link to an object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ObjectManager.py</SourceFile>
+<SourceLine>51</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the object</Description>
+</Argument>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Name of the object</Description>
+</Argument>
+<Argument>
+<Name>target</Name>
+<Type></Type>
+<Description>Target object path</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

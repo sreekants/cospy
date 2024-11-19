@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ORPCService</Name>
+<Description>The base class for all API services</Description>
+<SourceFile>ORPCService.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.core.network.ORPCService</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Kernel</Name>
+<Description>A class for micro kernel in the simulation environment</Description>
+<SourceFile>Kernel.py</SourceFile>
+<SourceLine>17</SourceLine>
+<Module>cos.core.kernel.Kernel</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>start</Name>
+<Description>Starts the kernel</Description>
+<OutputFile>cos.core.kernel.Kernel.Kernel/Kernel.start</OutputFile>
+</Function>
+<Function>
+<Name>create_thread_pool</Name>
+<Description>Creates the thread pool</Description>
+<OutputFile>cos.core.kernel.Kernel.Kernel/Kernel.create_thread_pool</OutputFile>
+</Function>
+<Function>
+<Name>stop</Name>
+<Description>Stops the kernel</Description>
+<OutputFile>cos.core.kernel.Kernel.Kernel/Kernel.stop</OutputFile>
+</Function>
+<Function>
+<Name>folders</Name>
+<Description>Returns the folders for the OS</Description>
+<OutputFile>cos.core.kernel.Kernel.Kernel/Kernel.folders</OutputFile>
+</Function>
+<Function>
+<Name>settings</Name>
+<Description>Returns a setting for the Kernel</Description>
+<OutputFile>cos.core.kernel.Kernel.Kernel/Kernel.settings</OutputFile>
+</Function>
+<Function>
+<Name>get_component</Name>
+<Description>Returns a named component of the OS</Description>
+<OutputFile>cos.core.kernel.Kernel.Kernel/Kernel.get_component</OutputFile>
+</Function>
+<Function>
+<Name>set_component</Name>
+<Description>Assigns a named component of the OS</Description>
+<OutputFile>cos.core.kernel.Kernel.Kernel/Kernel.set_component</OutputFile>
+</Function>
+</Functions>
+</Class>

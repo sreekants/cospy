@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>SpriteController</Class>
+<Module>cos.ui.game.SpriteController</Module>
+<Description>Updates the sprite</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>SpriteController.py</SourceFile>
+<SourceLine>34</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>world</Name>
+<Type></Type>
+<Description>Reference ot the simulation world</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

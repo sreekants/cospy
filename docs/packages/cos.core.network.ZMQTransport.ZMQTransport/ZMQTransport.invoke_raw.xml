@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>invoke_raw</Name>
+<Class>ZMQTransport</Class>
+<Module>cos.core.network.ZMQTransport</Module>
+<Description>Low level method to invoke a method</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ZMQTransport.py</SourceFile>
+<SourceLine>95</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>method</Name>
+<Type></Type>
+<Description>Method name</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+<Argument>
+<Name>flag</Name>
+<Type></Type>
+<Description>Binary 32-bit flag</Description>
+</Argument>
+<Argument>
+<Name>ttl</Name>
+<Type></Type>
+<Description>Time to live for the request</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

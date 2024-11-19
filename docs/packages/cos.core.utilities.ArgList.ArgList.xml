@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ArgList</Name>
+<Description>Implementation of a name value argument list class</Description>
+<SourceFile>ArgList.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>cos.core.utilities.ArgList</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>IsTrue</Name>
+<Description>Checks if an argument is true</Description>
+<OutputFile>cos.core.utilities.ArgList.ArgList/ArgList.IsTrue</OutputFile>
+</Function>
+<Function>
+<Name>IsFalse</Name>
+<Description>Checks if an argument is false</Description>
+<OutputFile>cos.core.utilities.ArgList.ArgList/ArgList.IsFalse</OutputFile>
+</Function>
+</Functions>
+</Class>

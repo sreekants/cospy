@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>MaritimeExclusionZone</Name>
+<Description>Implementation of the maritime exclusion class</Description>
+<SourceFile>MaritimeExclusionZone.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.model.geography.MaritimeExclusionZone</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

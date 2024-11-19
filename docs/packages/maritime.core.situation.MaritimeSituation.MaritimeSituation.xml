@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>MaritimeSituation</Name>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<SourceFile>MaritimeSituation.py</SourceFile>
+<SourceLine>12</SourceLine>
+<Module>maritime.core.situation.MaritimeSituation</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>regulate</Name>
+<Description>Invokes a regulation event for a vessel</Description>
+<OutputFile>maritime.core.situation.MaritimeSituation.MaritimeSituation/MaritimeSituation.regulate</OutputFile>
+</Function>
+<Function>
+<Name>for_each_in_range</Name>
+<Description>Helper funcation to evaluate vessel and other objects within a certain range</Description>
+<OutputFile>maritime.core.situation.MaritimeSituation.MaritimeSituation/MaritimeSituation.for_each_in_range</OutputFile>
+</Function>
+<Function>
+<Name>for_each_incident</Name>
+<Description>Invoke a callback for each incident in a collection</Description>
+<OutputFile>maritime.core.situation.MaritimeSituation.MaritimeSituation/MaritimeSituation.for_each_incident</OutputFile>
+</Function>
+</Functions>
+</Class>

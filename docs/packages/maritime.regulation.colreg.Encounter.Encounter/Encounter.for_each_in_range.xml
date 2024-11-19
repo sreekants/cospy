@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>for_each_in_range</Name>
+<Class>Encounter</Class>
+<Module>maritime.regulation.colreg.Encounter</Module>
+<Description>Helper function to process permutations of two list of objects</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Encounter.py</SourceFile>
+<SourceLine>147</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>situation</Name>
+<Type></Type>
+<Description>Situation information</Description>
+</Argument>
+<Argument>
+<Name>distance</Name>
+<Type></Type>
+<Description>distance</Description>
+</Argument>
+<Argument>
+<Name>list1</Name>
+<Type></Type>
+<Description>List of objects to match</Description>
+</Argument>
+<Argument>
+<Name>list2</Name>
+<Type></Type>
+<Description>List of objects to match against</Description>
+</Argument>
+<Argument>
+<Name>fn</Name>
+<Type></Type>
+<Description>Function to call back when a vehicle is in range</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Opaque argument to pass to the callback</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

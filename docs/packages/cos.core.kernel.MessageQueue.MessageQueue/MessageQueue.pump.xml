@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>pump</Name>
+<Class>MessageQueue</Class>
+<Module>cos.core.kernel.MessageQueue</Module>
+<Description>Pumps pending messages at a given throttle rate</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MessageQueue.py</SourceFile>
+<SourceLine>45</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Queue path</Description>
+</Argument>
+<Argument>
+<Name>throttle_rate</Name>
+<Type></Type>
+<Description>Number messages processed per loop</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

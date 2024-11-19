@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>notify</Name>
+<Class>WeatherSystem</Class>
+<Module>cos.model.environment.WeatherSystem</Module>
+<Description>Notifies all clients about an update to the weather force fields</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>WeatherSystem.py</SourceFile>
+<SourceLine>83</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>world</Name>
+<Type></Type>
+<Description>Reference ot the simulation world</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

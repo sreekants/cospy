@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Rule9</Name>
+<Description>Implementation of COLREG Rule</Description>
+<SourceFile>Rule9.py</SourceFile>
+<SourceLine>33</SourceLine>
+<Module>rules.colreg.rule9.Rule9</Module>
+<Layer>rules</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>rules.colreg.rule9.Rule9.Rule9/Rule9.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_overtaken</Name>
+<Description>Event handler for overtaken</Description>
+<OutputFile>rules.colreg.rule9.Rule9.Rule9/Rule9.on_overtaken</OutputFile>
+</Function>
+<Function>
+<Name>on_overtaking</Name>
+<Description>Event handler for overtaking</Description>
+<OutputFile>rules.colreg.rule9.Rule9.Rule9/Rule9.on_overtaking</OutputFile>
+</Function>
+<Function>
+<Name>on_crossing</Name>
+<Description>Event handler for crossing</Description>
+<OutputFile>rules.colreg.rule9.Rule9.Rule9/Rule9.on_crossing</OutputFile>
+</Function>
+</Functions>
+</Class>

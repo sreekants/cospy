@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>load_modules</Name>
+<Class>BootLoader</Class>
+<Module>cos.core.kernel.BootLoader</Module>
+<Description>Loads all the modules in a simulation file</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BootLoader.py</SourceFile>
+<SourceLine>133</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>sim</Name>
+<Type></Type>
+<Description>Reference ot the simulation</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+<Argument>
+<Name>scope</Name>
+<Type></Type>
+<Description>Scope namespace</Description>
+</Argument>
+<Argument>
+<Name>section</Name>
+<Type></Type>
+<Description>Section string</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>modules</Name>
+<Type></Type>
+<Description>List of modules</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

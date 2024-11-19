@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.model.geography</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>15</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>AreaToAvoid</Name>
+<OutputFile>maritime.model.geography.AreaToAvoid.AreaToAvoid</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ContiguousZone</Name>
+<OutputFile>maritime.model.geography.ContiguousZone.ContiguousZone</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>DeepWaterRoute</Name>
+<OutputFile>maritime.model.geography.DeepwaterRoute.DeepWaterRoute</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ExclusiveEconomicZone</Name>
+<OutputFile>maritime.model.geography.ExclusiveEconomicZone.ExclusiveEconomicZone</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Harbour</Name>
+<OutputFile>maritime.model.geography.Harbour.Harbour</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>InshoreTrafficZone</Name>
+<OutputFile>maritime.model.geography.InshoreTrafficZone.InshoreTrafficZone</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>InternalWaters</Name>
+<OutputFile>maritime.model.geography.InternalWaters.InternalWaters</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeExclusionZone</Name>
+<OutputFile>maritime.model.geography.MaritimeExclusionZone.MaritimeExclusionZone</OutputFile>
+<Description>Implementation of the maritime exclusion class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>PrecautionaryRoute</Name>
+<OutputFile>maritime.model.geography.PrecautionaryRoute.PrecautionaryRoute</OutputFile>
+<Description>Implementation of the precautionary routes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RecommendedRoute</Name>
+<OutputFile>maritime.model.geography.RecommendedRoute.RecommendedRoute</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Roundabout</Name>
+<OutputFile>maritime.model.geography.Roundabout.Roundabout</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeparationZone</Name>
+<OutputFile>maritime.model.geography.SeparationZone.SeparationZone</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TerritorialSea</Name>
+<OutputFile>maritime.model.geography.TerritorialSea.TerritorialSea</OutputFile>
+<Description>Implementation of the marine_valley class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TrafficLane</Name>
+<OutputFile>maritime.model.geography.TrafficLane.TrafficLane</OutputFile>
+<Description>Implementation of the maritme traffic lane class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TrafficSeparationScheme</Name>
+<OutputFile>maritime.model.geography.TrafficSeparationScheme.TrafficSeparationScheme</OutputFile>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>destroy</Name>
+<Class>TreeNode</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Destroys a node (does not remove it from the list)</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>104</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>node</Name>
+<Type></Type>
+<Description>Node to destroy</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>failed</Name>
+<Class>IPCMessage</Class>
+<Module>cos.core.kernel.IPCMessage</Module>
+<Description>Checks if the message is an exception</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>IPCMessage.py</SourceFile>
+<SourceLine>74</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_start</Name>
+<Class>Rule13</Class>
+<Module>rules.colreg.rule13.Rule13</Module>
+<Description>Callback for simulation startup</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Rule13.py</SourceFile>
+<SourceLine>31</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

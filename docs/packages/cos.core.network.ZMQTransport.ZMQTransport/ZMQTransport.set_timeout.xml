@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set_timeout</Name>
+<Class>ZMQTransport</Class>
+<Module>cos.core.network.ZMQTransport</Module>
+<Description>Sets the timeout for the transport</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ZMQTransport.py</SourceFile>
+<SourceLine>42</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>timeout</Name>
+<Type></Type>
+<Description>Timeout value</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

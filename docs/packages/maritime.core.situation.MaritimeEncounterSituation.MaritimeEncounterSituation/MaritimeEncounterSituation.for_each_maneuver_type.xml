@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>for_each_maneuver_type</Name>
+<Class>MaritimeEncounterSituation</Class>
+<Module>maritime.core.situation.MaritimeEncounterSituation</Module>
+<Description>Helper funcation to evaluate maneuver types</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MaritimeEncounterSituation.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>rule_ctxt</Name>
+<Type></Type>
+<Description>Rule context</Description>
+</Argument>
+<Argument>
+<Name>types</Name>
+<Type></Type>
+<Description>Types of situations</Description>
+</Argument>
+<Argument>
+<Name>fn</Name>
+<Type></Type>
+<Description>Callback to invoke when a maneuver is identified</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

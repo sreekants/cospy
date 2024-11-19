@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>VectorField</Name>
+<Description>Vector shapes</Description>
+<SourceFile>VectorSprite.py</SourceFile>
+<SourceLine>55</SourceLine>
+<Module>cos.ui.game.VectorSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>update</Name>
+<Description>Updates the weather system</Description>
+<OutputFile>cos.ui.game.VectorSprite.VectorField/VectorField.update</OutputFile>
+</Function>
+<Function>
+<Name>render</Name>
+<Description>Renders the vector field</Description>
+<OutputFile>cos.ui.game.VectorSprite.VectorField/VectorField.render</OutputFile>
+</Function>
+</Functions>
+</Class>

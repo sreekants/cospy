@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>randomize_direction</Name>
+<Class>LinearMotionBehavior</Class>
+<Module>cos.behavior.motion.LinearMotionBehavior</Module>
+<Description>Randomize the direction of the vehicle</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>LinearMotionBehavior.py</SourceFile>
+<SourceLine>122</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

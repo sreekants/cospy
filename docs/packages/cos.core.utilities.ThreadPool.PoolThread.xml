@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>PoolThread</Name>
+<Description>Helper thread pool class</Description>
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>130</SourceLine>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>run</Name>
+<Description>Thread run method. Process all pending tasks.</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread/PoolThread.run</OutputFile>
+</Function>
+<Function>
+<Name>execute_task</Name>
+<Description>Executes the current task</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread/PoolThread.execute_task</OutputFile>
+</Function>
+<Function>
+<Name>requeue</Name>
+<Description>Requeue the current tast</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread/PoolThread.requeue</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Clear the current task</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread/PoolThread.clear</OutputFile>
+</Function>
+<Function>
+<Name>next</Name>
+<Description>Switches to the next task in the queue</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread/PoolThread.next</OutputFile>
+</Function>
+<Function>
+<Name>stop</Name>
+<Description>Stops the thread</Description>
+<OutputFile>cos.core.utilities.ThreadPool.PoolThread/PoolThread.stop</OutputFile>
+</Function>
+</Functions>
+</Class>

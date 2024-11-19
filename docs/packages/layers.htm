@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Empact Programmer's Reference</title>
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<h1>Layers in the Framework</h1>
+<p>
+  The entire framework is broken down into 4 layers and several modules
+  in each layer. The reason for this is to logically separate the vast 
+  number of classes into layers and further break down the facilities
+  in a layer into small manageable modules which then consist of classes.
+  By organizing the framework this way, you as a user can select what the
+  modules you need for your application and link into only those necessary
+  modules. 
+</p>
+
+<p>
+  The following list describes the layers in the framework and their function. 
+<ul>
+  <li><b style="font-weight:bold"><a href="Layer.cos.xml">cos</a></b>: The core layer implements the kernel of the operating system 
+    and the simulation enviroment.
+  </li>
+  <li><b style="font-weight:bold"><a href="Layer.cai.xml">cai</a></b>: This layer provides general purpose reusable libraries for building AI-assisted solutions. 
+    They are not mandatory for runnign the system but is avilable for reuse in higher level modules.
+  </li>
+  <li><b style="font-weight:bold"><a href="Layer.maritime.xml">maritime</a></b>: The maritime layer provides complete set of classes to implement maritime simulations.
+  </li>
+  <li><b style="font-weight:bold"><a href="Layer.rules.xml">rules</a></b>: The rules layer implements validation and testing utilities for regulations including - COLREGs and MASS.
+  </li>
+</ul>
+</p>
+
+
+</body>
+</html>

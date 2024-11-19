@@ -1,0 +1,17 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : ObjectManager.idl
+// Function         : ROVCore - Global object manager
+/////////////////////////////////////////////////////////////////////////////////////////
+
+interface ObjectManager
+{
+	void			create( string path, string name, string type, string config );
+	void			register( string path, string name, string type, string objref, string config );
+	void			link( string path, string name, string target, string config );
+	void			unregister( string path, string config );
+	string			get( string path, long depth, string config );
+	string			find( string path, long depth, string config );
+	bool			exists( string path, string config );
+};
+

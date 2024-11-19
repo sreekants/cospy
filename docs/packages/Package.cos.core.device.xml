@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.core.device</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>2</ClassCount>
+<FunctionCount>27</FunctionCount>
+<Classes>
+<Class>
+<Name>NullDevice</Name>
+<OutputFile>cos.core.device.NullDevice.NullDevice</OutputFile>
+<Description>Base class for all devices</Description>
+<FunctionCount>26</FunctionCount>
+</Class>
+<Class>
+<Name>Creator</Name>
+<OutputFile>cos.core.device.NullDevice.Creator</OutputFile>
+<Description>Base class for all devices</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+</Classes>
+</Module>

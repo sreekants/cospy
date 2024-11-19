@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>complete</Name>
+<Class>PoolTask</Class>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Description>Checks if the thread has completed</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>101</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>self</Name>
+<Type></Type>
+<Description>reference to this instance</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

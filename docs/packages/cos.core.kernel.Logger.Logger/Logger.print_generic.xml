@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>print_generic</Name>
+<Class>Logger</Class>
+<Module>cos.core.kernel.Logger</Module>
+<Description>Prints an generic text</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>278</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>color</Name>
+<Type></Type>
+<Description>Text color</Description>
+</Argument>
+<Argument>
+<Name>module</Name>
+<Type></Type>
+<Description>Module information</Description>
+</Argument>
+<Argument>
+<Name>text</Name>
+<Type></Type>
+<Description>Text to print</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

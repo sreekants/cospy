@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.model.resolver</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>12</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>ColregResolver</Name>
+<OutputFile>maritime.model.resolver.ColregResolver.ColregResolver</OutputFile>
+<Description>Implementation of the ColregResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>EEZResolver</Name>
+<OutputFile>maritime.model.resolver.EEZResolver.EEZResolver</OutputFile>
+<Description>Implementation of the EEZResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>HarbourResolver</Name>
+<OutputFile>maritime.model.resolver.HarbourResolver.HarbourResolver</OutputFile>
+<Description>Implementation of the HarbourResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MEZResolver</Name>
+<OutputFile>maritime.model.resolver.MEZResolver.MEZResolver</OutputFile>
+<Description>Implementation of the MEZResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TargetResolver</Name>
+<OutputFile>maritime.model.resolver.TargetResolver.TargetResolver</OutputFile>
+<Description>Implementation of the TargetResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TSSResolver</Name>
+<OutputFile>maritime.model.resolver.TSSResolver.TSSResolver</OutputFile>
+<Description>Implementation of the TSSResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>LaneResolver</Name>
+<OutputFile>maritime.model.resolver.TSSResolver.LaneResolver</OutputFile>
+<Description>Implementation of the TSSResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>VesselResolver</Name>
+<OutputFile>maritime.model.resolver.VesselResolver.VesselResolver</OutputFile>
+<Description>Implementation of the VesselResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>OwnShipResolver</Name>
+<OutputFile>maritime.model.resolver.VesselResolver.OwnShipResolver</OutputFile>
+<Description>Implementation of the VesselResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>TargetShipResolver</Name>
+<OutputFile>maritime.model.resolver.VesselResolver.TargetShipResolver</OutputFile>
+<Description>Implementation of the VesselResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ZoneResolver</Name>
+<OutputFile>maritime.model.resolver.ZoneResolver.ZoneResolver</OutputFile>
+<Description>Implementation of the ZoneResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeZoneResolver</Name>
+<OutputFile>maritime.model.resolver.ZoneResolver.MaritimeZoneResolver</OutputFile>
+<Description>Implementation of the ZoneResolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

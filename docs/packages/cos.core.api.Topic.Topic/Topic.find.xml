@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>find</Name>
+<Class>Topic</Class>
+<Module>cos.core.api.Topic</Module>
+<Description>Finds a queue matching a criteria</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Topic.py</SourceFile>
+<SourceLine>37</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Search criteria</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

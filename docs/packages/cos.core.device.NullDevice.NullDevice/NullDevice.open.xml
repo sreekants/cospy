@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>open</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Opens the device</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>24</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>devicename</Name>
+<Type></Type>
+<Description>Namd of the device</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>info</Name>
+<Type></Type>
+<Description>String of name-value pair attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

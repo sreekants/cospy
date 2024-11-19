@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>sim</Name>
+<Class>SimulationPoolThread</Class>
+<Module>cos.core.simulation.SimulationThreadPool</Module>
+<Description>Returns a reference to the simulation kernel</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>SimulationThreadPool.py</SourceFile>
+<SourceLine>18</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

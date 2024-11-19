@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>info</Name>
+<Class>Topic</Class>
+<Module>cos.core.api.Topic</Module>
+<Description>Returns information about a topic</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Topic.py</SourceFile>
+<SourceLine>47</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Topic argument</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,98 @@
+# COLREG.Rule19: Conduct of Vessels in Restricted Visibility
+
+define:{
+    OS: OwnShip
+    TS: TargetShip
+}
+
+# (a) This Rule applies to vessels not in sight of one another when navigating in 
+# or near an area of restricted visibility.
+condition: {
+    : not (OS, TS).Visible 
+    : not (OS, TS).Visible
+    : [OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange
+
+
+    # Trigger rule 19 overriding other conditions. Useful for rules in cross-reference.
+    : OS.Restriction in ['COLREG.Rule19.*']  
+}
+
+# (b) Every vessel shall proceed at a safe speed adapted to the prevailing 
+# circumstances and conditions of restricted visibility. A power-driven vessel 
+# shall have engines ready for immediate manoeuvre.
+clause['COLREG.Rule19.b']:{
+    : {
+        assure: { :OS.Speed in Vessel.RestrictedVisibility.Speed.Safe.Range }
+    }
+    : {
+        condition: { :OS.Type is Vessel.Type.PowerDriven }
+        assure: { :OS.Engine.State in [Vessel.Engine.ON] }
+    }
+}
+
+# (c) Every vessel shall have due regard to the prevailing circumstances and 
+# conditions of restricted visibility when complying with the Rules of Section I of this Part.
+clause['COLREG.Rule19.c']:{
+    : {
+        condition: { : OS.Situation in [Zone.Situation.Circumstances.*] }
+        assure: { : abort }     # Abort further processing of the rule
+    }
+}
+
+# (d) A vessel which detects by radar alone the presence of another vessel 
+# shall determine if a closequarters situation is developing and/or risk of 
+# collision exists. 
+clause['COLREG.Rule19.d']:{
+    : {
+        condition: {
+            : ((OS, TS).Detect in [Radio.*, Sonar.*]) and
+              ((OS, TS).Encounter in [
+                Risk.CloseQuarters, 
+                Risk.Collision
+                ])
+        }
+
+        # If so, she shall take avoiding action in ample time, 
+        # pcosided that when such action consists of an alteration of course, so far 
+        # as possible the following shall be avoided:
+        # (i) an alteration of course to port for a vessel forward of the beam, other than for a vessel
+        # being overtaken;
+        # (ii) an alteration of course towards a vessel abeam or abaft the beam.
+        exclude: {
+            : (OS, TS).Direction in [Position.Abeam]
+            : (OS, TS).Direction in [Position.Abaft]
+        }
+        assure: { 
+            :OS.Maneuver in [
+                Maneuver.Course.Alter
+                ]
+        }
+    }
+}
+
+# (e) Except where it has been determined that a risk of collision does not exist, every vessel which
+# hears apparently forward of her beam the fog signal of another vessel, or which cannot avoid a close
+# quarters situation with another vessel forward of her beam, shall reduce her speed to the minimum
+# at which she can be kept on her course. She shall if necessary take all her way off and in any event
+# navigate with extreme caution until danger of collision is over.
+clause['COLREG.Rule19.e']:{
+    : {
+        condition: { 
+            : (OS, TS).Detect in [Signal.FogHorn] 
+            : ((OS, TS).Position in [Position.Abeam]) and
+              ((OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.SafeRange) 
+        }
+        exclude: {
+            : (OS, TS).TimeToEncounter not in Vessel.Collision.TimeToEncounter.SafeRange
+        }
+        assure: { 
+            :OS.Maneuver in [
+                :OS.Engine.Acceleration is Negative             # Reduce speed
+                :(OS, TS).Approach.Gradient is Positive    # Turn away
+                ]
+        }
+    }
+}
+
+
+

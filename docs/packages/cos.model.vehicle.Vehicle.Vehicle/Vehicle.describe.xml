@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>describe</Name>
+<Class>Vehicle</Class>
+<Module>cos.model.vehicle.Vehicle</Module>
+<Description>Describes the object confituration</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vehicle.py</SourceFile>
+<SourceLine>82</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

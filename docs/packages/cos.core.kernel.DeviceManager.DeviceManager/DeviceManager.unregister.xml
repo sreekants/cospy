@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>unregister</Name>
+<Class>DeviceManager</Class>
+<Module>cos.core.kernel.DeviceManager</Module>
+<Description>Unregistrs a device factory</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>DeviceManager.py</SourceFile>
+<SourceLine>104</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>dump</Name>
+<Class>SearchIndex</Class>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Description>dumps the index to a file</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>246</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the file</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

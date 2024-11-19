@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SpriteController</Name>
+<Description>Implementation of a controller for a sprite behavior.</Description>
+<SourceFile>SpriteController.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.ui.game.SpriteController</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>get_position</Name>
+<Description>Returns the position of the sprite</Description>
+<OutputFile>cos.ui.game.SpriteController.SpriteController/SpriteController.get_position</OutputFile>
+</Function>
+<Function>
+<Name>init</Name>
+<Description>Initializes the sprite</Description>
+<OutputFile>cos.ui.game.SpriteController.SpriteController/SpriteController.init</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Updates the sprite</Description>
+<OutputFile>cos.ui.game.SpriteController.SpriteController/SpriteController.update</OutputFile>
+</Function>
+</Functions>
+</Class>

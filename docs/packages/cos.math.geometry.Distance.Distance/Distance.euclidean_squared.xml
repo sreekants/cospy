@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>euclidean_squared</Name>
+<Class>Distance</Class>
+<Module>cos.math.geometry.Distance</Module>
+<Description>Returns euclidean squared distance</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Distance.py</SourceFile>
+<SourceLine>23</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>x1</Name>
+<Type></Type>
+<Description>Start point</Description>
+</Argument>
+<Argument>
+<Name>x2</Name>
+<Type></Type>
+<Description>End point</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

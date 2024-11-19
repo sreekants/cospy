@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Circle</Name>
+<Description>Implementation of the Circle class</Description>
+<SourceFile>Circle.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.math.geometry.Circle</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>radius</Name>
+<Description>Returns the radius</Description>
+<OutputFile>cos.math.geometry.Circle.Circle/Circle.radius</OutputFile>
+</Function>
+<Function>
+<Name>center</Name>
+<Description>Returns the center</Description>
+<OutputFile>cos.math.geometry.Circle.Circle/Circle.center</OutputFile>
+</Function>
+<Function>
+<Name>area</Name>
+<Description>Returns the area</Description>
+<OutputFile>cos.math.geometry.Circle.Circle/Circle.area</OutputFile>
+</Function>
+<Function>
+<Name>encloses</Name>
+<Description>Checks if a point is enclosed by the circle</Description>
+<OutputFile>cos.math.geometry.Circle.Circle/Circle.encloses</OutputFile>
+</Function>
+</Functions>
+</Class>

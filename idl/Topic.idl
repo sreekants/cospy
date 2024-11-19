@@ -1,0 +1,21 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : Topic.idl
+// Function         : ROVCore - Service manager
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+interface Topic
+{
+	blob 	pop( string path );
+	blob 	push( string path, string msg );
+	
+	string 	find( string arg );
+	string 	info( string arg );
+	string 	list( string arg );
+	string 	type( string arg );
+
+	string 	route( string src, string dest );
+	string 	unroute( string path );
+};
+

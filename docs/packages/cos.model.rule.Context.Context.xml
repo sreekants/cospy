@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Context</Name>
+<Description>Implementation of the Context class</Description>
+<SourceFile>Context.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.model.rule.Context</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>IS</Name>
+<Description>operator IS</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.IS</OutputFile>
+</Function>
+<Function>
+<Name>IN</Name>
+<Description>operator IN</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.IN</OutputFile>
+</Function>
+<Function>
+<Name>LT</Name>
+<Description>operator LT</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.LT</OutputFile>
+</Function>
+<Function>
+<Name>GT</Name>
+<Description>operator GT</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.GT</OutputFile>
+</Function>
+<Function>
+<Name>GTE</Name>
+<Description>operator GTE</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.GTE</OutputFile>
+</Function>
+<Function>
+<Name>LTE</Name>
+<Description>operator LTE</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.LTE</OutputFile>
+</Function>
+<Function>
+<Name>EQ</Name>
+<Description>operator EQ</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.EQ</OutputFile>
+</Function>
+<Function>
+<Name>NEQ</Name>
+<Description>operator NEQ</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.NEQ</OutputFile>
+</Function>
+<Function>
+<Name>resolve</Name>
+<Description>operator resolve</Description>
+<OutputFile>cos.model.rule.Context.Context/Context.resolve</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,104 @@
+[tool.poetry]
+name = "modcolreg"
+version = "0.1.0"
+description = ""
+authors = ["Sreekant Sreedharan <sreekant.sreedharan@ntnu.no>", "Eirik Fagerhaug <eirik.fagerhaug@ntnu.no>"]
+readme = "README.md"
+license = "LICENSE"
+packages = [
+    {include = "modcolreg", from = "src"},
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.2"
+ruff = "^0.2.2"
+pytest-cov = "^4.0.0"
+deptry = "^0.12.0"
+mypy = "^1.8.0"
+bandit = "^1.7.7"
+pre-commit = "^3.6.2"
+tox = "^4.11.1"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.4.2"
+mkdocs-material = "^9.2.7"
+mkdocstrings = {extras = ["python"], version = "^0.23.0"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+files = ["src/modcolreg"]
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py37"
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+]
+ignore = [
+    # LineTooLong
+    "E501",
+    # DoNotAssignLambda
+    "E731",
+]
+
+[tool.ruff.format]
+preview = true
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["modcolreg"]
+
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]

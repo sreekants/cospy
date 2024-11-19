@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Sea</Name>
+<Description>Implementation of the sea class</Description>
+<SourceFile>Sea.py</SourceFile>
+<SourceLine>45</SourceLine>
+<Module>cos.model.geography.Sea</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>nominal_depth</Name>
+<Description>Nominal depth of the sea</Description>
+<OutputFile>cos.model.geography.Sea.Sea/Sea.nominal_depth</OutputFile>
+</Function>
+</Functions>
+</Class>

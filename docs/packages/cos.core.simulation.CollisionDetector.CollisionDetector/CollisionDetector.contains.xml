@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>contains</Name>
+<Class>CollisionDetector</Class>
+<Module>cos.core.simulation.CollisionDetector</Module>
+<Description>Checks if a point is enclosed in a body</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>CollisionDetector.py</SourceFile>
+<SourceLine>82</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>pt</Name>
+<Type></Type>
+<Description>Point to evaluate</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Service</Name>
+<Description></Description>
+<SourceFile>Service.py</SourceFile>
+<SourceLine>6</SourceLine>
+<Module>cos.core.api.Service</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>stop</Name>
+<Description>Stops a service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.stop</OutputFile>
+</Function>
+<Function>
+<Name>start</Name>
+<Description>Start a service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.start</OutputFile>
+</Function>
+<Function>
+<Name>suspend</Name>
+<Description>Suspend a service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.suspend</OutputFile>
+</Function>
+<Function>
+<Name>resume</Name>
+<Description>Resume a service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.resume</OutputFile>
+</Function>
+<Function>
+<Name>command</Name>
+<Description>Invoke a command on a service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.command</OutputFile>
+</Function>
+<Function>
+<Name>signal</Name>
+<Description>Send a signal to a service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.signal</OutputFile>
+</Function>
+<Function>
+<Name>describe</Name>
+<Description>Describes the service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.describe</OutputFile>
+</Function>
+<Function>
+<Name>list</Name>
+<Description>Lists all services</Description>
+<OutputFile>cos.core.api.Service.Service/Service.list</OutputFile>
+</Function>
+<Function>
+<Name>info</Name>
+<Description>Retrieves information about a service</Description>
+<OutputFile>cos.core.api.Service.Service/Service.info</OutputFile>
+</Function>
+</Functions>
+</Class>

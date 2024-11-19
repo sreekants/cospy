@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SimulationThread</Name>
+<Description>Base class for all general threads used in the simulation</Description>
+<SourceFile>SimulationThread.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.core.simulation.SimulationThread</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>sim</Name>
+<Description>Returns a reference to the simulation kernel</Description>
+<OutputFile>cos.core.simulation.SimulationThread.SimulationThread/SimulationThread.sim</OutputFile>
+</Function>
+</Functions>
+</Class>

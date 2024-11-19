@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>rules</Name>
+<Description></Description>
+<ClassCount>41</ClassCount>
+<FunctionCount>22</FunctionCount>
+<Classes>
+<Class>
+<Name>Rule1</Name>
+<OutputFile>rules.colreg.rule1.Rule1.Rule1</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule10</Name>
+<OutputFile>rules.colreg.rule10.Rule10.Rule10</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Rule11</Name>
+<OutputFile>rules.colreg.rule11.Rule11.Rule11</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule12</Name>
+<OutputFile>rules.colreg.rule12.Rule12.Rule12</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule13</Name>
+<OutputFile>rules.colreg.rule13.Rule13.Rule13</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Rule14</Name>
+<OutputFile>rules.colreg.rule14.Rule14.Rule14</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule15</Name>
+<OutputFile>rules.colreg.rule15.Rule15.Rule15</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Rule16</Name>
+<OutputFile>rules.colreg.rule16.Rule16.Rule16</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule17</Name>
+<OutputFile>rules.colreg.rule17.Rule17.Rule17</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+<Class>
+<Name>Rule18</Name>
+<OutputFile>rules.colreg.rule18.Rule18.Rule18</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule19</Name>
+<OutputFile>rules.colreg.rule19.Rule19.Rule19</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Rule2</Name>
+<OutputFile>rules.colreg.rule2.Rule2.Rule2</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule20</Name>
+<OutputFile>rules.colreg.rule20.Rule20.Rule20</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule21</Name>
+<OutputFile>rules.colreg.rule21.Rule21.Rule21</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule22</Name>
+<OutputFile>rules.colreg.rule22.Rule22.Rule22</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule23</Name>
+<OutputFile>rules.colreg.rule23.Rule23.Rule23</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule24</Name>
+<OutputFile>rules.colreg.rule24.Rule24.Rule24</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule25</Name>
+<OutputFile>rules.colreg.rule25.Rule25.Rule25</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule26</Name>
+<OutputFile>rules.colreg.rule26.Rule26.Rule26</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule27</Name>
+<OutputFile>rules.colreg.rule27.Rule27.Rule27</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule28</Name>
+<OutputFile>rules.colreg.rule28.Rule28.Rule28</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule29</Name>
+<OutputFile>rules.colreg.rule29.Rule29.Rule29</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule3</Name>
+<OutputFile>rules.colreg.rule3.Rule3.Rule3</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Rule30</Name>
+<OutputFile>rules.colreg.rule30.Rule30.Rule30</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule31</Name>
+<OutputFile>rules.colreg.rule31.Rule31.Rule31</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule32</Name>
+<OutputFile>rules.colreg.rule32.Rule32.Rule32</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule33</Name>
+<OutputFile>rules.colreg.rule33.Rule33.Rule33</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule34</Name>
+<OutputFile>rules.colreg.rule34.Rule34.Rule34</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Rule35</Name>
+<OutputFile>rules.colreg.rule35.Rule35.Rule35</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule36</Name>
+<OutputFile>rules.colreg.rule36.Rule36.Rule36</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule37</Name>
+<OutputFile>rules.colreg.rule37.Rule37.Rule37</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule38</Name>
+<OutputFile>rules.colreg.rule38.Rule38.Rule38</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule39</Name>
+<OutputFile>rules.colreg.rule39.Rule39.Rule39</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule4</Name>
+<OutputFile>rules.colreg.rule4.Rule4.Rule4</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule40</Name>
+<OutputFile>rules.colreg.rule40.Rule40.Rule40</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule41</Name>
+<OutputFile>rules.colreg.rule41.Rule41.Rule41</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule5</Name>
+<OutputFile>rules.colreg.rule5.Rule5.Rule5</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule6</Name>
+<OutputFile>rules.colreg.rule6.Rule6.Rule6</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule7</Name>
+<OutputFile>rules.colreg.rule7.Rule7.Rule7</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule8</Name>
+<OutputFile>rules.colreg.rule8.Rule8.Rule8</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Rule9</Name>
+<OutputFile>rules.colreg.rule9.Rule9.Rule9</OutputFile>
+<Description>Implementation of COLREG Rule</Description>
+<FunctionCount>4</FunctionCount>
+</Class>
+</Classes>
+</Module>

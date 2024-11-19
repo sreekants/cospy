@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.core.situation</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>8</ClassCount>
+<FunctionCount>7</FunctionCount>
+<Classes>
+<Class>
+<Name>Event</Name>
+<OutputFile>maritime.core.situation.Events.Event</OutputFile>
+<Description>Types of maritime events</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>EncounterEvent</Name>
+<OutputFile>maritime.core.situation.Events.EncounterEvent</OutputFile>
+<Description>Types of maritime events</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Maneuver</Name>
+<OutputFile>maritime.core.situation.Maneuver.Maneuver</OutputFile>
+<Description>Implementation of the Maneuver class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeConductSituation</Name>
+<OutputFile>maritime.core.situation.MaritimeConductSituation.MaritimeConductSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeEncounterSituation</Name>
+<OutputFile>maritime.core.situation.MaritimeEncounterSituation.MaritimeEncounterSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>MaritimeSituation</Name>
+<OutputFile>maritime.core.situation.MaritimeSituation.MaritimeSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+<Class>
+<Name>Encounter</Name>
+<OutputFile>maritime.core.situation.Types.Encounter</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>EncounterStage</Name>
+<OutputFile>maritime.core.situation.Types.EncounterStage</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>init_config</Name>
+<Class>WeatherSystem</Class>
+<Module>cos.model.environment.WeatherSystem</Module>
+<Description>Initializes the weather system configurations</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>WeatherSystem.py</SourceFile>
+<SourceLine>96</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

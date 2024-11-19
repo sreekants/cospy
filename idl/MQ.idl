@@ -1,0 +1,29 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : SystemMessageQueue.idl
+// Function         : ROVCore - IPC global message queue
+/////////////////////////////////////////////////////////////////////////////////////////
+
+interface MQ
+{
+	void		pushi( string domain, string queuename, blob message, int count, string config );
+	void		push( string domain, string queuename, string config );
+	blob		pop( string domain, string queuename, string config );
+	blob		peek( string domain, string queuename, string config );
+	void		move( string domain, string criteria, string sourcequeuename, string targetqueuename, string config );
+	boolean		is_empty( string domain, string queuename, string config );
+	int			getcount( string domain, string queuename, string config );
+	boolean		exists( string domain, string queuename, string config );
+	void		purge( string domain, string queuename, string config );
+	void		create( string domain, string queuename, string config );
+	void		delete( string domain, string queuename, string config );
+	string		locate( string domain, string criteria, string config );
+	string		list( string domain, string queuename, string config );
+	string		get_property( string domain, string queuename, string name, string config );
+	void		set_property( string domain, string queuename, string name, string value, string config );
+	string		describe( string domain, string queuename, string config );
+	void		add_route( string domain, string queuename, string route, string config );
+	void		delete_route( string domain, string queuename, string route, string config );
+	boolean		is_route( string domain, string queuename, string route, string config );
+};
+

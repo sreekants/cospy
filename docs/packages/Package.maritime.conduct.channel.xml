@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.conduct.channel</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>3</FunctionCount>
+<Classes>
+<Class>
+<Name>NarrowChannel</Name>
+<OutputFile>maritime.conduct.channel.NarrowChannel.NarrowChannel</OutputFile>
+<Description>Implementation of the NarrowChannel class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+</Classes>
+</Module>

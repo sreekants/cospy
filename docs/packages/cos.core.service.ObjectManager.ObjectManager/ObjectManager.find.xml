@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>find</Name>
+<Class>ObjectManager</Class>
+<Module>cos.core.service.ObjectManager</Module>
+<Description>Finds an object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ObjectManager.py</SourceFile>
+<SourceLine>67</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the object</Description>
+</Argument>
+<Argument>
+<Name>depth</Name>
+<Type></Type>
+<Description>Recursive depth to search for (for symbolic links)</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

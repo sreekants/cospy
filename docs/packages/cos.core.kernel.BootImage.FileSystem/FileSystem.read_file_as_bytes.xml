@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>read_file_as_bytes</Name>
+<Class>FileSystem</Class>
+<Module>cos.core.kernel.BootImage</Module>
+<Description>Returns the content of a file as bytes</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BootImage.py</SourceFile>
+<SourceLine>89</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path of the file in the image</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

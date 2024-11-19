@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>regulate</Name>
+<Class>MaritimeSituation</Class>
+<Module>maritime.core.situation.MaritimeSituation</Module>
+<Description>Invokes a regulation event for a vessel</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MaritimeSituation.py</SourceFile>
+<SourceLine>22</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>vessel</Name>
+<Type></Type>
+<Description>Vessel that triggered the regulation event</Description>
+</Argument>
+<Argument>
+<Name>msg</Name>
+<Type></Type>
+<Description>Message describing the regulation event</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Opaque argument to pass as context</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

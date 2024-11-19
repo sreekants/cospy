@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.model.environment</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>16</ClassCount>
+<FunctionCount>16</FunctionCount>
+<Classes>
+<Class>
+<Name>ActorType</Name>
+<OutputFile>cos.model.environment.Actors.ActorType</OutputFile>
+<Description>Implementation of an orchestrator class that conducts the simulation</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Actors</Name>
+<OutputFile>cos.model.environment.Actors.Actors</OutputFile>
+<Description>Implementation of an orchestrator class that conducts the simulation</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Builder</Name>
+<OutputFile>cos.model.environment.Builder.Builder</OutputFile>
+<Description>Base class for all environment builders</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Environment</Name>
+<OutputFile>cos.model.environment.Environment.Environment</OutputFile>
+<Description>Implementation of the Environment class</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>EnvironmentService</Name>
+<OutputFile>cos.model.environment.EnvironmentService.EnvironmentService</OutputFile>
+<Description>Implementation of the EnvironmentService class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Scales</Name>
+<OutputFile>cos.model.environment.Scales.Scales</OutputFile>
+<Description>Implementation of the Scales class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaCurrent</Name>
+<OutputFile>cos.model.environment.SeaCurrent.SeaCurrent</OutputFile>
+<Description>Implementation of the SeaCurrent class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SeaWave</Name>
+<OutputFile>cos.model.environment.SeaWave.SeaWave</OutputFile>
+<Description>Implementation of the SeaWave class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>DynamicForce</Name>
+<OutputFile>cos.model.environment.Types.DynamicForce</OutputFile>
+<Description>Implementation of the Types class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherType</Name>
+<OutputFile>cos.model.environment.Weather.WeatherType</OutputFile>
+<Description>Implementation of the Weather class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ElementType</Name>
+<OutputFile>cos.model.environment.Weather.ElementType</OutputFile>
+<Description>Implementation of the Weather class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Weather</Name>
+<OutputFile>cos.model.environment.Weather.Weather</OutputFile>
+<Description>Implementation of the Weather class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherBuilder</Name>
+<OutputFile>cos.model.environment.WeatherBuilder.WeatherBuilder</OutputFile>
+<Description>Implementation of the WeatherBuilder class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherSystem</Name>
+<OutputFile>cos.model.environment.WeatherSystem.WeatherSystem</OutputFile>
+<Description>Implementation of the WeatherSystem class</Description>
+<FunctionCount>11</FunctionCount>
+</Class>
+<Class>
+<Name>WeatherSystemGenerator</Name>
+<OutputFile>cos.model.environment.WeatherSystemGenerator.WeatherSystemGenerator</OutputFile>
+<Description>Implementation of the WeatherSystemGenerator class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>WindCurrent</Name>
+<OutputFile>cos.model.environment.WindCurrent.WindCurrent</OutputFile>
+<Description>Implementation of the WindCurrent class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ParameterManager</Name>
+<Description>A parameter subsystem is a shared, dictionary that is accessible via APIs.</Description>
+<SourceFile>ParameterManager.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.core.kernel.ParameterManager</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_init</Name>
+<Description>Callback for simulation initialization</Description>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager/ParameterManager.on_init</OutputFile>
+</Function>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager/ParameterManager.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_run</Name>
+<Description>Event handler for run</Description>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager/ParameterManager.on_run</OutputFile>
+</Function>
+<Function>
+<Name>on_term</Name>
+<Description>Callback for simulation termination</Description>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager/ParameterManager.on_term</OutputFile>
+</Function>
+<Function>
+<Name>on_stop</Name>
+<Description>Callback for simulation shutdown</Description>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager/ParameterManager.on_stop</OutputFile>
+</Function>
+<Function>
+<Name>register</Name>
+<Description>Registers a marameter</Description>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager/ParameterManager.register</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Clears a parameter</Description>
+<OutputFile>cos.core.kernel.ParameterManager.ParameterManager/ParameterManager.clear</OutputFile>
+</Function>
+</Functions>
+</Class>

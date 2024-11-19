@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>LinearMotionBehavior</Name>
+<Description>Default motion behavior uses the linear vectors defined in the configuration to move the object</Description>
+<SourceFile>LinearMotionBehavior.py</SourceFile>
+<SourceLine>12</SourceLine>
+<Module>cos.behavior.motion.LinearMotionBehavior</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>initialize_dynamics</Name>
+<Description>Initialize the dynamics vectors</Description>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior/LinearMotionBehavior.initialize_dynamics</OutputFile>
+</Function>
+<Function>
+<Name>move</Name>
+<Description>Moves the vehicle</Description>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior/LinearMotionBehavior.move</OutputFile>
+</Function>
+<Function>
+<Name>translate</Name>
+<Description>Translates the behicle to a new location</Description>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior/LinearMotionBehavior.translate</OutputFile>
+</Function>
+<Function>
+<Name>apply_force</Name>
+<Description>Applies environmental forces to the vehicle</Description>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior/LinearMotionBehavior.apply_force</OutputFile>
+</Function>
+<Function>
+<Name>randomize_direction</Name>
+<Description>Randomize the direction of the vehicle</Description>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior/LinearMotionBehavior.randomize_direction</OutputFile>
+</Function>
+<Function>
+<Name>position</Name>
+<Description>Returns the current position</Description>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior/LinearMotionBehavior.position</OutputFile>
+</Function>
+<Function>
+<Name>velocity</Name>
+<Description>Returns the current velocity</Description>
+<OutputFile>cos.behavior.motion.LinearMotionBehavior.LinearMotionBehavior/LinearMotionBehavior.velocity</OutputFile>
+</Function>
+</Functions>
+</Class>

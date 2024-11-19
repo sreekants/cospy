@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>push</Name>
+<Class>Topic</Class>
+<Module>cos.core.api.Topic</Module>
+<Description>Pushes a message to queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Topic.py</SourceFile>
+<SourceLine>25</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>IPC Topic path</Description>
+</Argument>
+<Argument>
+<Name>msg</Name>
+<Type></Type>
+<Description>Message to push</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

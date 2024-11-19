@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>list</Name>
+<Class>Service</Class>
+<Module>cos.core.api.Service</Module>
+<Description>Lists all services</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Service.py</SourceFile>
+<SourceLine>91</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Argument to the command</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

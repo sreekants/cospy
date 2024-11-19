@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>RemoveNulls</Name>
+<Class>IPCMessage</Class>
+<Module>cos.core.kernel.IPCMessage</Module>
+<Description>Compact the mesage removing nulls</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>IPCMessage.py</SourceFile>
+<SourceLine>129</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>obj</Name>
+<Type></Type>
+<Description>The message objects</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

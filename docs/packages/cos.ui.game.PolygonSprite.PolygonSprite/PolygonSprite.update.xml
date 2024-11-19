@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>PolygonSprite</Class>
+<Module>cos.ui.game.PolygonSprite</Module>
+<Description>Updates the polygon</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>PolygonSprite.py</SourceFile>
+<SourceLine>36</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

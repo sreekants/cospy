@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>stop</Name>
+<Class>BootLoader</Class>
+<Module>cos.core.kernel.BootLoader</Module>
+<Description>Stops the simulation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BootLoader.py</SourceFile>
+<SourceLine>71</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>sim</Name>
+<Type></Type>
+<Description>Reference ot the simulation</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

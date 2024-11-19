@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>build_profile</Name>
+<Class>VesselComposer</Class>
+<Module>maritime.model.vessel.VesselComposer</Module>
+<Description>Builds a vessel from a profile</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>VesselComposer.py</SourceFile>
+<SourceLine>31</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>vessel</Name>
+<Type></Type>
+<Description>Vessel object</Description>
+</Argument>
+<Argument>
+<Name>filename</Name>
+<Type></Type>
+<Description>File name</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

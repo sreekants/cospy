@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>pending</Name>
+<Class>TransactionalDatabase</Class>
+<Module>cos.core.utilities.TransactionalDatabase</Module>
+<Description>Returns the number of pending bytes:</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>TransactionalDatabase.py</SourceFile>
+<SourceLine>72</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>self</Name>
+<Type></Type>
+<Description>reference to this instance</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

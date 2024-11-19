@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>run</Name>
+<Class>Runner</Class>
+<Module>cos.core.simulation.Runner</Module>
+<Description>Starts the simulation thread</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Runner.py</SourceFile>
+<SourceLine>71</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>sim</Name>
+<Type></Type>
+<Description>Reference ot the simulation</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

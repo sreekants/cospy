@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Arrow</Name>
+<Description>Renders an arrow</Description>
+<SourceFile>Arrow.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>cos.ui.game.Arrow</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>compose</Name>
+<Description>Calculate the shape of the arrow.</Description>
+<OutputFile>cos.ui.game.Arrow.Arrow/Arrow.compose</OutputFile>
+</Function>
+<Function>
+<Name>render</Name>
+<Description>Renders the arrow</Description>
+<OutputFile>cos.ui.game.Arrow.Arrow/Arrow.render</OutputFile>
+</Function>
+</Functions>
+</Class>

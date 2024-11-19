@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Device</Name>
+<Description>Base class for all devices</Description>
+<SourceFile>Device.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>cos.core.kernel.Device</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>throw_not_impl</Name>
+<Description>Helper function to throw an exception for an unimplemented function</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.throw_not_impl</OutputFile>
+</Function>
+<Function>
+<Name>open</Name>
+<Description>Opens the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.open</OutputFile>
+</Function>
+<Function>
+<Name>bind</Name>
+<Description>Binds a device to an address</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.bind</OutputFile>
+</Function>
+<Function>
+<Name>listen</Name>
+<Description>Sets the device to listen mode</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.listen</OutputFile>
+</Function>
+<Function>
+<Name>accept</Name>
+<Description>Accepts a connection to the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.accept</OutputFile>
+</Function>
+<Function>
+<Name>connect</Name>
+<Description>Connects a device to an address</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.connect</OutputFile>
+</Function>
+<Function>
+<Name>close</Name>
+<Description>Closes the socket</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.close</OutputFile>
+</Function>
+<Function>
+<Name>set</Name>
+<Description>Sets an option on the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.set</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Returns the current option on a device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.get</OutputFile>
+</Function>
+<Function>
+<Name>ioctl</Name>
+<Description>Performs an I/O control operation on the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.ioctl</OutputFile>
+</Function>
+<Function>
+<Name>is_accept_pending</Name>
+<Description>Checks if a connection is pending</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.is_accept_pending</OutputFile>
+</Function>
+<Function>
+<Name>is_read_pending</Name>
+<Description>Checks if read data is pending on the socket</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.is_read_pending</OutputFile>
+</Function>
+<Function>
+<Name>is_open</Name>
+<Description>Checks if the socket is open</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.is_open</OutputFile>
+</Function>
+<Function>
+<Name>extension</Name>
+<Description>Returs an extension interface supported bythe device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.extension</OutputFile>
+</Function>
+<Function>
+<Name>send</Name>
+<Description>Sends data on the socket</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.send</OutputFile>
+</Function>
+<Function>
+<Name>receive</Name>
+<Description>Receives bytes from the socket, blocking for till data arrives</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.receive</OutputFile>
+</Function>
+<Function>
+<Name>receiveex</Name>
+<Description>Receives pending data from the socket, without blocking</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.receiveex</OutputFile>
+</Function>
+<Function>
+<Name>sendto</Name>
+<Description>Sends data to an address</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.sendto</OutputFile>
+</Function>
+<Function>
+<Name>recvfrom</Name>
+<Description>Receives pending data from the socket, without blocking</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.recvfrom</OutputFile>
+</Function>
+<Function>
+<Name>type</Name>
+<Description>Returns the type of the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.type</OutputFile>
+</Function>
+<Function>
+<Name>read_port</Name>
+<Description>Low level function to read from a port</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.read_port</OutputFile>
+</Function>
+<Function>
+<Name>write_port</Name>
+<Description>Low level function to write to a port</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.write_port</OutputFile>
+</Function>
+<Function>
+<Name>write</Name>
+<Description>Writes data to the socket</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.write</OutputFile>
+</Function>
+<Function>
+<Name>read</Name>
+<Description>Reads from the socket, blocking for the first stream of data</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.read</OutputFile>
+</Function>
+<Function>
+<Name>readex</Name>
+<Description>Reads a byte without blocking</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.readex</OutputFile>
+</Function>
+<Function>
+<Name>startio</Name>
+<Description>Initializes IO operations</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.startio</OutputFile>
+</Function>
+<Function>
+<Name>start</Name>
+<Description>Starts the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.start</OutputFile>
+</Function>
+<Function>
+<Name>suspend</Name>
+<Description>Suspends the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.suspend</OutputFile>
+</Function>
+<Function>
+<Name>resume</Name>
+<Description>Resumes the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.resume</OutputFile>
+</Function>
+<Function>
+<Name>term</Name>
+<Description>Terminates th device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.term</OutputFile>
+</Function>
+<Function>
+<Name>unload</Name>
+<Description>Unloads the device</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.unload</OutputFile>
+</Function>
+<Function>
+<Name>dispatch</Name>
+<Description>Dispatches commands to the device driver</Description>
+<OutputFile>cos.core.kernel.Device.Device/Device.dispatch</OutputFile>
+</Function>
+</Functions>
+</Class>

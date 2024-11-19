@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Radar</Name>
+<Description></Description>
+<SourceFile>Radar.py</SourceFile>
+<SourceLine>4</SourceLine>
+<Module>cos.core.api.Radar</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>describe</Name>
+<Description>Describes a radar</Description>
+<OutputFile>cos.core.api.Radar.Radar/Radar.describe</OutputFile>
+</Function>
+</Functions>
+</Class>

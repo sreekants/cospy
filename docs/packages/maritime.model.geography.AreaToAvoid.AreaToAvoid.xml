@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>AreaToAvoid</Name>
+<Description>Implementation of the marine_valley class</Description>
+<SourceFile>AreaToAvoid.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>maritime.model.geography.AreaToAvoid</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

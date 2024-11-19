@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>move</Name>
+<Class>MQ</Class>
+<Module>cos.core.service.MQ</Module>
+<Description>Moves a queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MQ.py</SourceFile>
+<SourceLine>45</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>domain</Name>
+<Type></Type>
+<Description>Domain namespace</Description>
+</Argument>
+<Argument>
+<Name>criteria</Name>
+<Type></Type>
+<Description>Criteria of selection</Description>
+</Argument>
+<Argument>
+<Name>sourcequeuename</Name>
+<Type></Type>
+<Description>Source queue name</Description>
+</Argument>
+<Argument>
+<Name>targetqueuename</Name>
+<Type></Type>
+<Description>Destination queue name</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

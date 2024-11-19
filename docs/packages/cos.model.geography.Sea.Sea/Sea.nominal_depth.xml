@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>nominal_depth</Name>
+<Class>Sea</Class>
+<Module>cos.model.geography.Sea</Module>
+<Description>Nominal depth of the sea</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Sea.py</SourceFile>
+<SourceLine>61</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

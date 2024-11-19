@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>PumpCtxt</Name>
+<Description>Implemention of an in-memory message queue for inter-process communication</Description>
+<SourceFile>MessageQueue.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>cos.core.kernel.MessageQueue</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

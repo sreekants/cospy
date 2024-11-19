@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ORPCProxy</Name>
+<Description>Base class for all RPC proxy classes</Description>
+<SourceFile>ORPCProxy.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.core.network.ORPCProxy</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>bind</Name>
+<Description>Bind the transport to an address</Description>
+<OutputFile>cos.core.network.ORPCProxy.ORPCProxy/ORPCProxy.bind</OutputFile>
+</Function>
+<Function>
+<Name>invoke</Name>
+<Description>Invokes a method</Description>
+<OutputFile>cos.core.network.ORPCProxy.ORPCProxy/ORPCProxy.invoke</OutputFile>
+</Function>
+</Functions>
+</Class>

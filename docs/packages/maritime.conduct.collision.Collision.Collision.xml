@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Collision</Name>
+<Description>Implementation of the Collision class</Description>
+<SourceFile>Collision.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>maritime.conduct.collision.Collision</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>maritime.conduct.collision.Collision.Collision/Collision.on_start</OutputFile>
+</Function>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.conduct.collision.Collision.Collision/Collision.evaluate</OutputFile>
+</Function>
+<Function>
+<Name>setup</Name>
+<Description>Sets up the parameters of the situations</Description>
+<OutputFile>maritime.conduct.collision.Collision.Collision/Collision.setup</OutputFile>
+</Function>
+<Function>
+<Name>on_collide_vessel</Name>
+<Description>Event handler to evaluate vessel collision</Description>
+<OutputFile>maritime.conduct.collision.Collision.Collision/Collision.on_collide_vessel</OutputFile>
+</Function>
+<Function>
+<Name>on_collide_obstacle</Name>
+<Description>Event handler to evaluate obstacle collision</Description>
+<OutputFile>maritime.conduct.collision.Collision.Collision/Collision.on_collide_obstacle</OutputFile>
+</Function>
+</Functions>
+</Class>

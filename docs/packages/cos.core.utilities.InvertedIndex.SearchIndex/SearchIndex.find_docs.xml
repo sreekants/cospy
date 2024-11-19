@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>find_docs</Name>
+<Class>SearchIndex</Class>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Description>Finds the files containing a word</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>194</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>word</Name>
+<Type></Type>
+<Description>Word to search for</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

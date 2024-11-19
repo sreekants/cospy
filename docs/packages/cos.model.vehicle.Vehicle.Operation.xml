@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Operation</Name>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<SourceFile>Vehicle.py</SourceFile>
+<SourceLine>21</SourceLine>
+<Module>cos.model.vehicle.Vehicle</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

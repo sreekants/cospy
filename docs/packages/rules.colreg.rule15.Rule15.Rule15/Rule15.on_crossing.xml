@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_crossing</Name>
+<Class>Rule15</Class>
+<Module>rules.colreg.rule15.Rule15</Module>
+<Description>Event handler for crossing</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Rule15.py</SourceFile>
+<SourceLine>33</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>evt</Name>
+<Type></Type>
+<Description>Event data</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

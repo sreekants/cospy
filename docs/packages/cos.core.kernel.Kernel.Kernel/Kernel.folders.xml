@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>folders</Name>
+<Class>Kernel</Class>
+<Module>cos.core.kernel.Kernel</Module>
+<Description>Returns the folders for the OS</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Kernel.py</SourceFile>
+<SourceLine>86</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

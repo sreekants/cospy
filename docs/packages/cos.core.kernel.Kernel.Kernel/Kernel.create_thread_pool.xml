@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create_thread_pool</Name>
+<Class>Kernel</Class>
+<Module>cos.core.kernel.Kernel</Module>
+<Description>Creates the thread pool</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Kernel.py</SourceFile>
+<SourceLine>59</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

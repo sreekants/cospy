@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ThreadPool</Name>
+<Description>Helper thread pool class</Description>
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>246</SourceLine>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>close</Name>
+<Description>Closes the threadpool releasing resources</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.close</OutputFile>
+</Function>
+<Function>
+<Name>size</Name>
+<Description>Returns the number of threads in the pool</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.size</OutputFile>
+</Function>
+<Function>
+<Name>pending</Name>
+<Description>Returns the number of pending tasks in the pool</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.pending</OutputFile>
+</Function>
+<Function>
+<Name>create</Name>
+<Description>Creates the pool</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.create</OutputFile>
+</Function>
+<Function>
+<Name>create_thread</Name>
+<Description>Overridable to create the pool thread instance</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.create_thread</OutputFile>
+</Function>
+<Function>
+<Name>wait</Name>
+<Description>Wait for the queue to be signaled</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.wait</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Clears all pending tasks</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.clear</OutputFile>
+</Function>
+<Function>
+<Name>queue_callback</Name>
+<Description>Queues a function callback as a task on the thread pool</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.queue_callback</OutputFile>
+</Function>
+<Function>
+<Name>remove</Name>
+<Description>Removes a task with a identifier from the queue</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.remove</OutputFile>
+</Function>
+<Function>
+<Name>for_each</Name>
+<Description>Invokes a callback for each task</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.for_each</OutputFile>
+</Function>
+<Function>
+<Name>get_task_status</Name>
+<Description>Returns the status of a task</Description>
+<OutputFile>cos.core.utilities.ThreadPool.ThreadPool/ThreadPool.get_task_status</OutputFile>
+</Function>
+</Functions>
+</Class>

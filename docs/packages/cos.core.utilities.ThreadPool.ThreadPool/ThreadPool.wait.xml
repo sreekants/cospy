@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>wait</Name>
+<Class>ThreadPool</Class>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Description>Wait for the queue to be signaled</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>436</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>timeout=None</Name>
+<Type></Type>
+<Description>Timeout to wait for</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

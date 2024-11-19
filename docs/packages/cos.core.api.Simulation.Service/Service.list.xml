@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>list</Name>
+<Class>Service</Class>
+<Module>cos.core.api.Simulation</Module>
+<Description>Lists objects of a type in a simulation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Simulation.py</SourceFile>
+<SourceLine>99</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Argument to the list</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

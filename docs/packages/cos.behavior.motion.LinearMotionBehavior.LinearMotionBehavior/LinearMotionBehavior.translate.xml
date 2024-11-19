@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>translate</Name>
+<Class>LinearMotionBehavior</Class>
+<Module>cos.behavior.motion.LinearMotionBehavior</Module>
+<Description>Translates the behicle to a new location</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>LinearMotionBehavior.py</SourceFile>
+<SourceLine>81</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>world</Name>
+<Type></Type>
+<Description>Reference ot the simulation world</Description>
+</Argument>
+<Argument>
+<Name>t</Name>
+<Type></Type>
+<Description>Time on the simulation clock</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

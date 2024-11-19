@@ -1,0 +1,239 @@
+# COLREG.Rule10:
+
+define: {
+    OS: OwnShip
+    TS: TargetShip
+    TSS: OwnShip.TrafficSeparationScheme
+}
+
+
+# Traffic Separation Schemes
+# (a) This Rule Applies to traffic separation schemes adopted by the Organization and does not relieve
+# any vessel of her obligation under any other rule.
+condition: {
+    : [OS, Map.Sea@TrafficSeparationScheme].Distance in Area.Near.ProximityRange
+
+    # Trigger rule 10 overriding other conditions. Useful for rules in cross-reference.
+    : OS.Restriction in ['COLREG.Rule10.*']  
+}
+
+# (b) A vessel using a traffic separation scheme shall:
+# (i) proceed in the appropriate traffic lane in the general direction of traffic flow for that
+# lane;
+clause['COLREG.Rule10.b.i']:{
+    : {
+        condition: { :TSS is not empty }
+        assure: { 
+            :OS.Position in TSS.Area
+            :OS.Heading in TSS.SafeHeading
+            :OS.Velocity <= TSS.SafeVelocity
+            :(OS,TS).Distance >= TSS.SafeDistance
+            }
+    }
+}
+
+# (ii) so far as practicable keep clear of a traffic separation line or separation zone;
+clause['COLREG.Rule10.b.ii']:{
+    : {
+        condition: { :TSS is not empty }
+        assure: { 
+            :[OS.Position, TSS.SeparationZone].Distance > TSS.SafeSeparationDistance
+            :[OS.Position, TSS.SeparationLine].Distance > TSS.SafeSeparationsDistance
+            }
+    }
+}
+
+# (iii) normally join or leave a traffic lane at the termination of the lane, but when joining or
+# leaving from either side shall do so at as small an angle to the general direction of traffic
+# flow as practicable.
+clause['COLREG.Rule10.b.iii/EnterTrafficSeparationScheme']:{
+    : {
+        condition: { :(TSS is empty) and (OS.Intent in [TrafficSeparationScheme.Enter]) }
+        assure: { 
+            :[OS.Position, TSS.EntryZone].Distance in TSS.SafeDistance
+            :OS.Heading in any TSS.SafeEntryHeading
+            }
+    }
+}
+
+clause['COLREG.Rule10.b.iii/ExitTrafficSeparationScheme']:{
+    : {
+        condition: { :(TSS is not empty) and (OS.Intent in [TrafficSeparationScheme.Exit]) }
+        assure: { 
+            :[OS.Position, TSS.ExitZone].Distance in TSS.SafeDistance
+            :OS.Heading in any TSS.SafeExitHeading
+            }
+    }
+}
+
+
+# (c) A vessel shall so far as practicable avoid crossing traffic lanes, but if obliged to do so shall cross on
+# a heading as nearly as practicable at right angles to the general direction of traffic flow.
+clause['COLREG.Rule10.c']:{
+    : {
+        condition: { :(TSS is not empty) and (OS.Intent in ['TrafficSeparationScheme.Crossing']) }
+        assure: { 
+            :[OS.Position, TSS.ExitZone].Distance in TSS.SafeDistance
+            :abs((OS.Heading, TSS.SafeHeading).Gradient) in range(87.5,92.5)  # 5 degree margin of error  
+            }
+    }
+}
+
+# (d)
+# (i) A vessel shall not use an inshore traffic zone when she can safely use the appropriate
+# traffic lane within the adjacent traffic separation scheme. However, vessels of less than 20
+# meters in length, sailing vessels and vessels engaged in fishing may use the inshore traffic
+# zone.
+clause['COLREG.Rule10.d.i']:{
+    : {
+        condition: { : (TSS is not empty) and
+                       (TSS.Type in ['Sea.Zone.InShoreTraffic']) and
+                       (OS.Intent not in ['Destination.Enter', 'Destination.Leave','Emergency.*'])
+         }
+        assure: { 
+            :(OS.Length in range(0, 20)) or 
+             (OS.Operation in ['Vessel.Operation.Sailing', 'Vessel.Operation.Fishing'])
+            }
+    }
+}
+
+
+# (ii) Notwithstanding subparagraph (d) (i), a vessel may use an inshore traffic zone when en
+# route to or from a port, offshore installation or structure, pilot station or any other place
+# situated within the inshore traffic zone, or to avoid immediate danger.
+clause['COLREG.Rule10.d.ii']:{
+    : {
+        condition: { : (TSS is not empty) and
+                       (TSS.Type in ['Sea.Zone.InShoreTraffic']) and
+                       (OS.Intent in ['Destination.Enter', 'Destination.Leave','Emergency.*'])
+         }
+        assure: { 
+            : continue
+        }
+    }
+}
+
+
+# (e) A vessel, other than a crossing vessel, or a vessel joining or leaving a lane shall not normally enter
+# a separation zone or cross a separation line except:
+# (i) in cases of emergency to avoid immediate danger;
+# (ii) to engage in fishing within a separation zone.
+clause['COLREG.Rule10.e.i']:{
+    : {
+        condition: { 
+            : (TSS is not empty) and 
+              (OS.Position in TSS.SeparationZone) and
+              (OS.Intent in ['Emergency.*'])
+            : (TSS is not empty) and 
+              (OS.Position in TSS.SeparationZone) and
+              (OS.Operation in [Vessel.Operation.Fishing])    # TODO: Why not sailing??
+         }
+        assure: { 
+            : clear             # Clear all violations
+        }
+    }
+}
+
+# (f) A vessel navigating in areas near the terminations of traffic separation schemes shall do so with
+# particular caution.
+clause['COLREG.Rule10.f']:{
+    : {
+        condition: { 
+            : [OS.Position, Map.Sea@TrafficSeparationScheme].Distance in Area.TrafficSeparationScheme.SafeRange
+         }
+        # TODO: What do we mean by particular caution?? assure: {}
+    }
+}
+
+# (g) A vessel shall so far as practicable avoid anchoring in a traffic separation scheme or in areas near
+# its terminations.
+clause['COLREG.Rule10.g']:{
+    : {
+        condition: { 
+            : (TSS is not empty) and 
+              ([OS.Position, Map.Sea@TrafficSeparationScheme].Distance in Area.TrafficSeparationScheme.AvoidRange)
+         }
+        assure: { 
+            : OS.Status not in [Vessel.ANCHORED]        # AIS/COLREG status 
+        }
+    }
+}
+
+# (h) A vessel not using a traffic separation scheme shall avoid it by as wide a margin as is practicable.
+clause['COLREG.Rule10.h']:{
+    : {
+        condition: { 
+            : [OS.Position, Map.Sea@TrafficSeparationScheme].Distance not in Area.TrafficSeparationScheme.SafeRange
+         }
+        assure: { 
+            : [OS.Position, Map.Sea@TrafficSeparationScheme].Distance > Area.TrafficSeparationScheme.SafeZoneClearance
+        }
+    }
+}
+
+# (i) A vessel engaged in fishing shall not impede the passage of any vessel following a traffic lane.
+clause['COLREG.Rule10.i']:{
+    : {
+        condition: { 
+            : (TSS is not empty) and 
+              (OS.Operation in ['Vessel.Operation.FISHING'])    # TODO: Why not sailing??
+         }
+        assure: { 
+            : (OS, TS).Distance > Area.TrafficSeparationScheme.SafeSmallVesselClearance
+            : (OS, TS).Distance > TSS.SafeSmallVesselClearance
+        }
+    }
+}
+
+# (j) A vessel of less than 20 meters in length or a sailing vessel shall not impede the safe passage of a
+# power-driven vessel following a traffic lane.
+clause['COLREG.Rule10.j']:{
+    : {
+        condition: { 
+            : (TSS is not empty) and 
+              (OS.Length in range(0, 20))
+         }
+        assure: { 
+            : (OS, TS).Distance > Area.TrafficSeparationScheme.SafeSmallVesselClearance
+            : (OS, TS).Distance > TSS.SafeSmallVesselClearance
+        }
+    }
+}
+
+# (k) A vessel restricted in her ability to manoeuvre when engaged in an operation for the maintenance
+# of safety of navigation in a traffic separation scheme is exempted from complying with this Rule to
+# the extent necessary to carry out the operation.
+clause['COLREG.Rule10.k']:{
+    : {
+        condition: { 
+            : (TSS is not empty) and 
+              (OS.Status in [Vessel.MOORED, Vessel.AGROUND, Vessel.UNDERWAY])
+            : (TSS is not empty) and 
+              (OS.Status in [Vessel.RESTRICTED]) and
+              (OS.Operation in [Vessel.Operation.SAFETY])
+                            
+
+         }
+        assure: { 
+            : clear             # Clear all violations
+            : abort             # No further processing
+        }
+    }
+}
+
+# (l) A vessel restricted in her ability to manoeuvre when engaged in an operation for the laying,
+# servicing or picking up of a submarine cable, within a traffic separation scheme, is exempted from
+# complying with this Rule to the extent necessary to carry out the operation.
+clause['COLREG.Rule10.l']:{
+    : {
+        condition: { 
+            : (TSS is not empty) and 
+              (OS.Status in [Vessel.RESTRICTED]) and
+              (OS.Operation in ['Vessel.Operation.SERVICE'])
+         }
+        assure: { 
+            : clear             # Clear all violations
+            : abort             # No further processing
+        }
+    }
+}

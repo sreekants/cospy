@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>sendto</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Sends data to a specific adddress</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>143</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>data</Name>
+<Type></Type>
+<Description>Data to send</Description>
+</Argument>
+<Argument>
+<Name>destaddr</Name>
+<Type></Type>
+<Description>Address of destination</Description>
+</Argument>
+<Argument>
+<Name>flags</Name>
+<Type></Type>
+<Description>Binary 32-bit flag</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

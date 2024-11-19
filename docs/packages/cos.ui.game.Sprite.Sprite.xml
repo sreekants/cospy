@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Sprite</Name>
+<Description>Base class for all sprite</Description>
+<SourceFile>Sprite.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>cos.ui.game.Sprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>prepare</Name>
+<Description>Prepares the sprite</Description>
+<OutputFile>cos.ui.game.Sprite.Sprite/Sprite.prepare</OutputFile>
+</Function>
+<Function>
+<Name>commit</Name>
+<Description>Renders the sprite to the memory buffer</Description>
+<OutputFile>cos.ui.game.Sprite.Sprite/Sprite.commit</OutputFile>
+</Function>
+<Function>
+<Name>render</Name>
+<Description>Renders the sprite to the screen</Description>
+<OutputFile>cos.ui.game.Sprite.Sprite/Sprite.render</OutputFile>
+</Function>
+<Function>
+<Name>rotate</Name>
+<Description>Rotates the sprite</Description>
+<OutputFile>cos.ui.game.Sprite.Sprite/Sprite.rotate</OutputFile>
+</Function>
+<Function>
+<Name>scale</Name>
+<Description>Rotates the sprite</Description>
+<OutputFile>cos.ui.game.Sprite.Sprite/Sprite.scale</OutputFile>
+</Function>
+<Function>
+<Name>get_rect</Name>
+<Description>Returns the rectangle of the sprite</Description>
+<OutputFile>cos.ui.game.Sprite.Sprite/Sprite.get_rect</OutputFile>
+</Function>
+</Functions>
+</Class>

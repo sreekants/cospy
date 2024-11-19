@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Thread</Name>
+<Description>Base class for all kernel threads</Description>
+<SourceFile>Thread.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.core.kernel.Thread</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

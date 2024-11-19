@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_neighbors</Name>
+<Class>Graph</Class>
+<Module>cai.planning.utilities.ImageGridGraph</Module>
+<Description>Returns the neighbours of a node</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ImageGridGraph.py</SourceFile>
+<SourceLine>61</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>node</Name>
+<Type></Type>
+<Description>Reference to a node</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

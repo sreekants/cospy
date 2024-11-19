@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>EvaluateCtxt</Name>
+<Description>Base class for an decision tree and supporting classes</Description>
+<SourceFile>DecisionTree.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.model.logic.DecisionTree</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

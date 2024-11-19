@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>TransactionalDatabase</Name>
+<Description>Utility class to process SQLite records in a transactional batches</Description>
+<SourceFile>TransactionalDatabase.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.core.utilities.TransactionalDatabase</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>open</Name>
+<Description>Opens a database connection</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.open</OutputFile>
+</Function>
+<Function>
+<Name>close</Name>
+<Description>Closes the database connection</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.close</OutputFile>
+</Function>
+<Function>
+<Name>is_open</Name>
+<Description>Checks if the database is open</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.is_open</OutputFile>
+</Function>
+<Function>
+<Name>pending</Name>
+<Description>Returns the number of pending bytes:</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.pending</OutputFile>
+</Function>
+<Function>
+<Name>begin</Name>
+<Description>Starts a transaction</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.begin</OutputFile>
+</Function>
+<Function>
+<Name>commit</Name>
+<Description>Commits a transaction.</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.commit</OutputFile>
+</Function>
+<Function>
+<Name>execute_sql</Name>
+<Description>Executes and SQL query on the database</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.execute_sql</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds values to the database</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.add</OutputFile>
+</Function>
+<Function>
+<Name>addkv</Name>
+<Description>Adds values to the database</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.addkv</OutputFile>
+</Function>
+<Function>
+<Name>flush</Name>
+<Description>Flushes pending bytes into the storage system</Description>
+<OutputFile>cos.core.utilities.TransactionalDatabase.TransactionalDatabase/TransactionalDatabase.flush</OutputFile>
+</Function>
+</Functions>
+</Class>

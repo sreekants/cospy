@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>VehicleSprite</Class>
+<Module>cos.ui.game.VehicleSprite</Module>
+<Description>Updates the sprite location with the key pressed</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>VehicleSprite.py</SourceFile>
+<SourceLine>35</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>world</Name>
+<Type></Type>
+<Description>Reference ot the simulation world</Description>
+</Argument>
+<Argument>
+<Name>pressed_keys</Name>
+<Type></Type>
+<Description>Map of the keys pressed.</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Sets a property on the device</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>67</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>level</Name>
+<Type></Type>
+<Description>Option level</Description>
+</Argument>
+<Argument>
+<Name>optname</Name>
+<Type></Type>
+<Description>Option name</Description>
+</Argument>
+<Argument>
+<Name>poptvalue</Name>
+<Type></Type>
+<Description>Option value</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

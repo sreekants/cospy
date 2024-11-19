@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>add_flyweight</Name>
+<Class>Flyweight</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Internal function to add the flyweight obect</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>250</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Key identifying the object</Description>
+</Argument>
+<Argument>
+<Name>obj</Name>
+<Type></Type>
+<Description>Object to add</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

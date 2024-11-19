@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create</Name>
+<Class>FileSystem</Class>
+<Module>cos.core.kernel.BootImage</Module>
+<Description>Adds a directory to the image</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BootImage.py</SourceFile>
+<SourceLine>37</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>source</Name>
+<Type></Type>
+<Description>Source directory path</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

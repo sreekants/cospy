@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>resolve</Name>
+<Class>Context</Class>
+<Module>cos.model.rule.Context</Module>
+<Description>operator resolve</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Context.py</SourceFile>
+<SourceLine>138</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>expr</Name>
+<Type></Type>
+<Description>Expression</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

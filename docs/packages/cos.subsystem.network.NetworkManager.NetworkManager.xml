@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>NetworkManager</Name>
+<Description>Network manager kernel subsystem</Description>
+<SourceFile>NetworkManager.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>cos.subsystem.network.NetworkManager</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

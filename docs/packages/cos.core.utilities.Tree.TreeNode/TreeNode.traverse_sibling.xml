@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>traverse_sibling</Name>
+<Class>TreeNode</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Helper function to iterate through all the siblings of a node and invoke a callback</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>276</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>fn</Name>
+<Type></Type>
+<Description>Function to call back</Description>
+</Argument>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Context argumen passed to the function</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

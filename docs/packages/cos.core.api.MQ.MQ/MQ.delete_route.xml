@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>delete_route</Name>
+<Class>MQ</Class>
+<Module>cos.core.api.MQ</Module>
+<Description>deletes a queue route</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MQ.py</SourceFile>
+<SourceLine>263</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>domain</Name>
+<Type></Type>
+<Description>Domain namespace</Description>
+</Argument>
+<Argument>
+<Name>queuename</Name>
+<Type></Type>
+<Description>Queue name</Description>
+</Argument>
+<Argument>
+<Name>route</Name>
+<Type></Type>
+<Description>Route to remove</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

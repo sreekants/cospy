@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>execute_sql</Name>
+<Class>ActiveRecord</Class>
+<Module>cos.core.utilities.ActiveRecord</Module>
+<Description>Executes an SQL command with no result</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>185</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>sql</Name>
+<Type></Type>
+<Description>SQL command to execute</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

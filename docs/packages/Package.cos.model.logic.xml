@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.model.logic</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>21</ClassCount>
+<FunctionCount>11</FunctionCount>
+<Classes>
+<Class>
+<Name>Assurance</Name>
+<OutputFile>cos.model.logic.Assurance.Assurance</OutputFile>
+<Description>Base class for an decision assurance</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Condition</Name>
+<OutputFile>cos.model.logic.Condition.Condition</OutputFile>
+<Description>Base class for an decision conditions</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>DecisionType</Name>
+<OutputFile>cos.model.logic.Decision.DecisionType</OutputFile>
+<Description>Base class for an decision</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Decision</Name>
+<OutputFile>cos.model.logic.Decision.Decision</OutputFile>
+<Description>Base class for an decision</Description>
+<FunctionCount>5</FunctionCount>
+</Class>
+<Class>
+<Name>EvaluateCtxt</Name>
+<OutputFile>cos.model.logic.DecisionTree.EvaluateCtxt</OutputFile>
+<Description>Base class for an decision tree and supporting classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>DecisionTree</Name>
+<OutputFile>cos.model.logic.DecisionTree.DecisionTree</OutputFile>
+<Description>Base class for an decision tree and supporting classes</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Exception</Name>
+<OutputFile>cos.model.logic.Exception.Exception</OutputFile>
+<Description>Base class for an decision exception</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Expression</Name>
+<OutputFile>cos.model.logic.Expression.Expression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>CompositeExpression</Name>
+<OutputFile>cos.model.logic.Expression.CompositeExpression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>UnaryExpression</Name>
+<OutputFile>cos.model.logic.Expression.UnaryExpression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>BinaryExpression</Name>
+<OutputFile>cos.model.logic.Expression.BinaryExpression</OutputFile>
+<Description>Base class for an decision expression</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Type</Name>
+<OutputFile>cos.model.logic.Symbol.Type</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>SymbolType</Name>
+<OutputFile>cos.model.logic.Symbol.SymbolType</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Symbol</Name>
+<OutputFile>cos.model.logic.Symbol.Symbol</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Variable</Name>
+<OutputFile>cos.model.logic.Symbol.Variable</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Float</Name>
+<OutputFile>cos.model.logic.Symbol.Float</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Integer</Name>
+<OutputFile>cos.model.logic.Symbol.Integer</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>List</Name>
+<OutputFile>cos.model.logic.Symbol.List</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Operator</Name>
+<OutputFile>cos.model.logic.Symbol.Operator</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Function</Name>
+<OutputFile>cos.model.logic.Symbol.Function</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Range</Name>
+<OutputFile>cos.model.logic.Symbol.Range</OutputFile>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

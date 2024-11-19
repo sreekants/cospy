@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.model.rule</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>22</ClassCount>
+<FunctionCount>34</FunctionCount>
+<Classes>
+<Class>
+<Name>Automata</Name>
+<OutputFile>cos.model.rule.Automata.Automata</OutputFile>
+<Description>Impelementation of a rule automata</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Clause</Name>
+<OutputFile>cos.model.rule.Clause.Clause</OutputFile>
+<Description>A rule clause decision</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Context</Name>
+<OutputFile>cos.model.rule.Context.Context</OutputFile>
+<Description>Implementation of the Context class</Description>
+<FunctionCount>9</FunctionCount>
+</Class>
+<Class>
+<Name>Definition</Name>
+<OutputFile>cos.model.rule.Definition.Definition</OutputFile>
+<Description>Definitions used by the rules</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>ALL</Name>
+<OutputFile>cos.model.rule.Expression.ALL</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>ANY</Name>
+<OutputFile>cos.model.rule.Expression.ANY</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NONE</Name>
+<OutputFile>cos.model.rule.Expression.NONE</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>ABORT</Name>
+<OutputFile>cos.model.rule.Expression.ABORT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>IS</Name>
+<OutputFile>cos.model.rule.Expression.IS</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>IN</Name>
+<OutputFile>cos.model.rule.Expression.IN</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NOT_IN</Name>
+<OutputFile>cos.model.rule.Expression.NOT_IN</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>IS_NOT</Name>
+<OutputFile>cos.model.rule.Expression.IS_NOT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NOT</Name>
+<OutputFile>cos.model.rule.Expression.NOT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>GT</Name>
+<OutputFile>cos.model.rule.Expression.GT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>LT</Name>
+<OutputFile>cos.model.rule.Expression.LT</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>LTE</Name>
+<OutputFile>cos.model.rule.Expression.LTE</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>GTE</Name>
+<OutputFile>cos.model.rule.Expression.GTE</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>EQ</Name>
+<OutputFile>cos.model.rule.Expression.EQ</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>NEQ</Name>
+<OutputFile>cos.model.rule.Expression.NEQ</OutputFile>
+<Description>Basic logical expressions used in a decision tree</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Rule</Name>
+<OutputFile>cos.model.rule.Rule.Rule</OutputFile>
+<Description>Base class for all rules</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>RuleSet</Name>
+<OutputFile>cos.model.rule.RuleSet.RuleSet</OutputFile>
+<Description>A coolection of rules</Description>
+<FunctionCount>1</FunctionCount>
+</Class>
+<Class>
+<Name>Situation</Name>
+<OutputFile>cos.model.rule.Situation.Situation</OutputFile>
+<Description>Implementation of the Rule Situation class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

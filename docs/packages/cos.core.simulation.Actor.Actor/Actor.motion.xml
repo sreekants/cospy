@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>motion</Name>
+<Class>Actor</Class>
+<Module>cos.core.simulation.Actor</Module>
+<Description>Returns the motion behavior of the actor</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Actor.py</SourceFile>
+<SourceLine>89</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

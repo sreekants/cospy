@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Geography</Name>
+<Description>Helper class to manage a collections of geographic assets</Description>
+<SourceFile>Geography.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>cos.model.geography.Geography</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

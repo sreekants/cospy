@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>IsFalse</Name>
+<Class>ArgList</Class>
+<Module>cos.core.utilities.ArgList</Module>
+<Description>Checks if an argument is false</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ArgList.py</SourceFile>
+<SourceLine>28</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Key identifier</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

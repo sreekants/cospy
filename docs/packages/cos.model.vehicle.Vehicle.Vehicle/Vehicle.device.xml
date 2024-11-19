@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>device</Name>
+<Class>Vehicle</Class>
+<Module>cos.model.vehicle.Vehicle</Module>
+<Description>Returns a device onboard the vehicle</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Vehicle.py</SourceFile>
+<SourceLine>164</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Name of the object</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_start</Name>
+<Class>Object</Class>
+<Module>cos.core.kernel.Object</Module>
+<Description>Callback for simulation startup</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Object.py</SourceFile>
+<SourceLine>109</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>unused</Name>
+<Type></Type>
+<Description>Unused variable</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>init</Name>
+<Class>SpriteController</Class>
+<Module>cos.ui.game.SpriteController</Module>
+<Description>Initializes the sprite</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>SpriteController.py</SourceFile>
+<SourceLine>27</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>rect</Name>
+<Type></Type>
+<Description>Rectangle of the sprite</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

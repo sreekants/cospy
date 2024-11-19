@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SimulationPoolThread</Name>
+<Description>Implementation of the thread pool used in simulation</Description>
+<SourceFile>SimulationThreadPool.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.core.simulation.SimulationThreadPool</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>sim</Name>
+<Description>Returns a reference to the simulation kernel</Description>
+<OutputFile>cos.core.simulation.SimulationThreadPool.SimulationPoolThread/SimulationPoolThread.sim</OutputFile>
+</Function>
+</Functions>
+</Class>

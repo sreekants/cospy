@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>describe</Name>
+<Class>World</Class>
+<Module>cos.core.api.Beacon</Module>
+<Description>Describes an object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Beacon.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>id</Name>
+<Type></Type>
+<Description>Unique object identifier</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

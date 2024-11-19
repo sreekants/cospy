@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>TreeNode</Name>
+<Description>Generic implementation of a tree data structure</Description>
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>20</SourceLine>
+<Module>cos.core.utilities.Tree</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>construct</Name>
+<Description>Constructs the object</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.construct</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds a new child node to the tree</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.add</OutputFile>
+</Function>
+<Function>
+<Name>remove</Name>
+<Description>Removes a child node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.remove</OutputFile>
+</Function>
+<Function>
+<Name>move_to</Name>
+<Description>Move the children from one node to another.</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.move_to</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Deletes all child nodes</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.clear</OutputFile>
+</Function>
+<Function>
+<Name>destroy</Name>
+<Description>Destroys a node (does not remove it from the list)</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.destroy</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Gets a node using a path notation. (New nodes are created if none exists).</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.get</OutputFile>
+</Function>
+<Function>
+<Name>find</Name>
+<Description>Returns a node associated with a gven path</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.find</OutputFile>
+</Function>
+<Function>
+<Name>match</Name>
+<Description>Searches for the first node with a matching name</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.match</OutputFile>
+</Function>
+<Function>
+<Name>traverse</Name>
+<Description>Helper function to iterate through child nodes of a node and invoke a callback</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.traverse</OutputFile>
+</Function>
+<Function>
+<Name>traverse_sibling</Name>
+<Description>Helper function to iterate through all the siblings of a node and invoke a callback</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.traverse_sibling</OutputFile>
+</Function>
+<Function>
+<Name>traverse_child</Name>
+<Description>Helper function to iterate through child nodes of a node and invoke a callback</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.traverse_child</OutputFile>
+</Function>
+<Function>
+<Name>at</Name>
+<Description>Returns a child by index</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.at</OutputFile>
+</Function>
+<Function>
+<Name>child</Name>
+<Description>Returns a child node with a matching name</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.child</OutputFile>
+</Function>
+<Function>
+<Name>path</Name>
+<Description>Returns the path of the node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.path</OutputFile>
+</Function>
+<Function>
+<Name>level</Name>
+<Description>Returns the number of parents to this node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.level</OutputFile>
+</Function>
+<Function>
+<Name>get_path</Name>
+<Description>Returns the path of the node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.get_path</OutputFile>
+</Function>
+<Function>
+<Name>size</Name>
+<Description>Returns the number of children of the node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.size</OutputFile>
+</Function>
+<Function>
+<Name>parent</Name>
+<Description>Returns the parent of this node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.parent</OutputFile>
+</Function>
+<Function>
+<Name>set_parent</Name>
+<Description>Sets the parent of this node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.set_parent</OutputFile>
+</Function>
+<Function>
+<Name>data</Name>
+<Description>Sets the data associated with the node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.data</OutputFile>
+</Function>
+<Function>
+<Name>name</Name>
+<Description>Sets the name of the node</Description>
+<OutputFile>cos.core.utilities.Tree.TreeNode/TreeNode.name</OutputFile>
+</Function>
+</Functions>
+</Class>

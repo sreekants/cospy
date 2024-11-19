@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Rectangle</Name>
+<Description>Implementation of the Rectangle class</Description>
+<SourceFile>Rectangle.py</SourceFile>
+<SourceLine>6</SourceLine>
+<Module>cos.math.geometry.Rectangle</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>encloses</Name>
+<Description>Checks if a point is enclosed by the rectange</Description>
+<OutputFile>cos.math.geometry.Rectangle.Rectangle/Rectangle.encloses</OutputFile>
+</Function>
+</Functions>
+</Class>

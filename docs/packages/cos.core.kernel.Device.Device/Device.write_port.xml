@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>write_port</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Low level function to write to a port</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>203</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>flags</Name>
+<Type></Type>
+<Description>Additional transmisson flags</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

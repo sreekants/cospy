@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>VesselComposer</Name>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<SourceFile>VesselComposer.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Module>maritime.model.vessel.VesselComposer</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>build</Name>
+<Description>Composes a vessel from a profile</Description>
+<OutputFile>maritime.model.vessel.VesselComposer.VesselComposer/VesselComposer.build</OutputFile>
+</Function>
+<Function>
+<Name>build_profile</Name>
+<Description>Builds a vessel from a profile</Description>
+<OutputFile>maritime.model.vessel.VesselComposer.VesselComposer/VesselComposer.build_profile</OutputFile>
+</Function>
+<Function>
+<Name>add_device</Name>
+<Description>Adds a devices to the vessel</Description>
+<OutputFile>maritime.model.vessel.VesselComposer.VesselComposer/VesselComposer.add_device</OutputFile>
+</Function>
+</Functions>
+</Class>

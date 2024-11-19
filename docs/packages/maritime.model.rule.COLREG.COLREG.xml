@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>COLREG</Name>
+<Description>Base class for all COLREG rules</Description>
+<SourceFile>COLREG.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Module>maritime.model.rule.COLREG</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.model.rule.COLREG.COLREG/COLREG.evaluate</OutputFile>
+</Function>
+<Function>
+<Name>on_violate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.model.rule.COLREG.COLREG/COLREG.on_violate</OutputFile>
+</Function>
+</Functions>
+</Class>

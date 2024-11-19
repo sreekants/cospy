@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>MotionBehavior</Class>
+<Module>cos.behavior.motion.MotionBehavior</Module>
+<Description>Updates the world by moving the vehicle</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MotionBehavior.py</SourceFile>
+<SourceLine>49</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>world</Name>
+<Type></Type>
+<Description>Reference ot the simulation world</Description>
+</Argument>
+<Argument>
+<Name>t</Name>
+<Type></Type>
+<Description>Time on the simulation clock</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

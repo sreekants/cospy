@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.core.time</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>2</ClassCount>
+<FunctionCount>5</FunctionCount>
+<Classes>
+<Class>
+<Name>Clock</Name>
+<OutputFile>cos.core.time.Clock.Clock</OutputFile>
+<Description>Implementation of the Clock class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>Ticker</Name>
+<OutputFile>cos.core.time.Ticker.Ticker</OutputFile>
+<Description>Implementation of the Ticker class</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+</Classes>
+</Module>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Faculty</Name>
+<Description>Base class for all faculties</Description>
+<SourceFile>Faculty.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.core.kernel.Faculty</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_timer</Name>
+<Description>Callback handling timer events</Description>
+<OutputFile>cos.core.kernel.Faculty.Faculty/Faculty.on_timer</OutputFile>
+</Function>
+</Functions>
+</Class>

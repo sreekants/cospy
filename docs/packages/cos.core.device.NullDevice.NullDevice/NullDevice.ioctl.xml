@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>ioctl</Name>
+<Class>NullDevice</Class>
+<Module>cos.core.device.NullDevice</Module>
+<Description>Performs an IO control operation</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>NullDevice.py</SourceFile>
+<SourceLine>86</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>command</Name>
+<Type></Type>
+<Description>Command to send</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>Argument for the command</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

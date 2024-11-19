@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Event</Name>
+<Description>Types of maritime events</Description>
+<SourceFile>Events.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>maritime.core.situation.Events</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

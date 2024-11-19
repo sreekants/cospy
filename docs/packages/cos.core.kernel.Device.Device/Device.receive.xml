@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>receive</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Receives bytes from the socket, blocking for till data arrives</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>151</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>nbytes</Name>
+<Type></Type>
+<Description>Bytes to receive</Description>
+</Argument>
+<Argument>
+<Name>flags</Name>
+<Type></Type>
+<Description>Additional transmisson flags</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

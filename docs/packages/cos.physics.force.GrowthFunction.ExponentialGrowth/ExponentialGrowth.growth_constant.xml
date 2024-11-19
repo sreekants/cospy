@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>growth_constant</Name>
+<Class>ExponentialGrowth</Class>
+<Module>cos.physics.force.GrowthFunction</Module>
+<Description>Growth constant</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>GrowthFunction.py</SourceFile>
+<SourceLine>31</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>scale</Name>
+<Type></Type>
+<Description>Scale of the growth</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>BeaconSprite</Class>
+<Module>cos.ui.game.BeaconSprite</Module>
+<Description>Update the sprite in the next time loop</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BeaconSprite.py</SourceFile>
+<SourceLine>21</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

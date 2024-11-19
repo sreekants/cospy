@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SearchNode</Name>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>27</SourceLine>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

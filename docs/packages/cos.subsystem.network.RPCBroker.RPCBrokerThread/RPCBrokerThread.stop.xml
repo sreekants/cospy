@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>stop</Name>
+<Class>RPCBrokerThread</Class>
+<Module>cos.subsystem.network.RPCBroker</Module>
+<Description>Signals the broker thread to terminate</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCBroker.py</SourceFile>
+<SourceLine>67</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

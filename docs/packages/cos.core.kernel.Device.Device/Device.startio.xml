@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>startio</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Initializes IO operations</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>239</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>irp</Name>
+<Type></Type>
+<Description>Interrupt request packet</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

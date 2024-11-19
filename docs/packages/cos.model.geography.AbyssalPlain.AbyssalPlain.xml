@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>AbyssalPlain</Name>
+<Description>Implementation of the abyssal plain class</Description>
+<SourceFile>AbyssalPlain.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.model.geography.AbyssalPlain</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

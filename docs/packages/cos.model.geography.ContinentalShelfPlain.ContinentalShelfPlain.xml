@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ContinentalShelfPlain</Name>
+<Description>Implementation of the continental_shelf_plain class</Description>
+<SourceFile>ContinentalShelfPlain.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.model.geography.ContinentalShelfPlain</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,46 @@
+packages:
+  modules:  # COLREG rule set
+     - name: MQ
+       module: cos.core.service.MQ
+       arg: 
+
+     - name: ObjectManager
+       module: cos.core.service.ObjectManager
+       arg: 
+
+     - name: Service 
+       module: cos.core.service.Service
+       arg: 
+
+     - name: Timer
+       module: cos.core.service.Timer
+       arg: 
+
+     - name: Topic
+       module: cos.core.service.Topic
+       arg: 
+
+     - name: Beacon
+       module: cos.core.service.Beacon
+       arg: 
+
+     - name: World
+       module: cos.core.service.World
+       arg: 
+
+     - name: Port
+       module: cos.core.service.Port
+       arg: 
+
+     - name: Radar
+       module: cos.core.service.Radar
+       arg: 
+
+     - name: Sea
+       module: cos.core.service.Sea
+       arg: 
+
+     - name: Vessel
+       module: cos.core.service.Vessel
+       arg: 
+

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>TemplateReplicator</Name>
+<Description>Helper class to generate code from a meta-programming template</Description>
+<SourceFile>TemplateReplicator.py</SourceFile>
+<SourceLine>72</SourceLine>
+<Module>cos.cluster.runtime.TemplateReplicator</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>replicate</Name>
+<Description>Repliate a template to an output directory from a template directory</Description>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.TemplateReplicator/TemplateReplicator.replicate</OutputFile>
+</Function>
+<Function>
+<Name>find_extension</Name>
+<Description>Finds the file extension of the path</Description>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.TemplateReplicator/TemplateReplicator.find_extension</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_settings</Name>
+<Class>MotionBehavior</Class>
+<Module>cos.behavior.motion.MotionBehavior</Module>
+<Description>Extracts a setting from the configuration</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MotionBehavior.py</SourceFile>
+<SourceLine>36</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

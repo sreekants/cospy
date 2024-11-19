@@ -1,0 +1,13 @@
+packages:
+  modules:  # Sky mapping
+     - name: Builder.FOG
+       module: cos.model.geography.SkyBuilder
+       service: Builder.FOG
+       args: Type=FOG
+       database: $(MAP)/sky.s3db
+
+     - name: Builder.CLOUD
+       module: cos.model.geography.SkyBuilder
+       service: Builder.CLOUD
+       args: Type=CLOUD
+       database: $(MAP)/sky.s3db

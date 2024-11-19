@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>BoundingBox</Class>
+<Module>cos.ui.game.BoundingBox</Module>
+<Description>Updates the screen</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BoundingBox.py</SourceFile>
+<SourceLine>34</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

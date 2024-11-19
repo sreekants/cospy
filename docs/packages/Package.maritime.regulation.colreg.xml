@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.regulation.colreg</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>4</ClassCount>
+<FunctionCount>13</FunctionCount>
+<Classes>
+<Class>
+<Name>Event</Name>
+<OutputFile>maritime.regulation.colreg.Encounter.Event</OutputFile>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Encounter</Name>
+<OutputFile>maritime.regulation.colreg.Encounter.Encounter</OutputFile>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>Evaluator</Name>
+<OutputFile>maritime.regulation.colreg.Evaluator.Evaluator</OutputFile>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+<Class>
+<Name>Resolver</Name>
+<OutputFile>maritime.regulation.colreg.Resolver.Resolver</OutputFile>
+<Description>Implementation of the COLREG master resolver class</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

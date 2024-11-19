@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>VirtualWorld</Name>
+<Description>Implementation of the virtual world.</Description>
+<SourceFile>VirtualWorld.py</SourceFile>
+<SourceLine>37</SourceLine>
+<Module>cos.tools.cviz.VirtualWorld</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>run</Name>
+<Description>Runs a simulation</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.run</OutputFile>
+</Function>
+<Function>
+<Name>subscribe</Name>
+<Description>Registrs for events on a remote simulation</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.subscribe</OutputFile>
+</Function>
+<Function>
+<Name>init</Name>
+<Description>Initialize the simulation</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.init</OutputFile>
+</Function>
+<Function>
+<Name>handle_events</Name>
+<Description>Handles simulation interaction events</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.handle_events</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds an actor to the simulation world</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.add</OutputFile>
+</Function>
+<Function>
+<Name>register</Name>
+<Description>Register an object on the object directory</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.register</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Updates the simulation UI</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.update</OutputFile>
+</Function>
+<Function>
+<Name>render</Name>
+<Description>Renders the screen</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.render</OutputFile>
+</Function>
+<Function>
+<Name>listen</Name>
+<Description>Polls for events in the simulation</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.listen</OutputFile>
+</Function>
+<Function>
+<Name>play</Name>
+<Description>Runs the simulation logic</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.play</OutputFile>
+</Function>
+<Function>
+<Name>loop</Name>
+<Description>Main simulation loop</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.loop</OutputFile>
+</Function>
+<Function>
+<Name>on_vessel_move</Name>
+<Description>Event handler for vessel_move</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.on_vessel_move</OutputFile>
+</Function>
+<Function>
+<Name>on_weather_update</Name>
+<Description>Event handler for weather_update</Description>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld/VirtualWorld.on_weather_update</OutputFile>
+</Function>
+</Functions>
+</Class>

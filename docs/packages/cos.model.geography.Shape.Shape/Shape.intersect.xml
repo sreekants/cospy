@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>intersect</Name>
+<Class>Shape</Class>
+<Module>cos.model.geography.Shape</Module>
+<Description>Checks the bounding box of another shape is contained within this shape</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Shape.py</SourceFile>
+<SourceLine>55</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>shape</Name>
+<Type></Type>
+<Description>Shape with a bounding box to compare</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

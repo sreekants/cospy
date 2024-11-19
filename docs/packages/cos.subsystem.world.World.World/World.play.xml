@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>play</Name>
+<Class>World</Class>
+<Module>cos.subsystem.world.World</Module>
+<Description>Runs the simulation logic</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>World.py</SourceFile>
+<SourceLine>84</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

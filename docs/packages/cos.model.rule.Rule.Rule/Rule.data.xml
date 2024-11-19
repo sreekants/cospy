@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>data</Name>
+<Class>Rule</Class>
+<Module>cos.model.rule.Rule</Module>
+<Description>Stores a score into the database</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Rule.py</SourceFile>
+<SourceLine>89</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>situation</Name>
+<Type></Type>
+<Description>Name of the situation. An associated fact_{situation} table must exist in the database</Description>
+</Argument>
+<Argument>
+<Name>values</Name>
+<Type></Type>
+<Description>A tuple of value for each field in the table</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

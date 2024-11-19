@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Vessel</Name>
+<Description></Description>
+<SourceFile>Vessel.py</SourceFile>
+<SourceLine>4</SourceLine>
+<Module>cos.core.api.Vessel</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>describe</Name>
+<Description>Describes a vessel</Description>
+<OutputFile>cos.core.api.Vessel.Vessel/Vessel.describe</OutputFile>
+</Function>
+<Function>
+<Name>init</Name>
+<Description>Initializes a vessel</Description>
+<OutputFile>cos.core.api.Vessel.Vessel/Vessel.init</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Updates a vessel</Description>
+<OutputFile>cos.core.api.Vessel.Vessel/Vessel.update</OutputFile>
+</Function>
+</Functions>
+</Class>

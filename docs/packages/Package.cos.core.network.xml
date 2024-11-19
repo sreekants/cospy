@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.core.network</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>5</ClassCount>
+<FunctionCount>19</FunctionCount>
+<Classes>
+<Class>
+<Name>ORPCProxy</Name>
+<OutputFile>cos.core.network.ORPCProxy.ORPCProxy</OutputFile>
+<Description>Base class for all RPC proxy classes</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>ORPCService</Name>
+<OutputFile>cos.core.network.ORPCService.ORPCService</OutputFile>
+<Description>The base class for all API services</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RPCZMQTransport</Name>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport</OutputFile>
+<Description>Implementation of the RPC Transport for ZMQ</Description>
+<FunctionCount>8</FunctionCount>
+</Class>
+<Class>
+<Name>ZMQFrame</Name>
+<OutputFile>cos.core.network.ZMQFrame.ZMQFrame</OutputFile>
+<Description>Implementation of an COS network frame for ZMQ tranport</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>ZMQTransport</Name>
+<OutputFile>cos.core.network.ZMQTransport.ZMQTransport</OutputFile>
+<Description>Transport layer class for ZMQ support.</Description>
+<FunctionCount>7</FunctionCount>
+</Class>
+</Classes>
+</Module>

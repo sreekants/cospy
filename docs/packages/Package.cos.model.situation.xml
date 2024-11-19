@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.model.situation</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>2</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>EncounterSituation</Name>
+<OutputFile>cos.model.situation.EncounterSituation.EncounterSituation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in traffic</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>Situation</Name>
+<OutputFile>cos.model.situation.Situation.Situation</OutputFile>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

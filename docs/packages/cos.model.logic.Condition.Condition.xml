@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Condition</Name>
+<Description>Base class for an decision conditions</Description>
+<SourceFile>Condition.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.model.logic.Condition</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>cos.model.logic.Condition.Condition/Condition.evaluate</OutputFile>
+</Function>
+</Functions>
+</Class>

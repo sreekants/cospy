@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Publisher</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>193</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add_observer</Name>
+<Description>Adds an observer to the list</Description>
+<OutputFile>cos.core.utilities.Patterns.Publisher/Publisher.add_observer</OutputFile>
+</Function>
+<Function>
+<Name>remove_observer</Name>
+<Description>Removes an observer from the list</Description>
+<OutputFile>cos.core.utilities.Patterns.Publisher/Publisher.remove_observer</OutputFile>
+</Function>
+<Function>
+<Name>notify</Name>
+<Description>Notifies all obects of an event</Description>
+<OutputFile>cos.core.utilities.Patterns.Publisher/Publisher.notify</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>exists</Name>
+<Class>DeviceManager</Class>
+<Module>cos.core.kernel.DeviceManager</Module>
+<Description>Checks if a device exists</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>DeviceManager.py</SourceFile>
+<SourceLine>75</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>name</Name>
+<Type></Type>
+<Description>Name of the object</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>flag</Name>
+<Type></Type>
+<Description>Binary 32-bit flag</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

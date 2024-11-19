@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>dump</Name>
+<Class>Tree</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Dumps the tree to an output stream</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>530</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>flags=0</Name>
+<Type></Type>
+<Description>Flag used to control the ouput</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

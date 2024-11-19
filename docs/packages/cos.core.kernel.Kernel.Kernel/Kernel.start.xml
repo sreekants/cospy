@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>start</Name>
+<Class>Kernel</Class>
+<Module>cos.core.kernel.Kernel</Module>
+<Description>Starts the kernel</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Kernel.py</SourceFile>
+<SourceLine>41</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>configfile</Name>
+<Type></Type>
+<Description>Name of the configuration file</Description>
+</Argument>
+<Argument>
+<Name>configpath</Name>
+<Type></Type>
+<Description>Path to the configuration directory</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>trigger_maneuver</Name>
+<Class>Encounter</Class>
+<Module>maritime.regulation.colreg.Encounter</Module>
+<Description>Trigger a maneuver event</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Encounter.py</SourceFile>
+<SourceLine>119</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>rule_ctxt</Name>
+<Type></Type>
+<Description>Rule context</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>OS</Name>
+<Type></Type>
+<Description>Own ship</Description>
+</Argument>
+<Argument>
+<Name>TS</Name>
+<Type></Type>
+<Description>Target ship</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

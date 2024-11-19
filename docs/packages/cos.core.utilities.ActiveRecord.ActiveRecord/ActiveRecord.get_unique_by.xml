@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_unique_by</Name>
+<Class>ActiveRecord</Class>
+<Module>cos.core.utilities.ActiveRecord</Module>
+<Description>Returns the field value of the first object matching a field an value</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>348</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>findfield</Name>
+<Type></Type>
+<Description>Field to retrieve</Description>
+</Argument>
+<Argument>
+<Name>field</Name>
+<Type></Type>
+<Description>Field to match</Description>
+</Argument>
+<Argument>
+<Name>value</Name>
+<Type></Type>
+<Description>Value of the matching field</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

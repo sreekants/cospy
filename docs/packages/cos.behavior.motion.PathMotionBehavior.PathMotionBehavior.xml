@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>PathMotionBehavior</Name>
+<Description>A path motion based on path file</Description>
+<SourceFile>PathMotionBehavior.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.behavior.motion.PathMotionBehavior</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>position</Name>
+<Description>Returns the current position</Description>
+<OutputFile>cos.behavior.motion.PathMotionBehavior.PathMotionBehavior/PathMotionBehavior.position</OutputFile>
+</Function>
+<Function>
+<Name>velocity</Name>
+<Description>Returns the current velocity</Description>
+<OutputFile>cos.behavior.motion.PathMotionBehavior.PathMotionBehavior/PathMotionBehavior.velocity</OutputFile>
+</Function>
+<Function>
+<Name>load</Name>
+<Description>Loads the behavior</Description>
+<OutputFile>cos.behavior.motion.PathMotionBehavior.PathMotionBehavior/PathMotionBehavior.load</OutputFile>
+</Function>
+<Function>
+<Name>move</Name>
+<Description>Moves the vehicle</Description>
+<OutputFile>cos.behavior.motion.PathMotionBehavior.PathMotionBehavior/PathMotionBehavior.move</OutputFile>
+</Function>
+<Function>
+<Name>translate</Name>
+<Description>Moves the vehicle to a new point</Description>
+<OutputFile>cos.behavior.motion.PathMotionBehavior.PathMotionBehavior/PathMotionBehavior.translate</OutputFile>
+</Function>
+</Functions>
+</Class>

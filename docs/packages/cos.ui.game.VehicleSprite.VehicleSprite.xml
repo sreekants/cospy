@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>VehicleSprite</Name>
+<Description>Implementation of mobile vehicle sprites.</Description>
+<SourceFile>VehicleSprite.py</SourceFile>
+<SourceLine>20</SourceLine>
+<Module>cos.ui.game.VehicleSprite</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>update</Name>
+<Description>Updates the sprite location with the key pressed</Description>
+<OutputFile>cos.ui.game.VehicleSprite.VehicleSprite/VehicleSprite.update</OutputFile>
+</Function>
+</Functions>
+</Class>

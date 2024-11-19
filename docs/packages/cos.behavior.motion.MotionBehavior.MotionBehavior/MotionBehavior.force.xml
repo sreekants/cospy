@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>force</Name>
+<Class>MotionBehavior</Class>
+<Module>cos.behavior.motion.MotionBehavior</Module>
+<Description>Returns the forces acting on the vehicle</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MotionBehavior.py</SourceFile>
+<SourceLine>44</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

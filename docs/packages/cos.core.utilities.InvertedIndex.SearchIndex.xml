@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SearchIndex</Name>
+<Description>Field map with a match row names to an array or rowname, ususally used in data retrieval.</Description>
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>144</SourceLine>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add_text</Name>
+<Description>Adds a text to the index</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex/SearchIndex.add_text</OutputFile>
+</Function>
+<Function>
+<Name>add_word</Name>
+<Description>Adds a word text and its information to the index</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex/SearchIndex.add_word</OutputFile>
+</Function>
+<Function>
+<Name>find_docs</Name>
+<Description>Finds the files containing a word</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex/SearchIndex.find_docs</OutputFile>
+</Function>
+<Function>
+<Name>trie</Name>
+<Description>Returns the trie data structure	tracking words in documents</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex/SearchIndex.trie</OutputFile>
+</Function>
+<Function>
+<Name>num_docs</Name>
+<Description>Returns the number of documents</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex/SearchIndex.num_docs</OutputFile>
+</Function>
+<Function>
+<Name>for_each</Name>
+<Description>Process each item in the trie</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex/SearchIndex.for_each</OutputFile>
+</Function>
+<Function>
+<Name>dump</Name>
+<Description>dumps the index to a file</Description>
+<OutputFile>cos.core.utilities.InvertedIndex.SearchIndex/SearchIndex.dump</OutputFile>
+</Function>
+</Functions>
+</Class>

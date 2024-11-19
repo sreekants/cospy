@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>regex_rules</Name>
+<Class>Ticker</Class>
+<Module>cos.core.time.Ticker</Module>
+<Description>Matches rules in a colleciton of regular expressions</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>27</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>rules=rule_tuple</Name>
+<Type></Type>
+<Description>Rule map</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>LogFile</Name>
+<Description>Log subsysten for the simulation</Description>
+<SourceFile>Logger.py</SourceFile>
+<SourceLine>16</SourceLine>
+<Module>cos.core.kernel.Logger</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>log</Name>
+<Description>Adds a log entry</Description>
+<OutputFile>cos.core.kernel.Logger.LogFile/LogFile.log</OutputFile>
+</Function>
+<Function>
+<Name>flush</Name>
+<Description>Flushes the log.</Description>
+<OutputFile>cos.core.kernel.Logger.LogFile/LogFile.flush</OutputFile>
+</Function>
+<Function>
+<Name>error</Name>
+<Description>Logs an error</Description>
+<OutputFile>cos.core.kernel.Logger.LogFile/LogFile.error</OutputFile>
+</Function>
+<Function>
+<Name>warning</Name>
+<Description>Logs a warning</Description>
+<OutputFile>cos.core.kernel.Logger.LogFile/LogFile.warning</OutputFile>
+</Function>
+<Function>
+<Name>info</Name>
+<Description>Logs an information</Description>
+<OutputFile>cos.core.kernel.Logger.LogFile/LogFile.info</OutputFile>
+</Function>
+</Functions>
+</Class>

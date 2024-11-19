@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>World</Name>
+<Description></Description>
+<SourceFile>Beacon.py</SourceFile>
+<SourceLine>4</SourceLine>
+<Module>cos.core.api.Beacon</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>describe</Name>
+<Description>Describes an object</Description>
+<OutputFile>cos.core.api.Beacon.World/World.describe</OutputFile>
+</Function>
+</Functions>
+</Class>

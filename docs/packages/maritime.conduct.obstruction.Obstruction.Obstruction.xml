@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Obstruction</Name>
+<Description>Implementation of the Obstruction class</Description>
+<SourceFile>Obstruction.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>maritime.conduct.obstruction.Obstruction</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>maritime.conduct.obstruction.Obstruction.Obstruction/Obstruction.on_start</OutputFile>
+</Function>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>maritime.conduct.obstruction.Obstruction.Obstruction/Obstruction.evaluate</OutputFile>
+</Function>
+<Function>
+<Name>setup</Name>
+<Description>Sets up the parameters of the situation</Description>
+<OutputFile>maritime.conduct.obstruction.Obstruction.Obstruction/Obstruction.setup</OutputFile>
+</Function>
+<Function>
+<Name>on_obstruct</Name>
+<Description>Event handler for obstruct</Description>
+<OutputFile>maritime.conduct.obstruction.Obstruction.Obstruction/Obstruction.on_obstruct</OutputFile>
+</Function>
+</Functions>
+</Class>

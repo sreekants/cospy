@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Event</Name>
+<Description>Implementation of the Evaluator class for COLREG evaluation</Description>
+<SourceFile>Encounter.py</SourceFile>
+<SourceLine>17</SourceLine>
+<Module>maritime.regulation.colreg.Encounter</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

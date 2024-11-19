@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>MaritimeEncounterSituation</Name>
+<Description>Enumerations and states of encounter situations that occur in shipping</Description>
+<SourceFile>MaritimeEncounterSituation.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>maritime.core.situation.MaritimeEncounterSituation</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>for_each_maneuver_type</Name>
+<Description>Helper funcation to evaluate maneuver types</Description>
+<OutputFile>maritime.core.situation.MaritimeEncounterSituation.MaritimeEncounterSituation/MaritimeEncounterSituation.for_each_maneuver_type</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ChainOfResponsibility</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>273</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>run</Name>
+<Description>Runs the chain (or pipeline)</Description>
+<OutputFile>cos.core.utilities.Patterns.ChainOfResponsibility/ChainOfResponsibility.run</OutputFile>
+</Function>
+<Function>
+<Name>set_next</Name>
+<Description>Adds a new command to the chain</Description>
+<OutputFile>cos.core.utilities.Patterns.ChainOfResponsibility/ChainOfResponsibility.set_next</OutputFile>
+</Function>
+<Function>
+<Name>get_next</Name>
+<Description>Returns the next command.</Description>
+<OutputFile>cos.core.utilities.Patterns.ChainOfResponsibility/ChainOfResponsibility.get_next</OutputFile>
+</Function>
+<Function>
+<Name>execute</Name>
+<Description>Overridable function that is the concrete execution of the command</Description>
+<OutputFile>cos.core.utilities.Patterns.ChainOfResponsibility/ChainOfResponsibility.execute</OutputFile>
+</Function>
+<Function>
+<Name>generate</Name>
+<Description>Generates a chain of respoinsibility pipeline from an array of commands by linking them.</Description>
+<OutputFile>cos.core.utilities.Patterns.ChainOfResponsibility/ChainOfResponsibility.generate</OutputFile>
+</Function>
+</Functions>
+</Class>

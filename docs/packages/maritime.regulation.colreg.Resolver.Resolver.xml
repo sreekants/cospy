@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Resolver</Name>
+<Description>Implementation of the COLREG master resolver class</Description>
+<SourceFile>Resolver.py</SourceFile>
+<SourceLine>18</SourceLine>
+<Module>maritime.regulation.colreg.Resolver</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

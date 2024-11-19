@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Sea</Name>
+<Description></Description>
+<SourceFile>Sea.py</SourceFile>
+<SourceLine>4</SourceLine>
+<Module>cos.core.api.Sea</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>describe</Name>
+<Description>Describes a sea</Description>
+<OutputFile>cos.core.api.Sea.Sea/Sea.describe</OutputFile>
+</Function>
+</Functions>
+</Class>

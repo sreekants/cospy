@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set</Name>
+<Class>ActiveRecord</Class>
+<Module>cos.core.utilities.ActiveRecord</Module>
+<Description>Sets the value of the object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>304</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>oid</Name>
+<Type></Type>
+<Description>Object ID or key field value</Description>
+</Argument>
+<Argument>
+<Name>field</Name>
+<Type></Type>
+<Description>Field name</Description>
+</Argument>
+<Argument>
+<Name>value</Name>
+<Type></Type>
+<Description>Field value to update</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

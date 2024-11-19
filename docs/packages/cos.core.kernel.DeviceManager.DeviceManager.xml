@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>DeviceManager</Name>
+<Description>Implementation of a generic device manager</Description>
+<SourceFile>DeviceManager.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.core.kernel.DeviceManager</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_init</Name>
+<Description>Callback for simulation initialization</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.on_init</OutputFile>
+</Function>
+<Function>
+<Name>on_term</Name>
+<Description>Callback for simulation termination</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.on_term</OutputFile>
+</Function>
+<Function>
+<Name>create</Name>
+<Description>Creates a device</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.create</OutputFile>
+</Function>
+<Function>
+<Name>get</Name>
+<Description>Gets a loaded device by name</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.get</OutputFile>
+</Function>
+<Function>
+<Name>exists</Name>
+<Description>Checks if a device exists</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.exists</OutputFile>
+</Function>
+<Function>
+<Name>assert_valid</Name>
+<Description>Asserts if a device is valid</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.assert_valid</OutputFile>
+</Function>
+<Function>
+<Name>register</Name>
+<Description>Register a factory for a device type</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.register</OutputFile>
+</Function>
+<Function>
+<Name>unregister</Name>
+<Description>Unregistrs a device factory</Description>
+<OutputFile>cos.core.kernel.DeviceManager.DeviceManager/DeviceManager.unregister</OutputFile>
+</Function>
+</Functions>
+</Class>

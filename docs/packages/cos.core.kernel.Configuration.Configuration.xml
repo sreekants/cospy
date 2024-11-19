@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Configuration</Name>
+<Description>Master configuration file for the simulation</Description>
+<SourceFile>Configuration.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>cos.core.kernel.Configuration</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>get_root_folder</Name>
+<Description>Returns the root folder</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.get_root_folder</OutputFile>
+</Function>
+<Function>
+<Name>get_keys</Name>
+<Description>Returns the keys of a type</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.get_keys</OutputFile>
+</Function>
+<Function>
+<Name>get_folder</Name>
+<Description>Returns a resolved directory path</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.get_folder</OutputFile>
+</Function>
+<Function>
+<Name>get_file</Name>
+<Description>Returns an file path</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.get_file</OutputFile>
+</Function>
+<Function>
+<Name>resolve</Name>
+<Description>Resolves a value with configuration variables</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.resolve</OutputFile>
+</Function>
+<Function>
+<Name>get_value</Name>
+<Description>Returns a string value</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.get_value</OutputFile>
+</Function>
+<Function>
+<Name>get_bool</Name>
+<Description>Returns a boolean value</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.get_bool</OutputFile>
+</Function>
+<Function>
+<Name>get_int</Name>
+<Description>Returns an integer value</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.get_int</OutputFile>
+</Function>
+<Function>
+<Name>find_config_file</Name>
+<Description>Finds the confituration file in the path</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.find_config_file</OutputFile>
+</Function>
+<Function>
+<Name>resolve_path</Name>
+<Description>Resolves a path</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.resolve_path</OutputFile>
+</Function>
+<Function>
+<Name>replace_separators</Name>
+<Description>Replaces the separators in a generic unix path with the native path separtor</Description>
+<OutputFile>cos.core.kernel.Configuration.Configuration/Configuration.replace_separators</OutputFile>
+</Function>
+</Functions>
+</Class>

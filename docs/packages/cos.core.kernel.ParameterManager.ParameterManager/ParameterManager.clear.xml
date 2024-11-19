@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>clear</Name>
+<Class>ParameterManager</Class>
+<Module>cos.core.kernel.ParameterManager</Module>
+<Description>Clears a parameter</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ParameterManager.py</SourceFile>
+<SourceLine>75</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path identifier of the parameter</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

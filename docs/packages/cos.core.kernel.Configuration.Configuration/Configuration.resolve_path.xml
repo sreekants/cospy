@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>resolve_path</Name>
+<Class>Configuration</Class>
+<Module>cos.core.kernel.Configuration</Module>
+<Description>Resolves a path</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Configuration.py</SourceFile>
+<SourceLine>217</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>value</Name>
+<Type></Type>
+<Description>Path name</Description>
+</Argument>
+<Argument>
+<Name>sep=None</Name>
+<Type></Type>
+<Description>Separator for the path</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

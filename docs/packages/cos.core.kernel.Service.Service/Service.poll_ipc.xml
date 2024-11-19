@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>poll_ipc</Name>
+<Class>Service</Class>
+<Module>cos.core.kernel.Service</Module>
+<Description>Registers a list of paths for polling on the IPC queue</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Service.py</SourceFile>
+<SourceLine>48</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>pathlist</Name>
+<Type></Type>
+<Description>List of IPC queue paths</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

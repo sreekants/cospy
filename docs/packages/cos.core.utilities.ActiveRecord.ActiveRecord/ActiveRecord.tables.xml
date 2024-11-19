@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>tables</Name>
+<Class>ActiveRecord</Class>
+<Module>cos.core.utilities.ActiveRecord</Module>
+<Description>Returns the tables in a database</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>92</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>conn</Name>
+<Type></Type>
+<Description>Connection</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

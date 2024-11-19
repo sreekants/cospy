@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>TargetShipResolver</Name>
+<Description>Implementation of the VesselResolver class</Description>
+<SourceFile>VesselResolver.py</SourceFile>
+<SourceLine>103</SourceLine>
+<Module>maritime.model.resolver.VesselResolver</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

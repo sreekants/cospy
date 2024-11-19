@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Polygon</Name>
+<Description>Implementation of the Polygon class</Description>
+<SourceFile>Polygon.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.math.geometry.Polygon</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>encloses</Name>
+<Description>Checks if a point is enclosed by the polygon</Description>
+<OutputFile>cos.math.geometry.Polygon.Polygon/Polygon.encloses</OutputFile>
+</Function>
+</Functions>
+</Class>

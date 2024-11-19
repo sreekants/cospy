@@ -1,0 +1,85 @@
+#!/usr/bin/python
+# Filename: Rule34.py
+# Description: Implementation of COLREG Rule
+
+from maritime.model.rule.COLREG import COLREG
+from cos.core.kernel.Context import Context
+
+'''
+Manoeuvring and Warning Signals
+(a) When vessels are in sight of one another, a power-driven vessel underway, when
+manoeuvring as authorized or required by these Rules, shall indicate that manoeuvre
+by the following signals on her whistle:
+- one short blast to mean 'I am altering my course to starboard ';
+- two short blasts to mean 'I am altering my course to port ';
+- three short blasts to mean 'I am operating astern propulsion'.
+(b) Any vessel may supplement the whistle signals prescribed in paragraph (a) of this
+Rule by light signals, repeated as appropriate, whilst the manoeuvre is being carried
+out:
+(i) these light signals shall have the following significance:
+- one flash to mean 'I am altering my course to starboard ';
+- two flashes to mean 'I am altering my course to port ';
+- three flashes to mean 'I am operating astern propulsion';
+(ii) the duration of each flash shall be about one second, the interval between
+flashes shall be about one second, and the interval between successive
+signals shall be not less than ten seconds;
+(iii) the light used for this signals shall, if fitted, be an all-round white light, visible
+at a minimum range of 5 miles and shall comply with the pcosisions of Annex
+I to these Regulations.
+(c) When in sight of one another in a narrow channel or fairway:
+(i) a vessel intending to overtake another shall in compliance with Rule 9(e) (i)
+indicate her intention by the following signals on her whistle :
+- two prolonged blasts followed by one short blast to mean 'I intend to
+overtake you on your starboard side';
+- two prolonged blasts followed by two short blasts to mean 'I intend to
+overtake you on your port side';
+(ii) the vessel about to be overtaken when acting in accordance with Rule 9(e)(i)
+shall indicate her agreement by the following signal on her whistle:
+- one prolonged, one short, one prolonged and one short blast, in that order.
+(d) When vessels in sight of one another are approaching each other and from any
+cause either vessel fails to understand the intentions or actions of the other, or is in
+doubt whether sufficient action is being taken by the other to avoid collision, the
+vessel in doubt shall immediately indicate such doubt by giving at least five short and
+rapid blasts on the whistle. Such signal may be supplemented by a light signal of at
+least five short and rapid flashes.
+(e) A vessel nearing a bend or an area of a channel or fairway where other vessels
+may be obscured by an intervening obstruction shall sound one prolonged blast. Such
+signal shall be answered with a prolonged blast by any approaching vessel that may
+be within hearing around the bend or behind the intervening obstruction.
+(f) If whistles are fitted on a vessel at a distance apart of more than 100 metres, one
+whistle only shall be used for giving manoeuvring and warning signals.
+'''
+
+class Rule34(COLREG):
+	def __init__(self):
+		""" Constructor
+		"""
+		COLREG.__init__(self)
+		return
+
+	def on_start(self, ctxt:Context, config):
+		""" Callback for simulation startup
+		Arguments
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		COLREG.on_start(self, ctxt, config)
+
+		self.subscribe("vessel.overtaking", self.on_overtaking)
+		return
+
+	def on_overtaking(self, ctxt:Context, evt):
+		""" Event handler for overtaking
+		Arguments
+			ctxt -- Simulation context
+			evt -- Event data
+		"""
+		vessel	= evt[1]
+		print( f'{self.__class__.__name__}.overtaking:{vessel.config["name"]}' )
+		return
+
+
+if __name__ == "__main__":
+	test = Rule34()
+
+

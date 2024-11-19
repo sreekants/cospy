@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.tools.cviz</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>4</ClassCount>
+<FunctionCount>23</FunctionCount>
+<Classes>
+<Class>
+<Name>Builder</Name>
+<OutputFile>cos.tools.cviz.Builder.Builder</OutputFile>
+<Description>Builder class for the visualization environment</Description>
+<FunctionCount>6</FunctionCount>
+</Class>
+<Class>
+<Name>Dispatcher</Name>
+<OutputFile>cos.tools.cviz.Dispatcher.Dispatcher</OutputFile>
+<Description>Implementation of the Dispatcher class</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>RPCAgent</Name>
+<OutputFile>cos.tools.cviz.RPCAgent.RPCAgent</OutputFile>
+<Description>Agent servicing RPC requests</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>VirtualWorld</Name>
+<OutputFile>cos.tools.cviz.VirtualWorld.VirtualWorld</OutputFile>
+<Description>Implementation of the virtual world.</Description>
+<FunctionCount>13</FunctionCount>
+</Class>
+</Classes>
+</Module>

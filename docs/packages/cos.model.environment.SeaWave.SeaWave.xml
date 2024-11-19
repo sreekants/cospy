@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SeaWave</Name>
+<Description>Implementation of the SeaWave class</Description>
+<SourceFile>SeaWave.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.model.environment.SeaWave</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

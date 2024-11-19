@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>replace_separators</Name>
+<Class>Configuration</Class>
+<Module>cos.core.kernel.Configuration</Module>
+<Description>Replaces the separators in a generic unix path with the native path separtor</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Configuration.py</SourceFile>
+<SourceLine>231</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>path</Name>
+<Type></Type>
+<Description>Path to parse</Description>
+</Argument>
+<Argument>
+<Name>sep=None</Name>
+<Type></Type>
+<Description>Separator for the path</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

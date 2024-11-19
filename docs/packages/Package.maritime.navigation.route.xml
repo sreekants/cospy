@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>maritime.navigation.route</Name>
+<Description></Description>
+<Layer>maritime</Layer>
+<ClassCount>1</ClassCount>
+<FunctionCount>0</FunctionCount>
+<Classes>
+<Class>
+<Name>Route</Name>
+<OutputFile>maritime.navigation.route.Route.Route</OutputFile>
+<Description>Fasade for route planning related classes</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+</Classes>
+</Module>

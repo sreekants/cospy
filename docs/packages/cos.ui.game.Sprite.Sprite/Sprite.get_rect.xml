@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_rect</Name>
+<Class>Sprite</Class>
+<Module>cos.ui.game.Sprite</Module>
+<Description>Returns the rectangle of the sprite</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Sprite.py</SourceFile>
+<SourceLine>89</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

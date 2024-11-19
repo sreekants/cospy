@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ObjectNode</Name>
+<Description>Inplementation of the COS kernel object manager</Description>
+<SourceFile>ObjectManager.py</SourceFile>
+<SourceLine>56</SourceLine>
+<Module>cos.core.kernel.ObjectManager</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

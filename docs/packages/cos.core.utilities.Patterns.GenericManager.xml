@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>GenericManager</Name>
+<Description>A collection of generic design patterns, mostly from the 'Gang of Four' book.</Description>
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>6</SourceLine>
+<Module>cos.core.utilities.Patterns</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>add</Name>
+<Description>Adds an object to the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.GenericManager/GenericManager.add</OutputFile>
+</Function>
+<Function>
+<Name>remove</Name>
+<Description>Removes an object from the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.GenericManager/GenericManager.remove</OutputFile>
+</Function>
+<Function>
+<Name>find</Name>
+<Description>Finds a matching object in the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.GenericManager/GenericManager.find</OutputFile>
+</Function>
+<Function>
+<Name>size</Name>
+<Description>Returns the number of objects in the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.GenericManager/GenericManager.size</OutputFile>
+</Function>
+<Function>
+<Name>clear</Name>
+<Description>Removes all objects from the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.GenericManager/GenericManager.clear</OutputFile>
+</Function>
+<Function>
+<Name>for_each</Name>
+<Description>Iterates through each object in the collection</Description>
+<OutputFile>cos.core.utilities.Patterns.GenericManager/GenericManager.for_each</OutputFile>
+</Function>
+<Function>
+<Name>for_each_first</Name>
+<Description>Iterates through each object in the collection for the first successful call</Description>
+<OutputFile>cos.core.utilities.Patterns.GenericManager/GenericManager.for_each_first</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>initialize_dynamics</Name>
+<Class>LinearMotionBehavior</Class>
+<Module>cos.behavior.motion.LinearMotionBehavior</Module>
+<Description>Initialize the dynamics vectors</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>LinearMotionBehavior.py</SourceFile>
+<SourceLine>34</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>loc</Name>
+<Type></Type>
+<Description>Location</Description>
+</Argument>
+<Argument>
+<Name>X</Name>
+<Type></Type>
+<Description>Linear vector</Description>
+</Argument>
+<Argument>
+<Name>R</Name>
+<Type></Type>
+<Description>Rotational vector</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

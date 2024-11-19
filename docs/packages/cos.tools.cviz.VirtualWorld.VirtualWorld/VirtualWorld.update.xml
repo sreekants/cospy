@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>VirtualWorld</Class>
+<Module>cos.tools.cviz.VirtualWorld</Module>
+<Description>Updates the simulation UI</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>VirtualWorld.py</SourceFile>
+<SourceLine>218</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

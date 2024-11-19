@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>connect</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Connects a device to an address</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>68</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>addr</Name>
+<Type></Type>
+<Description>Device address</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

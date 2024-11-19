@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>TargetResolver</Name>
+<Description>Implementation of the TargetResolver class</Description>
+<SourceFile>TargetResolver.py</SourceFile>
+<SourceLine>19</SourceLine>
+<Module>maritime.model.resolver.TargetResolver</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

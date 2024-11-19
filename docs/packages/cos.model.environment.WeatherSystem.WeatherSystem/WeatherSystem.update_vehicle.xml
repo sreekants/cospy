@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update_vehicle</Name>
+<Class>WeatherSystem</Class>
+<Module>cos.model.environment.WeatherSystem</Module>
+<Description>Overridable method to update a simulation vehicle</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>WeatherSystem.py</SourceFile>
+<SourceLine>248</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>vehicle</Name>
+<Type></Type>
+<Description>Reference ot the simulation vehicle</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

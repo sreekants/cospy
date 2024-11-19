@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>dispatch</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Dispatches commands to the device driver</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>273</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>command</Name>
+<Type></Type>
+<Description>Command to the driver</Description>
+</Argument>
+<Argument>
+<Name>event</Name>
+<Type></Type>
+<Description>Event to be handled by the driver</Description>
+</Argument>
+<Argument>
+<Name>irp</Name>
+<Type></Type>
+<Description>Interrupt request packet</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

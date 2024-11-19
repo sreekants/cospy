@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>add_device</Name>
+<Class>VesselComposer</Class>
+<Module>maritime.model.vessel.VesselComposer</Module>
+<Description>Adds a devices to the vessel</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>VesselComposer.py</SourceFile>
+<SourceLine>46</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>vessel</Name>
+<Type></Type>
+<Description>Vessel object</Description>
+</Argument>
+<Argument>
+<Name>devices</Name>
+<Type></Type>
+<Description>List of devices to attach to the vessel</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

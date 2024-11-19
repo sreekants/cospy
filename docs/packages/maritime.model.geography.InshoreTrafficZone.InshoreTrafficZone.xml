@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>InshoreTrafficZone</Name>
+<Description>Implementation of the maritme traffic zone classes</Description>
+<SourceFile>InshoreTrafficZone.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.model.geography.InshoreTrafficZone</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

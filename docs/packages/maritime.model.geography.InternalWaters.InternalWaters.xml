@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>InternalWaters</Name>
+<Description>Implementation of the marine_valley class</Description>
+<SourceFile>InternalWaters.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.model.geography.InternalWaters</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Operation</Name>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<SourceFile>Vessel.py</SourceFile>
+<SourceLine>20</SourceLine>
+<Module>maritime.model.vessel.Vessel</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

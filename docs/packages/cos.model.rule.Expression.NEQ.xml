@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>NEQ</Name>
+<Description>Basic logical expressions used in a decision tree</Description>
+<SourceFile>Expression.py</SourceFile>
+<SourceLine>307</SourceLine>
+<Module>cos.model.rule.Expression</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>cos.model.rule.Expression.NEQ/NEQ.evaluate</OutputFile>
+</Function>
+</Functions>
+</Class>

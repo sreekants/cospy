@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>World</Name>
+<Description>Class that holds the entire universe of objects in the simulation</Description>
+<SourceFile>World.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>cos.subsystem.world.World</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>sim</Name>
+<Description>Returns the simulation object</Description>
+<OutputFile>cos.subsystem.world.World.World/World.sim</OutputFile>
+</Function>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>cos.subsystem.world.World.World/World.on_start</OutputFile>
+</Function>
+<Function>
+<Name>init</Name>
+<Description>Initializes an object</Description>
+<OutputFile>cos.subsystem.world.World.World/World.init</OutputFile>
+</Function>
+<Function>
+<Name>has_collision</Name>
+<Description>Checks for collisions in an area</Description>
+<OutputFile>cos.subsystem.world.World.World/World.has_collision</OutputFile>
+</Function>
+<Function>
+<Name>add</Name>
+<Description>Adds an object</Description>
+<OutputFile>cos.subsystem.world.World.World/World.add</OutputFile>
+</Function>
+<Function>
+<Name>play</Name>
+<Description>Runs the simulation logic</Description>
+<OutputFile>cos.subsystem.world.World.World/World.play</OutputFile>
+</Function>
+<Function>
+<Name>describe</Name>
+<Description>Describes a class of objects in the simulation</Description>
+<OutputFile>cos.subsystem.world.World.World/World.describe</OutputFile>
+</Function>
+<Function>
+<Name>get_objects</Name>
+<Description>Returns all object of a particular type</Description>
+<OutputFile>cos.subsystem.world.World.World/World.get_objects</OutputFile>
+</Function>
+</Functions>
+</Class>

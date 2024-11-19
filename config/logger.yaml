@@ -1,0 +1,6 @@
+Defaults:
+  Warning: True
+  Error: True
+  Information: True
+  Trace: True
+

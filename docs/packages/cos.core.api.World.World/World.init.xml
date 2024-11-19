@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>init</Name>
+<Class>World</Class>
+<Module>cos.core.api.World</Module>
+<Description>Initializes the world</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>World.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>bodies</Name>
+<Type></Type>
+<Description>Bodies to add to the simulation</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

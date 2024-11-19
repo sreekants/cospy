@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>dump</Name>
+<Class>MessageQueue</Class>
+<Module>cos.core.kernel.MessageQueue</Module>
+<Description>Dumps a list of all queues with a particular prefix</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MessageQueue.py</SourceFile>
+<SourceLine>316</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>prefix</Name>
+<Type></Type>
+<Description>Prefix path to search for</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>settings</Name>
+<Class>Kernel</Class>
+<Module>cos.core.kernel.Kernel</Module>
+<Description>Returns a setting for the Kernel</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Kernel.py</SourceFile>
+<SourceLine>92</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

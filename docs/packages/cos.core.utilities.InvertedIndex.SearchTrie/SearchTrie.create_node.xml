@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create_node</Name>
+<Class>SearchTrie</Class>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Description>Overridable function to create a node on the trie</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>66</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Trie key (search word)</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>add_visited_node</Name>
+<Class>Graph</Class>
+<Module>cai.planning.utilities.ImageGridGraph</Module>
+<Description>Marks a node as visited</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ImageGridGraph.py</SourceFile>
+<SourceLine>88</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>node</Name>
+<Type></Type>
+<Description>Node to add</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

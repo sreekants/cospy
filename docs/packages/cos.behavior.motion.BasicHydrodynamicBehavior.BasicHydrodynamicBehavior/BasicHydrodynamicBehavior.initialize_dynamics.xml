@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>initialize_dynamics</Name>
+<Class>BasicHydrodynamicBehavior</Class>
+<Module>cos.behavior.motion.BasicHydrodynamicBehavior</Module>
+<Description>Initializes the dynamics vector</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BasicHydrodynamicBehavior.py</SourceFile>
+<SourceLine>38</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>loc</Name>
+<Type></Type>
+<Description>Location</Description>
+</Argument>
+<Argument>
+<Name>X</Name>
+<Type></Type>
+<Description>Linear vector</Description>
+</Argument>
+<Argument>
+<Name>R</Name>
+<Type></Type>
+<Description>Rotational vector</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

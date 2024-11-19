@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>encode</Name>
+<Class>ZMQFrame</Class>
+<Module>cos.core.network.ZMQFrame</Module>
+<Description>Encodes a frame</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ZMQFrame.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>objpath</Name>
+<Type></Type>
+<Description>Object path</Description>
+</Argument>
+<Argument>
+<Name>seq</Name>
+<Type></Type>
+<Description>Sequence number of the frame</Description>
+</Argument>
+<Argument>
+<Name>flag</Name>
+<Type></Type>
+<Description>Binary 32-bit flag</Description>
+</Argument>
+<Argument>
+<Name>ttl</Name>
+<Type></Type>
+<Description>Time to live</Description>
+</Argument>
+<Argument>
+<Name>payload</Name>
+<Type></Type>
+<Description>Payload of the frame</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

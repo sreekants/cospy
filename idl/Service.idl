@@ -1,0 +1,26 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : Service.idl
+// Function         : ROVCore - Service manager
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+interface Service
+{
+	int 	start( string args );
+	void 	stop( int id, string args );
+	void	suspend( int id, string args );
+	void	resume( int id, string args );
+
+	int 	command( int id, string name, string args );
+	int 	signal( int id, int event, string args );
+	object 	describe( string query, string scope, string args );
+
+	string 	call( string arg );
+	string 	find( string arg );
+	string 	info( string path );
+	string 	list( string arg );
+	string 	pub( string arg );
+	string 	type( string arg );
+};
+

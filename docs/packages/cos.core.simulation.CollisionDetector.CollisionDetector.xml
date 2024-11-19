@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>CollisionDetector</Name>
+<Description>Simple 2D collision detector</Description>
+<SourceFile>CollisionDetector.py</SourceFile>
+<SourceLine>55</SourceLine>
+<Module>cos.core.simulation.CollisionDetector</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>has_collision</Name>
+<Description>Checss if a colision has occured in the simulation</Description>
+<OutputFile>cos.core.simulation.CollisionDetector.CollisionDetector/CollisionDetector.has_collision</OutputFile>
+</Function>
+<Function>
+<Name>contains</Name>
+<Description>Checks if a point is enclosed in a body</Description>
+<OutputFile>cos.core.simulation.CollisionDetector.CollisionDetector/CollisionDetector.contains</OutputFile>
+</Function>
+</Functions>
+</Class>

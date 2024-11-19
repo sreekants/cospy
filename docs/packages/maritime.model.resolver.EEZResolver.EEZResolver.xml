@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>EEZResolver</Name>
+<Description>Implementation of the EEZResolver class</Description>
+<SourceFile>EEZResolver.py</SourceFile>
+<SourceLine>14</SourceLine>
+<Module>maritime.model.resolver.EEZResolver</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

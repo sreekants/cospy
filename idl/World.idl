@@ -1,0 +1,17 @@
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// File name        : World.idl
+// Function         : ROVCore - Simulation World
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+interface World
+{
+	void	init( object bodies );
+	bool	has_collision( object shape );
+	void	add( object type, object obj );
+	bool	play();
+
+	object 	describe( string type );
+};
+

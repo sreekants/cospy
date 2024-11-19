@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Creator</Name>
+<Description>Implementation of the AIS device</Description>
+<SourceFile>AIS.py</SourceFile>
+<SourceLine>169</SourceLine>
+<Module>maritime.device.communication.AIS</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

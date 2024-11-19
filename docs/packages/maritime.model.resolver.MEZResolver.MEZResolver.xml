@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>MEZResolver</Name>
+<Description>Implementation of the MEZResolver class</Description>
+<SourceFile>MEZResolver.py</SourceFile>
+<SourceLine>14</SourceLine>
+<Module>maritime.model.resolver.MEZResolver</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

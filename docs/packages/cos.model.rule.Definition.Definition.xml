@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Definition</Name>
+<Description>Definitions used by the rules</Description>
+<SourceFile>Definition.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.model.rule.Definition</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>IN</Name>
+<Class>Context</Class>
+<Module>cos.model.rule.Context</Module>
+<Description>operator IN</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Context.py</SourceFile>
+<SourceLine>53</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>lhs</Name>
+<Type></Type>
+<Description>lvalue of the expression (variable name)</Description>
+</Argument>
+<Argument>
+<Name>rhs</Name>
+<Type></Type>
+<Description>rvalue of the expression (an array)</Description>
+</Argument>
+<Argument>
+<Name>match_all</Name>
+<Type></Type>
+<Description>Flag to match all values</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

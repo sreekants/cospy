@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Situation</Name>
+<Description>Implementation of the Rule Situation class</Description>
+<SourceFile>Situation.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>cos.model.rule.Situation</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

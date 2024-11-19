@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>generate</Name>
+<Class>ChainOfResponsibility</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Generates a chain of respoinsibility pipeline from an array of commands by linking them.</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>312</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>cmdseq</Name>
+<Type></Type>
+<Description>An array of commands to link into a pipeline</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

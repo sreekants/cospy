@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Declarations</Name>
+<Description>Helper class to generate code from a meta-programming template</Description>
+<SourceFile>TemplateReplicator.py</SourceFile>
+<SourceLine>7</SourceLine>
+<Module>cos.cluster.runtime.TemplateReplicator</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>replace_text</Name>
+<Description>Replace all meta tags in a text and returns the processed text</Description>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.Declarations/Declarations.replace_text</OutputFile>
+</Function>
+<Function>
+<Name>set</Name>
+<Description>Sets a meta tag value</Description>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.Declarations/Declarations.set</OutputFile>
+</Function>
+<Function>
+<Name>has_tag</Name>
+<Description>Sets a meta tag value</Description>
+<OutputFile>cos.cluster.runtime.TemplateReplicator.Declarations/Declarations.has_tag</OutputFile>
+</Function>
+</Functions>
+</Class>

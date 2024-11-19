@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>construct</Name>
+<Class>TreeNode</Class>
+<Module>cos.core.utilities.Tree</Module>
+<Description>Constructs the object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Tree.py</SourceFile>
+<SourceLine>34</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>name=None</Name>
+<Type></Type>
+<Description>Name of the node</Description>
+</Argument>
+<Argument>
+<Name>parent=None</Name>
+<Type></Type>
+<Description>Parent of the node</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

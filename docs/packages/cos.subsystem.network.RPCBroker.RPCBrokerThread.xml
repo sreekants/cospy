@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>RPCBrokerThread</Name>
+<Description>RPC broker thread and supporting classes</Description>
+<SourceFile>RPCBroker.py</SourceFile>
+<SourceLine>14</SourceLine>
+<Module>cos.subsystem.network.RPCBroker</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>run</Name>
+<Description>Runs the transport</Description>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBrokerThread/RPCBrokerThread.run</OutputFile>
+</Function>
+<Function>
+<Name>stop</Name>
+<Description>Signals the broker thread to terminate</Description>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBrokerThread/RPCBrokerThread.stop</OutputFile>
+</Function>
+</Functions>
+</Class>

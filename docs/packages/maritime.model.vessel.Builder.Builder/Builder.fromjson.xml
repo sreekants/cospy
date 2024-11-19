@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>fromjson</Name>
+<Class>Builder</Class>
+<Module>maritime.model.vessel.Builder</Module>
+<Description>Builds a vessel from a configuration</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Builder.py</SourceFile>
+<SourceLine>71</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>pkg</Name>
+<Type></Type>
+<Description>Class name of the vessel type</Description>
+</Argument>
+<Argument>
+<Name>profile</Name>
+<Type></Type>
+<Description>Configuration of the object in JSON</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>arguments to pass to the composer</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

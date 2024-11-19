@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ScreenArea</Name>
+<Description>Simple 2D collision detector</Description>
+<SourceFile>CollisionDetector.py</SourceFile>
+<SourceLine>12</SourceLine>
+<Module>cos.core.simulation.CollisionDetector</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>intersect</Name>
+<Description>Checks of a rectangle intersects with the screen area</Description>
+<OutputFile>cos.core.simulation.CollisionDetector.ScreenArea/ScreenArea.intersect</OutputFile>
+</Function>
+<Function>
+<Name>inside</Name>
+<Description>Checks if a coordinate is within the screen area</Description>
+<OutputFile>cos.core.simulation.CollisionDetector.ScreenArea/ScreenArea.inside</OutputFile>
+</Function>
+</Functions>
+</Class>

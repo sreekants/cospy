@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>init_config</Name>
+<Class>Evaluator</Class>
+<Module>maritime.regulation.colreg.Evaluator</Module>
+<Description>Initializes the configuration</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Evaluator.py</SourceFile>
+<SourceLine>64</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

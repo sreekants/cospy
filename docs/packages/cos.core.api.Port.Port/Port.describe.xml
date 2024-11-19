@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>describe</Name>
+<Class>Port</Class>
+<Module>cos.core.api.Port</Module>
+<Description>Describes a port</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Port.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>id</Name>
+<Type></Type>
+<Description>Unique identifier</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

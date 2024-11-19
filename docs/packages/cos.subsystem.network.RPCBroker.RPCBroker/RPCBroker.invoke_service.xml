@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>invoke_service</Name>
+<Class>RPCBroker</Class>
+<Module>cos.subsystem.network.RPCBroker</Module>
+<Description>Invokes an RPC method on the service</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCBroker.py</SourceFile>
+<SourceLine>113</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>objpath</Name>
+<Type></Type>
+<Description>Object path</Description>
+</Argument>
+<Argument>
+<Name>req</Name>
+<Type></Type>
+<Description>Request to invoke on the object</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

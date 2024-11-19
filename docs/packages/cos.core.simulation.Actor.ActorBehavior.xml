@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ActorBehavior</Name>
+<Description>Impmenentation of a controller class for all sumulation objectsRunnerThread</Description>
+<SourceFile>Actor.py</SourceFile>
+<SourceLine>12</SourceLine>
+<Module>cos.core.simulation.Actor</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="module.xsl"?>
+<Module>
+<Name>cos.subsystem.network</Name>
+<Description></Description>
+<Layer>cos</Layer>
+<ClassCount>3</ClassCount>
+<FunctionCount>5</FunctionCount>
+<Classes>
+<Class>
+<Name>NetworkManager</Name>
+<OutputFile>cos.subsystem.network.NetworkManager.NetworkManager</OutputFile>
+<Description>Network manager kernel subsystem</Description>
+<FunctionCount>0</FunctionCount>
+</Class>
+<Class>
+<Name>RPCBrokerThread</Name>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBrokerThread</OutputFile>
+<Description>RPC broker thread and supporting classes</Description>
+<FunctionCount>2</FunctionCount>
+</Class>
+<Class>
+<Name>RPCBroker</Name>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBroker</OutputFile>
+<Description>RPC broker thread and supporting classes</Description>
+<FunctionCount>3</FunctionCount>
+</Class>
+</Classes>
+</Module>

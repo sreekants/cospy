@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>MotionBehavior</Name>
+<Description>Base class for all motion behavior</Description>
+<SourceFile>MotionBehavior.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.behavior.motion.MotionBehavior</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>init</Name>
+<Description>Initializes the behavior</Description>
+<OutputFile>cos.behavior.motion.MotionBehavior.MotionBehavior/MotionBehavior.init</OutputFile>
+</Function>
+<Function>
+<Name>get_settings</Name>
+<Description>Extracts a setting from the configuration</Description>
+<OutputFile>cos.behavior.motion.MotionBehavior.MotionBehavior/MotionBehavior.get_settings</OutputFile>
+</Function>
+<Function>
+<Name>force</Name>
+<Description>Returns the forces acting on the vehicle</Description>
+<OutputFile>cos.behavior.motion.MotionBehavior.MotionBehavior/MotionBehavior.force</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Updates the world by moving the vehicle</Description>
+<OutputFile>cos.behavior.motion.MotionBehavior.MotionBehavior/MotionBehavior.update</OutputFile>
+</Function>
+</Functions>
+</Class>

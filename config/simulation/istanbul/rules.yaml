@@ -1,0 +1,6 @@
+packages:
+  modules:  # Local jurisdictional rule set
+     - name: Istanbul.Harbour
+       module: maritime.model.rule.HarbourRule
+       config: sample.frequency=1 automata=$(SIMULATION)/rule/port.legata scorecard=$(SIMULATION)/rule/score.json
+

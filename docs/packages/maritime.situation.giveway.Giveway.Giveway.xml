@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Giveway</Name>
+<Description>Implementation of the Giveway class</Description>
+<SourceFile>Giveway.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>maritime.situation.giveway.Giveway</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>maritime.situation.giveway.Giveway.Giveway/Giveway.on_start</OutputFile>
+</Function>
+<Function>
+<Name>setup</Name>
+<Description>Sets up the parameters of the situation</Description>
+<OutputFile>maritime.situation.giveway.Giveway.Giveway/Giveway.setup</OutputFile>
+</Function>
+</Functions>
+</Class>

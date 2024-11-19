@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Sets an option on the device</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>82</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>level</Name>
+<Type></Type>
+<Description>Option level</Description>
+</Argument>
+<Argument>
+<Name>optname</Name>
+<Type></Type>
+<Description>Option name</Description>
+</Argument>
+<Argument>
+<Name>optvalue</Name>
+<Type></Type>
+<Description>Option value</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

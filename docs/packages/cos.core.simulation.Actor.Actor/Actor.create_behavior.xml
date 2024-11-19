@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create_behavior</Name>
+<Class>Actor</Class>
+<Module>cos.core.simulation.Actor</Module>
+<Description>Creates a behavior from a configuration</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Actor.py</SourceFile>
+<SourceLine>94</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Shape</Name>
+<Description>Implementation of the Shape class</Description>
+<SourceFile>Shape.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.model.geography.Shape</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>describe</Name>
+<Description>Describes the shape</Description>
+<OutputFile>cos.model.geography.Shape.Shape/Shape.describe</OutputFile>
+</Function>
+<Function>
+<Name>get_polygon</Name>
+<Description>Returns the polygon of the shape</Description>
+<OutputFile>cos.model.geography.Shape.Shape/Shape.get_polygon</OutputFile>
+</Function>
+<Function>
+<Name>intersect</Name>
+<Description>Checks the bounding box of another shape is contained within this shape</Description>
+<OutputFile>cos.model.geography.Shape.Shape/Shape.intersect</OutputFile>
+</Function>
+<Function>
+<Name>contains</Name>
+<Description>Checks if a point is within the shape</Description>
+<OutputFile>cos.model.geography.Shape.Shape/Shape.contains</OutputFile>
+</Function>
+</Functions>
+</Class>

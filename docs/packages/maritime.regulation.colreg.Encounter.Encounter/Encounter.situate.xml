@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>situate</Name>
+<Class>Encounter</Class>
+<Module>maritime.regulation.colreg.Encounter</Module>
+<Description>Triggers a situation event</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Encounter.py</SourceFile>
+<SourceLine>71</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>rule_ctxt</Name>
+<Type></Type>
+<Description>Rule context</Description>
+</Argument>
+<Argument>
+<Name>OS</Name>
+<Type></Type>
+<Description>Own ship</Description>
+</Argument>
+<Argument>
+<Name>TS</Name>
+<Type></Type>
+<Description>Target ship</Description>
+</Argument>
+<Argument>
+<Name>distance</Name>
+<Type></Type>
+<Description>distance from the target</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

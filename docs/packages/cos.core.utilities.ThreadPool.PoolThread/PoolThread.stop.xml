@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>stop</Name>
+<Class>PoolThread</Class>
+<Module>cos.core.utilities.ThreadPool</Module>
+<Description>Stops the thread</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ThreadPool.py</SourceFile>
+<SourceLine>238</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>self</Name>
+<Type></Type>
+<Description>reference to this instance</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

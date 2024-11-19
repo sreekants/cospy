@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Timer</Name>
+<Description></Description>
+<SourceFile>Timer.py</SourceFile>
+<SourceLine>6</SourceLine>
+<Module>cos.core.api.Timer</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>get_utc</Name>
+<Description>Returns the simulation time in UTC</Description>
+<OutputFile>cos.core.api.Timer.Timer/Timer.get_utc</OutputFile>
+</Function>
+<Function>
+<Name>get_tickcount</Name>
+<Description>Returns the total number oc clock ticks passed</Description>
+<OutputFile>cos.core.api.Timer.Timer/Timer.get_tickcount</OutputFile>
+</Function>
+</Functions>
+</Class>

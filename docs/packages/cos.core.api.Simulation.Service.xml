@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Service</Name>
+<Description></Description>
+<SourceFile>Simulation.py</SourceFile>
+<SourceLine>6</SourceLine>
+<Module>cos.core.api.Simulation</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>stop</Name>
+<Description>Stops the simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.stop</OutputFile>
+</Function>
+<Function>
+<Name>start</Name>
+<Description>Start the simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.start</OutputFile>
+</Function>
+<Function>
+<Name>suspend</Name>
+<Description>Suspend the simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.suspend</OutputFile>
+</Function>
+<Function>
+<Name>resume</Name>
+<Description>Resume a simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.resume</OutputFile>
+</Function>
+<Function>
+<Name>command</Name>
+<Description>Send a command to the simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.command</OutputFile>
+</Function>
+<Function>
+<Name>signal</Name>
+<Description>Sends an event to the simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.signal</OutputFile>
+</Function>
+<Function>
+<Name>describe</Name>
+<Description>Describes components of the simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.describe</OutputFile>
+</Function>
+<Function>
+<Name>list</Name>
+<Description>Lists objects of a type in a simulation</Description>
+<OutputFile>cos.core.api.Simulation.Service/Service.list</OutputFile>
+</Function>
+</Functions>
+</Class>

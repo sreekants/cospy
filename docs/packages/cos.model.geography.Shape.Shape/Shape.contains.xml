@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>contains</Name>
+<Class>Shape</Class>
+<Module>cos.model.geography.Shape</Module>
+<Description>Checks if a point is within the shape</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Shape.py</SourceFile>
+<SourceLine>69</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>pt</Name>
+<Type></Type>
+<Description>Point to validate</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

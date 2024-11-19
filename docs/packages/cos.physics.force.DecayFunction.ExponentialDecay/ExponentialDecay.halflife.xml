@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>halflife</Name>
+<Class>ExponentialDecay</Class>
+<Module>cos.physics.force.DecayFunction</Module>
+<Description>Halflife to decay</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>DecayFunction.py</SourceFile>
+<SourceLine>22</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

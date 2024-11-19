@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Operator</Name>
+<Description>Implementation of the symbolic types used in a decison</Description>
+<SourceFile>Symbol.py</SourceFile>
+<SourceLine>128</SourceLine>
+<Module>cos.model.logic.Symbol</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>evaluate</Name>
+<Description>Evaluates the expression</Description>
+<OutputFile>cos.model.logic.Symbol.Operator/Operator.evaluate</OutputFile>
+</Function>
+</Functions>
+</Class>

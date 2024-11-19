@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>find_config_file</Name>
+<Class>Configuration</Class>
+<Module>cos.core.kernel.Configuration</Module>
+<Description>Finds the confituration file in the path</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Configuration.py</SourceFile>
+<SourceLine>198</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

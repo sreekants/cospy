@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>DecisionType</Name>
+<Description>Base class for an decision</Description>
+<SourceFile>Decision.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Module>cos.model.logic.Decision</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

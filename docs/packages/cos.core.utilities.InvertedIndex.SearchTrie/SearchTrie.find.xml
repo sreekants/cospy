@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>find</Name>
+<Class>SearchTrie</Class>
+<Module>cos.core.utilities.InvertedIndex</Module>
+<Description>Finds a word node in the trie</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>InvertedIndex.py</SourceFile>
+<SourceLine>43</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Trie key (search word)</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

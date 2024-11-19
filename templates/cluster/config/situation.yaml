@@ -1,0 +1,31 @@
+packages:
+  modules:  # Situation analysis modules
+      # Situation transformers (coverts ground observattions into incidents)
+     - name: Encounter
+       module: maritime.regulation.colreg.Encounter
+       arg: 
+
+      # Situation evaluators (coverts incidents into situations)
+     - name: Crossing
+       module: maritime.situation.crossing.Crossing
+       arg: 
+
+     - name: GiveWay
+       module: maritime.situation.giveway.Giveway
+       arg: 
+
+     - name: HeadOn
+       module: maritime.situation.headon.Headon
+       arg: 
+
+     - name: Overtaking
+       module: maritime.situation.overtaking.Overtaking
+       arg: 
+
+     - name: StandOn
+       module: maritime.situation.standon.Standon
+       arg: 
+
+     - name: Traffic
+       module: maritime.situation.traffic.Traffic
+       arg: 

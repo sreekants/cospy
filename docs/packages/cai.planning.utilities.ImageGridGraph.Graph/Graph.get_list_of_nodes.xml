@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>get_list_of_nodes</Name>
+<Class>Graph</Class>
+<Module>cai.planning.utilities.ImageGridGraph</Module>
+<Description>Returns the nodes in the graph</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ImageGridGraph.py</SourceFile>
+<SourceLine>56</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

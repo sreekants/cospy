@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>compose</Name>
+<Class>Arrow</Class>
+<Module>cos.ui.game.Arrow</Module>
+<Description>Calculate the shape of the arrow.</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Arrow.py</SourceFile>
+<SourceLine>30</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

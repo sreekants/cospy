@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>rotate</Name>
+<Class>Sprite</Class>
+<Module>cos.ui.game.Sprite</Module>
+<Description>Rotates the sprite</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Sprite.py</SourceFile>
+<SourceLine>65</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>angle</Name>
+<Type></Type>
+<Description>Angle to rotate</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

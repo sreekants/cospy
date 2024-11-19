@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>RuleSet</Name>
+<Description>A coolection of rules</Description>
+<SourceFile>RuleSet.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.model.rule.RuleSet</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_timer</Name>
+<Description>Callback handling timer events</Description>
+<OutputFile>cos.model.rule.RuleSet.RuleSet/RuleSet.on_timer</OutputFile>
+</Function>
+</Functions>
+</Class>

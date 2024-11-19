@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Route</Name>
+<Description>Fasade for route planning related classes</Description>
+<SourceFile>Route.py</SourceFile>
+<SourceLine>5</SourceLine>
+<Module>maritime.navigation.route.Route</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

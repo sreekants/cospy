@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SkySprite</Name>
+<Description>Sky shapes</Description>
+<SourceFile>SkySprite.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.ui.game.SkySprite</Module>
+<Layer>cos</Layer>
+<Functions>
+</Functions>
+</Class>

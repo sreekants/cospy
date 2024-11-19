@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Builder</Name>
+<Description>Helper class to build the simulation environment</Description>
+<SourceFile>Builder.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.core.simulation.Builder</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_init</Name>
+<Description>Callback for simulation initialization</Description>
+<OutputFile>cos.core.simulation.Builder.Builder/Builder.on_init</OutputFile>
+</Function>
+<Function>
+<Name>build</Name>
+<Description>Builds an object</Description>
+<OutputFile>cos.core.simulation.Builder.Builder/Builder.build</OutputFile>
+</Function>
+<Function>
+<Name>scale_polygon2D</Name>
+<Description>Scakes a 2D polygon</Description>
+<OutputFile>cos.core.simulation.Builder.Builder/Builder.scale_polygon2D</OutputFile>
+</Function>
+<Function>
+<Name>map2D_to_str</Name>
+<Description>Maps a point to a string</Description>
+<OutputFile>cos.core.simulation.Builder.Builder/Builder.map2D_to_str</OutputFile>
+</Function>
+<Function>
+<Name>map2D</Name>
+<Description>Scales a point</Description>
+<OutputFile>cos.core.simulation.Builder.Builder/Builder.map2D</OutputFile>
+</Function>
+<Function>
+<Name>capitalize</Name>
+<Description>Capitalizes a text</Description>
+<OutputFile>cos.core.simulation.Builder.Builder/Builder.capitalize</OutputFile>
+</Function>
+</Functions>
+</Class>

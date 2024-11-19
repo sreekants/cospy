@@ -1,0 +1,132 @@
+packages:
+  modules:  # COLREG rule set
+     - name: COLREG.Evaluator
+       module: maritime.regulation.colreg.Evaluator
+       config: sample.frequency=1
+      
+     - name: Rule1
+       module: rules.colreg.rule1.Rule1
+       config: 
+      
+     - name: Rule2
+       module: rules.colreg.rule2.Rule2
+      
+     - name: Rule3
+       module: rules.colreg.rule3.Rule3
+
+     - name: Rule4
+       module: rules.colreg.rule4.Rule4
+
+     - name: Rule5
+       module: rules.colreg.rule5.Rule5
+
+     - name: Rule6
+       module: rules.colreg.rule6.Rule6
+
+     - name: Rule7
+       module: rules.colreg.rule7.Rule7
+       enable: False
+
+     - name: Rule8
+       module: rules.colreg.rule8.Rule8
+
+     - name: Rule9
+       module: rules.colreg.rule9.Rule9
+
+     - name: Rule10
+       module: rules.colreg.rule10.Rule10
+
+     - name: Rule11
+       module: rules.colreg.rule11.Rule11
+
+     - name: Rule12
+       module: rules.colreg.rule12.Rule12
+
+     - name: Rule13
+       module: rules.colreg.rule13.Rule13
+
+     - name: Rule14
+       module: rules.colreg.rule14.Rule14
+
+     - name: Rule15
+       module: rules.colreg.rule15.Rule15
+
+     - name: Rule16
+       module: rules.colreg.rule16.Rule16
+
+     - name: Rule17
+       module: rules.colreg.rule17.Rule17
+
+     - name: Rule18
+       module: rules.colreg.rule18.Rule18
+
+     - name: Rule19
+       module: rules.colreg.rule19.Rule19
+
+     - name: Rule20
+       module: rules.colreg.rule20.Rule20
+
+     - name: Rule21
+       module: rules.colreg.rule21.Rule21
+
+     - name: Rule22
+       module: rules.colreg.rule22.Rule22
+
+     - name: Rule23
+       module: rules.colreg.rule23.Rule23
+
+     - name: Rule24
+       module: rules.colreg.rule24.Rule24
+
+     - name: Rule25
+       module: rules.colreg.rule25.Rule25
+
+     - name: Rule26
+       module: rules.colreg.rule26.Rule26
+
+     - name: Rule27
+       module: rules.colreg.rule27.Rule27
+
+     - name: Rule28
+       module: rules.colreg.rule28.Rule28
+
+     - name: Rule29
+       module: rules.colreg.rule29.Rule29
+
+     - name: Rule30
+       module: rules.colreg.rule30.Rule30
+
+     - name: Rule31
+       module: rules.colreg.rule31.Rule31
+
+     - name: Rule32
+       module: rules.colreg.rule32.Rule32
+
+     - name: Rule33
+       module: rules.colreg.rule33.Rule33
+
+     - name: Rule34
+       module: rules.colreg.rule34.Rule34
+
+     - name: Rule35
+       module: rules.colreg.rule35.Rule35
+
+     - name: Rule36
+       module: rules.colreg.rule36.Rule36
+
+     - name: Rule37
+       module: rules.colreg.rule37.Rule37
+
+     - name: Rule38
+       module: rules.colreg.rule38.Rule38
+
+     - name: Rule39
+       module: rules.colreg.rule39.Rule39
+
+     - name: Rule40
+       module: rules.colreg.rule40.Rule40
+
+     - name: Rule41
+       module: rules.colreg.rule41.Rule41
+
+

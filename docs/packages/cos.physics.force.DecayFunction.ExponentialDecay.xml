@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>ExponentialDecay</Name>
+<Description>Implementation of the DecayFunctions class</Description>
+<SourceFile>DecayFunction.py</SourceFile>
+<SourceLine>8</SourceLine>
+<Module>cos.physics.force.DecayFunction</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>mean</Name>
+<Description>Mean of the decay function</Description>
+<OutputFile>cos.physics.force.DecayFunction.ExponentialDecay/ExponentialDecay.mean</OutputFile>
+</Function>
+<Function>
+<Name>halflife</Name>
+<Description>Halflife to decay</Description>
+<OutputFile>cos.physics.force.DecayFunction.ExponentialDecay/ExponentialDecay.halflife</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Builder</Name>
+<Description>Builder class for vessels</Description>
+<SourceFile>Builder.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Module>maritime.model.vessel.Builder</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Builds all the vessels in a simulation</Description>
+<OutputFile>maritime.model.vessel.Builder.Builder/Builder.create</OutputFile>
+</Function>
+<Function>
+<Name>fromjson</Name>
+<Description>Builds a vessel from a configuration</Description>
+<OutputFile>maritime.model.vessel.Builder.Builder/Builder.fromjson</OutputFile>
+</Function>
+</Functions>
+</Class>

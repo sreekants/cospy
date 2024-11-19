@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>close</Name>
+<Class>FileSystem</Class>
+<Module>cos.core.kernel.BootImage</Module>
+<Description>Closes a file stream</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>BootImage.py</SourceFile>
+<SourceLine>54</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>fp</Name>
+<Type></Type>
+<Description>Unused handle</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

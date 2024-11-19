@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Vehicle</Name>
+<Description>Types of vessels and their properties, states and characteristics</Description>
+<SourceFile>Vehicle.py</SourceFile>
+<SourceLine>56</SourceLine>
+<Module>cos.model.vehicle.Vehicle</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>describe</Name>
+<Description>Describes the object confituration</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.describe</OutputFile>
+</Function>
+<Function>
+<Name>location</Name>
+<Description>Returns the object location</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.location</OutputFile>
+</Function>
+<Function>
+<Name>velocity</Name>
+<Description>Returns the object velocity</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.velocity</OutputFile>
+</Function>
+<Function>
+<Name>acceleration</Name>
+<Description>Returns the object acceleration</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.acceleration</OutputFile>
+</Function>
+<Function>
+<Name>boundary</Name>
+<Description>REturns the bounding rectangle of the object</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.boundary</OutputFile>
+</Function>
+<Function>
+<Name>sim_update</Name>
+<Description>Updates the simulation</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.sim_update</OutputFile>
+</Function>
+<Function>
+<Name>sim_init</Name>
+<Description>Initialize the simulation</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.sim_init</OutputFile>
+</Function>
+<Function>
+<Name>force</Name>
+<Description>Sets a force vector on the vehicle</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.force</OutputFile>
+</Function>
+<Function>
+<Name>device</Name>
+<Description>Returns a device onboard the vehicle</Description>
+<OutputFile>cos.model.vehicle.Vehicle.Vehicle/Vehicle.device</OutputFile>
+</Function>
+</Functions>
+</Class>

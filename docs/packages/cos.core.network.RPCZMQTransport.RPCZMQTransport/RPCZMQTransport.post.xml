@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>post</Name>
+<Class>RPCZMQTransport</Class>
+<Module>cos.core.network.RPCZMQTransport</Module>
+<Description>Posts a message to the socket</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCZMQTransport.py</SourceFile>
+<SourceLine>141</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>sock</Name>
+<Type></Type>
+<Description>Reference to the socket</Description>
+</Argument>
+<Argument>
+<Name>objpath</Name>
+<Type></Type>
+<Description>Object path (on the object manager)</Description>
+</Argument>
+<Argument>
+<Name>req</Name>
+<Type></Type>
+<Description>Request object</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

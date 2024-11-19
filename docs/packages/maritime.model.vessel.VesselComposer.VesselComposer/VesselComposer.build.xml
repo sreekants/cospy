@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>build</Name>
+<Class>VesselComposer</Class>
+<Module>maritime.model.vessel.VesselComposer</Module>
+<Description>Composes a vessel from a profile</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>VesselComposer.py</SourceFile>
+<SourceLine>19</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>vessel</Name>
+<Type></Type>
+<Description>Reference to a new vessel to compose</Description>
+</Argument>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

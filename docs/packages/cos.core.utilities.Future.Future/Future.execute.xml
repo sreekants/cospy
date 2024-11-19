@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>execute</Name>
+<Class>Future</Class>
+<Module>cos.core.utilities.Future</Module>
+<Description>Executes the task</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Future.py</SourceFile>
+<SourceLine>35</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>pool</Name>
+<Type></Type>
+<Description>Reference to the containing thread pool</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

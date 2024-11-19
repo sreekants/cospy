@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>for_each_incident</Name>
+<Class>MaritimeSituation</Class>
+<Module>maritime.core.situation.MaritimeSituation</Module>
+<Description>Invoke a callback for each incident in a collection</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MaritimeSituation.py</SourceFile>
+<SourceLine>58</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>rule_ctxt</Name>
+<Type></Type>
+<Description>Rule context</Description>
+</Argument>
+<Argument>
+<Name>type</Name>
+<Type></Type>
+<Description>Type of the object</Description>
+</Argument>
+<Argument>
+<Name>collection</Name>
+<Type></Type>
+<Description>collection of incidents to match</Description>
+</Argument>
+<Argument>
+<Name>fn</Name>
+<Type></Type>
+<Description>Callback to invoke for each incident</Description>
+</Argument>
+<Argument>
+<Name>arg</Name>
+<Type></Type>
+<Description>Opaque argument to pass to the callback</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

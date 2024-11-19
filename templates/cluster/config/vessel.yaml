@@ -1,0 +1,25 @@
+packages:
+  modules:  # Vessels
+     - name: Builder.PowerDrivenVessels
+       module: maritime.model.vessel.Builder
+       service: Builder.PowerDrivenVessels
+       args: Type=POWER_DRIVEN
+       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db
+
+     - name: Builder.SailingVessels
+       module: maritime.model.vessel.Builder
+       service: Builder.SailingVessels
+       args: Type=SAILING
+       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db
+  
+     - name: Builder.SeaPlanes
+       module: maritime.model.vessel.Builder
+       service: Builder.SeaPlanes
+       args: Type=SEAPLANE
+       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db
+
+     - name: WIGs
+       module: maritime.model.vessel.Builder
+       service: Builder.PowerDrivenVessels
+       args: Type=WIG
+       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db

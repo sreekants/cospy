@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>add_component</Name>
+<Class>Composite</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Adds a component to the composite</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>177</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>obj</Name>
+<Type></Type>
+<Description>Object to add to the collection</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

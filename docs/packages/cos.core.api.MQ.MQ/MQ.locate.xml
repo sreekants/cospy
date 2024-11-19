@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>locate</Name>
+<Class>MQ</Class>
+<Module>cos.core.api.MQ</Module>
+<Description>Finds a queue given a criteria</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MQ.py</SourceFile>
+<SourceLine>169</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>domain</Name>
+<Type></Type>
+<Description>Domain namespace</Description>
+</Argument>
+<Argument>
+<Name>criteria</Name>
+<Type></Type>
+<Description>Criteria to search for</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

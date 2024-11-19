@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_vessel_move</Name>
+<Class>VirtualWorld</Class>
+<Module>cos.tools.cviz.VirtualWorld</Module>
+<Description>Event handler for vessel_move</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>VirtualWorld.py</SourceFile>
+<SourceLine>330</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

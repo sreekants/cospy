@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>set_host</Name>
+<Class>ZMQTransport</Class>
+<Module>cos.core.network.ZMQTransport</Module>
+<Description>Sets the host of the transport</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ZMQTransport.py</SourceFile>
+<SourceLine>28</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>host</Name>
+<Type></Type>
+<Description>Host name</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

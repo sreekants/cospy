@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>create_flyweight</Name>
+<Class>Flyweight</Class>
+<Module>cos.core.utilities.Patterns</Module>
+<Description>Overridable function to create a new objects for a key</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Patterns.py</SourceFile>
+<SourceLine>265</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>key</Name>
+<Type></Type>
+<Description>Key of the object</Description>
+</Argument>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Context argument passed to the constructor</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

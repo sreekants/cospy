@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>update</Name>
+<Class>ActiveRecord</Class>
+<Module>cos.core.utilities.ActiveRecord</Module>
+<Description>Updates values of an object</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>ActiveRecord.py</SourceFile>
+<SourceLine>218</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>oid</Name>
+<Type></Type>
+<Description>Object ID or key field value</Description>
+</Argument>
+<Argument>
+<Name>values</Name>
+<Type></Type>
+<Description>Values to update on the table for the object</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

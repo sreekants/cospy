@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>on_overtaken</Name>
+<Class>Rule9</Class>
+<Module>rules.colreg.rule9.Rule9</Module>
+<Description>Event handler for overtaken</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Rule9.py</SourceFile>
+<SourceLine>53</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ctxt</Name>
+<Type></Type>
+<Description>Simulation context</Description>
+</Argument>
+<Argument>
+<Name>evt</Name>
+<Type></Type>
+<Description>Event data</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

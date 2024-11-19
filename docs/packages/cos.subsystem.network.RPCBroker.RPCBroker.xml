@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>RPCBroker</Name>
+<Description>RPC broker thread and supporting classes</Description>
+<SourceFile>RPCBroker.py</SourceFile>
+<SourceLine>73</SourceLine>
+<Module>cos.subsystem.network.RPCBroker</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>on_start</Name>
+<Description>Callback for simulation startup</Description>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBroker/RPCBroker.on_start</OutputFile>
+</Function>
+<Function>
+<Name>on_stop</Name>
+<Description>Callback for simulation shutdown</Description>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBroker/RPCBroker.on_stop</OutputFile>
+</Function>
+<Function>
+<Name>invoke_service</Name>
+<Description>Invokes an RPC method on the service</Description>
+<OutputFile>cos.subsystem.network.RPCBroker.RPCBroker/RPCBroker.invoke_service</OutputFile>
+</Function>
+</Functions>
+</Class>

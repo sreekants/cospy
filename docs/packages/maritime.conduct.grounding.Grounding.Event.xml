@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Event</Name>
+<Description>Implementation of the Grounding class</Description>
+<SourceFile>Grounding.py</SourceFile>
+<SourceLine>13</SourceLine>
+<Module>maritime.conduct.grounding.Grounding</Module>
+<Layer>maritime</Layer>
+<Functions>
+</Functions>
+</Class>

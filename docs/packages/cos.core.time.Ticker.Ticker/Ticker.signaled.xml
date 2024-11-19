@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>signaled</Name>
+<Class>Ticker</Class>
+<Module>cos.core.time.Ticker</Module>
+<Description>Checks if the ticker is signaled.</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Ticker.py</SourceFile>
+<SourceLine>17</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

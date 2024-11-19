@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>BoundingBox</Name>
+<Description>IImplementation of a rectangular bounding box for simulation objects</Description>
+<SourceFile>BoundingBox.py</SourceFile>
+<SourceLine>9</SourceLine>
+<Module>cos.ui.game.BoundingBox</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>render</Name>
+<Description>Renders the bounding box</Description>
+<OutputFile>cos.ui.game.BoundingBox.BoundingBox/BoundingBox.render</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Updates the screen</Description>
+<OutputFile>cos.ui.game.BoundingBox.BoundingBox/BoundingBox.update</OutputFile>
+</Function>
+</Functions>
+</Class>

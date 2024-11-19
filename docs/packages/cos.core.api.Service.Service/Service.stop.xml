@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>stop</Name>
+<Class>Service</Class>
+<Module>cos.core.api.Service</Module>
+<Description>Stops a service</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Service.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>args</Name>
+<Type></Type>
+<Description>List of arguments</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

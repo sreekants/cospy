@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Actor</Name>
+<Description>Impmenentation of a controller class for all sumulation objectsRunnerThread</Description>
+<SourceFile>Actor.py</SourceFile>
+<SourceLine>17</SourceLine>
+<Module>cos.core.simulation.Actor</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>init</Name>
+<Description>Initializes an actor</Description>
+<OutputFile>cos.core.simulation.Actor.Actor/Actor.init</OutputFile>
+</Function>
+<Function>
+<Name>update</Name>
+<Description>Update the simulant controlled by the actor</Description>
+<OutputFile>cos.core.simulation.Actor.Actor/Actor.update</OutputFile>
+</Function>
+<Function>
+<Name>get_position</Name>
+<Description>Returns the position vector of the simulant</Description>
+<OutputFile>cos.core.simulation.Actor.Actor/Actor.get_position</OutputFile>
+</Function>
+<Function>
+<Name>get_velocity</Name>
+<Description>Returns the velocity vector of the simulant</Description>
+<OutputFile>cos.core.simulation.Actor.Actor/Actor.get_velocity</OutputFile>
+</Function>
+<Function>
+<Name>get_acceleration</Name>
+<Description>Returns the velocity vector of the simulant</Description>
+<OutputFile>cos.core.simulation.Actor.Actor/Actor.get_acceleration</OutputFile>
+</Function>
+<Function>
+<Name>motion</Name>
+<Description>Returns the motion behavior of the actor</Description>
+<OutputFile>cos.core.simulation.Actor.Actor/Actor.motion</OutputFile>
+</Function>
+<Function>
+<Name>create_behavior</Name>
+<Description>Creates a behavior from a configuration</Description>
+<OutputFile>cos.core.simulation.Actor.Actor/Actor.create_behavior</OutputFile>
+</Function>
+</Functions>
+</Class>

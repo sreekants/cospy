@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>Topic</Name>
+<Description></Description>
+<SourceFile>Topic.py</SourceFile>
+<SourceLine>6</SourceLine>
+<Module>cos.core.api.Topic</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>pop</Name>
+<Description>Pops a message from the queue</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.pop</OutputFile>
+</Function>
+<Function>
+<Name>push</Name>
+<Description>Pushes a message to queue</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.push</OutputFile>
+</Function>
+<Function>
+<Name>find</Name>
+<Description>Finds a queue matching a criteria</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.find</OutputFile>
+</Function>
+<Function>
+<Name>info</Name>
+<Description>Returns information about a topic</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.info</OutputFile>
+</Function>
+<Function>
+<Name>list</Name>
+<Description>List all topics</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.list</OutputFile>
+</Function>
+<Function>
+<Name>type</Name>
+<Description>Returns the type of a topic</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.type</OutputFile>
+</Function>
+<Function>
+<Name>route</Name>
+<Description>Route a message from a source to a destination</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.route</OutputFile>
+</Function>
+<Function>
+<Name>unroute</Name>
+<Description>Removes a route</Description>
+<OutputFile>cos.core.api.Topic.Topic/Topic.unroute</OutputFile>
+</Function>
+</Functions>
+</Class>

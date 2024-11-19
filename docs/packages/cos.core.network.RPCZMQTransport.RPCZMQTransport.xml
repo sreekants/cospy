@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>RPCZMQTransport</Name>
+<Description>Implementation of the RPC Transport for ZMQ</Description>
+<SourceFile>RPCZMQTransport.py</SourceFile>
+<SourceLine>15</SourceLine>
+<Module>cos.core.network.RPCZMQTransport</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>get_port</Name>
+<Description>Returns the port address</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.get_port</OutputFile>
+</Function>
+<Function>
+<Name>create</Name>
+<Description>Creates the transport</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.create</OutputFile>
+</Function>
+<Function>
+<Name>close</Name>
+<Description>Closes the transport</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.close</OutputFile>
+</Function>
+<Function>
+<Name>is_pending</Name>
+<Description>Checks if a request is queued</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.is_pending</OutputFile>
+</Function>
+<Function>
+<Name>runrpc</Name>
+<Description>Runs the RPC loop</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.runrpc</OutputFile>
+</Function>
+<Function>
+<Name>post</Name>
+<Description>Posts a message to the socket</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.post</OutputFile>
+</Function>
+<Function>
+<Name>runipc</Name>
+<Description>Runs an IPC loop</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.runipc</OutputFile>
+</Function>
+<Function>
+<Name>notify</Name>
+<Description>Notifies events remotely</Description>
+<OutputFile>cos.core.network.RPCZMQTransport.RPCZMQTransport/RPCZMQTransport.notify</OutputFile>
+</Function>
+</Functions>
+</Class>

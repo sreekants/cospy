@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>encloses</Name>
+<Class>Polygon</Class>
+<Module>cos.math.geometry.Polygon</Module>
+<Description>Checks if a point is enclosed by the polygon</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Polygon.py</SourceFile>
+<SourceLine>16</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>x</Name>
+<Type></Type>
+<Description>X coordinate</Description>
+</Argument>
+<Argument>
+<Name>y</Name>
+<Type></Type>
+<Description>Y coordinate</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

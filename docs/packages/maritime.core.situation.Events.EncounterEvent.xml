@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>EncounterEvent</Name>
+<Description>Types of maritime events</Description>
+<SourceFile>Events.py</SourceFile>
+<SourceLine>16</SourceLine>
+<Module>maritime.core.situation.Events</Module>
+<Layer>maritime</Layer>
+<Functions>
+<Function>
+<Name>OS</Name>
+<Description>Returns a reference to the own ship</Description>
+<OutputFile>maritime.core.situation.Events.EncounterEvent/EncounterEvent.OS</OutputFile>
+</Function>
+</Functions>
+</Class>

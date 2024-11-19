@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>doubling_time</Name>
+<Class>ExponentialGrowth</Class>
+<Module>cos.physics.force.GrowthFunction</Module>
+<Description>Doubling time for the growth</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>GrowthFunction.py</SourceFile>
+<SourceLine>19</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

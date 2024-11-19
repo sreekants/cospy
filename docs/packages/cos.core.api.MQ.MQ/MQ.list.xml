@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>list</Name>
+<Class>MQ</Class>
+<Module>cos.core.api.MQ</Module>
+<Description>List all queue within a scope</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>MQ.py</SourceFile>
+<SourceLine>183</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>domain</Name>
+<Type></Type>
+<Description>Domain namespace</Description>
+</Argument>
+<Argument>
+<Name>queuename</Name>
+<Type></Type>
+<Description>Queue name scope</Description>
+</Argument>
+<Argument>
+<Name>config</Name>
+<Type></Type>
+<Description>Configuration attributes</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

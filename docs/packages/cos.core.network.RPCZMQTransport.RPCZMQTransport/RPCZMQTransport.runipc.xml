@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>runipc</Name>
+<Class>RPCZMQTransport</Class>
+<Module>cos.core.network.RPCZMQTransport</Module>
+<Description>Runs an IPC loop</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>RPCZMQTransport.py</SourceFile>
+<SourceLine>184</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

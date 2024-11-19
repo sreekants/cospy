@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>BootLoader</Name>
+<Description>Implementation of the boot loader for the simulation engine</Description>
+<SourceFile>BootLoader.py</SourceFile>
+<SourceLine>11</SourceLine>
+<Module>cos.core.kernel.BootLoader</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>startup</Name>
+<Description>Starts up the simulation</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.startup</OutputFile>
+</Function>
+<Function>
+<Name>shutdown</Name>
+<Description>Shutdown the sumulation</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.shutdown</OutputFile>
+</Function>
+<Function>
+<Name>start</Name>
+<Description>Start the simulation</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.start</OutputFile>
+</Function>
+<Function>
+<Name>stop</Name>
+<Description>Stops the simulation</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.stop</OutputFile>
+</Function>
+<Function>
+<Name>init</Name>
+<Description>Initializes the simulation</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.init</OutputFile>
+</Function>
+<Function>
+<Name>load_section</Name>
+<Description>Loads a section of the configuration</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.load_section</OutputFile>
+</Function>
+<Function>
+<Name>load_file</Name>
+<Description>Loads a simulation file</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.load_file</OutputFile>
+</Function>
+<Function>
+<Name>load_modules</Name>
+<Description>Loads all the modules in a simulation file</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.load_modules</OutputFile>
+</Function>
+<Function>
+<Name>load_class</Name>
+<Description>Loads a python class</Description>
+<OutputFile>cos.core.kernel.BootLoader.BootLoader/BootLoader.load_class</OutputFile>
+</Function>
+</Functions>
+</Class>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>stop</Name>
+<Class>Runner</Class>
+<Module>cos.core.simulation.Runner</Module>
+<Description>Stops the simulation thread</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Runner.py</SourceFile>
+<SourceLine>80</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+</Arguments>
+</Signature></Signatures>
+</Function>

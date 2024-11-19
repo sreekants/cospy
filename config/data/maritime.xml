@@ -1,0 +1,282 @@
+<DataCube> <Name>maritime</Name>
+ <Type />
+ <Description />
+ <Facts><Fact> <Name>Log</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_log</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CallerId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>caller_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TxnType</Name>
+ <Type>int</Type>
+ <Display>Transaction Type</Display>
+ <Description>Transaction type</Description>
+ <FieldName>txn_type</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Flags</Name>
+ <Type>int</Type>
+ <Display>Flags</Display>
+ <Description>Flags</Description>
+ <FieldName>flags</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Ro</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_ro</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Concern</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>ScoreHazardousTransport</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_score_hazardous_transport</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Vessel</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>ScoreBerthingRisk</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_score_berthing_risk</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+</Facts>
+
+ <Dimensions><Dimension> <Name>Location</Name>
+ <Type />
+ <Display />
+ <Description />
+ <TableName />
+ <Leaves><Dimension> <Name>Country</Name>
+ <Type>string</Type>
+ <Display>Country</Display>
+ <Description>Country name</Description>
+ <TableName>dim_country</TableName>
+ <Leaves><Dimension> <Name>State</Name>
+ <Type>string</Type>
+ <Display>State</Display>
+ <Description>State name</Description>
+ <TableName>dim_state</TableName>
+ <Leaves><Dimension> <Name>District</Name>
+ <Type>string</Type>
+ <Display>District</Display>
+ <Description>District name</Description>
+ <TableName>dim_district</TableName>
+ <Leaves><Dimension> <Name>County</Name>
+ <Type>string</Type>
+ <Display>County</Display>
+ <Description>County name</Description>
+ <TableName>dim_county</TableName>
+ <Leaves><Dimension> <Name>PostalCode</Name>
+ <Type>string</Type>
+ <Display>PostalCode</Display>
+ <Description>PostalCode of the port</Description>
+ <TableName>dim_postal_code</TableName>
+ <Leaves><Dimension> <Name>Port</Name>
+ <Type>string</Type>
+ <Display>Port</Display>
+ <Description>Port name</Description>
+ <TableName>dim_port</TableName>
+ <Leaves />
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+<Dimension> <Name>gps</Name>
+ <Type>string</Type>
+ <Display>gps</Display>
+ <Description>Gps location</Description>
+ <TableName>dim_gps</TableName>
+ <Leaves />
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Dimensions>
+
+</DataCube>

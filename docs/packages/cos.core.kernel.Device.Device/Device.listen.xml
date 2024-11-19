@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../function.xsl"?>
+<Function>
+<Name>listen</Name>
+<Class>Device</Class>
+<Module>cos.core.kernel.Device</Module>
+<Description>Sets the device to listen mode</Description>
+<Signatures><Signature>
+<Description />
+<SourceFile>Device.py</SourceFile>
+<SourceLine>52</SourceLine>
+<Result><Argument> <Name /><Type /><Description /></Argument></Result>
+<Arguments>
+<Argument>
+<Name>ibacklog</Name>
+<Type></Type>
+<Description>Backlog of events to hold while listening</Description>
+</Argument>
+</Arguments>
+</Signature></Signatures>
+</Function>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="class.xsl"?>
+<Class>
+<Name>SeaBuilder</Name>
+<Description>builder class for marine assets</Description>
+<SourceFile>SeaBuilder.py</SourceFile>
+<SourceLine>10</SourceLine>
+<Module>cos.model.geography.SeaBuilder</Module>
+<Layer>cos</Layer>
+<Functions>
+<Function>
+<Name>create</Name>
+<Description>Creates a sea artifact from the database</Description>
+<OutputFile>cos.model.geography.SeaBuilder.SeaBuilder/SeaBuilder.create</OutputFile>
+</Function>
+</Functions>
+</Class>
