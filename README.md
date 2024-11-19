@@ -1,14 +1,12 @@
-# modcolreg
+# cospy
 
-[![Release](https://img.shields.io/github/v/release/NTNU-Autoship-Internal/modcolreg)](https://img.shields.io/github/v/release/NTNU-Autoship-Internal/modcolreg)
-[![Build status](https://img.shields.io/github/actions/workflow/status/NTNU-Autoship-Internal/modcolreg/main.yml?branch=main)](https://github.com/NTNU-Autoship-Internal/modcolreg/actions/workflows/main.yml?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/NTNU-Autoship-Internal/modcolreg/branch/main/graph/badge.svg)](https://codecov.io/gh/NTNU-Autoship-Internal/modcolreg)
-[![Commit activity](https://img.shields.io/github/commit-activity/m/NTNU-Autoship-Internal/modcolreg)](https://img.shields.io/github/commit-activity/m/NTNU-Autoship-Internal/modcolreg)
-[![License](https://img.shields.io/github/license/NTNU-Autoship-Internal/modcolreg)](https://img.shields.io/github/license/NTNU-Autoship-Internal/modcolreg)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://opensource.org/license/apache-2-0) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-A framework for simulating ASV (autonomous surface vehicles) for regulatory compliance 
 
-- **Github repository**: <https://github.com/NTNU-Autoship-Internal/modcolreg/>
+
+COS (Co-Simulation Operating System) - Core packages
+
+- **Github repository**: <https://github.com/sreekants/cospy>
 
 ## Getting started with your project
 
@@ -18,7 +16,7 @@ First, create a repository on GitHub with the same name as this project, and the
 git init -b main
 git add .
 git commit -m "init commit"
-git remote add origin git@github.com:NTNU-Autoship-Internal/modcolreg.git
+git remote add origin git@github.com:sreekants/cospy.git
 git push -u origin main
 ```
 
@@ -57,14 +55,16 @@ If you are only installing the prerequisite python packages and prefer not to de
 pip install -r requirements.txt
 ```
 
+If you have trouble with the python package installation, it is most likely a version mismatch. You may have to install a packages manually by looking at the requirements.txt.
+
 ### Checking your setup.
 If you have got all your dependeicies and environment variables setup you should be good to go already. You can verify if everything is running by booting up the kernel. To do that, you change directory to *apps/coslaunch* under your installation dierctory. When you are at this folder, start the kernel with the following command:
 
 ```bash
-/home/jdoe/devel/modcolreg/apps/cosservice$ python main.py
+/home/jdoe/devel/cospy/apps/cosservice$ python main.py
 ```
 
-IF all goes well, you should see an output like the following..
+If all goes well, you should see an output like the following..
 
 ```bash
 COS Simulation Operating system
@@ -72,7 +72,7 @@ Version: 1.0 [07 Mar 2018]
 22/04/24 12:55:56 (Kernel) Initializing...
 22/04/24 12:55:56 (Loader) Loading Kernel: Subsystem
 22/04/24 12:55:56 (Loader) Loading Subsystem
-22/04/24 12:55:56 (Loader)   level-0: E:\users\ntnu\modcolreg/config/subsystem.yaml.
+22/04/24 12:55:56 (Loader)   level-0: /home/jdoe/devel/cospy/config/subsystem.yaml.
 22/04/24 12:55:56 (Loader)    + Module: cos.core.subsystem.RPCBroker 
 22/04/24 12:55:56 (Loader)    + Module: cos.core.subsystem.NetworkManager 
 22/04/24 12:55:56 (Loader)    + Module: cos.core.subsystem.DataManager 
@@ -91,7 +91,7 @@ Pressing a key at this prompt shuts down the kernel. But otherwise, the kernel i
 
 
 ```bash
-/home/jdoe/devel/modcolreg/apps/cosservice$ python .\main.py
+/home/jdoe/devel/cospy/apps/cviz$ python main.py
 pygame 2.5.2 (SDL 2.28.3, Python 3.12.2)
 Hello from the pygame community. https://www.pygame.org/contribute.html
 Connecting to tcp://localhost:5556
