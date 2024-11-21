@@ -125,7 +125,7 @@ class InlandWaterRule(Rule):
 				continue
 
 			for err in result.error:
-				self.on_violate( ctxt, rule_ctxt, rule.parent.name )
+				self.on_violate( ctxt, rule_ctxt, err.parent.name )
 
 		return
 

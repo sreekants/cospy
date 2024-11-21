@@ -133,11 +133,11 @@
  <FieldName>report_time</FieldName>
  <Unit />
 </Measure>
-<Measure> <Name>Vessel</Name>
+<Measure> <Name>VesselId</Name>
  <Type>int</Type>
  <Display>Vessel IMO</Display>
  <Description>Vessel IMO</Description>
- <FieldName>vessel</FieldName>
+ <FieldName>vessel_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Penalty</Name>
@@ -195,6 +195,2712 @@
 </Measures>
 
 </Fact>
+<Fact> <Name>Colreg_R01</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r01</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R02</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r02</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R03</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r03</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R04</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r04</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R05</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r05</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R06</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r06</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R07</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r07</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R08</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r08</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R09</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r09</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R10</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r10</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R11</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r11</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R12</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r12</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R13</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r13</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R14</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r14</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R15</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r15</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R16</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r16</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R17</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r17</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R18</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r18</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R19</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r19</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R20</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r20</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R21</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r21</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R22</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r22</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R23</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r23</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R24</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r24</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R25</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r25</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R26</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r26</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R27</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r27</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R28</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r28</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R29</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r29</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R30</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r30</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R31</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r31</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R32</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r32</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R33</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r33</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R34</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r34</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R35</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r35</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R36</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r36</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R37</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r37</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R38</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r38</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R39</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r39</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R40</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r40</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Colreg_R41</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_colreg_r41</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>time</Type>
+ <Display>Call Time</Display>
+ <Description>Phone call report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty Score</Display>
+ <Description>Penalty Score</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Info</Description>
+ <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
 </Facts>
 
  <Dimensions><Dimension> <Name>Location</Name>
@@ -232,42 +2938,42 @@
  <Display>Port</Display>
  <Description>Port name</Description>
  <TableName>dim_port</TableName>
- <Leaves />
-
- <Fields />
-
-</Dimension>
-</Leaves>
-
- <Fields />
-
-</Dimension>
-</Leaves>
-
- <Fields />
-
-</Dimension>
-</Leaves>
-
- <Fields />
-
-</Dimension>
-</Leaves>
-
- <Fields />
-
-</Dimension>
-</Leaves>
-
- <Fields />
-
-</Dimension>
-<Dimension> <Name>gps</Name>
+ <Leaves><Dimension> <Name>gps</Name>
  <Type>string</Type>
  <Display>gps</Display>
  <Description>Gps location</Description>
  <TableName>dim_gps</TableName>
  <Leaves />
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
+
+ <Fields />
+
+</Dimension>
+</Leaves>
 
  <Fields />
 

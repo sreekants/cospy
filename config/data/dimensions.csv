@@ -5,4 +5,4 @@ Location,District,State,string,District,District name
 Location,County,District,string,County,County name
 Location,PostalCode,County,string,PostalCode,PostalCode of the port
 Location,Port,PostalCode,string,Port,Port name
-Location,gps,,string,gps,Gps location
+Location,gps,Port,string,gps,Gps location
