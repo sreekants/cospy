@@ -94,7 +94,7 @@ class Evaluator(Service):
 		self.preprocessors	= objmgr.get_all("/Faculty/Situation/Incident")
 		self.postprocessors	= objmgr.get_all("/Faculty/Situation/Processors")
 
-		self.rules			= objmgr.get_all("/Faculty/Regulation/Rules")
+		self.rules			= objmgr.get_all("/Faculty/Regulation")
 		return
 
 	def init_objects(self, ctxt:Context, config):

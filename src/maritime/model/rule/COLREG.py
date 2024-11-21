@@ -67,7 +67,7 @@ class COLREG(Rule):
 
 		return
 
-	def on_violate(self, ctxt:Context, rule_ctxt:RuleContext, rule:Decision):
+	def on_violate(self, ctxt:Context, rule_ctxt:RuleContext, err:Decision):
 		""" Evaluates the expression
 		Arguments
 			ctxt -- Simulation context
@@ -76,7 +76,7 @@ class COLREG(Rule):
 		"""
 
 		# Override the function to score the violation
-		ctxt.log.error( 'COLREG', f'Violated rule {rule}')
+		ctxt.log.error( 'COLREG', f'Violated rule {err}')
 		return
 
 if __name__ == "__main__":
