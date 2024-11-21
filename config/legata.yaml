@@ -1,5 +1,5 @@
 language:
-  resolvers:  # Port authorities
+  resolvers:  # Legata resolvers
      - scope: 'variables'
        prefix: null
        module: cos.model.resolver.MappingResolver
