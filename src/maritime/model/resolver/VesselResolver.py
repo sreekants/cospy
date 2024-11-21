@@ -76,54 +76,6 @@ class VesselResolver(Resolver):
 
 		return self.heading
 
-class OwnShipResolver(VesselResolver):
-	def __init__(self, OS:Vessel=None):
-		""" Constructor
-		Arguments
-			OS -- TODO
-		""" 
-		VesselResolver.__init__(self, OS,'OwnShip.')
-		return
-
-	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
-		Arguments
-			ctxt -- Simulation context
-			rulectxt -- TODO
-		""" 
-		self.velocity	= None
-		self.heading	= None
-
-		if rulectxt.situation is not None:
-			self.vessel		= rulectxt.situation.os
-		else:
-			self.vessel		= None
-		return
-
-class TargetShipResolver(VesselResolver):
-	def __init__(self, TS:Vessel=None):
-		""" Constructor
-		Arguments
-			TS -- TODO
-		""" 
-		VesselResolver.__init__(self, TS,'TargetShip.')
-		return
-
-	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
-		Arguments
-			ctxt -- Simulation context
-			rulectxt -- TODO
-		""" 
-		self.velocity	= None
-		self.heading	= None
-
-		if rulectxt.situation is not None:
-			self.vessel		= rulectxt.situation.ts
-		else:
-			self.vessel		= None
-		return
-
 
 if __name__ == "__main__":
 	test = VesselResolver()

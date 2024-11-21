@@ -2,7 +2,7 @@ packages:
   modules:  # COLREG rule set
      - name: COLREG.Evaluator
        module: maritime.regulation.colreg.Evaluator
-       config: sample.frequency=1
+       config: sample.frequency=1 resolvers=$(CONFIG)/legata.yaml
       
      - name: Rule1
        module: rules.colreg.rule1.Rule1

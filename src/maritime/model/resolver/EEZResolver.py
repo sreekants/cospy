@@ -12,20 +12,21 @@ import numpy as np
 import math
 
 class EEZResolver(MaritimeZoneResolver):
-	def __init__(self, vessel:Vessel=None, EEZ:ExclusiveEconomicZone=None):
+	def __init__(self, resolver=None, vessel:Vessel=None, EEZ:ExclusiveEconomicZone=None):
 		""" Constructor
 		Arguments
-			vessel -- TODO
-			EEZ -- TODO
+			resolver -- Parent composite resolver
+			vessel -- Own ship
+			EEZ -- Economic zone
 		""" 
 		MaritimeZoneResolver.__init__(self, vessel, EEZ, '[OwnShip,EEZ]')
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
+		""" Reset th resolver
 		Arguments
 			ctxt -- Simulation context
-			rulectxt -- TODO
+			rulectxt -- Rule context
 		""" 
 		if rulectxt.situation is not None:
 			self.zone	= rulectxt.situation.eez

@@ -12,20 +12,21 @@ import numpy as np
 import math
 
 class HarbourResolver(MaritimeZoneResolver):
-	def __init__(self, vessel:Vessel=None, harbour:Harbour=None):
+	def __init__(self, resolver=None, vessel:Vessel=None, harbour:Harbour=None):
 		""" Constructor
 		Arguments
-			vessel -- TODO
-			harbour -- TODO
+			resolver -- Parent composite resolver
+			vessel -- Own ship
+			harbour -- Harbour
 		""" 
 		MaritimeZoneResolver.__init__(self, vessel, harbour, '[OwnShip,Harbour]')
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
+		""" Reset th resolver
 		Arguments
 			ctxt -- Simulation context
-			rulectxt -- TODO
+			rulectxt -- Rule context
 		""" 
 		if rulectxt.situation is not None:
 			self.zone	= rulectxt.situation.harbour

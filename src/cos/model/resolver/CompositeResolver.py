@@ -23,30 +23,43 @@ class CompositeResolver(Resolver):
 		self.resolvers	= Composite()
 		return
 
-	def add(self, resolver:Resolver)->Resolver:
-		""" TODO: add
+	def add(self, scope:str, resolver:Resolver)->Resolver:
+		""" Adds a resolver to the context
 		Arguments
-			resolver -- TODO
+			scope -- Scope of the resolver
+			resolver -- Resolver instance
 		""" 
-		self.resolvers.add_component( resolver )
+		self.resolvers.add_component( [scope,resolver] )
 		return resolver
 
-	def resolve(self, ctxt:Context, variable:str):
-		""" TODO: resolve
+	def get(self, scope:str)->Resolver:
+		""" Returns a resolver for a scope
+		Arguments
+			scope -- Scope of the resolver
+		""" 
+		for info in self.resolvers.container:
+			if info[0] == scope:
+				return info[1]
+
+		return None
+
+	def resolve(self, ctxt:Context, token:str):
+		""" Resolves a token
 		Arguments
 			ctxt -- Simulation context
-			variable -- TODO
+			token -- Token to resolve
 		""" 
-		if variable is None:
+		if token is None:
 			return None
 
-		result = Resolver.to_number(variable)
+		# Check if the token is a number
+		result = Resolver.to_number(token)
 		if result is not None:
 			return result
 
 		rctxt			= CompositeResolverContext()
 		rctxt.ctxt		= ctxt
-		rctxt.variable	= variable
+		rctxt.variable	= token
 		self.resolvers.for_each_first( self.__resolve, rctxt )
 		return rctxt.result
 
@@ -62,13 +75,13 @@ class CompositeResolver(Resolver):
 		return None
 
 	@staticmethod
-	def __resolve(resolver:Resolver, rctxt:CompositeResolverContext):
-		""" TODO: __resolve
+	def __resolve(resolver_info:Resolver, rctxt:CompositeResolverContext):
+		""" Resolves a context
 		Arguments
-			resolver -- TODO
-			rctxt -- TODO
+			resolver_info -- Resolver to apply context to
+			rctxt -- Context to resolve
 		""" 
-		result = resolver.resolve( rctxt.ctxt, rctxt.variable )
+		result = resolver_info[1].resolve( rctxt.ctxt, rctxt.variable )
 		if result is None:
 			return False
 

@@ -26,7 +26,6 @@ class Evaluator(Service):
 		self.resolver		= Resolver()
 		return
 
-
 	def on_start(self, ctxt:Context, config):
 		""" Callback for simulation startup
 		Arguments
@@ -35,7 +34,7 @@ class Evaluator(Service):
 		"""
 		Service.on_start(self, ctxt, config)
 
-		self.init_config(config)
+		self.init_config(ctxt, config)
 		self.init_faculties(ctxt, config)
 		self.init_objects(ctxt, config)
 
@@ -61,9 +60,10 @@ class Evaluator(Service):
 		self.evaluate(ctxt)
 		return
 
-	def init_config(self, config):
+	def init_config(self, ctxt, config):
 		""" Initializes the configuration
 		Arguments
+			ctxt -- Simulation context
 			config -- Configuration attributes
 		"""
 		# Parse configurations
@@ -78,6 +78,8 @@ class Evaluator(Service):
 		else:
 			self.timer	= None
 
+		# Initialize resolvers from packages
+		self.resolver.init(ctxt, args["resolvers"])
 		return
 
 	def init_faculties(self, ctxt:Context, config):

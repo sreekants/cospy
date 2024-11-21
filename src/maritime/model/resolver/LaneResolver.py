@@ -12,34 +12,36 @@ from cos.model.rule.Context import Context as RuleContext
 import numpy as np
 import math
 
-class TSSResolver(MaritimeZoneResolver):
-	def __init__(self, vessel:Vessel=None, TSS:TrafficSeparationScheme=None):
+
+class LaneResolver(MaritimeZoneResolver):
+	def __init__(self, resolver=None, vessel:Vessel=None, TSS:TrafficLane=None):
 		""" Constructor
 		Arguments
-			vessel -- TODO
-			TSS -- TODO
+			resolver -- Parent composite resolver
+			vessel -- Own ship
+			TSS -- Traffic separation zone
 		""" 
-		MaritimeZoneResolver.__init__(self, TSS, '[OwnShip,TrafficSeparationScheme]')
+		MaritimeZoneResolver.__init__(self, TSS, '[OwnShip,TrafficLane]')
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
+		""" Reset th resolver
 		Arguments
 			ctxt -- Simulation context
-			rulectxt -- TODO
+			rulectxt -- Rule context
 		""" 
 		if rulectxt.situation is not None:
-			self.zone	= rulectxt.situation.tss
+			self.zone	= rulectxt.situation.lane
 		else:
 			self.zone	= None
 		return
 
 	@property
-	def tss(self):
-		""" TODO: tss
+	def lane(self):
+		""" TODO: lane
 		""" 
 		return self.zone
 
 if __name__ == "__main__":
-	test = TSSResolver()
+	test = LaneResolver()
 

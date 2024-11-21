@@ -17,12 +17,13 @@ import inspect
 
 
 class TargetResolver(Resolver):
-	def __init__(self, OS:Vehicle=None, TS:Vehicle=None, range:float=0.0 ):
+	def __init__(self, resolver=None, OS:Vehicle=None, TS:Vehicle=None, range:float=0.0 ):
 		""" Constructor
 		Arguments
-			OS -- TODO
-			TS -- TODO
-			range -- TODO
+			resolver -- Parent composite resolver
+			OS -- Own ship
+			TS -- Target ship
+			range -- Range of interest
 		""" 
 		Resolver.__init__(self, '(OwnShip,TargetShip).')
 
@@ -34,10 +35,10 @@ class TargetResolver(Resolver):
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
+		""" Reset th resolver
 		Arguments
 			ctxt -- Simulation context
-			rulectxt -- TODO
+			rulectxt -- Rule context
 		""" 
 		self.range		= 0.0
 		self.distance	= None

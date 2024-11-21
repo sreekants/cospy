@@ -7,20 +7,21 @@ from cos.model.rule.Context import Context
 
 
 class MappingResolver(Resolver):
-	def __init__(self, prefix:str=None):
+	def __init__(self, resolver=None, prefix:str=None):
 		""" Constructor
 		Arguments
-			prefix -- TODO
+			resolver -- Parent composite resolver
+			prefix -- Prefix for the resolver
 		""" 
 		Resolver.__init__(self, prefix)
 		self.values	= {}
 		return
 
 	def resolve(self, ctxt:Context, variable:str):
-		""" TODO: resolve
+		""" Reset th resolver
 		Arguments
 			ctxt -- Simulation context
-			variable -- TODO
+			rulectxt -- Rule context
 		""" 
 		return self.values.get(variable, None)
 

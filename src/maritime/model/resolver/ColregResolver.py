@@ -12,23 +12,23 @@ import numpy as np
 import math
 
 class ColregResolver(Resolver):
-	def __init__(self, TR:TargetResolver):
+	def __init__(self, resolver):
 		""" Constructor
 		Arguments
-			TR -- TODO
+			resolver -- Parent composite resolver
 		""" 
 		Resolver.__init__(self, '(OwnShip,TargetShip).COLREG.')
 
 
-		self.tr			= TR
+		self.tr			= resolver.get('target')
 		self.situation	= None
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
+		""" Reset th resolver
 		Arguments
 			ctxt -- Simulation context
-			rulectxt -- TODO
+			rulectxt -- Rule context
 		""" 
 		self.tr.reset( ctxt, rulectxt )
 		return

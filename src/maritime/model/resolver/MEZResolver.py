@@ -12,20 +12,21 @@ import numpy as np
 import math
 
 class MEZResolver(MaritimeZoneResolver):
-	def __init__(self, vessel:Vessel=None, MEZ:MaritimeExclusionZone=None):
+	def __init__(self, resolver=None, vessel:Vessel=None, MEZ:MaritimeExclusionZone=None):
 		""" Constructor
 		Arguments
-			vessel -- TODO
-			MEZ -- TODO
+			resolver -- Parent composite resolver
+			vessel -- Own ship
+			MEZ -- Exclusion zone 
 		""" 
 		MaritimeZoneResolver.__init__(self, vessel, MEZ, '[OwnShip,MaritimeExclusionZone]')
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
+		""" Reset th resolver
 		Arguments
 			ctxt -- Simulation context
-			rulectxt -- TODO
+			rulectxt -- Rule context
 		""" 
 		if rulectxt.situation is not None:
 			self.zone	= rulectxt.situation.mez
