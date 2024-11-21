@@ -1,0 +1,46 @@
+language:
+  resolvers:  # Port authorities
+     - scope: 'variables'
+       prefix: null
+       module: cos.model.resolver.MappingResolver
+
+     - scope: 'constants'
+       prefix: null
+       module: cos.model.resolver.MappingResolver
+
+     - scope: 'eez'
+       prefix: null
+       module: maritime.model.resolver.EEZResolver
+
+     - scope: 'harbour'
+       prefix: null
+       module: maritime.model.resolver.HarbourResolver
+
+     - scope: 'lane'
+       prefix: null
+       module: maritime.model.resolver.LaneResolver
+
+     - scope: 'mez'
+       prefix: null
+       module: maritime.model.resolver.MEZResolver
+
+     - scope: 'target'
+       prefix: null
+       module: maritime.model.resolver.TargetResolver
+
+     - scope: 'tss'
+       prefix: null
+       module: maritime.model.resolver.TSSResolver
+
+     - scope: 'os'
+       prefix: null
+       module: maritime.model.resolver.OwnShipResolver
+
+     - scope: 'ts'
+       prefix: null
+       module: maritime.model.resolver.TargetShipResolver
+
+     - scope: 'colreg'
+       prefix: null
+       module: maritime.model.resolver.ColregResolver
+
