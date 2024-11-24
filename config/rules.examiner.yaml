@@ -1,0 +1,49 @@
+packages:
+  modules:  # Examiner modules
+     - name: Approach
+       module: rules.examiner.navigation.ApproachExaminer
+
+     - name: Berthing
+       module: rules.examiner.navigation.BerthingExaminer
+
+     - name: Collision
+       module: rules.examiner.navigation.CollisionExaminer
+
+     - name: DayTime
+       module: rules.examiner.navigation.DayTimeExaminer
+
+     - name: Grounding
+       module: rules.examiner.navigation.GroundingExaminer
+
+     - name: LaneDiscipline
+       module: rules.examiner.navigation.LaneDisciplineExaminer
+
+     - name: NightTime
+       module: rules.examiner.navigation.NightTimeExaminer
+
+     - name: Overtaking
+       module: rules.examiner.navigation.OvertakingExaminer
+
+     - name: Signal
+       module: rules.examiner.navigation.SignalExaminer
+
+     - name: Speed
+       module: rules.examiner.navigation.SpeedExaminer
+
+     - name: Customs
+       module: rules.examiner.security.CustomsExaminer
+
+     - name: ZoneViolation
+       module: rules.examiner.security.ZoneViolationExaminer
+
+     - name: Comfort
+       module: rules.examiner.planning.ComfortExaminer
+
+     - name: Economic
+       module: rules.examiner.planning.EconomicExaminer
+
+     - name: Plan
+       module: rules.examiner.planning.PlanExaminer
+
+     - name: Environmental.Cargo
+       module: rules.examiner.environmental.CargoExaminer

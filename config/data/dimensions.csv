@@ -6,3 +6,6 @@ Location,County,District,string,County,County name
 Location,PostalCode,County,string,PostalCode,PostalCode of the port
 Location,Port,PostalCode,string,Port,Port name
 Location,gps,Port,string,gps,Gps location
+Fleet,FlagState,,string,Country,Country name
+Fleet,FlagPort,OriginCountry,string,Port,Port name
+Fleet,vessel,OriginPort,string,Vessel,Vessel IMO

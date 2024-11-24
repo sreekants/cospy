@@ -1,261 +1,904 @@
 Category,Name,Type,Description,Display Name,Unit
-Log,ReportTime,time,Phone call report time,Call Time,
+Log,ReportTime,time,Report time, Time,
 Log,CallerId,int,Vessel IMO,Vessel IMO,
 Log,TxnType,int,Transaction type,Transaction Type,
 Log,Flags,int,Flags,Flags,
-Ro,Concern,string,Concern,Concern,
-Ro,ReportTime,time,Phone call report time,Call Time,
+Ro,Crs,string,Crs,Crs,
+Ro,ReportTime,time,Report time, Time,
 Ro,VesselId,int,Vessel IMO,Vessel IMO,
 Ro,Penalty,float,Penalty Score,Penalty Score,
-ScoreHazardousTransport,ReportTime,time,Phone call report time,Call Time,
-ScoreHazardousTransport,VesselId,int,Vessel IMO,Vessel IMO,
+Heading,Value,double,Heading,Heading,m/s
+Heading,Unit,int,Unit of Measurement,Unit of Measurement,m/s
+Heading,StartTime,time,Reading start time,Reading start time,time 
+Heading,EndTime,time,Reading end time,Reading end time,time 
+Heading,ReportTime,time,Reading report time,Reading report time,time 
+Heading,ErrorPct,double,Systemic Error,Systemic Error,%
+Heading,Sigma,double,Variance of the measurements,Variance of the measurements,
+Heading,MinVal,double,Minimum value,Minimum value,%
+Heading,MaxVal,double,Maximum value,Maximum value,%
+Heading,NumVal,int,Number of readings made,Number of readings made,
+Heading,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Heading,Checksum,int,Record checksum,Record checksum,
+Heading,Tag,string,Notes,Notes,
+Velocity,Value,double,Velocity,Velocity,m/s
+Velocity,Unit,int,Unit of Measurement,Unit of Measurement,m/s
+Velocity,StartTime,time,Reading start time,Reading start time,time 
+Velocity,EndTime,time,Reading end time,Reading end time,time 
+Velocity,ReportTime,time,Reading report time,Reading report time,time 
+Velocity,ErrorPct,double,Systemic Error,Systemic Error,%
+Velocity,Sigma,double,Variance of the measurements,Variance of the measurements,
+Velocity,MinVal,double,Minimum value,Minimum value,%
+Velocity,MaxVal,double,Maximum value,Maximum value,%
+Velocity,NumVal,int,Number of readings made,Number of readings made,
+Velocity,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Velocity,Checksum,int,Record checksum,Record checksum,
+Velocity,Tag,string,Notes,Notes,
+Acceleration,Value,double,Velocity,Velocity,m/s²
+Acceleration,Unit,int,Unit of Measurement,Unit of Measurement,m/s²
+Acceleration,StartTime,time,Reading start time,Reading start time,time 
+Acceleration,EndTime,time,Reading end time,Reading end time,time 
+Acceleration,ReportTime,time,Reading report time,Reading report time,time 
+Acceleration,ErrorPct,double,Systemic Error,Systemic Error,%
+Acceleration,Sigma,double,Variance of the measurements,Variance of the measurements,
+Acceleration,MinVal,double,Minimum value,Minimum value,%
+Acceleration,MaxVal,double,Maximum value,Maximum value,%
+Acceleration,NumVal,int,Number of readings made,Number of readings made,
+Acceleration,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Acceleration,Checksum,int,Record checksum,Record checksum,
+Acceleration,Tag,string,Notes,Notes,
+Jerk,Value,double,Velocity,Velocity,m/s
+Jerk,Unit,int,Unit of Measurement,Unit of Measurement,m/s
+Jerk,StartTime,time,Reading start time,Reading start time,time 
+Jerk,EndTime,time,Reading end time,Reading end time,time 
+Jerk,ReportTime,time,Reading report time,Reading report time,time 
+Jerk,ErrorPct,double,Systemic Error,Systemic Error,%
+Jerk,Sigma,double,Variance of the measurements,Variance of the measurements,
+Jerk,MinVal,double,Minimum value,Minimum value,%
+Jerk,MaxVal,double,Maximum value,Maximum value,%
+Jerk,NumVal,int,Number of readings made,Number of readings made,
+Jerk,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Jerk,Checksum,int,Record checksum,Record checksum,
+Jerk,Tag,string,Notes,Notes,
+AngularVelocity,Value,double,Velocity,Velocity,m/s
+AngularVelocity,Unit,int,Unit of Measurement,Unit of Measurement,m/s
+AngularVelocity,StartTime,time,Reading start time,Reading start time,time 
+AngularVelocity,EndTime,time,Reading end time,Reading end time,time 
+AngularVelocity,ReportTime,time,Reading report time,Reading report time,time 
+AngularVelocity,ErrorPct,double,Systemic Error,Systemic Error,%
+AngularVelocity,Sigma,double,Variance of the measurements,Variance of the measurements,
+AngularVelocity,MinVal,double,Minimum value,Minimum value,%
+AngularVelocity,MaxVal,double,Maximum value,Maximum value,%
+AngularVelocity,NumVal,int,Number of readings made,Number of readings made,
+AngularVelocity,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+AngularVelocity,Checksum,int,Record checksum,Record checksum,
+AngularVelocity,Tag,string,Notes,Notes,
+AngularAcceleration,Value,double,Velocity,Velocity,m/s²
+AngularAcceleration,Unit,int,Unit of Measurement,Unit of Measurement,m/s²
+AngularAcceleration,StartTime,time,Reading start time,Reading start time,time 
+AngularAcceleration,EndTime,time,Reading end time,Reading end time,time 
+AngularAcceleration,ReportTime,time,Reading report time,Reading report time,time 
+AngularAcceleration,ErrorPct,double,Systemic Error,Systemic Error,%
+AngularAcceleration,Sigma,double,Variance of the measurements,Variance of the measurements,
+AngularAcceleration,MinVal,double,Minimum value,Minimum value,%
+AngularAcceleration,MaxVal,double,Maximum value,Maximum value,%
+AngularAcceleration,NumVal,int,Number of readings made,Number of readings made,
+AngularAcceleration,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+AngularAcceleration,Checksum,int,Record checksum,Record checksum,
+AngularAcceleration,Tag,string,Notes,Notes,
+Yaw,Value,double,Yaw,Yaw,degrees
+Yaw,Unit,int,Unit of Measurement,Unit of Measurement,degrees
+Yaw,StartTime,time,Reading start time,Reading start time,time 
+Yaw,EndTime,time,Reading end time,Reading end time,time 
+Yaw,ReportTime,time,Reading report time,Reading report time,time 
+Yaw,ErrorPct,double,Systemic Error,Systemic Error,%
+Yaw,Sigma,double,Variance of the measurements,Variance of the measurements,
+Yaw,MinVal,double,Minimum value,Minimum value,%
+Yaw,MaxVal,double,Maximum value,Maximum value,%
+Yaw,NumVal,int,Number of readings made,Number of readings made,
+Yaw,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Yaw,Checksum,int,Record checksum,Record checksum,
+Yaw,Tag,string,Notes,Notes,
+Pitch,Value,double,Pitch,Pitch,degrees
+Pitch,Unit,int,Unit of Measurement,Unit of Measurement,degrees
+Pitch,StartTime,time,Reading start time,Reading start time,time 
+Pitch,EndTime,time,Reading end time,Reading end time,time 
+Pitch,ReportTime,time,Reading report time,Reading report time,time 
+Pitch,ErrorPct,double,Systemic Error,Systemic Error,%
+Pitch,Sigma,double,Variance of the measurements,Variance of the measurements,
+Pitch,MinVal,double,Minimum value,Minimum value,%
+Pitch,MaxVal,double,Maximum value,Maximum value,%
+Pitch,NumVal,int,Number of readings made,Number of readings made,
+Pitch,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Pitch,Checksum,int,Record checksum,Record checksum,
+Pitch,Tag,string,Notes,Notes,
+Roll,Value,double,Roll,Roll,degrees
+Roll,Unit,int,Unit of Measurement,Unit of Measurement,degrees
+Roll,StartTime,time,Reading start time,Reading start time,time 
+Roll,EndTime,time,Reading end time,Reading end time,time 
+Roll,ReportTime,time,Reading report time,Reading report time,time 
+Roll,ErrorPct,double,Systemic Error,Systemic Error,%
+Roll,Sigma,double,Variance of the measurements,Variance of the measurements,
+Roll,MinVal,double,Minimum value,Minimum value,%
+Roll,MaxVal,double,Maximum value,Maximum value,%
+Roll,NumVal,int,Number of readings made,Number of readings made,
+Roll,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Roll,Checksum,int,Record checksum,Record checksum,
+Roll,Tag,string,Notes,Notes,
+Heave,Value,double,Heave,Heave,m
+Heave,Unit,int,Unit of Measurement,Unit of Measurement,m
+Heave,StartTime,time,Reading start time,Reading start time,time 
+Heave,EndTime,time,Reading end time,Reading end time,time 
+Heave,ReportTime,time,Reading report time,Reading report time,time 
+Heave,ErrorPct,double,Systemic Error,Systemic Error,%
+Heave,Sigma,double,Variance of the measurements,Variance of the measurements,
+Heave,MinVal,double,Minimum value,Minimum value,%
+Heave,MaxVal,double,Maximum value,Maximum value,%
+Heave,NumVal,int,Number of readings made,Number of readings made,
+Heave,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Heave,Checksum,int,Record checksum,Record checksum,
+Heave,Tag,string,Notes,Notes,
+VerticalMotion,Value,double,Velocity,Velocity,m/s
+VerticalMotion,Unit,int,Unit of Measurement,Unit of Measurement,m/s
+VerticalMotion,StartTime,time,Reading start time,Reading start time,time 
+VerticalMotion,EndTime,time,Reading end time,Reading end time,time 
+VerticalMotion,ReportTime,time,Reading report time,Reading report time,time 
+VerticalMotion,ErrorPct,double,Systemic Error,Systemic Error,%
+VerticalMotion,Sigma,double,Variance of the measurements,Variance of the measurements,
+VerticalMotion,MinVal,double,Minimum value,Minimum value,%
+VerticalMotion,MaxVal,double,Maximum value,Maximum value,%
+VerticalMotion,NumVal,int,Number of readings made,Number of readings made,
+VerticalMotion,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+VerticalMotion,Checksum,int,Record checksum,Record checksum,
+VerticalMotion,Tag,string,Notes,Notes,
+VerticalAcceleration,Value,double,Velocity,Velocity,m/s²
+VerticalAcceleration,Unit,int,Unit of Measurement,Unit of Measurement,m/s²
+VerticalAcceleration,StartTime,time,Reading start time,Reading start time,time 
+VerticalAcceleration,EndTime,time,Reading end time,Reading end time,time 
+VerticalAcceleration,ReportTime,time,Reading report time,Reading report time,time 
+VerticalAcceleration,ErrorPct,double,Systemic Error,Systemic Error,%
+VerticalAcceleration,Sigma,double,Variance of the measurements,Variance of the measurements,
+VerticalAcceleration,MinVal,double,Minimum value,Minimum value,%
+VerticalAcceleration,MaxVal,double,Maximum value,Maximum value,%
+VerticalAcceleration,NumVal,int,Number of readings made,Number of readings made,
+VerticalAcceleration,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+VerticalAcceleration,Checksum,int,Record checksum,Record checksum,
+VerticalAcceleration,Tag,string,Notes,Notes,
+RelativeVelocity,Trarget,int,Target Vessel IMO,Target,
+RelativeVelocity,Value,double,Relative Velocity,Relative Velocity,kts/hr
+RelativeVelocity,Unit,int,Unit of Measurement,Unit of Measurement,kts/hr
+RelativeVelocity,StartTime,time,Reading start time,Reading start time,time 
+RelativeVelocity,EndTime,time,Reading end time,Reading end time,time 
+RelativeVelocity,ReportTime,time,Reading report time,Reading report time,time 
+RelativeVelocity,ErrorPct,double,Systemic Error,Systemic Error,%
+RelativeVelocity,Sigma,double,Variance of the measurements,Variance of the measurements,
+RelativeVelocity,MinVal,double,Minimum value,Minimum value,%
+RelativeVelocity,MaxVal,double,Maximum value,Maximum value,%
+RelativeVelocity,NumVal,int,Number of readings made,Number of readings made,
+RelativeVelocity,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+RelativeVelocity,Checksum,int,Record checksum,Record checksum,
+RelativeVelocity,Tag,string,Notes,Notes,
+RelativeHeading,Trarget,int,Target Vessel IMO,Target,
+RelativeHeading,Value,double,Relative Heading,Relative Heading,degree
+RelativeHeading,Unit,int,Unit of Measurement,Unit of Measurement,degree
+RelativeHeading,StartTime,time,Reading start time,Reading start time,time 
+RelativeHeading,EndTime,time,Reading end time,Reading end time,time 
+RelativeHeading,ReportTime,time,Reading report time,Reading report time,time 
+RelativeHeading,ErrorPct,double,Systemic Error,Systemic Error,%
+RelativeHeading,Sigma,double,Variance of the measurements,Variance of the measurements,
+RelativeHeading,MinVal,double,Minimum value,Minimum value,%
+RelativeHeading,MaxVal,double,Maximum value,Maximum value,%
+RelativeHeading,NumVal,int,Number of readings made,Number of readings made,
+RelativeHeading,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+RelativeHeading,Checksum,int,Record checksum,Record checksum,
+RelativeHeading,Tag,string,Notes,Notes,
+RelativePhase,Trarget,int,Target Vessel IMO,Target,
+RelativePhase,Value,double,Relative Heading,Relative Heading,degree
+RelativePhase,Unit,int,Unit of Measurement,Unit of Measurement,degree
+RelativePhase,StartTime,time,Reading start time,Reading start time,time 
+RelativePhase,EndTime,time,Reading end time,Reading end time,time 
+RelativePhase,ReportTime,time,Reading report time,Reading report time,time 
+RelativePhase,ErrorPct,double,Systemic Error,Systemic Error,%
+RelativePhase,Sigma,double,Variance of the measurements,Variance of the measurements,
+RelativePhase,MinVal,double,Minimum value,Minimum value,%
+RelativePhase,MaxVal,double,Maximum value,Maximum value,%
+RelativePhase,NumVal,int,Number of readings made,Number of readings made,
+RelativePhase,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+RelativePhase,Checksum,int,Record checksum,Record checksum,
+RelativePhase,Tag,string,Notes,Notes,
+Dcpa,Trarget,int,Target Vessel IMO,Target,
+Dcpa,Value,double,DCPA,Distance to CPA,m
+Dcpa,Unit,int,Unit of Measurement,Unit of Measurement,meters
+Dcpa,StartTime,time,Reading start time,Reading start time,time 
+Dcpa,EndTime,time,Reading end time,Reading end time,time 
+Dcpa,ReportTime,time,Reading report time,Reading report time,time 
+Dcpa,ErrorPct,double,Systemic Error,Systemic Error,%
+Dcpa,Sigma,double,Variance of the measurements,Variance of the measurements,
+Dcpa,MinVal,double,Minimum value,Minimum value,%
+Dcpa,MaxVal,double,Maximum value,Maximum value,%
+Dcpa,NumVal,int,Number of readings made,Number of readings made,
+Dcpa,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Dcpa,Checksum,int,Record checksum,Record checksum,
+Dcpa,Tag,string,Notes,Notes,
+Tcpa,Trarget,int,Target Vessel IMO,Target,
+Tcpa,Value,double,TCPA,Time to CPA,seconds
+Tcpa,Unit,int,Unit of Measurement,Unit of Measurement,seconds
+Tcpa,StartTime,time,Reading start time,Reading start time,time 
+Tcpa,EndTime,time,Reading end time,Reading end time,time 
+Tcpa,ReportTime,time,Reading report time,Reading report time,time 
+Tcpa,ErrorPct,double,Systemic Error,Systemic Error,%
+Tcpa,Sigma,double,Variance of the measurements,Variance of the measurements,
+Tcpa,MinVal,double,Minimum value,Minimum value,%
+Tcpa,MaxVal,double,Maximum value,Maximum value,%
+Tcpa,NumVal,int,Number of readings made,Number of readings made,
+Tcpa,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Tcpa,Checksum,int,Record checksum,Record checksum,
+Tcpa,Tag,string,Notes,Notes,
+Vcro,Trarget,int,Target Vessel IMO,Target,
+Vcro,Value,double,Vcro,Vessel conflict ranking,
+Vcro,Unit,int,Unit of Measurement,Unit of Measurement,
+Vcro,StartTime,time,Reading start time,Reading start time,time 
+Vcro,EndTime,time,Reading end time,Reading end time,time 
+Vcro,ReportTime,time,Reading report time,Reading report time,time 
+Vcro,ErrorPct,double,Systemic Error,Systemic Error,%
+Vcro,Sigma,double,Variance of the measurements,Variance of the measurements,
+Vcro,MinVal,double,Minimum value,Minimum value,%
+Vcro,MaxVal,double,Maximum value,Maximum value,%
+Vcro,NumVal,int,Number of readings made,Number of readings made,
+Vcro,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Vcro,Checksum,int,Record checksum,Record checksum,
+Vcro,Tag,string,Notes,Notes,
+Displacement,Value,double,Displacement,Displacement,m
+Displacement,Unit,int,Unit of Measurement,Unit of Measurement,m
+Displacement,StartTime,time,Reading start time,Reading start time,time 
+Displacement,EndTime,time,Reading end time,Reading end time,time 
+Displacement,ReportTime,time,Reading report time,Reading report time,time 
+Displacement,ErrorPct,double,Systemic Error,Systemic Error,%
+Displacement,Sigma,double,Variance of the measurements,Variance of the measurements,
+Displacement,MinVal,double,Minimum value,Minimum value,%
+Displacement,MaxVal,double,Maximum value,Maximum value,%
+Displacement,NumVal,int,Number of readings made,Number of readings made,
+Displacement,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Displacement,Checksum,int,Record checksum,Record checksum,
+Displacement,Tag,string,Notes,Notes,
+Draft,Value,double,Draft,Draft,m
+Draft,Unit,int,Unit of Measurement,Unit of Measurement,m
+Draft,StartTime,time,Reading start time,Reading start time,time 
+Draft,EndTime,time,Reading end time,Reading end time,time 
+Draft,ReportTime,time,Reading report time,Reading report time,time 
+Draft,ErrorPct,double,Systemic Error,Systemic Error,%
+Draft,Sigma,double,Variance of the measurements,Variance of the measurements,
+Draft,MinVal,double,Minimum value,Minimum value,%
+Draft,MaxVal,double,Maximum value,Maximum value,%
+Draft,NumVal,int,Number of readings made,Number of readings made,
+Draft,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Draft,Checksum,int,Record checksum,Record checksum,
+Draft,Tag,string,Notes,Notes,
+SubmergedVolume,Value,double,Speed,Speed,m³
+SubmergedVolume,Unit,int,Unit of Measurement,Unit of Measurement,m³
+SubmergedVolume,StartTime,time,Reading start time,Reading start time,time 
+SubmergedVolume,EndTime,time,Reading end time,Reading end time,time 
+SubmergedVolume,ReportTime,time,Reading report time,Reading report time,time 
+SubmergedVolume,ErrorPct,double,Systemic Error,Systemic Error,%
+SubmergedVolume,Sigma,double,Variance of the measurements,Variance of the measurements,
+SubmergedVolume,MinVal,double,Minimum value,Minimum value,%
+SubmergedVolume,MaxVal,double,Maximum value,Maximum value,%
+SubmergedVolume,NumVal,int,Number of readings made,Number of readings made,
+SubmergedVolume,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+SubmergedVolume,Checksum,int,Record checksum,Record checksum,
+SubmergedVolume,Tag,string,Notes,Notes,
+Weight,Value,double,Weight,Weight,kg
+Weight,Unit,int,Unit of Measurement,Unit of Measurement,kg
+Weight,StartTime,time,Reading start time,Reading start time,time 
+Weight,EndTime,time,Reading end time,Reading end time,time 
+Weight,ReportTime,time,Reading report time,Reading report time,time 
+Weight,ErrorPct,double,Systemic Error,Systemic Error,%
+Weight,Sigma,double,Variance of the measurements,Variance of the measurements,
+Weight,MinVal,double,Minimum value,Minimum value,%
+Weight,MaxVal,double,Maximum value,Maximum value,%
+Weight,NumVal,int,Number of readings made,Number of readings made,
+Weight,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Weight,Checksum,int,Record checksum,Record checksum,
+Weight,Tag,string,Notes,Notes,
+Payload,Value,double,Payload,Payload,kg
+Payload,Unit,int,Unit of Measurement,Unit of Measurement,kg
+Payload,StartTime,time,Reading start time,Reading start time,time 
+Payload,EndTime,time,Reading end time,Reading end time,time 
+Payload,ReportTime,time,Reading report time,Reading report time,time 
+Payload,ErrorPct,double,Systemic Error,Systemic Error,%
+Payload,Sigma,double,Variance of the measurements,Variance of the measurements,
+Payload,MinVal,double,Minimum value,Minimum value,%
+Payload,MaxVal,double,Maximum value,Maximum value,%
+Payload,NumVal,int,Number of readings made,Number of readings made,
+Payload,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Payload,Checksum,int,Record checksum,Record checksum,
+Payload,Tag,string,Notes,Notes,
+Passengers,Value,int,Passengers,Passengers,no.
+Passengers,Unit,int,Unit of Measurement,Unit of Measurement,no.
+Passengers,StartTime,time,Reading start time,Reading start time,time 
+Passengers,EndTime,time,Reading end time,Reading end time,time 
+Passengers,ReportTime,time,Reading report time,Reading report time,time 
+Passengers,ErrorPct,double,Systemic Error,Systemic Error,%
+Passengers,Sigma,double,Variance of the measurements,Variance of the measurements,
+Passengers,MinVal,double,Minimum value,Minimum value,%
+Passengers,MaxVal,double,Maximum value,Maximum value,%
+Passengers,NumVal,int,Number of readings made,Number of readings made,
+Passengers,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Passengers,Checksum,int,Record checksum,Record checksum,
+Passengers,Tag,string,Notes,Notes,
+Crew,Value,int,Passengers,Passengers,no.
+Crew,Unit,int,Unit of Measurement,Unit of Measurement,no.
+Crew,StartTime,time,Reading start time,Reading start time,time 
+Crew,EndTime,time,Reading end time,Reading end time,time 
+Crew,ReportTime,time,Reading report time,Reading report time,time 
+Crew,ErrorPct,double,Systemic Error,Systemic Error,%
+Crew,Sigma,double,Variance of the measurements,Variance of the measurements,
+Crew,MinVal,double,Minimum value,Minimum value,%
+Crew,MaxVal,double,Maximum value,Maximum value,%
+Crew,NumVal,int,Number of readings made,Number of readings made,
+Crew,Gradient,double,Linear gradient of measurements,Linear gradient of measurements,
+Crew,Checksum,int,Record checksum,Record checksum,
+Crew,Tag,string,Notes,Notes,
+ScoreHazardousTransport,ReportTime,time,Report time, Time,
 ScoreHazardousTransport,Penalty,float,Penalty Score,Penalty Score,
-ScoreBerthingRisk,ReportTime,time,Phone call report time,Call Time,
-ScoreBerthingRisk,VesselId,int,Vessel IMO,Vessel IMO,
+ScoreBerthingRisk,ReportTime,time,Report time, Time,
 ScoreBerthingRisk,Penalty,float,Penalty Score,Penalty Score,
-Colreg_R01,ReportTime,time,Phone call report time,Call Time,
-Colreg_R01,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R01,ReportTime,time,Report time, Time,
 Colreg_R01,Clause,string,Clause ID,Clause identifier,
 Colreg_R01,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R01,Situation,string,Situation,Situation description,
 Colreg_R01,Info,string,Info,Additional information,
-Colreg_R02,ReportTime,time,Phone call report time,Call Time,
-Colreg_R02,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R02,ReportTime,time,Report time, Time,
 Colreg_R02,Clause,string,Clause ID,Clause identifier,
 Colreg_R02,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R02,Situation,string,Situation,Situation description,
 Colreg_R02,Info,string,Info,Additional information,
-Colreg_R03,ReportTime,time,Phone call report time,Call Time,
-Colreg_R03,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R03,ReportTime,time,Report time, Time,
 Colreg_R03,Clause,string,Clause ID,Clause identifier,
 Colreg_R03,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R03,Situation,string,Situation,Situation description,
 Colreg_R03,Info,string,Info,Additional information,
-Colreg_R04,ReportTime,time,Phone call report time,Call Time,
-Colreg_R04,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R04,ReportTime,time,Report time, Time,
 Colreg_R04,Clause,string,Clause ID,Clause identifier,
 Colreg_R04,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R04,Situation,string,Situation,Situation description,
 Colreg_R04,Info,string,Info,Additional information,
-Colreg_R05,ReportTime,time,Phone call report time,Call Time,
-Colreg_R05,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R05,ReportTime,time,Report time, Time,
 Colreg_R05,Clause,string,Clause ID,Clause identifier,
 Colreg_R05,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R05,Situation,string,Situation,Situation description,
 Colreg_R05,Info,string,Info,Additional information,
-Colreg_R06,ReportTime,time,Phone call report time,Call Time,
-Colreg_R06,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R06,ReportTime,time,Report time, Time,
 Colreg_R06,Clause,string,Clause ID,Clause identifier,
 Colreg_R06,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R06,Situation,string,Situation,Situation description,
 Colreg_R06,Info,string,Info,Additional information,
-Colreg_R07,ReportTime,time,Phone call report time,Call Time,
-Colreg_R07,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R07,ReportTime,time,Report time, Time,
 Colreg_R07,Clause,string,Clause ID,Clause identifier,
 Colreg_R07,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R07,Situation,string,Situation,Situation description,
 Colreg_R07,Info,string,Info,Additional information,
-Colreg_R08,ReportTime,time,Phone call report time,Call Time,
-Colreg_R08,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R08,ReportTime,time,Report time, Time,
 Colreg_R08,Clause,string,Clause ID,Clause identifier,
 Colreg_R08,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R08,Situation,string,Situation,Situation description,
 Colreg_R08,Info,string,Info,Additional information,
-Colreg_R09,ReportTime,time,Phone call report time,Call Time,
-Colreg_R09,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R09,ReportTime,time,Report time, Time,
 Colreg_R09,Clause,string,Clause ID,Clause identifier,
 Colreg_R09,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R09,Situation,string,Situation,Situation description,
 Colreg_R09,Info,string,Info,Additional information,
-Colreg_R10,ReportTime,time,Phone call report time,Call Time,
-Colreg_R10,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R10,ReportTime,time,Report time, Time,
 Colreg_R10,Clause,string,Clause ID,Clause identifier,
 Colreg_R10,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R10,Situation,string,Situation,Situation description,
 Colreg_R10,Info,string,Info,Additional information,
-Colreg_R11,ReportTime,time,Phone call report time,Call Time,
-Colreg_R11,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R11,ReportTime,time,Report time, Time,
 Colreg_R11,Clause,string,Clause ID,Clause identifier,
 Colreg_R11,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R11,Situation,string,Situation,Situation description,
 Colreg_R11,Info,string,Info,Additional information,
-Colreg_R12,ReportTime,time,Phone call report time,Call Time,
-Colreg_R12,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R12,ReportTime,time,Report time, Time,
 Colreg_R12,Clause,string,Clause ID,Clause identifier,
 Colreg_R12,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R12,Situation,string,Situation,Situation description,
 Colreg_R12,Info,string,Info,Additional information,
-Colreg_R13,ReportTime,time,Phone call report time,Call Time,
-Colreg_R13,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R13,ReportTime,time,Report time, Time,
 Colreg_R13,Clause,string,Clause ID,Clause identifier,
 Colreg_R13,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R13,Situation,string,Situation,Situation description,
 Colreg_R13,Info,string,Info,Additional information,
-Colreg_R14,ReportTime,time,Phone call report time,Call Time,
-Colreg_R14,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R14,ReportTime,time,Report time, Time,
 Colreg_R14,Clause,string,Clause ID,Clause identifier,
 Colreg_R14,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R14,Situation,string,Situation,Situation description,
 Colreg_R14,Info,string,Info,Additional information,
-Colreg_R15,ReportTime,time,Phone call report time,Call Time,
-Colreg_R15,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R15,ReportTime,time,Report time, Time,
 Colreg_R15,Clause,string,Clause ID,Clause identifier,
 Colreg_R15,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R15,Situation,string,Situation,Situation description,
 Colreg_R15,Info,string,Info,Additional information,
-Colreg_R16,ReportTime,time,Phone call report time,Call Time,
-Colreg_R16,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R16,ReportTime,time,Report time, Time,
 Colreg_R16,Clause,string,Clause ID,Clause identifier,
 Colreg_R16,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R16,Situation,string,Situation,Situation description,
 Colreg_R16,Info,string,Info,Additional information,
-Colreg_R17,ReportTime,time,Phone call report time,Call Time,
-Colreg_R17,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R17,ReportTime,time,Report time, Time,
 Colreg_R17,Clause,string,Clause ID,Clause identifier,
 Colreg_R17,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R17,Situation,string,Situation,Situation description,
 Colreg_R17,Info,string,Info,Additional information,
-Colreg_R18,ReportTime,time,Phone call report time,Call Time,
-Colreg_R18,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R18,ReportTime,time,Report time, Time,
 Colreg_R18,Clause,string,Clause ID,Clause identifier,
 Colreg_R18,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R18,Situation,string,Situation,Situation description,
 Colreg_R18,Info,string,Info,Additional information,
-Colreg_R19,ReportTime,time,Phone call report time,Call Time,
-Colreg_R19,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R19,ReportTime,time,Report time, Time,
 Colreg_R19,Clause,string,Clause ID,Clause identifier,
 Colreg_R19,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R19,Situation,string,Situation,Situation description,
 Colreg_R19,Info,string,Info,Additional information,
-Colreg_R20,ReportTime,time,Phone call report time,Call Time,
-Colreg_R20,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R20,ReportTime,time,Report time, Time,
 Colreg_R20,Clause,string,Clause ID,Clause identifier,
 Colreg_R20,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R20,Situation,string,Situation,Situation description,
 Colreg_R20,Info,string,Info,Additional information,
-Colreg_R21,ReportTime,time,Phone call report time,Call Time,
-Colreg_R21,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R21,ReportTime,time,Report time, Time,
 Colreg_R21,Clause,string,Clause ID,Clause identifier,
 Colreg_R21,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R21,Situation,string,Situation,Situation description,
 Colreg_R21,Info,string,Info,Additional information,
-Colreg_R22,ReportTime,time,Phone call report time,Call Time,
-Colreg_R22,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R22,ReportTime,time,Report time, Time,
 Colreg_R22,Clause,string,Clause ID,Clause identifier,
 Colreg_R22,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R22,Situation,string,Situation,Situation description,
 Colreg_R22,Info,string,Info,Additional information,
-Colreg_R23,ReportTime,time,Phone call report time,Call Time,
-Colreg_R23,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R23,ReportTime,time,Report time, Time,
 Colreg_R23,Clause,string,Clause ID,Clause identifier,
 Colreg_R23,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R23,Situation,string,Situation,Situation description,
 Colreg_R23,Info,string,Info,Additional information,
-Colreg_R24,ReportTime,time,Phone call report time,Call Time,
-Colreg_R24,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R24,ReportTime,time,Report time, Time,
 Colreg_R24,Clause,string,Clause ID,Clause identifier,
 Colreg_R24,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R24,Situation,string,Situation,Situation description,
 Colreg_R24,Info,string,Info,Additional information,
-Colreg_R25,ReportTime,time,Phone call report time,Call Time,
-Colreg_R25,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R25,ReportTime,time,Report time, Time,
 Colreg_R25,Clause,string,Clause ID,Clause identifier,
 Colreg_R25,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R25,Situation,string,Situation,Situation description,
 Colreg_R25,Info,string,Info,Additional information,
-Colreg_R26,ReportTime,time,Phone call report time,Call Time,
-Colreg_R26,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R26,ReportTime,time,Report time, Time,
 Colreg_R26,Clause,string,Clause ID,Clause identifier,
 Colreg_R26,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R26,Situation,string,Situation,Situation description,
 Colreg_R26,Info,string,Info,Additional information,
-Colreg_R27,ReportTime,time,Phone call report time,Call Time,
-Colreg_R27,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R27,ReportTime,time,Report time, Time,
 Colreg_R27,Clause,string,Clause ID,Clause identifier,
 Colreg_R27,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R27,Situation,string,Situation,Situation description,
 Colreg_R27,Info,string,Info,Additional information,
-Colreg_R28,ReportTime,time,Phone call report time,Call Time,
-Colreg_R28,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R28,ReportTime,time,Report time, Time,
 Colreg_R28,Clause,string,Clause ID,Clause identifier,
 Colreg_R28,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R28,Situation,string,Situation,Situation description,
 Colreg_R28,Info,string,Info,Additional information,
-Colreg_R29,ReportTime,time,Phone call report time,Call Time,
-Colreg_R29,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R29,ReportTime,time,Report time, Time,
 Colreg_R29,Clause,string,Clause ID,Clause identifier,
 Colreg_R29,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R29,Situation,string,Situation,Situation description,
 Colreg_R29,Info,string,Info,Additional information,
-Colreg_R30,ReportTime,time,Phone call report time,Call Time,
-Colreg_R30,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R30,ReportTime,time,Report time, Time,
 Colreg_R30,Clause,string,Clause ID,Clause identifier,
 Colreg_R30,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R30,Situation,string,Situation,Situation description,
 Colreg_R30,Info,string,Info,Additional information,
-Colreg_R31,ReportTime,time,Phone call report time,Call Time,
-Colreg_R31,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R31,ReportTime,time,Report time, Time,
 Colreg_R31,Clause,string,Clause ID,Clause identifier,
 Colreg_R31,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R31,Situation,string,Situation,Situation description,
 Colreg_R31,Info,string,Info,Additional information,
-Colreg_R32,ReportTime,time,Phone call report time,Call Time,
-Colreg_R32,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R32,ReportTime,time,Report time, Time,
 Colreg_R32,Clause,string,Clause ID,Clause identifier,
 Colreg_R32,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R32,Situation,string,Situation,Situation description,
 Colreg_R32,Info,string,Info,Additional information,
-Colreg_R33,ReportTime,time,Phone call report time,Call Time,
-Colreg_R33,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R33,ReportTime,time,Report time, Time,
 Colreg_R33,Clause,string,Clause ID,Clause identifier,
 Colreg_R33,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R33,Situation,string,Situation,Situation description,
 Colreg_R33,Info,string,Info,Additional information,
-Colreg_R34,ReportTime,time,Phone call report time,Call Time,
-Colreg_R34,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R34,ReportTime,time,Report time, Time,
 Colreg_R34,Clause,string,Clause ID,Clause identifier,
 Colreg_R34,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R34,Situation,string,Situation,Situation description,
 Colreg_R34,Info,string,Info,Additional information,
-Colreg_R35,ReportTime,time,Phone call report time,Call Time,
-Colreg_R35,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R35,ReportTime,time,Report time, Time,
 Colreg_R35,Clause,string,Clause ID,Clause identifier,
 Colreg_R35,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R35,Situation,string,Situation,Situation description,
 Colreg_R35,Info,string,Info,Additional information,
-Colreg_R36,ReportTime,time,Phone call report time,Call Time,
-Colreg_R36,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R36,ReportTime,time,Report time, Time,
 Colreg_R36,Clause,string,Clause ID,Clause identifier,
 Colreg_R36,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R36,Situation,string,Situation,Situation description,
 Colreg_R36,Info,string,Info,Additional information,
-Colreg_R37,ReportTime,time,Phone call report time,Call Time,
-Colreg_R37,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R37,ReportTime,time,Report time, Time,
 Colreg_R37,Clause,string,Clause ID,Clause identifier,
 Colreg_R37,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R37,Situation,string,Situation,Situation description,
 Colreg_R37,Info,string,Info,Additional information,
-Colreg_R38,ReportTime,time,Phone call report time,Call Time,
-Colreg_R38,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R38,ReportTime,time,Report time, Time,
 Colreg_R38,Clause,string,Clause ID,Clause identifier,
 Colreg_R38,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R38,Situation,string,Situation,Situation description,
 Colreg_R38,Info,string,Info,Additional information,
-Colreg_R39,ReportTime,time,Phone call report time,Call Time,
-Colreg_R39,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R39,ReportTime,time,Report time, Time,
 Colreg_R39,Clause,string,Clause ID,Clause identifier,
 Colreg_R39,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R39,Situation,string,Situation,Situation description,
 Colreg_R39,Info,string,Info,Additional information,
-Colreg_R40,ReportTime,time,Phone call report time,Call Time,
-Colreg_R40,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R40,ReportTime,time,Report time, Time,
 Colreg_R40,Clause,string,Clause ID,Clause identifier,
 Colreg_R40,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R40,Situation,string,Situation,Situation description,
 Colreg_R40,Info,string,Info,Additional information,
-Colreg_R41,ReportTime,time,Phone call report time,Call Time,
-Colreg_R41,VesselId,int,Vessel IMO,Vessel IMO,
+Colreg_R41,ReportTime,time,Report time, Time,
 Colreg_R41,Clause,string,Clause ID,Clause identifier,
 Colreg_R41,Penalty,float,Penalty Score,Penalty Score,
 Colreg_R41,Situation,string,Situation,Situation description,
 Colreg_R41,Info,string,Info,Additional information,
+Solas_C01,ReportTime,time,Report time, Time,
+Solas_C01,Clause,string,Clause ID,Clause identifier,
+Solas_C01,Penalty,float,Penalty Score,Penalty Score,
+Solas_C01,Situation,string,Situation,Situation description,
+Solas_C01,Info,string,Info,Additional information,
+Solas_C02,ReportTime,time,Report time, Time,
+Solas_C02,Clause,string,Clause ID,Clause identifier,
+Solas_C02,Penalty,float,Penalty Score,Penalty Score,
+Solas_C02,Situation,string,Situation,Situation description,
+Solas_C02,Info,string,Info,Additional information,
+Solas_C03,ReportTime,time,Report time, Time,
+Solas_C03,Clause,string,Clause ID,Clause identifier,
+Solas_C03,Penalty,float,Penalty Score,Penalty Score,
+Solas_C03,Situation,string,Situation,Situation description,
+Solas_C03,Info,string,Info,Additional information,
+Solas_C04,ReportTime,time,Report time, Time,
+Solas_C04,Clause,string,Clause ID,Clause identifier,
+Solas_C04,Penalty,float,Penalty Score,Penalty Score,
+Solas_C04,Situation,string,Situation,Situation description,
+Solas_C04,Info,string,Info,Additional information,
+Solas_C05,ReportTime,time,Report time, Time,
+Solas_C05,Clause,string,Clause ID,Clause identifier,
+Solas_C05,Penalty,float,Penalty Score,Penalty Score,
+Solas_C05,Situation,string,Situation,Situation description,
+Solas_C05,Info,string,Info,Additional information,
+Solas_C06,ReportTime,time,Report time, Time,
+Solas_C06,Clause,string,Clause ID,Clause identifier,
+Solas_C06,Penalty,float,Penalty Score,Penalty Score,
+Solas_C06,Situation,string,Situation,Situation description,
+Solas_C06,Info,string,Info,Additional information,
+Solas_C07,ReportTime,time,Report time, Time,
+Solas_C07,Clause,string,Clause ID,Clause identifier,
+Solas_C07,Penalty,float,Penalty Score,Penalty Score,
+Solas_C07,Situation,string,Situation,Situation description,
+Solas_C07,Info,string,Info,Additional information,
+Solas_C08,ReportTime,time,Report time, Time,
+Solas_C08,Clause,string,Clause ID,Clause identifier,
+Solas_C08,Penalty,float,Penalty Score,Penalty Score,
+Solas_C08,Situation,string,Situation,Situation description,
+Solas_C08,Info,string,Info,Additional information,
+Solas_C09,ReportTime,time,Report time, Time,
+Solas_C09,Clause,string,Clause ID,Clause identifier,
+Solas_C09,Penalty,float,Penalty Score,Penalty Score,
+Solas_C09,Situation,string,Situation,Situation description,
+Solas_C09,Info,string,Info,Additional information,
+Solas_C10,ReportTime,time,Report time, Time,
+Solas_C10,Clause,string,Clause ID,Clause identifier,
+Solas_C10,Penalty,float,Penalty Score,Penalty Score,
+Solas_C10,Situation,string,Situation,Situation description,
+Solas_C10,Info,string,Info,Additional information,
+Solas_C11,ReportTime,time,Report time, Time,
+Solas_C11,Clause,string,Clause ID,Clause identifier,
+Solas_C11,Penalty,float,Penalty Score,Penalty Score,
+Solas_C11,Situation,string,Situation,Situation description,
+Solas_C11,Info,string,Info,Additional information,
+Solas_C12,ReportTime,time,Report time, Time,
+Solas_C12,Clause,string,Clause ID,Clause identifier,
+Solas_C12,Penalty,float,Penalty Score,Penalty Score,
+Solas_C12,Situation,string,Situation,Situation description,
+Solas_C12,Info,string,Info,Additional information,
+Solas_C13,ReportTime,time,Report time, Time,
+Solas_C13,Clause,string,Clause ID,Clause identifier,
+Solas_C13,Penalty,float,Penalty Score,Penalty Score,
+Solas_C13,Situation,string,Situation,Situation description,
+Solas_C13,Info,string,Info,Additional information,
+Solas_C14,ReportTime,time,Report time, Time,
+Solas_C14,Clause,string,Clause ID,Clause identifier,
+Solas_C14,Penalty,float,Penalty Score,Penalty Score,
+Solas_C14,Situation,string,Situation,Situation description,
+Solas_C14,Info,string,Info,Additional information,
+Solas_C15,ReportTime,time,Report time, Time,
+Solas_C15,Clause,string,Clause ID,Clause identifier,
+Solas_C15,Penalty,float,Penalty Score,Penalty Score,
+Solas_C15,Situation,string,Situation,Situation description,
+Solas_C15,Info,string,Info,Additional information,
+Crs_Highsea_Misc,ReportTime,time,Report time, Time,
+Crs_Highsea_Misc,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Misc,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Misc,Situation,string,Situation,Situation description,
+Crs_Highsea_Misc,Info,string,Info,Additional information,
+Crs_Highsea_Plan,ReportTime,time,Report time, Time,
+Crs_Highsea_Plan,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Plan,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Plan,Situation,string,Situation,Situation description,
+Crs_Highsea_Plan,Info,string,Info,Additional information,
+Crs_Highsea_Comfort,ReportTime,time,Report time, Time,
+Crs_Highsea_Comfort,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Comfort,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Comfort,Situation,string,Situation,Situation description,
+Crs_Highsea_Comfort,Info,string,Info,Additional information,
+Crs_Highsea_Grounding,ReportTime,time,Report time, Time,
+Crs_Highsea_Grounding,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Grounding,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Grounding,Situation,string,Situation,Situation description,
+Crs_Highsea_Grounding,Info,string,Info,Additional information,
+Crs_Highsea_DayTime,ReportTime,time,Report time, Time,
+Crs_Highsea_DayTime,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_DayTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_DayTime,Situation,string,Situation,Situation description,
+Crs_Highsea_DayTime,Info,string,Info,Additional information,
+Crs_Highsea_NightTime,ReportTime,time,Report time, Time,
+Crs_Highsea_NightTime,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_NightTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_NightTime,Situation,string,Situation,Situation description,
+Crs_Highsea_NightTime,Info,string,Info,Additional information,
+Crs_Highsea_Headon,ReportTime,time,Report time, Time,
+Crs_Highsea_Headon,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Headon,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Headon,Situation,string,Situation,Situation description,
+Crs_Highsea_Headon,Info,string,Info,Additional information,
+Crs_Highsea_Berthing,ReportTime,time,Report time, Time,
+Crs_Highsea_Berthing,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Berthing,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Berthing,Situation,string,Situation,Situation description,
+Crs_Highsea_Berthing,Info,string,Info,Additional information,
+Crs_Highsea_Overtaking,ReportTime,time,Report time, Time,
+Crs_Highsea_Overtaking,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Overtaking,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Overtaking,Situation,string,Situation,Situation description,
+Crs_Highsea_Overtaking,Info,string,Info,Additional information,
+Crs_Highsea_GiveWay,ReportTime,time,Report time, Time,
+Crs_Highsea_GiveWay,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_GiveWay,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_GiveWay,Situation,string,Situation,Situation description,
+Crs_Highsea_GiveWay,Info,string,Info,Additional information,
+Crs_Highsea_Speed,ReportTime,time,Report time, Time,
+Crs_Highsea_Speed,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Speed,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Speed,Situation,string,Situation,Situation description,
+Crs_Highsea_Speed,Info,string,Info,Additional information,
+Crs_Highsea_Signal,ReportTime,time,Report time, Time,
+Crs_Highsea_Signal,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Signal,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Signal,Situation,string,Situation,Situation description,
+Crs_Highsea_Signal,Info,string,Info,Additional information,
+Crs_Highsea_Discipline,ReportTime,time,Report time, Time,
+Crs_Highsea_Discipline,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Discipline,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Discipline,Situation,string,Situation,Situation description,
+Crs_Highsea_Discipline,Info,string,Info,Additional information,
+Crs_Highsea_Collision,ReportTime,time,Report time, Time,
+Crs_Highsea_Collision,Type,int,Crs Code,Crs identification code,
+Crs_Highsea_Collision,Penalty,float,Penalty Score,Penalty Score,
+Crs_Highsea_Collision,Situation,string,Situation,Situation description,
+Crs_Highsea_Collision,Info,string,Info,Additional information,
+Crs_Coastal_Misc,ReportTime,time,Report time, Time,
+Crs_Coastal_Misc,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Misc,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Misc,Situation,string,Situation,Situation description,
+Crs_Coastal_Misc,Info,string,Info,Additional information,
+Crs_Coastal_Plan,ReportTime,time,Report time, Time,
+Crs_Coastal_Plan,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Plan,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Plan,Situation,string,Situation,Situation description,
+Crs_Coastal_Plan,Info,string,Info,Additional information,
+Crs_Coastal_Comfort,ReportTime,time,Report time, Time,
+Crs_Coastal_Comfort,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Comfort,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Comfort,Situation,string,Situation,Situation description,
+Crs_Coastal_Comfort,Info,string,Info,Additional information,
+Crs_Coastal_Grounding,ReportTime,time,Report time, Time,
+Crs_Coastal_Grounding,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Grounding,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Grounding,Situation,string,Situation,Situation description,
+Crs_Coastal_Grounding,Info,string,Info,Additional information,
+Crs_Coastal_DayTime,ReportTime,time,Report time, Time,
+Crs_Coastal_DayTime,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_DayTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_DayTime,Situation,string,Situation,Situation description,
+Crs_Coastal_DayTime,Info,string,Info,Additional information,
+Crs_Coastal_NightTime,ReportTime,time,Report time, Time,
+Crs_Coastal_NightTime,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_NightTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_NightTime,Situation,string,Situation,Situation description,
+Crs_Coastal_NightTime,Info,string,Info,Additional information,
+Crs_Coastal_Headon,ReportTime,time,Report time, Time,
+Crs_Coastal_Headon,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Headon,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Headon,Situation,string,Situation,Situation description,
+Crs_Coastal_Headon,Info,string,Info,Additional information,
+Crs_Coastal_Berthing,ReportTime,time,Report time, Time,
+Crs_Coastal_Berthing,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Berthing,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Berthing,Situation,string,Situation,Situation description,
+Crs_Coastal_Berthing,Info,string,Info,Additional information,
+Crs_Coastal_Overtaking,ReportTime,time,Report time, Time,
+Crs_Coastal_Overtaking,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Overtaking,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Overtaking,Situation,string,Situation,Situation description,
+Crs_Coastal_Overtaking,Info,string,Info,Additional information,
+Crs_Coastal_GiveWay,ReportTime,time,Report time, Time,
+Crs_Coastal_GiveWay,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_GiveWay,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_GiveWay,Situation,string,Situation,Situation description,
+Crs_Coastal_GiveWay,Info,string,Info,Additional information,
+Crs_Coastal_Speed,ReportTime,time,Report time, Time,
+Crs_Coastal_Speed,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Speed,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Speed,Situation,string,Situation,Situation description,
+Crs_Coastal_Speed,Info,string,Info,Additional information,
+Crs_Coastal_Signal,ReportTime,time,Report time, Time,
+Crs_Coastal_Signal,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Signal,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Signal,Situation,string,Situation,Situation description,
+Crs_Coastal_Signal,Info,string,Info,Additional information,
+Crs_Coastal_Discipline,ReportTime,time,Report time, Time,
+Crs_Coastal_Discipline,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Discipline,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Discipline,Situation,string,Situation,Situation description,
+Crs_Coastal_Discipline,Info,string,Info,Additional information,
+Crs_Coastal_Collision,ReportTime,time,Report time, Time,
+Crs_Coastal_Collision,Type,int,Crs Code,Crs identification code,
+Crs_Coastal_Collision,Penalty,float,Penalty Score,Penalty Score,
+Crs_Coastal_Collision,Situation,string,Situation,Situation description,
+Crs_Coastal_Collision,Info,string,Info,Additional information,
+Crs_Domestic_Misc,ReportTime,time,Report time, Time,
+Crs_Domestic_Misc,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Misc,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Misc,Situation,string,Situation,Situation description,
+Crs_Domestic_Misc,Info,string,Info,Additional information,
+Crs_Domestic_Plan,ReportTime,time,Report time, Time,
+Crs_Domestic_Plan,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Plan,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Plan,Situation,string,Situation,Situation description,
+Crs_Domestic_Plan,Info,string,Info,Additional information,
+Crs_Domestic_Comfort,ReportTime,time,Report time, Time,
+Crs_Domestic_Comfort,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Comfort,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Comfort,Situation,string,Situation,Situation description,
+Crs_Domestic_Comfort,Info,string,Info,Additional information,
+Crs_Domestic_Grounding,ReportTime,time,Report time, Time,
+Crs_Domestic_Grounding,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Grounding,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Grounding,Situation,string,Situation,Situation description,
+Crs_Domestic_Grounding,Info,string,Info,Additional information,
+Crs_Domestic_DayTime,ReportTime,time,Report time, Time,
+Crs_Domestic_DayTime,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_DayTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_DayTime,Situation,string,Situation,Situation description,
+Crs_Domestic_DayTime,Info,string,Info,Additional information,
+Crs_Domestic_NightTime,ReportTime,time,Report time, Time,
+Crs_Domestic_NightTime,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_NightTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_NightTime,Situation,string,Situation,Situation description,
+Crs_Domestic_NightTime,Info,string,Info,Additional information,
+Crs_Domestic_Headon,ReportTime,time,Report time, Time,
+Crs_Domestic_Headon,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Headon,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Headon,Situation,string,Situation,Situation description,
+Crs_Domestic_Headon,Info,string,Info,Additional information,
+Crs_Domestic_Berthing,ReportTime,time,Report time, Time,
+Crs_Domestic_Berthing,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Berthing,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Berthing,Situation,string,Situation,Situation description,
+Crs_Domestic_Berthing,Info,string,Info,Additional information,
+Crs_Domestic_Overtaking,ReportTime,time,Report time, Time,
+Crs_Domestic_Overtaking,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Overtaking,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Overtaking,Situation,string,Situation,Situation description,
+Crs_Domestic_Overtaking,Info,string,Info,Additional information,
+Crs_Domestic_GiveWay,ReportTime,time,Report time, Time,
+Crs_Domestic_GiveWay,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_GiveWay,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_GiveWay,Situation,string,Situation,Situation description,
+Crs_Domestic_GiveWay,Info,string,Info,Additional information,
+Crs_Domestic_Speed,ReportTime,time,Report time, Time,
+Crs_Domestic_Speed,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Speed,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Speed,Situation,string,Situation,Situation description,
+Crs_Domestic_Speed,Info,string,Info,Additional information,
+Crs_Domestic_Signal,ReportTime,time,Report time, Time,
+Crs_Domestic_Signal,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Signal,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Signal,Situation,string,Situation,Situation description,
+Crs_Domestic_Signal,Info,string,Info,Additional information,
+Crs_Domestic_Discipline,ReportTime,time,Report time, Time,
+Crs_Domestic_Discipline,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Discipline,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Discipline,Situation,string,Situation,Situation description,
+Crs_Domestic_Discipline,Info,string,Info,Additional information,
+Crs_Domestic_Collision,ReportTime,time,Report time, Time,
+Crs_Domestic_Collision,Type,int,Crs Code,Crs identification code,
+Crs_Domestic_Collision,Penalty,float,Penalty Score,Penalty Score,
+Crs_Domestic_Collision,Situation,string,Situation,Situation description,
+Crs_Domestic_Collision,Info,string,Info,Additional information,
+Crs_Interior_Misc,ReportTime,time,Report time, Time,
+Crs_Interior_Misc,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Misc,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Misc,Situation,string,Situation,Situation description,
+Crs_Interior_Misc,Info,string,Info,Additional information,
+Crs_Interior_Plan,ReportTime,time,Report time, Time,
+Crs_Interior_Plan,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Plan,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Plan,Situation,string,Situation,Situation description,
+Crs_Interior_Plan,Info,string,Info,Additional information,
+Crs_Interior_Comfort,ReportTime,time,Report time, Time,
+Crs_Interior_Comfort,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Comfort,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Comfort,Situation,string,Situation,Situation description,
+Crs_Interior_Comfort,Info,string,Info,Additional information,
+Crs_Interior_Grounding,ReportTime,time,Report time, Time,
+Crs_Interior_Grounding,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Grounding,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Grounding,Situation,string,Situation,Situation description,
+Crs_Interior_Grounding,Info,string,Info,Additional information,
+Crs_Interior_DayTime,ReportTime,time,Report time, Time,
+Crs_Interior_DayTime,Type,int,Crs Code,Crs identification code,
+Crs_Interior_DayTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_DayTime,Situation,string,Situation,Situation description,
+Crs_Interior_DayTime,Info,string,Info,Additional information,
+Crs_Interior_NightTime,ReportTime,time,Report time, Time,
+Crs_Interior_NightTime,Type,int,Crs Code,Crs identification code,
+Crs_Interior_NightTime,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_NightTime,Situation,string,Situation,Situation description,
+Crs_Interior_NightTime,Info,string,Info,Additional information,
+Crs_Interior_Headon,ReportTime,time,Report time, Time,
+Crs_Interior_Headon,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Headon,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Headon,Situation,string,Situation,Situation description,
+Crs_Interior_Headon,Info,string,Info,Additional information,
+Crs_Interior_Berthing,ReportTime,time,Report time, Time,
+Crs_Interior_Berthing,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Berthing,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Berthing,Situation,string,Situation,Situation description,
+Crs_Interior_Berthing,Info,string,Info,Additional information,
+Crs_Interior_Overtaking,ReportTime,time,Report time, Time,
+Crs_Interior_Overtaking,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Overtaking,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Overtaking,Situation,string,Situation,Situation description,
+Crs_Interior_Overtaking,Info,string,Info,Additional information,
+Crs_Interior_GiveWay,ReportTime,time,Report time, Time,
+Crs_Interior_GiveWay,Type,int,Crs Code,Crs identification code,
+Crs_Interior_GiveWay,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_GiveWay,Situation,string,Situation,Situation description,
+Crs_Interior_GiveWay,Info,string,Info,Additional information,
+Crs_Interior_Speed,ReportTime,time,Report time, Time,
+Crs_Interior_Speed,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Speed,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Speed,Situation,string,Situation,Situation description,
+Crs_Interior_Speed,Info,string,Info,Additional information,
+Crs_Interior_Signal,ReportTime,time,Report time, Time,
+Crs_Interior_Signal,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Signal,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Signal,Situation,string,Situation,Situation description,
+Crs_Interior_Signal,Info,string,Info,Additional information,
+Crs_Interior_Discipline,ReportTime,time,Report time, Time,
+Crs_Interior_Discipline,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Discipline,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Discipline,Situation,string,Situation,Situation description,
+Crs_Interior_Discipline,Info,string,Info,Additional information,
+Crs_Interior_Collision,ReportTime,time,Report time, Time,
+Crs_Interior_Collision,Type,int,Crs Code,Crs identification code,
+Crs_Interior_Collision,Penalty,float,Penalty Score,Penalty Score,
+Crs_Interior_Collision,Situation,string,Situation,Situation description,
+Crs_Interior_Collision,Info,string,Info,Additional information,
