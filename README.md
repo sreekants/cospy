@@ -9,7 +9,7 @@ COS (Co-Simulation Operating System) - Core packages
 
 - **Github repository**: <https://github.com/sreekants/cospy>
 
-Copyright [2023] [Norwegian University of Science and Technology]
+Copyright 2023, Norwegian University of Science and Technology.
   
 ## Getting started with your project
 
