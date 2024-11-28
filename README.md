@@ -20,4 +20,4 @@ The following more information about the background research behind the project.
 ## Quick Links
   * [Getting Started Guide](docs/GettingStarted.md)
 
-<small>Copyright 2023, Norwegian University of Science and Technology.</small>
+<sub>Copyright 2023, Norwegian University of Science and Technology.</sub>
