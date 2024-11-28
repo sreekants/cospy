@@ -16,6 +16,7 @@ The following more information about the background research behind the project.
 * [Safety Assurances of Autonomous Vessels](https://www.researchgate.net/publication/385274872_Safety_Assurances_in_Autonomous_Vessels)
 * [Legata - a domain language for regulatory compliance](https://www.researchgate.net/publication/386174675_Legata_-A_domain_language_for_regulatory_compliance)
 
+![Concept Diagram](docs/images/Datapipeline.png)
 ## Quick Links
   * [Getting Started Guide](docs/GettingStarted.md)
 
