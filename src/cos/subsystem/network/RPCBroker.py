@@ -12,35 +12,34 @@ import time
 
 
 class RPCBrokerThread(SimulationThread):
-	def __init__(self, sim, broker, arg):
+	def __init__(self, sim, broker, args:ArgList, package:str):
 		""" Constructor
 		Arguments
 			sim -- Reference ot the simulation
 			broker -- Reference to the broker
-			arg -- Arguments to create the transport
+			args -- Arguments to create the transport
+			package -- Transport software module implementing the stack
 		"""
 		SimulationThread.__init__(self, sim)
 		self.running	= True
 		self.broker		= broker
 
-		self.__create_transport(sim, broker, arg)
+		self.__create_transport(sim, broker, args, module)
 
 		return
 
-	def __create_transport(self, sim, broker, arg):
+	def __create_transport(self, sim, broker, args:ArgList, package:str):
 		""" Creates a transport
 		Arguments
 			sim -- Reference ot the simulation
 			broker -- Reference to the broker
-			arg -- Arguments to create the transport
+			args -- Arguments to create the transport
+			package -- Transport software module implementing the stack
 		"""
 		self.transport	= None
-		if arg == None:
+		if args == None:
 			return
-
-		args				= ArgList(arg)
-		package				= args["transport"]
-
+		
 		if package==None or len(package) == 0:
 			return
 
@@ -75,7 +74,7 @@ class RPCBroker(Subsystem):
 		""" Constructor
 		"""
 		Subsystem.__init__(self, "RPC", "Broker")
-		self.thread		= None
+		self.threads	= []
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -84,13 +83,18 @@ class RPCBroker(Subsystem):
 			ctxt -- Simulation context
 			config -- Configuration attributes
 		"""
-		self.sim	 = ctxt.sim
+		self.sim	= ctxt.sim
+		args		= ArgList(self.get_config(config)["config"])
+		transports	= args['transport']
+		if transports == None:
+			return
 
-		config		= self.get_config(config)
+		# Start the RPC thread for each protocol
+		for proto in transports:
+			thread	= RPCBrokerThread(ctxt.sim, self, args, proto)
+			thread.start()
 
-		# Start the RPC thread
-		self.thread	= RPCBrokerThread(ctxt.sim, self, config["config"])
-		self.thread.start()
+			self.threads.append( thread )
 
 		# Reguster this broker as the master broker
 		self.sim.ipc.broker	= self

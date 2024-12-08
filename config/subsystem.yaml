@@ -1,9 +1,5 @@
 packages:
   modules:  # Kernel subsystem services
-     - name: RPCBroker
-       module: cos.subsystem.network.RPCBroker
-       config: transport=cos.core.network.RPCZMQTransport
-
      - name: NetworkManager
        module: cos.subsystem.network.NetworkManager
        config: 
