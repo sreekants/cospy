@@ -1,102 +1,23 @@
-# cospy
+# COS (Co-Simulation Operating System) - Core packages
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://opensource.org/license/apache-2-0) 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
-
-COS (Co-Simulation Operating System) - Core packages
-
 - **Github repository**: <https://github.com/sreekants/cospy>
 
-## Getting started with your project
+## Introduction
 
-First, create a repository on GitHub with the same name as this project, and then run the following commands:
+The Co-Simulation Operating System (COS) is a "testable metaverse" designed for digital twinning of autonomous vessels, thus allowing large-scale simulations with augmented fidelity for testing. It introduces the concept of a ’simulules’ - containerized simulation capsules running on a high-performance computing (HPC) cluster. Each simulule is an isolated instance that tests one permutation of a scenario, within which the evaluated autonomous software is introduced as a digital twin. The results are stored in a database, then analyzed and visualized through a performance dashboard. COS is built as an embedded operating system for large-scale distributed simulations. It supports 100,000 to 10 million scenarios in parallel, is domain-agnostic (for maritime, road, rail, or aerial simulations), and allows limitless expansion through plug-in features called "faculties." COS is based on a microkernel design, making it flexible to run on both desktop and HPC clusters, while also emulating realworld systems (propulsiion  systems, telecommunication, sonar and visual detectors etc.) for enhanced simulation fidelity.
 
-```bash
-git init -b main
-git add .
-git commit -m "init commit"
-git remote add origin git@github.com:sreekants/cospy.git
-git push -u origin main
-```
+The platform draws extensively from the [Inferno Operating System](https://en.wikipedia.org/wiki/Inferno_(operating_system)) and ROS - the [Robotic Operating System](https://en.wikipedia.org/wiki/Robot_Operating_System#Services). All resources are exposed as sockets (not files). Resources appear in a hierarchical namespace that may represent physically separated (inprocess or remote) resources. All capabilities of the system are plugin software modules exposed as nodes advertising [services](https://en.wikipedia.org/wiki/Robot_Operating_System#Services) (often extended as faculties), with an inter-process messaging system based advertised as [topics](https://en.wikipedia.org/wiki/Robot_Operating_System#Topics) serving the backbone for a standard communication protocol.
 
-Finally, install the environment and the pre-commit hooks with
+The following more information about the background research behind the project.
+* [Safety Assurances of Autonomous Vessels](https://www.researchgate.net/publication/385274872_Safety_Assurances_in_Autonomous_Vessels)
+* [Legata - a domain language for regulatory compliance](https://www.researchgate.net/publication/386174675_Legata_-A_domain_language_for_regulatory_compliance)
 
-```bash
-make install
-```
+![Concept Diagram](docs/images/Datapipeline.png)
+## Quick Links
+  * [Getting Started Guide](docs/GettingStarted.md)
 
-You are now ready to start development on your project!
-
-
-
-## Setting up a runtime environment
-You will need to set up a few runtime variables for the simulation to run properly.
-
-## Getting started with your project
-
-Assume that you have cloned this git repository into a folder at *PATH_TO_COS_REPOSITORY*. Follow the instructions below to setup the environment
-
-### Linux & MacOS setup
-Setup the following environment variables by adding the following lines to your ~/.bashrc file or ~/.zshrc (depending on the shell you prefer to use). 
-
-```bash
-export COS_ROOT="*PATH_TO_COS_REPOSITORY*"
-export COS_CONFIG="${COS_ROOT}/config"
-export PYTHONPATH="${PYTHONPATH}:${COS_ROOT}/src"
-```
-
-Note that on the MacOS, the default shell is zsh and on Linux it is bash. Either way, what you want is the directories to show up in your environment variables. You can verify the setup with the *printenv* command that will dump out the variables for you.  
-
-### Quickstart installation of python packages
-If you are only installing the prerequisite python packages and prefer not to develop software on the repository, you can install the prerequisite files form the requirements.txt with the following command. 
-
-```bash
-pip install -r requirements.txt
-```
-
-If you have trouble with the python package installation, it is most likely a version mismatch. You may have to install a packages manually by looking at the requirements.txt.
-
-### Checking your setup.
-If you have got all your dependeicies and environment variables setup you should be good to go already. You can verify if everything is running by booting up the kernel. To do that, you change directory to *apps/coslaunch* under your installation dierctory. When you are at this folder, start the kernel with the following command:
-
-```bash
-/home/jdoe/devel/cospy/apps/cosservice$ python main.py
-```
-
-If all goes well, you should see an output like the following..
-
-```bash
-COS Simulation Operating system
-Version: 1.0 [07 Mar 2018]
-22/04/24 12:55:56 (Kernel) Initializing...
-22/04/24 12:55:56 (Loader) Loading Kernel: Subsystem
-22/04/24 12:55:56 (Loader) Loading Subsystem
-22/04/24 12:55:56 (Loader)   level-0: /home/jdoe/devel/cospy/config/subsystem.yaml.
-22/04/24 12:55:56 (Loader)    + Module: cos.core.subsystem.RPCBroker 
-22/04/24 12:55:56 (Loader)    + Module: cos.core.subsystem.NetworkManager 
-22/04/24 12:55:56 (Loader)    + Module: cos.core.subsystem.DataManager 
-22/04/24 12:55:56 (Loader)    + Module: cos.core.subsystem.World 
-22/04/24 12:55:56 (Loader) Loading Faculties: Environment,Monitors,Signals,Actors,Rules
-22/04/24 12:55:56 (Loader) Loading Environment
-....
-22/04/24 12:55:57 (Loader)    + Module: cos.core.service.Sea 
-22/04/24 12:55:57 (Loader)    + Module: cos.core.service.Vessel 
-22/04/24 12:55:57 (RPC) Listening for RPC on [tcp://*:5556]
-22/04/24 12:55:57 (IPC) Posting IPC events on [tcp://*:5557]
-Press Enter to exit...
-```
-
-Pressing a key at this prompt shuts down the kernel. But otherwise, the kernel is up and running. You can visualize the kernel by likewise, change directory to *apps/cviz* under your installation dierctory. When you are at this folder, start the visualization with the following command:
-
-
-```bash
-/home/jdoe/devel/cospy/apps/cviz$ python main.py
-pygame 2.5.2 (SDL 2.28.3, Python 3.12.2)
-Hello from the pygame community. https://www.pygame.org/contribute.html
-Connecting to tcp://localhost:5556
-Connecting to tcp://localhost:5556
-Collecting updates from world server on tcp://localhost:5557...
-Connecting to tcp://localhost:5556
-```
+<sub>Copyright 2023, Norwegian University of Science and Technology.</sub>
