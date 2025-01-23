@@ -141,13 +141,13 @@ class InlandWaterRule(Rule):
 		if score is None:
 			return
 		
-		now		= ctxt.sim.clock.utc
+		now		= ctxt.sim.now()
 		fact	= score["fact"]
 		concern	= score["concern"]
 		penalty	= score["penalty"]
 
-		self.data(ctxt, fact, [now,10000,now, imo, penalty])
-		self.data(ctxt, 'ro', [now,10000,f'\'{concern}\'',now, imo, penalty])
+		self.data(ctxt, fact, [now, imo, penalty])
+		self.data(ctxt, 'ro', [f'\'{concern}\'',now, imo, penalty])
 
 		# Override the function to score the violation
 		ctxt.log.error( self.regulation, f'Violated clause {clausename} for {concern}')

@@ -38,6 +38,11 @@ class Kernel:
 		self.__init_settings()
 		return
 
+	def now(self):
+		""" Returns the current kernel time
+		"""
+		return self.clock.utc
+	
 	def start(self, configfile, configpath, settings):
 		""" Starts the kernel
 		Arguments

@@ -52,7 +52,7 @@ class Rule17(COLREG):
 		print( f'{self.__class__.__name__}.standon:{vessel.config["name"]}' )
 
 		# Post an event to the scoring table
-		self.data(ctxt, 'call', [300, 0, 0])
+		self.data(ctxt, 'log', [ctxt.sim.now(), 300, 0, 0])
 		return
 
 	def on_giveway(self, ctxt:Context, evt):
@@ -65,7 +65,7 @@ class Rule17(COLREG):
 		print( f'{self.__class__.__name__}.giveway:{vessel.config["name"]}' )
 
 		# Post an event to the scoring table
-		self.data(ctxt, 'log', [200, 0, 0])
+		self.data(ctxt, 'log', [ctxt.sim.now(), 200, 0, 0])
 		return
 
 	def on_crossing(self, ctxt:Context, evt):
@@ -78,7 +78,7 @@ class Rule17(COLREG):
 		print( f'{self.__class__.__name__}.crossing:{vessel.config["name"]}' )
 
 		# Post an event to the scoring table
-		self.data(ctxt, 'log', [200, 0, 0])
+		self.data(ctxt, 'log', [ctxt.sim.now(), 200, 0, 0])
 		return
 
 if __name__ == "__main__":

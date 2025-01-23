@@ -24,7 +24,7 @@ class RPCBrokerThread(SimulationThread):
 		self.running	= True
 		self.broker		= broker
 
-		self.__create_transport(sim, broker, args, module)
+		self.__create_transport(sim, broker, args, package)
 
 		return
 
@@ -89,6 +89,8 @@ class RPCBroker(Subsystem):
 		if transports == None:
 			return
 
+		transports	= transports.split(',')
+		
 		# Start the RPC thread for each protocol
 		for proto in transports:
 			thread	= RPCBrokerThread(ctxt.sim, self, args, proto)
