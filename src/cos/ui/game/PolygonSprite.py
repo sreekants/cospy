@@ -22,7 +22,7 @@ class PolygonSprite:
 		else:
 			self.visible	= False
 
-		depth		= config.get("depth", 0.0)
+		self.depth		= config.get("depth", 0.0)
 
 		# TODO: Opacity does not yet work. The depth needs to deal with opacity 
 		# or render ordered has to be sorted by depth accordingly
