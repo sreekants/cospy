@@ -109,8 +109,9 @@ class RPCBroker(Subsystem):
 			config -- Configuration attributes
 		"""
 		# Stop the RPC thread
-		self.thread.stop()
-		self.thread.join()
+		for thread in self.threads:
+			thread.stop()
+			thread.join()
 
 		# Wait for sockets to close
 		time.sleep(.5)

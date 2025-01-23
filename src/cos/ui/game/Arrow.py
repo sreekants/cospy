@@ -57,10 +57,6 @@ class Arrow:
 			ctxt -- Simulation context
 			screen -- Reference ot the simulation screen
 		"""
-		"""Draw an arrow between start and end with the arrow head at the end.
-		Args:
-			surface (pygame.Surface): The surface to draw on
-		"""
 		if ctxt.layer != self.layer:
 			return
 
