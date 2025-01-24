@@ -61,9 +61,13 @@ class Kml2map:
 
 		e.extract( self.path, "kml", "csv" )
 
+		e.clear(self.path, "land.s3db")
+		e.clear(self.path, "sea.s3db")
+
 		# Output the data.
 		e.dump(self.path, "land", "land.s3db")
 		e.dump(self.path, "sea", "sea.s3db")
+		e.dump(self.path, "tss", "sea.s3db")
 		return
 		
 		

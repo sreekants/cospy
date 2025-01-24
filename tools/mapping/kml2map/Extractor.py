@@ -176,7 +176,7 @@ class Extractor:
 		print( f'range of data: x({minx:.4f} - {maxx:.4f}={(maxx-minx):.4f}) y({miny:.4f} - {maxy:.4f}={(maxy-miny):.4f}) ')
 		return
 
-	def dump(self, path, type, dbfile):
+	def clear(self, path, dbfile):
 		if len(path) > 0:
 			dbpath  = os.path.join(path, dbfile)
 		else:
@@ -184,7 +184,13 @@ class Extractor:
 		
 		if self.resetdb == True:
 			ActiveRecord.clear(dbpath)
-			
+
+	def dump(self, path, type, dbfile):
+		if len(path) > 0:
+			dbpath  = os.path.join(path, dbfile)
+		else:
+			dbpath  = path
+				
 		db  = ActiveRecord.create('', dbpath, 'isohypses')
 			
 		for k, v in self.output.items():
@@ -208,13 +214,13 @@ class Extractor:
 		return
 
 	def get_depth_field(self, type):
-		return { "land":"height", "sea":"depth", "sky":"height"}[type]
+		return { "land":"height", "sea":"depth", "tss":"depth", "sky":"height"}[type]
 
 	def get_color(self, type):
-		return { "land":"#3CB371", "sea":"#47B9C6", "sky":"#47B9C6"}[type]
+		return { "land":"#3CB371", "sea":"#47B9C6", "tss":"#47B9C6", "sky":"#47B9C6"}[type]
 
 	def get_type(self, type, name):
-		return { "land":100000, "sea":100000, "sky":100000}[type]
+		return { "land":100000, "sea":100000, "tss":100000, "sky":100000}[type]
 
 	def get_name(self, type, name):
 		if name.startswith(type) == False:
