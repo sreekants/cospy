@@ -11,15 +11,15 @@ from Kml2map import Kml2map
 def get_app_info():
 	return {
 		"executable": "kml2map.py",
-		"name"		: "Skeleton documentation generator",
+		"name"		: "KML to map converter",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?] dir"
+		"usage"		:[ 	"[-h][-?][dir path]"
 					],
 					
 		"help"		:[
 			    ["h"	, ["Print help.", usage]],
 			    ["?"	, ["Print help.", usage]],
-			    ["dir"	, ["Code directory.", None]]
+			    ["dir"	, ["Database directory.", None]]
 				]		
 		}
 	
@@ -66,7 +66,7 @@ def main():
 			_debug = 1                  
 
 	theApp = Kml2map()
-	theApp.run()
+	theApp.run( args, get_app_info() )
 	
 
 if __name__ == "__main__":

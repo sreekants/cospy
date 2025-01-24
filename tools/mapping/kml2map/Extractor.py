@@ -3,141 +3,241 @@
 # Description: Extractor for KML files.
 
 
+from cos.core.utilities.ActiveRecord import ActiveRecord
 from xml.etree import ElementTree as ET
-import csv
 import os
-import numpy as np
+import uuid
 
-from scipy.interpolate import interp1d
 from pyproj import CRS, Transformer
 
-# Map a point to a 1200 x 800 pixel zone
-mapper = (
-            (interp1d([400,7800],[0,1200]), 1874000), 
-            (interp1d([12400,22000],[0,800]), 3280000)
-            )
+class Interpolator:
+	def __init__(self, rfrom, rto):
+		self.rfrom  = rfrom
+		self.rto    = rto
+		return
+	
+	def __call__(self, v):
+		return self.rto[0]+ (self.rto[1]-self.rto[0])*(v-self.rfrom[0])/(self.rfrom[1]-self.rfrom[0])
+	
+	
+class Mapper:
+	def __init__(self, mapping):
+		self.offset = mapping[2]
+		self.soffset = mapping[3]
+		self.scale  = Interpolator(mapping[0], mapping[1])
+		self.range  = mapping[1]
+		return
+		
 
-zone_number = 35
-zone_letter ="N"
+class Extractor:
+	def __init__(self, args):
+		self.output = {}
 
-def latlon_to_utm( lat, lon ):
-    """
-    Converts latitude and longitude of a position to a defined UTM projection.
-    Parameters:
-    lat: latitude
-    lon: longitude
-    zone_number (int): UTM zone number
-    zone_letter (str): UTM zone letter (N or S)
-    Returns:
-    tuple: easting, northing
-    """
-    # Determine if the zone is in the northern or southern hemisphere
-    is_northern = zone_letter.upper() >= "N"
-    # Define the UTM coordinate system based on zone and hemisphere
-    utm_crs = CRS.from_proj4(f"+proj=utm +zone={zone_number} +{'north' if is_northern else 'south'} +ellps=WGS84")
-    wgs84_crs = CRS.from_epsg(4326)  # EPSG:4326 for WGS84
-    # Create a transformer object
-    transformer = Transformer.from_crs(wgs84_crs, utm_crs)
-    # Perform the transformation
-    easting, northing = transformer.transform(lat, lon)
-    return easting, northing
+		self.resetdb    = True
+	
+		self.mapx = Mapper( args["mapping"]["x"] )
+		self.mapy = Mapper( args["mapping"]["y"] )
 
-
-def map_to_screen(long, lat, mapper):
-    """
-    maps map coord to screen.
-
-    Args:
-        lon (float): Longitude.
-        lat (float): Latitude.
-        mapper (float): Scale mapping.
-
-    Returns:
-        list: A list of tuples containing (longitude, latitude, altitude).
-    """
-    xoff        = mapper[0][1]
-    yoff        = mapper[1][1]
-    mlong, mlat = latlon_to_utm(long, lat)
-    mlong   = mlong-xoff
-    mlat    = mlat-yoff
-
-    return mapper[0][0](mlong), mapper[1][0](mlat)
-
-def save_coordinates_to_csv(points, kml_file_path, output_csv_path):
-    """
-    Extract coordinates from a .kml file.
-
-    Args:
-        kml_file_path (str): Path to the .kml file.
-
-    Returns:
-        list: A list of tuples containing (longitude, latitude, altitude).
-    """
-    # Parse the .kml file
-    tree = ET.parse(kml_file_path)
-    root = tree.getroot()
+		self.zone_number = args["zone"]["number"]
+		self.zone_letter = args["zone"]["letter"]
+		return
 
 
-    # Namespace definitions for KML
-    namespaces = {'kml': 'http://www.opengis.net/kml/2.2'}
-
-    # Extract all coordinates
-    all_coordinates = []
-    for placemark in root.findall(".//kml:Placemark", namespaces):
-        for coord in placemark.findall(".//kml:coordinates", namespaces):
-            coord_text = coord.text.strip()
-            coord_list = coord_text.split()
-            # Collect all coordinates in the required format
-            for c in coord_list:
-                lon, lat, *_        = map(float, c.split(','))
-                map_lon, map_lat    = map_to_screen(lon, lat, mapper)
-                # Format with four digits of precision
-                formatted_lon = f"{map_lon:.2f}"
-                formatted_lat = f"{map_lat:.2f}"
-
-                points[0].append(map_lon)
-                points[1].append(map_lat)
-
-                all_coordinates.append(f"{formatted_lon},{formatted_lat}")
-
-    # Save to CSV
-    with open(output_csv_path, mode='w', newline='') as csvfile:
-        csvfile.write(" ".join(all_coordinates))  # Write all coordinates as a single line
+	def latlon_to_utm( self, lat, lon ):
+		"""
+		Converts latitude and longitude of a position to a defined UTM projection.
+		Parameters:
+            lat: latitude
+            lon: longitude
+		Returns:
+    		tuple: easting, northing
+		"""
+		
+		# Determine if the zone is in the northern or southern hemisphere
+		is_northern = self.zone_letter.upper() >= "N"
+		
+		# Define the UTM coordinate system based on zone and hemisphere
+		utm_crs     = CRS.from_proj4(f"+proj=utm +zone={self.zone_number} +{'north' if is_northern else 'south'} +ellps=WGS84")
+		wgs84_crs   = CRS.from_epsg(4326)  # EPSG:4326 for WGS84
+		
+		# Create a transformer object
+		transformer = Transformer.from_crs(wgs84_crs, utm_crs)
+		
+		# Perform the transformation
+		easting, northing = transformer.transform(lat, lon)
+		return easting, northing
 
 
-def automate_kml_to_csv_conversion(path_kml_data, path_csv_data):
-    """
-    Convert all .kml files in a directory to .csv files in another directory.
+	def map_to_screen( self, lat, long ):
+		"""
+		maps map coord to screen.
 
-    Args:
-        path_kml_data (str): Path to the directory containing .kml files.
-        path_csv_data (str): Path to the directory where .csv files will be saved.
-    """
-    # Ensure the output directory exists
-    os.makedirs(path_csv_data, exist_ok=True)
-    
-    points     = [list(), list()]
-    # Iterate through all .kml files in the source directory
-    for kml_filename in os.listdir(path_kml_data):
-        if kml_filename.endswith(".kml"):
-            kml_file_path = os.path.join(path_kml_data, kml_filename)
-            csv_filename = os.path.splitext(kml_filename)[0] + ".csv"
-            csv_file_path = os.path.join(path_csv_data, csv_filename)
+		Args:
+            lon (float): Longitude.
+            lat (float): Latitude.
 
-            # Convert and save the .csv file
-            save_coordinates_to_csv(points, kml_file_path, csv_file_path)
-            print(f"Converted {kml_file_path} to {csv_file_path}")
+		Returns:
+    		list: A list of tuples containing (longitude, latitude, altitude).
+		"""
+		
+		mlong, mlat = self.latlon_to_utm(lat, long)
+		# return mlat, mlong
+	
+		molong   = mlong - self.mapx.offset
+		molat    = mlat - self.mapy.offset
+		# return molong, molat
+	
+		long    = self.mapx.soffset + self.mapx.scale(molong)
+		lat     = self.mapy.soffset + self.mapy.scale(molat)
+			
+		return lat, long
 
-    minx    = min(points[0])
-    maxx    = max(points[0])
-    miny    = min(points[1])
-    maxy    = max(points[1])
 
-    print( f'range of data: x({minx:.4f} - {maxx:.4f}={(maxx-minx):.4f}) y({miny:.4f} - {maxy:.4f}={(maxy-miny):.4f}) ')
 
-# Paths to the KML and CSV directories
-path_kml_data = "kml"
-path_csv_data = "csv"
+	def save_coordinates_to_csv( self, points, kml_path, output_csv_path ):
+		"""
+		Extract coordinates from a .kml file.
 
-# Automate the process
-automate_kml_to_csv_conversion(path_kml_data, path_csv_data)
+		Args:
+		kml_path (str): Path to the .kml file.
+
+		Returns:
+		list: A list of tuples containing (longitude, latitude, altitude).
+		"""
+		# Parse the .kml file
+		tree = ET.parse(kml_path)
+		root = tree.getroot()
+
+
+		# Namespace definitions for KML
+		namespaces = {'kml': 'http://www.opengis.net/kml/2.2'}
+
+		# Extract all coordinates
+		coords = []
+		for placemark in root.findall(".//kml:Placemark", namespaces):
+			for coord in placemark.findall(".//kml:coordinates", namespaces):
+				coord_text = coord.text.strip()
+				coord_list = coord_text.split()
+				# Collect all coordinates in the required format
+				for c in coord_list:
+					lon, lat, *_        = map(float, c.split(','))
+					map_lat, map_lon     = self.map_to_screen(lat, lon)
+					# Format with four digits of precision
+					formatted_lon = f"{map_lon:.2f}"
+					formatted_lat = f"{(self.mapy.range[1]-map_lat):.2f}"
+
+					points[0].append(map_lon)
+					points[1].append(map_lat)
+
+					coords.append(f"{formatted_lon},{formatted_lat}")
+
+			polypath = " ".join(coords)
+			# Save to CSV
+			with open(output_csv_path, mode='w', newline='') as csvfile:
+				csvfile.write(polypath)  # Write all coordinates as a single line
+				
+		return polypath
+
+	def extract(self, path, indir, outdir):
+		"""
+		Convert all .kml files in a directory to .csv files in another directory.
+
+		Args:
+			path (str): Root directory of the files.
+			indir (str): Directory containing .kml files.
+			outdir (str): Directory where .csv files will be saved.
+		"""
+
+		indir	= os.path.join(path,indir)
+		outdir	= os.path.join(path,outdir)
+
+		# Ensure the output directory exists
+		os.makedirs(outdir, exist_ok=True)
+
+		points     = [list(), list()]
+		# Iterate through all .kml files in the source directory
+		for kml_file in os.listdir(indir):
+			if kml_file.endswith(".kml"):
+				kml_path = os.path.join(indir, kml_file)
+				csv_file = os.path.splitext(kml_file)[0] + ".csv"
+				csv_path = os.path.join(outdir, csv_file)
+
+				# Convert and save the .csv file
+				output = self.save_coordinates_to_csv(points, kml_path, csv_path)
+				print(f"Converted {kml_path} to {csv_path}")
+				
+				self.output[csv_file]   = output
+
+		minx    = min(points[0])
+		maxx    = max(points[0])
+		miny    = min(points[1])
+		maxy    = max(points[1])
+
+		print( f'range of data: x({minx:.4f} - {maxx:.4f}={(maxx-minx):.4f}) y({miny:.4f} - {maxy:.4f}={(maxy-miny):.4f}) ')
+		return
+
+	def dump(self, path, type, dbfile):
+		if len(path) > 0:
+			dbpath  = os.path.join(path, dbfile)
+		else:
+			dbpath  = path
+		
+		if self.resetdb == True:
+			ActiveRecord.clear(dbpath)
+			
+		db  = ActiveRecord.create('', dbpath, 'isohypses')
+			
+		for k, v in self.output.items():
+			if k.startswith(type) == False:
+				continue
+			
+			print( f'Writing {k} to {dbpath}' )
+			
+			name 	= self.get_name( type, os.path.splitext(k)[0] )
+			guid	= str(uuid.uuid1()).lower()
+			values = {
+                'guid': guid,
+                'name': name,
+                'type': self.get_type(type, v),
+                'path': v,
+                self.get_depth_field(type): 0,
+				'color': self.get_color(type),				
+                'visible': 'Y' }
+			
+			db.add(values)
+		return
+
+	def get_depth_field(self, type):
+		return { "land":"height", "sea":"depth", "sky":"height"}[type]
+
+	def get_color(self, type):
+		return { "land":"#3CB371", "sea":"#47B9C6", "sky":"#47B9C6"}[type]
+
+	def get_type(self, type, name):
+		return { "land":100000, "sea":100000, "sky":100000}[type]
+
+	def get_name(self, type, name):
+		if name.startswith(type) == False:
+			return name
+		
+		ndx 	= len(type)
+		if name[ndx] == '-':
+			ndx	= ndx+1
+
+		return name[ndx:]
+
+if __name__ == "__main__":
+    test = Extractor( {
+            "zone":{
+                "number":35,
+                "letter":"N"
+            },
+            "mapping":{
+				# source range, targe range, start offset
+                "x": ( [400,7800],    	[0,1200],   1874000 ),
+                "y": ( [12400,22000],   [0,800],   	3280000 )
+            }
+        })
+
+    # Automate the process
+    test.extract("kml", "csv")
