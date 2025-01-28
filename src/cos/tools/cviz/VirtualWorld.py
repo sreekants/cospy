@@ -198,7 +198,7 @@ class VirtualWorld:
 				entity.prepare(self, self.screen)
 
 		# Painter's algorithm (render in layers)
-		for layer in range(0,8):
+		for layer in range(0,10):
 			self.layer	= layer
 
 			# Draw all our sprites

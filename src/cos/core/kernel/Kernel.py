@@ -51,7 +51,7 @@ class Kernel:
 		"""
 		self.scheduler	= self.create_thread_pool()
 		self.config	= Configuration(configfile, configpath, settings['image'],
-							  ['DB','SIMULATION','LOCATION','WEATHER','MAP']
+							  ['DB','SIMULATION','COUNTRY','LOCATION','WEATHER','MAP']
 							  )
 		self.log	= Logger( self.config )
 
