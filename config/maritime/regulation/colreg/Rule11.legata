@@ -1,0 +1,8 @@
+# COLREG.Rule11:
+
+define: {
+    OS: OwnShip
+}
+
+# Application
+# Rules in this Section apply to vessels in sight of one another.

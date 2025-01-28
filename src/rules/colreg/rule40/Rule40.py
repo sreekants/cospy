@@ -6,7 +6,7 @@ from maritime.model.rule.COLREG import COLREG
 
 '''
 Application
-Contracting Parties shall use the pcosisions of the Code for Implementation in the
+Contracting Parties shall use the provisions of the Code for Implementation in the
 execution of their obligations and responsibilities contained in the present Convention.
 '''
 
