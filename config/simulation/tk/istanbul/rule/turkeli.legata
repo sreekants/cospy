@@ -6,11 +6,13 @@ define: {
     OS: OwnShip
 }
 
+# include "bosphorous.legata"
 
 # (3) Check if the sea current exceeds 4 kn, then large
 # vessels, deep-draught vessels and hazardous cargocarrying
 # vessels with a speed of 10 kn or less cannot
 # enter the strait.
+
 
 clause['Istanbul.Strait.Rule3.Heavy']:{
     : {
