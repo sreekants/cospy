@@ -10,16 +10,25 @@ class Kml2map:
 		self.xrange	= [0, 7000]
 		self.yrange	= [0, 5000]
 
-		self.xorig	= 665000
-		self.yorig	= 4545000 
-
 		self.xsorig	= -600
 		self.ysorig	= 50
+
+		# REMOVE
+		self.xorig	= 0
+		self.yorig	= 0 
+
 
 		self.path	= '.'
 		return
 
 	def run(self, args, appinfo):
+		if len(args) > 0:
+			self.configure(args, appinfo)
+
+		self.extract()
+		return 0
+	
+	def configure(self, args, appinfo):
 		for help in appinfo["help"]:
 			if help[0] != args[0]:
 				continue
@@ -39,8 +48,7 @@ class Kml2map:
 					print(e)
 					return -1
 				
-				self.extract()
-				return 0
+		return 0
 
 	def dir( self, args ):
 		self.path	= args[0]
@@ -53,8 +61,8 @@ class Kml2map:
 					"letter":"N"
 				},
 				"mapping":{
-					"x": ( self.xrange,	[0,1200],   self.xorig, self.xsorig ),
-					"y": ( self.yrange, [0,800],   	self.yorig, self.ysorig )
+					"x": ( self.xrange,	[0,1200],   self.xsorig ),
+					"y": ( self.yrange, [0,800],   	self.ysorig )
 				}
 			})
 		
