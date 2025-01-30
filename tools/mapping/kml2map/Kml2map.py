@@ -7,76 +7,110 @@ import os
 
 class Kml2map:
 	def __init__(self):
-		self.xrange	= [0, 7000]
-		self.yrange	= [0, 5000]
+		self.xrange	= [0, 5000.0]
+		self.yrange	= [0, 5000.0]
 
-		self.xsorig	= -600
-		self.ysorig	= 50
-
-		# REMOVE
-		self.xorig	= 0
-		self.yorig	= 0 
-
+		self.xsorig	= 0.0
+		self.ysorig	= 0.0
 
 		self.path	= '.'
 		return
 
 	def run(self, args, appinfo):
 		if len(args) > 0:
-			self.configure(args, appinfo)
+			if self.configure(args, appinfo) == False:
+				return -1
 
 		self.extract()
 		return 0
 	
 	def configure(self, args, appinfo):
-		for help in appinfo["help"]:
-			if help[0] != args[0]:
+		next	= 0
+
+		while True:
+			if next >= len(args):
+				break
+
+			method = args[next]
+			if method[0] != '-':
+				next = next+1
 				continue
 
-			method = args[0]
+			method	= method[1:]
+
 			if hasattr(self, method) and callable(func:=getattr(self, method)):
 				try:
-					args 	= args[1:]
-					if len(args) == 0:
-						args	= None
+					nargs 	= args[next+1:]
+					if len(nargs) == 0:
+						nargs	= None
 
-					result	= func( args )
+					result	= func( nargs )
 					if result != None:
 						print( result )
 						
 				except Exception as e:
 					print(e)
-					return -1
+					return False
 				
-		return 0
+			next	= next+1
+				
+		return True
 
 	def dir( self, args ):
 		self.path	= args[0]
 		return
 
-	def extract(self):
-		e = Extractor( {
-				"zone":{
-					"number":35,
-					"letter":"N"
-				},
-				"mapping":{
-					"x": ( self.xrange,	[0,1200],   self.xsorig ),
-					"y": ( self.yrange, [0,800],   	self.ysorig )
-				}
-			})
+	@staticmethod
+	def get_range(arg, type):
+		nchar	= len(arg)
+		if (nchar < 2) or (arg[0] != '[') or (arg[-1] != ']'):
+			raise ValueError( f"Invalid {type} argument [{arg}]." )
 		
+		a	= arg[1:nchar-1].split(',')
 
-		e.extract( self.path, "kml", "csv" )
-
-		e.clear(self.path, "land.s3db")
-		e.clear(self.path, "sea.s3db")
-
-		# Output the data.
-		e.dump(self.path, "land", "land.s3db")
-		e.dump(self.path, "sea", "sea.s3db")
-		e.dump(self.path, "tss", "sea.s3db")
+		return (float(a[0]), float(a[1]))
+	
+	def scale( self, args ):
+		scale		= Kml2map.get_range( args[0], "scale" )
+		self.xrange	= [0, scale[0]]
+		self.yrange	= [0, scale[1]]
 		return
+
+	def offset( self, args ):
+		offset		= Kml2map.get_range( args[0], "offset" )
+		self.xsorig	= offset[0]
+		self.ysorig	= offset[1]
+		return
+
+	def extract(self):
+		try:
+			e = Extractor( {
+					"zone":{
+						"number":35,
+						"letter":"N"
+					},
+					"mapping":{
+						"x": ( self.xrange,	[0,1200],   self.xsorig ),
+						"y": ( self.yrange, [0,800],   	self.ysorig )
+					}
+				})
+			
+			# Extract the map
+			e.extract( self.path, "kml", "csv" )
+
+			# Remove all existing data
+			e.clear(self.path, "land.s3db")
+			e.clear(self.path, "sea.s3db")
+
+			# Output the data.
+			e.dump(self.path, "land", "land.s3db")
+			e.dump(self.path, "sea", "sea.s3db")
+			e.dump(self.path, "tss", "sea.s3db")
+		except Exception as e:
+			print(e)
+			return False
+	
+		return True
 		
 		
 

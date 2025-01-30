@@ -8,7 +8,6 @@ define: {
 # Pilot Vessels
 condition: { 
     : OS.Operation has 'Vessel.Operation.PILOT'
-
 }
 
 # (a) A vessel engaged on pilotage duty shall exhibit:

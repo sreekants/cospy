@@ -229,7 +229,7 @@ clause['COLREG.Rule10.l']:{
         condition: { 
             : (TSS is not empty) and 
               (OS.Status in [Vessel.RESTRICTED]) and
-              (OS.Operation in ['Vessel.Operation.SERVICE'])
+              (OS.Operation has 'Vessel.Operation.SERVICE')
          }
         assure: { 
             : clear             # Clear all violations

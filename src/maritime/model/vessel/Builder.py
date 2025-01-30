@@ -36,6 +36,15 @@ class Builder(BuilderBaseClass):
 			rec -- Database record of the object
 		"""
 		guid	= rec[2]
+		X		= rec[8].strip()
+		R		= rec[9].strip()
+
+		if len(X)>0:
+			X	= [float(x) for x in X.split(',')]
+
+		if len(R)>0:
+			R	= [float(x) for x in R.split(',')]
+
 		config	= {
 						"id": rec[0],
 						"guid":guid,
@@ -48,8 +57,8 @@ class Builder(BuilderBaseClass):
 						"weight": rec[10],
 						"pose":{
 							"position": [float(x) for x in rec[7].split(',')],
-							"X": [float(x) for x in rec[8].split(',')],
-							"R": [float(x) for x in rec[9].split(',')]
+							"X": X,
+							"R": R
 						},
 						"behavior":rec[11],
 						"sprite":rec[12],

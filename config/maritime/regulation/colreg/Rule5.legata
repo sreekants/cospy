@@ -20,20 +20,20 @@ condition: {
 clause['COLREG.Rule5/Sight']:{
     : {
         condition: (OS, TS).Distance in Vessel.Collision.TimeToEncounter.VisibleRange
-        assure: { :OS.Intent in ['Operation.Lookout.*'] }
+        assure: { :OS.Intent has 'Operation.Lookout.*' }
     }
 }
 
 clause['COLREG.Rule5/Radar']:{
     : {
         condition: (OS, TS).Distance in Vessel.Collision.TimeToEncounter.RadioRange
-        assure: { :OS.Intent in ['Operation.Lookout.Radio*'] }
+        assure: { :OS.Intent has 'Operation.Lookout.Radio*' }
     }
 }
 
 clause['COLREG.Rule5/Sonar']:{
     : {
         condition: (OS, TS).Distance in Vessel.Collision.TimeToEncounter.SonicRange
-        assure: { :OS.Intent in ['Operation.Lookout.Sonar*'] }
+        assure: { :OS.Intent has 'Operation.Lookout.Sonar*' }
     }
 }

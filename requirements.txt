@@ -21,6 +21,7 @@ py-trees
 pydantic
 pydantic-core
 pygame
+pyproj
 PyYAML
 pyzmq
 regex

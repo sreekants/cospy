@@ -9,7 +9,7 @@ interface Vessel
 {
 	object 		describe( string id );
 	void 		init( string id, object config );
-	object		update( string id );
+	object		update( string id, object state );
 	void		ioctl( string id, int op, object arg );
 };
 

@@ -13,13 +13,15 @@ def get_app_info():
 		"executable": "kml2map.py",
 		"name"		: "KML to map converter",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?][dir path]"
+		"usage"		:[ 	"[-h][-?][-dir path][-offset range][-scale range]"
 					],
 					
 		"help"		:[
 			    ["h"	, ["Print help.", usage]],
 			    ["?"	, ["Print help.", usage]],
-			    ["dir"	, ["Database directory.", None]]
+			    ["dir"	, ["Database directory.", None]],
+			    ["offset"	, ["Offset the output map eg:[-600,20].", None]],
+			    ["scale"	, ["Scale output map eg:[5000,5000] - 5km to a pixel on x,y.", None]]
 				]		
 		}
 	
@@ -52,8 +54,10 @@ def usage():
 	return
 
 def main():
+	arglist	= sys.argv[1:]
+
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "hi:d", ["help"])
+		opts, args = getopt.getopt(arglist, "hi:d", ["help","dir","scale","offset"])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -63,10 +67,10 @@ def main():
 			sys.exit()                  
 		elif opt == '-d':
 			global _debug               
-			_debug = 1                  
+			_debug = 1 
 
 	theApp = Kml2map()
-	theApp.run( args, get_app_info() )
+	theApp.run( arglist, get_app_info() )
 	
 
 if __name__ == "__main__":
