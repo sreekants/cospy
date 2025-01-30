@@ -15,7 +15,20 @@ class PolygonSprite:
 		self.id		= config["id"]
 		self.guid	= config["guid"]
 		self.name	= config["name"]
-		self.color	= self.getcolor(config)
+
+		visible		= config.get("visible", 'Y')
+		if (visible == 'Y') or (visible == 'True'):
+			self.visible	= True
+		else:
+			self.visible	= False
+
+		self.depth		= config.get("depth", 0.0)
+
+		# TODO: Opacity does not yet work. The depth needs to deal with opacity 
+		# or render ordered has to be sorted by depth accordingly
+		opacity		= None			
+	
+		self.color	= self.getcolor(config, opacity)
 		self.points	= self.getpolygon(config)
 		self.area	= Polygon(self.points)
 		self.layer	= 0
@@ -27,6 +40,9 @@ class PolygonSprite:
 			ctxt -- Simulation context
 			screen -- Reference ot the simulation screen
 		"""
+		if self.visible == False:
+			return
+		
 		if ctxt.layer != self.layer:
 			return
 

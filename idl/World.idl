@@ -10,8 +10,11 @@ interface World
 	void	init( object bodies );
 	bool	has_collision( object shape );
 	void	add( object type, object obj );
-	bool	play();
+
+	int		start( object spec );
+	bool	stop();
+	bool	suspend();
+	bool	resume();
 
 	object 	describe( string type );
 };
-

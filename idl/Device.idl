@@ -1,0 +1,11 @@
+interface Device
+{
+    int         create( object config );
+    string      find( int id );
+    bool        delete( int id );
+
+    void        init( int id, object shape );
+    object      update( int id );
+
+	string      describe( string id );
+};

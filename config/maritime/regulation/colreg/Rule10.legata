@@ -92,7 +92,7 @@ clause['COLREG.Rule10.d.i']:{
          }
         assure: { 
             :(OS.Length in range(0, 20)) or 
-             (OS.Operation in ['Vessel.Operation.Sailing', 'Vessel.Operation.Fishing'])
+             (OS.Operation has any ['Vessel.Operation.Sailing', 'Vessel.Operation.Fishing'])
             }
     }
 }
@@ -126,7 +126,7 @@ clause['COLREG.Rule10.e.i']:{
               (OS.Intent in ['Emergency.*'])
             : (TSS is not empty) and 
               (OS.Position in TSS.SeparationZone) and
-              (OS.Operation in [Vessel.Operation.Fishing])    # TODO: Why not sailing??
+              (OS.Operation has 'Vessel.Operation.FISHING')    # TODO: Why not sailing??
          }
         assure: { 
             : clear             # Clear all violations
@@ -176,7 +176,7 @@ clause['COLREG.Rule10.i']:{
     : {
         condition: { 
             : (TSS is not empty) and 
-              (OS.Operation in ['Vessel.Operation.FISHING'])    # TODO: Why not sailing??
+              (OS.Operation has 'Vessel.Operation.FISHING')    # TODO: Why not sailing??
          }
         assure: { 
             : (OS, TS).Distance > Area.TrafficSeparationScheme.SafeSmallVesselClearance
@@ -210,7 +210,7 @@ clause['COLREG.Rule10.k']:{
               (OS.Status in [Vessel.MOORED, Vessel.AGROUND, Vessel.UNDERWAY])
             : (TSS is not empty) and 
               (OS.Status in [Vessel.RESTRICTED]) and
-              (OS.Operation in [Vessel.Operation.SAFETY])
+              (OS.Operation has 'Vessel.Operation.SAFETY')
                             
 
          }

@@ -2,6 +2,7 @@
 # Filename: RPCZMQTransport.py
 # Description: Implementation of the RPC Transport for ZMQ
 
+from cos.core.network.Transport import Transport
 from cos.core.kernel.Context import Context
 from cos.core.kernel.IPCMessage import IPCMessage, IPCFlags
 from cos.core.network.ZMQFrame import ZMQFrame
@@ -9,10 +10,9 @@ from cos.core.network.ZMQFrame import ZMQFrame
 import time, zmq, random, msgpack, struct, datetime, socket
 
 RPCPORT			= 5556
-IPCPORT			= RPCPORT+1
 MAX_MESSAGES	= 1024
 
-class RPCZMQTransport():
+class RPCZMQTransport(Transport):
 	def __init__(self, sim, broker, args:dict):
 		""" Constructor
 		Arguments
@@ -20,18 +20,17 @@ class RPCZMQTransport():
 			broker -- Broker name
 			args -- List of arguments
 		"""
-		port 			= self.get_port(args)
+		Transport.__init__(self, sim, broker, args)
 
 		self.poller		= zmq.Poller()
-		self.sim		= sim
-		self.broker		= broker
 
 		self.context	= None
 		self.rpcsocket	= None
 		self.ipcsock	= None
 
+		port 			= self.get_port(args)
 		if port < 0:
-			port	= RPCPORT
+			port		= RPCPORT
 
 		self.port		= port
 		return
@@ -136,9 +135,9 @@ class RPCZMQTransport():
 			msg.ts		= now		# Time the message was sent (UTC)
 			msg.ta		= None		# Time the message arrived at the destination (UTC)
 
-			self.post( self.rpcsocket, objpath, msg )
+			self.__post( self.rpcsocket, objpath, msg )
 
-	def post( self, sock, objpath, req ):
+	def __post( self, sock, objpath, req ):
 		""" Posts a message to the socket
 		Arguments
 			sock -- Reference to the socket
@@ -149,7 +148,7 @@ class RPCZMQTransport():
 			# Invoke and generate result
 			result	= self.broker.invoke_service( objpath, req, self.__to_args(req) )
 
-			msg = { 'r': result }
+			msg = { "r": result }
 
 			if req.ttl>1:
 				ttl	= req.ttl-1

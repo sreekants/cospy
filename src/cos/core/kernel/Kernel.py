@@ -38,6 +38,11 @@ class Kernel:
 		self.__init_settings()
 		return
 
+	def now(self):
+		""" Returns the current kernel time
+		"""
+		return self.clock.utc
+	
 	def start(self, configfile, configpath, settings):
 		""" Starts the kernel
 		Arguments
@@ -46,7 +51,7 @@ class Kernel:
 		"""
 		self.scheduler	= self.create_thread_pool()
 		self.config	= Configuration(configfile, configpath, settings['image'],
-							  ['LOCATION','SIMULATION','DB','MAP']
+							  ['DB','SIMULATION','COUNTRY','LOCATION','WEATHER','MAP']
 							  )
 		self.log	= Logger( self.config )
 

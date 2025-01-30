@@ -1,0 +1,10 @@
+# COLREG.Rule16:
+
+define: {
+    OS: OwnShip
+}
+
+# Action by Give-way Vessel
+# Every vessel which is directed to keep out of the way of another vessel shall, so far as possible, take
+# early and substantial action to keep well clear.
+

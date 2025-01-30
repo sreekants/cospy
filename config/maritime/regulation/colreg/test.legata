@@ -1,0 +1,6 @@
+# COLREG Test rule area
+
+define: {
+    OS: OwnShip
+}
+

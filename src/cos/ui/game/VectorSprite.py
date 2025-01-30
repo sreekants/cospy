@@ -61,11 +61,11 @@ class VectorField:
 		"""
 		self.glyphs	= []
 		self.guid	= config["guid"]
-		self.layer	= 1
+		self.layer	= 9
 		self.color	= color
 
 		for v in config["vectors"]:
-			self.glyphs.append( VectorSprite(v, self.color) )
+			self.glyphs.append( VectorSprite(v, self.color, self.layer) )
 		return
 
 	def update(self, ctxt, config):
@@ -75,7 +75,7 @@ class VectorField:
 		"""
 		self.glyphs.clear()
 		for v in config["vectors"]:
-			self.glyphs.append( VectorSprite(v, self.color) )
+			self.glyphs.append( VectorSprite(v, self.color, self.layer) )
 		return
 
 	def render(self, ctxt, screen):

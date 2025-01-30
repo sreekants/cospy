@@ -1,0 +1,5 @@
+# COLREG.Rule4:
+
+define: {
+    OS: OwnShip
+}

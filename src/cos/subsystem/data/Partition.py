@@ -15,12 +15,13 @@ class Partition:
 		self.fields		= fields
 		return
 
-	def add(self, data):
+	def add(self, at, data):
 		""" Queues data for write
 		Arguments
+			at -- Time of record
 			data -- Data to be queued
 		"""
-		self.records.put( data )
+		self.records.put( [at, data] )
 		return
 
 	def flush(self, db:TransactionalDatabase):
@@ -37,13 +38,24 @@ class Partition:
 
 		return
 
-	def serialize(self, db:TransactionalDatabase, data):
+	def serialize(self, db:TransactionalDatabase, rec):
 		""" Serializes a record into the database
 		Arguments
 			db -- Database to write to
-			data -- Record to write
+			rec -- Record to write
 		"""
-		db.addkv( self.topic, self.fields, map(str, data) )
+		at		= rec[0]
+		data	= rec[1]
+
+		# If all the fields are provided
+		AUDIT_REGISTER	= 1000
+
+		values	= []
+		values.append( str(at) )
+		values.append( str(AUDIT_REGISTER) )
+		values.extend( map(str, data) )
+
+		db.addkv( self.topic, self.fields, values )		
 		return
 
 	def __len__(self):

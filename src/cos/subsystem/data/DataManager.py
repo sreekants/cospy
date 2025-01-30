@@ -107,7 +107,7 @@ class DataManager(Subsystem):
 		"""
 		partition	= self.partitions.get(topic, None)
 		if partition is not None:
-			partition.add( data )
+			partition.add( self.sim.now(), data )
 		return
 
 	def flush(self):

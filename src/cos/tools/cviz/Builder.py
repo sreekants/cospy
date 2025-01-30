@@ -39,15 +39,15 @@ class AssetBuilder:
 		elif type == "land":
 			obj 	= Land(config)
 			rect	= None
-			self.world.bodies.append(obj)
+			self.add_sorted(self.world.bodies, obj)
 		elif type == "sea":
 			obj 	= Sea(config)
 			rect	= None
-			self.world.reliefs.append(obj)
+			self.add_sorted(self.world.reliefs, obj)
 		elif type == "sky":
 			obj 	= Sky(config)
 			rect	= None
-			self.world.reliefs.append(obj)
+			self.add_sorted(self.world.reliefs, obj)
 		elif type == "sea.current":
 			obj 	= SeaCurrentSystem(config)
 			rect	= None
@@ -68,7 +68,22 @@ class AssetBuilder:
 		self.world.register(type, obj)
 		return obj
 
+	def add_sorted(self, container, obj):
+		nobj	= len(container)
+		if nobj == 0:
+			container.append(obj)
+			return
+		
+		ndx = 0
+		for next in container:
+			if obj.depth < next.depth:
+				container.insert(ndx, obj)
+				return
 
+			ndx	= ndx+1
+
+		container.append(obj)
+		return
 
 class Builder:
 	def __init__(self):
