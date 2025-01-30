@@ -1,25 +1,25 @@
 packages:
-  modules:  # Vessels
-     - name: Builder.PowerDrivenVessels
-       module: maritime.model.vessel.Builder
-       service: Builder.PowerDrivenVessels
-       args: Type=POWER_DRIVEN
-       database: $(SIMULATION)/vessel.s3db
+  modules: # Vessels
+    - name: Builder.PowerDrivenVessels
+      module: maritime.model.vessel.Builder
+      service: Builder.PowerDrivenVessels
+      args: Type=POWER_DRIVEN
+      database: $(SIMULATION)/vessel.s3db
 
-     - name: Builder.SailingVessels
-       module: maritime.model.vessel.Builder
-       service: Builder.SailingVessels
-       args: Type=SAILING
-       database: $(SIMULATION)/vessel.s3db
-  
-     - name: Builder.SeaPlanes
-       module: maritime.model.vessel.Builder
-       service: Builder.SeaPlanes
-       args: Type=SEAPLANE
-       database: $(SIMULATION)/vessel.s3db
+    - name: Builder.SailingVessels
+      module: maritime.model.vessel.Builder
+      service: Builder.SailingVessels
+      args: Type=SAILING
+      database: $(SIMULATION)/vessel.s3db
 
-     - name: WIGs
-       module: maritime.model.vessel.Builder
-       service: Builder.PowerDrivenVessels
-       args: Type=WIG
-       database: $(SIMULATION)/vessel.s3db
+    - name: Builder.SeaPlanes
+      module: maritime.model.vessel.Builder
+      service: Builder.SeaPlanes
+      args: Type=SEAPLANE
+      database: $(SIMULATION)/vessel.s3db
+
+    - name: WIGs
+      module: maritime.model.vessel.Builder
+      service: Builder.PowerDrivenVessels
+      args: Type=WIG
+      database: $(SIMULATION)/vessel.s3db

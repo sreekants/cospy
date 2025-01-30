@@ -30,6 +30,7 @@ class CViz:
 	def configure(self, args, appinfo):
 		if len(args) == 0:
 			return
+		print("args: ", args)
 		
 		for help in appinfo["help"]:
 			if help[0] != args[0]:
@@ -42,7 +43,7 @@ class CViz:
 					if len(args) == 0:
 						args	= None
 
-					result	= func( args )				
+					result	= func( args )						
 				except Exception as e:
 					print(e)
 					return -1
