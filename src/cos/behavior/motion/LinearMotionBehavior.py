@@ -41,7 +41,7 @@ class LinearMotionBehavior(MotionBehavior):
 		self.x		= np.array( (loc[0], loc[1], loc[2]) )	# Position vector
 		null_vector	= np.zeros(3)
 
-		if X is not null:
+		if X is not None:
 			self.dx		= np.array( (X[0], X[1], X[2]) )		# Velocity vector
 			self.d2x	= np.array( (X[3], X[4], X[5]) )		# Acceleration vector
 		else:
@@ -49,7 +49,7 @@ class LinearMotionBehavior(MotionBehavior):
 			self.d2x	= null_vector		# Acceleration vector
 
 
-		if R is not null:
+		if R is not None:
 			self.θ		= np.array( (R[0], R[1], R[2]) )	# Rotational velocity vector
 			self.dθ		= np.array( (R[3], R[4], R[5]) )	# Rotational vector
 		else:
