@@ -61,7 +61,7 @@ class MotionBehavior:
 			op -- Operation code
 			arg -- arguments for the operation
 		"""
-		return
+		return False
 
 if __name__ == "__main__":
 	test = MotionBehavior()

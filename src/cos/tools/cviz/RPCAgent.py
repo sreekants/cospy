@@ -6,23 +6,24 @@ from cos.core.kernel.IPCMessage import IPCMessage, IPCFlags
 from cos.core.network.ZMQFrame import ZMQFrame
 import sys, time, zmq, random, msgpack, struct, datetime, socket
 
+RPCAGENT_PORT		= 5557
+
 class RPCAgent:
 	def __init__(self):
 		""" Constructor
 		"""
 		return
 
-	def connect(self):
+	def connect(self, host="localhost", port=RPCAGENT_PORT, ):
 		""" Cpmmects to the server
 		"""
-		port = "5557"
 
 		# Socket to talk to server
 		self.context = zmq.Context()
 		self.socket = self.context.socket(zmq.SUB)
 
 		print( f"Collecting updates from world server on tcp://localhost:{port}..." )
-		self.socket.connect ("tcp://localhost:%s" % port)
+		self.socket.connect ( f"tcp://{host}:{port}")
 
 		self.topicfilter = ""
 		self.socket.setsockopt(zmq.SUBSCRIBE, b'')

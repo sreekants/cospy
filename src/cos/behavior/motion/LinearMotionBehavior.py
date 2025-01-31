@@ -146,6 +146,33 @@ class LinearMotionBehavior(MotionBehavior):
 			self.dx[1]	= math.copysign( random.randint(minvel, maxvel), self.dx[1])
 		return
 
+	def ioctl(self, op, arg):
+		""" Handles operation signals
+		Arguments
+			op -- Operation code
+			arg -- arguments for the operation
+		"""
+		if op == "position":
+			X			= arg
+			self.x		= np.array( (X[0], X[1], X[2]) )		# Position
+			return True
+
+		if op == "velocity":
+			X			= arg
+			self.dx		= np.array( (X[0], X[1], X[2]) )		# Velocity vector
+			if len(X) > 3:
+				self.d2x	= np.array( (X[3], X[4], X[5]) )	# Acceleration vector
+			return True
+
+		if op == "heading":
+			R			= arg
+			self.θ		= np.array( (R[0], R[1], R[2]) )		# Rotational velocity vector
+			if len(R) > 3:
+				self.dθ		= np.array( (R[3], R[4], R[5]) )	# Rotational vector
+			return True
+
+		return MotionBehavior.ioctl(self, op, arg)
+
 	@property
 	def position(self):
 		""" Returns the current position

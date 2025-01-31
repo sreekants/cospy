@@ -35,6 +35,53 @@ class Vessel(ORPCService):
 
 		return inst.describe()
 
+
+	def init( self, id, config ):
+		""" Initializes a vessel
+		Arguments
+			id -- Unique identifier
+			config -- Configuration attributes
+		"""
+		inst = self.__get_vessel(id)
+		if inst == None:
+			return
+		inst.initialize( config )
+		return
+
+	def ioctl( self, id, op, arg ):
+		inst = self.__get_vessel(id)
+		if inst == None:
+			raise Exception( f"Unknown vessel {id}." )
+		
+		inst.ioctl( op, arg )
+		return
+
+	def update( self, id, state ):
+		inst = self.__get_vessel(id)
+		if inst == None:
+			raise Exception( f"Unknown vessel {id}." )
+		
+		self.__update_pose(inst, state)
+		return
+
+	def __update_pose(self, inst, state):
+		pose	= state.get("pose", None)
+		if pose is None:
+			return
+		position	= pose.get("position", None)
+		X			= pose.get("X", None)
+		R			= pose.get("R", None)
+
+		if position is not None:
+			inst.ioctl( "position", position )
+
+		if X is not None:
+			inst.ioctl( "velocity", X )
+
+		if R is not None:
+			inst.ioctl( "heading", X )
+		return
+
 	def __get_vessel(self, id):
 		""" Finds a vessel with an ID
 		Arguments
@@ -61,24 +108,3 @@ class Vessel(ORPCService):
 		# Return the match immediately
 		result.match	= node.handle
 		return ErrorCode.S_OK
-
-
-	def init( self, id, config ):
-		""" Initializes a vessel
-		Arguments
-			id -- Unique identifier
-			config -- Configuration attributes
-		"""
-		inst = self.__get_vessel(id)
-		if inst == None:
-			return
-		inst.initialize( config )
-		return
-
-	def ioctl( self, id, op, arg ):
-		inst = self.__get_vessel(id)
-		if inst == None:
-			raise Exception( f"Unknown vessel {id}." )
-		
-		inst.ioctl( op, arg )
-		return

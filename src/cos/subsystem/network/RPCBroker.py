@@ -132,7 +132,7 @@ class RPCBroker(Subsystem):
 		if hasattr(inst, method) and callable(func:=getattr(inst, method)):
 			return func( *args )
 
-		raise Exception( f'Failed to call method{method} on {objpath}' )
+		raise Exception( f'Failed to call method[{method}] on [{objpath}]' )
 
 
 if __name__ == "__main__":
