@@ -39,16 +39,16 @@ class Keyboard:
 			self.world.zoom(-1)
 
 		if event.key == K_UP:
-			self.world.pan_up()
-
-		if event.key == K_DOWN:
 			self.world.pan_down()
 
+		if event.key == K_DOWN:
+			self.world.pan_up()
+
 		if event.key == K_LEFT:
-			self.world.pan_left()
+			self.world.pan_right()
 
 		if event.key == K_RIGHT:
-			self.world.pan_right()
+			self.world.pan_left()
 
 		return True, True
 
