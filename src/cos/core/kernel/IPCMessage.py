@@ -99,7 +99,7 @@ class IPCMessage:
 		return self
 
 	def __str__(self):
-		""" Displays the string in a string format:
+		""" Displays the message in a string format:
 		"""
 		message = {
 			"h": self.h,

@@ -7,13 +7,16 @@ import os
 
 class Kml2map:
 	def __init__(self):
-		self.xrange	= [0, 5000.0]
-		self.yrange	= [0, 5000.0]
+		self.xrange		= [0, 10000.0]
+		self.yrange		= [0, 10000.0]
 
-		self.xsorig	= 0.0
-		self.ysorig	= 0.0
+		self.xsorig		= 0.0
+		self.ysorig		= 0.0
 
-		self.path	= '.'
+		self.path		= '.'
+
+		self.zonenum	= 35
+		self.zonechar	= "N"
 		return
 
 	def run(self, args, appinfo):
@@ -82,12 +85,18 @@ class Kml2map:
 		self.ysorig	= offset[1]
 		return
 
+	def zone( self, args ):
+		zone			= args[0]
+		self.zonenum	= int(zone[:-1])
+		self.zonechar	= zone[-1:]
+		return
+
 	def extract(self):
 		try:
 			e = Extractor( {
 					"zone":{
-						"number":35,
-						"letter":"N"
+						"number":self.zonenum,
+						"letter":self.zonechar
 					},
 					"mapping":{
 						"x": ( self.xrange,	[0,1200],   self.xsorig ),
