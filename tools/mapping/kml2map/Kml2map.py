@@ -103,6 +103,7 @@ class Kml2map:
 			e.clear(self.path, "sea.s3db")
 
 			# Output the data.
+			print("output")
 			e.dump(self.path, "land", "land.s3db")
 			e.dump(self.path, "sea", "sea.s3db")
 			e.dump(self.path, "tss", "sea.s3db")

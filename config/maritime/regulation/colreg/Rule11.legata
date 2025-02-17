@@ -6,3 +6,19 @@ define: {
 
 # Application
 # Rules in this Section apply to vessels in sight of one another.
+
+precedent['COLREG.Rule11.VesselInSight']:{
+    : {
+        condition: {
+            : (OS, TS).Visibility in Vessel.Visibility.VisibleRange
+            }
+        assure: { 
+            :add(OS, 'COLREG.Vessels.Visible', TS) 
+            :add(TS, 'COLREG.Vessels.Visible', OS) 
+            }
+        otherwise: { 
+            :del(OS, 'COLREG.Vessels.Visible', TS) 
+            :del(TS, 'COLREG.Vessels.Visible', OS) 
+            }
+    }
+}

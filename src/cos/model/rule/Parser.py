@@ -35,31 +35,44 @@ class Parser:
         self.definitions    = {}
         self.conditions     = []
         self.clauses        = []
+        self.precedents     = []
 
         return
 
-    def parse(self, data, path:str=None):
+    def parse(self, data:str, path:str=None):
         if path is not None:
             self.filename	= path
 
+        data    = self.preprocess(data, path)
+        if len(data) == 0:
+            return
+        
         # TODO: Preprocess file for imports
         self.parser.parse(data)
         self.__dump()
         self.__generate_automata()
         return
-    
+
+    def preprocess(self, data:str, path:str=None):
+        data    = data.strip()
+        return data
+
     def __dump(self):
         if self.debug == False:
             return
         
         print( f'Definitions {len(self.definitions)}')
+        print( f'Precedents {len(self.precedents)}')
         print( f'Conditions {len(self.conditions)}')
         print( f'Clauses {len(self.clauses)}')
         return
 
     def __generate_automata(self):
         if self.automata is not None:
-            self.automata.generate( self.conditions, self.clauses )
+            self.automata.generate( {'conditions':self.conditions, 
+                                     'clauses':self.clauses, 
+                                     'precedents':self.precedents
+                            } )
         return
 
     # GRAMMAR
@@ -67,34 +80,45 @@ class Parser:
         """
         rule : blocks
         """
-    
+        blocks  = p[1]
+        if blocks is None:
+            return
+
         # Consolidate all the blocks into variables.
-        for block in p[1]:
+        for block in blocks:
             btype   = block[0]
             bvalue  = block[1]
-            target  = None
             match btype:
                 case 'conditions':
-                    target  = self.conditions
+                    self.conditions.extend(bvalue)
                 case 'clauses':
-                    target  = self.clauses
-
-            if target is not None:
-                target.extend(bvalue)
-
+                    self.clauses.extend(bvalue)
+                case 'precedents':
+                    self.precedents.extend(bvalue)
+            
         return
 
     def p_blocks(self, p):
         """
-        blocks : declaration
-        blocks : blocks declaration 
+        blocks : null_clause
+        blocks : code_blocks
+        """
+        self.move(p)
+        return
+
+    def p_code_blocks(self, p):
+        """
+        code_blocks : declaration
+        code_blocks : line_indicator
+        code_blocks : code_blocks declaration 
         """
         self.fold(p, 2)
         return
-
+    
     def p_declaration(self, p):
         """
         declaration : global_definitions 
+        declaration : global_precedents 
         declaration : global_defaults
         declaration : global_conditions
         declaration : global_clauses
@@ -102,6 +126,13 @@ class Parser:
         self.move(p)
         return
 
+    def p_global_precedents(self, p):
+        """
+        global_precedents : precedents
+        """
+        p[0]    = ('precedents', p[1])
+        return
+    
     def p_global_conditions(self, p):
         """
         global_conditions : conditions
@@ -167,11 +198,13 @@ class Parser:
 
     def p_clause_statement(self, p):
         """
-        clause_statement : COLON BLOCKSTART conditions assurances BLOCKEND
+        clause_statement : COLON BLOCKSTART conditions exclusions assurances contradictions BLOCKEND
         """
         p[0]    = { 
                     'conditions': p[3], 
-                    'assurances': p[4]
+                    'exclusions': p[4], 
+                    'assurances': p[5],
+                    'contradictions': p[6]
                     }
         
         return
@@ -199,9 +232,38 @@ class Parser:
     def p_assurance_statement(self, p):
         """
         assurance_statement : COLON action_commands
-        assurance_statement : COLON compound_action 
+        assurance_statement : COLON assurance_expressions 
+        assurance_statement : COLON assurance_call 
         """
+
+
         self.move(p, p[2])
+        return
+
+    def p_assurance_expressions(self, p):
+        """
+        assurance_expressions : compound_action 
+        """
+        self.move(p,  [('?', ('expression',p[1]))])
+        return
+
+    def p_assurance_call(self, p):
+        """
+        assurance_call : functional_expression 
+        """
+        self.move(p,  [('*', ('function',p[1]))])
+        return
+
+    def p_contradictions(self, p):
+        """
+        contradictions :
+        contradictions : OTHERWISE COLON BLOCKSTART assurance_statements BLOCKEND 
+        """
+        match len(p):
+            case 1:
+                self.move(p, [])
+            case 6:
+                self.move(p, p[4])
         return
 
     def p_compound_action(self, p):
@@ -216,9 +278,11 @@ class Parser:
     def p_action_expression(self, p):
         """
         action_expression : expression
+        action_expression : functional_expression
         """
-        self.move(p, ('expression',p[1]))
+        self.move(p)
         return
+
 
     def p_action_commands(self, p):
         """
@@ -229,9 +293,32 @@ class Parser:
         self.move(p,  [('^', ('command',p[1]))])
         return
 
+
     def p_conditions(self, p):
         """
         conditions : CONDITION COLON BLOCKSTART condition_statements BLOCKEND 
+        """
+        self.move(p, p[4])
+        return
+
+    def p_exclusions(self, p):
+        """
+        exclusions : null_clause
+        exclusions : exclusion_clause
+        """
+        self.move(p)
+        return
+
+    def p_null_clause(self, p):
+        """
+        null_clause : 
+        """
+        p[0]    = None
+        return
+    
+    def p_exclusion_clause(self, p):
+        """
+        exclusion_clause : EXCLUDE COLON BLOCKSTART condition_statements BLOCKEND 
         """
         self.move(p, p[4])
         return
@@ -249,6 +336,25 @@ class Parser:
         condition : COLON expression 
         """
         self.move(p, p[2])
+        return
+
+    def p_precedents(self, p):
+        """
+        precedents : precedent_keyword LBRACE STRING RBRACE COLON BLOCKSTART clause_statements BLOCKEND
+        """
+        self.move(p, [{
+            'location': p[1],
+            'name': p[3], 
+            'definition': p[7] 
+            }])
+        
+        return
+
+    def p_precedent_keyword(self, p):
+        """
+        precedent_keyword : PRECEDENT
+        """
+        p[0]    = self.here(p)
         return
 
     def p_definitions(self, p):
@@ -310,6 +416,7 @@ class Parser:
         expression_statement : subject_not_in_range
         expression_statement : subject_not_in_any_range
         expression_statement : subject_comparison
+        expression_statement : subject_has
         """
         self.move(p)
         return
@@ -344,16 +451,23 @@ class Parser:
 
     def p_subject_is_object(self, p):
         """
-        subject_is_object : subject IS object
+        subject_is_object : subject IS rvalue
         """
         p[0]    = EQ(p[1], p[3])
         return
 
     def p_subject_is_not_object(self, p):
         """
-        subject_is_not_object : subject IS NOT object
+        subject_is_not_object : subject IS NOT rvalue
         """
         p[0]    = NEQ(p[1], p[4])
+        return
+
+    def p_subject_has(self, p):
+        """
+        subject_has : subject HAS arg
+        """
+        p[0]    = IN(p[1], [p[3]], True)
         return
 
     def p_subject_in_range(self, p):
@@ -386,8 +500,10 @@ class Parser:
 
     def p_rvalue(self, p):
         """
+        rvalue : object
         rvalue : identifier
         rvalue : number
+        rvalue : boolean
         """
         self.move(p)
         return
@@ -422,6 +538,7 @@ class Parser:
         """
         computed_variable : intersection_variable
         computed_variable : tuple_variable
+        computed_variable : functional_expression
         """
         self.move(p)
         return
@@ -443,6 +560,11 @@ class Parser:
         function : MATH_FLOOR
         function : MATH_MEAN
         function : MATH_STD
+        function : FN_ADD
+        function : FN_DEL
+        function : FN_SET
+        function : FN_ISSET
+        function : FN_COUNT
         function : FN_NMPHTOKMPH
         """
         self.move(p)
@@ -520,6 +642,7 @@ class Parser:
         arg : computed_variable
         arg : identifier
         arg : number
+        arg : boolean
         arg : STRING
         arg : EMPTY
         """
@@ -579,6 +702,20 @@ class Parser:
         p[0]    = Symbol.Variable(self.resolve(p, var))
         return
 
+    def p_boolean(self, p):
+        """
+        boolean : TRUE
+        boolean : FALSE
+        """
+        val    = p[1]
+
+        if val == 'true' :
+            p[0]    = Symbol.Integer(1)
+        else:
+            p[0]    = Symbol.Integer(0)
+
+        return
+
     def p_number(self, p):
         """
         number : INTEGER
@@ -606,13 +743,6 @@ class Parser:
         """
         file        = p[3]
         lineno      = p[2]
-        return
-
-    def p_import(self, p):
-        """
-        import : IMPORT STRING
-        """
-        file        = p[2]
         return
 
     def p_error(self, p):
@@ -678,7 +808,7 @@ class Parser:
                 p[0]    = lhs
             case _:
                 self.throw( p, f'Unexpected definition on {typename}' )
-        return
+        return p[0]
 
     def append_expression(self, p, lhs:list, rhs, typename, operator):
         self.assert_fold_logic(p, lhs, typename, operator)

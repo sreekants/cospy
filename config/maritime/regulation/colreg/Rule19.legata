@@ -8,10 +8,10 @@ define:{
 # (a) This Rule applies to vessels not in sight of one another when navigating in 
 # or near an area of restricted visibility.
 condition: {
-    : not (OS, TS).Visible 
-    : not (OS, TS).Visible
-    : [OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange
-
+    : (
+        ((OS, TS).Visible is true) and
+        ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange)
+      )
 
     # Trigger rule 19 overriding other conditions. Useful for rules in cross-reference.
     : OS.Restriction in ['COLREG.Rule19.*']  
@@ -22,11 +22,13 @@ condition: {
 # shall have engines ready for immediate manoeuvre.
 clause['COLREG.Rule19.b']:{
     : {
-        assure: { :OS.Speed in Vessel.RestrictedVisibility.Speed.Safe.Range }
-    }
-    : {
-        condition: { :OS.Type is Vessel.Type.PowerDriven }
-        assure: { :OS.Engine.State in [Vessel.Engine.ON] }
+        condition: { 
+            :(OS.Type is Vessel.Type.PowerDriven) and 
+             (OS.Speed in Vessel.RestrictedVisibility.Speed.Safe.Range)
+         }
+        assure: { 
+            :OS.Engine.State in ['Vessel.Engine.ON'] 
+        }
     }
 }
 
@@ -34,7 +36,7 @@ clause['COLREG.Rule19.b']:{
 # conditions of restricted visibility when complying with the Rules of Section I of this Part.
 clause['COLREG.Rule19.c']:{
     : {
-        condition: { : OS.Situation in [Zone.Situation.Circumstances.*] }
+        condition: { : OS.Situation in [Sea.Zone.Situation.Circumstances.*] }
         assure: { : abort }     # Abort further processing of the rule
     }
 }
@@ -86,10 +88,8 @@ clause['COLREG.Rule19.e']:{
             : (OS, TS).TimeToEncounter not in Vessel.Collision.TimeToEncounter.SafeRange
         }
         assure: { 
-            :OS.Maneuver in [
-                :OS.Engine.Acceleration is Negative             # Reduce speed
-                :(OS, TS).Approach.Gradient is Positive    # Turn away
-                ]
+            : OS.Engine.Acceleration < 0         # Reduce speed
+            : (OS, TS).Approach.Gradient > 0     # Turn away
         }
     }
 }

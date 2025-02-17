@@ -15,6 +15,9 @@ class DecisionType(Flag):
 
 	TYPE_ROOT_DECISION				= 0x00010000  # Root node of a Decision
 	TYPE_BASIC_DECISION				= 0x00000010  # Basic type of Decision
+	TYPE_BASIC_CONDITION			= 0x00010010  # Basic condition type
+	TYPE_BASIC_PRECONDITION			= 0x00020010  # Basic pre-condition type 
+	TYPE_BASIC_POSTCONDITION		= 0x00020010  # Basic post-condition type
 
 class Decision(TreeNode):
 	def __init__(self, name:str=None, parent=None, type=DecisionType.TYPE_NULL_OBJECT, ref=None):
@@ -29,6 +32,7 @@ class Decision(TreeNode):
 		self.conditions	= []
 		self.exceptions	= []
 		self.assurances	= []
+		self.precedents	= []
 		self.trace		= True
 		return
 
@@ -100,6 +104,14 @@ class Decision(TreeNode):
 			expression -- Expression to evaluate
 		"""
 		self.assurances.append(expression)
+		return
+
+	def PRECEDENT(self, expression):
+		""" Adds a precedent.
+		Arguments
+			expression -- Expression to evaluate
+		"""
+		self.precedents.append(expression)
 		return
 
 	def EXCEPT(self, expression):

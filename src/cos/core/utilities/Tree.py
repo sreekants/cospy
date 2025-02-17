@@ -571,6 +571,8 @@ class Tree:
 		self._root.parent	= None
 		return root
 
+	def __str__(self):
+		return '\n'.join(self.dump())
 
 
 
@@ -582,13 +584,13 @@ if __name__ == "__main__":
 	t.get( '/Child2/GrandChild2.2' )
 
 	print( '\n=========== Tree Dump ===========' )
-	t.Dump()
+	print(t)
 	print( '=================================\n' )
 
 	print( f'Path     = {n.get_path()}' )
 	print( f'Parents  = {n.level}' )
-	print( f'Path(Y)  = {t.match("Y").get_path()}' )
-	print( f'Path(X*)  = {t.match("X*",True).get_path()}' )
+	print( f'Path(Y)  = {t.match("Y")[0].path}' )
+	print( f'Path(X*)  = {t.match("X*",True)[0].path}' )
 
 
 

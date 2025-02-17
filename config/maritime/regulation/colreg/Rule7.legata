@@ -4,6 +4,11 @@ define: {
     OS: OwnShip
 }
 
+condition: {
+    # Trigger rule 7 only if other special rules made by local authority do not apply 
+    : OS.COLREG.Mode is true
+}
+
 # Risk of Collision
 # (a) Every vessel shall use all available means appropriate to the prevailing circumstances and
 # conditions to determine if risk of collision exists. If there is any doubt such risk shall be deemed to

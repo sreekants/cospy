@@ -130,7 +130,7 @@ class Rule(Faculty):
 		path	= ctxt.sim.config.resolve(file)
 		lagata	= Automata(None)
 
-		# Load the compiled legata file
+		# Load and compiled legata file
 		ctxt.log.info( self.id, f'Loading legata file : {file}' )
 		lagata.load( path )
 		lagata.dump()

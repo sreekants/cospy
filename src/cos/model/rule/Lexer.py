@@ -10,8 +10,11 @@ class Lexer:
     'import'	: 'IMPORT',
     'line'	    : 'LINE',
     'condition'	: 'CONDITION',
+    'exclude'   : 'EXCLUDE',
+    'precedent'	: 'PRECEDENT',
     'clause'	: 'CLAUSE',
     'assure'	: 'ASSURE',
+    'otherwise'	: 'OTHERWISE',
     'clear'	    : 'CLEAR',
     'continue'	: 'CONTINUE',
     'abort'	    : 'ABORT',
@@ -19,6 +22,9 @@ class Lexer:
     'description'	    : 'DESCRIPTION',
 
     'range'     : 'RANGE',
+
+    'true'	    : 'TRUE',
+    'false'	    : 'FALSE',
 
     'is'	    : 'IS',
     'not'	    : 'NOT',
@@ -37,6 +43,11 @@ class Lexer:
     'mean'      : 'MATH_MEAN',
     'std'       : 'MATH_STD',
 
+    'count'     : "FN_COUNT",
+    'add'       : "FN_ADD",
+    'del'       : "FN_DEL",
+    'set'       : "FN_SET",
+    'isset'     : "FN_ISSET",
     'nmphtokmph'    : 'FN_NMPHTOKMPH'
     }
 

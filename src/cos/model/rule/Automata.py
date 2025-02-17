@@ -41,7 +41,7 @@ class Automata:
 		return
 
 	def load(self, file:str):
-		""" TODO: load
+		""" Loads the automata from a file
 		Arguments
 			file -- File path
 		""" 
@@ -59,7 +59,7 @@ class Automata:
 		raise Exception( f'Unsupported Legata file format.')
 
 	def save(self, file):
-		""" TODO: save
+		""" Saves the automata to a binary file
 		Arguments
 			file -- File path
 		""" 
@@ -71,8 +71,9 @@ class Automata:
 		return
 
 	def dump(self):
-		""" TODO: dump
+		""" Dumps the automata information to the screen
 		""" 
+		self.definition
 		result = []
 		self.definition.traverse( Automata.__append_node, result )
 		print( '\n'.join(result) )
@@ -93,24 +94,40 @@ class Automata:
 		for statements in node.conditions:
 			result.append( f'{indent}condition: {Automata.__exprtxt(statements)}' )
 
-		for action in node.assurances:
+		Automata.__append_actions(result, indent, node.assurances)
+		return ErrorCode.ERROR_CONTINUE
+
+	@staticmethod
+	def __append_actions( result:list, indent, actions ):
+		for action in actions:
 			atype	=  action[0][0]
 			match atype:
 				case '^':
 					result.append( f'{indent} assure: {action[0][1][1]}()' )
 				case '?':
 					statements	= action[0][1][1]
-					result.append( f'{indent} assure: {Automata.__exprtxt(statements)}' )
+					result.append( f'{indent} assure: {Automata.__exprtxt(statements[0][1])}' )
+				case '*':
+					statements	= action[0][1][1]
+					result.append( f'{indent} assure: {Automata.__fntxt(statements)}' )
 				case _:
 					raise RuntimeError( 'Unsupported action type.' )
-
-		return ErrorCode.ERROR_CONTINUE
+		return
 
 	@staticmethod
-	def __exprtxt(statements):
+	def __fntxt(expr):
 		""" TODO: __exprtxt
 		Arguments
 			statements -- TODO
+		""" 
+		return str(expr)
+
+
+	@staticmethod
+	def __exprtxt(statements):
+		""" Prints a set of statements
+		Arguments
+			statements -- Statements to the print
 		""" 
 		exprlist	= []
 		for s in statements:
@@ -119,22 +136,26 @@ class Automata:
 		return ' & '.join(exprlist)
 
 
-	def generate(self, conditions, clauses):
-		""" TODO: generate
+	def generate(self, components):
+		""" Generates the components of the automata
 		Arguments
-			conditions -- TODO
-			clauses -- TODO
+			components -- Dictionary of components to generate
 		""" 
-		for c in conditions:
+
+		for c in components['conditions']:
 			self.__add_conditions(c)
 
-		for c in clauses:
+		for c in components['clauses']:
 			self.__add_clause(c)
+
+		for c in components['precedents']:
+			self.__add_precedent(c)
+
 
 		return
 
 	def __add_conditions(self, condition):
-		""" TODO: __add_conditions
+		""" Adds a condition to t
 		Arguments
 			condition -- TODO
 		""" 
@@ -142,7 +163,7 @@ class Automata:
 		return
 
 	def __add_clause(self, clause):
-		""" TODO: __add_clause
+		""" Adds a close to the list
 		Arguments
 			clause -- TODO
 		""" 
@@ -192,6 +213,28 @@ class Automata:
 		for a in assurances:
 			# print(f'assure: {a}')
 			define.ASSURE(a)
+		return
+
+	def __add_precedent(self, precedent):
+		""" TODO: __add_precedents
+		Arguments
+			clause -- TODO
+			define -- TODO
+			assurances -- TODO
+		""" 
+		location	= precedent['location']
+		try:
+			name		= Decision(precedent['name'])
+			decision	= self.definition.add( '/', name)
+			# print(f"{clause['location']} Generating clause {name}...")
+			for d in precedent['definition']:
+				define	= decision.add( Decision('def') )
+				self.__add_clause_conditions(precedent, define, d['conditions'])
+				self.__add_clause_assurances(precedent, define, d['assurances'])
+
+		except Exception as e:
+			print( f'{location} {str(e)}')
+			sys.exit(-1)
 		return
 
 if __name__ == "__main__":

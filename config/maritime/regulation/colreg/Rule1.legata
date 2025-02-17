@@ -7,10 +7,10 @@ define: {
 
 # (a) These Rules shall apply to all vessels upon the high seas and in all waters
 # connected therewith navigable by seagoing vessels.
-clause['COLREG.Rule1.a']:{
+precedent['COLREG.Rule1.a']:{
     : {
         condition: { 
-            : OS.Position.Territory in [Territory.HighSea, Territory.Navigable]
+            : OS.Position.Territory in ['Territory.HighSea', 'Territory.Navigable']
          }
         assure: { 
             : set(OS, 'COLREG.Mode', true)
@@ -23,10 +23,12 @@ clause['COLREG.Rule1.a']:{
 # an appropriate authority for roadsteads, harbours, rivers, lakes or inland waterways
 # connected with the high seas and navigable by seagoing vessels. Such special rules
 # shall conform as closely as possible to these Rules.
-clause['COLREG.Rule1.b'] {
-    # Responsibility of appropriate territorial authority to implement regional protocols 
-    # as separate legata files
-}
+
+################################################################
+# clause['COLREG.Rule1.b'] {}
+# Responsibility of appropriate territorial authority to implement regional protocols 
+# as separate legata files
+################################################################
 
 # (c) Nothing in these Rules shall interfere with the operation of any special rules made
 # by the Government of any State with respect to additional station or signal lights,
@@ -35,18 +37,22 @@ clause['COLREG.Rule1.b'] {
 # in fishing as a fleet. These additional station or signal lights, shapes or whistle signals
 # shall, so far as possible, be such that they cannot be mistaken for any light, shapes or
 # signal authorized elsewhere under these Rules.
-clause['COLREG.Rule1.c'] {
-    # Responsibility of appropriate coastal authority to implement regional protocols 
-    # as separate legata files
-}
+
+################################################################
+# clause['COLREG.Rule1.c'] {}
+# Responsibility of appropriate coastal authority to implement regional protocols 
+# as separate legata files
+################################################################
 
 
 # (d) Traffic separation schemes may be adopted by the Organization for the purpose of
 # these Rules.
-clause['COLREG.Rule1.d'] {
-    # Responsibility of appropriate jurisdictional authority to implement regional protocols 
-    # as separate legata files
-}
+
+################################################################
+# clause['COLREG.Rule1.d'] {}
+# Responsibility of appropriate coastal authority to implement regional protocols 
+# as separate legata files
+################################################################
 
 # (e) Whenever the Government concerned shall have determined that a vessel of
 # special construction or purpose cannot comply fully with the provisions of any of these
@@ -57,7 +63,9 @@ clause['COLREG.Rule1.d'] {
 # characteristics of sound-signalling appliances, as her Government shall have
 # determined to be the closest possible compliance with these Rules in respect to that
 # vessel. MSC/Circ.1144
-clause['COLREG.Rule1.e'] {
-    # Responsibility of appropriate jurisdictional authority to implement regional protocols 
-    # as separate legata files
-}
+
+################################################################
+# clause['COLREG.Rule1.e'] {}
+# Responsibility of appropriate coastal authority to implement regional protocols 
+# as separate legata files
+################################################################

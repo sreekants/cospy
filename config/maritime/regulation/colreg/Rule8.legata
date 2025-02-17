@@ -9,7 +9,9 @@ define: {
 # (A amended paragraph (a) shall enter into force on 29 November 2003, as
 # amended by Resolution A.919(22))
 condition: {
-    : condition: (OS, TS).Distance < Vessel.Collision.TimeToEncounter.SituationRange
+    : ( (OS.COLREG.Mode is true) and 
+        ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.SituationRange) 
+        )
 }
 
 
@@ -18,10 +20,12 @@ condition: {
 # observance of good seamanship.
 clause['COLREG.Rule8.a/COLAV']:{
     : {
-        condition: (OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+        condition: {
+            :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+        }
         assure  : { 
-            :OS.Intent has ['Operation.CollisionAvoidance.*'] 
-            }
+            :OS.Intent has 'Operation.CollisionAvoidance.*'
+        }
     }
 }
 
@@ -33,17 +37,17 @@ clause['COLREG.Rule8.a/COLAV']:{
 # succession of small alterations of course and/or speed should be avoided.
 clause['COLREG.Rule8.b/CourseAlteration']:{
     :{
-        condition: ((OS, TS).Visible) or 
+        condition: {
+            :((OS, TS).Visible is true) or 
             ((OS, TS).Distance in Vessel.Collision.TimeToEncounter.RadioRange)
+        }
+        exclude: {
+            :OS.AngularVelocity <= 0
+            :OS.Acceleration <= 0
+        }
         assure:{
-            :{
-                condition: OS.AngularVelocity > 0
-                assure: OS.AngularVelocity > OS.MinimumSafeAngularVelocity
-            }
-            :{
-                condition: OS.Acceleration > 0
-                assure: OS.Acceleration > OS.MinimumSafeAcceleration
-            }
+            :OS.AngularVelocity > OS.MinimumSafeAngularVelocity
+            :OS.Acceleration > OS.MinimumSafeAcceleration
         }
     } 
 }
@@ -53,9 +57,11 @@ clause['COLREG.Rule8.b/CourseAlteration']:{
 # another close-quarters situation.
 clause['COLREG.Rule8.c/CourseAlteration']:{
     :{
-        condition: (OS, TS).Distance > Vessel.Collision.TimeToEncounter.SituationRange
+        condition: {
+            :(OS, TS).Distance > Vessel.Collision.TimeToEncounter.SituationRange
+        }
         assure:{
-            :OS.Intent has ['Operation.CollisionAvoidance.CloseQuarterAvoidance'] 
+            :OS.Intent has 'Operation.CollisionAvoidance.CloseQuarterAvoidance'
         }
     } 
 }
@@ -66,9 +72,11 @@ clause['COLREG.Rule8.c/CourseAlteration']:{
 # past and clear.
 clause['COLREG.Rule8.d/CourseAlteration']:{
     :{
-        condition: (OS, TS).Distance > Vessel.Collision.TimeToEncounter.SituationRange
+        condition: {
+            :(OS, TS).Distance > Vessel.Collision.TimeToEncounter.SituationRange
+        }
         assure:{
-            :OS.Intent has ['Operation.CollisionAvoidance.CloseQuarterAvoidance'] 
+            :OS.Intent has 'Operation.CollisionAvoidance.CloseQuarterAvoidance'
         }
     } 
 }
@@ -77,9 +85,11 @@ clause['COLREG.Rule8.d/CourseAlteration']:{
 # speed or take all way off by stopping or reversing her means of propulsion.
 clause['COLREG.Rule8.e/Halting']:{
     :{
-        condition: (OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+        condition: {
+            :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+        }
         assure:{
-            : (OS.Intent has any ['Operation.CollisionAvoidance.Decelerate']) or
+            : (OS.Intent has 'Operation.CollisionAvoidance.Decelerate') or
               (OS.Velocity <= 0)
         }
     } 
@@ -99,9 +109,11 @@ clause['COLREG.Rule8.e/Halting']:{
 # risk of collision.
 clause['COLREG.Rule8.f/GiveWayOnPassage']:{
     :{
-        condition: (OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+        condition: {
+            :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+        }
         assure:{
-            : (OS.Intent has any ['Operation.CollisionAvoidance.Decelerate']) or
+            : (OS.Intent has 'Operation.CollisionAvoidance.Decelerate') or
               (OS.Velocity <= 0)
         }
     } 

@@ -3,3 +3,16 @@
 define: {
     OS: OwnShip
 }
+
+
+
+condition: {
+    # Trigger rule 4 if the vessel is in zero visibility.
+    : OS.Visibility <= 0  
+}
+
+# In other words, if there is zero visibility and the vessel does not have the instruments 
+# to proceed safely, the speed of the water craft should be reduced and course corrections 
+# made, until adequate vision is restored for safe operation of the vessel.
+
+#### TODO:

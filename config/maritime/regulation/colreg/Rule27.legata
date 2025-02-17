@@ -8,7 +8,7 @@ define: {
 # Manoeuvre
 
 condition: { 
-    : OS.State has any [State.Unmanoeuverarble, State.CommandAbandonded]
+    : OS.State in any [State.Unmanoeuverarble, State.CommandAbandonded]
 }
 
 # (a) A vessel not under command shall exhibit:

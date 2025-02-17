@@ -245,7 +245,8 @@ class Extractor:
 	def save(self, tasks):
 		# Iterate through all .kml files in the source directory
 		for t in tasks:
-
+			print("output")
+			
 			# Convert and save the .csv file
 			self.output[t.csv_file] = self.generate(t)
 
