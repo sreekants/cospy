@@ -93,15 +93,13 @@ class ABORT(Expression):
 		return ErrorCode.E_ABORT
 
 class IS(BinaryExpression):
-	def __init__(self, lhs, rhs, match_all=False):
+	def __init__(self, lhs, rhs):
 		""" Constructor
 		Arguments
 			lhs -- lvalue
 			lhs -- rvalue
-			match_all -- Match all the value in the list (if rvalue is a list)
 		"""
 		BinaryExpression.__init__(self, 'is', lhs, rhs)
-		self.match_all	= match_all
 		return
 
 	def evaluate(self, ctxt):
@@ -109,23 +107,16 @@ class IS(BinaryExpression):
 		Arguments
 			ctxt -- Simulation context
 		"""
-		return self.result(ctxt.IS(self.lhs, self.rhs, self.match_all), ErrorCode.S_TRUE, ErrorCode.S_FALSE)
+		return self.result(ctxt.IS(self.lhs, self.rhs), ErrorCode.S_TRUE, ErrorCode.S_FALSE)
 
-class IN(BinaryExpression):
-	def __init__(self, lhs, rhs, match_all=False):
+class IS_NOT(BinaryExpression):
+	def __init__(self, lhs, rhs):
 		""" Constructor
 		Arguments
 			lhs -- lvalue
 			lhs -- rvalue
-			match_all -- Match all the value in the list (if rvalue is a list)
 		"""
-		if match_all == True:
-			symbol	= 'in'
-		else:
-			symbol	= 'in any'
-
-		BinaryExpression.__init__(self, symbol, lhs, rhs)
-		self.match_all	= match_all
+		BinaryExpression.__init__(self, 'is not', lhs, rhs)
 		return
 
 	def evaluate(self, ctxt):
@@ -133,7 +124,25 @@ class IN(BinaryExpression):
 		Arguments
 			ctxt -- Simulation context
 		"""
-		return self.result(ctxt.IN(self.lhs, self.rhs, self.match_all), ErrorCode.S_TRUE, ErrorCode.S_FALSE)
+		return self.result(ctxt.IS(self.lhs, self.rhs), ErrorCode.S_FALSE, ErrorCode.S_TRUE)
+
+
+class IN(BinaryExpression):
+	def __init__(self, lhs, rhs):
+		""" Constructor
+		Arguments
+			lhs -- lvalue
+			lhs -- rvalue
+		"""
+		BinaryExpression.__init__(self, 'in', lhs, rhs)
+		return
+
+	def evaluate(self, ctxt):
+		""" Evaluates the expression
+		Arguments
+			ctxt -- Simulation context
+		"""
+		return self.result(ctxt.IN(self.lhs, self.rhs), ErrorCode.S_TRUE, ErrorCode.S_FALSE)
 
 	def __str__(self)->str:
 		""" TODO: __str__
@@ -146,20 +155,13 @@ class IN(BinaryExpression):
 
 
 class NOT_IN(BinaryExpression):
-	def __init__(self, lhs, rhs, match_all=False):
+	def __init__(self, lhs, rhs):
 		""" Constructor
 		Arguments
 			lhs -- lvalue
 			lhs -- rvalue
-			match_all -- Match all the value in the list (if rvalue is a list)
 		"""
-		if match_all == True:
-			symbol	= 'not in'
-		else:
-			symbol	= 'not in any'
-
-		BinaryExpression.__init__(self, symbol, lhs, rhs)
-		self.match_all	= match_all
+		BinaryExpression.__init__(self, 'not in', lhs, rhs)
 		return
 
 	def evaluate(self, ctxt):
@@ -167,39 +169,8 @@ class NOT_IN(BinaryExpression):
 		Arguments
 			ctxt -- Simulation context
 		"""
-		return self.result(ctxt.IN(self.lhs, self.rhs, self.match_all), ErrorCode.S_FALSE, ErrorCode.S_TRUE)
+		return self.result(ctxt.IN(self.lhs, self.rhs), ErrorCode.S_FALSE, ErrorCode.S_TRUE)
 
-class IS(UnaryExpression):
-	def __init__(self, value):
-		""" Constructor
-		Arguments
-			lhs -- lvalue
-		"""
-		UnaryExpression.__init__(self, value)
-		return
-
-	def evaluate(self, ctxt):
-		""" Evaluates the expression
-		Arguments
-			ctxt -- Simulation context
-		"""
-		return self.result(ctxt.IS(self.lhs, self.rhs), ErrorCode.S_TRUE, ErrorCode.S_FALSE)
-
-class IS_NOT(UnaryExpression):
-	def __init__(self, value):
-		""" Constructor
-		Arguments
-			lhs -- lvalue
-		"""
-		UnaryExpression.__init__(self, value)
-		return
-
-	def evaluate(self, ctxt):
-		""" Evaluates the expression
-		Arguments
-			ctxt -- Simulation context
-		"""
-		return self.result(ctxt.IS(self.lhs, self.rhs), ErrorCode.S_FALSE, ErrorCode.S_TRUE)
 
 class NOT(UnaryExpression):
 	def __init__(self, value):

@@ -98,7 +98,7 @@ class Service(ORPCService):
 		"""
 		obj:Object	= Simulation.instance().objects.get(path)
 		if obj is None:
-			raise f'Not object resolved for path [{path}].'
+			raise Exception( f'Not object resolved for path [{path}].' )
 
 		result	= []
 

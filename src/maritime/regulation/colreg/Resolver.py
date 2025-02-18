@@ -36,7 +36,12 @@ class Resolver(CompositeResolver):
 				klassname, klass	= BootLoader.load_class( r['module'] )
 				
 				# Assign it to the scope
-				self.add( r['scope'], klass(self))
+				resolver			= klass( self )
+				prefix				= r['prefix']
+				if prefix is not None:
+					resolver.prefix	= prefix
+
+				self.add( r['scope'], resolver)
 
 		return
 

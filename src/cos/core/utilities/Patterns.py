@@ -75,8 +75,8 @@ class GenericManager:
 		"""
 		for obj in self.container:
 			if fn( obj, ctxt ) == True:
-				return
-		return
+				return True
+		return False
 
 class Manager:
 	def __init__(self):

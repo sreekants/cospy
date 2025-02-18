@@ -44,3 +44,6 @@ language:
        prefix: null
        module: maritime.model.resolver.ColregResolver
 
+     - scope: 'vessel'
+       prefix: null
+       module: maritime.model.resolver.VesselDeclarationsResolver

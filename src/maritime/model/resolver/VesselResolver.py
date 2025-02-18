@@ -29,31 +29,31 @@ class VesselResolver(Resolver):
 
 	@simproperty
 	def Intent(self):
-		""" TODO: Intent
+		""" Returns the vessel intent property set
 		""" 
-		return ['Operation.Lookout.XXX']
+		return self.vessel.intent
 
 	@simproperty
 	def Type(self):
-		""" TODO: Type
+		""" Returns the type of the vessel
 		""" 
 		return self.vessel.type
 
 	@simproperty
 	def EngineState(self):
-		""" TODO: EngineState
+		""" Returns the Engine state
 		""" 
-		return 'Engine.State.ON'
+		return self.vessel.engine.state
 
 	@simproperty
 	def Position(self):
-		""" TODO: Position
+		""" Returns the position
 		""" 
 		return self.vessel.location
 
 	@simproperty
 	def Velocity(self)->float:
-		""" TODO: Velocity
+		""" Returns the velocity
 		""" 
 		if self.velocity is None:
 			V				= self.vessel.velocity
@@ -63,13 +63,13 @@ class VesselResolver(Resolver):
 
 	@simproperty
 	def Acceleration(self)->float:
-		""" TODO: Acceleration
+		""" Returns the acceleration
 		""" 
 		return self.vessel.acceleration
 
 	@simproperty
 	def Heading(self)->float:
-		""" TODO: Heading
+		""" Returns the heading
 		""" 
 		if self.heading is None:
 			self.heading	= self.vessel.heading

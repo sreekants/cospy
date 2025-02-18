@@ -17,6 +17,20 @@ class Resolver:
 		self.resolvers	= Resolver.generate_dispatch(self.__class__, '__simattribute')
 		return
 
+	def get_key(self, ctxt:Context, variable:str):
+		""" Matches the prefix and returns the key if a match is found
+		Arguments
+			ctxt -- Simulation context
+		""" 
+		if variable.startswith(self.prefix) == False:
+			return None
+		
+		prefixlen	= len(self.prefix)
+		if variable[prefixlen] != '.':
+			return None
+		
+		return variable[len(self.prefix)+1:]
+
 	def reset(self, ctxt:Context, rulectxt):
 		""" TODO: reset
 		Arguments

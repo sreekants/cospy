@@ -2,6 +2,9 @@
 # Filename: Vehicle.py
 # Description: Types of vessels and their properties, states and characteristics
 
+from cos.model.vehicle.Intent import Intent
+from cos.model.vehicle.Engine import Engine
+from cos.model.vehicle.ValueSet import ValueSet
 from cos.core.kernel.Object import Object
 from cos.core.kernel.Context import Context
 from cos.core.simulation.Actor import Actor, ActorBehavior
@@ -72,7 +75,12 @@ class Vehicle(Object):
         self.config         = config
         self.actor		    = Actor(ctxt, config)
         self.devices        = {}
+        self.engine         = Engine()
 
+        # Property sets
+        self.intent         = Intent()
+        self.mode           = ValueSet()
+        
         global VID
 
         VID                 = VID+1

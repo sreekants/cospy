@@ -42,15 +42,18 @@ class Decision(TreeNode):
 			ctxt -- Simulation context
 		"""
 		# Check if any conditions apply; if not, the decision cannot be applied
-		condition	= self.is_any(ctxt.ctxt, self.conditions)
-		if condition is not None:
-			if self.trace == True:
-				ctxt.ctxt.ctxt.log.trace( 'Logic', f'Applying {self.parent} = {condition}')
+		if len(self.conditions) == 0:
+			condition	= None
+		else:
+			condition	= self.is_any(ctxt.ctxt, self.conditions)
+			if condition is not None:
+				if self.trace == True:
+					ctxt.ctxt.ctxt.log.trace( 'Logic', f'Applying {self.parent} = {condition}')
 
-			# Check if any exception apply; if so bail out.
-			if self.is_any(ctxt.ctxt, self.exceptions):
-				ctxt.error.append(self)
-				return ErrorCode.ERROR_EXCEPTION_IN_SERVICE
+				# Check if any exception apply; if so bail out.
+				if self.is_any(ctxt.ctxt, self.exceptions):
+					ctxt.error.append(self)
+					return ErrorCode.ERROR_EXCEPTION_IN_SERVICE
 
 		# Apply all the assurances on the children
 		result = self.traverse( Decision.__apply_child, ctxt, 8 )
@@ -61,8 +64,8 @@ class Decision(TreeNode):
 		if condition is not None:
 			# Apply all assurances.
 			for assureinfo in self.assurances:
-				a	= assureinfo[0][1][1][0][1]
-				result = a.evaluate(ctxt.ctxt)
+				a	= assureinfo[0][1][1][0][1][0]
+				result = a[1].evaluate(ctxt.ctxt)
 				if result not in [ErrorCode.S_OK, ErrorCode.S_TRUE, ErrorCode.ERROR_CONTINUE]:
 					ctxt.error.append(self)
 					return ErrorCode.ERROR_EXCEPTION_IN_SERVICE

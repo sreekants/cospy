@@ -138,17 +138,21 @@ class Evaluator(Service):
 			ctxt -- Simulation context
 		"""
 
-		rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels)
+		try:
+			rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels)
 
-  		# IMPORTANT: It is critical that
-		# Initialize for rule evaluation.
-		[r.begin(ctxt, rule_ctxt) for r in self.rules]
+			# IMPORTANT: It is critical that
+			# Initialize for rule evaluation.
+			[r.begin(ctxt, rule_ctxt) for r in self.rules]
 
-		# Evaluate the rules.
-		[r.evaluate(ctxt, rule_ctxt) for r in self.rules]
+			# Evaluate the rules.
+			[r.evaluate(ctxt, rule_ctxt) for r in self.rules]
 
-		# Finalize the rules for scoring and bookkeeping.
-		[r.end(ctxt, rule_ctxt) for r in self.rules]
+			# Finalize the rules for scoring and bookkeeping.
+			[r.end(ctxt, rule_ctxt) for r in self.rules]
+		except Exception as e:
+			ctxt.log.error( 'RuleEvaluator', f'Runtime error: {str(e)}' )
+		
 
 		return
 

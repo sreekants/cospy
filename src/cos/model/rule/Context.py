@@ -58,6 +58,9 @@ class Context:
 			rhs -- rvalue of the expression (an array)
 			match_all -- Flag to match all values
 		"""
+		if (lhs is None) or (lhs is None):
+			raise RuntimeError("Unexpected NULL object in expression evaluation.") 
+		
 		result, lhs, rhs	= self.resolve_tuple(lhs, rhs)
 		if result == False:
 			return None
@@ -154,8 +157,7 @@ class Context:
 		if isinstance(expr, int) or isinstance(expr, float) or isinstance(expr, list):
 			return expr
 
-		val		= self.resolver.resolve(None, expr)
-		return val
+		return self.resolver.resolve(self, expr)
 
 if __name__ == "__main__":
 	test = Context()

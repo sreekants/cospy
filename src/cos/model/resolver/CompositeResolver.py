@@ -60,7 +60,8 @@ class CompositeResolver(Resolver):
 		rctxt			= CompositeResolverContext()
 		rctxt.ctxt		= ctxt
 		rctxt.variable	= token
-		self.resolvers.for_each_first( self.__resolve, rctxt )
+		if self.resolvers.for_each_first(self.__resolve, rctxt) == False:
+			raise ValueError( f'Unresolved variable [{token}].')
 		return rctxt.result
 
 	def applies(self, variable:str)->bool:

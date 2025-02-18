@@ -13,7 +13,7 @@ precedent['COLREG.Rule1.a']:{
             : OS.Position.Territory in ['Territory.HighSea', 'Territory.Navigable']
          }
         assure: { 
-            : set(OS, 'COLREG.Mode', true)
+            : set(OS.Mode, 'COLREG', true)
             : abort     # No further processing
         }
     }

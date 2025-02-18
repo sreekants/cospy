@@ -2,7 +2,17 @@
 
 define: {
     OS: OwnShip
+    TS: TargetShip
 }
 
 
-xxx
+clause['COLREG.Rule5/Sight']:{
+    : {
+        condition: {
+            : (OS, TS).Distance in Vessel.Collision.TimeToEncounter.VisibleRange
+        }
+        assure: { 
+            : OS.Intent has 'Operation.Lookout.*' 
+        }
+    }
+}

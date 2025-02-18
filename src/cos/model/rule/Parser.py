@@ -411,13 +411,11 @@ class Parser:
         """
         expression_statement : subject_is_object
         expression_statement : subject_is_not_object
-        expression_statement : subject_in_range
-        expression_statement : subject_in_any_range
-        expression_statement : subject_not_in_range
-        expression_statement : subject_not_in_any_range
-        expression_statement : subject_comparison
         expression_statement : subject_has
-        expression_statement : subject_has_all_range
+        expression_statement : subject_is_range
+        expression_statement : subject_in_range
+        expression_statement : subject_not_in_range
+        expression_statement : subject_comparison
         """
         self.move(p)
         return
@@ -468,42 +466,35 @@ class Parser:
         """
         subject_has : subject HAS arg
         """
-        p[0]    = IN(p[1], [p[3]], True)
+        p[0]    = IN(p[1], [p[3]])
         return
 
-    def p_subject_has_all_range(self, p):
+    def p_subject_is_range(self, p):
         """
-        subject_has_all_range : subject HAS ALL range_expression
+        subject_is_range : subject IS range_expression
         """
-        p[0]    = IN(p[1], p[4], True)
+        p[0]    = IS(p[1], p[4])
+        return
+
+    def p_subject_is_not_range(self, p):
+        """
+        subject_is_range : subject IS NOT range_expression
+        """
+        p[0]    = IS_NOT(p[1], p[4])
         return
 
     def p_subject_in_range(self, p):
         """
         subject_in_range : subject IN range_expression
         """
-        p[0]    = IN(p[1], p[3], True)
-        return
-
-    def p_subject_in_any_range(self, p):
-        """
-        subject_in_any_range : subject IN ANY range_expression
-        """
-        p[0]    = IN(p[1], p[4], False)
+        p[0]    = IN(p[1], p[3])
         return
 
     def p_subject_not_in_range(self, p):
         """
         subject_not_in_range : subject NOT IN range_expression
         """
-        p[0]    = NOT_IN(p[1], p[4], False)
-        return
-
-    def p_subject_not_in_any_range(self, p):
-        """
-        subject_not_in_any_range : subject NOT IN ANY range_expression
-        """
-        p[0]    = NOT_IN(p[1], p[5], True)
+        p[0]    = NOT_IN(p[1], p[4])
         return
 
     def p_rvalue(self, p):
