@@ -48,19 +48,19 @@ clause['COLREG.Rule6.a.ii/TrafficDensity']:{
 }
 
 
-# (iii) the manoeuvrability of the vessel with special reference to stopping distance and turning
+# (iii) the manoeuverability of the vessel with special reference to stopping distance and turning
 # ability in the prevailing conditions;
-clause['COLREG.Rule6.a.iii/Manoeuvrability']:{
+clause['COLREG.Rule6.a.iii/Manoeuverability']:{
     : {
         condition: { 
             : OS.COLREG.Manoeuvrable is false
             : OS.COLREG.Stoppable is false
         }
         assure: { 
-            :add(OS, 'COLREG.SafeSpeed', 'LowManoeuvrability') 
+            :add(OS, 'COLREG.SafeSpeed', 'LowManoeuevrability') 
         }
         otherwise: { 
-            :del(OS, 'COLREG.SafeSpeed', 'LowManoeuvrability') 
+            :del(OS, 'COLREG.SafeSpeed', 'LowManoeuevrability') 
         }
     }
 }

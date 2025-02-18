@@ -9,8 +9,7 @@ import os, sys, fnmatch
 class RegEval:
 	def __init__(self, path='.'):
 		self.path	= path
-		self.file	= 'Rule*'
-		# self.file	= 'debug.legata'
+		self.file	= None
 		return
 
 	def run(self, args, appinfo):
@@ -81,6 +80,10 @@ class RegEval:
 		
 	def dir( self, args ):
 		self.path	= args[0]
+		return
+
+	def match( self, args ):
+		self.file	= args[0]
 		return
 
 	def load( self ):

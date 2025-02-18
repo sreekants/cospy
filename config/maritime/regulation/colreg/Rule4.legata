@@ -15,4 +15,15 @@ condition: {
 # to proceed safely, the speed of the water craft should be reduced and course corrections 
 # made, until adequate vision is restored for safe operation of the vessel.
 
-#### TODO:
+clause['COLREG.Rule4/ZeroVisibility']:{
+    :{
+        condition: {
+            :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+        }
+        assure:{
+            : (OS.Intent has 'Operation.CollisionAvoidance.Decelerate') and
+              (OS.Velocity <= Vessel.Velocity.ReducedSpeed)
+            : (OS.Intent has 'Manoeuverer.Destination.SafeZone')
+        }
+    } 
+}

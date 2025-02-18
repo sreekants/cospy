@@ -19,9 +19,9 @@ class Interpolator:
 		return self.rto[0]+ (self.rto[1]-self.rto[0])*(v-self.rfrom[0])/(self.rfrom[1]-self.rfrom[0])
 	
 class Task:
-	def __init__(self, kml_path, csv_path, csv_file):
+	def __init__(self, kml_path, csv_dir, csv_file):
 		self.kml_path	= kml_path
-		self.csv_path	= csv_path
+		self.csv_dir	= csv_dir
 		self.csv_file	= csv_file
 		self.input		= None
 		self.output		= None
@@ -35,6 +35,11 @@ class Mapper:
 		self.range		= dest
 		return
 
+	def __str__(self):
+		""" Displays the mapper in a string format:
+		"""
+
+		return f'scale= {self.scale.rfrom} => {self.scale.rto} offset={self.destoffset}'
 
 class Projection:
 	def __init__(self, x, y):
@@ -73,9 +78,8 @@ class Extractor:
 			if kml_file.endswith(".kml"):
 				kml_path = os.path.join(fullpath, kml_file)
 				csv_file = os.path.splitext(kml_file)[0] + ".csv"
-				csv_path = os.path.join(outdir, csv_file)
 
-				files.append( Task(kml_path, csv_path, csv_file) )
+				files.append( Task(kml_path, outdir, csv_file) )
 
 		return files
 
@@ -139,7 +143,7 @@ class Extractor:
 		tasks	= self.get_files(path, indir, outdir)
 
 		# Ensure the output directory exists
-		os.makedirs(outdir, exist_ok=True)
+		os.makedirs(os.path.join(path,outdir), exist_ok=True)
 
 		self.analyze(tasks)
 		self.save(tasks)
@@ -152,9 +156,10 @@ class Extractor:
 
 		# Iterate through all .kml files in the source directory
 		for t in tasks:
-			print( f'   {t.kml_path}:')
+			print( f'   File: {t.kml_path}')
 			t.input		= self.extract_polygons(points, t)
 
+		print( f'\nAnalyzing cartographic data:')
 		minx    = min(points[0])
 		maxx    = max(points[0])
 		miny    = min(points[1])
@@ -165,6 +170,17 @@ class Extractor:
 
 		self.proj.mapx.srcoffset	= scalex[0]
 		self.proj.mapy.srcoffset	= scaley[0]
+
+		min_lat, min_lon     = self.map_to_screen(self.proj, minx, miny)
+		max_lat, max_lon     = self.map_to_screen(self.proj, maxx, maxy)
+
+		self.proj.mapx.range = (min_lon, max_lon)
+		self.proj.mapy.range = (min_lat, max_lat)
+
+		lat, lon    		 = self.map_to_screen(self.proj, scalex[3], scaley[3])
+		self.proj.mapy.range = (min_lat, lat)
+
+		print('')
 		return
 
 
@@ -189,25 +205,39 @@ class Extractor:
 		# Extract all coordinates
 		polygons = []
 		for placemark in root.findall(".//kml:Placemark", namespaces):
-			for coord in placemark.findall(".//kml:coordinates", namespaces):
-				coord_text = coord.text.strip()
-				coord_list = coord_text.split()
-				# Collect all coordinates in the required format
+			name = placemark.find(".//kml:name", namespaces)
+			if name is None:
+				continue
+			# Extract the place nme
+			place = name.text.strip()
+			if not place:
+				continue
 
-				if len(coord_list) == 0:
-					continue
-				
-				shape	= []
-				for c in coord_list:
-					lon, lat, *_	= map(float, c.split(','))
-					utmlon, utmlat	= self.latlon_to_utm(lat, lon)
+			print( f'    - {place}')
 
-					points[0].append(utmlon)
-					points[1].append(utmlat)
+			coord = placemark.find(".//kml:coordinates", namespaces)
+			if coord is None:
+				continue
 
-					shape.append( (utmlon, utmlat, lon, lat) )
+			coord_text = coord.text.strip()
+			coord_list = coord_text.split()
 
-				polygons.append( shape )
+			# Collect all coordinates in the required format
+			if len(coord_list) == 0:
+				continue
+			
+			# Generate the list of coordinates into a polygon
+			polygon	= []
+			for c in coord_list:
+				lon, lat, *_	= map(float, c.split(','))
+				utmlon, utmlat	= self.latlon_to_utm(lat, lon)
+
+				points[0].append(utmlon)
+				points[1].append(utmlat)
+
+				polygon.append( (utmlon, utmlat, lon, lat) )
+
+			polygons.append( (place, polygon) )
 
 		return polygons
 
@@ -222,34 +252,45 @@ class Extractor:
 		list: A list of tuples containing (longitude, latitude, altitude).
 		"""
 
-		with open(task.csv_path, mode='w', newline='') as csvfile:
-			for polygon in task.input:
-				coords 	= []
-				for coord in polygon:
-					lon	= coord[0]
-					lat	= coord[1]
+		# Create a map of places
+		places = {}
 
-					map_lat, map_lon     = self.map_to_screen(self.proj, lat, lon)
-					# Format with four digits of precision
-					formatted_lon = f"{map_lon:.2f}"
-					formatted_lat = f"{(self.proj.mapy.range[1]-map_lat):.2f}"
+		for place, polygon in task.input:
+			csv_path	= os.path.join(task.csv_dir, f'{place}.csv' )
 
-					coords.append(f"{formatted_lon},{formatted_lat}")
+			# Build the polygon path description
+			coords 	= []
+			for coord in polygon:
+				lon	= coord[0]
+				lat	= coord[1]
 
-				polypath = " ".join(coords)
+				map_lat, map_lon     = self.map_to_screen(self.proj, lat, lon)
+
+				# Format with four digits of precision
+				formatted_lon = f"{map_lon:.2f}"
+				formatted_lat = f"{(self.proj.mapy.range[1]-map_lat):.2f}"
+
+				coords.append(f"{formatted_lon},{formatted_lat}")
+
+			polypath 		= " ".join(coords)
+			places[place]	= polypath
+
+			with open(csv_path, mode='w', newline='') as csvfile:
 				csvfile.write( polypath )  # Write all coordinates as a single line
-				return polypath
-				
-		return ""
+
+
+		return places
 
 	def save(self, tasks):
+		print( f'Generating maps:')
+		print( f'  Mapper(x) : {self.proj.mapx}')
+		print( f'  Mapper(y) : {self.proj.mapx}')
+
 		# Iterate through all .kml files in the source directory
 		for t in tasks:
-			print("output")
-			
-			# Convert and save the .csv file
 			self.output[t.csv_file] = self.generate(t)
 
+		print('')
 		return
 
 
@@ -267,31 +308,39 @@ class Extractor:
 			dbpath  = os.path.join(path, dbfile)
 		else:
 			dbpath  = path
+
+		is_first	= True				
+		db  		= ActiveRecord.create('', dbpath, 'isohypses')
+		polygons	= self.output.values()
+
+		for polygon in polygons:
+			for k, v in polygon.items():
+				if k.startswith(type) == False:
+					continue
+
+				if is_first == True:
+					print( f'Writing {type} to {dbfile}:')
+					is_first	= False
+
+				print( f'  {k}' )
 				
-		db  = ActiveRecord.create('', dbpath, 'isohypses')
-			
-		for k, v in self.output.items():
-			if k.startswith(type) == False:
-				continue
-			
-			print( f'Writing {k} to {dbpath}' )
-			
-			name 	= self.get_name( type, os.path.splitext(k)[0] )
-			guid	= str(uuid.uuid1()).lower()
-			depth	= self.get_depth( type, name )
-			values = {
-                'guid': guid,
-                'name': name,
-                'type': self.get_type(type, v),
-                'path': v,
-                self.get_depth_field(type): depth,
-				'color': self.get_color(type, depth),
-                'visible': 'Y' }
-			
-			db.add(values)
+				name 	= Extractor.get_name( type, os.path.splitext(k)[0] )
+				guid	= str(uuid.uuid1()).lower()
+				depth	= Extractor.get_depth( type, name )
+				values = {
+					'guid': guid,
+					'name': name,
+					'type': Extractor.get_type(type, v),
+					'path': v,
+					Extractor.get_depth_field(type): depth,
+					'color': Extractor.get_color(type, depth),
+					'visible': 'Y' }
+				
+				db.add(values)
 		return
 
-	def get_depth(self, type:str, name:str):
+	@staticmethod
+	def get_depth(type:str, name:str):
 		if name[0].isdigit() == False:
 			return 0
 		ndx 		= name.find('-')
@@ -301,16 +350,20 @@ class Extractor:
 		depth = name[:ndx-1]
 		return int(depth)
 	
-	def get_depth_field(self, type:str):
+	@staticmethod
+	def get_depth_field(type:str):
 		return { "land":"height", "sea":"depth", "tss":"depth", "sky":"height"}[type]
 
-	def get_color(self, type:str, depth):
+	@staticmethod
+	def get_color(type:str, depth):
 		return { "land":"#3CB371", "sea":"#47B9C6", "tss":"#FFB9C6", "sky":"#47B9C6"}[type]
 
-	def get_type(self, type:str, name):
+	@staticmethod
+	def get_type(type:str, name):
 		return { "land":100000, "sea":100000, "tss":100000, "sky":100000}[type]
 
-	def get_name(self, type:str, name:str):
+	@staticmethod
+	def get_name(type:str, name:str):
 		if name.startswith(type) == False:
 			return name
 		
@@ -318,7 +371,26 @@ class Extractor:
 		if name[ndx] == '-':
 			ndx	= ndx+1
 
-		return name[ndx:]
+		return Extractor.uncamelize(name[ndx:])
+
+	@staticmethod
+	def uncamelize(s:str):
+		if not s:
+			return s
+
+		last	= ''
+		result	= []
+		for n in range(0, len(s)):
+			ch	= s[n]
+
+			if ((n != 0) and ch.isupper()) and last.isalpha():
+				result.append( ' '+ch )
+				continue
+
+			result.append(ch)
+			last	= ch
+
+		return ''.join(result)
 
 	@staticmethod
 	def base(x):
@@ -333,7 +405,7 @@ class Extractor:
 		rangex				= maxx-minx
 		midx				= minx + rangex/2.0
 		mantissax, basex	= Extractor.base(rangex)
-		print( f'Range of data (UTM): {parm} ({minx:.4f} - {maxx:.4f}={rangex:.4f})')
+		print( f'  Range of data (UTM): {parm} ({minx:.4f} - {maxx:.4f}={rangex:.4f})')
 
 		spread	= math.ceil(mantissax)*pow(10, basex) * 1.2
 		result	= ( int(midx - spread/2.0), 
@@ -341,8 +413,9 @@ class Extractor:
 					midx, rangex, spread
 					)
 		
-		print( f'  Log: x={mantissax} * 10^{basex}')
-		print( f'  Spread: x={result}')
+		print( f'    Log: {parm}={mantissax} * 10^{basex}')
+		print( f'    Position: {parm}= left {result[0]}, right {result[1]}, mid {int(result[2])}')
+		print( f'    Span: range {int(result[3])}, spread {int(result[4])}')
 		return result
 
 

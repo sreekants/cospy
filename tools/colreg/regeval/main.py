@@ -19,7 +19,8 @@ def get_app_info():
 		"help"		:[
 			    ["h"	, ["Print help.", usage]],
 			    ["?"	, ["Print help.", usage]],
-			    ["dir"	, ["Code directory.", None]]
+			    ["dir"	, ["Code directory.", None]],
+			    ["match"	, ["Match a wildcard.", None]]
 				]		
 		}
 	

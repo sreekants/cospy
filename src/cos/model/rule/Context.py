@@ -3,7 +3,7 @@
 # Description: Implementation of the Context class
 
 from cos.model.rule.Situation import Situation
-from cos.model.logic.Symbol import Symbol, SymbolType
+from cos.model.symbol.Symbol import Symbol, SymbolType
 from cos.core.kernel.Context import Context as KernelContext
 
 class Context:
@@ -25,10 +25,10 @@ class Context:
 		return
 
 	def resolve_tuple(self, lhs, rhs):
-		""" TODO: resolve_tuple
+		""" Resolves the tuple to values
 		Arguments
-			lhs -- TODO
-			rhs -- TODO
+			lhs -- lvalue of the expression (variable name)
+			rhs -- rvalue of the expression
 		""" 
 		lhs	= self.resolve(lhs)
 		rhs	= self.resolve(rhs)
@@ -48,7 +48,8 @@ class Context:
 		result, lhs, rhs	= self.resolve_tuple(lhs, rhs)
 		if result == False:
 			return None
-		return True
+		
+		return True if lhs == rhs else False
 
 	def IN(self, lhs, rhs, match_all:bool=False):
 		""" operator IN
@@ -61,7 +62,14 @@ class Context:
 		if result == False:
 			return None
 
-		return True if lhs in rhs else False
+		if match_all == False:
+			return True if lhs in rhs else False
+		
+		for x in lhs:
+			if x not in rhs:
+				return False
+			
+		return True
 
 	def LT(self, lhs, rhs, convert=None):
 		""" operator LT

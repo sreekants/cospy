@@ -4,8 +4,8 @@
 
 from cos.model.rule.Definition import Definition
 from cos.model.rule.Lexer import Lexer
-from cos.model.logic.Symbol import *
 from cos.model.rule.Expression import *
+from cos.model.symbol.Symbol import *
 
 from cos.model.rule.Lexer import Lexer
 
@@ -417,6 +417,7 @@ class Parser:
         expression_statement : subject_not_in_any_range
         expression_statement : subject_comparison
         expression_statement : subject_has
+        expression_statement : subject_has_all_range
         """
         self.move(p)
         return
@@ -468,6 +469,13 @@ class Parser:
         subject_has : subject HAS arg
         """
         p[0]    = IN(p[1], [p[3]], True)
+        return
+
+    def p_subject_has_all_range(self, p):
+        """
+        subject_has_all_range : subject HAS ALL range_expression
+        """
+        p[0]    = IN(p[1], p[4], True)
         return
 
     def p_subject_in_range(self, p):

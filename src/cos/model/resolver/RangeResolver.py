@@ -33,6 +33,13 @@ class RangeResolver(Resolver):
 		return (value in self.bound)
 
 
+	def HAS(self, value):
+		""" HAS
+		Arguments
+			value -- TODO
+		""" 
+		return (value in self.bound)
+
 
 if __name__ == "__main__":
 	test = RangeResolver()

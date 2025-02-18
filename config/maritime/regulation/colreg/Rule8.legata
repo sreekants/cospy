@@ -90,7 +90,7 @@ clause['COLREG.Rule8.e/Halting']:{
         }
         assure:{
             : (OS.Intent has 'Operation.CollisionAvoidance.Decelerate') or
-              (OS.Velocity <= 0)
+              (OS.Acceleration <= 0)
         }
     } 
 }
@@ -114,7 +114,7 @@ clause['COLREG.Rule8.f/GiveWayOnPassage']:{
         }
         assure:{
             : (OS.Intent has 'Operation.CollisionAvoidance.Decelerate') or
-              (OS.Velocity <= 0)
+              (OS.Acceleration <= 0)
         }
     } 
 }

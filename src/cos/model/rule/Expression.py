@@ -4,7 +4,7 @@
 
 from cos.model.logic.Expression import *
 from cos.core.utilities.Errors import ErrorCode
-from cos.model.logic.Symbol import *
+from cos.model.symbol.Symbol import *
 
 class ALL(CompositeExpression):
 	def __init__(self):

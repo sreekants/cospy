@@ -24,7 +24,7 @@ class SymbolType(ABC):
 		""" Constructor
 		Arguments
 			type -- Type of the object
-			value -- TODO
+			value -- Value of the symbol
 		""" 
 		self.value	= value
 		return
@@ -45,7 +45,7 @@ class Symbol:
 		def __init__(self, value:str):
 			""" Constructor
 			Arguments
-				value -- TODO
+				value -- Value of the symbol
 			""" 
 			SymbolType.__init__(self, Type.VARIABLE, value)
 			return
@@ -60,7 +60,7 @@ class Symbol:
 		def __init__(self, value:float):
 			""" Constructor
 			Arguments
-				value -- TODO
+				value -- Value of the symbol
 			""" 
 			SymbolType.__init__(self, Type.FLOAT, value)
 			return
@@ -74,7 +74,7 @@ class Symbol:
 		def __init__(self, value:int):
 			""" Constructor
 			Arguments
-				value -- TODO
+				value -- Value of the symbol
 			""" 
 			SymbolType.__init__(self, Type.INTEGER, value)
 			return
@@ -88,7 +88,7 @@ class Symbol:
 		def __init__(self, value:str):
 			""" Constructor
 			Arguments
-				value -- TODO
+				value -- Value of the symbol
 			""" 
 			SymbolType.__init__(self, Type.STRING, value)
 			return
@@ -110,6 +110,9 @@ class Symbol:
 				for a in args:
 					self.value.append(a)
 			return
+
+		def IN(self, value) -> bool:
+			return True if (value in self.value) else False
 
 		def tostring(self) -> str:
 			""" TODO: tostring
@@ -172,6 +175,12 @@ class Symbol:
 			SymbolType.__init__(self, Type.RANGE, (min,max) )
 			return
 
+		def IN(self, value) -> bool:
+			return True if (self.value[0]<= value)  and (self.value[1]>= value) else False
+
+		def BETWEEN(self, value) -> bool:
+			return True if (self.value[0]< value)  and (self.value[1]> value) else False
+		
 		def tostring(self) -> str:
 			""" TODO: tostring
 			""" 
