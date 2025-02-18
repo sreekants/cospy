@@ -34,6 +34,12 @@ class VesselResolver(Resolver):
 		return self.vessel.intent
 
 	@simproperty
+	def Mode(self):
+		""" Returns the vessel intent property set
+		""" 
+		return self.vessel.intent
+
+	@simproperty
 	def Type(self):
 		""" Returns the type of the vessel
 		""" 
