@@ -80,6 +80,8 @@ class Vehicle(Object):
         # Property sets
         self.intent         = Intent()
         self.mode           = ValueSet()
+        self.cargo          = ValueSet()
+        self.operation      = ValueSet()
         
         global VID
 
