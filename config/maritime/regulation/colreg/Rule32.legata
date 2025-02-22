@@ -1,4 +1,5 @@
-# COLREG.Rule32:
+# COLREG.Rule32 :
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -10,8 +11,10 @@ define: {
 # (a) The word 'whistle' means any sound signalling appliance capable of producing the
 # prescribed blasts and which complies with the specifications in Annex III to these
 # Regulations.
+
 # (b) The term 'short blast' means a blast of about one second's duration.
+
 # (c) The term 'prolonged blast' means a blast of from four to six seconds's duration.
 
 
-# Rule 32 defines vessel classes and terms. Nothing to do here.
+# Rule 32 defines vessel signaling classes and terms. Nothing to do here.

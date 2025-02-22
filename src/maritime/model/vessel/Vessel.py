@@ -83,7 +83,6 @@ class Vessel(Vehicle):
         self.underkeel_clearance   = 100
         self.motion_allowance      = 0
         self.squat                 = 0
-        self._cargo                 = None
         return
 
     @property
@@ -147,15 +146,6 @@ class Vessel(Vehicle):
         self.actor.motion.force[type]   = value
         return
 
-    @property
-    def cargo(self):
-        """ Returns the cargo of the vessel
-        """
-        if self._cargo is None:
-            args          = ArgList( self.config.get('settings', '') )
-            self._cargo   = args['cargo']
-
-        return self._cargo
 
     def init(self, ctxt:Context, args:ArgList ):
         """ Initializes the vessel

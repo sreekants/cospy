@@ -1,4 +1,5 @@
-# COLREG.Rule11:
+# COLREG.Rule11 :
+# Status        : REVIEW
 
 define: {
     OS: OwnShip

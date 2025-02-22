@@ -1,4 +1,5 @@
-# COLREG.Rule4:
+# COLREG.Rule4  :
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -21,9 +22,9 @@ clause['COLREG.Rule4/ZeroVisibility']:{
             :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
         }
         assure:{
-            : (OS.Intent has 'Operation.CollisionAvoidance.Decelerate') and
+            : (OS.Intent has 'Maneuver.CollisionAvoidance.Decelerate') and
               (OS.Velocity <= Vessel.Velocity.ReducedSpeed)
-            : (OS.Intent has 'Manoeuverer.Destination.SafeZone')
+            : (OS.Intent has 'Manoeuverer.Course.SafeZone')
         }
     } 
 }

@@ -21,8 +21,13 @@ class Sprite(pygame.sprite.Sprite):
 			mask -- Mask to apply for the sprite
 		"""
 		pygame.sprite.Sprite.__init__(self)
-		self.orig = pygame.image.load(image).convert()
-		self.orig.set_colorkey(mask, RLEACCEL)
+
+		if image is None:
+			self.orig = None
+		else:
+			self.orig = pygame.image.load(image).convert()
+			self.orig.set_colorkey(mask, RLEACCEL)
+
 		self.surf		= self.orig
 		self.center		= None
 		self.rect		= None
@@ -59,9 +64,20 @@ class Sprite(pygame.sprite.Sprite):
 			return
 
 		if self.rect is not None:
-			screen.blit(self.surf, ctxt.encoder.transform_rect(self.rect))
+			self.render_at( ctxt, screen, ctxt.encoder.transform_rect(self.rect) )
 		return
 
+	def render_at(self, ctxt, screen, rect):
+		""" Renders the sprite to the screen at a position
+		Arguments
+			ctxt -- Simulation context
+			screen -- Reference ot the simulation screen
+			rect -- Bounding rectangle of the image
+		"""
+		if rect is not None:
+			screen.blit(self.surf, rect)
+		return
+	
 	def rotate(self, angle):
 		""" Rotates the sprite
 		Arguments
@@ -70,8 +86,10 @@ class Sprite(pygame.sprite.Sprite):
 		if self.angle == angle:
 			return
 		self.angle	= angle
-		self.surf = pygame.transform.rotozoom(self.orig, self.angle, self.zoom)
-		self.surf.set_colorkey(self.mask, RLEACCEL)
+
+		if self.orig is not None:	
+			self.surf = pygame.transform.rotozoom(self.orig, self.angle, self.zoom)
+			self.surf.set_colorkey(self.mask, RLEACCEL)
 		return
 
 	def scale(self, size):
@@ -82,8 +100,10 @@ class Sprite(pygame.sprite.Sprite):
 		if self.zoom == size:
 			return
 		self.zoom	= size
-		self.surf = pygame.transform.rotozoom(self.orig, self.angle, self.zoom)
-		self.surf.set_colorkey(self.mask, RLEACCEL)
+
+		if self.orig is not None:	
+			self.surf = pygame.transform.rotozoom(self.orig, self.angle, self.zoom)
+			self.surf.set_colorkey(self.mask, RLEACCEL)
 		return
 
 	def get_rect(self):

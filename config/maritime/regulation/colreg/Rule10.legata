@@ -1,4 +1,5 @@
-# COLREG.Rule10:
+# COLREG.Rule10 :
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -11,7 +12,7 @@ define: {
 # (a) This Rule Applies to traffic separation schemes adopted by the Organization and does not relieve
 # any vessel of her obligation under any other rule.
 condition: {
-    : [OS, Map.Sea@TrafficSeparationScheme].Distance in Area.Near.ProximityRange
+    : [OS, Map.Sea@TrafficSeparationScheme].Distance in Area.ProximityRange
 
     # Trigger rule 10 overriding other conditions. Useful for rules in cross-reference.
     : OS.Restriction in ['COLREG.Rule10.*']  

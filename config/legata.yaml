@@ -47,3 +47,4 @@ language:
      - scope: 'vessel'
        prefix: null
        module: maritime.model.resolver.VesselDeclarationsResolver
+

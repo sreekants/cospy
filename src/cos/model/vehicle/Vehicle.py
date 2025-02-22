@@ -9,6 +9,7 @@ from cos.core.kernel.Object import Object
 from cos.core.kernel.Context import Context
 from cos.core.simulation.Actor import Actor, ActorBehavior
 from cos.math.geometry.Rectangle import Rectangle
+from cos.core.utilities.ArgList import ArgList
 
 from enum import Enum, Flag
 import math
@@ -80,13 +81,29 @@ class Vehicle(Object):
         # Property sets
         self.intent         = Intent()
         self.mode           = ValueSet()
-        self.cargo          = ValueSet()
-        self.operation      = ValueSet()
         
+        # Builds the values.
+        self.build_values()
+
         global VID
 
         VID                 = VID+1
         self.vid            = VID
+        return
+
+    def build_values(self):
+        """ Buids the values
+        """
+        # Builds the operation manifest
+        self.operation      = ValueSet()
+
+        # Builds the cargo manifest
+        self.cargo  = ValueSet()
+        args    = ArgList( self.config.get('settings', '') )
+        cargo   = args['cargo']
+        if cargo is not None:
+            for c in cargo.split(','):
+                self.cargo.add(c)
         return
 
     def describe(self):

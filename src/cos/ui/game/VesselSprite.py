@@ -4,7 +4,65 @@
 
 from cos.ui.game.AnimatedSprite import AnimatedSprite
 from cos.ui.game.Config import *
-import  pygame
+import  pygame, math
+
+class VesselIcon(AnimatedSprite):
+	def __init__(self, config):
+		""" Constructor
+		Arguments
+			config -- Configuration attributes
+		"""
+		super(VesselSprite, self).__init__( config, None, (255, 255, 255) )
+
+		self.name	= config["name"]
+		self.id		= config["identifier"]
+		self.layer	= 6
+
+		self.initialize()
+		return
+	
+	def initialize(self, length=15, width=10, bowlen=4, color=(0, 0, 178)):
+		self.length		= length
+		self.width		= width
+		self.bowlen		= bowlen
+		self.color		= color
+		return
+
+	def render_at(self, ctxt, screen:pygame.Surface, rect:pygame.Rect):
+		""" Renders the sprite to the screen at a position
+		Arguments
+			ctxt -- Simulation context
+			screen -- Reference ot the simulation screen
+			rect -- Bounding rectangle of the image
+		"""
+		self.render_polygon(screen, rect.center, self.angle)
+		return
+
+
+	def render_polygon(self, surface:pygame.Surface, pos, angle):
+		points = []
+
+		left		= -self.length/2
+		top			= -self.width/2
+		right		= self.length/2
+		bottom		= self.width/2
+
+		# Build the polygon shape by transforming it around the center
+		points.append(self.rotxfrm(pos, left, top, angle))
+		points.append(self.rotxfrm(pos, left, bottom, angle))
+		points.append(self.rotxfrm(pos, right,bottom, angle))
+		points.append(self.rotxfrm(pos, self.length+self.bowlen, 0, angle))
+		points.append(self.rotxfrm(pos, right, top, angle))
+
+		# Render the polygon
+		pygame.draw.polygon(surface, self.color, points)
+		return
+
+	def rotxfrm(self, pivot, x, y, angle):
+		deg			= -math.radians(angle)
+		r			= math.sqrt(x**2+y**2)
+		theta		= math.atan2(y, x)
+		return [ pivot[0]+r*math.cos(theta+deg), pivot[1]+r*math.sin(theta+deg) ]
 
 class VesselSprite(AnimatedSprite):
 	def __init__(self, config):

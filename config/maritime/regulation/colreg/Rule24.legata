@@ -1,4 +1,5 @@
-# COLREG.Rule24:
+# COLREG.Rule24 :
+# Status        : TODO
 
 define: {
     OS: OwnShip

@@ -1,4 +1,5 @@
-# COLREG.Rule29:
+# COLREG.Rule29 :
+# Status        : TODO
 
 define: {
     OS: OwnShip
@@ -16,5 +17,6 @@ condition: {
 # (ii) when underway, in addition, sidelight and a sternlight;
 # (iii) when at anchor, in addition to the lights prescribed in subparagraph (i), the
 # light, lights or shape prescribed in Rule 30 for vessels at anchor.
+
 # (b) A pilot vessel when not engaged on pilotage duty shall exhibit the lights or shapes
 # prescribed for a similar vessel of her length.

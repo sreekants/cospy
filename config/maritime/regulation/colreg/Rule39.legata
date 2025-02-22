@@ -1,4 +1,5 @@
-# COLREG.Rule39:
+# COLREG.Rule39 :
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -18,4 +19,4 @@ define: {
 # Code) adopted by the Organization by resolution A.1070(28).
 # (d) Audit Standard means the Code for Implementation.
 
-# Rule 39 defines vessel classes and terms. Nothing to do here.
+# Rule 39 defines vessel auditing classes and terms. Nothing to do here.

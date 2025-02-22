@@ -1,36 +1,151 @@
-# COLREG.Rule9:
+# COLREG.Rule9  :
+# Status        : TODO
 
 define: {
     OS: OwnShip
 }
 
+condition: {
+    : [OS, Map.Sea@TrafficSeparationScheme].Distance in Area.ProximityRange
+    : OS.Position.Territory in ['Territory.NarrowChannel','Territory.Fairway','Territory.Harbour','Territory.InlandWaterway']
+
+    # Trigger rule 5 overriding other conditions. Useful for rules in cross-reference.
+    : OS.Restriction in ['COLREG.Rule9.*']  
+}
+
 # Narrow Channels
 # (a) A vessel proceeding along the course of a narrow channel or fairway shall keep as near to the
 # outer limit of the channel or fairway which lies on her starboard side as is safe and practicable.
+clause['COLREG.Rule9.a/KeepNearCoast']:{
+    : {
+        condition: {
+            : OS.Position.Territory in ['Territory.NarrowChannel','Territory.Fairway','Territory.InlandWaterway']
+        }
+        assure: { 
+            # Vessel will be penalized proportional to distance from shoreline 
+            # 5x width is assumed to be the safe practicable distance 
+            # beyond which it is penalized
+            : [OS.Position, Map.Sea@ShoreLine].MinDistance < (5*OS.Width)
+
+            # Safety and feasibility considerations penalized by appropriate modules
+        }
+    }
+}
 
 # (b) A vessel of less than 20 metres in length or a sailing vessel shall not impede the passage of a
 # vessel which can safely navigate only within a narrow channel or fairway.
+clause['COLREG.Rule9.b/SmallVessel']:{
+    : {
+        condition: {
+            : (OS.Length < 20) or (OS.Type is 'Vessel.Type.PowerDriven')
+        }
+        assure: { 
+            : (OS, TS).Distance > Sea.NarrowChannelSafeDistance
+        }
+    }
+}
 
 # (c) A vessel engaged in fishing shall not impede the passage of any other vessel navigating within a
 # narrow channel or fairway.
+clause['COLREG.Rule9.c/Fishing']:{
+    : {
+        condition: {
+            : (OS.Operation has 'Vessel.Operation.Fishing')
+        }
+        assure: { 
+            : (OS, TS).Distance > Sea.NarrowChannelSafeDistance
+        }
+    }
+}
 
 # (d) A vessel shall not cross a narrow channel or fairway if such crossing impedes the passage of a
 # vessel which can safely navigate only within such channel or fairway. The latter vessel may use the
 # sound signal prescribed in Rule 34(d) if in doubt as to the intention of the crossing vessel.
+clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
+    : {
+        condition: {
+            : (OS.Intent has 'Maneuver.Overtaking.*')
+        }
+        assure: { 
+            : apply 'COLREG.Rule34.c.i*'
+        }
+    }
+}
 
 # (e)
-
 # (i) In a narrow channel or fairway when overtaking can take place only if the vessel to be
 # overtaken has to take action to permit safe passing, the vessel intending to overtake
 # shall indicate her intention by sounding the appropriate signal prescribed in Rule
 # 34(c)(i). The vessel to be overtaken shall, if in agreement, sound the appropriate signal
 # prescribed in Rule 34(c)(ii) and take steps to permit safe passing. If in doubt she may
 # sound the signals prescribed in Rule 34(d).
+clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
+    : {
+        condition: {
+            : (OS.Intent has 'Maneuver.Overtaking.*')
+        }
+        assure: { 
+            : apply 'COLREG.Rule34.c.i*'
+        }
+    }
+}
+
+clause['COLREG.Rule9.e.i.b/AssureCOLREGRule13']:{
+    : {
+        condition: {
+            : (OS.Intent has 'Maneuver.Overtaken.*')
+        }
+        assure: { 
+            : apply 'COLREG.Rule34.c.i*'
+        }
+    }
+}
+
+clause['COLREG.Rule9.e.i.c/AssureCOLREGRule13']:{
+    : {
+        condition: {
+            : (OS.Intent has 'Maneuver.DenyOvertake.*')
+        }
+        assure: { 
+            : apply 'COLREG.Rule34.d*'
+        }
+    }
+}
 
 # (ii) This Rule does not relieve the overtaking vessel of her obligation under Rule 13.
+clause['COLREG.Rule9.e.ii/AssureCOLREGRule13']:{
+    : {
+        condition: {
+            : (OS.Intent has 'Maneuver.Overtaking.*')
+        }
+        assure: { 
+            : apply 'COLREG.Rule12.*'
+        }
+    }
+}
 
 # (f) A vessel nearing a bend or an area of a narrow channel or fairway where other vessels
 # may be obscured by an intervening obstruction shall navigate with particular alertness
 # and caution and shall sound the appropriate signal prescribed in Rule 34(e).
+clause['COLREG.Rule9.f/TurningBlindspot']:{
+    : {
+        condition: {
+            : [OS.Position, Map.Sea@ShoreLine].Curvature > 20
+        }
+        assure: { 
+            : OS.Intent in ['Signal']
+        }
+    }
+}
 
 # (g) Any vessel shall, if the circumstances of the case admit, avoid anchoring in a narrow channel.
+clause['COLREG.Rule9.g/Anchor']:{
+    : {
+        condition: {
+            : OS.Position.Territory has 'Territory.NarrowChannel'
+        }
+        assure: { 
+            : OS.Intent not in ['*Anchoring*']
+        }
+    }
+}

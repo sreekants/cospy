@@ -1,11 +1,12 @@
-# COLREG.Rule23:
+# COLREG.Rule23 :
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
 }
 
 condition: { 
-    :OS.Type is Vessel.Type.PowerDriven 
+    :OS.Type is 'Vessel.Type.PowerDriven' 
 }
 
 # Power-driven Vessels underway
@@ -18,12 +19,15 @@ condition: {
 # light but may do so;
 # (iii) sidelights;
 # (iv) a sternlight.
+
 # (b) An air-cushion vessel when operating in the non-displacement mode shall, in
 # addition to the lights prescribed in paragraph (a) of this Rule exhibit an all-round
 # flashing yellow light.
+
 # (c) A WIG craft only when taking off, landing and in flight near the surface shall, in
 # addition to the lights prescribed in paragraph (a) of this Rule, exhibit a high intensity
 # all-round flashing red light.
+
 # (d)
 # (i) A power-driven vessel of less than 12 meters in length may in lieu of the lights
 # prescribed in paragraph (a) of this Rule exhibit an all-round white light and
