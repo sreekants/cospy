@@ -310,7 +310,8 @@ class VirtualWorld:
 				entity.rotate( theta )
 				'''
 
-				entity.rect	= self.encoder.transform_rect( rect )
+				entity.rect		= self.encoder.transform_rect( rect )
+				entity.angle	= math.degrees( math.atan2(-dx[1],dx[0]) )
 				return
 
 		return

@@ -6,7 +6,7 @@ from cos.core.api.World import World as WorldService
 from cos.core.api.Sea import Sea as SeaService
 from cos.ui.game.VehicleSprite import VehicleSprite as Vehicle
 
-from cos.ui.game.VesselSprite import VesselSprite as Vessel
+from cos.ui.game.VesselSprite import VesselIcon as Vessel
 from cos.ui.game.LandSprite import LandSprite as Land
 from cos.ui.game.SeaSprite import SeaSprite as Sea
 from cos.ui.game.SkySprite import SkySprite as Sky

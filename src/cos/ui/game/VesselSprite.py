@@ -6,13 +6,16 @@ from cos.ui.game.AnimatedSprite import AnimatedSprite
 from cos.ui.game.Config import *
 import  pygame, math
 
+AQUABLUE=(57, 196, 242)
+BARBIEPINK=(240, 95, 92)
+
 class VesselIcon(AnimatedSprite):
 	def __init__(self, config):
 		""" Constructor
 		Arguments
 			config -- Configuration attributes
 		"""
-		super(VesselSprite, self).__init__( config, None, (255, 255, 255) )
+		super(VesselIcon, self).__init__( config, None, (255, 255, 255) )
 
 		self.name	= config["name"]
 		self.id		= config["identifier"]
@@ -21,7 +24,7 @@ class VesselIcon(AnimatedSprite):
 		self.initialize()
 		return
 	
-	def initialize(self, length=15, width=10, bowlen=4, color=(0, 0, 178)):
+	def initialize(self, length=15, width=10, bowlen=4, color=AQUABLUE):
 		self.length		= length
 		self.width		= width
 		self.bowlen		= bowlen
@@ -48,14 +51,17 @@ class VesselIcon(AnimatedSprite):
 		bottom		= self.width/2
 
 		# Build the polygon shape by transforming it around the center
-		points.append(self.rotxfrm(pos, left, top, angle))
-		points.append(self.rotxfrm(pos, left, bottom, angle))
+		points.append(self.rotxfrm(pos, left, top+2, angle))
+		points.append(self.rotxfrm(pos, left, bottom-2, angle))
 		points.append(self.rotxfrm(pos, right,bottom, angle))
+		points.append(self.rotxfrm(pos, right+3,bottom-1, angle))
 		points.append(self.rotxfrm(pos, self.length+self.bowlen, 0, angle))
+		points.append(self.rotxfrm(pos, right+3,top+1, angle))
 		points.append(self.rotxfrm(pos, right, top, angle))
 
 		# Render the polygon
 		pygame.draw.polygon(surface, self.color, points)
+		pygame.draw.lines(surface, (64, 64, 64), True, points)
 		return
 
 	def rotxfrm(self, pivot, x, y, angle):

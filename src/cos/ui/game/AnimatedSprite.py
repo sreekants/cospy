@@ -5,6 +5,8 @@
 from cos.ui.game.Sprite import Sprite
 from cos.ui.game.SpriteController import SpriteController
 from cos.core.kernel.BootLoader import BootLoader
+from cos.math.geometry.Rectangle import Rectangle
+import pygame
 
 BLACK=(0, 0, 0)
 
@@ -21,7 +23,11 @@ class AnimatedSprite(Sprite):
 		# Set the behavior
 		self.control	= SpriteController( self, config )
 		position		= self.control.get_position()
-		self.rect		= self.surf.get_rect( center=(position[0], position[1]) )
+
+		if self.surf is not None:
+			self.rect		= self.surf.get_rect( center=(position[0], position[1]) )
+		else:
+			self.rect		= pygame.Rect(position[0]-5, position[1]-5,10,10)
 
 		self.control.init( self.rect )
 
