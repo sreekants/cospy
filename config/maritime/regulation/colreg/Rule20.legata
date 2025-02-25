@@ -1,5 +1,5 @@
 # COLREG.Rule20 :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
