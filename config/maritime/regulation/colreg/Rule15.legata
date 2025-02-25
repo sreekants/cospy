@@ -17,7 +17,7 @@ clause['COLREG.Rule15']:{
               ((OS, TS).Direction in ['Position.Starboard'])
             }
         assure:{
-            : OS.Intent in ['Maneuver.CollisionAvoidance.*','Maneuver.GiveWay','Maneuver.StandOn']
+            : OS.Intent in ['Manouever.CollisionAvoidance.*','Manouever.GiveWay','Manouever.StandOn']
             : (OS,TS).Speed < 0
         }
     }

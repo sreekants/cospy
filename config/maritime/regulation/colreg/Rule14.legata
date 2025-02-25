@@ -13,7 +13,7 @@ define: {
 clause['COLREG.Rule14.a']:{
     :{
         condition: { 
-            : (OS, TS).CPA in Vessel.Collision.TimeToEncounter.CollisionRange
+            : (OS, TS).ClosestApproachPoint in Vessel.Collision.TimeToEncounter.CollisionRange
             }
         assure:{
             : OS.Heading in range(1, 90)

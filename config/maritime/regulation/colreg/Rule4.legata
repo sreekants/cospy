@@ -22,7 +22,7 @@ clause['COLREG.Rule4/ZeroVisibility']:{
             :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
         }
         assure:{
-            : (OS.Intent has 'Maneuver.CollisionAvoidance.Decelerate') and
+            : (OS.Intent has 'Manouever.CollisionAvoidance.Decelerate') and
               (OS.Velocity <= Vessel.Velocity.ReducedSpeed)
             : (OS.Intent has 'Manoeuverer.Course.SafeZone')
         }
