@@ -25,7 +25,7 @@ clause['COLREG.Rule8.a/COLAV']:{
             :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
         }
         assure  : { 
-            :OS.Intent has 'Maneuver.CollisionAvoidance.*'
+            :OS.Intent has 'Manouever.CollisionAvoidance.*'
         }
     }
 }
@@ -62,7 +62,7 @@ clause['COLREG.Rule8.c/CourseAlteration']:{
             :(OS, TS).Distance > Vessel.Collision.TimeToEncounter.SituationRange
         }
         assure:{
-            :OS.Intent has 'Maneuver.CollisionAvoidance.CloseQuarterAvoidance'
+            :OS.Intent has 'Manouever.CollisionAvoidance.CloseQuarterAvoidance'
         }
     } 
 }
@@ -77,7 +77,7 @@ clause['COLREG.Rule8.d/CourseAlteration']:{
             :(OS, TS).Distance > Vessel.Collision.TimeToEncounter.SituationRange
         }
         assure:{
-            :OS.Intent has 'Maneuver.CollisionAvoidance.CloseQuarterAvoidance'
+            :OS.Intent has 'Manouever.CollisionAvoidance.CloseQuarterAvoidance'
         }
     } 
 }
@@ -90,7 +90,7 @@ clause['COLREG.Rule8.e/Halting']:{
             :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
         }
         assure:{
-            : (OS.Intent has 'Maneuver.CollisionAvoidance.Decelerate') or
+            : (OS.Intent has 'Manouever.CollisionAvoidance.Decelerate') or
               (OS.Acceleration <= 0)
         }
     } 
@@ -114,7 +114,7 @@ clause['COLREG.Rule8.f/GiveWayOnPassage']:{
             :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
         }
         assure:{
-            : (OS.Intent has 'Maneuver.CollisionAvoidance.Decelerate') or
+            : (OS.Intent has 'Manouever.CollisionAvoidance.Decelerate') or
               (OS.Acceleration <= 0)
         }
     } 

@@ -1,5 +1,5 @@
 # COLREG.Rule9  :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -64,7 +64,7 @@ clause['COLREG.Rule9.c/Fishing']:{
 clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
     : {
         condition: {
-            : (OS.Intent has 'Maneuver.Overtaking.*')
+            : (OS.Intent has 'Manouever.Overtaking.*')
         }
         assure: { 
             : apply 'COLREG.Rule34.c.i*'
@@ -82,7 +82,7 @@ clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
 clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
     : {
         condition: {
-            : (OS.Intent has 'Maneuver.Overtaking.*')
+            : (OS.Intent has 'Manouever.Overtaking.*')
         }
         assure: { 
             : apply 'COLREG.Rule34.c.i*'
@@ -93,7 +93,7 @@ clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
 clause['COLREG.Rule9.e.i.b/AssureCOLREGRule13']:{
     : {
         condition: {
-            : (OS.Intent has 'Maneuver.Overtaken.*')
+            : (OS.Intent has 'Manouever.Overtaken.*')
         }
         assure: { 
             : apply 'COLREG.Rule34.c.i*'
@@ -104,7 +104,7 @@ clause['COLREG.Rule9.e.i.b/AssureCOLREGRule13']:{
 clause['COLREG.Rule9.e.i.c/AssureCOLREGRule13']:{
     : {
         condition: {
-            : (OS.Intent has 'Maneuver.DenyOvertake.*')
+            : (OS.Intent has 'Manouever.DenyOvertake.*')
         }
         assure: { 
             : apply 'COLREG.Rule34.d*'
@@ -116,7 +116,7 @@ clause['COLREG.Rule9.e.i.c/AssureCOLREGRule13']:{
 clause['COLREG.Rule9.e.ii/AssureCOLREGRule13']:{
     : {
         condition: {
-            : (OS.Intent has 'Maneuver.Overtaking.*')
+            : (OS.Intent has 'Manouever.Overtaking.*')
         }
         assure: { 
             : apply 'COLREG.Rule12.*'

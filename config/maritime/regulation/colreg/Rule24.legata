@@ -9,11 +9,6 @@ define: {
 # Towing and Pushing
 
 # (a) A power-driven vessel when towing shall exhibit:
-clause['COLREG.Rule24.a']:{
-    : {
-        condition: { : OS.Operation has 'Vessel.Operation.TOWING' }
-    }
-
 # (i) instead of the light prescribed in Rule 23(a)(i) or (a)(ii), two masthead lights in
 # a vertical line. When the length of the tow, measuring from the stern of the
 # towing vessel to the after end of the tow exceeds 200 metres, three such lights
@@ -23,6 +18,11 @@ clause['COLREG.Rule24.a']:{
 # (iv) a towing light in a vertical line above the sternlight;
 # (v) when the length of the tow exceeds 200 metres, a diamond shape where it can
 # best be seen.
+clause['COLREG.Rule24.a']:{
+    :{
+        condition: { : OS.Operation has 'Vessel.Operation.TOWING' }
+    }
+
     # TODO
 }
 

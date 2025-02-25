@@ -1,5 +1,5 @@
 # COLREG.Rule15 :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -10,3 +10,15 @@ define: {
 # When two power-driven vessels are crossing so as to involve risk of collision, the vessel which has the
 # other on her own starboard side shall keep out of the way and shall, if the circumstances of the case
 # admit, avoid crossing ahead of the other vessel.
+clause['COLREG.Rule15']:{
+    :{
+        condition: { 
+            : ((OS, TS).ClosestApproachPoint in Vessel.Collision.TimeToEncounter.CollisionRange) and
+              ((OS, TS).Direction in ['Position.Starboard'])
+            }
+        assure:{
+            : OS.Intent in ['Maneuver.CollisionAvoidance.*','Maneuver.GiveWay','Maneuver.StandOn']
+            : (OS,TS).Speed < 0
+        }
+    }
+}

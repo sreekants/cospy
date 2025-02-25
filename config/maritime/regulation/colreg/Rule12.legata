@@ -1,8 +1,13 @@
 # COLREG.Rule12 :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
+    TS: TargetShip
+}
+
+condition: {
+    : (OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
 }
 
 
@@ -11,12 +16,54 @@ define: {
 # them shall keep out of the way of the other as follows;
 # (i) when each has the wind on a different side, the vessel which has the wind on the port
 # side shall keep out of the way of the other;
+clause['COLREG.Rule12.a.i']:{
+    :{
+        condition: { 
+            : ((OS, TS).Direction in ['Position.Abeam']) and
+              ([OS.Position, Weather.Wind].Direction in range(180,360))
+            }
+        assure:{
+            : OS.Intent has 'Manouever.Course.Alteration'
+        }
+    }
+}
+
 # (ii) when both have the wind on the same side, the vessel which is to windward shall keep
 # out of the way of the vessel which is to leeward;
+clause['COLREG.Rule12.a.ii']:{
+    :{
+        condition: { 
+            : ( ((OS, TS).Direction in ['Position.Abeam']) and
+                ([OS.Position, Weather.Wind].Direction in range(0,180)))
+            }
+        assure:{
+            : OS.Intent has 'Manouever.Course.Alteration'
+        }
+    }
+}
+
 # (iii) if a vessel with the wind on the port side sees a vessel to windward and cannot
 # determine with certainty whether the other vessel has the wind on the port or on the
 # starboard side, she shall keep out of the way of the other.
+clause['COLREG.Rule12.a.ii']:{
+    :{
+        condition: { 
+            : ((OS, TS).Direction in ['Position.Starboard']) and
+              ([OS.Position, Weather.Wind].Direction in range(180,360))
+            }
+        assure:{
+            : OS.Intent has 'Manouever.Encounter.Avoidance'
+        }
+    }
+}
+
 
 # (b) For the purposes of this Rule the windward side shall be deemed to be the side opposite to that
 # on which the mainsail is carried or, in the case of a square-rigged vessel, the side opposite to that on
 # which the largest fore-and-aft sail is carried.
+
+################################################################
+# clause['COLREG.Rule12.b'] {}
+# Definitions of wind directions are implied in angle ranges 
+# in previous clauses
+################################################################

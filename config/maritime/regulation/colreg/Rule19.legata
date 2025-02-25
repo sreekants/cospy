@@ -65,8 +65,8 @@ clause['COLREG.Rule19.d']:{
             : (OS, TS).Direction in ['Position.Abaft']
         }
         assure: { 
-            :OS.Maneuver in [
-                'Maneuver.Course.Alteration'
+            :OS.Manouever in [
+                'Manouever.Course.Alteration'
                 ]
         }
     }
@@ -81,7 +81,7 @@ clause['COLREG.Rule19.e']:{
     : {
         condition: { 
             : (OS, TS).Detect in [Signal.FogHorn] 
-            : ((OS, TS).Position in [Position.Abeam]) and
+            : ((OS, TS).Position in ['Position.Abeam']) and
               ((OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.SafeRange) 
         }
         exclude: {

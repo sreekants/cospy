@@ -1,5 +1,5 @@
 # COLREG.Rule7  :
-# Status        : 
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -8,22 +8,82 @@ define: {
 condition: {
     # Trigger rule 7 only if other special rules made by local authority do not apply 
     : OS.COLREG.Mode is true
+    : Environment.Scenario has 'Risk.Collision'
 }
 
 # Risk of Collision
 # (a) Every vessel shall use all available means appropriate to the prevailing circumstances and
 # conditions to determine if risk of collision exists. If there is any doubt such risk shall be deemed to
 # exist.
+clause['COLREG.Rule7.a']:{
+    :{
+        condition: { 
+            :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
+            }
+        assure:{
+            : OS.Intent in ['Alert.SituationAvoidance','Alert.CollisionAvoidance']
+        }
+    }
+    :{
+        condition: { 
+            :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.SituationRange
+            }
+        assure:{
+            : OS.Intent has 'Alert.CollisionAvoidance'
+        }
+    }
+}
+
 # (b) Proper use shall be made of radar equipment if fitted and operational, including long-range
 # scanning to obtain early warning of risk of collision and radar plotting or equivalent systematic
 # observation of detected objects.
+clause['COLREG.Rule7.a']:{
+    :{
+        condition: { 
+            :OS.Capability has 'Equipment.Radar*'
+            }
+        assure:{
+            : OS.Intent has 'Operation.Lookout.Radio*' 
+        }
+    }
+}
+
 # (c) Assumptions shall not be made on the basis of scanty information, especially scanty radar
 # information.
+# TODO: Assumptions may not be able to 
+
 # (d) In determining if risk of collision exists the following considerations shall be among those taken
 # into account:
 # (i) Such risk shall be deemed to exist if the compass bearing of an approaching vessel does
 # not appreciably change;
+clause['COLREG.Rule7.d.i']:{
+    :{
+        condition: { 
+            :((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange) and
+             ((TS, OS).Heading.Gradient < Vessel.Collision.Heading.Collide)
+            }
+        assure:{
+            : OS.Intent has 'Alert.CollisionAvoidance'
+        }
+    }
+}
+
+
 # (ii) such risk may sometimes exist even when an appreciable bearing change is evident,
 # particularly when approaching a very large vessel or a tow or when approaching a vessel
 # at close range.
+clause['COLREG.Rule7.d.ii']:{
+    :{
+        condition: { 
+            :((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange) and
+             (TS.Weight in Vessel.Class.LargeVessel)
+            :((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange) and
+             (OS.Operation has 'Vessel.Operation.TOWING')
+            :((OS, TS).Distance < Vessel.Collision.TimeToEncounter.SituationRange)
+            }
+        assure:{
+            : OS.Intent has 'Alert.CollisionAvoidance'
+        }
+    }
+}
 

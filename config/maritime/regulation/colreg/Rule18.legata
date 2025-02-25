@@ -1,10 +1,13 @@
 # COLREG.Rule18 :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
 }
 
+condition: {
+    : OS.Speed > 0      # Vessel underway
+}
 
 # Responsibilities between Vessels
 # (The new paragraph (f) shall enter into force on 29 November 2003, as
@@ -15,30 +18,132 @@ define: {
 # (ii) a vessel restricted in her ability to manoeuvre;
 # (iii) a vessel engaged in fishing;
 # (iv) a sailing vessel.
+clause['COLREG.Rule18.a']:{
+    : {
+        condition: { 
+            :(OS.Type is 'Vessel.Type.PowerDriven') and 
+             ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
+            : (TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.Fishing','Vessel.Operation.RestrictedMovement','Vessel.Operation.Sailing']) or 
+              (TS.Type in ['Vessel.Type.Sailing','Vessel.Type.Fishing'])
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.KeepClear'
+        }
+    }
+}
 
 # (b) A sailing vessel underway shall keep out of the way of:
 # (i) a vessel not under command;
 # (ii) a vessel restricted in her ability to manoeuvre;
 # (iii) a vessel engaged in fishing.
+clause['COLREG.Rule18.b']:{
+    : {
+        condition: { 
+            :(OS.Type is 'Vessel.Type.SailingVessel') and 
+             ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
+            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement']) or 
+             (TS.Type in ['Vessel.Type.Fishing'])
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.KeepClear'
+        }
+    }
+}
 
 # (c) A vessel engaged in fishing when underway shall, so far as possible, keep out of the way
 # of:
 # (i) a vessel not under command;
 # (ii) a vessel restricted in her ability to manoeuvre.
+clause['COLREG.Rule18.c']:{
+    : {
+        condition: { 
+            :((OS.Type is 'Vessel.Type.Fishing') or (TS.Operation has ['Vessel.Operation.Fishing'])) and 
+             ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
+            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement']))
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.KeepClear'
+        }
+    }
+}
 
 # (d)
 # (i) Any vessel other than a vessel not under command or a vessel restricted in her ability to
 # manoeuvre shall, if the circumstances of the case admit, avoid impeding the safe
 # passage of a vessel constrained by her draught, exhibiting the signals in Rule 28.
+clause['COLREG.Rule18.d.i']:{
+    : {
+        condition: { 
+            :((OS.Type is 'Vessel.Type.Fishing') or (TS.Operation has ['Vessel.Operation.Fishing'])) and 
+             ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
+            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement'])
+         }
+         except: {
+            :(OS.Operation has 'Vessel.Operation.NotUnderCommand') or
+             ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange)
+              
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.AllowPassage*'
+        }
+    }
+}
+
 # (ii) A vessel constrained by her draught shall navigate with particular caution having full
 # regard to her special condition.
+clause['COLREG.Rule18.d.ii']:{
+    : {
+        condition: { 
+            :(OS.Operation in ['Vessel.Operation.RestrictedMovement'])
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.Caution*'
+            # What to do??
+        }
+    }
+}
 
 # (e) A seaplane on the water shall, in general, keep well clear of all vessels and avoid impeding their
 # navigation. In circumstances, however, where risk of collision exists, she shall comply with the Rules
 # of this Part.
+clause['COLREG.Rule18.e']:{
+    : {
+        condition: { 
+            :OS.Type is 'Vessel.Type.Seaplane'
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.KeepClear'
+        }
+    }
+}
 
 # (f)
 # (i) A WIG craft shall, when taking off, landing and in flight near the surface, keep well clear of
 # all other vessels and avoid impeding their navigation;
+clause['COLREG.Rule18.f.i']:{
+    : {
+        condition: { 
+            :OS.Type is 'Vessel.Type.WIG'
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.KeepClear'
+        }
+    }
+}
+
+
 # (ii) a WIG craft operating on the water surface shall comply with the Rules of this Part as a
 # power-driven vessel.
+clause['COLREG.Rule18.a']:{
+    : {
+        condition: { 
+            :(OS.Type is 'Vessel.Type.WIG') and 
+             ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
+            : (TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.Fishing','Vessel.Operation.RestrictedMovement','Vessel.Operation.Sailing']) or 
+              (TS.Type in ['Vessel.Type.Sailing','Vessel.Type.Fishing'])
+         }
+        assure: { 
+            :OS.Intent has 'Manouever.KeepClear'
+        }
+    }
+}

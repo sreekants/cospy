@@ -1,5 +1,5 @@
 # COLREG.Rule13 :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
@@ -21,3 +21,8 @@ define: {
 # (d) Any subsequent alteration of the bearing between the two vessels shall not make the overtaking
 # vessel a crossing vessel within the meaning of these Rules or relieve her of the duty of keeping clear
 # of the overtaken vessel until she is finally past and clear.
+
+################################################################
+# clause['COLREG.Rule13'] {}
+# Definitions of what constitutes overtaking is implemented in the software
+################################################################
