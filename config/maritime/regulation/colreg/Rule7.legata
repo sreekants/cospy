@@ -15,7 +15,7 @@ condition: {
 # (a) Every vessel shall use all available means appropriate to the prevailing circumstances and
 # conditions to determine if risk of collision exists. If there is any doubt such risk shall be deemed to
 # exist.
-clause['COLREG.Rule7.a']:{
+clause['COLREG.Rule7.a.Alert']:{
     :{
         condition: { 
             :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
@@ -24,6 +24,8 @@ clause['COLREG.Rule7.a']:{
             : OS.Intent in ['Alert.SituationAvoidance','Alert.CollisionAvoidance']
         }
     }
+}
+clause['COLREG.Rule7.a.Situation']:{
     :{
         condition: { 
             :(OS, TS).Distance < Vessel.Collision.TimeToEncounter.SituationRange
@@ -37,7 +39,7 @@ clause['COLREG.Rule7.a']:{
 # (b) Proper use shall be made of radar equipment if fitted and operational, including long-range
 # scanning to obtain early warning of risk of collision and radar plotting or equivalent systematic
 # observation of detected objects.
-clause['COLREG.Rule7.a']:{
+clause['COLREG.Rule7.b']:{
     :{
         condition: { 
             :OS.Capability has 'Equipment.Radar*'

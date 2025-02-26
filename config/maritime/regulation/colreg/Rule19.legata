@@ -23,7 +23,7 @@ condition: {
 clause['COLREG.Rule19.b']:{
     : {
         condition: { 
-            :(OS.Type is 'Vessel.Type.PowerDriven') and 
+            :(OS.Type is Vessel.Type.PowerDriven) and 
              (OS.Speed in Vessel.RestrictedVisibility.Speed.Safe.Range)
          }
         assure: { 

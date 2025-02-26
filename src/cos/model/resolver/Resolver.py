@@ -17,6 +17,14 @@ class Resolver:
 		self.resolvers	= Resolver.generate_dispatch(self.__class__, '__simattribute')
 		return
 
+	def init(self, ctxt, cfg):
+		""" Initializes the configuration for the resolver
+		Arguments
+			ctxt -- Simulation context
+			cfg -- Configuration for the resolver
+		""" 
+		return
+	
 	def get_key(self, ctxt:Context, variable:str):
 		""" Matches the prefix and returns the key if a match is found
 		Arguments

@@ -45,7 +45,7 @@ clause['COLREG.Rule12.a.ii']:{
 # (iii) if a vessel with the wind on the port side sees a vessel to windward and cannot
 # determine with certainty whether the other vessel has the wind on the port or on the
 # starboard side, she shall keep out of the way of the other.
-clause['COLREG.Rule12.a.ii']:{
+clause['COLREG.Rule12.a.iii']:{
     :{
         condition: { 
             : ((OS, TS).Direction in ['Position.Starboard']) and

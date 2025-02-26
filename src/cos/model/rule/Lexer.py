@@ -14,6 +14,7 @@ class Lexer:
     'precedent'	: 'PRECEDENT',
     'clause'	: 'CLAUSE',
     'assure'	: 'ASSURE',
+    'apply'	    : 'APPLY',
     'otherwise'	: 'OTHERWISE',
     'clear'	    : 'CLEAR',
     'continue'	: 'CONTINUE',

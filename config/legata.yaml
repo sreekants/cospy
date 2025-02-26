@@ -3,48 +3,61 @@ language:
      - scope: 'variables'
        prefix: null
        module: cos.model.resolver.MappingResolver
+       config: 
 
      - scope: 'constants'
        prefix: null
        module: cos.model.resolver.MappingResolver
+       config: 
 
      - scope: 'eez'
        prefix: null
        module: maritime.model.resolver.EEZResolver
+       config: 
 
      - scope: 'harbour'
        prefix: null
        module: maritime.model.resolver.HarbourResolver
+       config: 
 
      - scope: 'lane'
        prefix: null
        module: maritime.model.resolver.LaneResolver
+       config: 
 
      - scope: 'mez'
        prefix: null
        module: maritime.model.resolver.MEZResolver
+       config: 
 
      - scope: 'target'
        prefix: null
        module: maritime.model.resolver.TargetResolver
+       config: 
 
      - scope: 'tss'
        prefix: null
        module: maritime.model.resolver.TSSResolver
+       config: 
 
      - scope: 'os'
        prefix: null
        module: maritime.model.resolver.OwnShipResolver
+       config: 
 
      - scope: 'ts'
        prefix: null
        module: maritime.model.resolver.TargetShipResolver
+       config: 
 
      - scope: 'colreg'
        prefix: null
        module: maritime.model.resolver.ColregResolver
+       config: 
 
      - scope: 'vessel'
        prefix: null
        module: maritime.model.resolver.VesselDeclarationsResolver
+       config: filter=Vessel
+       database: $(CONFIG)/maritime/regulation/definitions.s3db
 

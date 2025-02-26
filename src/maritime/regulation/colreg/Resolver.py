@@ -22,7 +22,7 @@ class Resolver(CompositeResolver):
 		""" Loads the resolvers
 		Arguments
 			ctxt -- Simulation context
-			configfile -- TODO
+			configfile -- Configuration file
 		""" 
 
 		if configfile is not None:
@@ -42,6 +42,8 @@ class Resolver(CompositeResolver):
 					resolver.prefix	= prefix
 
 				self.add( r['scope'], resolver)
+				
+				resolver.init( ctxt, r )
 
 		return
 

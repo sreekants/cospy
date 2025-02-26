@@ -234,6 +234,7 @@ class Parser:
         assurance_statement : COLON action_commands
         assurance_statement : COLON assurance_expressions 
         assurance_statement : COLON assurance_call 
+        assurance_statement : COLON apply_clause
         """
 
 
@@ -293,6 +294,13 @@ class Parser:
         self.move(p,  [('^', ('command',p[1]))])
         return
 
+
+    def p_apply_clause(self, p):
+        """
+        apply_clause : APPLY STRING
+        """
+        self.move(p, [('!', p[2])])
+        return
 
     def p_conditions(self, p):
         """

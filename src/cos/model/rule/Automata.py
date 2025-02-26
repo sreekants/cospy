@@ -100,8 +100,8 @@ class Automata:
 	@staticmethod
 	def __append_actions( result:list, indent, actions ):
 		for action in actions:
-			atype	=  action[0][0]
-			match atype:
+			opcode	=  action[0][0]
+			match opcode:
 				case '^':
 					result.append( f'{indent} assure: {action[0][1][1]}()' )
 				case '?':
@@ -110,8 +110,11 @@ class Automata:
 				case '*':
 					statements	= action[0][1][1]
 					result.append( f'{indent} assure: {Automata.__fntxt(statements)}' )
+				case '!':
+					statements	= action[0][1][1]
+					result.append( f'{indent} assure: apply {action[0][1]}' )
 				case _:
-					raise RuntimeError( 'Unsupported action type.' )
+					raise RuntimeError( f'Unsupported action type [{opcode}] in [{action[0]}].' )
 		return
 
 	@staticmethod

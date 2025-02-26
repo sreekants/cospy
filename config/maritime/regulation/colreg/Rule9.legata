@@ -25,7 +25,7 @@ clause['COLREG.Rule9.a/KeepNearCoast']:{
             # Vessel will be penalized proportional to distance from shoreline 
             # 5x width is assumed to be the safe practicable distance 
             # beyond which it is penalized
-            : [OS.Position, Map.Sea@ShoreLine].MinDistance < (5*OS.Width)
+            : [OS.Position, Map.Sea@ShoreLine].MinDistance < Vessel.SafeDistance.Shoreline # (5*OS.Width)
 
             # Safety and feasibility considerations penalized by appropriate modules
         }
@@ -37,7 +37,7 @@ clause['COLREG.Rule9.a/KeepNearCoast']:{
 clause['COLREG.Rule9.b/SmallVessel']:{
     : {
         condition: {
-            : (OS.Length < 20) or (OS.Type is 'Vessel.Type.PowerDriven')
+            : (OS.Length < 20) or (OS.Type is Vessel.Type.PowerDriven)
         }
         assure: { 
             : (OS, TS).Distance > Sea.NarrowChannelSafeDistance
@@ -61,13 +61,13 @@ clause['COLREG.Rule9.c/Fishing']:{
 # (d) A vessel shall not cross a narrow channel or fairway if such crossing impedes the passage of a
 # vessel which can safely navigate only within such channel or fairway. The latter vessel may use the
 # sound signal prescribed in Rule 34(d) if in doubt as to the intention of the crossing vessel.
-clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
+clause['COLREG.Rule9.d']:{
     : {
         condition: {
             : (OS.Intent has 'Manouever.Overtaking.*')
         }
         assure: { 
-            : apply 'COLREG.Rule34.c.i*'
+            : apply 'COLREG.Rule34.c.i'
         }
     }
 }

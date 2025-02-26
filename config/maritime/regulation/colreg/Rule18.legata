@@ -21,10 +21,10 @@ condition: {
 clause['COLREG.Rule18.a']:{
     : {
         condition: { 
-            :(OS.Type is 'Vessel.Type.PowerDriven') and 
+            :(OS.Type is Vessel.Type.PowerDriven) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
             : (TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.Fishing','Vessel.Operation.RestrictedMovement','Vessel.Operation.Sailing']) or 
-              (TS.Type in ['Vessel.Type.Sailing','Vessel.Type.Fishing'])
+              (TS.Type in [Vessel.Type.Sailing, Vessel.Type.Fishing])
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -39,10 +39,10 @@ clause['COLREG.Rule18.a']:{
 clause['COLREG.Rule18.b']:{
     : {
         condition: { 
-            :(OS.Type is 'Vessel.Type.SailingVessel') and 
+            :(OS.Type is Vessel.Type.SailingVessel) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
             :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement']) or 
-             (TS.Type in ['Vessel.Type.Fishing'])
+             (TS.Type is Vessel.Type.Fishing)
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -57,9 +57,9 @@ clause['COLREG.Rule18.b']:{
 clause['COLREG.Rule18.c']:{
     : {
         condition: { 
-            :((OS.Type is 'Vessel.Type.Fishing') or (TS.Operation has ['Vessel.Operation.Fishing'])) and 
+            :((OS.Type is Vessel.Type.Fishing) or (TS.Operation has 'Vessel.Operation.Fishing')) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
-            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement']))
+            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement'])
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -74,14 +74,13 @@ clause['COLREG.Rule18.c']:{
 clause['COLREG.Rule18.d.i']:{
     : {
         condition: { 
-            :((OS.Type is 'Vessel.Type.Fishing') or (TS.Operation has ['Vessel.Operation.Fishing'])) and 
+            :((OS.Type is Vessel.Type.Fishing) or (TS.Operation has 'Vessel.Operation.Fishing')) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
             :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement'])
          }
-         except: {
+         exclude: {
             :(OS.Operation has 'Vessel.Operation.NotUnderCommand') or
-             ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange)
-              
+             ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange)              
          }
         assure: { 
             :OS.Intent has 'Manouever.AllowPassage*'
@@ -109,7 +108,7 @@ clause['COLREG.Rule18.d.ii']:{
 clause['COLREG.Rule18.e']:{
     : {
         condition: { 
-            :OS.Type is 'Vessel.Type.Seaplane'
+            :OS.Type is Vessel.Type.Seaplane
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -123,7 +122,7 @@ clause['COLREG.Rule18.e']:{
 clause['COLREG.Rule18.f.i']:{
     : {
         condition: { 
-            :OS.Type is 'Vessel.Type.WIG'
+            :OS.Type is Vessel.Type.WIG
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -134,13 +133,13 @@ clause['COLREG.Rule18.f.i']:{
 
 # (ii) a WIG craft operating on the water surface shall comply with the Rules of this Part as a
 # power-driven vessel.
-clause['COLREG.Rule18.a']:{
+clause['COLREG.Rule18.f.ii']:{
     : {
         condition: { 
-            :(OS.Type is 'Vessel.Type.WIG') and 
+            :(OS.Type is Vessel.Type.WIG) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
             : (TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.Fishing','Vessel.Operation.RestrictedMovement','Vessel.Operation.Sailing']) or 
-              (TS.Type in ['Vessel.Type.Sailing','Vessel.Type.Fishing'])
+              (TS.Type in [Vessel.Type.Sailing,Vessel.Type.Fishing])
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
