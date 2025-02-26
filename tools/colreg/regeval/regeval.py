@@ -5,7 +5,7 @@
 import os, shutil, getopt, sys
 import os.path
 
-from RegEval import RegEval
+from app import RegEval
 
 
 def get_app_info():

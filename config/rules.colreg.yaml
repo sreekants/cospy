@@ -6,127 +6,167 @@ packages:
       
      - name: Rule1
        module: rules.colreg.rule1.Rule1
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule1.legata
       
      - name: Rule2
        module: rules.colreg.rule2.Rule2
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule2.legata
       
      - name: Rule3
        module: rules.colreg.rule3.Rule3
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule3.legata
 
      - name: Rule4
        module: rules.colreg.rule4.Rule4
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule4.legata
 
      - name: Rule5
        module: rules.colreg.rule5.Rule5
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule5.legata
 
      - name: Rule6
        module: rules.colreg.rule6.Rule6
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule6.legata
 
      - name: Rule7
        module: rules.colreg.rule7.Rule7
        enable: False
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule7.legata
 
      - name: Rule8
        module: rules.colreg.rule8.Rule8
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule8.legata
 
      - name: Rule9
        module: rules.colreg.rule9.Rule9
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule9.legata
 
      - name: Rule10
        module: rules.colreg.rule10.Rule10
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule10.legata
 
      - name: Rule11
        module: rules.colreg.rule11.Rule11
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule11.legata
 
      - name: Rule12
        module: rules.colreg.rule12.Rule12
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule12.legata
 
      - name: Rule13
        module: rules.colreg.rule13.Rule13
-       config: automata=$(CONFIG)/maritime/regulation/colreg/test.legata
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule13.legata
 
      - name: Rule14
        module: rules.colreg.rule14.Rule14
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule14.legata
 
      - name: Rule15
        module: rules.colreg.rule15.Rule15
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule15.legata
 
      - name: Rule16
        module: rules.colreg.rule16.Rule16
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule16.legata
 
      - name: Rule17
        module: rules.colreg.rule17.Rule17
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule17.legata
 
      - name: Rule18
        module: rules.colreg.rule18.Rule18
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule18.legata
 
      - name: Rule19
        module: rules.colreg.rule19.Rule19
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule19.legata
 
      - name: Rule20
        module: rules.colreg.rule20.Rule20
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule20.legata
 
      - name: Rule21
        module: rules.colreg.rule21.Rule21
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule21.legata
 
      - name: Rule22
        module: rules.colreg.rule22.Rule22
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule22.legata
 
      - name: Rule23
        module: rules.colreg.rule23.Rule23
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule23.legata
 
      - name: Rule24
        module: rules.colreg.rule24.Rule24
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule24.legata
 
      - name: Rule25
        module: rules.colreg.rule25.Rule25
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule25.legata
 
      - name: Rule26
        module: rules.colreg.rule26.Rule26
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule26.legata
 
      - name: Rule27
        module: rules.colreg.rule27.Rule27
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule27.legata
 
      - name: Rule28
        module: rules.colreg.rule28.Rule28
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule28.legata
 
      - name: Rule29
        module: rules.colreg.rule29.Rule29
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule29.legata
 
      - name: Rule30
        module: rules.colreg.rule30.Rule30
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule30.legata
 
      - name: Rule31
        module: rules.colreg.rule31.Rule31
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule31.legata
 
      - name: Rule32
        module: rules.colreg.rule32.Rule32
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule32.legata
 
      - name: Rule33
        module: rules.colreg.rule33.Rule33
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule33.legata
 
      - name: Rule34
        module: rules.colreg.rule34.Rule34
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule34.legata
 
      - name: Rule35
        module: rules.colreg.rule35.Rule35
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule35.legata
 
      - name: Rule36
        module: rules.colreg.rule36.Rule36
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule36.legata
 
      - name: Rule37
        module: rules.colreg.rule37.Rule37
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule37.legata
 
      - name: Rule38
        module: rules.colreg.rule38.Rule38
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule38.legata
 
      - name: Rule39
        module: rules.colreg.rule39.Rule39
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule39.legata
 
      - name: Rule40
        module: rules.colreg.rule40.Rule40
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule40.legata
 
      - name: Rule41
        module: rules.colreg.rule41.Rule41
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule41.legata
 
 

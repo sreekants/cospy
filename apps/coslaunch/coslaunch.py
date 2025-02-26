@@ -1,36 +1,39 @@
 #!/usr/bin/python
 # Filename: main.py
-# Description: Main entry point for COSTopic application
+# Description: Main entry for COSLaunch application
 
 import os, shutil, getopt, sys
 import os.path
 
-from COSTopic import COSTopic
+from app import COSLaunch
 
+IMAGE=None
 
 def get_app_info():
 	return {
-		"executable": "cos_topic.py",
-		"name"		: "Skeleton documentation generator",
+		"executable": "coslaunch.py",
+		"name"		: "COS Simulation Operating system",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?][echo][list][find topic]"
+		"usage"		:[ 	"[-h][-?][-i image]"
 					],
 					
 		"help"		:[
-			    ["-h"	, ["Print help.", usage]],
-			    ["-?"	, ["Print help.", usage]],
-			    ["route"	, ["Route a topic to another.", None]],
-			    ["unroute"	, ["Delete a route.", None]],
-			    ["echo"	, ["echo print messages to screen.", None]],
-			    ["find"	, ["find services by service type.", None]],
-			    ["info"	, ["print information about topic.", None]],
-			    ["list"	, ["list active services.", None]],
-			    ["pub"	, ["publish data to topic.", None]],	
-			    ["type"	, ["print service type.", None]]				
+			    ["h"		, ["Print help.", usage]],
+			    ["?"		, ["Print help.", usage]],
+			    ["i"		, ["Set the image.", set_image]],
+			    ["image"	, ["Code directory.", None]]
 				]		
 		}
 	
 
+def preamble():
+	Format	= "name,version,copyright"
+	AppInfo	= get_app_info()
+	
+	# Print header
+	for attr in Format.split(','):
+		if AppInfo.get(attr):
+			print( AppInfo[attr] )
 
 def usage():
 	Format	= "name,version,copyright,website"
@@ -43,7 +46,7 @@ def usage():
 
 	# Print usage			
 	print("\nUsage:\n    {}\t{}\n\nOptions:".format(
-					AppInfo['executable'], 
+					AppInfo['executable'], 	
 					"\n\t\t".join(AppInfo["usage"])) )
 
 	# Pring argument description			
@@ -58,6 +61,14 @@ def usage():
 	sys.exit(0)		    
 	return
 
+def set_image():
+	global IMAGE
+	IMAGE	= sys.argv[-1]
+	if os.path.isfile(IMAGE) == False:
+		print( f'[{IMAGE}] is not an image file.')
+		sys.exit(-1)
+	return
+
 def main():
 	try:
 		opts, args = getopt.getopt(sys.argv[1:], "hi:d", ["help"])
@@ -67,18 +78,19 @@ def main():
 	for opt, arg in opts:
 		if opt in ("-h", "--help"):
 			usage()                     
-			sys.exit()
+			sys.exit()                  
+		elif opt in ("-i"):
+			set_image()
 		elif opt == '-d':
 			global _debug               
 			_debug = 1                  
 
-	if len(args) == 0:
-			usage()                     
-			sys.exit()
-
-	theApp = COSTopic()
-	theApp.run( args, get_app_info() )
+	preamble()
+	theApp = COSLaunch()
+	theApp.run( args, get_app_info(), {
+			'image' : IMAGE
+			})
 	
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()	

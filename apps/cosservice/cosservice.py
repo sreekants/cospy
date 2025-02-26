@@ -1,25 +1,29 @@
 #!/usr/bin/python
 # Filename: main.py
-# Description: Main entry point for COSViz application
+# Description: Main entry point for COSService application
 
 import os, shutil, getopt, sys
 import os.path
 
-from CViz import CViz
+from app import COSService
 
 
 def get_app_info():
 	return {
-		"executable": "visualizer.py",
-		"name"		: "COS Simulation Visualizer",
+		"executable": "cosservice.py",
+		"name"		: "Skeleton documentation generator",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?] dir"
+		"usage"		:[ 	"[-h][-?] [call  find info list type]"
 					],
 					
 		"help"		:[
 			    ["h"	, ["Print help.", usage]],
 			    ["?"	, ["Print help.", usage]],
-			    ["host"	, ["Service host (eg: localhost:5556).", None]]
+			    ["call"	, ["call the service with the pcosided args.", None]],
+			    ["find"	, ["find services by service type.", None]],
+			    ["info"	, ["print information about service.", None]],
+			    ["list"	, ["list active services.", None]],
+			    ["type"	, ["print service type.", None]]				
 				]		
 		}
 	
@@ -41,7 +45,7 @@ def usage():
 
 	# Pring argument description			
 	for help in AppInfo["help"]:
-		if len(help[0]) < 3:
+		if len(help[0]) <= 3:
 			indent	= '\t\t'
 		else:
 			indent	= '\t'
@@ -63,9 +67,13 @@ def main():
 			sys.exit()                  
 		elif opt == '-d':
 			global _debug               
-			_debug = 1                  
+			_debug = 1
 
-	theApp = CViz()
+	if len(args) == 0:
+			usage()                     
+			sys.exit()
+
+	theApp = COSService()
 	theApp.run( args, get_app_info() )
 	
 

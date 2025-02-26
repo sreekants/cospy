@@ -1,28 +1,31 @@
 #!/usr/bin/python
 # Filename: main.py
-# Description: Main entry point for COSService application
+# Description: Main entry point for COSTopic application
 
 import os, shutil, getopt, sys
 import os.path
 
-from COSService import COSService
+from app import COSTopic
 
 
 def get_app_info():
 	return {
-		"executable": "cos_service.py",
+		"executable": "cos_topic.py",
 		"name"		: "Skeleton documentation generator",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?] [call  find info list type]"
+		"usage"		:[ 	"[-h][-?][echo][list][find topic]"
 					],
 					
 		"help"		:[
-			    ["h"	, ["Print help.", usage]],
-			    ["?"	, ["Print help.", usage]],
-			    ["call"	, ["call the service with the pcosided args.", None]],
+			    ["-h"	, ["Print help.", usage]],
+			    ["-?"	, ["Print help.", usage]],
+			    ["route"	, ["Route a topic to another.", None]],
+			    ["unroute"	, ["Delete a route.", None]],
+			    ["echo"	, ["echo print messages to screen.", None]],
 			    ["find"	, ["find services by service type.", None]],
-			    ["info"	, ["print information about service.", None]],
+			    ["info"	, ["print information about topic.", None]],
 			    ["list"	, ["list active services.", None]],
+			    ["pub"	, ["publish data to topic.", None]],	
 			    ["type"	, ["print service type.", None]]				
 				]		
 		}
@@ -50,7 +53,7 @@ def usage():
 		else:
 			indent	= '\t'
 		
-		print( "    -{}{}{}".format(help[0], indent, help[1][0]) )
+		print( "    {}{}{}".format(help[0], indent, help[1][0]) )
 	
 	sys.exit(0)		    
 	return
@@ -64,16 +67,16 @@ def main():
 	for opt, arg in opts:
 		if opt in ("-h", "--help"):
 			usage()                     
-			sys.exit()                  
+			sys.exit()
 		elif opt == '-d':
 			global _debug               
-			_debug = 1
+			_debug = 1                  
 
 	if len(args) == 0:
 			usage()                     
 			sys.exit()
 
-	theApp = COSService()
+	theApp = COSTopic()
 	theApp.run( args, get_app_info() )
 	
 

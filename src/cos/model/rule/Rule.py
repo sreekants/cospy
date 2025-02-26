@@ -133,7 +133,7 @@ class Rule(Faculty):
 		# Load and compiled legata file
 		ctxt.log.info( self.id, f'Loading legata file : {file}' )
 		lagata.load( path )
-		lagata.dump()
+		# lagata.dump()
 
 		return lagata
 
