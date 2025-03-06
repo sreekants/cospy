@@ -149,21 +149,6 @@ class Symbol:
 			"""
 			return self.value.evaluate(ctxt)
 
-	class Function(SymbolType):
-		def __init__(self, name, args):
-			""" Constructor
-			Arguments
-				name -- Name of the object
-				args -- List of arguments
-			""" 
-			SymbolType.__init__(self, Type.FUNCTION, (name, args))
-			return
-
-		def tostring(self) -> str:
-			""" TODO: tostring
-			""" 
-			argslist = [str(arg) for arg in self.value[1]]
-			return f"{self.value[0]}({', '.join(argslist)})"
 
 	class Range(SymbolType):
 		def __init__(self, min, max):
@@ -185,6 +170,27 @@ class Symbol:
 			""" TODO: tostring
 			""" 
 			return f'[{self.value[0]}:{self.value[1]}]'
+
+	class Function(SymbolType):
+		def __init__(self, name, args, evaluator):
+			""" Constructor
+			Arguments
+				name -- Name of the object
+				args -- List of arguments
+				evaluator -- Evaluation handler
+			""" 
+			SymbolType.__init__(self, Type.FUNCTION, (name, args))
+			self.eval	= evaluator
+			return
+
+		def tostring(self) -> str:
+			""" TODO: tostring
+			""" 
+			argslist = [str(arg) for arg in self.value[1]]
+			return f"{self.value[0]}({', '.join(argslist)})"
+		
+		def evaluate(self, ctxt):
+			return self.eval(ctxt, self.value)
 
 if __name__ == "__main__":
 	test = SymbolType()

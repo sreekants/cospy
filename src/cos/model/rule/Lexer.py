@@ -49,6 +49,10 @@ class Lexer:
     'del'       : "FN_DEL",
     'set'       : "FN_SET",
     'isset'     : "FN_ISSET",
+    'meters'    : 'FN_METERS',
+    'feets'     : 'FN_FEETS',
+    'kmph'      : 'FN_KMPH',
+    'kn'        : 'FN_KN',
     'nmphtokmph'    : 'FN_NMPHTOKMPH'
     }
 

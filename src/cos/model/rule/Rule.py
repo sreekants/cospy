@@ -105,7 +105,7 @@ class Rule(Faculty):
 		return
 
 	def __load_scorecard(self, ctxt:Context, file)->Automata:
-		""" TODO: __load_automata
+		""" Loads the scorecard for the automata
 		Arguments
 			ctxt -- Simulation context
 			file -- File path
@@ -118,7 +118,7 @@ class Rule(Faculty):
 		return
 	
 	def __load_automata(self, ctxt:Context, file)->Automata:
-		""" TODO: __load_automata
+		""" Loads the automata
 		Arguments
 			ctxt -- Simulation context
 			file -- File path

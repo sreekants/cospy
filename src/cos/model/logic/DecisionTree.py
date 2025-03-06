@@ -48,6 +48,16 @@ class DecisionTree(Tree):
 		return ectxt
 
 	@staticmethod
+	def evaluate_node(ctxt, node:Decision):
+		""" Evaluates the expression
+		Arguments
+			ctxt -- Simulation context
+		""" 
+		# Traverse each node and apply a decision
+		ectxt		= EvaluateCtxt(ctxt)
+		return DecisionTree.__evaluate_node( ectxt, node )
+
+	@staticmethod
 	def __evaluate_node( ctxt:EvaluateCtxt, node:Decision ):
 		""" Pumps messages in a queue node
 		Arguments

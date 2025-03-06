@@ -34,6 +34,8 @@ class Decision(TreeNode):
 		self.assurances	= []
 		self.precedents	= []
 		self.trace		= True
+		self.type		= type
+		self.ref		= ref
 		return
 
 	def apply(self, ctxt):
@@ -64,7 +66,7 @@ class Decision(TreeNode):
 		if condition is not None:
 			# Apply all assurances.
 			for assureinfo in self.assurances:
-				a	= assureinfo[0][1][1][0][1][0]
+				a	= assureinfo[0][1]
 				result = a[1].evaluate(ctxt.ctxt)
 				if result not in [ErrorCode.S_OK, ErrorCode.S_TRUE, ErrorCode.ERROR_CONTINUE]:
 					ctxt.error.append(self)

@@ -82,6 +82,11 @@ class VesselResolver(Resolver):
 
 		return self.heading
 
+	@simproperty
+	def Position_Territory(self):
+		""" Symbol property - Position.Territory
+		""" 
+		return 'Territory.HighSea'	# todo
 
 if __name__ == "__main__":
 	test = VesselResolver()

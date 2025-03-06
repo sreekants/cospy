@@ -13,10 +13,11 @@ import ply.yacc as yacc
 
 
 class Parser:
-    def __init__(self, automata=None):
+    def __init__(self, automata=None, evaluator=None):
         self.parser     = None
         self.filename   = None
         self.automata   = automata
+        self.eval       = evaluator
         self.debug      = False
         return
 
@@ -224,7 +225,9 @@ class Parser:
     def p_assurance_statements(self, p):
         """
         assurance_statements : assurance_statement
+        assurance_statements : clause_statement
         assurance_statements : assurance_statements assurance_statement 
+        assurance_statements : assurance_statements clause_statement 
         """
         self.fold(p, 2)
         return
@@ -511,6 +514,7 @@ class Parser:
         rvalue : identifier
         rvalue : number
         rvalue : boolean
+        rvalue : functional_expression
         """
         self.move(p)
         return
@@ -556,7 +560,7 @@ class Parser:
         """
         func    = p[1]
         args    = p[3]
-        p[0]    = Symbol.Function(func, args)
+        p[0]    = Symbol.Function(func, args, self.eval)
         return
 
     def p_function(self, p):
@@ -572,6 +576,10 @@ class Parser:
         function : FN_SET
         function : FN_ISSET
         function : FN_COUNT
+        function : FN_FEETS
+        function : FN_METERS
+        function : FN_KMPH
+        function : FN_KN
         function : FN_NMPHTOKMPH
         """
         self.move(p)

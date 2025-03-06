@@ -19,6 +19,18 @@ class COLREG(Rule):
 		self.sitations	= queue.Queue()
 		return
 
+	def begin(self, ctxt:Context, rule_ctxt):
+		""" Triggers the begining of a situation
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		Rule.begin(self, ctxt, rule_ctxt)
+
+		if self.automata is not None:
+			self.automata.begin(rule_ctxt)			
+		return
+
 	def evaluate(self, ctxt:Context, rule_ctxt:RuleContext):
 		""" Evaluates the expression
 		Arguments

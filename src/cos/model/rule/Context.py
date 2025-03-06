@@ -7,7 +7,7 @@ from cos.model.symbol.Symbol import Symbol, SymbolType
 from cos.core.kernel.Context import Context as KernelContext
 
 class Context:
-	def __init__(self, ctxt:KernelContext, resolver, world, vessels):
+	def __init__(self, ctxt:KernelContext, resolver, world, vessels, api):
 		""" Constructor
 		Arguments
 			resolver -- Reference to the resolver
@@ -22,6 +22,7 @@ class Context:
 
 		self.situation	= Situation()
 		self.encounters	= []
+		self.api		= api
 		return
 
 	def resolve_tuple(self, lhs, rhs):
@@ -147,7 +148,7 @@ class Context:
 		return True if lhs!=rhs else False
 
 	def resolve(self, expr):
-		""" operator resolve
+		""" Resolve an expression
 		Arguments
 			expr -- Expression
 		"""
@@ -158,6 +159,14 @@ class Context:
 			return expr
 
 		return self.resolver.resolve(self, expr)
+
+	def evaluate(self, method, args):
+		""" Evaluates an API method
+		Arguments
+			method -- Method to call
+			args -- Arguments to the method
+		"""
+		return self.api(self, method, args)
 
 if __name__ == "__main__":
 	test = Context()

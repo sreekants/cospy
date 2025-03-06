@@ -47,6 +47,22 @@ class Resolver:
 		""" 
 		return
 
+	@staticmethod
+	def get_property(variable:str):
+		sndx	= variable.find(')')
+		if sndx != -1:
+			sndx	= sndx+1
+		else:
+			sndx	= None
+
+		ndx		= variable.find('.', sndx)
+		if ndx <= 0:
+			return None
+		
+		varname	= variable[ndx+1:]
+
+		return varname.replace('.','_')
+	
 	def resolve(self, ctxt:Context, variable:str):
 		""" TODO: resolve
 		Arguments
@@ -56,11 +72,10 @@ class Resolver:
 		if (self.resolvers is None) or (len(self.resolvers) == 0):
 			return
 
-		ndx		= variable.rfind('.')
-		if ndx <= 0:
+		fnname	= Resolver.get_property(variable)
+		if fnname is None:
 			return None
 
-		fnname	= variable[ndx+1:]
 		method	= self.resolvers.get(fnname, None)
 		if method is None:
 			return None

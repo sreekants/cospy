@@ -4,9 +4,9 @@
 
 from cos.model.rule.Definition import Definition
 from cos.model.rule.Context import Context
-from cos.core.utilities.Patterns import Composite
 from cos.model.rule.Parser import Parser
 from cos.model.logic.Decision import Decision
+from cos.model.logic.DecisionTree import DecisionTree, DecisionType
 from cos.core.utilities.Errors import ErrorCode
 
 import os, sys, pickle
@@ -21,6 +21,14 @@ class Automata:
 		self.definition	= Definition()
 		return
 
+	def begin(self, ctxt:Context):
+		""" Triggers the begining of a situation
+		Arguments
+			ctxt -- Simulation context
+		"""
+		result		= self.definition.traverse( self.__init_node, ctxt, 1 )
+		return result
+
 	def evaluate(self, ctxt:Context ):
 		""" Evaluates the expression
 		Arguments
@@ -28,12 +36,13 @@ class Automata:
 		""" 
 		return self.definition.evaluate(ctxt)
 
+
 	def compile(self, file:str):
 		""" TODO: compile
 		Arguments
 			file -- File path
 		""" 
-		parser = Parser(self)
+		parser = Parser(self, Automata.__evaluate)
 		parser.build()
 		with open(file, 'rt') as f:
 			codepage = f.read()
@@ -172,11 +181,11 @@ class Automata:
 		""" 
 		location	= clause['location']
 		try:
-			name		= Decision(clause['name'])
+			name		= Decision(clause['name'], None, DecisionType.TYPE_BASIC_CONDITION)
 			decision	= self.definition.add( '/', name)
 			# print(f"{clause['location']} Generating clause {name}...")
 			for d in clause['definition']:
-				define	= decision.add( Decision('def') )
+				define	= decision.add( Decision('def', None, DecisionType.TYPE_BASIC_DECISION) )
 				self.__add_clause_conditions(clause, define, d['conditions'])
 				self.__add_clause_assurances(clause, define, d['assurances'])
 
@@ -227,11 +236,11 @@ class Automata:
 		""" 
 		location	= precedent['location']
 		try:
-			name		= Decision(precedent['name'])
+			name		= Decision(precedent['name'], None, DecisionType.TYPE_BASIC_PRECONDITION)
 			decision	= self.definition.add( '/', name)
 			# print(f"{clause['location']} Generating clause {name}...")
 			for d in precedent['definition']:
-				define	= decision.add( Decision('def') )
+				define	= decision.add( Decision('def', None, DecisionType.TYPE_BASIC_DECISION) )
 				self.__add_clause_conditions(precedent, define, d['conditions'])
 				self.__add_clause_assurances(precedent, define, d['assurances'])
 
@@ -239,6 +248,22 @@ class Automata:
 			print( f'{location} {str(e)}')
 			sys.exit(-1)
 		return
+
+	@staticmethod
+	def __init_node( ctxt:Context, node:Decision ):
+		""" Internal callback function to handle dumping a tree node
+		Arguments
+			ctxt -- Context argument passed to the callback
+			node -- Node to process
+		"""
+		if node.type != DecisionType.TYPE_BASIC_PRECONDITION:
+			return ErrorCode.ERROR_CONTINUE
+		
+		return DecisionTree.evaluate_node( ctxt, node)
+
+	@staticmethod
+	def __evaluate( ctxt, ast ):
+		return ctxt.evaluate( ast[0], ast[1] )
 
 if __name__ == "__main__":
 	test = Automata()

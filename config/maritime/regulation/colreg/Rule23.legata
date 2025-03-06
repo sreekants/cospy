@@ -1,12 +1,12 @@
 # COLREG.Rule23 :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
 }
 
 condition: { 
-    :OS.Type is Vessel.Type.PowerDriven
+    :OS.Operation has 'Vessel.Operation.UNDERWAY'
 }
 
 # Power-driven Vessels underway
@@ -19,26 +19,113 @@ condition: {
 # light but may do so;
 # (iii) sidelights;
 # (iv) a sternlight.
+clause['COLREG.Rule23.a']:{
+    : {
+        condition: { 
+            :OS.Type is Vessel.Type.PowerDriven
+        }
+		exclude:{
+            :OS.Length < meters(12)		# Rule23.d.i
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Masthead.Forward.1x'
+            :OS.Signal.ON has 'Light.Masthead.Abaft'
+            :OS.Signal.ON has 'Light.Sidelight'
+            :OS.Signal.ON has 'Light.Sternlight'
+        }
+    }
+}
+
+clause['COLREG.Rule23.a.ii']:{
+    : {
+        condition: { 
+            :OS.Type is Vessel.Type.PowerDriven
+        }
+		exclude:{
+            :OS.Length < meters(50)
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Masthead.Abaft'
+        }
+    }
+}
+
 
 # (b) An air-cushion vessel when operating in the non-displacement mode shall, in
 # addition to the lights prescribed in paragraph (a) of this Rule exhibit an all-round
 # flashing yellow light.
+clause['COLREG.Rule23.b']:{
+    : {
+        condition: { 
+            :OS.Type is Vessel.Type.AirCushion
+        }
+        assure: { 
+            :OS.Signal.ON has 'Light.Flashing.Yellow'
+        }
+    }
+}
 
 # (c) A WIG craft only when taking off, landing and in flight near the surface shall, in
 # addition to the lights prescribed in paragraph (a) of this Rule, exhibit a high intensity
 # all-round flashing red light.
+clause['COLREG.Rule23.c']:{
+    : {
+        condition: { 
+            :OS.Type is Vessel.Type.WIG
+        }
+        assure: { 
+            :OS.Signal.ON has 'Light.Flashing.Red'
+        }
+    }
+}
 
 # (d)
 # (i) A power-driven vessel of less than 12 meters in length may in lieu of the lights
 # prescribed in paragraph (a) of this Rule exhibit an all-round white light and
 # sidelights:
+clause['COLREG.Rule23.d.i']:{
+    : {
+        condition: { 
+            :OS.Type is Vessel.Type.PowerDriven
+        }
+		exclude:{
+            :OS.Length > meters(12)
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Allround.White'
+            :OS.Signal.ON has 'Light.Sidelight'
+        }
+    }
+}
+
+
 # (ii) a power-driven vessel of less than 7 meters in length whose maximum speed
 # does not exceed 7 knots may in lieu of the lights prescribed in paragraph (a) of
 # this Rule exhibit an all-round white light and shall, if practicable, also exhibit
 # sidelights;
+clause['COLREG.Rule23.d.ii']:{
+    : {
+        condition: { 
+            :OS.Type is Vessel.Type.PowerDriven
+        }
+		exclude:{
+            :(OS.Length > meters(7)) and (OS.speed > kn(7))
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Allround.White'
+        }
+    }
+}
+
 # (iii) the masthead light or all-round white light on a power-driven vessel of less
 # than 12 meters in length may be displaced from the fore and aft centreline of
 # the vessel if centreline fitting is not practicable, pcosided that the sidelights are
 # combined in one lantern which shall be carried on the fore and aft centreline of
 # the vessel or located as nearly as practicable in the same fore and aft line as
 # the masthead light or the all-round white light.
+
+################################################################
+# clause['COLREG.Rule23.d.iii'] {}
+# Concerns the positioning of the lights
+################################################################
+

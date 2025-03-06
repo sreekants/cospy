@@ -1,10 +1,14 @@
 # COLREG.Rule24 :
-# Status        : TODO
+# Status        : REVIEW
 
 define: {
     OS: OwnShip
 }
 
+
+condition: { 
+    :OS.Operation in ['Vessel.Operation.TOWING','Vessel.Operation.PUSHING','Vessel.Operation.PUSHED']
+}
 
 # Towing and Pushing
 
@@ -20,10 +24,24 @@ define: {
 # best be seen.
 clause['COLREG.Rule24.a']:{
     :{
-        condition: { : OS.Operation has 'Vessel.Operation.TOWING' }
+        condition: { 
+			:(OS.Type is Vessel.Type.PowerDriven)
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Masthead.Forward.2x'
+            :OS.Signal.ON has 'Light.Sidelight'
+            :OS.Signal.ON has 'Light.Sternlight'
+            :OS.Signal.ON has 'Light.TowingLight'
+            :{
+				condition: { 
+					:OS.Length > meters(200)
+				}
+				assure: { 
+					:OS.Signal.ON has 'Light.Diamond'
+				}
+			}	
+        }
     }
-
-    # TODO
 }
 
 # (b) When a pushing vessel and a vessel being pushed ahead are rigidly connected in a
@@ -31,29 +49,51 @@ clause['COLREG.Rule24.a']:{
 # prescribed in Rule 23.
 clause['COLREG.Rule24.b']:{
     : {
-        condition: { : OS.Operation has 'Vessel.Operation.PUSHING' }
+        condition: { 
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation has 'Vessel.Operation.PUSHED')
+		}
+        assure: { 
+            :apply 'COLREG.Rule23*'
+        }
     }
-    # TODO
 }
 
 
 
 # (c) A power-driven vessel when pushing ahead or towing alongside, except in the case
 # of a composite unit, shall exhibit:
-clause['COLREG.Rule24.c']:{
-    : {
-        condition: { : OS.Operation has 'Vessel.Operation.PUSHING' }
-    }
-    # TODO
 # (i) instead of the light prescribed in Rule 23(a)(i) or (a)(ii), two masthead lights in
 # a vertical line;
 # (ii) sidelights;
 # (iii) a sternlight.
-
+clause['COLREG.Rule24.c']:{
+    : {
+        condition: { 
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation has 'Vessel.Operation.PUSHING')
+        }
+		exclude: {
+			: OS.Trait has 'Vessel.Trait.CompositeUnit'
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Masthead.Forward.2x'
+            :OS.Signal.ON has 'Light.Sidelight'
+            :OS.Signal.ON has 'Light.Sternlight'
+        }
+    }
 }
 
 # (d) A power-driven vessel to which paragraph (a) or (c) of this Rule applies shall also
 # comply with Rule 23(a)(ii).
+clause['COLREG.Rule24.d']:{
+    : {
+        condition: { 
+			:OS.Type is Vessel.Type.PowerDriven
+		}
+        assure: { 
+            :apply 'COLREG.Rule23*'
+        }
+    }
+}
 
 # (e) A vessel or object being towed, other than those mentioned in paragraph (g) of
 # this Rule, shall exhibit:
@@ -61,6 +101,26 @@ clause['COLREG.Rule24.c']:{
 # (ii) a sternlight;
 # (iii) when the length of the tow exceeds 200 metres, a diamond shape where it can
 # best be seen.
+clause['COLREG.Rule24.e']:{
+    : {
+        condition: { 
+			:OS.Operation has 'Vessel.Operation.TOWED'
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Sidelight'
+            :OS.Signal.ON has 'Light.Sternlight'
+            :{
+				condition: { 
+					:OS.Length > meters(200)
+				}
+				assure: { 
+					:OS.Signal.ON has 'Light.Diamond'
+				}
+			}	
+        }
+    }
+}
+
 
 
 # (f) Pcosided that any number of vessels being towed alongside or pushed in a group
@@ -69,7 +129,7 @@ clause['COLREG.Rule24.c']:{
 # at the forward end, sidelights;
 # (ii) a vessel being towed alongside shall exhibit a sternlight and at the forward
 # end, sidelights.
-
+# TODO How to address a fleet.
 
 # (g) An inconspicuous, partly submerged vessel or object, or combination of such
 # vessels or objects being towed, shall exhibit:
@@ -86,10 +146,14 @@ clause['COLREG.Rule24.c']:{
 # diamond shape where it can best be seen and located as far forward as is
 # practicable.
 
+# TODO: Is submerged vessel a new COLREG type?
+
 # (h) Where from any sufficient cause it is impracticable for a vessel or object being
 # towed to exhibit the lights or shapes prescribed in paragraph (e) or (g) of this Rule, all
 # possible measures shall be taken to light the vessel or object towed or at least to
 # indicate the presence of such vessel or object.
+
+# TODO: How to deal with conditional exclusion?
 
 # (i) Where from any sufficient cause it is impracticable for a vessel not normally
 # engaged in towing operations to display the lights prescribed in paragraph (a)
@@ -98,3 +162,5 @@ clause['COLREG.Rule24.c']:{
 # All possible measures shall be taken to indicate the nature of the relationship
 # between the towing vessel and the vessel being towed as authorized by Rule
 # 36, in particular by illuminating the towline.
+
+# TODO: Should this be an intent?

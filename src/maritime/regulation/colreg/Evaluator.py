@@ -3,11 +3,12 @@
 # Description: Implementation of the Evaluator class for COLREG evaluation
 
 from maritime.regulation.colreg.Resolver import Resolver
+from maritime.regulation.colreg.API import API
+from cos.model.rule.Context import Context as RuleContext
 from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
-from cos.model.rule.Context import Context as RuleContext
 
 class Evaluator(Service):
 	def __init__(self):
@@ -24,6 +25,7 @@ class Evaluator(Service):
 		self.postprocessors	= None
 		self.poll_at		= 1
 		self.resolver		= Resolver()
+		self.API			= API()
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -118,7 +120,7 @@ class Evaluator(Service):
 		Arguments
 			ctxt -- Simulation context
 		"""
-		rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels)
+		rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels, self.API)
 
 
 		# Preprocess situations
@@ -139,7 +141,7 @@ class Evaluator(Service):
 		"""
 
 		try:
-			rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels)
+			rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels, self.API)
 
 			# IMPORTANT: It is critical that
 			# Initialize for rule evaluation.
