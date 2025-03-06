@@ -39,7 +39,7 @@ does not use any modules of the simulation. We wanted to keep it simple with min
 You will need python 3.x installed as a prerequisute. Once this is done, update the python package with the following command 
 from this folder.
 
-pip install requirements.txt
+*pip install requirements.txt*
 
 
 ## Running the sample
