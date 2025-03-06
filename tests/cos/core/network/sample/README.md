@@ -39,7 +39,9 @@ does not use any modules of the simulation. We wanted to keep it simple with min
 You will need python 3.x installed as a prerequisute. Once this is done, update the python package with the following command 
 from this folder.
 
-*pip install requirements.txt*
+```bash
+pip install requirements.txt
+```
 
 
 ## Running the sample
@@ -47,7 +49,9 @@ from this folder.
 ### Starting the Server
 Start the server with the following command. The sever starts a notification service on port 8756 and an API service on port 8757. 
 
-*python server.py*
+```bash
+python server.py
+```
 
 ### Event Notifications
 Websockets notifications are received here on the browser. Simply open up the bridge.html file. This is a plain HTML file that uses 
@@ -59,6 +63,8 @@ While runnign the server, and the a page on the browser receiving event notifica
 this does is changes the startup seed on the ticker in the server - randomly. The result will be immediately seen on the browser where the
 ticking values will change the range randomly to reflect the new seed.
 
-*python client.py*
+```bash
+python client.py
+```
 
 
