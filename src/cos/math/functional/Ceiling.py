@@ -2,13 +2,14 @@
 # Filename: Ceiling.py
 # Description: Ceiling value
 
+import math
+
 class Ceiling:
 	def __init__(self):
 		return
 
 	def __call__(self, x):
-		if 
-		return b and (a//b + bool(a%b))
+		return math.ceil(x)
 		
 
 if __name__ == "__main__":

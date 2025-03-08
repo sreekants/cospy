@@ -4,7 +4,6 @@
 
 class PID:
     def __init__(self, Fplant, Kp,  Ki, Kd, Fp, Fi=None, Fd=None,):
-          self.Fplant    = Fplant
           self.Kp   = Kp
           self.Fp   = Fp
           self.Ki   = Ki
