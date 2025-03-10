@@ -15,6 +15,11 @@ class Triangle(shapely.Polygon):
 		shapely.Polygon.__init__(self, [A,B,C])
 		return
 
+	def coords(self):
+		""" Returns the coordinates of the bounds
+		"""
+		return self.exterior.coords
+	
 	@property
 	def circumcenter(self):
 		""" Returns the circumcenter of the triangle

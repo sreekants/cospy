@@ -3,7 +3,7 @@
 # Description: Pipeline of functions
 
 class Pipeline(list):
-	def __init__(self, plant):
+	def __init__(self, plant=None):
 		self.e		= None
 		self.plant	= plant
 		return
@@ -22,7 +22,7 @@ class Pipeline(list):
 
 		# If the tail end of the pipeline has a plant as in a 
 		# PID controller, we use it to calculate the error
-		if self.plant is None:
+		if self.plant is not None:
 			x 		= self.plant(x)
 			self.e	= x
 

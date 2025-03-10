@@ -6,7 +6,6 @@ from cos.model.geography.Shape import Shape
 from cos.core.kernel.Context import Context
 
 from enum import Enum, Flag
-from shapely import Polygon
 
 class Type(Flag):
     """Enum for the different types of sea terrain."""
