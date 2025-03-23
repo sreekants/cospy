@@ -5,6 +5,9 @@ define: {
     OS: OwnShip
 }
 
+condition: { 
+    : OS.State in ['Vessel.State.Anchored','Vessel.State.Aground']
+}
 
 # Anchored Vessels and Vessels aground
 # (a) A vessel at anchor shall exhibit where it can best be seen:

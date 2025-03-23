@@ -16,5 +16,7 @@ define: {
 
 # (c) The term 'prolonged blast' means a blast of from four to six seconds's duration.
 
-
+################################################################
+# clause['COLREG.Rule32'] {}
 # Rule 32 defines vessel signaling classes and terms. Nothing to do here.
+################################################################

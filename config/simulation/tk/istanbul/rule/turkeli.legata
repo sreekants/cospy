@@ -7,9 +7,11 @@ define: {
 }
 
 # include "bosphorous.legata"
+# include "Rule8.legata"
+
 
 # (3) Check if the sea current exceeds 4 kn, then large
-# vessels, deep-draught vessels and hazardous cargocarrying
+# vessels, deep-draught vessels and hazardous cargo arrying
 # vessels with a speed of 10 kn or less cannot
 # enter the strait.
 

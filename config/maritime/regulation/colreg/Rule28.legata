@@ -8,7 +8,7 @@ define: {
 
 # Vessel constrained by their draught
 condition: { 
-    : OS.State has State.Constrained
+    : OS.State has 'Vessel.State.Constrained'
 }
 
 # A vessel constrained by her draught may, in addition to the lights prescribed for
