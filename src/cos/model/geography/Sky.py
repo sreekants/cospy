@@ -5,7 +5,6 @@
 from cos.core.kernel.Context import Context
 from cos.model.geography.Shape import Shape
 from enum import Enum, Flag
-from shapely import Polygon
 
 class Type(Flag):
     """Enum for the different types of air behaviors."""

@@ -17,7 +17,7 @@ def draw_points(points):
     plt.scatter(xpoints, ypoints)
 
 def triangulate(points):
-    # Triangulate it.
+    # Triangulate the points.
     triangles = Delaunator(points).triangles
 
     # Convert the points into coordinates

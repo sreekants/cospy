@@ -1,0 +1,15 @@
+{
+    "Name":"Example.Controller",
+    "Description":"Example control port emulator",
+    "Properties" : {
+	  "On": {
+		"Input": "A*",
+		"Output": "110"
+	  },
+	  "Off": {
+		"Input": "B*",
+		"Output": "0"
+	  }
+	}
+}
+
