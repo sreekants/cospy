@@ -14,6 +14,20 @@ define: {
 # - a sternlight, 3 miles;
 # - a towing light, 3 miles;
 # - a white, red, green or yellow all-round light, 3 miles.
+clause['COLREG.Rule22.a']:{
+    : {
+        condition: { 
+            : OS.Length > meters(50)
+         }
+        assure: { 
+            : OS.Equipment.MastheadLight.Range >= miles(6) 
+            : OS.Equipment.SideLight.Range >= miles(3) 
+            : OS.Equipment.SternLight.Range >= miles(3) 
+            : OS.Equipment.TowingLight.Range >= miles(3) 
+            : OS.Equipment.SignalLight.Range >= miles(3)    # All-round light 
+        }
+    }
+}
 
 # (b) In vessels of 12 metres or more in length but less than 50 m in length:
 # - a masthead light, 5 miles; except that where the length of the vessel is less than
@@ -22,6 +36,35 @@ define: {
 # - a sternlight, 2 miles;
 # - a towing light, 2 miles;
 # - a white, red, green or yellow all-round light, 2 miles.
+clause['COLREG.Rule22.b.Large']:{
+    : {
+        condition: { 
+            : OS.Length in range(meters(20), meters(50))
+         }
+        assure: { 
+            : OS.Equipment.MastheadLight.Range >= miles(5) 
+            : OS.Equipment.SideLight.Range >= miles(2) 
+            : OS.Equipment.SternLight.Range >= miles(2) 
+            : OS.Equipment.TowingLight.Range >= miles(2) 
+            : OS.Equipment.SignalLight.Range >= miles(2)    # All-round light 
+        }
+    }
+}
+
+clause['COLREG.Rule22.b.Small']:{
+    : {
+        condition: { 
+            : OS.Length in range(meters(12), meters(20))
+         }
+        assure: { 
+            : OS.Equipment.MastheadLight.Range >= miles(3) 
+            : OS.Equipment.SideLight.Range >= miles(2) 
+            : OS.Equipment.SternLight.Range >= miles(2) 
+            : OS.Equipment.TowingLight.Range >= miles(2) 
+            : OS.Equipment.SignalLight.Range >= miles(2)    # All-round light 
+        }
+    }
+}
 
 # (c) In vessels of less than 12 metres in length:
 # - a masthead light, 2 miles,
@@ -29,6 +72,20 @@ define: {
 # - a sternlight, 2 miles,
 # - a towing light, 2 miles;
 # - a white, red, green or yellow all-round light, 2 miles.
+clause['COLREG.Rule22.c']:{
+    : {
+        condition: { 
+            : OS.Length < meters(12)
+         }
+        assure: { 
+            : OS.Equipment.MastheadLight.Range >= miles(2) 
+            : OS.Equipment.SideLight.Range >= miles(1) 
+            : OS.Equipment.SternLight.Range >= miles(2) 
+            : OS.Equipment.TowingLight.Range >= miles(2) 
+            : OS.Equipment.SignalLight.Range >= miles(2)    # All-round light 
+        }
+    }
+}
 
 # (d) In inconspicuous, partly submerged vessels or objects being towed; a white allround light, 3 miles.
 

@@ -40,3 +40,8 @@ condition: {
 
 # (e) A vessel when not engaged in fishing shall not exhibit the lights or shapes
 # prescribed in this Rule, but only those prescribed for a vessel of her length.
+
+################################################################
+# clause['COLREG.Rule26'] {}
+# Prescribes lights to identify fishing vessels
+################################################################

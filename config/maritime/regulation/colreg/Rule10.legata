@@ -38,8 +38,8 @@ clause['COLREG.Rule10.b.ii']:{
     : {
         condition: { :TSS is not empty }
         assure: { 
-            :[OS.Position, TSS.SeparationZone].Distance > TSS.SafeSeparationDistance
-            :[OS.Position, TSS.SeparationLine].Distance > TSS.SafeSeparationsDistance
+            :[OS.Position, TSS.SeparationZone].Distance > TSS.SafeZoneSeparationDistance
+            :[OS.Position, TSS.SeparationLine].Distance > TSS.SafeLineSeparationDistance
             }
     }
 }
@@ -51,8 +51,8 @@ clause['COLREG.Rule10.b.iii/EnterTrafficSeparationScheme']:{
     : {
         condition: { :(TSS is empty) and (OS.Intent in [TrafficSeparationScheme.Enter]) }
         assure: { 
-            :[OS.Position, TSS.EntryZone].Distance in TSS.SafeDistance
-            :OS.Heading in TSS.SafeEntryHeading
+            :[OS.Position, TSS.EntryZone].Distance in TSS.SafeZoneSeparationDistance
+            :OS.Heading in TSS.SafeZoneEntryHeading
             }
     }
 }
@@ -61,8 +61,8 @@ clause['COLREG.Rule10.b.iii/ExitTrafficSeparationScheme']:{
     : {
         condition: { :(TSS is not empty) and (OS.Intent in [TrafficSeparationScheme.Exit]) }
         assure: { 
-            :[OS.Position, TSS.ExitZone].Distance in TSS.SafeDistance
-            :OS.Heading in TSS.SafeExitHeading
+            :[OS.Position, TSS.ExitZone].Distance in TSS.SafeZoneSeparationDistance
+            :OS.Heading in TSS.SafeZoneExitHeading
             }
     }
 }

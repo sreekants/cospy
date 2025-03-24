@@ -50,6 +50,7 @@ class Lexer:
     'set'       : "FN_SET",
     'isset'     : "FN_ISSET",
     'meters'    : 'FN_METERS',
+    'miles'     : 'FN_MILES',
     'feets'     : 'FN_FEETS',
     'kmph'      : 'FN_KMPH',
     'kn'        : 'FN_KN',

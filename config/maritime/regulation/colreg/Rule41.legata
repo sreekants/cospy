@@ -1,5 +1,5 @@
 # COLREG.Rule41 :
-# Status        : TODO
+# Status        : Review
 
 define: {
     OS: OwnShip
@@ -24,3 +24,8 @@ define: {
 # the Organization*.
 # * Refer to the Framework and Procedures for the IMO Member State Audit Scheme,
 # adopted by the Organization by resolution A.1067(28).
+
+################################################################
+# clause['COLREG.Rule41'] {}
+# Rule 41 defines vessel audit compliance. Nothing to do here.
+################################################################

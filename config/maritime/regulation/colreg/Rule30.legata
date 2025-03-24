@@ -32,3 +32,8 @@ condition: {
 
 # (f) A vessel of less than 12 metres in length, when aground, shall not be required to
 # exhibit the lights or shapes prescribed in sub-paragraphs (d)(i) and (ii) of this COLREG.
+
+################################################################
+# clause['COLREG.Rule30'] {}
+# Prescribes lights to identify anchored vessels 
+################################################################
