@@ -29,7 +29,6 @@ clause['COLREG.Rule23.a']:{
 		}
         assure: { 
             :OS.Signal.ON has 'Light.Masthead.Forward.1x'
-            :OS.Signal.ON has 'Light.Masthead.Abaft'
             :OS.Signal.ON has 'Light.Sidelight'
             :OS.Signal.ON has 'Light.Sternlight'
         }
@@ -42,7 +41,7 @@ clause['COLREG.Rule23.a.ii']:{
             :OS.Type is Vessel.Type.PowerDriven
         }
 		exclude:{
-            :OS.Length < meters(50)
+            :OS.Length < meters(50)     # Rule23.d.i  (includes less than 12 meters in length)
 		}
         assure: { 
             :OS.Signal.ON has 'Light.Masthead.Abaft'
