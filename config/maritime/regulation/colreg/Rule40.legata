@@ -1,5 +1,5 @@
 # COLREG.Rule40 :
-# Status        : TODO
+# Status        : Review
 
 define: {
     OS: OwnShip
@@ -8,3 +8,8 @@ define: {
 # Application
 # Contracting Parties shall use the provisions of the Code for Implementation in the
 # execution of their obligations and responsibilities contained in the present Convention.
+
+################################################################
+# clause['COLREG.Rule40'] {}
+# Rule 40 defines compliance obligations. Nothing to do here.
+################################################################

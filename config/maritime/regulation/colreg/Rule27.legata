@@ -73,7 +73,13 @@ condition: {
 # Rule 27(b)(i) - Vessels not under command or restricted in their ability to
 # manoeuvre
 # "Not under command" (NUC) all-round red lights (Rule 27(a)(ii)) may be used as part of
-# the "Restricted Ability to Manoeuvre" (RAM) lights pcosided the vertical and horizontal
+# the "Restricted Ability to Manoeuvre" (RAM) lights provided the vertical and horizontal
 # distances required by COLREG 1972 are complied with and the electrical system is
 # arranged so that the all-round white light (RAM) may be switched on independently from
 # the two all-round red lights (NUC).
+
+################################################################
+# clause['COLREG.Rule26'] {}
+# Prescribes lights to identify vessels not under Command or 
+# restricted mobility
+################################################################

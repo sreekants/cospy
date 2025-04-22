@@ -119,7 +119,7 @@ clause['COLREG.Rule9.e.ii/AssureCOLREGRule13']:{
             : (OS.Intent has 'Manouever.Overtaking.*')
         }
         assure: { 
-            : apply 'COLREG.Rule12.*'
+            : apply 'COLREG.Rule13.*'
         }
     }
 }

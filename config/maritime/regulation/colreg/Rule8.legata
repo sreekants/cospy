@@ -26,6 +26,7 @@ clause['COLREG.Rule8.a/COLAV']:{
         }
         assure  : { 
             :OS.Intent has 'Manouever.CollisionAvoidance.*'
+            :OS.TCPA > Vessel.Reaction.AmpleTime
         }
     }
 }
@@ -53,7 +54,7 @@ clause['COLREG.Rule8.b/CourseAlteration']:{
 }
 
 # (c) If there is sufficient sea room, alteration of course alone may be the most effective action to avoid
-# a close-quarters situation pcosided that it is made in good time, is substantial and does not result in
+# a close-quarters situation provided that it is made in good time, is substantial and does not result in
 # another close-quarters situation.
 clause['COLREG.Rule8.c/CourseAlteration']:{
     :{

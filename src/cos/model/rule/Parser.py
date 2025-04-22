@@ -531,7 +531,7 @@ class Parser:
 
     def p_range(self, p):
         """
-        range : RANGE LPAREN number COMMA number RPAREN
+        range : RANGE LPAREN rvalue COMMA rvalue RPAREN
         """
         p[0]    = Symbol.Range(p[3], p[5])
         return
@@ -578,6 +578,7 @@ class Parser:
         function : FN_COUNT
         function : FN_FEETS
         function : FN_METERS
+        function : FN_MILES
         function : FN_KMPH
         function : FN_KN
         function : FN_NMPHTOKMPH
