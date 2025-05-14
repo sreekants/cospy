@@ -18,11 +18,27 @@ def response(msgid, target):
                      'X': [], 
                      'R': []
                     },
-
-                'angle':f"{msgid+1000}",
-                'angleSetpoint':f"{msgid+2000}", 
-                'thrust':f"{msgid+3000}", 
-                'thrustSetpoint':f"{msgid+4000}" 
+                'data':{
+                    'angle':f"{msgid+1000}",
+                    'angleAdvices':[],
+                    'angleSetpoint':f"{msgid+2000}", 
+                    'bottomPropeller':None,
+                    'autoAtAngleSetpointDeadband':2,
+                    'autoAtThrustSetpointDeadband':1,
+                    'disableAutoAtAngleSetpoint':False,
+                    'disableAutoAtThrustSetpoint':False,
+                    'loading':0,
+                    'noPadding':False,
+                    'singleDirection':False,
+                    'starboardPortIndicator':False,
+                    'state':True,
+                    'topPropeller':None,
+                    'touching':False,
+                    'thrust':f"{msgid+3000}", 
+                    'thrustSetpoint':f"{msgid+4000}",
+                    'thrustSetpointAtZeroDeadband':.1,
+                    'thrustAdvices':[]
+                    }
             }
         }
 

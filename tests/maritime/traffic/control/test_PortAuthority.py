@@ -25,10 +25,12 @@ class PortAuthorityTestCase(unittest.TestCase):
 		return
 		
 	def test_occupancy(self):
+		# Test occupancy for a zone
 		self.test.add_zone( TrafficLane( None, 'bd9d11e4-8f0a-47f3-aafb-4fa4694685f1', {
 							"id": 100,
 							"guid":'bd9d11e4-8f0a-47f3-aafb-4fa4694685f1',
 							"name": 'Zone.10',
+							"path": "100,100 100,200 400,200 400,100",
 							"depth": 1000
 							})
 						)

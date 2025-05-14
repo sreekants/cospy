@@ -22,6 +22,16 @@ class TrafficController(TrafficActor):
 	def run(self, ctxt):
 		# Process all messages
 		TrafficActor.run(self, ctxt, self.process)
+
+		# Process all violations
+		self.police( ctxt )
+		return
+
+	def police(self, ctxt):
+		if ctxt is None:
+			return
+		
+		vessels		= ctxt.sim.objects.get_all("/World/Vehicle")
 		return
 
 	def process(self, ctxt, req:Message):

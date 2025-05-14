@@ -86,7 +86,7 @@ class VesselResolver(Resolver):
 	def Position_Territory(self):
 		""" Symbol property - Position.Territory
 		""" 
-		return 'Territory.HighSea'	# todo
+		return 'Territory.HighSea'
 
 if __name__ == "__main__":
 	test = VesselResolver()

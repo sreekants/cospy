@@ -53,6 +53,16 @@ class ObjectType(Enum):
 	TYPE_ANY_OBJECT_TYPE			= 0x0FFFFFFF,
 	TYPE_INVALID_OBJECT				= 0xFFFFFFFF
 
+class ObjectQuery:
+	def __init__(self, text):
+		""" Constructor
+		Arguments
+			text -- #TODO
+		"""
+		self.text	= text
+		self.match	= None
+		return
+
 class ObjectNode(TreeNode):
 	def __init__(self, name:str=None, parent=None, type=ObjectType.TYPE_NULL_OBJECT, ref=None):
 		""" Constructor
@@ -233,6 +243,17 @@ class ObjectManager:
 		self.traverse( path, self.__get_all_object, result, 0xFFFF )
 		return result
 
+	def find(self, path:str, id:str):
+		""" Finds a decendant node with a matching name under a path
+		Arguments
+			path -- Root path
+			id -- Name of the child node
+		"""
+		query = ObjectQuery(id)
+
+		self.traverse(path, self.__match_node_by_name, query, 0xFFFF )
+		return query.match
+
 	@staticmethod
 	def __get_all_node(result, node:ObjectNode):
 		""" #TODO: __get_all_node
@@ -290,6 +311,23 @@ class ObjectManager:
 
 		return None
 
+
+	@staticmethod
+	def __match_node_by_name(result:ObjectQuery, node:ObjectNode):
+		""" Finds a matching vessel with a name
+		Arguments
+			result -- #TODO
+			node -- #TODO
+		"""
+		if node.type != ObjectType.TYPE_SERVICE_OBJECT:
+			return ErrorCode.ERROR_CONTINUE
+
+		if node.name != result.text:
+			return ErrorCode.ERROR_CONTINUE
+
+		# Return the match immediately
+		result.match	= node.handle
+		return ErrorCode.S_OK
 
 if __name__ == "__main__":
 	test = ObjectManager()

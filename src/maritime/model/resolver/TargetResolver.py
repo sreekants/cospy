@@ -32,6 +32,8 @@ class TargetResolver(Resolver):
 		self.range		= range
 		self.distance	= None
 		self.velocity	= None
+
+		self.visibility_threshold	= 0.8
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
@@ -51,8 +53,6 @@ class TargetResolver(Resolver):
 		else:
 			self.OS			= None
 			self.TS			= None
-		return
-
 		return
 
 	def is_valid(self):
@@ -171,7 +171,16 @@ class TargetResolver(Resolver):
 	def Visible(self):
 		""" Symbol property - Visible
 		""" 
-		return True
+		if self.visibility_threshold > self.Visibility():
+			return True
+		
+		return False
+
+	@simproperty
+	def Visibility(self):
+		""" Symbol property - Visibility
+		""" 
+		return 1.0
 
 if __name__ == "__main__":
 	test = TargetResolver()

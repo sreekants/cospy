@@ -4,18 +4,7 @@
 
 from cos.core.network.ORPCService import ORPCService
 from cos.core.simulation.Simulation import Simulation
-from cos.core.kernel.ObjectManager import ObjectNode, ObjectType
-from cos.core.utilities.Errors import ErrorCode
 
-class ObjectQuery:
-	def __init__(self, text):
-		""" Constructor
-		Arguments
-			text -- #TODO
-		"""
-		self.text	= text
-		self.match	= None
-		return
 
 class Vessel(ORPCService):
 	def __init__(self):
@@ -87,24 +76,5 @@ class Vessel(ORPCService):
 		Arguments
 			id -- Unique identifier
 		"""
-		query = ObjectQuery(id)
+		return Simulation.instance().objects.find("/World/Vehicle/Vessel", id )
 
-		Simulation.instance().objects.traverse("/World/Vehicle/Vessel", self.__match_node_by_name, query, 0xFFFF )
-		return query.match
-
-	@staticmethod
-	def __match_node_by_name(result:ObjectQuery, node:ObjectNode):
-		""" Finds a matching vessel with a name
-		Arguments
-			result -- #TODO
-			node -- #TODO
-		"""
-		if node.type != ObjectType.TYPE_SERVICE_OBJECT:
-			return ErrorCode.ERROR_CONTINUE
-
-		if node.name != result.text:
-			return ErrorCode.ERROR_CONTINUE
-
-		# Return the match immediately
-		result.match	= node.handle
-		return ErrorCode.S_OK

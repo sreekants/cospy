@@ -3,7 +3,7 @@
 # Description: Implementation of the Evaluator class for COLREG evaluation
 
 from maritime.regulation.colreg.Resolver import Resolver
-# from maritime.regulation.colreg.API import API
+from maritime.regulation.colreg.API import API
 from cos.model.rule.Context import Context as RuleContext
 from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
