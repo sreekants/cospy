@@ -80,7 +80,7 @@ clause['COLREG.Rule18.d.i']:{
          }
          exclude: {
             :(OS.Operation has 'Vessel.Operation.NotUnderCommand') or
-             ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange)              
+             ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Proximity.SafeRange)              
          }
         assure: { 
             :OS.Intent has 'Manouever.AllowPassage*'

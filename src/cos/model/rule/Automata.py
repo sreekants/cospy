@@ -19,6 +19,9 @@ class Automata:
 		""" 
 		self.rule		= rule
 		self.definition	= Definition()
+
+		self.parser 	= Parser(self, Automata.__evaluate)
+		self.parser.build()
 		return
 
 	def begin(self, ctxt:Context):
@@ -38,15 +41,13 @@ class Automata:
 
 
 	def compile(self, file:str):
-		""" TODO: compile
+		""" Compiles a file
 		Arguments
 			file -- File path
 		""" 
-		parser = Parser(self, Automata.__evaluate)
-		parser.build()
 		with open(file, 'rt') as f:
 			codepage = f.read()
-			parser.parse(codepage, file)
+			self.parser.parse(codepage, file)
 		return
 
 	def load(self, file:str):
@@ -79,13 +80,16 @@ class Automata:
 			pickle.dump(self.definition, fp, protocol=pickle.DEFAULT_PROTOCOL)
 		return
 
-	def dump(self):
+	def dump(self, args:map):
 		""" Dumps the automata information to the screen
 		""" 
-		self.definition
-		result = []
-		self.definition.traverse( Automata.__append_node, result )
-		print( '\n'.join(result) )
+
+		if args.get('definitions', False) == True:
+			self.definition
+			result = []
+			self.definition.traverse( Automata.__append_node, result )
+			print( '\n'.join(result) )
+
 		return
 
 	@staticmethod
@@ -109,23 +113,35 @@ class Automata:
 	@staticmethod
 	def __append_actions( result:list, indent, actions ):
 		for action in actions:
-			opcode	=  action[0][0]
-			match opcode:
-				case '^':
-					result.append( f'{indent} assure: {action[0][1][1]}()' )
-				case '?':
-					statements	= action[0][1][1]
-					result.append( f'{indent} assure: {Automata.__exprtxt(statements[0][1])}' )
-				case '*':
-					statements	= action[0][1][1]
-					result.append( f'{indent} assure: {Automata.__fntxt(statements)}' )
-				case '!':
-					statements	= action[0][1][1]
-					result.append( f'{indent} assure: apply {action[0][1]}' )
-				case _:
-					raise RuntimeError( f'Unsupported action type [{opcode}] in [{action[0]}].' )
+			result.append( Automata.__append_action(list, indent, action) )
 		return
 
+	@staticmethod
+	def __append_action( result:list, indent, action ):
+		part	= action[0]
+		opcode	= part[0]
+		match opcode:
+			case '^':
+				return f'{indent} assure: {action[0][1][1]}()'
+			case '?':
+				statements	= action[0][1][1]
+				return f'{indent} assure: {Automata.__exprtxt(statements[0][1])}'
+			case '*':
+				statements	= action[0][1][1]
+				return f'{indent} assure: {Automata.__fntxt(statements)}'
+			case '!':
+				statements	= action[0][1][1]
+				return f'{indent} assure: apply {action[0][1]}'
+			case '{':
+				return f'{indent} assure: {Automata.__clause_to_text(result, indent, part[1][1])}'
+			case _:
+				raise RuntimeError( f'Unsupported action type [{opcode}] in [{action[0]}].' )
+		return
+
+	@staticmethod
+	def __clause_to_text(result, indent, clause):
+		return 'CLAUSE'
+	
 	@staticmethod
 	def __fntxt(expr):
 		""" TODO: __exprtxt
@@ -265,6 +281,12 @@ class Automata:
 	def __evaluate( ctxt, ast ):
 		return ctxt.evaluate( ast[0], ast[1] )
 
+	@property
+	def symbols(self):
+		""" Returns the symbols in the current parse
+		"""
+		return self.parser.terms
+	
 if __name__ == "__main__":
 	test = Automata()
 

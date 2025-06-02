@@ -10,6 +10,11 @@ class RegEval:
 	def __init__(self, path='.'):
 		self.path	= path
 		self.file	= None
+		self.config = {
+				'definitions':True,
+			}
+		
+		self.terms  = set()
 		return
 
 	def run(self, args, appinfo):
@@ -37,10 +42,17 @@ class RegEval:
 				self.compile(path)
 
 		except Exception as e:
-			print( e )
+			print( f'Error {e}' )
 			return -1
 			
 		return 0
+
+	def dump_symbols(self):
+		print( f"Symbols ({len(self.terms)})" )
+		terms = sorted(self.terms)
+		for t in terms:
+			print( f'  * {t}' )
+		return
 
 	def configure(self, args, appinfo):
 		next	= 0
@@ -99,7 +111,9 @@ class RegEval:
 
 		# Load and compiled legata file
 		lagata.load( path )
-		lagata.dump()
+		lagata.dump( self.config )
+
+		self.terms.update(lagata.symbols)
 
 		return lagata
 

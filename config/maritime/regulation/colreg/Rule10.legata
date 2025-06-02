@@ -38,8 +38,8 @@ clause['COLREG.Rule10.b.ii']:{
     : {
         condition: { :TSS is not empty }
         assure: { 
-            :[OS.Position, TSS.SeparationZone].Distance > TSS.SafeZoneSeparationDistance
-            :[OS.Position, TSS.SeparationLine].Distance > TSS.SafeLineSeparationDistance
+            :[OS.Position, TSS.SeparationZone].Distance > TSS.SafeZone.SeparationDistance
+            :[OS.Position, TSS.SeparationLine].Distance > TSS.
             }
     }
 }
@@ -51,8 +51,8 @@ clause['COLREG.Rule10.b.iii/EnterTrafficSeparationScheme']:{
     : {
         condition: { :(TSS is empty) and (OS.Intent in [TrafficSeparationScheme.Enter]) }
         assure: { 
-            :[OS.Position, TSS.EntryZone].Distance in TSS.SafeZoneSeparationDistance
-            :OS.Heading in TSS.SafeZoneEntryHeading
+            :[OS.Position, TSS.EntryZone].Distance in TSS.SafeZone.SeparationDistance
+            :OS.Heading in TSS.SafeZone.EntryHeading
             }
     }
 }
@@ -61,8 +61,8 @@ clause['COLREG.Rule10.b.iii/ExitTrafficSeparationScheme']:{
     : {
         condition: { :(TSS is not empty) and (OS.Intent in [TrafficSeparationScheme.Exit]) }
         assure: { 
-            :[OS.Position, TSS.ExitZone].Distance in TSS.SafeZoneSeparationDistance
-            :OS.Heading in TSS.SafeZoneExitHeading
+            :[OS.Position, TSS.ExitZone].Distance in TSS.SafeZone.SeparationDistance
+            :OS.Heading in TSS.SafeZone.ExitHeading
             }
     }
 }
@@ -155,7 +155,7 @@ clause['COLREG.Rule10.g']:{
               ([OS.Position, Map.Sea@TrafficSeparationScheme].Distance in Area.TrafficSeparationScheme.AvoidRange)
          }
         assure: { 
-            : OS.Status not in [Vessel.ANCHORED]        # AIS/COLREG status 
+            : OS.Status not in [Vessel.Status.ANCHORED]        # AIS/COLREG status 
         }
     }
 }
@@ -181,7 +181,7 @@ clause['COLREG.Rule10.i']:{
          }
         assure: { 
             : (OS, TS).Distance > Area.TrafficSeparationScheme.SafeSmallVesselClearance
-            : (OS, TS).Distance > TSS.SafeSmallVesselClearance
+            : (OS, TS).Distance > TSS.SmallVessel.SafeDistance
         }
     }
 }
@@ -196,7 +196,7 @@ clause['COLREG.Rule10.j']:{
          }
         assure: { 
             : (OS, TS).Distance > Area.TrafficSeparationScheme.SafeSmallVesselClearance
-            : (OS, TS).Distance > TSS.SafeSmallVesselClearance
+            : (OS, TS).Distance > TSS.SmallVessel.SafeDistance
         }
     }
 }
@@ -208,9 +208,9 @@ clause['COLREG.Rule10.k']:{
     : {
         condition: { 
             : (TSS is not empty) and 
-              (OS.Status in [Vessel.MOORED, Vessel.AGROUND, Vessel.UNDERWAY])
+              (OS.Status in [Vessel.Status.MOORED, Vessel.Status.AGROUND, Vessel.Status.UNDERWAY])
             : (TSS is not empty) and 
-              (OS.Status in [Vessel.RESTRICTED]) and
+              (OS.Status in [Vessel.Status.RESTRICTED]) and
               (OS.Operation has 'Vessel.Operation.SAFETY')                            
 
          }
@@ -228,7 +228,7 @@ clause['COLREG.Rule10.l']:{
     : {
         condition: { 
             : (TSS is not empty) and 
-              (OS.Status in [Vessel.RESTRICTED]) and
+              (OS.Status in [Vessel.Status.RESTRICTED]) and
               (OS.Operation has 'Vessel.Operation.SERVICE')
          }
         assure: { 

@@ -10,7 +10,7 @@ define:{
 condition: {
     : (
         ((OS, TS).Visible is true) and
-        ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Near.SafeRange)
+        ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Proximity.SafeRange)
       )
 
     # Trigger rule 19 overriding other conditions. Useful for rules in cross-reference.
@@ -24,7 +24,7 @@ clause['COLREG.Rule19.b']:{
     : {
         condition: { 
             :(OS.Type is Vessel.Type.PowerDriven) and 
-             (OS.Speed in Vessel.RestrictedVisibility.Speed.Safe.Range)
+             (OS.Speed in Vessel.RestrictedVisibility.Speed.SafeRange)
          }
         assure: { 
             :OS.Engine.State in ['Vessel.Engine.ON'] 
@@ -80,7 +80,7 @@ clause['COLREG.Rule19.d']:{
 clause['COLREG.Rule19.e']:{
     : {
         condition: { 
-            : (OS, TS).Detect in [Signal.FogHorn] 
+            : (OS, TS).Detect in ['Signal.FogHorn'] 
             : ((OS, TS).Position in ['Position.Abeam']) and
               ((OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.SafeRange) 
         }

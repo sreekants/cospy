@@ -31,12 +31,13 @@ class Parser:
         self.parser         = yacc.yacc(module=self, **kwargs)
 
         # Initialize the state variables
-        self.definitions    = {}
-        self.defaults       = {}
-        self.definitions    = {}
+        self.definitions    = dict()
+        self.defaults       = dict()
+        self.definitions    = dict()
         self.conditions     = []
         self.clauses        = []
         self.precedents     = []
+        self.terms          = set()
 
         return
 
@@ -225,9 +226,9 @@ class Parser:
     def p_assurance_statements(self, p):
         """
         assurance_statements : assurance_statement
-        assurance_statements : clause_statement
+        assurance_statements : assurance_clause
         assurance_statements : assurance_statements assurance_statement 
-        assurance_statements : assurance_statements clause_statement 
+        assurance_statements : assurance_statements assurance_clause 
         """
         self.fold(p, 2)
         return
@@ -242,6 +243,13 @@ class Parser:
 
 
         self.move(p, p[2])
+        return
+
+    def p_assurance_clause(self, p):
+        """
+        assurance_clause : clause_statement
+        """
+        self.move(p,  [('{', ('clause',p[1]))])
         return
 
     def p_assurance_expressions(self, p):
@@ -715,7 +723,10 @@ class Parser:
             if rscope != scope:
                 var = f'{rscope}{var[sep:]}'
 
-        p[0]    = Symbol.Variable(self.resolve(p, var))
+        sym     = self.resolve(p, var)      
+        p[0]    = Symbol.Variable(sym)
+
+        self.terms.add(sym)
         return
 
     def p_boolean(self, p):
