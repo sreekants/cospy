@@ -1,14 +1,16 @@
 #!/usr/bin/python
-# Filename: PathMotionBehavior.py
-# Description: A path motion based on path file
+# Filename: PathFollowingMotionBehavior.py
+# Description: A path following motion based on path file
 
 from cos.behavior.motion.MotionBehavior import MotionBehavior
 from cos.core.kernel.Configuration import Configuration
+from cos.math.geometry.Distance import Distance
+from io import StringIO
+from math import cos,sin,atan2
 import numpy as np
 import csv
-from io import StringIO
 
-class PathMotionBehavior(MotionBehavior):
+class PathFollowingMotionBehavior(MotionBehavior):
 	def __init__(self, ctxt, config):
 		""" Constructor
 		Arguments
@@ -18,7 +20,9 @@ class PathMotionBehavior(MotionBehavior):
 		MotionBehavior.__init__(self)
 
 		self.path		= []
-		self.tstart	= 0
+		self.current	= None
+		self.next		= None
+		self.atpoint	= 0
 
 		args		= self.get_settings( config )
 		if ('pathfile' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
@@ -64,53 +68,37 @@ class PathMotionBehavior(MotionBehavior):
 			y		= float(waypoint[3])
 			z		= float(waypoint[4])
 
-			# Velocity
-			dx		= float(waypoint[5])
-			dy		= float(waypoint[6])
-			dz		= float(waypoint[7])
-
-			# Accelearation
-			d2x		= float(waypoint[8])
-			d2y		= float(waypoint[9])
-			d2z		= float(waypoint[10])
-
-
-			ψ		= float(waypoint[11])		# Yaw
-			θ		= float(waypoint[12])		# Pitch
-			φ		= float(waypoint[13])		# Roll
-
-			dψ		= float(waypoint[14])		# Yaw velocity
-			dθ		= float(waypoint[15])		# Pitch velocity
-			dφ		= float(waypoint[16])		# Roll velocity
-
-			d2ψ		= float(waypoint[17])		# Yaw acceleration
-			d2θ		= float(waypoint[18])		# Pitch acceleration
-			d2φ		= float(waypoint[19])		# Roll acceleration
+			# Trajectory
+			sog		= float(waypoint[5])	# Path over ground
+			cog		= float(waypoint[6])	# Course over ground
 
 			self.path.append( (t,
 					# Location & Angular vectors
 					np.array((x, y, z)),
-					np.array((dx, dy, dz)),
-					np.array((d2x, d2y, d2z)),
-
-					# Rotational vectors
-					np.array((ψ, θ, φ)),
-					np.array((dψ, dθ, dφ)),
-					np.array((d2ψ, d2θ, d2φ))
+					np.array((sog, cog, 0.0))
 					) )
 
 			if rownum == 1:		# First row has the start point
-				self.x	= self.path[0][1]
+				self.current	= self.path[0]
+				self.atpoint	= 0
+				self.x			= self.current[1]
+
+
+			if rownum == 2:		# Second row has the next point
+				self.next		= self.path[1]
 
 			rownum	= rownum+1
+			
 		return
 
-	def restart(self, t):
-		if len(self.path) < 1:
+	def restart(self):
+		if len(self.path) < 2:
 			return
 		
-		self.tstart	= t
-		self.x			= self.path[0][1]
+		self.current	= self.path[0]
+		self.atpoint	= 0
+		self.x			= self.current[1]
+		self.next		= self.path[1]
 		return
 
 	def move(self, world, t, config):
@@ -141,33 +129,68 @@ class PathMotionBehavior(MotionBehavior):
 		"""
 		# Find the matching waypoint
 		pos	= self.get_pos(t)
-		if pos is None:			
+		if pos is None:
 			self.dx	= np.zeros(3)
 			return self.x
 
 		self.dx		= pos[2]
 		return self.x + self.dx
 
+	def move_next(self):
+		if (self.next is None) or (self.current is None):
+			return
+		
+		sog		= self.current[2][0]
+		p1		= self.x
+		p2		= self.next[1]
+
+		# If there is more distance to cover in the current 
+		# waypoint segment, we do not shift.
+		if Distance.euclidean(p1, p2) > sog:
+			return
+		
+		self.atpoint	= self.atpoint+1
+
+		# Make sure that we have more waypoint segments
+		if self.atpoint == len(self.path):
+			self.current	= None
+			self.next		= None
+
+			# Restart if a loop run is expected
+			if self.looprun == True:
+				self.restart()
+
+			return
+		
+		self.current	= self.next
+		self.next		= self.path[self.atpoint]
+		return
+
+
 	def get_pos(self, t):
 		""" Returns position and orientation vector
 		Arguments
 			t -- Time on the simulation clock
 		"""
-		# Find the matching waypoint
-		waypoint	= None
-		for p in self.path:
-			if (p[0]+self.tstart) > t:
-				break
 
-			waypoint	= p
+		self.move_next()
 
-		if (waypoint is None) and (self.looprun == True):
-			self.restart(t)
-			return
+		if (self.next is None) or (self.current is None):
+			return None
 		
-		return waypoint
+		sog		= self.current[2][0]
+		p1		= self.x
+		p2		= self.next[1]
+			
+		theta 	= atan2(p2[1]-p1[1], p2[0]-p1[0])
+
+		return (t,
+				self.x,
+				np.array((sog*cos(theta), sog*sin(theta), 0.0))
+				)
+
 
 if __name__ == "__main__":
-	test = PathMotionBehavior()
+	test = PathFollowingMotionBehavior()
 
 
