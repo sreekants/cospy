@@ -151,7 +151,7 @@ class BasicHydrodynamicBehavior(MotionBehavior):
 	def get_wind(self):
 		""" Returns the wind vector
 		"""
-		return self.force[DynamicForce.WIND_CURRENT]
+		return self.forces[DynamicForce.WIND_CURRENT]
 
 	@property
 	def position(self):

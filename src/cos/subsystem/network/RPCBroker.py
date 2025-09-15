@@ -51,7 +51,7 @@ class RPCBrokerThread(SimulationThread):
 	def run(self):
 		""" Runs the transport
 		"""
-		if self.transport == None:
+		if self.transport is None:
 			return
 
 		with self.transport as layer3:

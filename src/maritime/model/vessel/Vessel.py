@@ -7,7 +7,7 @@ from cos.model.vehicle.Vehicle import Vehicle
 from cos.core.utilities.ArgList import ArgList
 
 from enum import Enum, Flag
-import math
+import math, random
 
 class Type(Flag):
     """Enum for the different types of vessel power drive."""
@@ -97,6 +97,8 @@ class Vessel(Vehicle):
         """
         return self.config
 
+
+
     def restrict(self, restriction:Restriction):
         """ Sets the vessel in a restricted state
         Arguments
@@ -154,6 +156,39 @@ class Vessel(Vehicle):
         	args -- List of arguments
         """
         return
+
+
+    def data(self):
+        """ Returns a description of the vessel
+        """
+        msgid = random.randrange(1000, 10000)
+        return {
+                'id': self.vid, 
+                'guid': self.id, 
+                'data':{
+                    'angle':f"{msgid+1000}",
+                    'angleAdvices':[],
+                    'angleSetpoint':f"{msgid+2000}", 
+                    'bottomPropeller':None,
+                    'autoAtAngleSetpointDeadband':2,
+                    'autoAtThrustSetpointDeadband':1,
+                    'disableAutoAtAngleSetpoint':False,
+                    'disableAutoAtThrustSetpoint':False,
+                    'loading':False,
+                    'longitude':0,
+                    'latutude':0,
+                    'noPadding':False,
+                    'singleDirection':False,
+                    'starboardPortIndicator':False,
+                    'state':True,
+                    'topPropeller':None,
+                    'touching':False,
+                    'thrust':f"{msgid+3000}", 
+                    'thrustSetpoint':f"{msgid+4000}",
+                    'thrustSetpointAtZeroDeadband':.1,
+                    'thrustAdvices':[]
+                    }
+            }
 
 if __name__ == "__main__":
 	test = Vessel( Type.POWER_DRIVEN )

@@ -17,13 +17,14 @@ class PathMotionBehavior(MotionBehavior):
 		"""
 		MotionBehavior.__init__(self)
 
-		self.path	= []
-		self.t		= 0
+		self.path		= []
+		self.tstart	= 0
 
 		args		= self.get_settings( config )
 		if ('pathfile' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
 			self.load( ctxt, ctxt.sim.config.resolve(args['pathfile']) )
 
+		self.looprun	= args.IsTrue('loop')
 		return
 
 	@property
@@ -87,7 +88,7 @@ class PathMotionBehavior(MotionBehavior):
 			d2φ		= float(waypoint[19])		# Roll acceleration
 
 			self.path.append( (t,
-					# Angular vectors
+					# Location & Angular vectors
 					np.array((x, y, z)),
 					np.array((dx, dy, dz)),
 					np.array((d2x, d2y, d2z)),
@@ -98,10 +99,18 @@ class PathMotionBehavior(MotionBehavior):
 					np.array((d2ψ, d2θ, d2φ))
 					) )
 
-			if rownum == 1:		# First row has the
+			if rownum == 1:		# First row has the start point
 				self.x	= self.path[0][1]
 
 			rownum	= rownum+1
+		return
+
+	def restart(self, t):
+		if len(self.path) < 1:
+			return
+		
+		self.tstart	= t
+		self.x			= self.path[0][1]
 		return
 
 	def move(self, world, t, config):
@@ -131,19 +140,32 @@ class PathMotionBehavior(MotionBehavior):
 			t -- Time on the simulation clock
 		"""
 		# Find the matching waypoint
+		pos	= self.get_pos(t)
+		if pos is None:			
+			self.dx	= np.zeros(3)
+			return self.x
+
+		self.dx		= pos[2]
+		return self.x + self.dx
+
+	def get_pos(self, t):
+		""" Returns position and orientation vector
+		Arguments
+			t -- Time on the simulation clock
+		"""
+		# Find the matching waypoint
 		waypoint	= None
 		for p in self.path:
-			if p[0] > t:
+			if (p[0]+self.tstart) > t:
 				break
 
 			waypoint	= p
 
-		if waypoint == None:
-			self.dx	= None
-			return self.x
-
-		self.dx		= waypoint[2]
-		return self.x + self.dx
+		if (waypoint is None) and (self.looprun == True):
+			self.restart(t)
+			return
+		
+		return waypoint
 
 if __name__ == "__main__":
 	test = PathMotionBehavior()

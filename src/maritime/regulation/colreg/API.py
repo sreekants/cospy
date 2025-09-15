@@ -13,7 +13,10 @@ from cos.math.geometry.Distance import Distance
 class API:
 	def __init__(self):
 		self.vtbl	= {
-			'set':API._set
+			'set':API._set,
+			'reset':API._reset,
+			'add':API._add,
+			'del':API._delete
 		}
 		return
 
@@ -32,6 +35,30 @@ class API:
 		os.mode[args[0]]	= args[1]
 		return None
 		
+	@staticmethod
+	def _reset(ctxt:RuleContext, args):
+		os:Vessel	= ctxt.situation.os
+		if os is None:
+			return None
+		
+		os.mode.clear()
+		return None
+	
+	@staticmethod
+	def _add(ctxt:RuleContext, args):
+		os:Vessel	= ctxt.situation.os
+		if os is None:
+			return None
+		os.mode.set(args[0])
+		return None
+
+	def _delete(ctxt:RuleContext, args):
+		os:Vessel	= ctxt.situation.os
+		if os is None:
+			return None
+		os.mode.reset(args[0])
+		return None
+
 
 if __name__ == "__main__":
 	test = API()

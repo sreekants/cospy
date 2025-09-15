@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" data-obc-theme="day">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/openbridge-logo-icon-favicon2.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="rgb(252, 252, 252)"> 
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+    <title>OpenBridge Demo</title>
+    <meta name="description" content="Demo of OpenBridge WebComponent">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P10PVL5Y1F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-P10PVL5Y1F');
+    </script>
+    <script type="module" crossorigin src="/assets/index-ItWt9m77.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B1Sgfy6u.css">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

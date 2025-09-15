@@ -53,7 +53,6 @@ class VirtualWorld:
 		self.parms		= ParameterManager()
 		self.world		= World()
 		self.dispatch	= Dispatcher(self)
-		self.music		= False
 		self.encoder	= Encoder()
 		return
 
@@ -75,10 +74,6 @@ class VirtualWorld:
 	def init(self):
 		""" Initialize the simulation
 		"""
-		# Setup for sounds, defaults are good
-		pygame.mixer.init()
-
-		self.load_sound()
 
 		# Initialize pygame
 		pygame.init()
@@ -97,16 +92,6 @@ class VirtualWorld:
 		pygame.time.set_timer(self.ADD_LAND, 1000)
 
 
-		if self.music == True:
-			# Load and play our background music
-			# Sound source: http://ccmixter.org/files/Apoxode/59262
-			# License: https://creativecommons.org/licenses/by/3.0/
-			pygame.mixer.music.load("audio/BackgroundMusic.mp3")
-			pygame.mixer.music.play(loops=-1)
-			pygame.mixer.music.set_volume(0.1)
-
-			self.reverse_thrust.set_volume(0.1)
-			self.collision_sound.set_volume(0.1)
 
 		pygame.font.init()
 		self.font = pygame.font.SysFont("arial", 15)
@@ -128,15 +113,6 @@ class VirtualWorld:
 		# Initialize communication
 		self.ipc	= RPCAgent()
 		self.ipc.connect()
-		return
-
-	def load_sound(self):
-		# Load all our sound files
-		# Sound sources: Jon Fincher
-		if self.music == True:
-			self.forward_thrust = pygame.mixer.Sound("audio/MotorForward.ogg")
-			self.reverse_thrust = pygame.mixer.Sound("audio/MotorReverse.ogg")
-			self.collision_sound = pygame.mixer.Sound("audio/Collision.ogg")
 		return
 
 	def register(self, type, obj):

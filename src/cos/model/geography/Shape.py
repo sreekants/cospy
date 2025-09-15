@@ -43,7 +43,7 @@ class Shape(Object):
 			ctxt -- Simulation context
 			config -- Configuration attributes
 		"""
-		scale	= ctxt.sim.world.scales.map
+		# scale	= ctxt.sim.world.scales.map
 		path	= config["path"]
 		points	= []
 		for item in path.split(' '):

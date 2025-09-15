@@ -2,5 +2,8 @@ packages:
   modules:  # Network services
      - name: RPCBroker
        module: cos.subsystem.network.RPCBroker
-       config: transport=cos.core.network.RPCZMQTransport xxx=cos.core.network.WebSocketTransport
+       config: transport=cos.core.network.RPCZMQTransport
 
+     - name: WebSocketBroker
+       module: cos.subsystem.network.WebSocketBroker
+       config: transport=cos.core.network.WebSocketTransport

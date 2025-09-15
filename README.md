@@ -12,7 +12,7 @@ The Co-Simulation Operating System (COS) is a "testable metaverse" designed for 
 
 The platform draws extensively from the [Inferno Operating System](https://en.wikipedia.org/wiki/Inferno_(operating_system)) and ROS - the [Robotic Operating System](https://en.wikipedia.org/wiki/Robot_Operating_System#Services). All resources are exposed as sockets (not files). Resources appear in a hierarchical namespace that may represent physically separated (inprocess or remote) resources. All capabilities of the system are plugin software modules exposed as nodes advertising [services](https://en.wikipedia.org/wiki/Robot_Operating_System#Services) (often extended as faculties), with an inter-process messaging system based advertised as [topics](https://en.wikipedia.org/wiki/Robot_Operating_System#Topics) serving the backbone for a standard communication protocol.
 
-The following more information about the background research behind the project.
+The following research publications provide more information about the background work behind the project.
 * [Safety Assurances of Autonomous Vessels](https://www.researchgate.net/publication/385274872_Safety_Assurances_in_Autonomous_Vessels)
 * [Legata - a domain language for regulatory compliance](https://www.researchgate.net/publication/386174675_Legata_-A_domain_language_for_regulatory_compliance)
 
