@@ -74,6 +74,7 @@ class LinearMotionBehavior(MotionBehavior):
 		# If the sprite has collided, reverse the vehicle
 		if world.has_collision(self.rect) == False:
 			self.last	= self.rect
+			self.lastdx	= self.dx
 			self.x		= newpos
 		else:
 			# Randomly accelerate

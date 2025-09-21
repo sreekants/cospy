@@ -95,13 +95,18 @@ class RegEval:
 		return files
 
 	def compile( self, path ):
-		lagata	= Automata(None)
+		legata	= Automata(None)
 
-		# Load and compiled legata file
-		lagata.load( path )
-		lagata.dump()
+		try:
 
-		return lagata
+			# Load and compiled legata file
+			legata.load( path )
+			legata.dump()
+		except Exception as e:
+			location = 'file'
+			print( f'{location} {str(e)}')
+
+		return legata
 
 
 if __name__ == "__main__":
