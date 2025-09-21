@@ -200,16 +200,24 @@ class Parser:
 
     def p_clause_statement(self, p):
         """
-        clause_statement : COLON BLOCKSTART conditions exclusions assurances contradictions BLOCKEND
+        clause_statement : COLON clause_body
+        """
+        self.move(p, p[2])
+        return
+
+    def p_clause_body(self, p):
+        """
+        clause_body : BLOCKSTART conditions exclusions assurances contradictions BLOCKEND
         """
         p[0]    = { 
-                    'conditions': p[3], 
-                    'exclusions': p[4], 
-                    'assurances': p[5],
-                    'contradictions': p[6]
+                    'conditions': p[2], 
+                    'exclusions': p[3], 
+                    'assurances': p[4],
+                    'contradictions': p[5]
                     }
         
         return
+
 
     def p_assurances(self, p):
         """
@@ -226,12 +234,11 @@ class Parser:
     def p_assurance_statements(self, p):
         """
         assurance_statements : assurance_statement
-        assurance_statements : assurance_clause
         assurance_statements : assurance_statements assurance_statement 
-        assurance_statements : assurance_statements assurance_clause 
         """
         self.fold(p, 2)
         return
+
 
     def p_assurance_statement(self, p):
         """
@@ -239,17 +246,18 @@ class Parser:
         assurance_statement : COLON assurance_expressions 
         assurance_statement : COLON assurance_call 
         assurance_statement : COLON apply_clause
+        assurance_statement : COLON assurance_sub_clause
         """
 
 
         self.move(p, p[2])
         return
 
-    def p_assurance_clause(self, p):
+    def p_assurance_sub_clause(self, p):
         """
-        assurance_clause : clause_statement
+        assurance_sub_clause : clause_body
         """
-        self.move(p,  [('{', ('clause',p[1]))])
+        self.move(p, [('%', ('clause',p[1]))])
         return
 
     def p_assurance_expressions(self, p):

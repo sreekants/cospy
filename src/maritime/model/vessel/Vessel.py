@@ -145,7 +145,7 @@ class Vessel(Vehicle):
         if self.actor.motion is None:
             return
 
-        self.actor.motion.force[type]   = value
+        self.actor.motion.forces[type]   = value
         return
 
 

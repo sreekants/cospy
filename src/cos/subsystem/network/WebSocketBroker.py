@@ -106,7 +106,7 @@ class WebSocketBrokerThread(BrokerThread):
 	def stop(self):
 		""" Signals the broker thread to terminate
 		"""
-		self.loop.stop()
+		self.loop.call_soon_threadsafe(self.loop.stop)
 		self.running	= False
 		return
 

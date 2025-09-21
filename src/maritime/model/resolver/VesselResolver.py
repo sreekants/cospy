@@ -25,6 +25,7 @@ class VesselResolver(Resolver):
 		self.vessel		= vessel
 		self.velocity	= None
 		self.heading	= None
+		self.acceleartion	= None
 		return
 
 	@simproperty
@@ -71,7 +72,10 @@ class VesselResolver(Resolver):
 	def Acceleration(self)->float:
 		""" Returns the acceleration
 		""" 
-		return self.vessel.acceleration
+		if self.acceleartion is None:
+			A				= self.vessel.acceleration
+			self.acceleration	= math.sqrt(A[0]**2+A[1]**2)
+		return self.acceleration
 
 	@simproperty
 	def Heading(self)->float:

@@ -99,52 +99,79 @@ class Automata:
 			ctxt -- Context argument passed to the callback
 			node -- Node to process
 		"""
-		indent	= ' '*(node.level-1)
-		if node.name != 'def':
-			result.append( f'{indent}{node.name}' )
-			return ErrorCode.ERROR_CONTINUE
+		try:
+			indent	= ' '*(node.level-1)
+			if node.name != 'def':
+				result.append( f'{indent}{node.name}' )
+				return ErrorCode.ERROR_CONTINUE
 
-		for statements in node.conditions:
-			result.append( f'{indent}condition: {Automata.__exprtxt(statements)}' )
-
-		Automata.__append_actions(result, indent, node.assurances)
+			Automata.__append_scope( result, indent, 
+						   node.conditions,
+						   node.exceptions, 
+						   node.assurances )
+		except Exception as e:
+			print( f'Error transcribing node [{node.path}]: {str(e)}')
 		return ErrorCode.ERROR_CONTINUE
 
 	@staticmethod
+	def __append_scope( result:list, indent, conditions, exceptions, assurances ):
+		for condition in conditions:
+			result.append( f'{indent}condition: {Automata.__exprtxt(condition)}' )
+
+		if exceptions is not None:
+			for exception in exceptions:
+				result.append( f'{indent}condition: {Automata.__exprtxt(exception)}' )
+
+		Automata.__append_actions(result, indent, assurances)
+		return
+
+	@staticmethod
 	def __append_actions( result:list, indent, actions ):
-		for action in actions:
-			result.append( Automata.__append_action(list, indent, action) )
+		try:
+			for action in actions:
+				opcode	=  action[0][0]
+				match opcode:
+					case '^':
+						result.append( f'{indent} assure: {action[0][1][1]}()' )
+					case '?':
+						expression	= action[0][1][1]
+						result.append( f'{indent} assure: {Automata.__exprtxt(expression[0][1])}' )
+					case '*':
+						function	= action[0][1][1]
+						result.append( f'{indent} assure: {Automata.__fntxt(function)}' )
+					case '!':
+						apply	= action[0][1]
+						result.append( f'{indent} assure: apply {apply}' )
+					case '%':
+						# TODO: Convert a subclause to an object
+						clause	= action[0][1][1]
+						result.append( f'{indent} assure: clause [' )
+						Automata.__append_clause(result, indent+' ', clause)
+						result.append( f'{indent} ]' )
+					case _:
+						raise RuntimeError( f'Unsupported action type [{opcode}] in [{action[0]}].' )
+		except Exception as e:
+			raise e
 		return
 
 	@staticmethod
-	def __append_action( result:list, indent, action ):
-		part	= action[0]
-		opcode	= part[0]
-		match opcode:
-			case '^':
-				return f'{indent} assure: {action[0][1][1]}()'
-			case '?':
-				statements	= action[0][1][1]
-				return f'{indent} assure: {Automata.__exprtxt(statements[0][1])}'
-			case '*':
-				statements	= action[0][1][1]
-				return f'{indent} assure: {Automata.__fntxt(statements)}'
-			case '!':
-				statements	= action[0][1][1]
-				return f'{indent} assure: apply {action[0][1]}'
-			case '{':
-				return f'{indent} assure: {Automata.__clause_to_text(result, indent, part[1][1])}'
-			case _:
-				raise RuntimeError( f'Unsupported action type [{opcode}] in [{action[0]}].' )
+	def __append_clause(result:list, indent, clause):
+		""" Prints a set of clause
+		Arguments
+		    indent to construct the clause
+			clause -- Clause to the print
+		""" 
+		Automata.__append_scope( result, indent, 
+						clause["conditions"],
+						clause["exclusions"], 
+						clause["assurances"] )
+
 		return
 
-	@staticmethod
-	def __clause_to_text(result, indent, clause):
-		return 'CLAUSE'
-	
+
 	@staticmethod
 	def __fntxt(expr):
-		""" TODO: __exprtxt
+		""" Prings a function
 		Arguments
 			statements -- TODO
 		""" 
@@ -288,5 +315,7 @@ class Automata:
 		return self.parser.terms
 	
 if __name__ == "__main__":
-	test = Automata()
+	test = Automata(None)
+	test.compile("E:\\users\\ntnu\\cospy\\config\\maritime\\regulation\\colreg\\test.legata")
+	test.dump()
 
