@@ -81,7 +81,7 @@ clause['COLREG.Rule19.e']:{
     : {
         condition: { 
             : (OS, TS).Detect in ['Signal.FogHorn'] 
-            : ((OS, TS).Position in ['Position.Abeam']) and
+            : ((OS, TS).Direction in ['Position.Abeam']) and
               ((OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.SafeRange) 
         }
         exclude: {
@@ -89,7 +89,7 @@ clause['COLREG.Rule19.e']:{
         }
         assure: { 
             : OS.Engine.Acceleration < 0         # Reduce speed
-            : (OS, TS).Approach.Gradient > 0     # Turn away
+            : (OS, TS).Heading.Gradient > 0     # Turn away
         }
     }
 }

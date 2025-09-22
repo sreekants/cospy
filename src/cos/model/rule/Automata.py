@@ -87,13 +87,13 @@ class Automata:
 		if args is None:
 			args	= {'definitions':True}
 		
-		if args.get('definitions', False) == True:
-			self.definition
-			result = []
-			self.definition.traverse( Automata.__append_node, result )
-			print( '\n'.join(result) )
+		result	= {}
 
-		return
+		if args.get('definitions', False) == True:
+			result['definitions'] 	= []
+			self.definition.traverse( Automata.__append_node, result['definitions'] )
+
+		return result
 
 	@staticmethod
 	def __append_node( result:list, node:Decision ):

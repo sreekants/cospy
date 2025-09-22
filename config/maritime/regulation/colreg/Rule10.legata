@@ -49,7 +49,7 @@ clause['COLREG.Rule10.b.ii']:{
 # flow as practicable.
 clause['COLREG.Rule10.b.iii/EnterTrafficSeparationScheme']:{
     : {
-        condition: { :(TSS is empty) and (OS.Intent in [TrafficSeparationScheme.Enter]) }
+        condition: { :(TSS is empty) and (OS.Intent has 'TrafficSeparationScheme.Enter') }
         assure: { 
             :[OS.Position, TSS.EntryZone].Distance in TSS.SafeZone.SeparationDistance
             :OS.Heading in TSS.SafeZone.EntryHeading
@@ -59,7 +59,7 @@ clause['COLREG.Rule10.b.iii/EnterTrafficSeparationScheme']:{
 
 clause['COLREG.Rule10.b.iii/ExitTrafficSeparationScheme']:{
     : {
-        condition: { :(TSS is not empty) and (OS.Intent in [TrafficSeparationScheme.Exit]) }
+        condition: { :(TSS is not empty) and (OS.Intent has 'TrafficSeparationScheme.Exit') }
         assure: { 
             :[OS.Position, TSS.ExitZone].Distance in TSS.SafeZone.SeparationDistance
             :OS.Heading in TSS.SafeZone.ExitHeading

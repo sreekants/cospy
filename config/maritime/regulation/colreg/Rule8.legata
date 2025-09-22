@@ -26,7 +26,7 @@ clause['COLREG.Rule8.a/COLAV']:{
         }
         assure  : { 
             :OS.Intent has 'Manouever.CollisionAvoidance.*'
-            :OS.TCPA > Vessel.Reaction.AmpleTime
+            :(OS,TS).TimeToClosestApproachPoint > Vessel.Reaction.AmpleTime
         }
     }
 }

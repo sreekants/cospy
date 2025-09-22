@@ -8,13 +8,20 @@ import os, sys, fnmatch
 
 class RegEval:
 	def __init__(self, path='.'):
-		self.path	= path
-		self.file	= None
-		self.config = {
+		self.path		= path
+		self.file		= None
+		self.terms		= set()
+
+		self.config 	= {
 				'definitions':True,
+				'terms':False,
+				'verbose':False
+			}
+
+		self.stats		= {
+				'rules':0
 			}
 		
-		self.terms  = set()
 		return
 
 	def run(self, args, appinfo):
@@ -38,8 +45,10 @@ class RegEval:
 						continue
 
 				count	= count+1
-				print( f'===== Processing ({count}): {file} =====')
-				self.compile(path)
+				self.compile(count, path)
+
+			self.stats["count"]	= count
+			self.postproc()
 
 		except Exception as e:
 			print( f'Error {e}' )
@@ -89,7 +98,15 @@ class RegEval:
 	def evaluate(self):
 		print( f"Processing directory: {self.path} ..." )
 		return
-		
+
+	def verbose( self, args ):
+		self.config["verbose"]	= True
+		return
+
+	def verbose( self, args ):
+		self.config["terms"]	= True
+		return
+
 	def dir( self, args ):
 		self.path	= args[0]
 		return
@@ -106,20 +123,71 @@ class RegEval:
 				files.append( (path, filename) )
 		return files
 
-	def compile( self, path ):
+	def compile( self, count, path ):
 		legata	= Automata(None)
 
 		try:
 
 			# Load and compiled legata file
 			legata.load( path )
-			legata.dump()
+			result = legata.dump(self.config)
+
+			if self.config.get('verbose', False) is True:
+				defs	= result['definitions']
+				print( f'===== Processing({count}): {path} =====')
+				print( '\n'.join(defs) )
+
+			for term in legata.parser.terms:
+				self.terms.add(term)
+
 		except Exception as e:
 			location = 'file'
 			print( f'{location} {str(e)}')
 
 		return legata
 
+	def postproc( self ):
+		try:
+			self.print_terms()
+			self.print_stats()
+		except Exception as e:
+			print( f'{str(e)}')
+		return
+
+	def print_terms( self ):
+		if self.config.get('terms', False) == False:
+			return
+		
+		print( f'===== Terms =====')
+		termdict	= {}
+
+		for term in self.terms:
+			if term.find('.') == -1:
+				continue
+
+			parts 	= term.split('.')
+			scope	= parts[0]
+
+			if termdict.get(scope, None) is None:
+				termdict[scope]	= set()
+
+			termset	= termdict.get(scope)
+			term	= '.'.join(parts[1:])
+			termset.add( term )
+
+		scopenames	= list(termdict.keys())
+		scopenames.sort()
+
+		for k in scopenames:
+			for t in termdict[k]:
+				print(f'{k}.{t}')
+		return
+
+	def print_stats( self ):
+		print( f'===== Summary =====')
+		print( f'Directory path:   {self.path}')
+		print( f'Files processed:  {self.stats["count"]}')
+		return
 
 if __name__ == "__main__":
     test = RegEval('E:\\users\\ntnu\\cospy\\config\\maritime\\regulation\\colreg')

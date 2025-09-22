@@ -20,6 +20,8 @@ def get_app_info():
 			    ["h"	, ["Print help.", usage]],
 			    ["?"	, ["Print help.", usage]],
 			    ["dir"	, ["Code directory.", None]],
+			    ["terms"	, ["Dump term catalog.", None]],
+			    ["verbose"	, ["Dump processing instructions.", None]],
 			    ["match"	, ["Match a wildcard.", None]]
 				]		
 		}
