@@ -80,10 +80,13 @@ class Automata:
 			pickle.dump(self.definition, fp, protocol=pickle.DEFAULT_PROTOCOL)
 		return
 
-	def dump(self, args:map):
+	def dump(self, args:map=None):
 		""" Dumps the automata information to the screen
 		""" 
-
+		
+		if args is None:
+			args	= {'definitions':True}
+		
 		if args.get('definitions', False) == True:
 			self.definition
 			result = []

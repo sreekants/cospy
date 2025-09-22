@@ -13,10 +13,10 @@ class Position:
 		self.x  = x
 		self.y  = y
 		return
-
-	def at(p0, v, t: float):
+	
+	def at(self, v, t: float):
 		"""Linear motion: p(t) = p0 + v * t"""
-		return p0 + v*t
+		return Vector(self.x, self.y) + v*t
 
 	def dot(self, other) -> float:
 		return self.x*other.x + self.y*other.y
