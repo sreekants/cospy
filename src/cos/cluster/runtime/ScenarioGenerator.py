@@ -114,7 +114,15 @@ if __name__ == "__main__":
 		"LOCATION":["alesund","trondheim","molde","liekanger"],
 		"WEATHER":["clearsky","cloudy","foggy","heavyrain","highsea","hurricane",
 			 "lightrain","snow","wind"],
-		"TRAFFIC":["hdta","mdta","ldta","ctz","rdta","vdta","seasonal"],
+		"TRAFFIC":[
+			 "hdta",			# High density
+			 "mdta",			# Medium density
+			 "ldta",			# Low density
+			 "ctz",				# Controlled traffic zone
+			 "rdta",			# Regional traffic ??
+			 "vdta",			# ??
+			 "seasonal"			# Seasonal traffic
+			 ],
 		"SITUATION":["crossing","headon","overtaking","giveway","standon",
 			   "restricted.visibility","narrow.channels","anchored"],
 		"ZONE":["tss","narrow.channels","deep.water","roundabouts","inshore",

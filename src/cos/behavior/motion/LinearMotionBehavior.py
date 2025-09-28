@@ -28,6 +28,7 @@ class LinearMotionBehavior(MotionBehavior):
 		else:
 			self.entropy	= 100	# Percentage of entropy introduced into the behavior
 
+		self.entropy	= 5	
 		self.has_forces	= True
 		return
 
@@ -40,10 +41,14 @@ class LinearMotionBehavior(MotionBehavior):
 		"""
 		self.x		= np.array( (loc[0], loc[1], loc[2]) )	# Position vector
 		null_vector	= np.zeros(3)
+		self.ranges	= [
+			(1, 2, 0)		# Default velocity range
+			]
 
 		if X is not None:
 			self.dx		= np.array( (X[0], X[1], X[2]) )		# Velocity vector
 			self.d2x	= np.array( (X[3], X[4], X[5]) )		# Acceleration vector
+			self.ranges[0]	= (abs(X[0]), abs(X[1]), abs(X[2]))
 		else:
 			self.dx		= null_vector		# Velocity vector
 			self.d2x	= null_vector		# Acceleration vector
@@ -134,18 +139,21 @@ class LinearMotionBehavior(MotionBehavior):
 	def randomize_direction(self):
 		""" Randomize the direction of the vehicle
 		"""
-		minvel	= 2
-		maxvel	= 5
-		self.dx[1]	= self.dx[1]+float(random.randint(minvel, maxvel))/float(maxvel)
-		self.dx[0]	= self.dx[0]+float(random.randint(minvel, maxvel))/float(maxvel)
+		V		= self.ranges[0]
+		vmax	= max(V[0], V[1])	# Maxmum velocity
+		vmin	= vmax*0.1			# Minimum velocity
+		vrange	= vmax - vmin		# Range of velocity
 
+		self.dx[0]	= vmin+vrange*float(random.randint(0, 100))/100.0
+		self.dx[1]	= vmin+vrange*float(random.randint(0, 100))/100.0
 
-		if self.dx[0] > maxvel:
-			self.dx[0]	= math.copysign(random.randint(minvel, maxvel), self.dx[0])
+		if random.randint(-1,0) :
+			self.dx[0]	= self.dx[0] * -1.0
 
-		if self.dx[1] > maxvel:
-			self.dx[1]	= math.copysign( random.randint(minvel, maxvel), self.dx[1])
-		return
+		if random.randint(-1,0) :
+			self.dx[1]	= self.dx[1] * -1.0
+
+		return 
 
 	def ioctl(self, op, arg):
 		""" Handles operation signals

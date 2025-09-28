@@ -1,2 +1,13 @@
 packages:
   modules:  # Local jurisdictional rule set
+     - name: Istanbul.Turkeli.Zone
+       module: maritime.regulation.internal.WaterwayRule
+       config: sample.frequency=1 automata=$(SIMULATION)/rule/turkeli.legata scorecard=$(SIMULATION)/rule/score.json zonekey=Turkeli
+
+     - name: Istanbul.Marmara.Zone
+       module: maritime.regulation.internal.WaterwayRule
+       config: sample.frequency=1 automata=$(SIMULATION)/rule/marmara.legata scorecard=$(SIMULATION)/rule/score.json zonekey=Marmara
+
+     - name: Istanbul.Bosphorus.Zone
+       module: maritime.regulation.inland.InshoreTrafficRule
+       config: sample.frequency=1 automata=$(SIMULATION)/rule/bosphorus.legata scorecard=$(SIMULATION)/rule/score.json zonekey=Bosphorus

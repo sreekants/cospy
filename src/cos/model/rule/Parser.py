@@ -7,8 +7,6 @@ from cos.model.rule.Lexer import Lexer
 from cos.model.rule.Expression import *
 from cos.model.symbol.Symbol import *
 
-from cos.model.rule.Lexer import Lexer
-
 import ply.yacc as yacc
 
 
@@ -33,7 +31,6 @@ class Parser:
         # Initialize the state variables
         self.definitions    = {}
         self.defaults       = {}
-        self.definitions    = {}
         self.conditions     = []
         self.clauses        = []
         self.precedents     = []

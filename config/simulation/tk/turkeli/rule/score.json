@@ -1,0 +1,15 @@
+{
+    "basescore": 0.0,
+    "scores":{
+        "Istanbul.Strait.Rule3.Heavy":{
+            "fact":"score_berthing_risk",
+            "concern":"berthing risk",
+            "penalty": 6
+        },
+        "Istanbul.Strait.Rule3.DangerousCargo":{
+            "fact":"score_hazardous_transport",
+            "concern":"hazardous transport",
+            "penalty": "42"        
+        }
+    }
+}
