@@ -25,7 +25,7 @@ clause['COLREG.Rule9.a/KeepNearCoast']:{
             # Vessel will be penalized proportional to distance from shoreline 
             # 5x width is assumed to be the safe practicable distance 
             # beyond which it is penalized
-            : [OS.Position, Map.Sea@ShoreLine].MinDistance < Vessel.SafeDistance.Shoreline # (5*OS.Width)
+            : [OS.Position, Map.Sea@ShoreLine].MinDistance < Sea.Shoreline.SafeDistance # (5*OS.Width)
 
             # Safety and feasibility considerations penalized by appropriate modules
         }
@@ -40,7 +40,7 @@ clause['COLREG.Rule9.b/SmallVessel']:{
             : (OS.Length < 20) or (OS.Type is Vessel.Type.PowerDriven)
         }
         assure: { 
-            : (OS, TS).Distance > Sea.NarrowChannelSafeDistance
+            : (OS, TS).Distance > Sea.NarrowChannel.SafeDistance
         }
     }
 }
@@ -53,7 +53,7 @@ clause['COLREG.Rule9.c/Fishing']:{
             : (OS.Operation has 'Vessel.Operation.Fishing')
         }
         assure: { 
-            : (OS, TS).Distance > Sea.NarrowChannelSafeDistance
+            : (OS, TS).Distance > Sea.NarrowChannel.SafeDistance
         }
     }
 }

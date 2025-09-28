@@ -19,6 +19,9 @@ class Automata:
 		""" 
 		self.rule		= rule
 		self.definition	= Definition()
+
+		self.parser 	= Parser(self, Automata.__evaluate)
+		self.parser.build()
 		return
 
 	def begin(self, ctxt:Context):
@@ -38,15 +41,13 @@ class Automata:
 
 
 	def compile(self, file:str):
-		""" TODO: compile
+		""" Compiles a file
 		Arguments
 			file -- File path
 		""" 
-		parser = Parser(self, Automata.__evaluate)
-		parser.build()
 		with open(file, 'rt') as f:
 			codepage = f.read()
-			parser.parse(codepage, file)
+			self.parser.parse(codepage, file)
 		return
 
 	def load(self, file:str):
@@ -79,14 +80,20 @@ class Automata:
 			pickle.dump(self.definition, fp, protocol=pickle.DEFAULT_PROTOCOL)
 		return
 
-	def dump(self):
+	def dump(self, args:map=None):
 		""" Dumps the automata information to the screen
 		""" 
-		self.definition
-		result = []
-		self.definition.traverse( Automata.__append_node, result )
-		print( '\n'.join(result) )
-		return
+		
+		if args is None:
+			args	= {'definitions':True}
+		
+		result	= {}
+
+		if args.get('definitions', False) == True:
+			result['definitions'] 	= []
+			self.definition.traverse( Automata.__append_node, result['definitions'] )
+
+		return result
 
 	@staticmethod
 	def __append_node( result:list, node:Decision ):
@@ -304,6 +311,12 @@ class Automata:
 	def __evaluate( ctxt, ast ):
 		return ctxt.evaluate( ast[0], ast[1] )
 
+	@property
+	def symbols(self):
+		""" Returns the symbols in the current parse
+		"""
+		return self.parser.terms
+	
 if __name__ == "__main__":
 	test = Automata(None)
 	test.compile("E:\\users\\ntnu\\cospy\\config\\maritime\\regulation\\colreg\\test.legata")

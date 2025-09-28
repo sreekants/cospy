@@ -34,6 +34,7 @@ class Parser:
         self.conditions     = []
         self.clauses        = []
         self.precedents     = []
+        self.terms          = set()
 
         return
 
@@ -727,7 +728,10 @@ class Parser:
             if rscope != scope:
                 var = f'{rscope}{var[sep:]}'
 
-        p[0]    = Symbol.Variable(self.resolve(p, var))
+        sym     = self.resolve(p, var)      
+        p[0]    = Symbol.Variable(sym)
+
+        self.terms.add(sym)
         return
 
     def p_boolean(self, p):

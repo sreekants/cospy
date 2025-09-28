@@ -89,9 +89,10 @@ class Distance:
 		Arguments
 			p -- Point from which to measure distance
 			P1 -- Start point of the line
-			P1 -- End point of the line
+			P2 -- End point of the line
 		""" 
 		# Refer: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
+		# Topic: Line defined by two points
 
 		x0		= p[0]
 		y0		= p[1]

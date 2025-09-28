@@ -22,7 +22,7 @@ condition: {
 clause['COLREG.Rule6.a.i/Visibility']:{
     : {
         condition: {
-            :OS.Visibility < Situation.Definitions.LowVisibility
+            :OS.Visibility < Situation.Type.LowVisibility
         }
         assure: { 
             :add(OS, 'COLREG.SafeSpeed', 'LowVisibility') 
@@ -37,7 +37,7 @@ clause['COLREG.Rule6.a.i/Visibility']:{
 clause['COLREG.Rule6.a.ii/TrafficDensity']:{
     : {
         condition: { 
-            : count(OS,'COLREG.Vessels.Visible') > Situation.Definitions.HighTrafficDensity
+            : count(OS,'COLREG.Vessels.Visible') > Situation.Type.HighTrafficDensity
         }
         assure: { 
             :add(OS, 'COLREG.SafeSpeed', 'HighTrafficDensity') 
@@ -75,7 +75,7 @@ clause['COLREG.Rule6.a.iii/Manoeuverability']:{
 clause['COLREG.Rule6.a.vi/DepthClearance']:{
     : {
         condition: {
-            :[OS.Position, Map.Sea].Draft < Situation.Definitions.MinimumDraft
+            :[OS.Position, Map.Sea].Draft < Situation.Type.MinimumDraft
         }
         assure: { 
             :add(OS, 'COLREG.SafeSpeed', 'LowDepth') 
@@ -91,7 +91,7 @@ clause['COLREG.Rule6.a.vi/DepthClearance']:{
 clause['COLREG.Rule6.b.i/Radar']:{
     : {
         condition: {
-            :[OS.Position, Map.Sea].Draft < Situation.Definitions.MinimumDraft
+            :[OS.Position, Map.Sea].Draft < Situation.Type.MinimumDraft
         }
         assure: { 
             :add(OS, 'COLREG.SafeSpeed', 'NoRadar') 
