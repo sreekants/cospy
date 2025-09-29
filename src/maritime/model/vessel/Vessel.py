@@ -157,6 +157,16 @@ class Vessel(Vehicle):
         """
         return
 
+    def runnable(self, ctxt:Context, config):
+        """ Checks if the object is runnable
+        Arguments
+            ctxt -- Simulation context
+            config -- Config information
+        """
+        if self.actor.runnable(ctxt, (config, self.config)) == False:
+            return False
+        
+        return True
 
     def data(self):
         """ Returns a description of the vessel

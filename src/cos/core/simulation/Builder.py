@@ -43,19 +43,22 @@ class Builder(Service):
 		"""
 		Service.on_init(self, ctxt, module )
 
-		args	= ArgList(module.get("args"))
-		if args.IsFalse("Enabled"):
+		self.args	= ArgList(self.resolve_args(ctxt, module))
+		if self.args.IsFalse("Enabled"):
 			return
 
 		path	= ctxt.sim.config.resolve( module["database"] )
-		self.build( ctxt, args, path, self.builder )
+		self.build( ctxt, self.args, path, self.builder )
 		return
 
+	def resolve_args(self, ctxt:Context, module):
+		args 	= module.get("args")
+		return ctxt.sim.config.resolve_argv(args)
+	
 	def build(self, ctxt:Context, args:ArgList, path:str, type:str):
 		""" Builds an object
 		Arguments
 			ctxt -- Simulation context
-			args -- List of arguments
 			path -- Path of the database with the objects
 			type -- Type of the object
 		"""
@@ -74,8 +77,12 @@ class Builder(Service):
 
 		for rec in records:
 			guid, inst	= self.create( ctxt, klass, rec )
-
-			ctxt.sim.objects.register( nspath, str(guid), inst )
+			if inst is not None:
+				ctxt.sim.objects.register( 
+					nspath, 
+					str(guid), 
+					inst 
+					)
 
 		return
 

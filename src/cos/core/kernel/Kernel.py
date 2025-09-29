@@ -50,9 +50,7 @@ class Kernel:
 			configpath -- Path to the configuration directory
 		"""
 		self.scheduler	= self.create_thread_pool()
-		self.config	= Configuration(configfile, configpath, settings['image'],
-							  ['DB','SIMULATION','COUNTRY','LOCATION','WEATHER','MAP']
-							  )
+		self.config	= Configuration(configfile, configpath, settings['image'])
 		self.log	= Logger( self.config )
 
 		self.log.info( "Kernel", "Initializing...")

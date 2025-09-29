@@ -6,9 +6,10 @@ from cos.core.kernel.BootImage import FileSystem
 
 import configparser
 import os
+import re
 
 class Configuration:
-	def __init__(self, configfile='cos.ini', configpath='COS_CONFIG', imagefile=None, variables=None):
+	def __init__(self, configfile='cos.ini', configpath='COS_CONFIG', imagefile=None):
 		""" Constructor:
 		Arguments
 			configfile='cos.ini' -- File name of the configuration file
@@ -22,7 +23,7 @@ class Configuration:
 		self.bootimage		= None
 
 		# Loads the configuration
-		self.__load_config( imagefile, variables )
+		self.__load_config( imagefile )
 
 		if self.approot in os.environ.keys():
 			self.workspace	= os.environ[self.approot]
@@ -31,7 +32,7 @@ class Configuration:
 
 		return
 
-	def __load_config(self, imagefile, variables=None):
+	def __load_config(self, imagefile):
 		""" Loads the configuration settings
 		Arguments
 			imagefile=None -- Boot image file
@@ -63,11 +64,14 @@ class Configuration:
 		self.root	= self.__expand_root_path('Folders','ROOT')
 		self.db		= self.__expand_root_path('Folders','DB')
 	
+		section		= 'EnvironmentVariables'
+		variables	= self.get_keys(section)
 		for k in variables:
+			k = k.upper()
 			if k in ['DB', 'ROOT', 'CONFIG']:
 				continue
 
-			self.env[k]	= self.resolve(self.__expand_root_path('Folders', k))
+			self.env[k]	= self.resolve(self.__expand_root_path(section, k))
 		return
 
 	def exists(self, path):
@@ -144,6 +148,17 @@ class Configuration:
 			key -- Key name
 		"""
 		return self.resolve( self.get_value(type,key) )
+
+	def resolve_argv(self, args):
+		matches	= re.findall( r'\$\([A-Z_]*\)', args )
+		for p in matches:
+			key	= str(p)
+			if args.find(key) == -1:
+				 continue
+			
+			value	= self.resolve(key)
+			args	= args.replace(key, value)
+		return args
 
 	def resolve(self, value):
 		""" Resolves a value with configuration variables

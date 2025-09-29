@@ -106,6 +106,14 @@ class Object:
 		ctxt.sim.objects.register( f'/{namespace}', self.id, self )
 		return
 
+	def runnable(self, ctxt:Context, config):
+		""" Checks if the object is runnable
+		Arguments
+			ctxt -- Simulation context
+			config -- Config information
+		"""
+		return True
+
 	def on_start(self, ctxt:Context, unused):
 		""" Callback for simulation startup
 		Arguments

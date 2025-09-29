@@ -74,6 +74,9 @@ class Builder(BuilderBaseClass):
 		composer.build( ctxt, inst, args )
 
 		inst.init( ctxt, args )
+
+		if inst.runnable(ctxt, self.args) == False:
+			return guid, None
 		return guid, inst
 
 	@staticmethod

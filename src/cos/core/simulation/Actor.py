@@ -129,6 +129,18 @@ class Actor:
 		return behaviors
 
 
+	def runnable(self, ctxt:Context, config):
+		""" Checks if the object is runnable
+		Arguments
+			ctxt -- Simulation context
+			config -- Config information
+		"""
+
+		for behavior in self.behaviors.values():
+			if behavior.runnable(ctxt, config) == False:
+				return False
+		return True
+
 
 if __name__ == "__main__":
 	test = Actor()
