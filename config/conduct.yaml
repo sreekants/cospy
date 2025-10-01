@@ -6,7 +6,7 @@ packages:
 
      - name: Collision
        module: maritime.conduct.collision.Collision
-       arg: 
+       arg: scale=1:1 interest=10 track=5 collision=0.1
 
      - name: Harbour
        module: maritime.conduct.harbour.Harbour

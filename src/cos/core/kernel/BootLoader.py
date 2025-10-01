@@ -170,7 +170,6 @@ class BootLoader:
 			module -- Module information
 		"""
 		try:
-			service				= None
 			package				= module['module']
 			klassname, klass	= BootLoader.load_class(package)
 
@@ -190,7 +189,7 @@ class BootLoader:
 			inst.on_init( Context(sim, config, sim.ipc), module )
 
 			# Append the class instance to the loaded list
-			self.seq.append( (inst, config) )
+			self.seq.append( (inst, module) )
 		except Exception as e:
 			sim.log.error( self.module, f'Failed to load [{package}]: {str(e)}' )
 

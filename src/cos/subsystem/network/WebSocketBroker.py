@@ -125,7 +125,7 @@ class WebSocketBroker(Subsystem):
 			config -- Configuration attributes
 		"""
 		self.sim	= ctxt.sim
-		args		= ArgList(self.get_config(config)["config"])
+		args		= ArgList(config["config"])
 		transports	= args['transport']
 		if transports == None:
 			return

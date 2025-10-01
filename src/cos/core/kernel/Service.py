@@ -61,20 +61,6 @@ class Service(Object):
 
 		return
 
-	def get_config(self, config, name=None):
-		""" Returns a configuration on the device
-		Arguments
-			config -- Configuration attributes
-			name -- Name of the object
-		"""
-		if name == None:
-			name = self.__class__.__name__
-
-		for item in config["packages"]["modules"]:
-			if item["module"].endswith(name):
-				return item
-
-		return None
 
 if __name__ == "__main__":
 	test = Service()

@@ -6,31 +6,3 @@ define: {
     OS: OwnShip
 }
 
-
-# (3) Check if the sea current exceeds 4 kn, then large
-# vessels, deep-draught vessels and hazardous cargocarrying
-# vessels with a speed of 10 kn or less cannot
-# enter the strait.
-
-clause['Istanbul.Strait.Rule3.Heavy']:{
-    : {
-        condition: { 
-            :(OS.Weight > 8000) and (OS.Undercurrent > 4)
-            :(OS.Draft > 50) and (OS.Undercurrent > 4)
-            }
-        assure: { 
-            :OS.Velocity > 10
-            }
-    }
-}
-clause['Istanbul.Strait.Rule3.DangerousCargo']:{
-    : {
-        condition: { 
-            :(OS.Cargo in ['HazardousMaterial']) and (OS.Undercurrent > 4)
-            }
-        assure: { 
-            :OS.Velocity > 10
-            }
-    }
-}
-

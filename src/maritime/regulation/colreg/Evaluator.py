@@ -69,7 +69,6 @@ class Evaluator(Service):
 			config -- Configuration attributes
 		"""
 		# Parse configurations
-		config				= self.get_config(config)
 		args				= ArgList(config["config"])
 
 		self.poll_at		= args["sample.frequency"]

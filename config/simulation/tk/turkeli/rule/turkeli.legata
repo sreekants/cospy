@@ -6,34 +6,43 @@ define: {
     OS: OwnShip
 }
 
-# include "bosphorous.legata"
-# include "Rule8.legata"
+
+condition: {
+    : [OS, Map.Sea@TrafficSeparationScheme].Distance in Area.ProximityRange
+}
 
 
-# (3) Check if the sea current exceeds 4 kn, then large
-# vessels, deep-draught vessels and hazardous cargo arrying
-# vessels with a speed of 10 kn or less cannot
-# enter the strait.
-
-
-clause['Istanbul.Strait.Rule3.Heavy']:{
+clause['Turkeli.Harbour.TSS.South-North']:{
     : {
         condition: { 
-            :(OS.Weight > 8000) and (OS.Undercurrent > 4)
-            :(OS.Draft > 50) and (OS.Undercurrent > 4)
+            : TSS.name is 'Turkeli.TSS.South-to-North'
             }
         assure: { 
-            :OS.Velocity > 10
+            :OS.Velocity > knot(0)        # No stopping and minimal speed
+            :OS.Heading in [181,359]        # South heading
             }
     }
 }
-clause['Istanbul.Strait.Rule3.DangerousCargo']:{
+
+clause['Turkeli.Harbour.TSS.North-South']:{
     : {
         condition: { 
-            :(OS.Cargo in ['HazardousMaterial']) and (OS.Undercurrent > 4)
+            : TSS.name is 'Turkeli.TSS.North-to-South'
             }
         assure: { 
-            :OS.Velocity > 10
+            :OS.Velocity > knot(0)        # No stopping and minimal speed
+            :OS.Heading in [1,179]        # North heading
+            }
+    }
+}
+
+clause['Turkeli.TSS.SeparationZone']:{
+    : {
+        condition: { 
+            : TSS.name is 'Turkeli.TSS.SeparationZone'
+            }
+        assure: { 
+            : fail
             }
     }
 }

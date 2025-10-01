@@ -36,6 +36,17 @@ class ArgList:
 
 		return False
 
+	def ToFloat(self, key:str, default=0.0):
+		""" Checks if an argument is false
+		Arguments
+			key -- Key identifier
+		"""
+		value	= self.arglist.get(key, None)
+		if value is None:
+			return default
+
+		return float(value)
+
 	def __len__(self):
 		""" Returns number of items in the clas
 		"""

@@ -67,7 +67,9 @@ class Rule9(COLREG):
 			evt -- Event data
 		"""
 		vessel	= evt[1]
-		print( f'{self.__class__.__name__}.overtaking:{vessel.config["name"]}' )
+
+		if self.trace:
+			print( f'{self.__class__.__name__}.overtaking:{vessel.config["name"]}' )
 		return
 
 	def on_crossing(self, ctxt:Context, evt):
@@ -77,7 +79,9 @@ class Rule9(COLREG):
 			evt -- Event data
 		"""
 		vessel	= evt[1]
-		print( f'{self.__class__.__name__}.crossing:{vessel.config["name"]}' )
+		
+		if self.trace:
+			print( f'{self.__class__.__name__}.crossing:{vessel.config["name"]}' )
 		return
 
 if __name__ == "__main__":

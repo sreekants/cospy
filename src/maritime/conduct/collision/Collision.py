@@ -7,6 +7,7 @@ from cos.core.kernel.Context import Context
 from cos.model.rule.Situation import Situation as RuleSituation
 from cos.model.rule.Context import Context as RuleContext
 from maritime.core.situation.Types import Encounter as EncounterType
+from cos.core.utilities.ArgList import ArgList
 
 class Collision(MaritimeConductSituation):
 	def __init__(self):
@@ -34,16 +35,16 @@ class Collision(MaritimeConductSituation):
 			rule_ctxt -- Rule context
 		"""
 		self.for_each_in_range( ctxt, rule_ctxt,
-				self.range_of_interest,
+				self.interest_range,
 				rule_ctxt.vessels,
 				rule_ctxt.vessels,
-				self.on_collide_vessel )
+				self.on_monitor_vessel )
 
 		self.for_each_in_range( ctxt, rule_ctxt,
-				self.collision_range,
+				self.interest_range,
 				rule_ctxt.vessels,
 				rule_ctxt.bodies,
-				self.on_collide_obstacle )
+				self.on_monitor_obstacle )
 
 		return
 
@@ -53,13 +54,15 @@ class Collision(MaritimeConductSituation):
 			ctxt -- Simulation context
 			config -- Configuration attributes
 		"""
+		args					= ArgList(config['arg'])
+
 		# Overridable implementation
-		self.range_of_interest	= 10		# Range of interest
-		self.tracking_range		= 5			# Range at approach (must be greater than collision range)
-		self.collision_range	= 1			# Range at collision
+		self.interest_range		= args.ToFloat('interest')	# Range of interest
+		self.tracking_range		= args.ToFloat('track')		# Range at visibility (must be greater than collision range)
+		self.collision_range	= args.ToFloat('collision')	# Range at collision
 		return
 
-	def on_collide_vessel(self, ctxt:Context, rule_ctxt:RuleContext, info, arg ):
+	def on_monitor_vessel(self, ctxt:Context, rule_ctxt:RuleContext, info, arg ):
 		""" Event handler to evaluate vessel collision
 		Arguments
 			ctxt -- Simulation context
@@ -67,13 +70,12 @@ class Collision(MaritimeConductSituation):
 			info -- String of name-value pair attributes
 			arg -- Opaque argument passed to the callback
 		"""
-		lhs			= info[0]
-		rhs			= info[1]
-		distance	= info[2]
+		lhs			= info[0]	# First vessel
+		rhs			= info[1]	# Second vessel
+		distance	= info[2]	# Distance between them
 
 
-
-		if distance < self.collision_range:
+		if distance > self.interest_range:
 			return
 
 		# If the vessel is outside the tracking range, we are no longer tracking it
@@ -86,18 +88,20 @@ class Collision(MaritimeConductSituation):
 			self.set_lpa(lhs, rhs, distance)
 		elif distance > lpa:
 			# Last point of approach was the closest point of approach (CPA) in the simulation
-			print( f'CPA {lhs.config["name"]} and {rhs.config["name"]} at distance {lpa}')
+			# print( f'Collision Risk: CPA {lhs.config["name"]} and {rhs.config["name"]} at distance {lpa}')
 			self.regulate( ctxt, lhs, "vessel.approach", (EncounterType.CPA, lhs, rhs, lpa) )
 			self.set_lpa(lhs, rhs, distance)
 
 
-		if distance > self.collision_range:
+		if distance < self.collision_range:
+			# Last point of approach was the closest point of approach (CPA) in the simulation
+			print( f'Collision: CPA {lhs.config["name"]} and {rhs.config["name"]} at distance {lpa}')
 			return
 
 		# print( f'COLLISION! {lhs.config["name"]} and {rhs.config["name"]} at distance {info[2]:0.2}')
 		return
 
-	def on_collide_obstacle(self, ctxt:Context, rule_ctxt:RuleContext, info, arg ):
+	def on_monitor_obstacle(self, ctxt:Context, rule_ctxt:RuleContext, info, arg ):
 		""" Event handler to evaluate obstacle collision
 		Arguments
 			ctxt -- Simulation context

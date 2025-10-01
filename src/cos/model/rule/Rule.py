@@ -18,6 +18,7 @@ class Rule(Faculty):
 
 		self.automata	= None
 		self.scorecard	= ScoreCard()
+		self.trace		= False
 		return
 
 	@property
@@ -32,6 +33,8 @@ class Rule(Faculty):
 		"""
 		Faculty.on_init(self, ctxt, module)
 		config		= ArgList( module.get("config", "") )
+		self.trace	= config.IsTrue('trace')
+		
 		self.setup( ctxt, config )
 		return
 
