@@ -3,7 +3,7 @@
 # Description: Implementation of the Context class
 
 from cos.model.rule.Situation import Situation
-from cos.model.symbol.Symbol import Symbol, SymbolType
+from cos.lang.symbol.Symbol import Symbol, SymbolType
 from cos.core.kernel.Context import Context as KernelContext
 
 class Context:

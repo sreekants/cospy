@@ -2,7 +2,7 @@
 # Filename: Lexer_test.py
 # Description: Test cases for the Lexer class
 
-from cos.model.rule.Lexer import Lexer
+from cos.lang.legata.Lexer import Lexer
 
 import unittest
 

@@ -2,9 +2,9 @@
 # Filename: Decision.py
 # Description: Base class for an decision
 
-from cos.model.logic.Exception import Exception
-from cos.model.logic.Assurance import Assurance
-from cos.model.logic.Expression import Expression
+from cos.lang.logic.Exception import Exception
+from cos.lang.logic.Assurance import Assurance
+from cos.lang.logic.Expression import Expression
 from cos.core.utilities.Errors import ErrorCode
 from cos.core.utilities.Tree import TreeNode
 

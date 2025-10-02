@@ -2,12 +2,9 @@
 # Filename: Resolver_test.py
 # Description: Test cases for the Resolver class
 
-from cos.model.rule.Parser import Parser
 from cos.model.rule.Automata import Automata
 from cos.model.rule.Context import *
-from cos.model.rule.Expression import *
-from cos.model.rule.Definition import Definition
-from cos.model.logic.Decision import Decision
+from cos.lang.legata.Expression import *
 from cos.model.resolver.Resolver import *
 from cos.model.resolver.CompositeResolver import CompositeResolver
 from cos.model.resolver.MappingResolver import MappingResolver

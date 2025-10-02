@@ -2,11 +2,11 @@
 # Filename: Automata.py
 # Description: Impelementation of a rule automata
 
-from cos.model.rule.Definition import Definition
 from cos.model.rule.Context import Context
-from cos.model.rule.Parser import Parser
-from cos.model.logic.Decision import Decision
-from cos.model.logic.DecisionTree import DecisionTree, DecisionType
+from cos.lang.legata.Definition import Definition
+from cos.lang.legata.Parser import Parser
+from cos.lang.logic.Decision import Decision
+from cos.lang.logic.DecisionTree import DecisionTree, DecisionType
 from cos.core.utilities.Errors import ErrorCode
 
 import os, sys, pickle

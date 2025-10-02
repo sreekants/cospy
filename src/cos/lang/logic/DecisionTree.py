@@ -2,7 +2,7 @@
 # Filename: DecisionTree.py
 # Description: Base class for an decision tree and supporting classes
 
-from cos.model.logic.Decision import Decision, DecisionType
+from cos.lang.logic.Decision import Decision, DecisionType
 from cos.core.utilities.Tree import Tree, TreeNode
 from cos.core.utilities.Errors import ErrorCode
 

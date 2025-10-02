@@ -2,7 +2,7 @@
 # Filename: Assurance.py
 # Description: Base class for an decision assurance 
 
-from cos.model.logic.Expression import Expression
+from cos.lang.logic.Expression import Expression
 from cos.core.utilities.Errors import ErrorCode
 
 from abc import ABC, abstractmethod

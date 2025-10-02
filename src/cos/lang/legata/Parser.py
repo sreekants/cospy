@@ -2,10 +2,10 @@
 # Filename: Parser.py
 # Description: Parser for the Legata(Maritime) vocabulary
 
-from cos.model.rule.Definition import Definition
-from cos.model.rule.Lexer import Lexer
-from cos.model.rule.Expression import *
-from cos.model.symbol.Symbol import *
+from cos.lang.legata.Definition import Definition
+from cos.lang.legata.Lexer import Lexer
+from cos.lang.legata.Expression import *
+from cos.lang.symbol.Symbol import *
 
 import ply.yacc as yacc
 

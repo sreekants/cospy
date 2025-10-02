@@ -6,7 +6,7 @@ from cos.model.rule.Rule import Rule
 from cos.model.rule.Automata import Automata
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
-from cos.model.logic.Decision import Decision
+from cos.lang.logic.Decision import Decision
 
 import queue, fnmatch
 

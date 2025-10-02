@@ -2,7 +2,7 @@
 # Filename: Exception.py
 # Description: Base class for an decision exception
 
-from cos.model.logic.Expression import Expression
+from cos.lang.logic.Expression import Expression
 
 class Exception:
 	def __init__(self, expression:Expression):

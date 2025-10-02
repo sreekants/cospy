@@ -4,8 +4,8 @@
 
 from cos.model.rule.Automata import *
 from cos.model.rule.Context import *
-from cos.model.rule.Expression import *
-from cos.model.rule.Definition import Definition
+from cos.lang.legata.Expression import *
+from cos.lang.legata.Definition import Definition
 from cos.model.logic.Decision import Decision
 from cos.model.resolver.Resolver import *
 from cos.model.resolver.CompositeResolver import CompositeResolver

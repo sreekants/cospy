@@ -2,7 +2,7 @@
 # Filename: Parser_test.py
 # Description: Test cases for the Parser class
 
-from cos.model.rule.Parser import Parser
+from cos.lang.legata.Parser import Parser
 from cos.core.kernel.Configuration import Configuration
 
 import unittest

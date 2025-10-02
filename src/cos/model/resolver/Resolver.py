@@ -2,7 +2,7 @@
 # Filename: Resolver.py
 # Description: Implementation of the base class for all resolvers
 
-from cos.model.rule.Definition import Definition
+from cos.lang.legata.Definition import Definition
 from cos.model.rule.Context import Context
 
 import os, inspect

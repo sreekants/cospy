@@ -2,9 +2,9 @@
 # Filename: Expression.py
 # Description: Basic logical expressions used in a decision tree
 
-from cos.model.logic.Expression import *
+from cos.lang.logic.Expression import *
+from cos.lang.symbol.Symbol import *
 from cos.core.utilities.Errors import ErrorCode
-from cos.model.symbol.Symbol import *
 
 class ALL(CompositeExpression):
 	def __init__(self):
