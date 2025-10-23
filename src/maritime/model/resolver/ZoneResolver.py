@@ -31,9 +31,21 @@ class ZoneResolver(Resolver):
 			ctxt -- Simulation context
 			rulectxt -- TODO
 		""" 
-		self.zone		= None
-		self.vessel		= None
+		if rulectxt.situation is not None:
+			self.zone		= rulectxt.situation.zone
+			self.vessel		= rulectxt.situation.os
+		else:
+			self.zone		= None
+			self.vessel		= None
 		return
+
+	@simproperty
+	def Name(self):
+		""" TODO: InRange
+		""" 
+		if self.zone is None:
+			return ''
+		return self.zone.name
 
 	@simproperty
 	def InRange(self):

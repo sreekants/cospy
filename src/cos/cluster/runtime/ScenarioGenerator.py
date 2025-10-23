@@ -108,7 +108,7 @@ class ScenarioGenerator:
 		return cases
 
 if __name__ == "__main__":
-	generator = ScenarioGenerator( 'E:\\users\\ntnu\\modcolreg\\cluster\\config',
+	generator = ScenarioGenerator( 'E:\\users\\ntnu\\cospy\\templates\\cluster\\config',
 		'python ${COS_DIR}/apps/coslaunch/main.py -config $$COS_CONFIG$$',
 		{
 		"LOCATION":["alesund","trondheim","molde","liekanger"],

@@ -15,11 +15,11 @@ condition: {
 clause['Turkeli.Harbour.TSS.South-North']:{
     : {
         condition: { 
-            : TSS.name is 'Turkeli.TSS.South-to-North'
+            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.South-to-North'
             }
         assure: { 
-            :OS.Velocity > knot(0)        # No stopping and minimal speed
-            :OS.Heading in [181,359]        # South heading
+            :OS.Velocity > 0            # No stopping and minimal speed
+            :OS.Heading in [181,359]    # South heading
             }
     }
 }
@@ -27,11 +27,11 @@ clause['Turkeli.Harbour.TSS.South-North']:{
 clause['Turkeli.Harbour.TSS.North-South']:{
     : {
         condition: { 
-            : TSS.name is 'Turkeli.TSS.North-to-South'
+            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.North-to-South'
             }
         assure: { 
-            :OS.Velocity > knot(0)        # No stopping and minimal speed
-            :OS.Heading in [1,179]        # North heading
+            :OS.Velocity > 0           # No stopping and minimal speed
+            :OS.Heading in [1,179]     # North heading
             }
     }
 }
@@ -39,7 +39,7 @@ clause['Turkeli.Harbour.TSS.North-South']:{
 clause['Turkeli.TSS.SeparationZone']:{
     : {
         condition: { 
-            : TSS.name is 'Turkeli.TSS.SeparationZone'
+            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.SeparationZone'
             }
         assure: { 
             : fail

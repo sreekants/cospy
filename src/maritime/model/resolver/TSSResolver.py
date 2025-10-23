@@ -19,19 +19,7 @@ class TSSResolver(MaritimeZoneResolver):
 			vessel -- TODO
 			TSS -- TODO
 		""" 
-		MaritimeZoneResolver.__init__(self, TSS, '[OwnShip,TrafficSeparationScheme]')
-		return
-
-	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" TODO: reset
-		Arguments
-			ctxt -- Simulation context
-			rulectxt -- TODO
-		""" 
-		if rulectxt.situation is not None:
-			self.zone	= rulectxt.situation.tss
-		else:
-			self.zone	= None
+		MaritimeZoneResolver.__init__(self, TSS, '(OwnShip,TrafficSeparationScheme)')
 		return
 
 	@property

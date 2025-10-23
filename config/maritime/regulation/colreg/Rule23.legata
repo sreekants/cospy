@@ -108,7 +108,7 @@ clause['COLREG.Rule23.d.ii']:{
             :OS.Type is Vessel.Type.PowerDriven
         }
 		exclude:{
-            :(OS.Length > meters(7)) and (OS.speed > kn(7))
+            :(OS.Length > meters(7)) and (OS.speed > knot(7))
 		}
         assure: { 
             :OS.Signal.ON has 'Light.Allround.White'

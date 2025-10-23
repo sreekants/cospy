@@ -22,18 +22,6 @@ class HarbourResolver(MaritimeZoneResolver):
 		MaritimeZoneResolver.__init__(self, vessel, harbour, '[OwnShip,Harbour]')
 		return
 
-	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" Reset th resolver
-		Arguments
-			ctxt -- Simulation context
-			rulectxt -- Rule context
-		""" 
-		if rulectxt.situation is not None:
-			self.zone	= rulectxt.situation.harbour
-		else:
-			self.zone	= None
-		return
-
 	@property
 	def harbour(self):
 		""" TODO: harbour

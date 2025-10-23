@@ -84,7 +84,7 @@ class Symbol:
 			""" 
 			return str(self.value)
 
-	class Integer(SymbolType):
+	class String(SymbolType):
 		def __init__(self, value:str):
 			""" Constructor
 			Arguments

@@ -82,6 +82,8 @@ class CompositeResolver(Resolver):
 			resolver_info -- Resolver to apply context to
 			rctxt -- Context to resolve
 		""" 
+		if resolver_info[0] == 'tss' and rctxt.variable.find('TrafficSeparationScheme') != -1:
+			print('HERE')
 		result = resolver_info[1].resolve( rctxt.ctxt, rctxt.variable )
 		if result is None:
 			return False

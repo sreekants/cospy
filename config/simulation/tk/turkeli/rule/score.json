@@ -3,13 +3,28 @@
     "scores":{
         "Istanbul.Strait.Rule3.Heavy":{
             "fact":"score_berthing_risk",
-            "concern":"berthing risk",
+            "concern":"Berthing risk",
             "penalty": 6
         },
         "Istanbul.Strait.Rule3.DangerousCargo":{
             "fact":"score_hazardous_transport",
-            "concern":"hazardous transport",
+            "concern":"Hazardous transport",
             "penalty": "42"        
+        },
+        "Turkeli.Harbour.TSS.South-North":{
+            "fact":"traffic_violation",
+            "concern":"Wrong TSS direction",
+            "penalty": 100
+        },
+        "Turkeli.Harbour.TSS.North-South":{
+            "fact":"traffic_violation",
+            "concern":"Wrong TSS direction",
+            "penalty": 100
+        },
+        "Turkeli.Harbour.SpeedLimit":{
+            "fact":"traffic_violation",
+            "concern":"Speed limit violation",
+            "penalty": 3
         }
     }
 }

@@ -441,7 +441,7 @@ class Tree:
 	def __init__(self, root=None):
 		""" Constructor
 		Arguments
-			path -- Path of the parent node
+			root -- Optional root node
 		"""
 		if root is None:
 			root	= TreeNode()
@@ -471,7 +471,7 @@ class Tree:
 			path -- Path of the node
 			sep='/' -- Path separator
 		"""
-		node	= self.find_node( path, sep )
+		node	= self.find( path, sep )
 
 		if node==None:
 			raise Exception( "Path not found." )
@@ -541,7 +541,7 @@ class Tree:
 		""" Internal callback function to handle dumping a tree node
 		Arguments
 			ctxt -- Context argument passed to the callback
-			node -- Node to process
+			result -- Result list to append to
 		"""
 		result.append( node.get_path() )
 		return ErrorCode.ERROR_CONTINUE

@@ -7,7 +7,7 @@ from cos.model.rule.Automata import Automata
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 from cos.core.utilities.ArgList import ArgList
-from cos.model.logic.Decision import Decision
+from cos.lang.logic.Decision import Decision
 from cos.model.rule.Situation import Situation
 
 import queue, fnmatch
@@ -58,7 +58,7 @@ class InlandWaterRule(Rule):
 		if zonekey is not None:
 			self.zones	= []
 			for h in zones:
-				if h.config['key'] == zonekey:
+				if fnmatch.fnmatch(h.config['key'], zonekey):
 					self.zones.append(h)
 		else:
 			self.zones	= zones
@@ -94,7 +94,6 @@ class InlandWaterRule(Rule):
 					evt			= Situation(v, None)
 					evt.zone	= z
 					self.add_situation( evt )
-
 
 		self.evaluate_rule( ctxt, rule_ctxt )
 		return
@@ -142,9 +141,9 @@ class InlandWaterRule(Rule):
 			return
 		
 		now		= ctxt.sim.now()
-		fact	= score["fact"]
-		concern	= score["concern"]
-		penalty	= score["penalty"]
+		fact	= score.get('fact', 'InlandWaterViolation.generic')
+		concern	= score.get('concern', 'Generic')
+		penalty	= score.get('penalty', 0)
 
 		self.data(ctxt, fact, [now, imo, penalty])
 		self.data(ctxt, 'ro', [f'\'{concern}\'',now, imo, penalty])

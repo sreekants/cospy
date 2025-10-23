@@ -303,6 +303,7 @@ class Parser:
 
     def p_action_commands(self, p):
         """
+        action_commands : FAIL
         action_commands : ABORT
         action_commands : CLEAR
         action_commands : CONTINUE
@@ -527,6 +528,7 @@ class Parser:
         rvalue : identifier
         rvalue : number
         rvalue : boolean
+        rvalue : constant
         rvalue : functional_expression
         """
         self.move(p)
@@ -593,7 +595,7 @@ class Parser:
         function : FN_METERS
         function : FN_MILES
         function : FN_KMPH
-        function : FN_KN
+        function : FN_KNOT
         function : FN_NMPHTOKMPH
         """
         self.move(p)
@@ -672,7 +674,7 @@ class Parser:
         arg : identifier
         arg : number
         arg : boolean
-        arg : STRING
+        arg : constant
         arg : EMPTY
         """
         if p[1] == 'empty':
@@ -706,14 +708,39 @@ class Parser:
 
     def p_value(self, p):
         """
-        value : IDENTIFIER
-        value : FLOAT
-        value : INTEGER
-        value : STRING
+        value : identifier
+        value : constant
         """
+        self.move(p)
+        return
+
+    def p_constant(self, p):
+        """
+        constant : FLOAT
+        constant : INTEGER
+        constant : STRING
+        """
+        if isinstance(p[1], float):
+            p[0]    = Symbol.Float(p[1])
+            return
+        elif isinstance(p[1], int):
+            p[0]    = Symbol.Integer(p[1])
+            return
+        elif isinstance(p[1], str):
+            p[0]    = Symbol.String(p[1])
+            return
+        
         p[0]    = Symbol.Variable(p[1])
         return
 
+    def p_string(self, p):
+        """
+        string : STRING
+        """
+        
+        p[0]    = ('string', p[1])
+        return
+    
     def p_identifier(self, p):
         """
         identifier : IDENTIFIER
@@ -807,7 +834,6 @@ class Parser:
         return
     
     def fold(self, p, offset):
-        n   = len(p)
         match len(p):
             case 1:
                 result    = []

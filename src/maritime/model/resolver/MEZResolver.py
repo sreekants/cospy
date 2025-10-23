@@ -19,20 +19,9 @@ class MEZResolver(MaritimeZoneResolver):
 			vessel -- Own ship
 			MEZ -- Exclusion zone 
 		""" 
-		MaritimeZoneResolver.__init__(self, vessel, MEZ, '[OwnShip,MaritimeExclusionZone]')
+		MaritimeZoneResolver.__init__(self, vessel, MEZ, '(OwnShip,MaritimeExclusionZone)')
 		return
 
-	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" Reset th resolver
-		Arguments
-			ctxt -- Simulation context
-			rulectxt -- Rule context
-		""" 
-		if rulectxt.situation is not None:
-			self.zone	= rulectxt.situation.mez
-		else:
-			self.zone	= None
-		return
 
 	@property
 	def mez(self):

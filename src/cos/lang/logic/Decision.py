@@ -66,8 +66,7 @@ class Decision(TreeNode):
 		if condition is not None:
 			# Apply all assurances.
 			for assureinfo in self.assurances:
-				a	= assureinfo[0][1]
-				result = a[1].evaluate(ctxt.ctxt)
+				result = self.__evaluate( ctxt, assureinfo )
 				if result not in [ErrorCode.S_OK, ErrorCode.S_TRUE, ErrorCode.ERROR_CONTINUE]:
 					ctxt.error.append(self)
 					return ErrorCode.ERROR_EXCEPTION_IN_SERVICE
@@ -94,6 +93,21 @@ class Decision(TreeNode):
 
 		return None
 
+	def __evaluate(self, ctxt, assureinfo):
+		a	= assureinfo[0][1]
+		t   = a[0]
+		e	= a[1]
+
+		# TODO: Simplify evaluation logic with polymorphism
+		match t:
+			case 'function':
+				return e.evaluate(ctxt.ctxt)
+			
+			case 'expression':
+				return e[0][1][0][1].evaluate(ctxt.ctxt)
+		
+		print(f'Evaluating {self.name} assurance expressions:')
+		return ErrorCode.S_OK
 
 	def IF(self, expression):
 		""" Adds a condition.

@@ -30,6 +30,8 @@ class Resolver:
 		Arguments
 			ctxt -- Simulation context
 		""" 
+
+		print(f'RESOLVE: {variable}')
 		if variable.startswith(self.prefix) == False:
 			return None
 		
@@ -64,11 +66,12 @@ class Resolver:
 		return varname.replace('.','_')
 	
 	def resolve(self, ctxt:Context, variable:str):
-		""" TODO: resolve
+		""" Resolves the property for the given variable
 		Arguments
 			ctxt -- Simulation context
 			variable -- TODO
 		""" 
+
 		if (self.resolvers is None) or (len(self.resolvers) == 0):
 			return
 

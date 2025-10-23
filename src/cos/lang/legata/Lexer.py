@@ -16,9 +16,12 @@ class Lexer:
     'assure'	: 'ASSURE',
     'apply'	    : 'APPLY',
     'otherwise'	: 'OTHERWISE',
+
     'clear'	    : 'CLEAR',
     'continue'	: 'CONTINUE',
     'abort'	    : 'ABORT',
+    'fail'	    : 'FAIL',
+    
     'default'	: 'DEFAULT',
     'description'	    : 'DESCRIPTION',
 
@@ -53,7 +56,7 @@ class Lexer:
     'miles'     : 'FN_MILES',
     'feets'     : 'FN_FEETS',
     'kmph'      : 'FN_KMPH',
-    'kn'        : 'FN_KN',
+    'knot'      : 'FN_KNOT',
     'nmphtokmph'    : 'FN_NMPHTOKMPH'
     }
 

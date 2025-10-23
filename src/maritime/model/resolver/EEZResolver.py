@@ -19,19 +19,7 @@ class EEZResolver(MaritimeZoneResolver):
 			vessel -- Own ship
 			EEZ -- Economic zone
 		""" 
-		MaritimeZoneResolver.__init__(self, vessel, EEZ, '[OwnShip,EEZ]')
-		return
-
-	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" Reset th resolver
-		Arguments
-			ctxt -- Simulation context
-			rulectxt -- Rule context
-		""" 
-		if rulectxt.situation is not None:
-			self.zone	= rulectxt.situation.eez
-		else:
-			self.zone	= None
+		MaritimeZoneResolver.__init__(self, vessel, EEZ, '(OwnShip,EEZ)')
 		return
 
 	@property

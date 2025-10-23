@@ -54,6 +54,7 @@ class Sea(Shape):
 
         self.type   = type
         self.depth	= float(config['depth'])
+        self.name	= config['name']
         return
 
     @property

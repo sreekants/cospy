@@ -2,7 +2,7 @@
 # Filename: Clause.py
 # Description: A rule clause decision
 
-from cos.model.logic.Decision import Decision, DecisionType
+from cos.lang.logic.Decision import Decision, DecisionType
 
 class Clause(Decision):
 	def __init__(self, name:str=None, parent=None, type=DecisionType.TYPE_NULL_OBJECT, ref=None):

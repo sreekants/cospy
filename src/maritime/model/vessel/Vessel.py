@@ -80,7 +80,7 @@ class Vessel(Vehicle):
         self.restriction    = Restriction.NONE
 
         # TODO: Load from the configuration
-        self.underkeel_clearance   = 100
+        self.underkeel_clearance   = .1
         self.motion_allowance      = 0
         self.squat                 = 0
         return

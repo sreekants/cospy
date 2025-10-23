@@ -21,19 +21,7 @@ class LaneResolver(MaritimeZoneResolver):
 			vessel -- Own ship
 			TSS -- Traffic separation zone
 		""" 
-		MaritimeZoneResolver.__init__(self, TSS, '[OwnShip,TrafficLane]')
-		return
-
-	def reset(self, ctxt:Context, rulectxt:RuleContext):
-		""" Reset th resolver
-		Arguments
-			ctxt -- Simulation context
-			rulectxt -- Rule context
-		""" 
-		if rulectxt.situation is not None:
-			self.zone	= rulectxt.situation.lane
-		else:
-			self.zone	= None
+		MaritimeZoneResolver.__init__(self, vessel, TSS, '(OwnShip,TrafficLane)')
 		return
 
 	@property

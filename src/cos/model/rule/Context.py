@@ -152,6 +152,10 @@ class Context:
 		Arguments
 			expr -- Expression
 		"""
+		# Handle constants
+		if isinstance(expr, Symbol.Float) or isinstance(expr, Symbol.Integer) or isinstance(expr, Symbol.String):
+			return expr.value
+
 		if isinstance(expr, SymbolType):
 			expr	= expr.value
 

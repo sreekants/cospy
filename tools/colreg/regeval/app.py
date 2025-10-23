@@ -117,6 +117,12 @@ class RegEval:
 
 	def load( self ):
 		files	= []
+		if len(sys.argv) > 1:
+			file = sys.argv[-1]
+			if os.path.isfile(file):
+				files.append( (file, os.path.basename(file)) )
+				return files
+		
 		for root, dirs, filenames in os.walk(self.path):
 			for filename in filenames:
 				path = os.path.join(root, filename)

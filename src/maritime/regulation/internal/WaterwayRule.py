@@ -7,6 +7,7 @@ from cos.core.kernel.Context import Context
 from cos.model.rule.Rule import Rule
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
+from cos.model.rule.Context import Context as RuleContext
 
 class WaterwayRule(InlandWaterRule):
 	def __init__(self):
@@ -26,6 +27,11 @@ class WaterwayRule(InlandWaterRule):
 		# Create a list of the relevant zones
 		InlandWaterRule.setup_zone(self, ctxt, config, 'WATERWAY')
 		return
+
+
+	def evaluate(self, ctxt:Context, rule_ctxt:RuleContext):
+		return InlandWaterRule.evaluate(self, ctxt, rule_ctxt)
+
 
 		
 
