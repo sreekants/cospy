@@ -7,7 +7,7 @@ from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 
 class LandBuilder(Builder):
-	def __init__(self, args):
+	def __init__(self, args:dict):
 		""" Constructor
 		Arguments
 			args -- List of arguments

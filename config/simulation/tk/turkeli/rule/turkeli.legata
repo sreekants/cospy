@@ -47,3 +47,15 @@ clause['Turkeli.TSS.SeparationZone']:{
     }
 }
 
+clause['Turkeli.Harbour.SpeedLimit']:{
+    : {
+        condition: { 
+            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.SpeedZone1'
+            }
+        assure: { 
+            :OS.Velocity < 0.01           # Slow down
+            }
+    }
+}
+
+

@@ -68,6 +68,7 @@ class Decision(TreeNode):
 			for assureinfo in self.assurances:
 				result = self.__evaluate( ctxt, assureinfo )
 				if result not in [ErrorCode.S_OK, ErrorCode.S_TRUE, ErrorCode.ERROR_CONTINUE]:
+					print( f'Assurance failed for decision {self.path}' )
 					ctxt.error.append(self)
 					return ErrorCode.ERROR_EXCEPTION_IN_SERVICE
 

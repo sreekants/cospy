@@ -11,7 +11,7 @@ from cos.core.utilities.ArgList import ArgList
 import json, datetime
 
 class Builder(BuilderBaseClass):
-	def __init__(self, args):
+	def __init__(self, args:dict):
 		""" Constructor
 		Arguments
 			args -- List of arguments
