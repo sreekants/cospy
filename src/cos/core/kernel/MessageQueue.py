@@ -62,7 +62,7 @@ class MessageQueue:
 
 		return ctxt.processed
 
-	def pump_node(self, node:TreeNode, throttle_rate:int=-1):
+	def pump_node(self, node:TreeNode, throttle_rate:int=-1, depth:int=8):
 		""" Pumps pending messages on a node at a given throttle rate
 		Arguments
 			node -- Reference to a node
@@ -74,7 +74,12 @@ class MessageQueue:
 		ctxt	= PumpCtxt( throttle_rate )
 
 		if node is not None:
-			node.traverse( MessageQueue.__pump_node, ctxt, 8 )
+			if depth > 0:
+				# Pump the child nodes first
+				node.traverse( MessageQueue.__pump_node, ctxt, depth )
+
+			# Then pump the node itself
+			MessageQueue.__pump_node( ctxt, node )			
 
 		return ctxt.processed
 
@@ -397,7 +402,7 @@ class MessageQueue:
 				s.notify( evt.ctxt, evt.msg, evt.arg )
 				ctxt.processed	= ctxt.processed+1
 				if ctxt.processed > ctxt.throttle_rate:
-					return ErrorCode.S_OK
+					return ErrorCode.ERROR_CONTINUE
 
 		return ErrorCode.ERROR_CONTINUE
 

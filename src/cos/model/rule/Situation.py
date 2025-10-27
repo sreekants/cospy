@@ -10,6 +10,7 @@ class Situation:
 		self.approaches	= {}
 
 		# Context attributes
+		self.zone		= None
 		self.eez		= None
 		self.harbour	= None
 		self.lane		= None

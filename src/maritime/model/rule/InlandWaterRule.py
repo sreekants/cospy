@@ -22,6 +22,8 @@ class InlandWaterRule(Rule):
 		"""
 		Rule.__init__(self, None)
 
+		assert(zonetype is not None)
+		
 		self.sitations	= queue.Queue()
 		self.zones		= None
 		self.zonetype	= zonetype

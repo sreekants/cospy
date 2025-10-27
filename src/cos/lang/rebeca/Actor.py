@@ -3,6 +3,7 @@
 # Description: Implementation of the Actor class
 
 from compiler.lang.rebeca.VirtualMachine import VirtualMachine
+from cos.lang.rebeca.IPCPort import IPCPort
 
 class Actor:
 	def __init__(self, interfaces:dict= None):
@@ -26,6 +27,59 @@ class Actor:
 		
 	def runnable(self):
 		return self.vm.runnable()
+
+	def notify( self, var:str, method:str, args:dict=None):
+		""" Invokes a method on the actor
+		Arguments
+			var -- Variable name
+			method -- Method name
+			ctxt -- Simulation context
+			args -- Method argument
+		"""
+		return self.vm.invoke(var, method, args)
+	
+	@staticmethod
+	def init_actor(service, ctxt, config):
+		""" Initializes the actor
+		Arguments
+			service -- A service service
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+
+		path 		= ctxt.sim.config.resolve( config["program"] )
+
+		# Create the actor bound to the ports
+		service.actor	= Actor({
+				'port': IPCPort(ctxt)
+			})
+		
+		service.actor.load( path )
+
+		# Build a dictionary of command line parameters
+		vars		= config.get("argv", "")
+		argv		= dict((k.strip(), v.strip()) for k,v in 
+              			(item.split('=') for item in vars.split(' ')))
+		
+		service.actor.start( argv )
+		return
+	
+	@staticmethod
+	def run_actor(service, steps=-1):
+		""" Runs the actor for a number of steps
+		Arguments
+			service -- A service service
+			steps -- Number of steps to run
+		"""
+		# Run the actor for a number of steps
+		service.actor.run(steps)
+
+		# Check if the actor is still runnable
+		if service.actor.runnable() == False:
+			service.actor.stop()
+			service.actor	= None
+
+		return
 
 if __name__ == "__main__":
 	test = Actor()

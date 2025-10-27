@@ -13,7 +13,7 @@ class WaterwayRule(InlandWaterRule):
 	def __init__(self):
 		""" Constructor
 		"""
-		InlandWaterRule.__init__(self, None)
+		InlandWaterRule.__init__(self, 'Internal.Waterway')
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):

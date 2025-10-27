@@ -117,7 +117,7 @@ class ZMQTransport:
 
 		self.socket.send_multipart( req )
 		if self.socket.poll(self.timeout) == 0:
-			raise Exception( "Conenction timed out." )
+			raise Exception( "Connection timed out." )
 
 		return ZMQFrame.decode( self.socket.recv_multipart() )
 

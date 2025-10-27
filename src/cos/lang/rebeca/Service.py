@@ -3,11 +3,12 @@
 # Description: Implementation of the Service class
 
 from cos.lang.rebeca.Actor import Actor
-from cos.lang.rebeca.IPCPort import IPCPort
 from cos.core.kernel.Service import Service as ServiceBase
 from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
+from typing import Any
+import json
 
 class Service(ServiceBase):
 	def __init__(self, args:dict):
@@ -15,10 +16,14 @@ class Service(ServiceBase):
 		Arguments
 			args -- List of arguments
 		"""
-		ServiceBase.__init__(self, args["Type"], args["Name"] )
+		type		= args.get("Type", "default")
+		name		= args.get("Name", "Service")
+		ServiceBase.__init__(self, type, name )
+
+		self.listen( f'/Services/{type}/{name}' )
 
 		self.timer			= None
-		self.poll_at		= 1
+		self.poll_at		= 5
 		self.steps			= int( args.get("Steps", 100) )
 		self.actor			= None
 		return
@@ -30,9 +35,13 @@ class Service(ServiceBase):
 			config -- Configuration attributes
 		"""
 		ServiceBase.on_start(self, ctxt, config)
+		
 
 		self.init_config(ctxt, config)
 
+		# Pump events to the message services
+		self.listen( self.ipc_topic )
+		self.poll_ipc( ctxt, [self.ipc_topic] )
 		return
 
 
@@ -54,23 +63,15 @@ class Service(ServiceBase):
 		Arguments
 			ctxt -- Simulation context
 			unused -- Unused variable
-		"""
-		if self.actor is None:
-			return
-		
+		"""		
 		ServiceBase.on_timer(self, ctxt, unused)
+
 
 		if (self.timer is None) or (self.timer.signaled() == False):
 			return
-
+		
 		# Run the actor for a number of steps
-		self.actor.run(self.steps)
-
-		# Check if the actor is still runnable
-		if self.actor.runnable() == False:
-			self.actor.stop()
-			self.actor	= None
-
+		Actor.run_actor( self, self.steps )
 		return
 
 	def init_config(self, ctxt, config):
@@ -91,31 +92,36 @@ class Service(ServiceBase):
 			self.timer	= None
 
 		# Initialize actor
-		self.init_actor( ctxt, config )
+		Actor.init_actor( self, ctxt, config )
 		return
-		
-	def init_actor(self, ctxt, config):
-		""" Initializes the actor
+
+	def notify(self, ctxt:Context, call:str, unused:str):
+		""" Triggers a method
 		Arguments
 			ctxt -- Simulation context
-			config -- Configuration attributes
+			call -- Method information
+			unused -- Unused variable
 		"""
+		# Unmarshall the argument
+		if call.startswith('{') and call.endswith('}'):
+			callinfo	= json.loads( call )
+			inst		= callinfo['object']
+			method 		= callinfo['method']
+			argv		= dict()
+			for k, v in callinfo.items():
+				if k not in ['object', 'method']:
+					argv[k]	= v
+		else:
+			callinfo	= ArgList(call, '=', ',')
+			inst		= callinfo['object']
+			method 		= callinfo['method']
+			argv		= dict()
+			for k, v in callinfo.arglist.items():
+				if k not in ['object', 'method']:
+					argv[k]	= v
 
-		path 		= ctxt.sim.config.resolve( config["program"] )
-
-		# Create the actor bound to the ports
-		self.actor	= Actor({
-				'port': IPCPort(ctxt)
-			})
-		
-		self.actor.load( path )
-
-		# Build a dictionary of command line parameters
-		vars		= config.get("argv", "")
-		argv		= dict((k.strip(), v.strip()) for k,v in 
-              			(item.split('=') for item in vars.split(' ')))
-		
-		self.actor.start( argv )
+		# Invoke the method on the actor
+		self.actor.notify( inst, method, argv )
 		return
 
 if __name__ == "__main__":

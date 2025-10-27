@@ -3,7 +3,7 @@
 # Description: Implementation of a name value argument list class
 
 class ArgList:
-	def __init__(self, args=None):
+	def __init__(self, args=None, vsep='=', sep=' '):
 		""" Constructor
 		Arguments
 			args -- List of arguments
@@ -11,7 +11,7 @@ class ArgList:
 		if args is None or len(args)==0:
 			self.arglist 	= dict()
 		else:
-			self.arglist 	= dict( item.split('=') for item in args.split(' ') )
+			self.arglist 	= dict( item.split(vsep) for item in args.split(sep) )
 		return
 
 	def IsTrue(self, key:str):
