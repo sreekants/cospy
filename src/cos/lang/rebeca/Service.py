@@ -5,10 +5,9 @@
 from cos.lang.rebeca.Actor import Actor
 from cos.core.kernel.Service import Service as ServiceBase
 from cos.core.kernel.Context import Context
+from cos.core.kernel.Request import Request
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
-from typing import Any
-import json
 
 class Service(ServiceBase):
 	def __init__(self, args:dict):
@@ -34,14 +33,36 @@ class Service(ServiceBase):
 			ctxt -- Simulation context
 			config -- Configuration attributes
 		"""
-		ServiceBase.on_start(self, ctxt, config)
-		
+		try:
+			ServiceBase.on_start(self, ctxt, config)
+			
+			# Initialize configuration
+			self.init_config(ctxt, config)
 
-		self.init_config(ctxt, config)
+			# Pump events to the message services
+			self.listen( self.ipc_topic )
+			self.poll_ipc( ctxt, [self.ipc_topic] )
+		except Exception as e:
+			ctxt.log.error(self.type, f"Service {self.id} failed to start: {e}")
+			raise e
+		return
 
-		# Pump events to the message services
-		self.listen( self.ipc_topic )
-		self.poll_ipc( ctxt, [self.ipc_topic] )
+
+	def on_run(self, ctxt:Context, level:int):
+		""" Callback for simulation startup
+		Arguments
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		try:
+			match level:
+				case 3:
+					# Initialize actor
+					Actor.init_actor( self, ctxt, self.config )
+					
+		except Exception as e:
+			ctxt.log.error(self.type, f"Service {self.id} failed to start: {e}")
+			raise e
 		return
 
 
@@ -91,8 +112,8 @@ class Service(ServiceBase):
 		else:
 			self.timer	= None
 
-		# Initialize actor
-		Actor.init_actor( self, ctxt, config )
+		# Save configuration for delayed startup
+		self.config		= config
 		return
 
 	def notify(self, ctxt:Context, call:str, unused:str):
@@ -102,26 +123,21 @@ class Service(ServiceBase):
 			call -- Method information
 			unused -- Unused variable
 		"""
-		# Unmarshall the argument
-		if call.startswith('{') and call.endswith('}'):
-			callinfo	= json.loads( call )
-			inst		= callinfo['object']
-			method 		= callinfo['method']
-			argv		= dict()
-			for k, v in callinfo.items():
-				if k not in ['object', 'method']:
-					argv[k]	= v
-		else:
-			callinfo	= ArgList(call, '=', ',')
-			inst		= callinfo['object']
-			method 		= callinfo['method']
-			argv		= dict()
-			for k, v in callinfo.arglist.items():
-				if k not in ['object', 'method']:
-					argv[k]	= v
+
+		# Unmarshall the request call
+		req = Request()
+		req.parse(call)
+		
+		if req.instance is None:
+			ctxt.log.error(f"Service {self.name} received a request with no instance.")
+			return
+
+		if req.method is None:
+			ctxt.log.error(f"Service {self.name} received a request with no instance.")
+			return
 
 		# Invoke the method on the actor
-		self.actor.notify( inst, method, argv )
+		self.actor.notify( req.instance, req.method, req.args )
 		return
 
 if __name__ == "__main__":

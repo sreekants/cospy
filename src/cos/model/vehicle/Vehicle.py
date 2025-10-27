@@ -58,7 +58,7 @@ class Restriction(Flag):
 VID = 0
 
 class Vehicle(Object):
-    def __init__(self, ctxt:Context, category, type, id, config ):
+    def __init__(self, ctxt:Context, category:str, type, id:str, config:dict ):
         """ Constructor
         Arguments
         	ctxt -- Simulation context

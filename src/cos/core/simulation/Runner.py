@@ -57,8 +57,11 @@ class RunnerThread(SimulationThread):
 		if simulant.handle == None:
 			return ErrorCode.ERROR_CONTINUE
 
-		# Trigger the timer on the service
-		simulant.handle.on_timer( Context(sim, sim, sim.ipc), None )
+		try:
+			# Trigger the timer on the service
+			simulant.handle.on_timer( Context(sim, sim, sim.ipc), None )
+		except Exception as e:
+			sim.log.error( 'Runner', f'Service [{simulant.name}] timer error: {e}' )
 		return ErrorCode.ERROR_CONTINUE
 
 class Runner:

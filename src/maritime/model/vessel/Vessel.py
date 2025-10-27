@@ -7,6 +7,7 @@ from cos.model.vehicle.Vehicle import Vehicle
 from cos.core.utilities.ArgList import ArgList
 
 from enum import Enum, Flag
+from typing import Any
 import math, random
 
 class Type(Flag):
@@ -53,7 +54,7 @@ class Restriction(Flag):
     OTHER               = 0x80000000   # Catch-all for remaining values
 
 class Vessel(Vehicle):
-    def __init__(self, ctxt, type, id, config ):
+    def __init__(self, ctxt, type, id, config:dict ):
         """ Constructor
         Arguments
         	ctxt -- Simulation context
@@ -155,6 +156,7 @@ class Vessel(Vehicle):
         	ctxt -- Simulation context
         	args -- List of arguments
         """
+        self.__register_callbacks( ctxt, args )
         return
 
     def runnable(self, ctxt:Context, config):
@@ -200,6 +202,24 @@ class Vessel(Vehicle):
                     }
             }
 
+    def __register_callbacks(self, ctxt:Context, args:ArgList ):
+        """ Initializes the vessel
+        Arguments
+        	ctxt -- Simulation context
+        	args -- List of arguments
+        """
+        self.subscribe( "bridge.control", self.__bridge_control )
+        return
+
+    def __bridge_control(self, ctxt:Context, arg:Any):
+        """ Handles bridge control commands
+        Arguments
+        	ctxt -- Simulation context
+        	arg -- Message argumnt
+        """
+        self.actor.notify( ctxt, "bridge.control", arg )
+        return
+    
 if __name__ == "__main__":
 	test = Vessel( Type.POWER_DRIVEN )
 

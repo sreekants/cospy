@@ -5,7 +5,7 @@
 from maritime.model.vessel.Vessel import Vessel, Type
 
 class SeaPlane(Vessel):
-	def __init__( self, ctxt, id=None, config=None ):
+	def __init__( self, ctxt, id=None, config:dict=None ):
 		""" Constructor
 		Arguments
 			ctxt -- Simulation context

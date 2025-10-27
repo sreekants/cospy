@@ -2,20 +2,16 @@
 # Filename: Actor.py
 # Description: Impmenentation of a controller class for all sumulation objectsRunnerThread
 
+from cos.core.simulation.Behavior import Behavior, ActorBehavior
 from cos.core.kernel.BootLoader import BootLoader
 from cos.core.utilities.ArgList import ArgList
 from cos.core.kernel.Context import Context
 
-from enum import Enum
 import numpy as np
 
-class ActorBehavior(Enum):
-	"""Enum for the behavior classes for an actor."""
-	MOTION		= 1
-	DYNAMICS	= 2
 
 class Actor:
-	def __init__(self, ctxt:Context, config):
+	def __init__(self, ctxt:Context, config:dict):
 		""" Constructor
 		Arguments
 			ctxt -- Simulation context
@@ -23,7 +19,6 @@ class Actor:
 		"""
 		self.behaviors	= None
 		self.loop		= -1 	# Loop count
-		self.behaviors	= self.create_behavior(ctxt, config)
 		self.name		= config["name"]
 
 		# Initialize the simulation states
@@ -33,6 +28,8 @@ class Actor:
 		self.x			= null_vector
 		self.dx			= null_vector
 		self.d2x		= null_vector
+		
+		self.create_behavior(ctxt, config)
 		return
 
 	def init( self, rect ):
@@ -69,9 +66,12 @@ class Actor:
 
 		self.loop	= self.loop+1
 		for behavior in self.behaviors.values():
+			if behavior.type not in [ActorBehavior.MOTION, ActorBehavior.DYNAMICS]:
+				continue
+					
 			pos, dx		= behavior.update( world, self.loop, config )
 
-			self.d2x	= dx-self.dx		# Acceleration
+			self.d2x	= (dx-self.dx)/2.0	# Acceleration
 			self.dx		= dx				# Velocity
 			self.x		= behavior.position
 			self.rect	= pos				# Position
@@ -99,13 +99,13 @@ class Actor:
 		"""
 		return self.behaviors.get(ActorBehavior.MOTION)
 
-	def create_behavior(self, ctxt, config):
+	def create_behavior(self, ctxt, config:dict):
 		""" Creates a behavior from a configuration
 		Arguments
 			ctxt -- Simulation context
 			config -- Configuration attributes
 		"""
-		behaviors	= {}
+		self.behaviors	= {}
 
 		modules		= ArgList(config.get("behavior"))
 		if len(modules) == 0:
@@ -113,8 +113,13 @@ class Actor:
 
 
 		behavior_types = [
-				(ActorBehavior.MOTION, "motion"),
-				(ActorBehavior.DYNAMICS, "dynamics")
+				(ActorBehavior.MOTION, 				"motion"),
+				(ActorBehavior.DYNAMICS,			"dynamics"),
+				(ActorBehavior.SENSOR, 				"sensor"),
+
+				(ActorBehavior.CONTROL_MOTION, 		"control.motion"),
+				(ActorBehavior.CONTROL_DYNAMICS, 	"control.dynamics"),
+				(ActorBehavior.CONTROL_SENSOR, 		"control.sensor")
 			]
 
 		for type in behavior_types:
@@ -124,9 +129,14 @@ class Actor:
 
 			klassname, klass	= BootLoader.load_class( pkg )
 
-			behaviors[type[0]] = klass(ctxt, config)
+			self.behaviors[type[0]] = klass(ctxt, config)
 
-		return behaviors
+
+		# Initialize all behaviors after initial creation
+		for b in self.behaviors.values():
+			b.intialize( self, config )
+
+		return self.behaviors
 
 
 	def runnable(self, ctxt:Context, config):
@@ -140,6 +150,11 @@ class Actor:
 			if behavior.runnable(ctxt, config) == False:
 				return False
 		return True
+
+	def notify(self, ctxt:Context, method:str, arg:dict):
+		for behavior in self.behaviors.values():
+			behavior.notify( ctxt, method, arg )
+		return
 
 
 if __name__ == "__main__":

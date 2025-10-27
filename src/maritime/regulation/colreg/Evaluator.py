@@ -26,6 +26,8 @@ class Evaluator(Service):
 		self.poll_at		= 1
 		self.resolver		= Resolver()
 		self.API			= API()
+
+		self.monitor_timer	= Ticker( 0.5 )	# Monitor every half second
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -54,7 +56,8 @@ class Evaluator(Service):
 
 		# Monitor all the time. So so we do not miss any events
   		# in between signaling
-		self.monitor(ctxt)
+		if self.monitor_timer.signaled() == True:
+			self.monitor(ctxt)
 
 		if (self.timer is None) or (self.timer.signaled() == False):
 			return

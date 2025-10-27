@@ -3,20 +3,25 @@
 # Description: Base class for all motion behavior
 
 from cos.model.environment.Types import DynamicForce
+from cos.core.simulation.Behavior import Behavior, ActorBehavior
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 
 import numpy as np
 
 
-class MotionBehavior:
+class MotionBehavior(Behavior):
 	def __init__(self):
 		""" Constructor
 		"""
+		Behavior.__init__(self, ActorBehavior.MOTION)
+		
 		null_vector		= np.zeros(3)
 		self.x			= null_vector
 		self.dx			= null_vector
 		self.d2x		= null_vector
+		
+		self.movable	= True
 
 		self.forces	= {
 			DynamicForce.WIND_CURRENT : null_vector,
@@ -54,6 +59,9 @@ class MotionBehavior:
 			t -- Time on the simulation clock
 			config -- Configuration attributes
 		"""
+		if self.movable == False:
+			return self.rect, np.zeros(3)
+		
 		return self.move(world, t, config)
 
 	def ioctl(self, op, arg):
