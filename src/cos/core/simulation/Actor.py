@@ -29,9 +29,18 @@ class Actor:
 		self.dx			= null_vector
 		self.d2x		= null_vector
 		
-		self.create_behavior(ctxt, config)
 		return
 
+	def create(self, ctxt:Context, vehicle, config:dict):	
+		""" Creates the actor behaviors
+		Arguments
+			vehicle -- Vehicle object to create the actor for
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		self.create_behavior( ctxt, vehicle, config )
+		return
+	
 	def init( self, rect ):
 		""" Initializes an actor
 		Arguments
@@ -99,7 +108,7 @@ class Actor:
 		"""
 		return self.behaviors.get(ActorBehavior.MOTION)
 
-	def create_behavior(self, ctxt, config:dict):
+	def create_behavior(self, ctxt, vehicle, config:dict):
 		""" Creates a behavior from a configuration
 		Arguments
 			ctxt -- Simulation context
@@ -109,7 +118,7 @@ class Actor:
 
 		modules		= ArgList(config.get("behavior"))
 		if len(modules) == 0:
-			return behaviors
+			return self.behaviors
 
 
 		behavior_types = [
@@ -134,7 +143,7 @@ class Actor:
 
 		# Initialize all behaviors after initial creation
 		for b in self.behaviors.values():
-			b.intialize( self, config )
+			b.intialize( self, vehicle, config )
 
 		return self.behaviors
 

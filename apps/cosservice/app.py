@@ -30,6 +30,9 @@ class COSService:
 					return -1
 				
 				return 0
+			
+		if len(args) > 0:
+			print(f"Unknown command: {args[0]}")
 
 		return -1
 		

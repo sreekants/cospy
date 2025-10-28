@@ -45,7 +45,7 @@ class Examiner(Faculty):
 
 
 	def begin(self, ctxt:Context, situation):
-		""" Triggers the begining of a sutuation
+		""" Triggers the begining of a situation
 		Arguments
 			ctxt -- Simulation context
 			situation -- Situation reference
@@ -69,8 +69,7 @@ class Examiner(Faculty):
 			ctxt -- Simulation context
 			situation -- Situation reference
 		"""
-		# print( f'evaluate {self.scope}/{self.id}' )
-		return
+		pass
 
 	def score(self, ctxt:Context, situation, event:str):
 		""" Scores the rule
@@ -78,8 +77,7 @@ class Examiner(Faculty):
 			ctxt -- Simulation context
 			situation -- Situation reference
 		"""
-		# print( f'score {self.scope}' )
-		return
+		pass
 
 	def setup(self, ctxt:Context, config:ArgList):
 		""" Sets up the rule, loading its configurations
@@ -105,7 +103,7 @@ class Examiner(Faculty):
 		return
 
 	def __load_scorecard(self, ctxt:Context, file)->Automata:
-		""" TODO: __load_automata
+		""" Loads the scorecard from file
 		Arguments
 			ctxt -- Simulation context
 			file -- File path
@@ -118,7 +116,7 @@ class Examiner(Faculty):
 		return
 	
 	def __load_automata(self, ctxt:Context, file)->Automata:
-		""" TODO: __load_automata
+		""" Loads the automata from file
 		Arguments
 			ctxt -- Simulation context
 			file -- File path

@@ -17,6 +17,7 @@ class SpriteController:
 		ctxt			= Context( Simulation.instance() )
 		self.guid		= config["guid"]
 		self.actor		= Actor(ctxt, config)
+		self.actor.create( ctxt, None, config)
 		return
 
 	def get_position(self):

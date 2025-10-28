@@ -3,6 +3,8 @@
 # Description: Implementation of the BerthingExaminer class
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
+from cos.core.kernel.Context import Context
+from cos.core.utilities.ArgList import ArgList
 
 class BerthingExaminer(NavigationExaminer):
 	def __init__(self):

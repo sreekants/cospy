@@ -5,9 +5,7 @@
 from cos.core.simulation.SimulationThread import SimulationThread
 from cos.core.kernel.Subsystem import Subsystem
 from cos.core.kernel.Context import Context
-from cos.core.kernel.BootLoader import BootLoader
 from cos.core.utilities.ArgList import ArgList
-from cos.subsystem.network.RPCBroker import RPCBrokerThread, RPCBroker
 
 import time, asyncio, websockets, json, functools
 

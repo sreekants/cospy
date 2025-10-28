@@ -26,7 +26,7 @@ class Actor:
 		return self.vm.step(steps)
 		
 	def runnable(self):
-		return self.vm.runnable()
+		return self.vm.pending()
 
 	def notify( self, var:str, method:str, args:dict=None):
 		""" Invokes a method on the actor
@@ -73,12 +73,6 @@ class Actor:
 		"""
 		# Run the actor for a number of steps
 		service.actor.run(steps)
-
-		# Check if the actor is still runnable
-		if service.actor.runnable() == False:
-			service.actor.stop()
-			service.actor	= None
-
 		return
 
 if __name__ == "__main__":

@@ -26,6 +26,7 @@ class IPCChannel:
 class RPCChannel:
     def __init__(self, ctxt, address):
         self.object     = ctxt.sim.objects.get(address)
+        print(address)
         self.ctxt       = ctxt
         return
     

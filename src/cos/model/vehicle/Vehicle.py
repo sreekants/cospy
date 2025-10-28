@@ -82,6 +82,8 @@ class Vehicle(Object):
         self.intent         = Intent()
         self.mode           = ValueSet()
         
+        self.actor.create( ctxt, self, config )
+
         # Builds the values.
         self.build_values()
 
