@@ -10,13 +10,13 @@
 
 This repository contains the **core Python packages** for **COS — the Co-Simulation Operating System**, a platform aimed at running *very large numbers* of high-fidelity simulations to test autonomous systems via digital twins. COS is a **“testable metaverse”**: a controlled virtual world where autonomous software can be dropped into realistic scenarios, exercised at scale, and assessed with repeatable, data-driven evaluation.
 
-![Concept Diagram](docs/images/Datapipeline.png)
-
 ### What COS is trying to solve
 
 Testing autonomy (especially in safety-critical domains) is hard because the “interesting” edge cases are rare, expensive, and ethically difficult to reproduce in the real world. COS approaches this by treating testing as a *massively parallel simulation problem*. It introduces the concept of **“simulules”**—containerized simulation capsules designed to run on a workstation *or* on an HPC cluster. Each simulule represents one permutation of a scenario (e.g., environment + traffic + sensor noise + initial conditions), with the target autonomy stack inserted as a **digital twin**. ([GitHub][1])
 
 At scale, COS aims to orchestrate 100,000 to 10 million scenarios in parallel, store results in a database, and support downstream analysis/visualization through a performance dashboard workflow. While the motivating use case is **autonomous vessels**, the repo positions COS as **domain-agnostic** (maritime, road, rail, aerial). ([GitHub][1])
+
+![Concept Diagram](docs/images/Datapipeline.png)
 
 ### Architectural ideas (microkernel + plug-in “faculties”)
 
