@@ -42,7 +42,7 @@ From the top-level layout, this repo looks like the “core runtime + tooling”
 
 ### Research context (why it exists)
 
-Although generally applicable, COS is originally movivated as a safety assurance and compliance testing environment for maritime autonomy—especially around **COLREG** (collision regulations). The linked chapter *“[Safety Assurances of Autonomous Vessels](https://www.researchgate.net/publication/385274872_Safety_Assurances_in_Autonomous_Vessels)”* describes a virtual testing environment built on digital twins plus a test-management approach for generating and assessing navigational scenarios. 
+Although generally applicable, COS is originally movivated as a safety assurance and compliance testing environment for maritime autonomy—especially around **COLREG** (collision regulations). The linked paper *“[Safety Assurances of Autonomous Vessels](https://www.researchgate.net/publication/385274872_Safety_Assurances_in_Autonomous_Vessels)”* describes a virtual testing environment built on digital twins plus a test-management approach for generating and assessing navigational scenarios. 
 Later work, *[Legata - a domain language for regulatory compliance](https://www.researchgate.net/publication/386174675_Legata_-A_domain_language_for_regulatory_compliance)* demonstrates COS applications designed to integrate regulatory logic into scenario generation and evaluation pipelines. 
 
 To simmarize, `cospy` is best understood as the foundational software layer for COS—a microkernel-inspired, ROS-like, plug-in extensible co-simulation “operating system” focused on scaling autonomy validation from “a few hand-built scenarios” to “millions of systematically varied test cases,” with strong ties to maritime safety assurance research. 
