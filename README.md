@@ -38,7 +38,7 @@ From the top-level layout, this repo looks like the “core runtime + tooling”
 * `config/` (scenario/configuration material),
 * `idl/` (interface definitions),
 * `tools/` and `tests/`,
-* plus `docs/` and a “[Getting Started Guide](docs/GettingStarted.md)” linked from the README. 
+* plus `docs/` and a “[Getting Started Guide](docs/GettingStarted.md)” linked from this README. 
 
 ### Research context (why it exists)
 
