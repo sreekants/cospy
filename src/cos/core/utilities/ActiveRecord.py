@@ -191,6 +191,7 @@ class ActiveRecord:
 		c.execute( sql )
 		self.conn.commit()
 		c.close()
+		return
 
 	def add( self, values ):
 		""" Adds values to the database
@@ -234,6 +235,7 @@ class ActiveRecord:
 		c.execute(sql, values)
 		self.conn.commit()
 		c.close()
+		return
 
 	def get_object_list( self, criteria ):
 		""" Returns the ID of objects matching a criteria
@@ -245,6 +247,7 @@ class ActiveRecord:
 		idList	= []
 		for row in c:
 			idList.append( row[0] )
+		c.close()
 		return idList
 
 	def get_object_count( self, criteria=None ):
@@ -313,6 +316,7 @@ class ActiveRecord:
 		c.execute('UPDATE {} SET {}=? WHERE id=?'.format(self.table, field), t)
 		self.conn.commit()
 		c.close()
+		return
 
 	def get( self, oid, field ):
 		""" Returns the field value of an object
@@ -401,6 +405,7 @@ class ActiveRecord:
 		c.execute('DELETE FROM {} WHERE {} IN(?)'.format(self.table, field), t )
 		self.conn.commit()
 		c.close()
+		return
 
 
 
