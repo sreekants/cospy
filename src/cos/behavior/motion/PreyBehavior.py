@@ -21,6 +21,22 @@ class PreyBehavior(FleetBehavior):
 		FleetBehavior.__init__(self, ctxt, config)
 		return
 
+	def update(self, world, t, config, obstacles=None):
+		""" Updates the behavior
+		Arguments
+			world -- World object
+			t -- Current time step
+			config -- Configuration attributes
+			obstacles -- List of obstacles in the world (optional)
+		"""
+
+		predators = self.scan(world, t, config, obstacles)
+
+		if predators is None:
+			return self.follow_herd(world, t, config, obstacles)
+		else:
+			return self.escape(predators, world, t, config, obstacles)
+
 		
 
 if __name__ == "__main__":
