@@ -17,6 +17,8 @@ class Type(Flag):
     SAILING             = 0x00000100   # Sail driven vessel
     SEAPLANE            = 0x00100001   # Sea plane
     WIG                 = 0x00200001   # Wing in ground crafts
+    META_VESSEL         = 0x10000000   # Meta vessel (for grouping and other purposes)         
+    FLEET               = 0x10001000   # Fleet of vessels
 
 class Operation(Flag):
     """Enum for the different types of vessel by operation."""
