@@ -16,6 +16,7 @@ oauthlib
 pandas
 pillow
 pipx
+ply
 psutil
 py-trees
 pydantic

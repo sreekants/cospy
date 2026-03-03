@@ -15,11 +15,16 @@ class ControlBehavior(Behavior):
 		self.motion		= None
 		return
 
-	def intialize(self, actor, vehicle, config:dict):
+	def intialize(self, ctxt, actor, vehicle, config:dict):
 		""" Initialize the behavior for the actor
 		Arguments
+			ctxt -- Simulation context
 			actor -- Actor to initialize the behavior for
+			vehicle -- Vehicle object to create the actor for
+			config -- Configuration attributes
 		"""
+		Behavior.intialize(self, ctxt, actor, vehicle, config)
+		
 		self.motion		= actor.behaviors.get(ActorBehavior.MOTION, None)
 		return
 

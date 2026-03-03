@@ -23,3 +23,9 @@ packages:
        service: Builder.PowerDrivenVessels
        args: Type=WIG scenario=$(TRAFFIC)
        database: $(SIMULATION)/vessel.s3db
+
+     - name: Fleets
+       module: maritime.model.vessel.Builder
+       service: Builder.Fleets
+       args: Type=FLEET scenario=$(TRAFFIC)
+       database: $(SIMULATION)/vessel.s3db

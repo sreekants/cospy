@@ -4,7 +4,6 @@
 
 from typing import List
 
-from cos.behavior.motion.FleetBehavior import FleetBehavior
 from cos.behavior.motion.MotionBehavior import MotionBehavior
 from cos.core.kernel.Configuration import Configuration
 from cos.model.vehicle.Vehicle import Vehicle
@@ -23,14 +22,24 @@ class FleetBehavior(MotionBehavior):
 		"""
 		MotionBehavior.__init__(self)
 
+		self.members	= None	# List of vessel names in the fleet
+		self.vessels	= None	# List of vessel objects in the fleet
+
 		args		= self.get_settings( config )
 		if ('membership' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
 			self.load( ctxt, ctxt.sim.config.resolve(args['membership']) )
 		
-		self.members	= None	# List of vessel names in the fleet
-		self.vessels	= None	# List of vessel objects in the fleet
 		return
 
+	def intialize(self, ctxt, actor, vehicle, config:dict):
+		""" Initialize the behavior for the actor
+		Arguments
+			actor -- Actor to initialize the behavior for
+		"""
+		MotionBehavior.intialize(self, ctxt, actor, vehicle, config)
+
+		self.resolve(ctxt.sim)
+		return
 		
 	def load(self, ctxt, filename):
 		""" Loads the behavior
@@ -50,7 +59,7 @@ class FleetBehavior(MotionBehavior):
 				rownum	= rownum+1
 				continue
 
-			self.members.append(member[0])
+			self.members.append((member[1].strip(), member[2]))
 
 		return
 
@@ -61,28 +70,32 @@ class FleetBehavior(MotionBehavior):
 			t -- Time step
 			config -- Configuration attributes
 		"""
-		if self.vessels is None:
-			self.__resolve(world.ctxt)
-
 		for vessel in self.vessels:
 			self.move_vessel(world.ctxt, vessel)
 
 		return
 
 	
-	def __resolve(self, ctxt):
-		""" Resolves the behavior
+	def resolve(self, sim):
+		""" Resolves the vessels in the fleet based on the member names
 		Arguments
 			ctxt -- Simulation context
 		"""
+
+		# If the vessels have already been resolved, do nothing
 		if self.members is None:
 			return
 
+		#print(sim.objects.dump())
+
+		# Resolve the vessel objects based on the member names
 		self.vessels = []
-		for member in self.members:
-			vessel = ctxt.sim.get_vessel(member)
+		for id, type in self.members:
+			vessel	= sim.objects.find("/World/Vehicle/Vessel", id )
 			if vessel is not None:
-				self.vessels.append(vessel)
+				self.vessels.append((vessel, type))
+			else:
+				self.log.info( "Fleet", f"Warning: Vessel with id '{id}' not found in the simulation.")
 
 		self.members = None	# Clear the members list to save memory
 		return
@@ -122,6 +135,18 @@ class FleetBehavior(MotionBehavior):
 	def get_positions(self):
 		"""Return current positions of all vehicles."""
 		return [(v, v.location, v.velocity) for v in self.vessels]
+
+	@property
+	def position(self):
+		""" Returns the current position
+		"""
+		return self.x
+
+	@property
+	def velocity(self):
+		""" Returns the current velocity
+		"""
+		return self.dx
 
 if __name__ == "__main__":
 	test = FleetBehavior()

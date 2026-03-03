@@ -21,7 +21,9 @@ class Builder(BuilderBaseClass):
 			"POWER_DRIVEN": (100000, "maritime.model.vessel.PowerDrivenVessel"),
 			"SAILING": (200000, "maritime.model.vessel.SailingVessel"),
 			"SEAPLANE": (300000, "maritime.model.vessel.SeaPlane"),
-			"WIG": (400000, "maritime.model.vessel.WIG")
+			"WIG": (400000, "maritime.model.vessel.WIG"),
+
+			"FLEET": (800000, "maritime.model.vessel.Fleet")
 			},
 			'Vehicle' )
 

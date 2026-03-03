@@ -19,6 +19,18 @@ class PreyBehavior(FleetBehavior):
 			config -- Configuration attributes
 		"""
 		FleetBehavior.__init__(self, ctxt, config)
+		self.predators = None	# List of predator objects in the world
+		return
+
+
+	def intialize(self, ctxt, actor, vehicle, config:dict):
+		""" Initialize the behavior for the actor
+		Arguments
+			actor -- Actor to initialize the behavior for
+		"""
+		FleetBehavior.intialize(self, ctxt, actor, vehicle, config)
+
+		# TODO: Resolve all predators in the world and store them for later use
 		return
 
 	def update(self, world, t, config, obstacles=None):
@@ -30,13 +42,31 @@ class PreyBehavior(FleetBehavior):
 			obstacles -- List of obstacles in the world (optional)
 		"""
 
-		predators = self.scan(world, t, config, obstacles)
-
-		if predators is None:
+		if self.predators is None:
 			return self.follow_herd(world, t, config, obstacles)
 		else:
-			return self.escape(predators, world, t, config, obstacles)
+			return self.escape(self.predators, world, t, config, obstacles)
 
+	def follow_herd(self, world, t, config, obstacles=None):
+		""" Follows the herd behavior
+		Arguments
+			world -- World object
+			t -- Current time step
+			config -- Configuration attributes
+			obstacles -- List of obstacles in the world (optional)
+		"""
+		return	
+	
+	def escape(self, predators, world, t, config, obstacles=None):
+		""" Escapes from predators
+		Arguments
+			predators -- List of predator objects in the world
+			world -- World object
+			t -- Current time step
+			config -- Configuration attributes
+			obstacles -- List of obstacles in the world (optional)
+		"""
+		return
 		
 
 if __name__ == "__main__":

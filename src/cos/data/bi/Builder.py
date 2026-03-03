@@ -3,6 +3,7 @@
 # Description: Implementation of the Builder class
 
 from cos.data.bi.Metadata import Metadata
+from cos.data.bi.Analyzer import Analyzer
 from cos.core.utilities.ActiveRecord import ActiveRecord
 
 import sqlite3,os, math
@@ -30,7 +31,7 @@ class Builder:
 	def calculate_maxrange(self, files:list):
 		maxid		= 0			
 		for f in files:
-			idrange		= Metadata.get_rowrange(f)
+			idrange		= Analyzer.get_rowrange(f)
 			if idrange[1] > maxid:
 				maxid	= idrange[1]
 

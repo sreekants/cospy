@@ -143,7 +143,7 @@ class Actor:
 
 		# Initialize all behaviors after initial creation
 		for b in self.behaviors.values():
-			b.intialize( self, vehicle, config )
+			b.intialize( ctxt, self, vehicle, config )
 
 		return self.behaviors
 
