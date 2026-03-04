@@ -30,8 +30,8 @@ class Prey(Boid):
         return
 
     @staticmethod
-    def create(speed: float, screen: Vector):
-        pos = Vector(random.uniform(0, screen.x), random.uniform(0, screen.y))
+    def create(speed: float, area: Vector):
+        pos = Vector(random.uniform(0, area.x), random.uniform(0, area.y))
         angle = random.uniform(-math.pi, math.pi)
         vel = Vector.from_angle(angle) * speed
         return Prey(pos, vel)

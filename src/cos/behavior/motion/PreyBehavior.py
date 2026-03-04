@@ -20,6 +20,7 @@ class PreyBehavior(FleetBehavior):
 		"""
 		FleetBehavior.__init__(self, ctxt, config)
 		self.predators = None	# List of predator objects in the world
+        self.preys = [Prey.create(self.prey_cfg.speed, screen_vec) for _ in range(self.prey_cfg.count)]
 		return
 
 

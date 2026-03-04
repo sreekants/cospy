@@ -8,11 +8,9 @@ Single-file rewrite of the JS repo:
 - Console application: run from terminal: python main.py
 """
 
-from __future__ import annotations
 
 import math
-from dataclasses import dataclass
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 from cos.math.geometry.Vector import Vector
 from cos.behavior.swarm.Prey import Prey   
 from cos.behavior.swarm.Predator import Predator
@@ -71,16 +69,6 @@ CONFIG = {
         "print_stats_every_n_frames": 120,
     }
 }
-
-
-
-
-# Toroidal wraparound helpers (conceptually like js/vector.js)
-
-# =========================
-# util.js equivalents
-# =========================
-
 
 
 
