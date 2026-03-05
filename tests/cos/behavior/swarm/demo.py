@@ -105,10 +105,6 @@ def drawLine(
     pygame.draw.line(surface, color, (a.x, a.y), (b.x, b.y), width)
 
 
-
-
-
-
 def render(
     surface: pygame.Surface,
     preyList: List[Prey],
@@ -167,7 +163,6 @@ def main() -> int:
 
     while True:
         dt = clock.tick(fps)  # milliseconds since last frame (not used; JS was fixed-step)
-        keys = pygame.key.get_pressed()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -185,7 +180,7 @@ def main() -> int:
         world = Toroid(screen_vec)
         if not paused:
             swarm.movePredators(world)
-            swarm.movePrey(world, keys)
+            swarm.movePrey(world)
 
         render(surface, swarm.preyList, swarm.predatorList, world)
         pygame.display.flip()

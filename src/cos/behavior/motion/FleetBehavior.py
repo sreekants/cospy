@@ -22,8 +22,7 @@ class FleetBehavior(MotionBehavior):
 		"""
 		MotionBehavior.__init__(self)
 
-		self.members	= None	# List of vessel names in the fleet
-		self.vessels	= None	# List of vessel objects in the fleet
+		self.members	= []	# List of vessel names in the fleet
 
 		args		= self.get_settings( config )
 		if ('membership' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
@@ -47,8 +46,6 @@ class FleetBehavior(MotionBehavior):
 			ctxt -- Simulation context
 			filename -- File name
 		"""
-
-		self.members 	= []
 		data 			= ctxt.sim.fs.read_file(filename)
 		memberlist 		= csv.reader(StringIO(data), delimiter=',')
 		rownum 			= 0
@@ -59,8 +56,18 @@ class FleetBehavior(MotionBehavior):
 				rownum	= rownum+1
 				continue
 
-			self.members.append((member[1].strip(), member[2]))
+			self.append_member( ctxt, member[1].strip(), int(member[2]) )
 
+		return
+	
+	def append_member(self, ctxt, vessel, type):
+		""" Appends a member to the fleet
+		Arguments
+			ctxt -- Simulation context
+			vessel -- Vessel object to append
+			type -- Type of the vessel (e.g., "leader", "follower")
+		"""
+		self.members.append((vessel, type))
 		return
 
 	def move(self, world, t, config):

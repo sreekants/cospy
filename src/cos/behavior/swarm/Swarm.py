@@ -2,18 +2,18 @@
 # Filename: Swarm.py
 # Description: Implementation of the Swarm class
 
-from cos.behavior.swarm.Prey import Prey, Config as PreyConfig
-from cos.behavior.swarm.Predator import Predator, Config as PredatorConfig
+from cos.behavior.swarm.Prey import Prey
+from cos.behavior.swarm.Predator import Predator
 from typing import List
 from cos.math.geometry.Vector import Vector
 
 class Swarm:
-    def __init__(self, CONFIG, screen_vec):
-        self.prey_cfg = PreyConfig()
-        self.pred_cfg = PredatorConfig()
+    def __init__(self, prey_cfg, pred_cfg, area=None):
+        self.prey_cfg = prey_cfg
+        self.pred_cfg = pred_cfg
 
-        self.preyList = [Prey.create(self.prey_cfg.speed, screen_vec) for _ in range(self.prey_cfg.count)]
-        self.predatorList = [Predator.create(self.pred_cfg.speed, screen_vec) for _ in range(self.pred_cfg.count)]
+        self.preyList       = [Prey.create(prey_cfg.speed, area) for _ in range(prey_cfg.count)]
+        self.predatorList   = [Predator.create(pred_cfg.speed, area) for _ in range(pred_cfg.count)]
         return
 
     def movePredators(self, world):
@@ -23,10 +23,9 @@ class Swarm:
         # Move each predator (may remove prey)
         for pred in self.predatorList:
             pred.move(self.preyList, world, self.pred_cfg)
-    
+        return
 
-    def movePrey(self, world, keys):
-
+    def movePrey(self, world):
         if not self.preyList:
             return
 
@@ -44,6 +43,8 @@ class Swarm:
                 world=world,
                 cfg=self.prey_cfg
             )
+
+        return
 
     def calcNeighbourDists(
         self,
@@ -84,6 +85,7 @@ class Swarm:
                     tooFar[i].append(disp.normalize())
 
             avgDist[i] = dist_sum / (n - 1)
+            
         return tooClose, tooFar, avgDist
 
 

@@ -4,6 +4,10 @@
 
 from cos.behavior.motion.FleetBehavior import FleetBehavior
 from cos.behavior.motion.MotionBehavior import MotionBehavior
+from cos.behavior.swarm.Prey import Prey
+from cos.behavior.swarm.Predator import Predator
+from cos.behavior.swarm.Swarm import Swarm
+
 from cos.core.kernel.Configuration import Configuration
 from cos.math.geometry.Distance import Distance
 from io import StringIO
@@ -19,20 +23,27 @@ class PreyBehavior(FleetBehavior):
 			config -- Configuration attributes
 		"""
 		FleetBehavior.__init__(self, ctxt, config)
-		self.predators = None	# List of predator objects in the world
-        self.preys = [Prey.create(self.prey_cfg.speed, screen_vec) for _ in range(self.prey_cfg.count)]
+
+		self.swarm	= Swarm()
 		return
 
 
-	def intialize(self, ctxt, actor, vehicle, config:dict):
-		""" Initialize the behavior for the actor
+	def append_member(self, ctxt, vessel, type):
+		""" Appends a member to the fleet
 		Arguments
-			actor -- Actor to initialize the behavior for
+			ctxt -- Simulation context
+			vessel -- Vessel object to append
+			type -- Type of the vessel (e.g., "leader", "follower")
 		"""
-		FleetBehavior.intialize(self, ctxt, actor, vehicle, config)
 
-		# TODO: Resolve all predators in the world and store them for later use
+		FleetBehavior.append_member(self, ctxt, vessel, type)
+
+		if type == 100000:	
+			self.preys.append(vessel)
+		elif type == 200000:	
+			self.predators.append(vessel)
 		return
+
 
 	def update(self, world, t, config, obstacles=None):
 		""" Updates the behavior
@@ -43,7 +54,7 @@ class PreyBehavior(FleetBehavior):
 			obstacles -- List of obstacles in the world (optional)
 		"""
 
-		if self.predators is None:
+		if not self.predators:
 			return self.follow_herd(world, t, config, obstacles)
 		else:
 			return self.escape(self.predators, world, t, config, obstacles)
