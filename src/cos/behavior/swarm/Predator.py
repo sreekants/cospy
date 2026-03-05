@@ -36,7 +36,7 @@ class Predator(Boid):
 
     def move(
         self,
-        preyList: List[Prey],
+        preyList,
         world,
         cfg
     ):
@@ -76,6 +76,21 @@ class Predator(Boid):
         self.pos = world.bound(self.pos+self.vel)
 
 		
+    @staticmethod
+    def motion(swarm, world, cfg, actors):
+        if not actors:
+            return
+
+        preyList    = None
+        for g in swarm.groups:
+            if g[0] == 'prey':
+                preyList    = g[2]
+                break
+
+        # Move each predator (may remove prey)
+        for pred in actors:
+            pred.move(preyList, world, cfg)
+        return
 
 if __name__ == "__main__":
 	test = Predator()

@@ -96,6 +96,83 @@ class Prey(Boid):
         self.pos = world.bound(self.pos+self.vel)
 
 		
+    @staticmethod
+    def motion(swarm, world, cfg, actors):
+        if not actors:
+            return
+
+        # Precompute neighbor info
+        tooClose, tooFar, avgDist = Prey.calcNeighbourDists(cfg.minSeparation, world, actors)
+        meanHeading = Prey.calcMeanHeading(actors)
+
+        for i in range(0, len(actors)):
+            actors[i].move(
+                tooClose=tooClose[i],
+                tooFar=tooFar[i],
+                avgDist=avgDist[i],
+                meanHeading=meanHeading,
+                predatorList=actors,
+                world=world,
+                cfg=cfg
+            )
+
+        return
+
+
+    @staticmethod
+    def calcNeighbourDists(
+        minSeparation: float,
+        world,
+        actors
+        ):
+        """
+        For each prey i:
+            - tooClose[i] : list of vectors pointing away from neighbors closer than minSeparation
+            - tooFar[i]   : list of unit vectors pointing toward neighbors farther than minSeparation
+            - avgDist[i]  : average distance to all other prey
+        """
+        n = len(actors)
+        tooClose: List[List[Vector]] = [[] for _ in range(n)]
+        tooFar: List[List[Vector]] = [[] for _ in range(n)]
+        avgDist: List[float] = [0.0 for _ in range(n)]
+
+        if n <= 1:
+            return tooClose, tooFar, avgDist
+
+        for i in range(n):
+            dist_sum = 0.0
+            for j in range(n):
+                if i == j:
+                    continue
+                disp = world.shortestBoundedPathTo(actors[i].pos, actors[j].pos)  # i->j
+                d = disp.norm()
+                dist_sum += d
+
+                if d < 1e-9:
+                    continue
+
+                if d < minSeparation:
+                    # vector pointing away from neighbor: -(i->j)
+                    tooClose[i].append((disp * -1.0).normalize())
+                else:
+                    # vector pointing toward neighbor
+                    tooFar[i].append(disp.normalize())
+
+            avgDist[i] = dist_sum / (n - 1)
+            
+        return tooClose, tooFar, avgDist
+
+
+    @staticmethod
+    def calcMeanHeading(actors):
+        """Average (normalized) heading of all prey."""
+        if not actors:
+            return Vector(0.0, 0.0)
+        s = Vector(0.0, 0.0)
+        for p in actors:
+            s = s + p.vel.normalize()
+        return s.normalize()
+
 
 if __name__ == "__main__":
 	test = Prey()

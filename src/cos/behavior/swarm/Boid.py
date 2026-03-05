@@ -38,6 +38,7 @@ class Boid:
 		return angle
 
 
+
 if __name__ == "__main__":
 	test = Boid()
 

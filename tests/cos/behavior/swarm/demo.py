@@ -17,6 +17,9 @@ from cos.behavior.swarm.Predator import Predator
 from cos.behavior.swarm.Swarm import Swarm
 from Toroid import Toroid
 
+from cos.behavior.swarm.Prey import Config as PreyConfig
+from cos.behavior.swarm.Predator import Config as PredatorConfig
+
 import pygame
 
 
@@ -105,12 +108,7 @@ def drawLine(
     pygame.draw.line(surface, color, (a.x, a.y), (b.x, b.y), width)
 
 
-def render(
-    surface: pygame.Surface,
-    preyList: List[Prey],
-    predatorList: List[Predator],
-    world: Toroid
-) -> None:
+def render( surface, groups, world, preyList, predatorList ):
     surface.fill(CONFIG["env"]["bg"])
 
     # Draw prey
@@ -135,6 +133,43 @@ def render(
             end = pred.pos+disp
             drawLine(surface, pred.pos, end, (0, 0, 255), 1)
 
+    return 
+
+    for typename, cfg, actors, fn in groups:
+        match typename:
+            case 'prey':
+                # Draw prey
+                prey_tri = CONFIG["prey"]["triangle"]
+                for i, p in enumerate(actors):
+                    color = (255, 0, 0) if i == 0 else (0, 0, 0)
+                    drawTriangle(surface, p.pos, p.vel, color, prey_tri["length"], prey_tri["width"])
+
+            case 'predator':
+                # Draw predators + optional target line
+                pred_tri = CONFIG["predator"]["triangle"]
+                for pred in actors:
+                    drawTriangle(surface, pred.pos, pred.vel, (0, 0, 255), pred_tri["length"], pred_tri["width"])
+
+                    if pred.target_index is None:
+                        continue
+
+                    if CONFIG["debug"]["draw_predator_target_line"] and pred.target_index < len(preyList):
+                        # draw shortest bounded line: show line to the wrapped target position
+                        target = preyList[pred.target_index].pos
+                        disp = world.shortestBoundedPathTo(pred.pos, target)
+                        # end point in screen coordinates:
+                        end = pred.pos+disp
+                        drawLine(surface, pred.pos, end, (0, 0, 255), 1)
+
+
+def createSwarm(screen_vec):
+    swarm = Swarm()
+
+    preycfg = PreyConfig()
+    predcfg = PredatorConfig()
+    preyList = swarm.setPreys(preycfg, [Prey.create(preycfg.speed, screen_vec) for _ in range(preycfg.count)])
+    predList = swarm.setPredators(predcfg, [Predator.create(predcfg.speed, screen_vec) for _ in range(predcfg.count)])
+    return swarm, preyList, predList
 
 def main() -> int:
     pygame.init()
@@ -148,7 +183,7 @@ def main() -> int:
     surface = pygame.display.set_mode((width, height))
     clock = pygame.time.Clock()
 
-    swarm = Swarm(CONFIG, screen_vec)
+    swarm, preyList, predList = createSwarm(screen_vec)
 
     paused = False
     frame = 0
@@ -175,23 +210,22 @@ def main() -> int:
                 if event.key == pygame.K_SPACE:
                     paused = not paused
                 if event.key == pygame.K_r:
-                    swarm = Swarm(CONFIG, screen_vec)
+                    swarm, preyList, predList = createSwarm(screen_vec)
 
         world = Toroid(screen_vec)
         if not paused:
-            swarm.movePredators(world)
-            swarm.movePrey(world)
+            swarm.move(world)
 
-        render(surface, swarm.preyList, swarm.predatorList, world)
+        render(surface, swarm.groups, world, preyList, predList)
         pygame.display.flip()
 
         frame += 1
         n = CONFIG["debug"]["print_stats_every_n_frames"]
         if n and frame % n == 0:
-            print(f"[frame {frame}] prey={len(swarm.preyList)} predators={len(swarm.predatorList)} paused={paused}")
+            print(f"[frame {frame}] prey={len(preyList)} predators={len(predList)} paused={paused}")
 
         # If all prey are dead, keep running but print once
-        if len(swarm.preyList) == 0 and frame % (fps * 2) == 0:
+        if len(preyList) == 0 and frame % (fps * 2) == 0:
             print("All prey eliminated. Press R to reset.")
 
     # unreachable
