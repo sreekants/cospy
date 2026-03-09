@@ -10,6 +10,60 @@ from cos.behavior.swarm.Swarm import Swarm
 from cos.math.geometry.Rectangle import Rectangle
 from cos.math.geometry.Point import Point
 from cos.math.geometry.Vector import Vector
+from maritime.traffic import actor
+
+class WorldAdapter:
+	""" Adapter class to provide a consistent interface for the swarm behavior to interact with the simulation world.
+	"""
+	def __init__(self, world):
+		self.world = world
+		return
+
+
+	def bound(self, pos: Vector) -> Vector:
+		"""Wrap position around zone (toroidal world)."""
+		x = pos.x
+		y = pos.y
+		return Vector(x, y)
+
+
+	def shortestBoundedPathTo(self, a: Vector, b: Vector) -> Vector:
+		"""
+		Shortest displacement vector from a -> b in a toroidal world.
+		Arguments
+			a -- start point
+			b -- end point
+		"""
+		dx = b.x - a.x
+		dy = b.y - a.y
+
+		return Vector(dx, dy)
+
+
+	def boundedDist(self, a: Vector, b: Vector) -> float:
+		return self.shortestBoundedPathTo(a, b).norm()
+
+class PreyAdapter(Prey):
+	def __init__(self, pos: Point, vel: Vector, ref=None):
+		Prey.__init__(self, pos, vel, ref)
+		return
+
+	def move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg ):	
+		Prey.move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg )
+		actor 		 		= self.ref.actor
+		actor.rect.center	= (self.pos.x, self.pos.y)
+		return
+
+class PredatorAdapter(Predator):
+	def __init__(self, pos: Point, vel: Vector, ref=None):
+		Predator.__init__(self, pos, vel, ref)
+		return
+
+	def move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg ):	
+		Predator.move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg )
+		actor 		 		= self.ref.actor
+		actor.rect.center	= (self.pos.x, self.pos.y)
+		return
 
 class PreyBehavior(FleetBehavior):
 	def __init__(self, ctxt, config):
@@ -35,8 +89,12 @@ class PreyBehavior(FleetBehavior):
 		preycfg = PreyConfig()
 		predcfg = PredatorConfig()
 
+		preycfg.speed  = -0.5
+		predcfg.speed  = -0.5
+
 		preys = []
 		predators = []
+
 
 		for v in self.vessels:
 			vessel	= v[0]
@@ -49,9 +107,9 @@ class PreyBehavior(FleetBehavior):
 			vel		= Vector(X[0], X[1])
 
 			if type == 100000:
-				preys.append(Prey(pos, vel))
+				preys.append(PreyAdapter(pos, vel, vessel))
 			elif type == 200000:
-				predators.append(Predator(pos, vel))	
+				predators.append(PredatorAdapter(pos, vel, vessel))	
 
 		# Resolve the members to the swarm behavior
 		self.swarm.setPreys(preycfg, preys )
@@ -85,7 +143,7 @@ class PreyBehavior(FleetBehavior):
 		"""
 
 		# Update the swarm behavior
-		#self.swarm.move(world)
+		self.swarm.move(WorldAdapter(world))
 		return None, None
 		
 
