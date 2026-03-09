@@ -11,9 +11,9 @@ class Toroid:
 
 	def bound(self, pos: Vector) -> Vector:
 		"""Wrap position around zone (toroidal world)."""
-		x = pos.x % self.zone.x
-		y = pos.y % self.zone.y
-		return Vector(x, y)
+		x = (pos.x-self.zone.x) % self.zone.width
+		y = (pos.y-self.zone.y) % self.zone.height
+		return Vector(self.zone.x + x, self.zone.y + y)
 
 
 	def shortestBoundedPathTo(self, a: Vector, b: Vector) -> Vector:
@@ -27,16 +27,16 @@ class Toroid:
 		dy = b.y - a.y
 
 		# Wrap dx into (-W/2, W/2]
-		if dx > self.zone.x / 2:
-			dx -= self.zone.x
-		elif dx < -self.zone.x / 2:
-			dx += self.zone.x
+		if dx > self.zone.width / 2:
+			dx -= self.zone.width
+		elif dx < -self.zone.width / 2:
+			dx += self.zone.width
 
 		# Wrap dy into (-H/2, H/2]
-		if dy > self.zone.y / 2:
-			dy -= self.zone.y
-		elif dy < -self.zone.y / 2:
-			dy += self.zone.y
+		if dy > self.zone.height / 2:
+			dy -= self.zone.height
+		elif dy < -self.zone.height / 2:
+			dy += self.zone.height
 
 		return Vector(dx, dy)
 

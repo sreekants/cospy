@@ -2,6 +2,7 @@
 # Filename: Predator.py
 # Description: Implementation of the Predator class
 
+from cos.math.geometry.Rectangle import Rectangle
 from cos.math.geometry.Vector import Vector
 from cos.behavior.swarm.Prey import Prey
 from cos.behavior.swarm.Boid import Boid
@@ -17,9 +18,6 @@ class Config:
         self.maxTurnAngle = math.radians(8.0)
         return
 
-# =========================
-# Predator class (js/predator.js)
-# =========================
 class Predator(Boid):
     def __init__(self, pos: Vector, vel: Vector):
         Boid.__init__(self)
@@ -28,8 +26,8 @@ class Predator(Boid):
         self.target_index: Optional[int] = None  # for debug line
 
     @staticmethod
-    def create(speed: float, screen: Vector) -> "Predator":
-        pos = Vector(random.uniform(0, screen.x), random.uniform(0, screen.y))
+    def create(speed: float, area: Rectangle) -> "Predator":
+        pos = Vector(area.x+random.uniform(0, area.width), area.y+random.uniform(0, area.height))
         angle = random.uniform(-math.pi, math.pi)
         vel = Vector.from_angle(angle) * speed
         return Predator(pos, vel)

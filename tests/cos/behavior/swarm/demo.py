@@ -12,6 +12,7 @@ Single-file rewrite of the JS repo:
 import math
 from typing import List, Tuple
 from cos.math.geometry.Vector import Vector
+from cos.math.geometry.Rectangle import Rectangle
 from cos.behavior.swarm.Prey import Prey   
 from cos.behavior.swarm.Predator import Predator
 from cos.behavior.swarm.Swarm import Swarm
@@ -54,8 +55,8 @@ CONFIG = {
     },
     "predator": {
         "count": 2,
-        "speed": 3.2,
-        "maxTurnAngle": math.radians(8.0),
+        "speed": 5.0,
+        "maxTurnAngle": math.radians(5.0),
         "killDist": 10.0,
         "triangle": {
             "length": 16,
@@ -178,7 +179,7 @@ def main() -> int:
     width = CONFIG["env"]["width"]
     height = CONFIG["env"]["height"]
     fps = CONFIG["env"]["fps"]
-    screen_vec = Vector(float(width), float(height))
+    screen_vec = Rectangle(0.0, 0.0, float(width), float(height))
 
     surface = pygame.display.set_mode((width, height))
     clock = pygame.time.Clock()

@@ -4,8 +4,8 @@
 
 from cos.behavior.motion.FleetBehavior import FleetBehavior
 from cos.behavior.motion.MotionBehavior import MotionBehavior
-from cos.behavior.swarm.Prey import Prey
-from cos.behavior.swarm.Predator import Predator
+from cos.behavior.swarm.Prey import Prey, Config as PreyConfig
+from cos.behavior.swarm.Predator import Predator, Config as PredatorConfig
 from cos.behavior.swarm.Swarm import Swarm
 
 from cos.core.kernel.Configuration import Configuration
@@ -14,6 +14,8 @@ from io import StringIO
 from math import cos,sin,atan2
 import numpy as np
 import csv
+
+from tests.cos.behavior import swarm
 
 class PreyBehavior(FleetBehavior):
 	def __init__(self, ctxt, config):
@@ -24,7 +26,27 @@ class PreyBehavior(FleetBehavior):
 		"""
 		FleetBehavior.__init__(self, ctxt, config)
 
-		self.swarm	= Swarm()
+		self.swarm			= Swarm()
+		self.preys			= []
+		self.predators		= [] 
+		return
+
+	def load(self, ctxt, filename):
+		""" Loads the behavior
+		Arguments
+			ctxt -- Simulation context
+			filename -- File name
+		"""
+		FleetBehavior.load(self, ctxt, filename)
+
+
+		preycfg = PreyConfig()
+		predcfg = PredatorConfig()
+
+		ctxt.sim
+		preyList = self.swarm.setPreys(preycfg, [Prey.create(preycfg.speed, screen_vec) for _ in range(preycfg.count)])
+		predList = self.swarm.setPredators(predcfg, [Predator.create(predcfg.speed, screen_vec) for _ in range(predcfg.count)])
+
 		return
 
 
@@ -54,30 +76,8 @@ class PreyBehavior(FleetBehavior):
 			obstacles -- List of obstacles in the world (optional)
 		"""
 
-		if not self.predators:
-			return self.follow_herd(world, t, config, obstacles)
-		else:
-			return self.escape(self.predators, world, t, config, obstacles)
-
-	def follow_herd(self, world, t, config, obstacles=None):
-		""" Follows the herd behavior
-		Arguments
-			world -- World object
-			t -- Current time step
-			config -- Configuration attributes
-			obstacles -- List of obstacles in the world (optional)
-		"""
-		return	
-	
-	def escape(self, predators, world, t, config, obstacles=None):
-		""" Escapes from predators
-		Arguments
-			predators -- List of predator objects in the world
-			world -- World object
-			t -- Current time step
-			config -- Configuration attributes
-			obstacles -- List of obstacles in the world (optional)
-		"""
+		# Update the swarm behavior
+		self.swarm.move(world)
 		return
 		
 

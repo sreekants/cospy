@@ -23,11 +23,7 @@ class FleetBehavior(MotionBehavior):
 		MotionBehavior.__init__(self)
 
 		self.members	= []	# List of vessel names in the fleet
-
-		args		= self.get_settings( config )
-		if ('membership' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
-			self.load( ctxt, ctxt.sim.config.resolve(args['membership']) )
-		
+		self.vessels	= []	# List of vessel objects in the fleet		
 		return
 
 	def intialize(self, ctxt, actor, vehicle, config:dict):
@@ -36,6 +32,10 @@ class FleetBehavior(MotionBehavior):
 			actor -- Actor to initialize the behavior for
 		"""
 		MotionBehavior.intialize(self, ctxt, actor, vehicle, config)
+
+		args		= self.get_settings( config )
+		if ('membership' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
+			self.load( ctxt, ctxt.sim.config.resolve(args['membership']) )
 
 		self.resolve(ctxt.sim)
 		return
