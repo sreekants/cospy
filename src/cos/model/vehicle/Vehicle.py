@@ -2,6 +2,8 @@
 # Filename: Vehicle.py
 # Description: Types of vessels and their properties, states and characteristics
 
+from turtle import position
+
 from cos.model.vehicle.Intent import Intent
 from cos.model.vehicle.Engine import Engine
 from cos.model.vehicle.ValueSet import ValueSet
@@ -12,7 +14,7 @@ from cos.math.geometry.Rectangle import Rectangle
 from cos.core.utilities.ArgList import ArgList
 
 from enum import Enum, Flag
-import math
+import numpy as np
 
 
 VID = 0
@@ -131,9 +133,13 @@ class Vehicle(Object):
         	world -- Reference ot the simulation world
         	rect -- Location of the object (bounding box)
         """
-        if rect is None:
+        if rect is None and self.actor.motion is not None:
             pos     = self.actor.motion.position
-            rect    = (pos[0],pos[1], 20, 10)
+        else:
+            X	    = self.config['pose']['position']
+            pos     = np.array( (X[0], X[1]) )
+
+        rect    = (pos[0],pos[1], 20, 10)
 
         self.actor.init( Rectangle( rect[0], rect[1], rect[2], rect[3]) )
 

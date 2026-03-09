@@ -3,6 +3,7 @@
 # Description: Implementation of the Prey class
 
 from cos.math.geometry.Rectangle import Rectangle
+from cos.math.geometry.Point import Point
 from cos.math.geometry.Vector import Vector
 from cos.behavior.swarm.Boid import Boid
 
@@ -24,10 +25,11 @@ class Config:
         return
 
 class Prey(Boid):
-    def __init__(self, pos: Vector, vel: Vector):
+    def __init__(self, pos: Point, vel: Vector, ref=None):
         Boid.__init__(self)
-        self.pos = pos
-        self.vel = vel
+        self.pos    = pos
+        self.vel    = vel
+        self.ref    = ref      # Opaque reference to the actual object 
         return
 
     @staticmethod

@@ -51,6 +51,7 @@ class Builder(BuilderBaseClass):
 						"id": rec[0],
 						"guid":guid,
 						"name":rec[1],
+						"type":rec[3],
 						"identifier":{
 							"imo":rec[4],
 							"mmsi":rec[5]

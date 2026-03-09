@@ -77,33 +77,10 @@ class MotionBehavior(Behavior):
 		Arguments
 			ctxt -- Simulation context
 			config -- Config information
-		"""
-		syscfg	= config[0]
-		instcfg	= ArgList(config[1]['settings'])
-
-		if self.__match_scanario(instcfg, syscfg) == False:
-			return False
-		
+		"""		
 		return True
 
 
-	def __match_scanario(self, instcfg, syscfg):
-		scenarios	= instcfg['scenario']
-
-		# If a scenario is not specified, default to activate 
-		# the instance
-		if scenarios is None:
-			return True
-		
-		# If scenarios are specified, then explicitly match
-		# scenarios
-		scenarios	= scenarios.split(',')
-		match		= syscfg['scenario']
-		for s in scenarios:
-			if match.find(s) != -1:
-				return True
-			
-		return False
 
 if __name__ == "__main__":
 	test = MotionBehavior()

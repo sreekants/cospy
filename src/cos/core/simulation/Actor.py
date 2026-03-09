@@ -28,6 +28,7 @@ class Actor:
 		self.x			= null_vector
 		self.dx			= null_vector
 		self.d2x		= null_vector
+		self.config		= config
 		
 		return
 
@@ -79,6 +80,8 @@ class Actor:
 				continue
 					
 			pos, dx		= behavior.update( world, self.loop, config )
+			if pos is None or dx is None:
+				continue
 
 			self.d2x	= (dx-self.dx)/2.0	# Acceleration
 			self.dx		= dx				# Velocity
@@ -158,6 +161,13 @@ class Actor:
 		for behavior in self.behaviors.values():
 			if behavior.runnable(ctxt, config) == False:
 				return False
+
+		syscfg	= config[0]
+		instcfg	= ArgList(config[1]['settings'])
+
+		if Actor.match_scanario(instcfg, syscfg) == False:
+			return False
+
 		return True
 
 	def notify(self, ctxt:Context, method:str, arg:dict):
@@ -165,6 +175,25 @@ class Actor:
 			behavior.notify( ctxt, method, arg )
 		return
 
+
+	@staticmethod
+	def match_scanario(instcfg, syscfg):
+		scenarios	= instcfg['scenario']
+
+		# If a scenario is not specified, default to activate 
+		# the instance
+		if scenarios is None:
+			return True
+		
+		# If scenarios are specified, then explicitly match
+		# scenarios
+		scenarios	= scenarios.split(',')
+		match		= syscfg['scenario']
+		for s in scenarios:
+			if match.find(s) != -1:
+				return True
+			
+		return False
 
 if __name__ == "__main__":
 	test = Actor()

@@ -19,253 +19,253 @@ class Rectangle:
 		return
 
 	def __str__(self):
-		""" #TODO: __str__
+		""" Returns the string representation of the rectangle
 		"""
 		return f'({self.x:.2f}, {self.y:.2f}, {(self.x+self.w):.2f}, {(self.y+self.width):.2f})'
 
 	@property
 	def top(self):
-		""" #TODO: top
+		""" Returns the top coordinate of the rectangle
 		"""
 		return self.y
 
 	@property
 	def left(self):
-		""" #TODO: left
+		""" Returns the left coordinate of the rectangle
 		"""
 		return self.x
 
 	@property
 	def bottom(self):
-		""" #TODO: bottom
+		""" Returns the bottom coordinate of the rectangle
 		"""
 		return self.y + self.h
 
 	@property
 	def right(self):
-		""" #TODO: right
+		""" Returns the right coordinate of the rectangle
 		"""
 		return self.x + self.w
 
 	@property
 	def topleft(self):
-		""" #TODO: topleft
+		""" Returns the top-left coordinate of the rectangle
 		"""
 		return self.x, self.y
 
 	@property
 	def bottomleft(self):
-		""" #TODO: bottomleft
+		""" Returns the bottom-left coordinate of the rectangle
 		"""
 		return self.x, self.y + self.h
 
 	@property
 	def topright(self):
-		""" #TODO: topright
+		""" Returns the top-right coordinate of the rectangle
 		"""
 		return self.x + self.w, self.y
 
 	@property
 	def bottomright(self):
-		""" #TODO: bottomright
+		""" Returns the bottom-right coordinate of the rectangle
 		"""
 		return self.x + self.w, self.y + self.h
 
 	@property
 	def midtop(self):
-		""" #TODO: midtop
+		""" Returns the mid-top coordinate of the rectangle
 		"""
 		return self.x + self.w / 2, self.y
 
 	@property
 	def midleft(self):
-		""" #TODO: midleft
+		""" Returns the mid-left coordinate of the rectangle
 		"""
 		return self.x, self.y + self.h / 2
 
 	@property
 	def midbottom(self):
-		""" #TODO: midbottom
+		""" Returns the mid-bottom coordinate of the rectangle
 		"""
 		return self.x + self.w / 2, self.y + self.h
 
 	@property
 	def midright(self):
-		""" #TODO: midright
+		""" Returns the mid-right coordinate of the rectangle
 		"""
 		return self.x + self.w, self.y + self.h / 2
 
 	@property
 	def center(self):
-		""" #TODO: center
+		""" Returns the center coordinate of the rectangle
 		"""
 		return self.x + self.w / 2, self.y + self.h / 2
 
 	@property
 	def centerx(self):
-		""" #TODO: centerx
+		""" Returns the x-coordinate of the center of the rectangle
 		"""
 		return self.x + self.w / 2
 
 	@property
 	def centery(self):
-		""" #TODO: centery
+		""" Returns the y-coordinate of the center of the rectangle
 		"""
 		return self.y + self.h / 2
 
 	@property
 	def size(self):
-		""" #TODO: size
+		""" Returns the size of the rectangle as a tuple (width, height)
 		"""
 		return self.w, self.h
 
 	@property
 	def width(self):
-		""" #TODO: width
+		""" Returns the width of the rectangle
 		"""
 		return self.w
 
 	@property
 	def height(self):
-		""" #TODO: height
+		""" Returns the height of the rectangle
 		"""
 		return self.h
 
 
 	@top.setter
 	def top(self, value):
-		""" #TODO: top
+		""" Sets the top coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new top coordinate
 		"""
 		self.y = value
 
 	@left.setter
 	def left(self, value):
-		""" #TODO: left
+		""" Sets the left coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new left coordinate
 		"""
 		self.x = int(value)
 
 	@bottom.setter
 	def bottom(self, value):
-		""" #TODO: bottom
+		""" Sets the bottom coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new bottom coordinate
 		"""
 		self.y = int(value) - self.h
 
 	@right.setter
 	def right(self, value):
-		""" #TODO: right
+		""" Sets the right coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new right coordinate
 		"""
 		self.x = int(value) - self.w
 
 	@topleft.setter
 	def topleft(self, value):
-		""" #TODO: topleft
+		""" Sets the top-left coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new top-left coordinate
 		"""
 		self.x = int(value[0])
 		self.y = int(value[1])
 
 	@bottomleft.setter
 	def bottomleft(self, value):
-		""" #TODO: bottomleft
+		""" Sets the bottom-left coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new bottom-left coordinate
 		"""
 		self.x = int(value[0])
 		self.y = int(value[1]) - self.h
 
 	@topright.setter
 	def topright(self, value):
-		""" #TODO: topright
+		""" Sets the top-right coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new top-right coordinate
 		"""
 		self.x = int(value[0]) - self.w
 		self.y = int(value[1])
 
 	@bottomright.setter
 	def bottomright(self, value):
-		""" #TODO: bottomright
+		""" Sets the bottom-right coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new bottom-right coordinate
 		"""
 		self.x = int(value[0]) - self.w
 		self.y = int(value[1]) - self.h
 
 	@midtop.setter
 	def midtop(self, value):
-		""" #TODO: midtop
+		""" Sets the mid-top coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new mid-top coordinate
 		"""
 		self.x = int(value[0]) - self.w / 2
 		self.y = int(value[1])
 
 	@midleft.setter
 	def midleft(self, value):
-		""" #TODO: midleft
+		""" Sets the mid-left coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new mid-left coordinate
 		"""
 		self.x = int(value[0])
 		self.y = int(value[1]) - self.h / 2
 
 	@midbottom.setter
 	def midbottom(self, value):
-		""" #TODO: midbottom
+		""" Sets the mid-bottom coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new mid-bottom coordinate
 		"""
 		self.x = int(value[0]) - self.w / 2
 		self.y = int(value[1]) - self.h
 
 	@midright.setter
 	def midright(self, value):
-		""" #TODO: midright
+		""" Sets the mid-right coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new mid-right coordinate
 		"""
 		self.x = int(value[0]) - self.w
 		self.y = int(value[1]) - self.h / 2
 
 	@center.setter
 	def center(self, value):
-		""" #TODO: center
+		""" Sets the center coordinate of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new center coordinate
 		"""
 		self.x = int(value[0]) - self.w / 2
 		self.y = int(value[1]) - self.h / 2
 
 	@centerx.setter
 	def centerx(self, value):
-		""" #TODO: centerx
+		""" Sets the x-coordinate of the center of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new x-coordinate of the center
 		"""
 		self.x = int(value) - self.w / 2
 
 	@centery.setter
 	def centery(self, value):
-		""" #TODO: centery
+		""" Sets the y-coordinate of the center of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new y-coordinate of the center
 		"""
 		self.y = int(value) - self.h / 2
 
 	@size.setter
 	def size(self, value):
-		""" #TODO: size
+		""" Sets the size of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new size as a tuple (width, height)
 		"""
 		if int(value[0]) < 0 or int(value[1]) < 0(self, value):
 			self._ensure_proxy()
@@ -273,9 +273,9 @@ class Rectangle:
 
 	@width.setter
 	def width(self, value):
-		""" #TODO: width
+		""" Sets the width of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new width
 		"""
 		if int(value) < 0(self, value):
 			self._ensure_proxy()
@@ -283,44 +283,44 @@ class Rectangle:
 
 	@height.setter
 	def height(self, value):
-		""" #TODO: height
+		""" Sets the height of the rectangle
 		Arguments
-			value -- #TODO
+			value -- The new height
 		"""
 		if int(value) < 0:
 			self._ensure_proxy()
 		self.h = int(value)
 
 	def move(self, *pos):
-		""" #TODO: move
+		""" Moves the rectangle by a given offset
 		Arguments
-			*pos -- #TODO
+			*pos -- The offset as a tuple (x, y) or two separate values
 		"""
 		x, y = _two_ints_from_args(pos)
 		return Rectangle(self.x + x, self.y + y, self.w, self.h)
 
 	def move_ip(self, *pos):
-		""" #TODO: move_ip
+		""" Moves the rectangle in place by a given offset
 		Arguments
-			*pos -- #TODO
+			*pos -- The offset as a tuple (x, y) or two separate values
 		"""
 		x, y = _two_ints_from_args(pos)
 		self.x += x
 		self.y += y
 
 	def inflate(self, x, y):
-		""" #TODO: inflate
+		""" Returns a new rectangle inflated by the given amounts
 		Arguments
-			x -- X coordinate
-			y -- Y coordinate
+			x -- The amount to inflate horizontally
+			y -- The amount to inflate vertically
 		"""
 		return Rectangle(self.x - x / 2, self.y - y / 2, self.w + x, self.h + y)
 
 	def inflate_ip(self, x, y):
-		""" #TODO: inflate_ip
+		""" Inflates the rectangle in place by the given amounts
 		Arguments
-			x -- X coordinate
-			y -- Y coordinate
+			x -- The amount to inflate horizontally
+			y -- The amount to inflate vertically
 		"""
 		self.x -= x / 2
 		self.y -= y / 2
@@ -328,18 +328,18 @@ class Rectangle:
 		self.h += y
 
 	def unionall(self, others):
-		""" #TODO: unionall
+		""" Returns a new rectangle that encloses all given rectangles
 		Arguments
-			others -- #TODO
+			others -- An iterable of rectangles to enclose
 		"""
 		r = Rectangle(self)
 		r.unionall_ip(others)
 		return r
 
 	def unionall_ip(self, others):
-		""" #TODO: unionall_ip
+		""" Updates the rectangle to enclose all given rectangles
 		Arguments
-			others -- #TODO
+			others -- An iterable of rectangles to enclose
 		"""
 		l = self.x
 		r = self.x + self.w
@@ -353,18 +353,18 @@ class Rectangle:
 		self.x, self.y, self.w, self.h = l, t, r - l, b - t
 
 	def fit(self, other):
-		""" #TODO: fit
+		""" Returns a new rectangle that fits within another rectangle
 		Arguments
-			other -- #TODO
+			other -- The rectangle to fit within
 		"""
 		r = Rectangle(self)
 		r.fit_ip(*other)
 		return r
 
 	def fit_ip(self, other):
-		""" #TODO: fit_ip
+		""" Adjusts the rectangle to fit within another rectangle in place
 		Arguments
-			other -- #TODO
+			other -- The rectangle to fit within
 		"""
 		xratio = self.w / float(other.w)
 		yratio = self.h / float(other.h)
@@ -375,7 +375,7 @@ class Rectangle:
 		self.y = other.y + (other.h - self.h) / 2
 
 	def normalize(self):
-		""" #TODO: normalize
+		""" Normalizes the rectangle's dimensions
 		"""
 		if self.w < 0:
 			self.x += self.w
@@ -387,7 +387,7 @@ class Rectangle:
 	def contains(self, other):
 		""" Checks if a rectangle is enclosed by another
 		Arguments
-			other -- #TODO
+			other -- The rectangle to check
 		"""
 		return self.x <= other.x and \
 				self.y <= other.y and \

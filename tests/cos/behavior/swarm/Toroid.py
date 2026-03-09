@@ -2,10 +2,11 @@
 # Filename: Toroid.py
 # Description: Implementation of the Toroid class
 
+from cos.math.geometry.Rectangle import Rectangle
 from cos.math.geometry.Vector import Vector
 
 class Toroid:
-	def __init__(self, zone):
+	def __init__(self, zone:Rectangle):
 		self.zone = zone
 		return
 

@@ -134,7 +134,8 @@ class Builder:
 			return
 
 		for vessel in objects["vessels"]:
-			self.assets.add( "vessel", vessel )
+			if vessel["type"] in [100000]:
+				self.assets.add( "vessel", vessel )
 		return
 
 	def create_landscape(self, world, objects):
