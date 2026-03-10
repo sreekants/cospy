@@ -4,16 +4,17 @@
 
 from cos.math.geometry.Rectangle import Rectangle
 from cos.math.geometry.Vector import Vector
+from cos.math.geometry.Point import Point
 
 class Toroid:
 	def __init__(self, zone:Rectangle):
 		self.zone = zone
 		return
 
-	def bound(self, pos: Vector) -> Vector:
+	def bound(self, ref, pos: Point, vel: Vector) -> Vector:
 		"""Wrap position around zone (toroidal world)."""
-		x = (pos.x-self.zone.x) % self.zone.width
-		y = (pos.y-self.zone.y) % self.zone.height
+		x = (pos.x + vel.x - self.zone.x) % self.zone.width
+		y = (pos.y + vel.y - self.zone.y) % self.zone.height
 		return Vector(self.zone.x + x, self.zone.y + y)
 
 

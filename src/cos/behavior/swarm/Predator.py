@@ -45,7 +45,7 @@ class Predator(Boid):
         self.target_index = None
         if not preyList:
             # wander forward
-            self.pos = world.bound(self.pos+self.vel)
+            self.pos = world.bound(self,self.pos, self.vel)
             return
 
         # Find nearest prey
@@ -68,13 +68,13 @@ class Predator(Boid):
             preyList.pop(closest_i)
             self.target_index = None
             # After kill, keep current heading
-            self.pos = world.bound(self.pos+self.vel)
+            self.pos = world.bound(self, self.pos, self.vel)
             return
 
         desired_dir = closest_disp.normalize()
         new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle)
         self.vel = new_heading * cfg.speed
-        self.pos = world.bound(self.pos+self.vel)
+        self.pos = world.bound(self, self.pos, self.vel)
 
 		
     @staticmethod

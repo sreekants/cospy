@@ -96,7 +96,8 @@ class Prey(Boid):
 
         new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle)
         self.vel = new_heading * cfg.speed
-        self.pos = world.bound(self.pos+self.vel)
+        self.pos = world.bound(self, self.pos, self.vel)
+        return
 
 		
     @staticmethod
@@ -114,7 +115,7 @@ class Prey(Boid):
                 tooFar=tooFar[i],
                 avgDist=avgDist[i],
                 meanHeading=meanHeading,
-                predatorList=actors,
+                predatorList=swarm.predators,
                 world=world,
                 cfg=cfg
             )

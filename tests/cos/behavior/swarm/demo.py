@@ -1,13 +1,3 @@
-"""
-Predator-prey boid simulation (Python + pygame)
-Single-file rewrite of the JS repo:
-- Retains class names: Vector, Prey, Predator
-- Retains helper concepts: turn(), drawTriangle(), drawLine()
-- Toroidal wraparound world: bound(), boundedDist(), shortestBoundedPathTo()
-- Hard-coded parameters in this file (CONFIG)
-- Console application: run from terminal: python main.py
-"""
-
 
 import math
 from typing import List, Tuple
@@ -24,10 +14,6 @@ from cos.behavior.swarm.Predator import Config as PredatorConfig
 import pygame
 
 
-
-# =========================
-# Hard-coded parameters
-# =========================
 CONFIG = {
     "env": {
         "width": 900,
@@ -74,7 +60,10 @@ CONFIG = {
     }
 }
 
-
+class World(Toroid):
+    def __init__(self, zone: Rectangle, predators: List[Predator]):
+        Toroid.__init__(self, zone)
+        return
 
 def drawTriangle(
     surface: pygame.Surface,
@@ -213,7 +202,7 @@ def main() -> int:
                 if event.key == pygame.K_r:
                     swarm, preyList, predList = createSwarm(screen_vec)
 
-        world = Toroid(screen_vec)
+        world = World(screen_vec, predList)
         if not paused:
             swarm.move(world)
 
@@ -235,3 +224,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

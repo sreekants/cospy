@@ -8,6 +8,7 @@ from cos.behavior.swarm.Predator import Predator
 class Swarm:
     def __init__(self):
         self.groups    = []
+        self.predators = None
         return
     
     def setPreys(self, prey_cfg, preyList, fnMove=None):
@@ -18,6 +19,7 @@ class Swarm:
     def setPredators(self, pred_cfg, predatorList, fnMove=None):
         fnMove      = Predator.motion if fnMove is None else fnMove
         self.groups.append( ('predator', pred_cfg, predatorList, fnMove) )
+        self.predators = predatorList
         return predatorList
 
     def move(self, world):

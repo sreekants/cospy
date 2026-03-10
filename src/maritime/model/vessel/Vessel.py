@@ -222,6 +222,14 @@ class Vessel(Vehicle):
         self.actor.notify( ctxt, "bridge.control", arg )
         return
     
+    def locate_at(self, position):
+        """ Locates the vessel at a new position
+        Arguments
+        	position -- New position to locate the vessel at
+        """
+        self.actor.rect.center   = position
+        return
+    
 if __name__ == "__main__":
 	test = Vessel( Type.POWER_DRIVEN )
 
