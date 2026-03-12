@@ -3,8 +3,10 @@
 # Description: Types of vessels and their properties, states and characteristics
 
 from cos.core.kernel.Context import Context
+from cos.math.geometry import Rectangle
 from cos.model.vehicle.Vehicle import Vehicle
 from cos.core.utilities.ArgList import ArgList
+from cos.math.geometry.Rectangle import Rectangle
 
 from enum import Enum, Flag
 from typing import Any
@@ -227,9 +229,18 @@ class Vessel(Vehicle):
         Arguments
         	position -- New position to locate the vessel at
         """
-        self.actor.rect.center   = position
+        boundary            = self.actor.rect
+        self.actor.rect     = Rectangle(position[0] - boundary.w/2, position[1] - boundary.h/2, boundary.width, boundary.height) 
         return
-    
+
+    def heading_towards(self, velocity):
+        """ Orients the vessel towards a new direction
+        Arguments
+        	velocity -- New velocity vector to orient the vessel towards
+        """
+        self.actor.dx   = velocity
+        return
+
 if __name__ == "__main__":
 	test = Vessel( Type.POWER_DRIVEN )
 

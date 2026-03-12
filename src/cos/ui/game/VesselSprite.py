@@ -31,6 +31,7 @@ class VesselIcon(AnimatedSprite):
 		self.width		= width
 		self.bowlen		= bowlen
 		self.color		= color
+		self.angle		= 0
 		return
 
 	def get_color(self, config):

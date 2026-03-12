@@ -27,17 +27,17 @@ class WorldAdapter:
 	def bound(self, obj, pos: Point, vel: Vector):
 		"""Wrap position around zone (toroidal world)."""
 		actor 		= obj.ref.actor
-		center		= actor.rect.center
-		newpos		= (center[0] + vel.x, center[1] + vel.y)
-		rect		= actor.rect.move( newpos[0]-center[0], newpos[1]-center[1] )
+		boundary	= actor.rect
+		rect		= Rectangle(pos.x - boundary.w/2, pos.y - boundary.h/2, boundary.width, boundary.height)
+
 		if self.world.has_collision(rect) == True:
 			obj.vel = vel * -1.0
 			return obj.last_pos
 
-		x = pos.x + vel.x
-		y = pos.y + vel.y
+		x 				= pos.x + vel.x
+		y 				= pos.y + vel.y
 		nextpos 		= Point(x, y)
-		obj.last_pos 	= nextpos
+		obj.last_pos 	= pos
 		return nextpos
 	
 
@@ -57,24 +57,37 @@ class WorldAdapter:
 	def boundedDist(self, a: Vector, b: Vector) -> float:
 		return self.shortestBoundedPathTo(a, b).norm()
 
-class PreyAdapter(Prey):
+class VesselAdapter:
+	""" Adapter class to provide a consistent interface for the swarm behavior to interact with the vessel objects in the simulation.
+	"""
+	def __init__(self, vessel):
+		self.vessel = vessel
+		return
+
+	def move(self, pos, vel):
+		self.vessel.locate_at( [pos.x, pos.y, 0] )
+		self.vessel.heading_towards( [vel.x, vel.y, 0] )
+		return
+	
+class PreyAdapter(Prey, VesselAdapter):
 	def __init__(self, pos: Point, vel: Vector, ref=None):
 		Prey.__init__(self, pos, vel, ref)
+		VesselAdapter.__init__(self, ref)
 		return
 
 	def move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg ):	
 		Prey.move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg )
-		self.ref.locate_at( (self.pos.x, self.pos.y) )
+		VesselAdapter.move(self, self.pos, self.vel)
 		return
 
-class PredatorAdapter(Predator):
+class PredatorAdapter(Predator, VesselAdapter):
 	def __init__(self, pos: Point, vel: Vector, ref=None):
 		Predator.__init__(self, pos, vel, ref)
 		return
 
 	def move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg ):	
 		Predator.move( self, tooClose, tooFar, avgDist, meanHeading, predatorList, world, cfg )
-		self.ref.locate_at( (self.pos.x, self.pos.y) )
+		VesselAdapter.move(self, self.pos, self.vel)
 		return
 
 class PreyBehavior(FleetBehavior):
