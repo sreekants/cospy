@@ -23,7 +23,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -82,7 +82,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -141,21 +141,21 @@
  <Unit>m/s</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -256,21 +256,21 @@
  <Unit>m/s</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -371,21 +371,21 @@
  <Unit>m/s&#xC2;&#xB2;</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -486,21 +486,21 @@
  <Unit>m/s</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -601,21 +601,21 @@
  <Unit>m/s</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -716,21 +716,21 @@
  <Unit>m/s&#xC2;&#xB2;</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -831,21 +831,21 @@
  <Unit>degrees</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -946,21 +946,21 @@
  <Unit>degrees</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1061,21 +1061,21 @@
  <Unit>degrees</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1176,21 +1176,21 @@
  <Unit>m</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1291,21 +1291,21 @@
  <Unit>m/s</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1406,21 +1406,21 @@
  <Unit>m/s&#xC2;&#xB2;</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1528,21 +1528,21 @@
  <Unit>kts/hr</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1650,21 +1650,21 @@
  <Unit>degree</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1772,21 +1772,21 @@
  <Unit>degree</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -1894,21 +1894,21 @@
  <Unit>meters</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2016,21 +2016,21 @@
  <Unit>seconds</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2138,21 +2138,21 @@
  <Unit />
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2253,21 +2253,21 @@
  <Unit>m</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2368,21 +2368,21 @@
  <Unit>m</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2483,21 +2483,21 @@
  <Unit>m&#xC2;&#xB3;</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2598,21 +2598,21 @@
  <Unit>kg</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2713,21 +2713,21 @@
  <Unit>kg</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2828,21 +2828,21 @@
  <Unit>no.</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -2943,21 +2943,21 @@
  <Unit>no.</Unit>
 </Measure>
 <Measure> <Name>StartTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading start time</Display>
  <Description>Reading start time</Description>
  <FieldName>start_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>EndTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading end time</Display>
  <Description>Reading end time</Description>
  <FieldName>end_time</FieldName>
  <Unit>time</Unit>
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Reading report time</Display>
  <Description>Reading report time</Description>
  <FieldName>report_time</FieldName>
@@ -3044,7 +3044,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3082,7 +3082,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3120,7 +3120,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3179,7 +3179,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3238,7 +3238,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3297,7 +3297,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3356,7 +3356,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3415,7 +3415,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3474,7 +3474,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3533,7 +3533,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3592,7 +3592,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3651,7 +3651,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3710,7 +3710,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3769,7 +3769,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3828,7 +3828,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3887,7 +3887,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -3946,7 +3946,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4005,7 +4005,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4064,7 +4064,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4123,7 +4123,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4182,7 +4182,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4241,7 +4241,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4300,7 +4300,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4359,7 +4359,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4418,7 +4418,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4477,7 +4477,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4536,7 +4536,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4595,7 +4595,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4654,7 +4654,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4713,7 +4713,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4772,7 +4772,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4831,7 +4831,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4890,7 +4890,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -4949,7 +4949,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5008,7 +5008,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5067,7 +5067,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5126,7 +5126,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5185,7 +5185,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5244,7 +5244,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5303,7 +5303,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5362,7 +5362,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5421,7 +5421,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5480,7 +5480,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5539,7 +5539,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5598,7 +5598,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5657,7 +5657,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5716,7 +5716,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5775,7 +5775,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5834,7 +5834,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5893,7 +5893,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -5952,7 +5952,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6011,7 +6011,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6070,7 +6070,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6129,7 +6129,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6188,7 +6188,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6247,7 +6247,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6306,7 +6306,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6365,7 +6365,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6424,7 +6424,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6483,7 +6483,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6542,7 +6542,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6601,7 +6601,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6660,7 +6660,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6719,7 +6719,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6778,7 +6778,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6837,7 +6837,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6896,7 +6896,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -6955,7 +6955,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7014,7 +7014,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7073,7 +7073,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7132,7 +7132,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7191,7 +7191,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7250,7 +7250,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7309,7 +7309,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7368,7 +7368,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7427,7 +7427,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7486,7 +7486,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7545,7 +7545,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7604,7 +7604,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7663,7 +7663,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7722,7 +7722,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7781,7 +7781,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7840,7 +7840,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7899,7 +7899,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -7958,7 +7958,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8017,7 +8017,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8076,7 +8076,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8135,7 +8135,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8194,7 +8194,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8253,7 +8253,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8312,7 +8312,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8371,7 +8371,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8430,7 +8430,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8489,7 +8489,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8548,7 +8548,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8607,7 +8607,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8666,7 +8666,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8725,7 +8725,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8784,7 +8784,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8843,7 +8843,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8902,7 +8902,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -8961,7 +8961,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9020,7 +9020,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9079,7 +9079,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9138,7 +9138,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9197,7 +9197,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9256,7 +9256,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9315,7 +9315,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9374,7 +9374,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9433,7 +9433,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9492,7 +9492,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9551,7 +9551,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9610,7 +9610,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9669,7 +9669,7 @@
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
- <Type>time</Type>
+ <Type>double</Type>
  <Display>Time</Display>
  <Description>Report time</Description>
  <FieldName>report_time</FieldName>
@@ -9701,6 +9701,422 @@
  <Display>Additional information</Display>
  <Description>Info</Description>
  <FieldName>info</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Crossing</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_crossing</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>StartTime</Name>
+ <Type>double</Type>
+ <Display>Reading start time</Display>
+ <Description>Reading start time</Description>
+ <FieldName>start_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+<Measure> <Name>EndTime</Name>
+ <Type>double</Type>
+ <Display>Reading end time</Display>
+ <Description>Reading end time</Description>
+ <FieldName>end_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>GiveWay</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_give_way</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>StartTime</Name>
+ <Type>double</Type>
+ <Display>Reading start time</Display>
+ <Description>Reading start time</Description>
+ <FieldName>start_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+<Measure> <Name>EndTime</Name>
+ <Type>double</Type>
+ <Display>Reading end time</Display>
+ <Description>Reading end time</Description>
+ <FieldName>end_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>HeadOn</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_head_on</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>StartTime</Name>
+ <Type>double</Type>
+ <Display>Reading start time</Display>
+ <Description>Reading start time</Description>
+ <FieldName>start_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+<Measure> <Name>EndTime</Name>
+ <Type>double</Type>
+ <Display>Reading end time</Display>
+ <Description>Reading end time</Description>
+ <FieldName>end_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Overtaking</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_overtaking</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>StartTime</Name>
+ <Type>double</Type>
+ <Display>Reading start time</Display>
+ <Description>Reading start time</Description>
+ <FieldName>start_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+<Measure> <Name>EndTime</Name>
+ <Type>double</Type>
+ <Display>Reading end time</Display>
+ <Description>Reading end time</Description>
+ <FieldName>end_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>StandOn</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_stand_on</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>StartTime</Name>
+ <Type>double</Type>
+ <Display>Reading start time</Display>
+ <Description>Reading start time</Description>
+ <FieldName>start_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+<Measure> <Name>EndTime</Name>
+ <Type>double</Type>
+ <Display>Reading end time</Display>
+ <Description>Reading end time</Description>
+ <FieldName>end_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Traffic</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_traffic</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>StartTime</Name>
+ <Type>double</Type>
+ <Display>Reading start time</Display>
+ <Description>Reading start time</Description>
+ <FieldName>start_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+<Measure> <Name>EndTime</Name>
+ <Type>double</Type>
+ <Display>Reading end time</Display>
+ <Description>Reading end time</Description>
+ <FieldName>end_time</FieldName>
+ <Unit>time</Unit>
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Collision</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_collision</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Distance</Name>
+ <Type>double</Type>
+ <Display>Distance</Display>
+ <Description>Distance</Description>
+ <FieldName>distance</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Approach</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_approach</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Own Ship</Display>
+ <Description>OwnShip</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetShip</Name>
+ <Type>int</Type>
+ <Display>Target Ship</Display>
+ <Description>TargetShip</Description>
+ <FieldName>target_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Distance</Name>
+ <Type>double</Type>
+ <Display>Distance</Display>
+ <Description>Distance</Description>
+ <FieldName>distance</FieldName>
  <Unit />
 </Measure>
 </Measures>
@@ -9793,11 +10209,11 @@
  <Display />
  <Description />
  <TableName />
- <Leaves><Dimension> <Name>OriginCountry</Name>
+ <Leaves><Dimension> <Name>FlagState</Name>
  <Type>string</Type>
  <Display>Country</Display>
  <Description>Country name</Description>
- <TableName>dim_origin_country</TableName>
+ <TableName>dim_flag_state</TableName>
  <Leaves><Dimension> <Name>OriginPort</Name>
  <Type>string</Type>
  <Display>Port</Display>

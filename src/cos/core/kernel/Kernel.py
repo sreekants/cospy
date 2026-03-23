@@ -42,7 +42,13 @@ class Kernel:
 		""" Returns the current kernel time
 		"""
 		return self.clock.utc
-	
+
+
+	def tickcount(self):
+		""" Returns the current kernel tick count
+		"""
+		return self.clock.tickcount
+
 	def start(self, configfile, configpath, settings):
 		""" Starts the kernel
 		Arguments

@@ -9,7 +9,7 @@
         "Istanbul.Strait.Rule3.DangerousCargo":{
             "fact":"score_hazardous_transport",
             "concern":"Hazardous transport",
-            "penalty": "42"        
+            "penalty": 42        
         },
         "Turkeli.Harbour.TSS.South-North":{
             "fact":"traffic_violation",

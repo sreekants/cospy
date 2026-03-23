@@ -2,6 +2,9 @@
 # Filename: Collision.py
 # Description: Implementation of the Collision class
 
+from sqlalchemy import values
+
+from maritime.core import situation
 from maritime.core.situation.MaritimeConductSituation import MaritimeConductSituation
 from cos.core.kernel.Context import Context
 from cos.model.rule.Situation import Situation as RuleSituation
@@ -80,22 +83,25 @@ class Collision(MaritimeConductSituation):
 
 		# If the vessel is outside the tracking range, we are no longer tracking it
 		if distance > self.tracking_range:
-			self.set_lpa(lhs, rhs, None)
+			self.set_lpa(ctxt, lhs, rhs, None)
 			return
 
 		lpa			= self.get_lpa(lhs, rhs)
 		if (lpa is None) or (distance < lpa):
-			self.set_lpa(lhs, rhs, distance)
+			self.set_lpa(ctxt, lhs, rhs, distance)
+			lpa	= distance
 		elif distance > lpa:
 			# Last point of approach was the closest point of approach (CPA) in the simulation
 			# print( f'Collision Risk: CPA {lhs.config["name"]} and {rhs.config["name"]} at distance {lpa}')
 			self.regulate( ctxt, lhs, "vessel.approach", (EncounterType.CPA, lhs, rhs, lpa) )
-			self.set_lpa(lhs, rhs, distance)
+			self.set_lpa(ctxt, lhs, rhs, distance)
+			lpa	= distance
 
 
 		if distance < self.collision_range:
 			# Last point of approach was the closest point of approach (CPA) in the simulation
-			print( f'Collision: CPA {lhs.config["name"]} and {rhs.config["name"]} at distance {lpa}')
+			#print( f'Collision: CPA {lhs.config["name"]} and {rhs.config["name"]} at distance {lpa}')
+			ctxt.sim.data.push(f'fact_collision', (lhs.recid, rhs.recid, ctxt.sim.tickcount(), round(lpa, 4)))
 			return
 
 		# print( f'COLLISION! {lhs.config["name"]} and {rhs.config["name"]} at distance {info[2]:0.2}')
@@ -123,7 +129,7 @@ class Collision(MaritimeConductSituation):
 		""" 
 		return self.lpa.get( (lhs.vid, rhs.vid), None )
 
-	def set_lpa(self, lhs, rhs, distance):
+	def set_lpa(self, ctxt, lhs, rhs, distance):
 		""" TODO: set_lpa
 		Arguments
 			lhs -- TODO
@@ -131,7 +137,10 @@ class Collision(MaritimeConductSituation):
 			distance -- TODO
 		""" 
 		self.lpa[(lhs.vid, rhs.vid)]	= distance
+
+		ctxt.sim.data.push(f'fact_approach', (lhs.recid, rhs.recid, ctxt.sim.tickcount(), round(distance, 4)))
 		return
+
 
 if __name__ == "__main__":
 	test = Collision("XXX")

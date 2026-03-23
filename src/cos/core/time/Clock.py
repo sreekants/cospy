@@ -8,19 +8,20 @@ class Clock:
 	def __init__(self):
 		""" Constructor
 		"""
+		self.starttime	= time.time()
 		return
 
 	@property
 	def utc(self):
 		""" Returns the UTC time
 		"""
-		return int(datetime.datetime.utcnow().timestamp())
+		return datetime.datetime.now()
 
 	@property
 	def tickcount(self):
 		""" Returns the tick count
 		"""
-		return int(time.time())
+		return round(time.time() - self.starttime, 4)
 
 if __name__ == "__main__":
 	test = Clock()

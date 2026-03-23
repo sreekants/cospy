@@ -138,11 +138,10 @@ class TransactionalDatabase:
 
 		fields	= ','.join(keys)
 		sql 	= 'INSERT INTO ' + table +' ('+fields+')' + ' VALUES('
-
-		sql += ','.join(values)
+		sql += ','.join(['?']*len(keys))
 		sql += ')'
 
-		self.cursor.execute(sql)
+		self.cursor.execute(sql, values)
 		return
 
 

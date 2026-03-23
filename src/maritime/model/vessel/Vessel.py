@@ -79,6 +79,7 @@ class Vessel(Vehicle):
         self.imo            = identifier["imo"]
         self.mmsi           = identifier["mmsi"]
         self.weight         = config['weight']
+        self.recid          = config['id']
 
         self.operation      = 0
         self.status         = Status.UNKNOWN

@@ -11,7 +11,7 @@ from cos.core.utilities.ArgList import ArgList
 from cos.core.utilities.TransactionalDatabase import TransactionalDatabase
 from cos.core.utilities.ActiveRecord import ActiveRecord
 
-import os, time
+import os, time, shutil
 from xml.dom import minidom
 
 class DataManagerThread(SimulationThread):
@@ -154,6 +154,11 @@ class DataManager(Subsystem):
 		if startrow == None:
 			startrow	= int(config['rowstart'])
 
+		if os.path.exists(self.storage) == False:
+			# Create the file if it does not exist
+			template = self.storage.replace( 'workingset.', '' )
+			shutil.copy( template, self.storage )
+		
 		conn	= ActiveRecord.connect(self.storage)
 
 		tables	= ActiveRecord.tables(conn)

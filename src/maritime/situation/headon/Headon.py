@@ -4,6 +4,7 @@
 
 from maritime.core.situation.Maneuver import Maneuver
 from maritime.core.situation.Types import Encounter as EncounterType
+from maritime.model.vessel.Vessel import Vessel
 from cos.core.kernel.Context import Context
 
 class Headon(Maneuver):
@@ -34,6 +35,18 @@ class Headon(Maneuver):
 		"""
 		# Overridable implementation
 		self.range	= 10.0
+		return
+
+	def regulate(self, ctxt:Context, vessel:Vessel, msg, arg):
+		""" Invokes a regulation event for a vessel
+		Arguments
+			ctxt -- Simulation context
+			vessel -- Vessel that triggered the regulation event
+			msg -- Message describing the regulation event
+			arg -- Opaque argument to pass as context
+		"""
+		Maneuver.regulate(self, ctxt, vessel, msg, arg)
+		self.data( ctxt, 'head_on', (arg[2].OS.recid, arg[2].TS.recid, ctxt.sim.tickcount(), ctxt.sim.tickcount) )
 		return
 
 

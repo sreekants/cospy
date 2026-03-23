@@ -74,6 +74,16 @@ class MaritimeSituation(EncounterSituation):
 
 		return True
 
+	def data(self, ctxt:Context, situation, values):
+		""" Stores a score into the database
+		Arguments
+			ctxt -- Simulation context
+			situation -- Name of the situation. An associated fact_{situation} table must exist in the database
+			values -- A tuple of value for each field in the table
+		"""
+		ctxt.sim.data.push(f'fact_{situation}', values)
+		return
+	
 	@staticmethod
 	def __in_range(lhs, rhs, range):
 		""" Checks if two objects are in range
