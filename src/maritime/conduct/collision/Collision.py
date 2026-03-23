@@ -138,7 +138,8 @@ class Collision(MaritimeConductSituation):
 		""" 
 		self.lpa[(lhs.vid, rhs.vid)]	= distance
 
-		ctxt.sim.data.push(f'fact_approach', (lhs.recid, rhs.recid, ctxt.sim.tickcount(), round(distance, 4)))
+		if distance is not None:
+			ctxt.sim.data.push(f'fact_approach', (lhs.recid, rhs.recid, ctxt.sim.tickcount(), round(distance, 4)))
 		return
 
 
