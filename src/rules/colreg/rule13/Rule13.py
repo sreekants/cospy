@@ -60,7 +60,6 @@ class Rule13(COLREG):
 		"""
 		OS		= evt[1]
 		TS		= evt[2]
-		print( f'{self.__class__.__name__}.crossing:{OS.config["name"]}' )
 		return
 
 	def on_close_encounter(self, ctxt:Context, evt):
@@ -73,7 +72,6 @@ class Rule13(COLREG):
 		TS			= evt[2]
 		distance	= evt[3]
 		self.add_situation( Situation(OS, TS) )
-		print( f'{self.__class__.__name__}.close_encounter:{OS.config["name"]}' )
 		return
 
 if __name__ == "__main__":

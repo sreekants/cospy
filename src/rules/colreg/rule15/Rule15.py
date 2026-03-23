@@ -37,7 +37,6 @@ class Rule15(COLREG):
 			evt -- Event data
 		"""
 		vessel	= evt[1]
-		print( f'{self.__class__.__name__}.crossing:{vessel.config["name"]}' )
 		return
 
 
