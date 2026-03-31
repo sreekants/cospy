@@ -31,7 +31,7 @@ class Resolver:
 			ctxt -- Simulation context
 		""" 
 
-		print(f'RESOLVE: {variable}')
+		# print(f'RESOLVE: {variable}')
 		if variable.startswith(self.prefix) == False:
 			return None
 		

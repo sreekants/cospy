@@ -33,7 +33,7 @@ class Decision(TreeNode):
 		self.exceptions	= []
 		self.assurances	= []
 		self.precedents	= []
-		self.trace		= True
+		self.trace		= False
 		self.type		= type
 		self.ref		= ref
 		return
@@ -68,7 +68,7 @@ class Decision(TreeNode):
 			for assureinfo in self.assurances:
 				result = self.__evaluate( ctxt, assureinfo )
 				if result not in [ErrorCode.S_OK, ErrorCode.S_TRUE, ErrorCode.ERROR_CONTINUE]:
-					print( f'Assurance failed for decision {self.path}' )
+					# print( f'Assurance failed for decision {self.path}' )
 					ctxt.error.append(self)
 					return ErrorCode.ERROR_EXCEPTION_IN_SERVICE
 
@@ -107,7 +107,8 @@ class Decision(TreeNode):
 			case 'expression':
 				return e[0][1][0][1].evaluate(ctxt.ctxt)
 		
-		print(f'Evaluating {self.name} assurance expressions:')
+		if self.trace == True:
+			print(f'Evaluating {self.name} assurance expressions:')
 		return ErrorCode.S_OK
 
 	def IF(self, expression):

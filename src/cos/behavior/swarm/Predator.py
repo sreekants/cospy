@@ -9,7 +9,7 @@ from cos.behavior.swarm.Prey import Prey
 from cos.behavior.swarm.Boid import Boid
 
 import random, math
-from typing import List, Optional, Tuple
+from typing import Optional
 
 class Config:
     def __init__(self):

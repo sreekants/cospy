@@ -199,8 +199,10 @@ class VirtualWorld:
 		for group in groups:
 			for entity in group:
 				entity.commit(self, self.screen)
-		for entity in self.bodies:
-			entity.commit(self, self.screen)
+
+		for geography in [self.reliefs, self.bodies]:
+			for entity in geography:
+				entity.commit(self, self.screen)
 		return
 
 	def listen(self):

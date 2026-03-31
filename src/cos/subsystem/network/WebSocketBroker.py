@@ -87,6 +87,10 @@ class WebSocketBrokerThread(BrokerThread):
 		asyncio.set_event_loop(self.loop)
 		self.loop.create_task(ipc(self.sim))
 		self.loop.create_task(rpc(self.sim))
+
+		# Sleep a bit to allow the server to start before the simulation starts sending messages
+		time.sleep(1)
+
 		try:
 			self.loop.run_forever()
 		except KeyboardInterrupt:

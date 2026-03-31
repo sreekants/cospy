@@ -76,7 +76,7 @@ class Actor:
 
 		self.loop	= self.loop+1
 		for behavior in self.behaviors.values():
-			if behavior.type not in [ActorBehavior.MOTION, ActorBehavior.DYNAMICS]:
+			if behavior.type not in [ActorBehavior.MOTION, ActorBehavior.CONTROL_COLAV, ActorBehavior.DYNAMICS]:
 				continue
 					
 			pos, dx		= behavior.update( world, self.loop, config )
@@ -130,6 +130,7 @@ class Actor:
 				(ActorBehavior.SENSOR, 				"sensor"),
 
 				(ActorBehavior.CONTROL_MOTION, 		"control.motion"),
+				(ActorBehavior.CONTROL_COLAV, 		"control.colav"),
 				(ActorBehavior.CONTROL_DYNAMICS, 	"control.dynamics"),
 				(ActorBehavior.CONTROL_SENSOR, 		"control.sensor")
 			]

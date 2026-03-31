@@ -4,27 +4,32 @@
         "Istanbul.Strait.Rule3.Heavy":{
             "fact":"score_berthing_risk",
             "concern":"Berthing risk",
-            "penalty": 6
+            "penalty": 6,
+            "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Istanbul.Strait.Rule3.DangerousCargo":{
             "fact":"score_hazardous_transport",
             "concern":"Hazardous transport",
-            "penalty": 42        
+            "penalty": 42,        
+            "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.TSS.South-North":{
             "fact":"traffic_violation",
             "concern":"Wrong TSS direction",
-            "penalty": 100
+            "penalty": 100,
+            "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.TSS.North-South":{
             "fact":"traffic_violation",
             "concern":"Wrong TSS direction",
-            "penalty": 100
+            "penalty": 100,
+            "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.SpeedLimit":{
             "fact":"traffic_violation",
             "concern":"Speed limit violation",
-            "penalty": 3
+            "penalty": 3,
+            "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         }
     }
 }

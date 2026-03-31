@@ -135,10 +135,10 @@ class Prey(Boid):
             - tooFar[i]   : list of unit vectors pointing toward neighbors farther than minSeparation
             - avgDist[i]  : average distance to all other prey
         """
-        n = len(actors)
-        tooClose: List[List[Vector]] = [[] for _ in range(n)]
-        tooFar: List[List[Vector]] = [[] for _ in range(n)]
-        avgDist: List[float] = [0.0 for _ in range(n)]
+        n           = len(actors)
+        tooClose    = [[] for _ in range(n)]
+        tooFar      = [[] for _ in range(n)]
+        avgDist     = [0.0 for _ in range(n)]
 
         if n <= 1:
             return tooClose, tooFar, avgDist

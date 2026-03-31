@@ -15,6 +15,7 @@ class ActorBehavior(Enum):
 	CONTROL_MOTION		= 2001
 	CONTROL_DYNAMICS	= 2002
 	CONTROL_SENSOR		= 2003
+	CONTROL_COLAV		= 2004
 
 class Behavior:
 	def __init__(self, type:ActorBehavior):

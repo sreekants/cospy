@@ -200,17 +200,19 @@ class ObjectManager:
 			ctxt -- Simulation context
 			depth -- #TODO
 		"""
+		node = None
 		with self.lock:
 			node	= self.ot.find( path )
-			if node is None:
-				return ErrorCode.ERROR_PATH_NOT_FOUND
 
-			result = fn( ctxt, node )
-			if result == ErrorCode.S_OK:
-				# Return immediately
-				return ErrorCode.S_OK
+		if node is None:
+			return ErrorCode.ERROR_PATH_NOT_FOUND
 
-			return node.traverse( fn, ctxt, depth )
+		result = fn( ctxt, node )
+		if result == ErrorCode.S_OK:
+			# Return immediately
+			return ErrorCode.S_OK
+
+		return node.traverse( fn, ctxt, depth )
 
 	def clear(self, path:str, fn=None, ctxt=None):
 		""" #TODO: clear

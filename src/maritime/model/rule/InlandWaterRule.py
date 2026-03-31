@@ -137,7 +137,8 @@ class InlandWaterRule(Rule):
 			rule_ctxt -- Rule context
 			err -- Error attribute
 		"""
-		imo		= int(rule_ctxt.situation.os.imo)
+		os		= rule_ctxt.situation.os
+		imo		= int(os.imo)
 		score	= self.scorecard.evaluate(clausename) 
 		if score is None:
 			return
@@ -146,7 +147,15 @@ class InlandWaterRule(Rule):
 		fact	= score.get('fact', 'InlandWaterViolation.generic')
 		concern	= score.get('concern', 'Generic')
 		penalty	= score.get('penalty', 0)
+		filter 	= score.get('filter', [])
 
+
+		# Match the vessel if a filter is specified.
+		if len(filter):
+			if os.id not in filter:
+				return
+
+		# Log the error in the database
 		self.data(ctxt, fact, [now, imo, penalty])
 		self.data(ctxt, 'ro', [f'\'{concern}\'',now, imo, penalty])
 

@@ -29,5 +29,6 @@ class TrafficSeparationSchemeRule(InlandWaterRule):
 		
 
 if __name__ == "__main__":
-	test = HarbourRule()
+	test = TrafficSeparationSchemeRule(InlandWaterRule)
+()
 

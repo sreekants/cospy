@@ -60,7 +60,9 @@ class MotionBehavior(Behavior):
 			config -- Configuration attributes
 		"""
 		if self.movable == False:
-			return self.rect, np.zeros(3)
+			distance = np.linalg.norm(self.dx)*1000.0
+			orientation = self.dx / distance if distance > 0 else np.zeros(3)
+			return self.rect, orientation
 		
 		return self.move(world, t, config)
 

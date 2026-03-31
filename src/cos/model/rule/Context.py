@@ -66,6 +66,9 @@ class Context:
 		if result == False:
 			return None
 
+		if isinstance(rhs, Symbol.Range):
+			return rhs.IN(lhs)
+		
 		if match_all == False:
 			return True if lhs in rhs else False
 		
@@ -155,6 +158,9 @@ class Context:
 		# Handle constants
 		if isinstance(expr, Symbol.Float) or isinstance(expr, Symbol.Integer) or isinstance(expr, Symbol.String):
 			return expr.value
+
+		if isinstance(expr, Symbol.Range):
+			return Symbol.Range(self.resolve(expr.value[0]), self.resolve(expr.value[1]))
 
 		if isinstance(expr, SymbolType):
 			expr	= expr.value

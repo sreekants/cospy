@@ -83,6 +83,8 @@ class VesselResolver(Resolver):
 		""" 
 		if self.heading is None:
 			self.heading	= self.vessel.heading
+			if self.heading < 0:
+				self.heading	= self.heading + 360
 
 		return self.heading
 

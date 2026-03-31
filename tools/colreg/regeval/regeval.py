@@ -13,7 +13,7 @@ def get_app_info():
 		"executable": "regeval.py",
 		"name"		: "COLREG Regulation Evaluator",
 		"version"	: "Version: 1.0 [17 Feb 2025]",
-		"usage"		:[ 	"[-h][-?] dir"
+		"usage"		:[ 	"[-h][-?][-dir] dir"
 					],
 					
 		"help"		:[
