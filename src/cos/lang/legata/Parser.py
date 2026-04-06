@@ -551,6 +551,13 @@ class Parser:
         p[0]    = Symbol.Range(p[3], p[5])
         return
 
+    def p_angle(self, p):
+        """
+        angle : ANGLE LPAREN rvalue COMMA rvalue RPAREN
+        """
+        p[0]    = Symbol.AngularRange(p[3], p[5])
+        return
+
     def p_subject(self, p):
         """
         subject : identifier

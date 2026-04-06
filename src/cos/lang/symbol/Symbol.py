@@ -161,7 +161,7 @@ class Symbol:
 			return
 
 		def IN(self, value) -> bool:
-			return True if (self.value[0]<= value)  and (self.value[1]>= value) else False
+			return True if (self.value[0]>= value)  and (self.value[1]>= value) else False
 
 		def BETWEEN(self, value) -> bool:
 			return True if (self.value[0]< value)  and (self.value[1]> value) else False
@@ -171,6 +171,47 @@ class Symbol:
 			""" 
 			return f'[{self.value[0]}:{self.value[1]}]'
 
+	class AngularRange(SymbolType):
+		def __init__(self, min, max):
+			""" Constructor
+			Arguments
+				min -- TODO
+				max -- TODO
+			""" 
+			min		= self.normalize(min)
+			max		= self.normalize(max)
+
+			SymbolType.__init__(self, Type.RANGE, (float(min),float(max)))
+			return
+
+		def normalize(self, value):
+			while value < 0:
+				value	= value + 360.0
+
+			while value > 360:
+				value	= value - 360.0
+
+			return value
+
+		def IN(self, value) -> bool:
+			value	= self.normalize(value)
+			if self.value[0] > self.value[1]:
+				return False if (self.value[1]<= value)  and (self.value[0]>= value) else True
+
+			return True if (self.value[0]<= value)  and (self.value[1]>= value) else False
+
+		def BETWEEN(self, value) -> bool:
+			value	= self.normalize(value)
+			if self.value[0] > self.value[1]:
+				return False if (self.value[1]< value)  and (self.value[0]> value) else True
+			
+			return True if (self.value[0]< value)  and (self.value[1]> value) else False
+		
+		def tostring(self) -> str:
+			""" TODO: tostring
+			""" 
+			return f'[{self.value[0]}:{self.value[1]}]'
+		
 	class Function(SymbolType):
 		def __init__(self, name, args, evaluator):
 			""" Constructor
@@ -193,5 +234,22 @@ class Symbol:
 			return self.eval(ctxt, self.value)
 
 if __name__ == "__main__":
-	test = SymbolType()
+	test = Symbol.AngularRange(10,-20)
+	print( f'{-90} in (-120, 10)={Symbol.AngularRange(-120,10).IN(-90)}')
+	print( f'{90} in (-120, 10)={Symbol.AngularRange(-120,10).IN(90)}')
+	print( f'{180} in (-120, 10)={Symbol.AngularRange(-120,10).IN(180)}')
+	print( f'{0} in (-120, 10)={Symbol.AngularRange(-120,10).IN(0)}')
+	print( f'{0} in (10,-120)={Symbol.AngularRange(10,-120).IN(0)}')
+	
+	'''
+	print( f'{5} in (10, 360)={Symbol.AngularRange(10,360).IN(5)}')
+	print( f'{5} in (10, 20)={Symbol.AngularRange(10,20).IN(5)}')
+	print( f'{15} in (10, 360)={Symbol.AngularRange(10,360).IN(15)}')
 
+	print( f'{5} in (10, 0)={Symbol.AngularRange(10,360).IN(5)}')
+	print( f'{180} in (10, -120)={Symbol.AngularRange(10,-120).IN(180)}')
+	print( f'{15} in (10, 0)={Symbol.AngularRange(10,360).IN(15)}')
+	print( f'{180} in (-120, 10)={Symbol.AngularRange(-120,10).IN(180)}')
+	print( f'{150} in (-120, 10)={Symbol.AngularRange(-120,10).IN(150)}')
+	print( f'{-150} in (-120, 10)={Symbol.AngularRange(-120,10).IN(-150)}')
+	'''

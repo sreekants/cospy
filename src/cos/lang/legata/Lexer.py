@@ -26,6 +26,7 @@ class Lexer:
     'description'	    : 'DESCRIPTION',
 
     'range'     : 'RANGE',
+    'angle'     : 'ANGLE',
 
     'true'	    : 'TRUE',
     'false'	    : 'FALSE',
