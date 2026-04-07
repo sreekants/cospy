@@ -538,6 +538,7 @@ class Parser:
         """
         range_expression : array
         range_expression : range    
+        range_expression : angle    
         range_expression : identifier
         """
         self.move(p)

@@ -18,12 +18,10 @@ class Actor:
 			config -- Configuration attributes
 		"""
 		self.behaviors	= None
-		self.loop		= -1 	# Loop count
 		self.name		= config["name"]
 
 		# Initialize the simulation states
 		null_vector		= np.zeros(3)
-		self.loop		= 0 	# Loop count
 		self.rect		= None
 		self.x			= null_vector
 		self.dx			= null_vector
@@ -49,7 +47,6 @@ class Actor:
 		"""
 		# Initialize the simulation states
 		null_vector		= np.zeros(3)
-		self.loop		= 0 	# Loop count
 		self.rect		= rect
 		self.x			= null_vector
 		self.dx			= null_vector
@@ -71,15 +68,13 @@ class Actor:
 			world -- Reference ot the simulation world
 			config -- Configuration attributes
 		"""
-		if self.loop == -1:
-			return None, None, None
 
-		self.loop	= self.loop+1
+
 		for behavior in self.behaviors.values():
 			if behavior.type not in [ActorBehavior.MOTION, ActorBehavior.CONTROL_COLAV, ActorBehavior.DYNAMICS]:
 				continue
 					
-			pos, dx		= behavior.update( world, self.loop, config )
+			pos, dx		= behavior.update( world, world.sim.simclock, config )
 			if pos is None or dx is None:
 				continue
 

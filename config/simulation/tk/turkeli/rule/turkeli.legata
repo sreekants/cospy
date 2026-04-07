@@ -31,7 +31,7 @@ clause['Turkeli.Harbour.TSS.North-South']:{
             }
         assure: { 
             :OS.Velocity > 0           # No stopping and minimal speed
-            :OS.Heading in range(1,179)     # North heading
+            :OS.Heading in angle(1,179)     # North heading
             }
     }
 }

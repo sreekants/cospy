@@ -48,7 +48,7 @@ class CollisionAvoidanceBehavior(Behavior):
 		return
 
 	
-	def get_visible_in_range(self, world, config, range):
+	def get_visible(self, world, config, range):
 		""" Gets the list of visible vehicles
 		Arguments
 			world -- Reference ot the simulation world

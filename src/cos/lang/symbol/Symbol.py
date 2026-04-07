@@ -14,6 +14,7 @@ class Type(Enum):
 	INTEGER			= 4
 	LIST			= 5
 	RANGE			= 6
+	ANGULAR_RANGE	= 7
 
 	OPERATOR		= 100
 	FUNCTION		= 300
@@ -181,10 +182,17 @@ class Symbol:
 			min		= self.normalize(min)
 			max		= self.normalize(max)
 
-			SymbolType.__init__(self, Type.RANGE, (float(min),float(max)))
+			SymbolType.__init__(self, Type.ANGULAR_RANGE, (float(min),float(max)))
 			return
 
 		def normalize(self, value):
+			if isinstance(value, Symbol.Integer):
+				value = float(value.value)
+			elif isinstance(value, Symbol.Float):
+				value = value.value
+
+			if value is None:
+				return 0.0
 			while value < 0:
 				value	= value + 360.0
 

@@ -24,10 +24,10 @@ class StopOnTrafficBehavior(CollisionAvoidanceBehavior):
 			config -- Configuration attributes
 		"""
 
-		vehicles = self.get_visible_in_range(world, config, self.range)
+		vehicles = self.get_visible(world, config, self.range)
 		if len(vehicles)>0:
 			self.stop()
-			print("Stopping on traffic")
+			# print("Stopping on traffic")
 		else:
 			self.resume()
 

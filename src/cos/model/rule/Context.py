@@ -66,7 +66,7 @@ class Context:
 		if result == False:
 			return None
 
-		if isinstance(rhs, Symbol.Range):
+		if isinstance(rhs, Symbol.Range) or isinstance(rhs, Symbol.AngularRange):
 			return rhs.IN(lhs)
 		
 		if match_all == False:
@@ -161,6 +161,9 @@ class Context:
 
 		if isinstance(expr, Symbol.Range):
 			return Symbol.Range(self.resolve(expr.value[0]), self.resolve(expr.value[1]))
+
+		if isinstance(expr, Symbol.AngularRange):
+			return Symbol.AngularRange(self.resolve(expr.value[0]), self.resolve(expr.value[1]))
 
 		if isinstance(expr, SymbolType):
 			expr	= expr.value

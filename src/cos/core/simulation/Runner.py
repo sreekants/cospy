@@ -9,6 +9,33 @@ from cos.core.utilities.Tree	import ErrorCode
 from threading import Thread
 import time
 
+class SimulationClock:
+	def __init__(self, world):
+		""" Constructor
+		Arguments
+			world -- Reference ot the simulation world
+		"""
+		self.world		= world
+		self.timestep	= -1 	# timestep count
+		self.tick		= self.world.clock.tickcount
+		return
+	
+	def step(self):
+		""" Steps the simulation by one tick
+		Arguments
+			world -- Reference ot the simulation world
+		"""
+		self.timestep	= self.timestep+1
+		self.tick		= self.world.clock.tickcount
+		return
+
+	def reset(self):		
+		""" Resets the simulation clock
+		"""
+		self.timestep	= 0
+		self.tick		= 0
+		return
+
 class RunnerThread(SimulationThread):
 	def __init__(self, sim):
 		""" Constructor
@@ -25,9 +52,17 @@ class RunnerThread(SimulationThread):
 		"""
 		# sim.objects.dump()
 		time.sleep(self.ticktime)		# Delayed start
+		clock		= SimulationClock(self.sim)
+		clock.reset()
+
+		# Set the simulation clock reference
+		self.sim.simclock = clock
 
 		while self.running:
-
+			
+			# Step the simulation clock
+			clock.step()
+			
 			for type in ['/Services']:
 				self.sim.objects.traverse( type,
 						self.__tick,

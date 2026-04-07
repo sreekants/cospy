@@ -105,7 +105,7 @@ class LinearMotionBehavior(MotionBehavior):
 			return self.x + self.dx
 
 		θ			= np.radians( self.θ[0] )
-		cosθ, sinθ	= np.cos(θ), np.sin(θ*(t/100))
+		cosθ, sinθ	= np.cos(θ), np.sin(θ*(t.timestep/100))
 
 		grad		= self.apply_force(world, self.dx)
 		dx 			= grad[0]
