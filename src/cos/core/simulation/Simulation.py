@@ -28,6 +28,11 @@ class Simulation:
 			self.runner.run(self)
 			return
 
+		def runnable(self):
+			""" Checks if the simulation is runnable
+			"""
+			return self.runner.runnable()
+
 		def stop(self):
 			""" Stops the simulation kernel
 			"""

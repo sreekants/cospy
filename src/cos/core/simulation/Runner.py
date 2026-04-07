@@ -45,6 +45,9 @@ class RunnerThread(SimulationThread):
 		SimulationThread.__init__(self, sim)
 		self.running	= True
 		self.ticktime	= 0.030		# Ticks every .3 seconds
+		
+		# Duration of the simulation run in steps. -1 for infinite.
+		self.duration	= sim.config.get_int('ProcessManager', 'RunCycles')
 		return
 
 	def run(self):
@@ -59,7 +62,7 @@ class RunnerThread(SimulationThread):
 		self.sim.simclock = clock
 
 		while self.running:
-			
+						
 			# Step the simulation clock
 			clock.step()
 			
@@ -69,9 +72,20 @@ class RunnerThread(SimulationThread):
 						self.sim,
 						8 )
 
+			if self.duration > 0 and clock.timestep >= self.duration:
+				self.stop()
+				self.sim.log.info( 'Runner', f'Simulation duration of {self.duration} steps reached. Stopping simulation.' )
+				self.runnable	= False
+				break
+
 			time.sleep(self.ticktime)
 		return
 
+
+	def is_active(self):		
+		""" Checks if the simulation is runnable
+		"""
+		return self.running
 
 	def stop(self):
 		""" Stops the simulation
@@ -121,6 +135,11 @@ class Runner:
 		self.thread.stop()
 		self.thread.join()
 		return
+
+	def runnable(self):
+		""" Checks if the simulation is runnable
+		"""
+		return self.thread.is_active()
 
 if __name__ == "__main__":
 	test = Runner()

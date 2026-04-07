@@ -15,7 +15,15 @@ class COSLaunch:
 		environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 		self.sim.start( settings )
-		input("Press Enter to exit...\n")
+
+		print("Press CTRL+C to exit...\n")
+		try:
+			while True:
+				if self.sim.runner.runnable() == False:
+					break
+		except KeyboardInterrupt:
+			pass
+
 		self.sim.stop()
 		return
 		
