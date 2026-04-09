@@ -18,9 +18,9 @@ class COSLaunch:
 
 		print("Press CTRL+C to exit...\n")
 		try:
-			while True:
-				if self.sim.runner.runnable() == False:
-					break
+			while self.sim.runner.runnable():
+				# Wait briefly instead of busy-spinning on the runner state.
+				self.sim.runner.thread.join(timeout=0.2)
 		except KeyboardInterrupt:
 			pass
 
