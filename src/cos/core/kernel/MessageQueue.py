@@ -10,7 +10,7 @@ from cos.core.utilities.Errors import ErrorCode
 
 import fnmatch
 
-DEFAULT_THROTTLE_RATE	= 64
+DEFAULT_THROTTLE_RATE	= 1000
 
 class PumpCtxt:
 	def __init__(self, throttle_rate):
@@ -395,6 +395,10 @@ class MessageQueue:
 
 		throttle_rate	= ctxt.throttle_rate
 		slot:Topic 		= node.data
+
+		#if slot.queue.empty() == False:
+		#	print( f'Pumping {slot.queue.qsize()} messages from {node.path}' )
+			
 		while slot.queue.empty() == False:
 			evt = slot.queue.get()
 

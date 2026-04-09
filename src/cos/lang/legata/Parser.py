@@ -694,9 +694,9 @@ class Parser:
     def p_pairs(self, p):
         """
         pairs : pair 
-        pairs : pairs pair
+        pairs : pairs COMMA pair
         """
-        self.fold(p, 2)
+        self.fold(p, 3)
         pass
 
 

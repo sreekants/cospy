@@ -13,7 +13,7 @@ class StopOnTrafficBehavior(CollisionAvoidanceBehavior):
 			config -- Configuration attributes
 		"""
 		CollisionAvoidanceBehavior.__init__(self, ctxt, config)
-		self.range		= 400
+		self.range		= 10
 		return
 
 	def update(self, world, t, config):

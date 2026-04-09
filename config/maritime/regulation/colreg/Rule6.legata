@@ -2,7 +2,7 @@
 # Status        : REVIEW
 
 define: {
-    OS: OwnShip
+    OS: OwnShip,
     TS: TargetShip
 }
 

@@ -10,6 +10,7 @@ from cos.core.utilities.ArgList import ArgList
 from cos.lang.logic.Decision import Decision
 from cos.model.rule.Situation import Situation
 
+from typing import Any
 import queue, fnmatch
 
 
@@ -44,6 +45,29 @@ class InlandWaterRule(Rule):
 		Rule.on_init(self, ctxt, module)
 		return
 
+	def on_start(self, ctxt:Context, config):
+		""" Callback for simulation startup
+		Arguments
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		Rule.on_start(self, ctxt, config)
+
+		self.subscribe("vessel.overtaking", self.on_overtaking)
+		self.subscribe("vessel.crossing", self.on_crossing)
+		self.subscribe("vessel.approach", self.on_close_encounter)
+		return
+
+	def notify(self, ctxt:Context, method:str, arg:Any):
+		""" Triggers a method
+		Arguments
+			ctxt -- Simulation context
+			method -- Method name
+			arg -- Message argumnt
+		"""
+		Rule.notify(self, ctxt, method, arg)
+		return
+
 	def setup_zone(self, ctxt:Context, config:ArgList, typename:str):
 		""" Sets up the rule, loading its configurations
 		Arguments
@@ -69,12 +93,15 @@ class InlandWaterRule(Rule):
 		return
 
 
-	def add_situation(self, situation):
+	def add_situation(self, evt):
 		""" TODO: add_situation
 		Arguments
-			situation -- TODO
+			evt -- TODO
 		""" 
-		self.sitations.put(situation)
+		for z in self.zones:
+			if z.intersect(evt.os.boundary):
+				evt.zone	= z
+				self.sitations.put(evt)
 		return
 
 
@@ -91,15 +118,10 @@ class InlandWaterRule(Rule):
 			return
 		
 		for v in rule_ctxt.vessels:
-			for z in self.zones:
-				if z.intersect(v.boundary):
-					evt			= Situation(v, None)
-					evt.zone	= z
-					self.add_situation( evt )
+			self.add_situation( Situation(v, None) )
 
 		self.evaluate_rule( ctxt, rule_ctxt )
 		return
-
 
 	def evaluate_rule(self, ctxt:Context, rule_ctxt:RuleContext):
 		""" Evaluates the expression
@@ -138,6 +160,7 @@ class InlandWaterRule(Rule):
 			err -- Error attribute
 		"""
 		os		= rule_ctxt.situation.os
+		ts		= rule_ctxt.situation.ts
 		imo		= int(os.imo)
 		score	= self.scorecard.evaluate(clausename) 
 		if score is None:
@@ -156,13 +179,40 @@ class InlandWaterRule(Rule):
 				return
 
 		# Log the error in the database
-		self.data(ctxt, fact, [now, imo, penalty])
+		# self.data(ctxt, fact, [os.recid, ts.recid if ts is not None else 0, now, now])
 		self.data(ctxt, 'ro', [f'\'{concern}\'',now, imo, penalty])
 
 		# Override the function to score the violation
 		ctxt.log.error( self.regulation, f'Violated clause {clausename} for {concern}')
 		return
 
+	def on_overtaking(self, ctxt:Context, evt):
+		""" Event handler for overtaking
+		Arguments
+			ctxt -- Simulation context
+			evt -- Event data
+		"""
+		#self.add_situation( Situation(evt[2].OS, evt[2].TS) )
+		return
+
+	def on_crossing(self, ctxt:Context, evt):
+		""" Event handler for crossing
+		Arguments
+			ctxt -- Simulation context
+			evt -- Event data
+		"""
+		#print( f'{self.__class__.__name__}.crossing:{evt[2].OS.config["name"]}' )
+		#self.add_situation( Situation(evt[2].OS, evt[2].TS) )
+		return
+
+	def on_close_encounter(self, ctxt:Context, evt):
+		""" Event handler for close encounters
+		Arguments
+			ctxt -- Simulation context
+			evt -- Event data
+		"""
+		self.add_situation( Situation(evt[1], evt[2]) )
+		return
 		
 
 if __name__ == "__main__":

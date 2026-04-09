@@ -108,6 +108,8 @@ class DataManager(Subsystem):
 		partition	= self.partitions.get(topic, None)
 		if partition is not None:
 			partition.add( self.sim.now(), data )
+		else:
+			self.sim.log.error( 'DataManager', f'Failed to push data to topic {topic}: No such topic' )
 		return
 
 	def flush(self):

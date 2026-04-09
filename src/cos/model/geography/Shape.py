@@ -4,8 +4,9 @@
 
 from cos.core.kernel.Object import Object
 from cos.core.kernel.Context import Context
-
+from cos.core.utilities.ArgList import ArgList
 from cos.math.geometry.Polygon import Polygon
+
 from shapely import geometry
 
 
@@ -76,6 +77,31 @@ class Shape(Object):
 			return True
 
 		return False
+
+	def get_float_property(self, config, name):
+		val	= self.get_property(config, name)
+		if val is None:
+			return None
+		
+		return float(val)
+
+	def get_int_property(self, config, name):
+		val	= self.get_property(config, name)
+		if val is None:
+			return None
+		
+		return int(val)
+
+	def get_property(self, config, name):
+		if config is None:
+			return None
+		
+		val = config.get(name, None)
+		if val is not None:
+			return val
+
+		args = ArgList( config.get('settings', None) )
+		return args[name]   
 
 if __name__ == "__main__":
 	test = Shape()

@@ -2,8 +2,6 @@
 # Filename: Collision.py
 # Description: Implementation of the Collision class
 
-from sqlalchemy import values
-
 from maritime.core import situation
 from maritime.core.situation.MaritimeConductSituation import MaritimeConductSituation
 from cos.core.kernel.Context import Context

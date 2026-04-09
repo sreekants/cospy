@@ -64,28 +64,6 @@ class Sea(Shape):
         return self.depth
 
 
-    def get_float_property(self, config, name):
-        val	= config.get(name, None )
-        if val is None:
-            return None
-        
-        return float(val)
-
-    def get_int_property(self, config, name):
-        if config is None:
-            return None
-        
-        val	= config.get(name, None )
-        if val is None:
-            return None
-        
-        return int(val)
-
-    def get_property(self, config, name):
-        if config is None:
-            return None
-        
-        return config.get(name, None )
 
 if __name__ == "__main__":
 	test = Sea()

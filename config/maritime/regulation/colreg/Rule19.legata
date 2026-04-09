@@ -1,7 +1,7 @@
 # COLREG.Rule19: Conduct of Vessels in Restricted Visibility
 
 define:{
-    OS: OwnShip
+    OS: OwnShip,
     TS: TargetShip
 }
 

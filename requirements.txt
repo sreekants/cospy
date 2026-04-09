@@ -35,5 +35,5 @@ scipy
 shapely
 simplejson
 urllib3
-websocket
+websockets
 zmq

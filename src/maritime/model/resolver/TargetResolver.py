@@ -79,6 +79,9 @@ class TargetResolver(Resolver):
 	def Distance(self):
 		""" Symbol property - Distance
 		""" 
+		if self.TS is None:
+			return  float('inf')
+		
 		if self.distance is None:
 			self.distance	= Distance.euclidean(self.OS.location, self.TS.location)
 		return self.distance

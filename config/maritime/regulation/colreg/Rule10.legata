@@ -2,8 +2,8 @@
 # Status        : REVIEW
 
 define: {
-    OS: OwnShip
-    TS: TargetShip
+    OS: OwnShip,
+    TS: TargetShip,
     TSS: OwnShip.TrafficSeparationScheme
 }
 

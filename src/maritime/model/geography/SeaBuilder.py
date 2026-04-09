@@ -57,7 +57,8 @@ class SeaBuilder(SeaBuilderBase):
 						"path": self.scale_polygon2D(ctxt, rec[5]),
 						"depth":rec[6],
 						"color":rec[7],
-						"visible":rec[8]
+						"visible":rec[8],
+						'settings': rec[9]
 				} )
 
 		return guid, inst

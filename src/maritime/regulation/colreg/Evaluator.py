@@ -27,7 +27,7 @@ class Evaluator(Service):
 		self.resolver		= Resolver()
 		self.API			= API()
 
-		self.monitor_timer	= Ticker( 0.5 )	# Monitor every half second
+		self.monitor_timer	= Ticker( 0.5 )	# Monitor every half second	
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -43,7 +43,7 @@ class Evaluator(Service):
 		self.init_objects(ctxt, config)
 
 		# Pump events to the rules
-		self.poll_ipc( ctxt, ['/Faculty/Regulation/Rules/COLREG'] )
+		self.poll_ipc( ctxt, ['/Faculty/Regulation/Rules'] )
 		return
 
 	def on_timer(self, ctxt:Context, unused):

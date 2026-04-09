@@ -47,13 +47,13 @@ async def api(websocket, sim):
 
 
 # Server loops to service clients
-async def ipc(sim):
+async def ipc(sim, stop_event):
 	async with websockets.serve(functools.partial(notify, sim=sim), "localhost", 8756):
-		await asyncio.Future()  # run forever
+		await stop_event.wait()
 
-async def rpc(sim):
+async def rpc(sim, stop_event):
 	async with websockets.serve(functools.partial(api, sim=sim), "localhost", 8757):
-		await asyncio.Future()  # run forever
+		await stop_event.wait()
 
 class BrokerThread(SimulationThread):
 	def __init__(self, sim, broker, args:ArgList):
@@ -78,6 +78,22 @@ class WebSocketBrokerThread(BrokerThread):
 			package -- Transport software module implementing the stack
 		"""
 		BrokerThread.__init__(self, sim, broker, args)
+		self.loop		= None
+		self.stop_event	= None
+		self.tasks		= []
+		return
+
+	async def _shutdown_async(self):
+		"""Cancels the server tasks while the event loop is still running."""
+		if self.stop_event is not None and self.stop_event.is_set() == False:
+			self.stop_event.set()
+
+		tasks = [task for task in self.tasks if task is not None and task.done() == False]
+		for task in tasks:
+			task.cancel()
+
+		if len(tasks) > 0:
+			await asyncio.gather(*tasks, return_exceptions=True)
 		return
 
 	def run(self):
@@ -85,8 +101,11 @@ class WebSocketBrokerThread(BrokerThread):
 		"""
 		self.loop = asyncio.new_event_loop()
 		asyncio.set_event_loop(self.loop)
-		self.loop.create_task(ipc(self.sim))
-		self.loop.create_task(rpc(self.sim))
+		self.stop_event = asyncio.Event()
+		self.tasks = [
+			self.loop.create_task(ipc(self.sim, self.stop_event), name='websocket-ipc'),
+			self.loop.create_task(rpc(self.sim, self.stop_event), name='websocket-rpc')
+		]
 
 		# Sleep a bit to allow the server to start before the simulation starts sending messages
 		time.sleep(1)
@@ -96,11 +115,14 @@ class WebSocketBrokerThread(BrokerThread):
 		except KeyboardInterrupt:
 			print("Shutting down")
 		finally:
-			tasks = asyncio.all_tasks(self.loop)
-			for task in tasks:
+			pending = [task for task in asyncio.all_tasks(self.loop) if task.done() == False]
+			for task in pending:
 				task.cancel()
-			self.loop.run_until_complete(asyncio.gather(*tasks, return_exceptions=True))
+			if len(pending) > 0:
+				self.loop.run_until_complete(asyncio.gather(*pending, return_exceptions=True))
+			self.loop.run_until_complete(self.loop.shutdown_asyncgens())
 			self.loop.close()
+			asyncio.set_event_loop(None)
 		return
 
 
@@ -108,7 +130,16 @@ class WebSocketBrokerThread(BrokerThread):
 	def stop(self):
 		""" Signals the broker thread to terminate
 		"""
-		self.loop.call_soon_threadsafe(self.loop.stop)
+		if self.loop is None or self.loop.is_closed():
+			self.running	= False
+			return
+
+		try:
+			future = asyncio.run_coroutine_threadsafe(self._shutdown_async(), self.loop)
+			future.result(timeout=2)
+		finally:
+			self.loop.call_soon_threadsafe(self.loop.stop)
+
 		self.running	= False
 		return
 
