@@ -10,7 +10,7 @@ from app import CViz
 
 def get_app_info():
 	return {
-		"executable": "visualizer.py",
+		"executable": "cviz.py",
 		"name"		: "COS Simulation Visualizer",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
 		"usage"		:[ 	"[-h][-?] dir"

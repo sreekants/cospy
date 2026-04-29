@@ -23,13 +23,23 @@ class VesselIcon(AnimatedSprite):
 
 		self.layer	= 6
 
-		self.initialize(12, 8, 2, self.get_color(config))
+		length		= config["length"]
+		size		= length[0]*length[1]
+
+	
+		self.initialize(12, 8, 2, self.get_color(config), size)
 		return
 	
-	def initialize(self, length, width, bowlen, color):
-		self.length		= length
-		self.width		= width
-		self.bowlen		= bowlen
+	def initialize(self, length, width, bowlen, color, size):
+		scale			= 1.0 
+		if size < 100000.0:
+			scale	= 0.75
+		elif size < 5000.0:
+			scale	= 0.5
+
+		self.length		= length*scale
+		self.width		= width*scale
+		self.bowlen		= bowlen*scale
 		self.color		= color
 		self.angle		= 0
 		return
