@@ -3,17 +3,15 @@
 # Description: Implementation of the BasicHydrodynamicBehavior class
 
 from cos.behavior.motion.MotionBehavior import MotionBehavior
-from cos.behavior.motion.HydrodynamicModel import Ship
 from cos.math.geometry.Rectangle import Rectangle
 from cos.behavior.motion.MotionBehavior import DynamicForce
-from cos.core.kernel.Configuration import Configuration
+from cos.behavior.motion.VesselModel import VesselModel
 
 import numpy as np
-import yaml
 
 
 class BasicHydrodynamicBehavior(MotionBehavior):
-	def __init__(self, ctxt, config=None):
+	def __init__(self, ctxt, config):
 		""" Constructor
 		Arguments
 			ctxt -- Simulation context
@@ -21,8 +19,8 @@ class BasicHydrodynamicBehavior(MotionBehavior):
 		"""
 		MotionBehavior.__init__(self)
 
-		self.ship	= None
 		self.rect	= Rectangle( -2, -1, 4, 2 )
+		self.model	= VesselModel()
 
 		args		= self.get_settings( config )
 
@@ -68,29 +66,12 @@ class BasicHydrodynamicBehavior(MotionBehavior):
 			filename -- File name
 		"""
 
-		config	= yaml.safe_load( self.get_file(ctxt, filename) )
+		self.model.load(self.get_file(ctxt, filename))
 
-		dynamics		= config['hydrodynamics']
-
-		self.north 		= dynamics['north']
-		self.east 		= dynamics['east']
-		self.yaw 		= dynamics['yaw'] * np.pi/180
-		self.yaw_ref 	= dynamics['yaw_ref'] * np.pi/180
-		self.speed 		= dynamics['speed']
-		self.speed_ref 	= dynamics['speed_ref']
-		self.yaw_rate 	= dynamics['yaw_rate']
-		self.dt 		= dynamics['dt']
 		self.t			= 0
 
 		# Initial states
-		self.states 	= [self.north, self.east, self.yaw, self.speed, self.yaw_rate]
-
-		physics			= config['physics']
-		self.ship 		= Ship(mass=physics['mass'],
-							linear_damping_coeff=physics['linear_damping_coeff'],
-							length=physics['length'],
-							width=physics['width'],
-							dt=self.dt )
+		self.states 	= [self.model.north, self.model.east, self.model.yaw, self.model.speed, self.model.yaw_rate]
 
 		# Data capture
 		self.time			= [self.t]
@@ -114,9 +95,8 @@ class BasicHydrodynamicBehavior(MotionBehavior):
 		newpos		= self.translate(t)
 		self.rect	= self.rect.move( newpos[0]-center[0], newpos[1]-center[1] )
 
-		# print( f'at {t}:{self.rect}')
-		# If we have collided, revert back to the previous position
-		if world.has_collision(self.rect) == False:
+		# If we cannot move to a region on the map, revert back to the previous position
+		if self.can_move(world, self.rect):
 			self.last	= self.rect
 			self.x		= newpos
 		else:
@@ -129,11 +109,11 @@ class BasicHydrodynamicBehavior(MotionBehavior):
 		Arguments
 			t -- Time on the simulation clock
 		"""
-		self.states = self.ship.dynamics(
+		self.states = self.model.ship.dynamics(
 						states=self.states,
 						wind_speed=self.get_wind(),
-						speed_ref=self.speed_ref,
-						heading_ref=self.yaw_ref, time_step=self.dt )
+						speed_ref=self.model.speed_ref,
+						heading_ref=self.model.yaw_ref, time_step=self.model.dt )
 
 		north	= self.states[0]
 		east	= self.states[1]
@@ -142,7 +122,7 @@ class BasicHydrodynamicBehavior(MotionBehavior):
 		self.speeds.append(self.states[3])
 		self.norths.append(north)
 		self.easts.append(east)
-		self.t = self.t + self.dt
+		self.t = self.t + self.model.dt
 		self.time.append(self.t)
 
 		self.dx	= np.array((east, north, 0.0))

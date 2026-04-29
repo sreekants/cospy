@@ -6,6 +6,7 @@ from cos.model.environment.Types import DynamicForce
 from cos.core.simulation.Behavior import Behavior, ActorBehavior
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
+from cos.math.geometry.Rectangle import Rectangle
 
 import numpy as np
 
@@ -22,6 +23,7 @@ class MotionBehavior(Behavior):
 		self.d2x		= null_vector
 		
 		self.movable	= True
+		self.active		= True
 
 		self.forces	= {
 			DynamicForce.WIND_CURRENT : null_vector,
@@ -82,6 +84,22 @@ class MotionBehavior(Behavior):
 		"""		
 		return True
 
+	def can_move(self, world, rect:Rectangle):
+		""" Checks if an object can enter a region on the map
+		Arguments
+			world -- Reference ot the simulation world
+			rect -- Region of the map
+		"""	
+
+		if (self.movable == False) or (self.active==False):
+			return False
+		
+		
+		# If we have collided, we cannot enter the space
+		if world.has_collision(rect):
+			return False
+		
+		return True
 
 
 if __name__ == "__main__":

@@ -58,7 +58,7 @@ class SeaBuilder(SeaBuilderBase):
 						"depth":rec[6],
 						"color":rec[7],
 						"visible":rec[8],
-						'settings': rec[9]
+						"settings": rec[9]
 				} )
 
 		return guid, inst

@@ -115,8 +115,9 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.rect	= self.rect.move( newpos[0]-center[0], newpos[1]-center[1] )
 
 		# print( f'at {t}:{self.rect}')
-		# If we have collided, revert back to the previous position
-		if world.has_collision(self.rect) == False:
+
+		# If we cannot move to a region on the map, revert back to the previous position
+		if self.can_move(world, self.rect):
 			self.last	= self.rect
 			self.x		= newpos
 

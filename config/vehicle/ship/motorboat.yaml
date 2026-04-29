@@ -17,6 +17,9 @@ physics:
 
 maneuverability:
     max_heading_rate : 2.0    # degrees per timestep
+    tss_min_dist     : 800.0  # metres; normal separation inside tss
+    overtake_lat_min : 55.0   # metres; lateral separation while overtaking
+    tss_angle_tol    : 30.0   # degrees; tolerance before lane correction kicks in
 
 devices:
      - name: RADAR

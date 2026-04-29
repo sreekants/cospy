@@ -30,6 +30,7 @@ class LinearMotionBehavior(MotionBehavior):
 
 		self.entropy	= 5	
 		self.has_forces	= True
+		self.start		= None
 		return
 
 	def initialize_dynamics(self, loc, X, R):
@@ -72,12 +73,16 @@ class LinearMotionBehavior(MotionBehavior):
 		"""
 		# If the sprite is animated using a velocity vector, we
 		#  move it relative to the original position
+
+		if self.start is None:
+			self.start	= (self.x, self.dx, self.rect)
+			
 		center		= self.rect.center
 		newpos		= self.translate(world, t)
 		self.rect	= self.rect.move( newpos[0]-center[0], newpos[1]-center[1] )
 
 		# If the sprite has collided, reverse the vehicle
-		if world.has_collision(self.rect) == False:
+		if self.can_move(world, self.rect):
 			self.last	= self.rect
 			self.lastdx	= self.dx
 			self.x		= newpos
