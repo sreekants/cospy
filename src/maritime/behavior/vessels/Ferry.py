@@ -2,22 +2,19 @@
 # Filename: Ferry.py
 # Description: Implementation of the Ferry class
 
-from maritime.simulation.vessels.PlannedVesselBehavior import PlannedVesselBehavior
+from maritime.behavior.vessels.PlannedVesselBehavior import PlannedVesselBehavior
 from cos.math.geometry.Distance import Distance
 
 import numpy as np
 
 
+# Specification: medium momentum, fast heading, crosses TSS perpendicularly.
+# Ferry does NOT obey TSS lane direction — it arranges its own timing to cross.
 class Ferry(PlannedVesselBehavior):
-    # Specification: medium momentum, fast heading, crosses TSS perpendicularly.
-    # Ferry does NOT obey TSS lane direction — it arranges its own timing to cross.
-    MOMENTUM         = 0.75   # medium inertia
-    MAX_HEADING_RATE = 8.0    # degrees per timestep; agile enough to time crossing
-
-    # Distance thresholds when crossing TSS traffic (spec §Distance Keeping)
-    CROSSING_AFT_MIN  = 50.0   # metres; minimum when crossing at aft of a TSS vessel
-    CROSSING_FORE_MIN = 250.0  # metres; minimum when crossing in front of approaching traffic
-
+    def __init__(self, ctxt, config):
+        PlannedVesselBehavior.__init__(self, ctxt, config)
+        return
+    
     def _adjust_velocity(self, world, target_dx):
         return self._crossing_separation(world, target_dx)
 
@@ -52,7 +49,7 @@ class Ferry(PlannedVesselBehavior):
         if min_dist == float('inf'):
             return target_dx
 
-        min_sep = self.CROSSING_FORE_MIN if fore_crossing else self.CROSSING_AFT_MIN
+        min_sep = self.model.crossing_fore_min if fore_crossing else self.model.crossing_aft_min
         if min_dist < min_sep:
             return target_dx * max(min_dist / min_sep, 0.0)
 

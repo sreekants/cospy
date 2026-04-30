@@ -1,25 +1,18 @@
 #!/usr/bin/python
-# Filename: Yacht.py
-# Description: Implementation of the Yacht class
+# Filename: Motorboat.py
+# Description: Implementation of the Motorboat class
 
-from maritime.simulation.vessels.UnplannedVesselBehavior import UnplannedVesselBehavior
+from maritime.behavior.vessels.UnplannedVesselBehavior import UnplannedVesselBehavior
 from maritime.navigation.cartography.Map import Map
 from cos.math.geometry.Distance import Distance
 
 import numpy as np
 
 
-class Yacht(UnplannedVesselBehavior):
-    # Specification: no path following, high momentum (preserves speed),
-    # fast heading (large direction changes allowed), stays outside TSS.
-    # When crossing to the other side, uses the same clearances as Ferry.
-    MOMENTUM          = 0.92   # high; resists speed changes
-    CROSSING_AFT_MIN  = 50.0   # metres; crossing at aft of TSS vessel
-    CROSSING_FORE_MIN = 250.0  # metres; crossing in front of approaching TSS vessel
-
+# Specification: Recreational — no path following, high momentum (preserves speed),
+class Motorboat(UnplannedVesselBehavior):
     def __init__(self, ctxt, config):
         UnplannedVesselBehavior.__init__(self, ctxt, config)
-        self._map = Map(ctxt)
         return
 
     def randomize_direction(self):
@@ -89,4 +82,4 @@ class Yacht(UnplannedVesselBehavior):
 
 
 if __name__ == "__main__":
-    test = Yacht(None, None)
+    test = Motorboat(None, None)

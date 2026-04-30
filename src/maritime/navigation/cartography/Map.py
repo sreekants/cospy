@@ -8,8 +8,13 @@ class Map:
 	def __init__(self, ctxt):
 		""" Constructor
 		"""
+		self.zones_cache	= {}
 		return
 
+	def reset(self):
+		self.zones_cache	= {}
+		return
+	
 	def in_tss(self, pt):
 		return False
 
@@ -21,6 +26,13 @@ class Map:
 		result		= list()
 		return result
 
+	def get_zones(self, type, bound:Rectangle):
+		# Search the cache for the file
+		if type in self.zones_cache:
+			return self.zones_cache[type]
+		
+		result		= list()
+		return result
 
 if __name__ == "__main__":
 	test = Map()

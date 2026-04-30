@@ -2,21 +2,18 @@
 # Filename: ContainerShip.py
 # Description: Implementation of the ContainerShip class
 
-from maritime.simulation.vessels.PlannedVesselBehavior import PlannedVesselBehavior
+from maritime.behavior.vessels.PlannedVesselBehavior import PlannedVesselBehavior
 from cos.math.geometry.Distance import Distance
 from math import atan2, cos, sin, degrees, radians
 
 import numpy as np
 
 
+# Specification: high momentum, slow heading, strict TSS lane compliance
 class ContainerShip(PlannedVesselBehavior):
-    # Specification: high momentum, slow heading, strict TSS lane compliance
-    MOMENTUM         = 0.92   # high inertia
-    MAX_HEADING_RATE = 2.0    # degrees per timestep
-
-    TSS_MIN_DIST     = 800.0  # metres; normal separation inside TSS
-    OVERTAKE_LAT_MIN = 55.0   # metres; lateral separation while overtaking
-    TSS_ANGLE_TOL    = 30.0   # degrees; tolerance before lane correction kicks in
+    def __init__(self, ctxt, config):
+        PlannedVesselBehavior.__init__(self, ctxt, config)
+        return
 
     def _adjust_velocity(self, world, target_dx):
         target_dx = self._tss_compliance(target_dx)
@@ -35,7 +32,7 @@ class ContainerShip(PlannedVesselBehavior):
         current_bearing = degrees(atan2(target_dx[1], target_dx[0]))
         delta = (tss_bearing - current_bearing + 180) % 360 - 180
 
-        if abs(delta) <= self.TSS_ANGLE_TOL:
+        if abs(delta) <= self.model.tss_angle_tol:
             return target_dx
 
         step      = min(abs(delta), self.MAX_HEADING_RATE * 3) * (1 if delta > 0 else -1)
@@ -68,7 +65,7 @@ class ContainerShip(PlannedVesselBehavior):
                 min_dist      = dist
                 is_overtaking = np.dot(self.dx, other - self.x) > 0
 
-        min_sep = self.OVERTAKE_LAT_MIN if is_overtaking else self.TSS_MIN_DIST
+        min_sep = self.model.overtake_lat_min if is_overtaking else self.model.tss_min_dist
         if min_dist < min_sep:
             return target_dx * max(min_dist / min_sep, 0.0)
 

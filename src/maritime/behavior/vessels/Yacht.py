@@ -1,24 +1,19 @@
 #!/usr/bin/python
-# Filename: Motorboat.py
-# Description: Implementation of the Motorboat class
+# Filename: Yacht.py
+# Description: Implementation of the Yacht class
 
-from maritime.simulation.vessels.UnplannedVesselBehavior import UnplannedVesselBehavior
-from maritime.navigation.cartography.Map import Map
+from maritime.behavior.vessels.UnplannedVesselBehavior import UnplannedVesselBehavior
 from cos.math.geometry.Distance import Distance
 
 import numpy as np
 
 
-class Motorboat(UnplannedVesselBehavior):
-    # Specification: Recreational — no path following, high momentum (preserves speed),
-    # fast heading, stays outside TSS; when crossing uses Ferry-style clearances.
-    MOMENTUM          = 0.92   # high; resists speed changes
-    CROSSING_AFT_MIN  = 50.0   # metres; crossing at aft of TSS vessel
-    CROSSING_FORE_MIN = 250.0  # metres; crossing in front of approaching TSS vessel
-
+# Specification: no path following, high momentum (preserves speed),
+# fast heading (large direction changes allowed), stays outside TSS.
+# When crossing to the other side, uses the same clearances as Ferry.
+class Yacht(UnplannedVesselBehavior):
     def __init__(self, ctxt, config):
         UnplannedVesselBehavior.__init__(self, ctxt, config)
-        self._map = Map(ctxt)
         return
 
     def randomize_direction(self):
@@ -54,7 +49,7 @@ class Motorboat(UnplannedVesselBehavior):
         if min_dist == float('inf'):
             return 1.0
 
-        min_sep = self.CROSSING_FORE_MIN if fore_crossing else self.CROSSING_AFT_MIN
+        min_sep = self.model.crossing_fore_min if fore_crossing else self.model.crossing_aft_min
         if min_dist < min_sep:
             return max(min_dist / min_sep, 0.0)
 
@@ -73,7 +68,7 @@ class Motorboat(UnplannedVesselBehavior):
 
         # Momentum: restore speed gradually after a separation slowdown
         if scale < 1.0:
-            self.dx = self.MOMENTUM * self.dx + (1.0 - self.MOMENTUM) * saved_dx
+            self.dx = self.model.momentum * self.dx + (1.0 - self.model.momentum) * saved_dx
 
         # TSS avoidance: revert and randomize heading if we've drifted into TSS
         if self._map.in_tss(self.x):
@@ -88,4 +83,4 @@ class Motorboat(UnplannedVesselBehavior):
 
 
 if __name__ == "__main__":
-    test = Motorboat(None, None)
+    test = Yacht(None, None)

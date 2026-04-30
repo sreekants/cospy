@@ -12,10 +12,6 @@ import numpy as np
 
 
 class PlannedVesselBehavior(PathFollowingMotionBehavior):
-	# Subclasses override these to tune inertia and agility.
-	MOMENTUM         = 0.80  # fraction of previous velocity retained each timestep
-	MAX_HEADING_RATE = 5.0   # maximum heading change in degrees per timestep
-
 	def __init__(self, ctxt, config):
 		PathFollowingMotionBehavior.__init__(self, ctxt, config)
 		self._map 	= Map(ctxt)

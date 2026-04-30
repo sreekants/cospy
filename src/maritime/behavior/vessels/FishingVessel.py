@@ -2,7 +2,7 @@
 # Filename: FishingVessel.py
 # Description: Implementation of the FishingVessel class
 
-from maritime.simulation.vessels.UnplannedVesselBehavior import UnplannedVesselBehavior
+from maritime.behavior.vessels.UnplannedVesselBehavior import UnplannedVesselBehavior
 from maritime.navigation.cartography.Map import Map
 from cos.math.geometry.Distance import Distance
 from io import StringIO
@@ -17,19 +17,10 @@ class FishingVessel(UnplannedVesselBehavior):
     NAVIGATING = 'navigating'
     FISHING    = 'fishing'
 
-    # Specification: low momentum (quick to respond), fast heading
-    MOMENTUM         = 0.40   # low; vessel adjusts speed and heading quickly
-    MAX_HEADING_RATE = 10.0   # degrees per timestep; fast heading changes
-
-    # Distance thresholds
-    TSS_MIN_DIST     = 800.0   # metres; standard separation when navigating inside TSS
-    FISHING_AFT_DIST = 1000.0  # metres; min distance from aft of any vessel while fishing
-    TSS_ANGLE_TOL    = 30.0    # degrees; tolerance before TSS correction kicks in
-
     def __init__(self, ctxt, config):
         UnplannedVesselBehavior.__init__(self, ctxt, config)
-        self._map = Map(ctxt)
-        self.mode = self.FISHING
+
+        self.mode = self.NAVIGATING
 
         # Navigation path state (used in NAVIGATING mode)
         self._nav_path    = []
@@ -44,6 +35,7 @@ class FishingVessel(UnplannedVesselBehavior):
             self._nav_loop = args.IsTrue('loop')
             if self._nav_path:
                 self.mode = self.NAVIGATING
+                
         return
 
     def ioctl(self, op, arg):
@@ -114,7 +106,7 @@ class FishingVessel(UnplannedVesselBehavior):
 
     def _apply_momentum(self, target_dx):
         """Low momentum: blends quickly toward target with a loose heading-rate clamp."""
-        blended    = self.MOMENTUM * self.dx + (1.0 - self.MOMENTUM) * target_dx
+        blended    = self.model.momentum * self.dx + (1.0 - self.model.momentum) * target_dx
         curr_norm  = np.linalg.norm(self.dx)
         blend_norm = np.linalg.norm(blended)
 
@@ -122,8 +114,8 @@ class FishingVessel(UnplannedVesselBehavior):
             curr_angle  = degrees(atan2(self.dx[1],  self.dx[0]))
             blend_angle = degrees(atan2(blended[1],  blended[0]))
             delta       = (blend_angle - curr_angle + 180) % 360 - 180
-            if abs(delta) > self.MAX_HEADING_RATE:
-                clamped = curr_angle + self.MAX_HEADING_RATE * (1 if delta > 0 else -1)
+            if abs(delta) > self.model.max_heading_rate:
+                clamped = curr_angle + self.model.max_heading_rate * (1 if delta > 0 else -1)
                 blended = np.array((
                     blend_norm * cos(radians(clamped)),
                     blend_norm * sin(radians(clamped)),
@@ -148,10 +140,10 @@ class FishingVessel(UnplannedVesselBehavior):
         current_bearing = degrees(atan2(target_dx[1], target_dx[0]))
         delta = (tss_bearing - current_bearing + 180) % 360 - 180
 
-        if abs(delta) <= self.TSS_ANGLE_TOL:
+        if abs(delta) <= self.model.tss_angle_tol:
             return target_dx
 
-        step      = min(abs(delta), self.MAX_HEADING_RATE * 2) * (1 if delta > 0 else -1)
+        step      = min(abs(delta), self.model.max_heading_rate * 2) * (1 if delta > 0 else -1)
         new_angle = current_bearing + step
         speed     = np.linalg.norm(target_dx)
         return np.array((
@@ -179,8 +171,8 @@ class FishingVessel(UnplannedVesselBehavior):
             if dist < min_dist:
                 min_dist = dist
 
-        if min_dist < self.TSS_MIN_DIST:
-            return target_dx * max(min_dist / self.TSS_MIN_DIST, 0.0)
+        if min_dist < self.model.tss_min_dist:
+            return target_dx * max(min_dist / self.model.tss_min_dist, 0.0)
 
         return target_dx
 
@@ -208,8 +200,8 @@ class FishingVessel(UnplannedVesselBehavior):
             if dist < min_dist:
                 min_dist = dist
 
-        if min_dist < self.FISHING_AFT_DIST:
-            return max(min_dist / self.FISHING_AFT_DIST, 0.0)
+        if min_dist < self.model.fishing_aft_dist:
+            return max(min_dist / self.model.fishing_aft_dist, 0.0)
 
         return 1.0
 
@@ -258,7 +250,7 @@ class FishingVessel(UnplannedVesselBehavior):
 
         # Restore speed; low momentum means quick recovery
         if scale < 1.0:
-            self.dx = self.MOMENTUM * self.dx + (1.0 - self.MOMENTUM) * saved_dx
+            self.dx = self.model.momentum * self.dx + (1.0 - self.model.momentum) * saved_dx
 
         # Fishing only outside TSS: revert and randomize if we've drifted in
         if self._map.in_tss(self.x):
