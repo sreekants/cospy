@@ -35,6 +35,7 @@ class Behavior:
 			vehicle -- Vehicle object to create the actor for
 			config -- Configuration attributes
 		"""
+		self.vehicle	= vehicle
 		return
 
 	def runnable(self, ctxt, config):

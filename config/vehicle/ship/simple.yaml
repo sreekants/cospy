@@ -15,8 +15,20 @@ physics:
     width: 3
     momentum: 0.92
 
+activity:
+    type                : "yacht" 
+    activity            : "transport" 
+
+maneuverability:
+    max_yaw_rate        : 10.0   # degrees per timestep
+    max_speed           : 100    # speed per timestep
+
 maneuverability:
     max_heading_rate : 2.0    # degrees per timestep
+
+    range_visibility    : 100    # range of situations observation
+    range_ample_time    : 50     # range of collision avoidance 
+    range_safety        : 10     # range for safety maneuvers
 
 devices:
      - name: RADAR

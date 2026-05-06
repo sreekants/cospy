@@ -42,19 +42,33 @@ class VesselModel:
 		
 		self.momentum			= physics['momentum']
 
-		if 'maneuverability' in config:
-			maneuver				= config['maneuverability']
-			self.max_heading_rate 	= maneuver['max_heading_rate']  # degrees per timestep
 
-		if 'behavior' in config:
-			behavior				= config['behavior']
+		maneuver = config.get('maneuverability',None)
+		if maneuver:
+			self.max_yaw_rate 	= maneuver['max_yaw_rate']  # degrees per timestep
+
+		behavior = config.get('behavior',None)
+		if behavior:
 			self.tss_min_dist     	= behavior['tss_min_dist']  	# metres; normal separation inside tss
 			self.overtake_lat_min 	= behavior['overtake_lat_min']  # metres; lateral separation while overtaking
 			self.tss_angle_tol    	= behavior['tss_angle_tol']   	# degrees; tolerance before lane correction kicks in
 
-			self.fishing_aft_dist 	= behavior['fishing_aft_dist']  # metres; min distance from aft of any vessel while fishing
 			self.crossing_aft_min	= behavior['crossing_aft_min']  # metres; crossing at aft of tss vessel
 			self.crossing_fore_min	= behavior['crossing_fore_min'] # metres; crossing in front of approaching tss vessel
+
+			self.range_visibility 	= behavior['range_visibility'] 
+			self.range_ample_time 	= behavior['range_ample_time'] 
+			self.range_safety 		= behavior['range_safety'] 
+
+		# Setup activities
+		activity = config.get('activity',None)
+		if activity:
+			self.type 		= activity['type']  
+			self.activity 	= activity['activity']  
+
+		activity = config.get('fishing',None)
+		if activity:
+			self.fishing_aft_dist 	= activity['fishing_aft_dist']  # metres; min distance from aft of any vessel while fishing
 
 		return config
 

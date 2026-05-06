@@ -101,6 +101,16 @@ class MotionBehavior(Behavior):
 		
 		return True
 
+	def get_file(self, ctxt, filename):
+		""" Returns the content of a simulation file
+		Arguments
+			ctxt -- Simulation context
+			filename -- File name
+		"""
+		if ctxt is None:
+			return open(filename, 'r').read()
+
+		return ctxt.sim.fs.read_file_as_bytes(filename)
 
 if __name__ == "__main__":
 	test = MotionBehavior()

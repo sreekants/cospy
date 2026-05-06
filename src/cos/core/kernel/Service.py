@@ -23,11 +23,11 @@ class Service(Object):
 		self.ipc_nodes	= []
 		return
 
-	def on_start(self, ctxt:Context, unused):
+	def on_start(self, ctxt:Context, config):
 		""" Callback for simulation startup
 		Arguments
 			ctxt -- Simulation context
-			unused -- Unused variable
+			config -- Unused variable
 		"""
 		namespace = self.type.replace('.', '/')
 		self.listen( f'/{namespace}/{self.id}' )

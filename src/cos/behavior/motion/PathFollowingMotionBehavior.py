@@ -29,6 +29,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			self.load( ctxt, ctxt.sim.config.resolve(args['pathfile']) )
 
 		self.looprun	= args.IsTrue('loop')
+		self.reverserun	= args.IsTrue('reverse')
 		return
 
 	@property
@@ -91,15 +92,19 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			
 		return
 
-	def restart(self):
+	def restart(self, reverse=False):
 		if len(self.path) < 2:
 			return
 		
+		if reverse == True:
+			self.path.reverse()
+
 		self.current	= self.path[0]
 		self.atpoint	= 0
 		self.x			= self.current[1]
 		self.next		= self.path[1]
 		return
+
 
 	def move(self, world, t, config):
 		""" Moves the vehicle
@@ -111,7 +116,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		# If the sprite is animated using a velocity vector, we
 		#  move it relative to the original position
 		center		= self.rect.center
-		newpos		= self.translate(t)
+		newpos		= self.translate(world, t)
 		self.rect	= self.rect.move( newpos[0]-center[0], newpos[1]-center[1] )
 
 		# print( f'at {t}:{self.rect}')
@@ -123,21 +128,27 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 		return self.rect, self.dx
 
-	def translate(self, t):
+	def translate(self, world, t):
 		""" Moves the vehicle to a new point
 		Arguments
+			world -- Reference ot the simulation world
 			t -- Time on the simulation clock
 		"""
 		# Find the matching waypoint
-		pos	= self.get_pos(t)
+		pos	= self.get_pos(world, t)
 		if pos is None:
 			self.dx	= np.zeros(3)
 			return self.x
 
 		self.dx		= pos[2]
-		return self.x + self.dx
+		return self.x + self.dx + self.d2x/2.0
 
-	def move_next(self):
+	def move_next(self, world, t):
+		""" Moves to the next point
+		Arguments
+			world -- Reference ot the simulation world
+			t -- Time on the simulation clock
+		"""
 		if (self.next is None) or (self.current is None):
 			return
 		
@@ -159,22 +170,24 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 			# Restart if a loop run is expected
 			if self.looprun == True:
-				self.restart()
+				self.restart(self.reverserun)
 
 			return
 		
 		self.current	= self.next
 		self.next		= self.path[self.atpoint]
+
+		self.on_waypoint( world, t, self.atpoint, self.current )
 		return
 
-
-	def get_pos(self, t):
+	def get_pos(self, world, t):
 		""" Returns position and orientation vector
 		Arguments
+			world -- Reference ot the simulation world
 			t -- Time on the simulation clock
 		"""
 
-		self.move_next()
+		self.move_next(world, t)
 
 		if (self.next is None) or (self.current is None):
 			return None
@@ -190,6 +203,8 @@ class PathFollowingMotionBehavior(MotionBehavior):
 				np.array((sog*cos(theta), sog*sin(theta), 0.0))
 				)
 
+	def on_waypoint(self, world, t, n, pt):
+		return
 
 if __name__ == "__main__":
 	test = PathFollowingMotionBehavior()

@@ -1,3 +1,6 @@
 packages:
-  modules:  # Radars
+  modules:  # Mapping modules
+     - name: Navigation.Mapping 
+       module: maritime.navigation.cartography.Map
+       config: sample.frequency=1 resolvers=$(CONFIG)/legata.yaml
 

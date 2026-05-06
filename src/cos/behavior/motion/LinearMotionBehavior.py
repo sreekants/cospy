@@ -90,7 +90,7 @@ class LinearMotionBehavior(MotionBehavior):
 			# Randomly accelerate
 			scale		= float(random.randint(25, 100)-50)/100.0
 			self.loop	= 0
-			self.dx		= self.dx * -(1.0+scale)	# Reverse the direction
+			self.dx		= (self.dx + self.d2x/2.0) * -(1.0+scale)	# Reverse the direction
 
 			if self.entropy and random.randrange(0,100)<self.entropy:
 				self.randomize_direction()

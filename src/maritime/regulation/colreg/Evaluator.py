@@ -137,7 +137,7 @@ class Evaluator(Service):
 		return
 
 	def evaluate(self, ctxt:Context):
-		""" Evaluates the expression
+		""" Evaluates the rules
 		Arguments
 			ctxt -- Simulation context
 		"""
@@ -145,7 +145,6 @@ class Evaluator(Service):
 		try:
 			rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels, self.API)
 
-			# IMPORTANT: It is critical that
 			# Initialize for rule evaluation.
 			[r.begin(ctxt, rule_ctxt) for r in self.rules]
 

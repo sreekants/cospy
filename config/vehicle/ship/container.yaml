@@ -15,20 +15,61 @@ physics:
     width: 3
     momentum: 0.92
     
+
+activity:
+    type                : "container" 
+    activity            : "cargo" 
+
 maneuverability:
-    max_heading_rate : 2.0    # degrees per timestep
+    max_yaw_rate        : 10.0   # degrees per timestep
+    max_speed           : 100    # speed per timestep
 
 behavior:
     # distance thresholds
-    tss_min_dist     : 800.0  # metres; normal separation inside tss
-    overtake_lat_min : 55.0   # metres; lateral separation while overtaking
-    tss_angle_tol    : 30.0   # degrees; tolerance before lane correction kicks in
+    tss_min_dist        : 800.0  # metres; normal separation inside tss
+    overtake_lat_min    : 55.0   # metres; lateral separation while overtaking
+    tss_angle_tol       : 30.0   # degrees; tolerance before lane correction kicks in
 
     # distance thresholds
-    fishing_aft_dist : 1000.0  # metres; min distance from aft of any vessel while fishing
+    fishing_aft_dist    : 1000.0  # metres; min distance from aft of any vessel while fishing
 
-    crossing_aft_min  : 50.0   # metres; crossing at aft of tss vessel
-    crossing_fore_min : 250.0  # metres; crossing in front of approaching tss vessel
+    crossing_aft_min    : 50.0   # metres; crossing at aft of tss vessel
+    crossing_fore_min   : 250.0  # metres; crossing in front of approaching tss vessel
+
+    range_visibility    : 100    # range of situations observation
+    range_ample_time    : 50     # range of collision avoidance 
+    range_safety        : 10     # range for safety maneuvers
+
+cargo:
+    # Cargo properties
+    # Vessel type
+        # - Container ships (standardized boxes), 
+        # - Bulk carriers (loose goods like coal/grain), 
+        # - Tankers (liquids), 
+        # - Ro-Ro vessels (wheeled vehicles), 
+        # - General cargo ships (packaged goods), 
+        # - Reefers (refrigerated),  
+        # - Heavy lift ships (oversized cargo).
+
+    # Regulated cargo
+        # Regulatory instruments:
+        # - SOLAS (Safety of Life at Sea): Overall safety construction and equipment.
+        # - MARPOL (Marine Pollution): Prevention of pollution by oil and noxious liquids.
+        # - IMDG Code: Mandatory regulations for transporting dangerous goods.
+        # - IMSBC Code: International Maritime Solid Bulk Cargoes Code for safe stowage of solid bulk. 
+
+    flammable       : false
+    refrigerated    : false # Reefer - Perishable goods requiring specific temperatures (fruits, meat, pharmaceuticals).
+    livestock       : false # pecialized transport for live animals with strict ventilation and health regulations.
+    biohazard       : false # Biological hazard
+    heavy_lift      : false # Oversized or extremely heavy items (e.g., wind turbines, machinery) requiring special loading procedures.
+    hazardous       : true  # IMDG Code: Packaged hazardous materials classified into nine classes (explosives, gases, flammable liquids, toxic substances, etc.).
+    bulk_solid      : false # SOLAS Ch. VI & XII: Unpackaged materials loaded directly into cargo spaces, such as grain, coal, ore, and cement. Regulations focus on stability and structural integrity of bulk carriers.
+    bulk_liquid     : false # MARPOL Annex I & II / IBC Code: Liquids transported in tanks, including crude oil, refined petroleum products, chemicals, and edible oils. These are handled by oil tankers or chemical tankers.
+    liquid_gas      : false # IGC Code: Specifically covers liquefied natural gas (LNG) and liquefied petroleum gas (LPG) carried at low temperatures/high pressure.
+    containerized   : true  # Containerized Cargo (CSS Code/CSC): Goods packed into standardized containers (20-foot or 40-foot). Key focus is on secure lashing and tracking.
+    general_cargo   : false # Goods that are packaged (bags, boxes, pallets) or separate items loaded individually. These are often loaded in multi-purpose ships.
+
 
 devices:
      - name: RADAR
