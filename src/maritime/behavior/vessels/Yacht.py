@@ -4,8 +4,10 @@
 
 from maritime.behavior.vessels.PlannedVesselBehavior import PlannedVesselBehavior
 from maritime.behavior.vessels.VesselManeuvers import VesselManeuvers
+from cos.behavior.motion.PathFollowingMotionBehavior import PathFollowingMotionBehavior
 
 import numpy as np
+import random
 
 
 # Specification: no path following, high momentum (preserves speed),
@@ -34,9 +36,33 @@ class Yacht(PlannedVesselBehavior):
         return
 
 
+    def on_watch_course(self, ctxt):
+        PlannedVesselBehavior.on_watch_course(self, ctxt)
+        return
+
+
+    def on_end_waypoint(self, world, t, n, pt):
+        # Pop any plan that might be queued
+        self.pop()
+        return
+    
     def on_waypoint(self, world, t, n, pt):
         self.anchor( self.anchor_time )
         return
+
+        # Push the plan
+        self.push()
+
+
+        # Plan a random walk
+        path        = []
+        nways       = 10 
+        dist        = 5
+        
+        self.plan( PlannedVesselBehavior.random_walk(path, dist, pt, nways) )
+        
+        return
+    
 
     def randomize_direction(self):
         """Fast heading: large turns allowed. High momentum: speed magnitude preserved."""

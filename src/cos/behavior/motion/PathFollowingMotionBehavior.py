@@ -30,8 +30,10 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 		self.looprun	= args.IsTrue('loop')
 		self.reverserun	= args.IsTrue('reverse')
-		return
 
+		self.planstack	= []
+		return
+	
 	@property
 	def position(self):
 		""" Returns the current position
@@ -105,6 +107,36 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.next		= self.path[1]
 		return
 
+	def plan(self, path, looprun=False, reverserun=False):
+		self.current	= path[0]
+		self.atpoint	= 0
+		self.next		= self.path[1]
+		self.looprun	= looprun
+		self.reverserun	= reverserun
+
+		# Do not reset self.x because you may be at another location
+		return
+
+	def push(self):
+		self.planstack.append( (self.path, self.current, self.next, self.atpoint, self.looprun, self.reverserun) )
+		return
+
+	def pop(self):
+		if not self.planstack:
+			return False
+		
+		checkpoint		= self.planstack.pop()
+
+		self.path		= checkpoint[0]
+		self.current	= checkpoint[1]
+		self.next		= checkpoint[2]
+		self.atpoint	= checkpoint[3]
+		self.looprun	= checkpoint[4]
+		self.reverserun	= checkpoint[5]
+
+		# Do not reset self.x because you may be at another location
+		return True
+
 
 	def move(self, world, t, config):
 		""" Moves the vehicle
@@ -165,6 +197,9 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 		# Make sure that we have more waypoint segments
 		if self.atpoint == len(self.path):
+			# Notify the end of the run
+			self.on_end_waypoint(world, t, self.atpoint, self.current)
+
 			self.current	= None
 			self.next		= None
 
@@ -205,6 +240,20 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 	def on_waypoint(self, world, t, n, pt):
 		return
+
+	def on_end_waypoint(self, world, t, n, pt):
+		return
+
+	@staticmethod
+	def waypoint(path, t, x, y, z, sog, cog):
+		# Helper function to build a path from way points.
+		path.append( (t,
+				# Location & Angular vectors
+				np.array((x, y, z)),
+				np.array((sog, cog, 0.0))
+				) )
+		
+		return path
 
 if __name__ == "__main__":
 	test = PathFollowingMotionBehavior()

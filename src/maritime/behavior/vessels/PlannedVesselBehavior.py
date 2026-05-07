@@ -23,38 +23,50 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		self.model	= VesselModel()
 		self.mode	= Operation.TRANSPORT
 
-		self.course_monitor	= Ticker( 0.5 )	# Monitor every half second	
-
-		# Load the ship model
-		args		= self.get_settings( config )
-		if ('ship.model' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
-			self.load_model( ctxt, ctxt.sim.config.resolve(args['ship.model']) )
-
-
-		# Navigation path state (used in NAVIGATING mode)
-		self.nav_path    	= []
-		self.nav_current 	= None
-		self.nav_next    	= None
-		self.nav_at      	= 0
-		self.nav_loop    	= False
-
-		if ('pathfile' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
-			self.load_nav_path(ctxt, ctxt.sim.config.resolve(args['pathfile']))
-			self.nav_loop 	= args.IsTrue('loop')
-			if self.nav_path:
-				self.mode 	= Operation.TRANSPORT
-
-		self.ranges	= [
-			(1, 2, 0)		# Default velocity range
-			]
-
+		self.mode 			= Operation.TRANSPORT
+		self.xscale			= 1.0
 
 		# Sequence of behavior operations
 		self.ops 			= None
 		self.postops		= None
 
 		# Behavior watchdogs
-		self.anchor_watch	= None
+		self.watchdogs	= {}
+
+
+		return
+
+	def intialize(self, ctxt, actor, vehicle, config:dict):
+		""" Initialize the behavior for the actor
+		Arguments
+			ctxt -- Simulation context
+			actor -- Actor to initialize the behavior for
+			vehicle -- Vehicle object to create the actor for
+			config -- Configuration attributes
+		"""
+		PathFollowingMotionBehavior.intialize(self, ctxt, actor, vehicle, config)
+
+		# Watch the course every 5 seconds
+		self.add_watch( 'course', 5, self.on_watch_course )
+
+		self.ranges	= [
+			(1, 2, 0)		# Default velocity range
+			]
+
+
+		# Load the ship model
+		args		= self.get_settings( config )
+		if ('ship.model' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
+			self.load_model( ctxt, ctxt.sim.config.resolve(args['ship.model']) )
+
+		return
+
+	def add_watch(self, key, duration, fn, ctxt=None):
+		self.watchdogs[key]	= (Ticker(duration), fn, ctxt)
+		return
+
+	def remove_watch(self, key):
+		self.watchdogs[key]	= None
 		return
 
 
@@ -70,21 +82,22 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 
 	def update(self, world, t, config):
-		# TODO: Generalize the watches.
-		if self.anchor_watch is None:
-			rect, dx	=  PathFollowingMotionBehavior.update(self, world, t, config)
-			return rect, dx
-		
-		if self.anchor_watch.signaled() == True:
-			self.movable        = True
-			self.anchor_watch   = None
-			self.vehicle.under_way()
+		self.saved_x      	= self.x
+		self.saved_rect   	= self.rect
 
-		return self.rect, self.dx
+		rect, dx	=  PathFollowingMotionBehavior.update(self, world, t, config)
 
+		# Check for watchs		
+		for v in self.watchdogs.values():
+			if (v is not None) and (v[0].signaled() == True):
+				v[1](v[2])
+
+		return rect, dx
+
+	
 	def anchor(self, duration):
 		self.movable        = False
-		self.anchor_watch	= Ticker( duration )
+		self.add_watch( 'anchor', duration, self.on_end_anchor )
 		self.vehicle.anchored()
 		return
 
@@ -122,61 +135,30 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		# interfere with the simulated position of the vessel
 		if self.postops is not None:
 			for fn in self.postops:
-				 fn(self, world, t, self.dx)
+				fn(self, world, t, self.dx)
 
 		return self.rect, self.dx
 
 
 	# Navigation path management
-	def load_nav_path(self, ctxt, filename):
-		data   = ctxt.sim.fs.read_file(filename)
-		reader = csv.reader(StringIO(data), delimiter=',')
-		rownum = 0
-		for waypoint in reader:
-			if rownum == 0:
-				rownum += 1
-				continue
-			t   = float(waypoint[1])
-			x   = float(waypoint[2])
-			y   = float(waypoint[3])
-			z   = float(waypoint[4])
-			sog = float(waypoint[5])
-			cog = float(waypoint[6])
-			self.nav_path.append((t, np.array((x, y, z)), np.array((sog, cog, 0.0))))
-			if rownum == 1:
-				self.nav_current = self.nav_path[0]
-				self.nav_at      = 0
-				self.x            = self.nav_current[1]
-			if rownum == 2:
-				self.nav_next = self.nav_path[1]
-			rownum += 1
-
-	def nav_restart(self):
-		if len(self.nav_path) < 2:
-			return
-		self.nav_current = self.nav_path[0]
-		self.nav_at      = 0
-		self.x            = self.nav_current[1]
-		self.nav_next    = self.nav_path[1]
-
-	def nav_heading(self):
+	def heading(self):
 		"""Advance to next waypoint if close enough and return target velocity vector."""
-		if (self.nav_next is None) or (self.nav_current is None):
+		if (self.next is None) or (self.current is None):
 			return None
 
-		sog = self.nav_current[2][0]
-		if Distance.euclidean(self.x, self.nav_next[1]) <= sog:
-			self.nav_at += 1
-			if self.nav_at >= len(self.nav_path):
-				self.nav_current = None
-				self.nav_next    = None
-				if self.nav_loop:
-					self.nav_restart()
+		sog = self.current[2][0]
+		if Distance.euclidean(self.x, self.next[1]) <= sog:
+			self.atpoint += 1
+			if self.atpoint >= len(self.path):
+				self.current = None
+				self.next    = None
+				if self.looprun:
+					self.restart()
 				return None
-			self.nav_current = self.nav_next
-			self.nav_next    = self.nav_path[self.nav_at]
+			self.current = self.next
+			self.next    = self.path[self.atpoint]
 
-		theta = atan2(self.nav_next[1][1] - self.x[1], self.nav_next[1][0] - self.x[0])
+		theta = atan2(self.next[1][1] - self.x[1], self.next[1][0] - self.x[0])
 		return np.array((sog * cos(theta), sog * sin(theta), 0.0))
 
 	def randomize_direction(self):
@@ -199,7 +181,28 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		return 
 
 
+	@staticmethod
+	def random_walk(path, dist, next, nways):
+		for n in range(0, nways):
+			tn   = 0
+			x    = next[1][0]+dist*float(random.randint(0, 100))/100.0
+			y    = next[1][1]+dist*float(random.randint(0, 100))/100.0
+			z    = 0
+			
+			PathFollowingMotionBehavior.waypoint(path, tn, x, y, z, 0.0, 0.0)
 
+		return path
+
+
+	# Overridable callbacks
+	def on_watch_course(self, ctxt):
+		return
+
+	def on_end_anchor(self, ctxt):
+		self.movable        = True
+		self.remove_watch('anchor')
+		self.vehicle.under_way()
+		return
 
 if __name__ == "__main__":
 	test = PlannedVesselBehavior(None, None)

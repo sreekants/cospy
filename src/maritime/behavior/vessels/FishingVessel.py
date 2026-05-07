@@ -17,7 +17,7 @@ class FishingVessel(PlannedVesselBehavior):
                 
         # Sequence of behavior operations
         self.ops = [
-            # VesselManeuvers.tss_avoidance,
+            VesselManeuvers.tss_avoidance,
             VesselManeuvers.overtaking_separation,
             VesselManeuvers.apply_momentum,
 
