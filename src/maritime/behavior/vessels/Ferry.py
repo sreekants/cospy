@@ -16,7 +16,7 @@ class Ferry(PlannedVesselBehavior):
         self.ops = [
             VesselManeuvers.tss_compliance,
             VesselManeuvers.overtaking_separation,
-            VesselManeuvers.apply_momentum,
+            # VesselManeuvers.apply_momentum,
 
             VesselManeuvers.crossing_separation
         ]

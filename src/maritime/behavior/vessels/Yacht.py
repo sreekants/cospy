@@ -31,8 +31,6 @@ class Yacht(PlannedVesselBehavior):
             #VesselManeuvers.raise_anchor        # Raise anchor on timeout
         ]
 
-        self.reverserun     = True
-        self.anchor_time    = 0.5
         return
 
 
@@ -40,29 +38,7 @@ class Yacht(PlannedVesselBehavior):
         PlannedVesselBehavior.on_watch_course(self, ctxt)
         return
 
-
-    def on_end_waypoint(self, world, t, n, pt):
-        # Pop any plan that might be queued
-        self.pop()
-        return
-    
-    def on_waypoint(self, world, t, n, pt):
-        self.anchor( self.anchor_time )
-        return
-
-        # Push the plan
-        self.push()
-
-
-        # Plan a random walk
-        path        = []
-        nways       = 10 
-        dist        = 5
         
-        self.plan( PlannedVesselBehavior.random_walk(path, dist, pt, nways) )
-        
-        return
-    
 
     def randomize_direction(self):
         """Fast heading: large turns allowed. High momentum: speed magnitude preserved."""

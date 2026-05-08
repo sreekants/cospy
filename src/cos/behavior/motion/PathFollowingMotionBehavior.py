@@ -24,14 +24,17 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.next		= None
 		self.atpoint	= 0
 
-		args		= self.get_settings( config )
+		args			= self.get_settings( config )
+
+		self.delay		= args.ToFloat('delay')
+		self.looprun	= args.IsTrue('loop')
+		self.reverse	= args.IsTrue('reverse')
+
+
 		if ('pathfile' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
 			self.load( ctxt, ctxt.sim.config.resolve(args['pathfile']) )
 
-		self.looprun	= args.IsTrue('loop')
-		self.reverserun	= args.IsTrue('reverse')
-
-		self.planstack	= []
+		self.plans		= []	# Stack of plans 
 		return
 	
 	@property
@@ -74,11 +77,13 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			# Trajectory
 			sog		= float(waypoint[5])	# Path over ground
 			cog		= float(waypoint[6])	# Course over ground
+			action	= waypoint[7]			# An action to simulate at waypoint
 
 			self.path.append( (t,
 					# Location & Angular vectors
 					np.array((x, y, z)),
-					np.array((sog, cog, 0.0))
+					np.array((sog, cog, 0.0)),
+					action
 					) )
 
 			if rownum == 1:		# First row has the start point
@@ -107,32 +112,33 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.next		= self.path[1]
 		return
 
-	def plan(self, path, looprun=False, reverserun=False):
+	def plan(self, path, looprun=False, reverse=False):
+		self.path		= path
 		self.current	= path[0]
 		self.atpoint	= 0
 		self.next		= self.path[1]
 		self.looprun	= looprun
-		self.reverserun	= reverserun
+		self.reverse	= reverse
 
 		# Do not reset self.x because you may be at another location
 		return
 
 	def push(self):
-		self.planstack.append( (self.path, self.current, self.next, self.atpoint, self.looprun, self.reverserun) )
+		self.plans.append( (self.path, self.current, self.next, self.atpoint, self.looprun, self.reverse) )
 		return
 
 	def pop(self):
-		if not self.planstack:
+		if not self.plans:
 			return False
 		
-		checkpoint		= self.planstack.pop()
+		checkpoint		= self.plans.pop()
 
 		self.path		= checkpoint[0]
 		self.current	= checkpoint[1]
 		self.next		= checkpoint[2]
 		self.atpoint	= checkpoint[3]
 		self.looprun	= checkpoint[4]
-		self.reverserun	= checkpoint[5]
+		self.reverse	= checkpoint[5]
 
 		# Do not reset self.x because you may be at another location
 		return True
@@ -182,16 +188,19 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			t -- Time on the simulation clock
 		"""
 		if (self.next is None) or (self.current is None):
-			return
+			return False
+		
+		if self.delay > t.timestep:
+			return False
 		
 		sog		= self.current[2][0]
 		p1		= self.x
 		p2		= self.next[1]
 
-		# If there is more distance to cover in the current 
+		# If there is no more distance to cover in the current 
 		# waypoint segment, we do not shift.
 		if Distance.euclidean(p1, p2) > sog:
-			return
+			return  True
 		
 		self.atpoint	= self.atpoint+1
 
@@ -205,7 +214,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 			# Restart if a loop run is expected
 			if self.looprun == True:
-				self.restart(self.reverserun)
+				self.restart(self.reverse)
 
 			return
 		
@@ -213,7 +222,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.next		= self.path[self.atpoint]
 
 		self.on_waypoint( world, t, self.atpoint, self.current )
-		return
+		return True
 
 	def get_pos(self, world, t):
 		""" Returns position and orientation vector
@@ -222,7 +231,8 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			t -- Time on the simulation clock
 		"""
 
-		self.move_next(world, t)
+		if self.move_next(world, t) == False:
+			return None
 
 		if (self.next is None) or (self.current is None):
 			return None
@@ -238,19 +248,20 @@ class PathFollowingMotionBehavior(MotionBehavior):
 				np.array((sog*cos(theta), sog*sin(theta), 0.0))
 				)
 
-	def on_waypoint(self, world, t, n, pt):
+	def on_end_waypoint(self, world, t, n, pt):
+		# Pop any plan that might be queued
+		self.pop()
 		return
 
-	def on_end_waypoint(self, world, t, n, pt):
-		return
 
 	@staticmethod
-	def waypoint(path, t, x, y, z, sog, cog):
+	def waypoint(path, t, x, y, z, sog, cog, action=''):
 		# Helper function to build a path from way points.
 		path.append( (t,
 				# Location & Angular vectors
 				np.array((x, y, z)),
-				np.array((sog, cog, 0.0))
+				np.array((sog, cog, 0.0)),
+				action
 				) )
 		
 		return path

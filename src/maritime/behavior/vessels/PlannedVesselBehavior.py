@@ -33,6 +33,9 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		# Behavior watchdogs
 		self.watchdogs	= {}
 
+		self.anchor_time    = 0.5		# Duration to anchor
+
+
 
 		return
 
@@ -182,20 +185,26 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 
 	@staticmethod
-	def random_walk(path, dist, next, nways):
+	def random_walk(path, dist, pt, nways):
 		for n in range(0, nways):
 			tn   = 0
-			x    = next[1][0]+dist*float(random.randint(0, 100))/100.0
-			y    = next[1][1]+dist*float(random.randint(0, 100))/100.0
+			x    = pt[0]+dist*float(random.randint(0, 100))/100.0
+			y    = pt[1]+dist*float(random.randint(0, 100))/100.0
 			z    = 0
 			
-			PathFollowingMotionBehavior.waypoint(path, tn, x, y, z, 0.0, 0.0)
+			PathFollowingMotionBehavior.waypoint(path, tn, x, y, z, 1.0, 0.0)
 
 		return path
 
 
 	# Overridable callbacks
 	def on_watch_course(self, ctxt):
+		return
+
+	def on_waypoint(self, world, t, n, pt):
+		match pt[3]:
+			case 'anchor':
+				self.anchor( self.anchor_time )        
 		return
 
 	def on_end_anchor(self, ctxt):

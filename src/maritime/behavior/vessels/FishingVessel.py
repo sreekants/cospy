@@ -43,6 +43,19 @@ class FishingVessel(PlannedVesselBehavior):
 
         return PlannedVesselBehavior.ioctl(self, op, arg)
 
+    def on_waypoint(self, world, t, n, pt):
+        # Push the plan
+        self.push()
+
+
+        # Plan a random walk
+        path        = []
+        nways       = 5 
+        dist        = 5
+        
+        self.plan( PlannedVesselBehavior.random_walk(path, dist, self.position, nways) )
+        
+        return
 
 
 if __name__ == "__main__":
