@@ -15,11 +15,11 @@ class ContainerShip(PlannedVesselBehavior):
         self.ops = [
     		# Container ships always obey TSS direction — hard correction, never violated.
             VesselManeuvers.tss_compliance,
-            VesselManeuvers.overtaking_separation,
+            VesselManeuvers.overtaking_distance,
             VesselManeuvers.apply_momentum
         ]
 
-        self.reverserun     = False
+        self.reverse    = False
         return
 
 

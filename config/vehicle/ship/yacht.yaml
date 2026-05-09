@@ -25,15 +25,20 @@ maneuverability:
     max_speed           : 100    # speed per timestep
 
 behavior:
-    max_heading_rate : 2.0    # degrees per timestep
     tss_min_dist     : 800.0  # metres; normal separation inside tss
-    overtake_lat_min : 55.0   # metres; lateral separation while overtaking
     tss_angle_tol    : 30.0   # degrees; tolerance before lane correction kicks in
+
+    # overtaking thresholds
+    overtake_lat_min : 55.0   # metres; lateral separation while overtaking
+
+    # crossing thresholds
+    crossing_aft_min    : 50.0   # metres; crossing at aft of tss vessel
+    crossing_fore_min   : 250.0  # metres; crossing in front of approaching tss vessel
 
     range_visibility    : 100    # range of situations observation
     range_ample_time    : 50     # range of collision avoidance 
     range_safety        : 10     # range for safety maneuvers
-
+    
 devices:
      - name: RADAR
        driver: maritime.regulation.colreg.Evaluator

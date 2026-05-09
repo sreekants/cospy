@@ -8,6 +8,7 @@ from maritime.model.vessel.Vessel import Vessel, Operation, Status
 
 from math import atan2, cos, sin, degrees, radians
 import numpy as np
+import re
 
 # Two operating modes per Specification
 
@@ -17,8 +18,8 @@ class FishingVessel(PlannedVesselBehavior):
                 
         # Sequence of behavior operations
         self.ops = [
-            VesselManeuvers.tss_avoidance,
-            VesselManeuvers.overtaking_separation,
+            # VesselManeuvers.tss_avoidance,
+            VesselManeuvers.overtaking_distance,
             VesselManeuvers.apply_momentum,
 
             VesselManeuvers.fishing_slowdown
@@ -28,7 +29,7 @@ class FishingVessel(PlannedVesselBehavior):
             VesselManeuvers.restore_speed
         ]
 
-        self.reverserun     = True
+        self.reverse    = True
         return
 
     def ioctl(self, op, arg):
@@ -43,18 +44,32 @@ class FishingVessel(PlannedVesselBehavior):
 
         return PlannedVesselBehavior.ioctl(self, op, arg)
 
-    def on_waypoint(self, world, t, n, pt):
-        # Push the plan
-        self.push()
+    def on_at_waypoint(self, world, t, n, pt):
+        if len(pt[3]):
+            activity  = pt[3].split('(')
+
+            match activity[0]:
+                case 'fishing':
+                    args  = re.search(r'\((.*)\)', pt[3])
+                    if args is not None:
+                        # Push the plan
+                        self.push()
 
 
-        # Plan a random walk
-        path        = []
-        nways       = 5 
-        dist        = 5
-        
-        self.plan( PlannedVesselBehavior.random_walk(path, dist, self.position, nways) )
-        
+                        # Plan a random walk
+                        path        = []
+                        args        = args[1].split('|')
+                        
+                        nways       = int(args[0])
+                        dist        = float(args[1])
+                        sog         = float(args[2])
+
+                        PlannedVesselBehavior.random_walk( path, dist, self.position, nways, sog )
+                        self.plan( path )
+                        return
+
+            
+        PlannedVesselBehavior.on_at_waypoint(self, world, t, n, pt)
         return
 
 

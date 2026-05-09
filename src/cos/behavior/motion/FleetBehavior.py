@@ -117,11 +117,13 @@ class FleetBehavior(MotionBehavior):
 
 		return
 
-	def update(self, world, t):
-		"""Update all vehicles based on current behavior."""
-		if obstacles is None:
-			obstacles = []
-
+	def update(self, world, t, config):
+		""" Updates the world by moving the fleet
+		Arguments
+			world -- Reference ot the simulation world
+			t -- Time on the simulation clock
+			config -- Configuration attributes
+		"""
 		positions 	= self.get_positions()
 		velocities	= {}
 

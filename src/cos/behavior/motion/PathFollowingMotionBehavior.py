@@ -7,8 +7,14 @@ from cos.core.kernel.Configuration import Configuration
 from cos.math.geometry.Distance import Distance
 from io import StringIO
 from math import cos,sin,atan2
+from enum import Enum
 import numpy as np
 import csv
+
+class OperationState(Enum):
+	UNKNOWN			= -1
+	START			= 1,
+	END				= 9
 
 class PathFollowingMotionBehavior(MotionBehavior):
 	def __init__(self, ctxt, config):
@@ -23,6 +29,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.current	= None
 		self.next		= None
 		self.atpoint	= 0
+		self.atstate	= OperationState.UNKNOWN
 
 		args			= self.get_settings( config )
 
@@ -87,16 +94,17 @@ class PathFollowingMotionBehavior(MotionBehavior):
 					) )
 
 			if rownum == 1:		# First row has the start point
-				self.current	= self.path[0]
 				self.atpoint	= 0
-				self.x			= self.current[1]
-
-
-			if rownum == 2:		# Second row has the next point
-				self.next		= self.path[1]
+				self.x			= self.path[0][1]
 
 			rownum	= rownum+1
-			
+
+		if len(self.path) == 0:
+			raise Exception( f'No path plan loaded in file [{path}]' )
+		
+		self.current	= None
+		self.next		= None
+		self.atstate	= OperationState.START
 		return
 
 	def restart(self, reverse=False):
@@ -107,16 +115,18 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			self.path.reverse()
 
 		self.current	= self.path[0]
+		self.next		= self.path[1]
 		self.atpoint	= 0
 		self.x			= self.current[1]
-		self.next		= self.path[1]
+		self.atstate	= OperationState.START
 		return
 
 	def plan(self, path, looprun=False, reverse=False):
 		self.path		= path
-		self.current	= path[0]
-		self.atpoint	= 0
+		self.current	= self.path[0]
 		self.next		= self.path[1]
+		self.atpoint	= 0
+		self.x			= self.current[1]
 		self.looprun	= looprun
 		self.reverse	= reverse
 
@@ -124,7 +134,8 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		return
 
 	def push(self):
-		self.plans.append( (self.path, self.current, self.next, self.atpoint, self.looprun, self.reverse) )
+		self.atstate	= OperationState.END
+		self.plans.append( (self.path, self.current, self.next, self.atpoint, self.looprun, self.reverse, self.atstate) )
 		return
 
 	def pop(self):
@@ -139,6 +150,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.atpoint	= checkpoint[3]
 		self.looprun	= checkpoint[4]
 		self.reverse	= checkpoint[5]
+		self.atstate	= checkpoint[6]
 
 		# Do not reset self.x because you may be at another location
 		return True
@@ -187,7 +199,15 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			world -- Reference ot the simulation world
 			t -- Time on the simulation clock
 		"""
-		if (self.next is None) or (self.current is None):
+		if self.path is None:
+			return False
+		
+		if self.current is None:
+			self.current	= self.path[0]
+			self.next		= self.path[1]
+			self.x			= self.current[1]
+			self.atstate	= OperationState.START
+			self.on_at_waypoint(world, t, self.atpoint, self.current)
 			return False
 		
 		if self.delay > t.timestep:
@@ -201,27 +221,36 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		# waypoint segment, we do not shift.
 		if Distance.euclidean(p1, p2) > sog:
 			return  True
-		
+
+		# print(f'{self.atpoint}{self.next}={self.atstate}')		
+		if self.atstate == OperationState.START:
+			self.on_at_waypoint( world, t, self.atpoint, self.next )
+
+		self.atstate	= OperationState.START
 		self.atpoint	= self.atpoint+1
+		self.current	= self.next
 
 		# Make sure that we have more waypoint segments
-		if self.atpoint == len(self.path):
-			# Notify the end of the run
-			self.on_end_waypoint(world, t, self.atpoint, self.current)
+		if self.atpoint >= len(self.path):
+			self.atstate	= OperationState.END
 
+			# Notify the end of the run
+			if self.on_end_path(world, t, self.atpoint, self.current) == True:
+				return
+			
 			self.current	= None
 			self.next		= None
 
 			# Restart if a loop run is expected
 			if self.looprun == True:
 				self.restart(self.reverse)
+				# We have reset the path we need to loop again. So return false
+				return False	
 
-			return
-		
-		self.current	= self.next
+			self.path	= None
+			return False
+
 		self.next		= self.path[self.atpoint]
-
-		self.on_waypoint( world, t, self.atpoint, self.current )
 		return True
 
 	def get_pos(self, world, t):
@@ -248,10 +277,13 @@ class PathFollowingMotionBehavior(MotionBehavior):
 				np.array((sog*cos(theta), sog*sin(theta), 0.0))
 				)
 
-	def on_end_waypoint(self, world, t, n, pt):
+	def on_end_path(self, world, t, n, pt):
 		# Pop any plan that might be queued
-		self.pop()
+		return self.pop()
+
+	def on_at_waypoint(self, world, t, n, pt):
 		return
+	
 
 
 	@staticmethod

@@ -16,7 +16,7 @@ class Motorboat(PlannedVesselBehavior):
         # Sequence of behavior operations
         self.ops = [
             VesselManeuvers.tss_compliance,
-            VesselManeuvers.overtaking_separation,
+            VesselManeuvers.overtaking_distance,
             VesselManeuvers.apply_momentum,
             
             VesselManeuvers.crossing_slowdown
@@ -26,7 +26,7 @@ class Motorboat(PlannedVesselBehavior):
             VesselManeuvers.restore_speed
         ]
 
-        self.reverserun     = True
+        self.reverse    = True
         return
 
 

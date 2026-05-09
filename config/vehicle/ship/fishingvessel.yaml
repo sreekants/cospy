@@ -25,10 +25,13 @@ maneuverability:
     max_speed           : 100    # speed per timestep
 
 behavior:
-    type                : "fishing" 
     tss_min_dist        : 800.0  # metres; normal separation inside tss
     tss_angle_tol       : 30.0   # degrees; tolerance before lane correction kicks in
-    overtake_lat_min    : 55.0   # metres; lateral separation while overtaking
+
+    # overtaking thresholds
+    overtake_lat_min : 55.0   # metres; lateral separation while overtaking
+
+    # crossing thresholds
     crossing_aft_min    : 50.0   # metres; crossing at aft of tss vessel
     crossing_fore_min   : 250.0  # metres; crossing in front of approaching tss vessel
 

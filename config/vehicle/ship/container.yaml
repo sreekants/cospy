@@ -27,19 +27,19 @@ maneuverability:
 
 behavior:
     # distance thresholds
-    tss_min_dist        : 800.0  # metres; normal separation inside tss
-    overtake_lat_min    : 55.0   # metres; lateral separation while overtaking
+    tss_min_dist        : 20     # metres; normal separation inside tss
     tss_angle_tol       : 30.0   # degrees; tolerance before lane correction kicks in
+    
+    # overtaking thresholds
+    overtake_lat_min    : 10     # metres; lateral separation while overtaking
 
-    # distance thresholds
-    fishing_aft_dist    : 1000.0  # metres; min distance from aft of any vessel while fishing
+    # crossing thresholds
+    crossing_aft_min    : 0.50   # kilometres; crossing at aft of tss vessel
+    crossing_fore_min   : 0.25   # kilometres; crossing in front of approaching tss vessel
 
-    crossing_aft_min    : 50.0   # metres; crossing at aft of tss vessel
-    crossing_fore_min   : 250.0  # metres; crossing in front of approaching tss vessel
-
-    range_visibility    : 100    # range of situations observation
-    range_ample_time    : 50     # range of collision avoidance 
-    range_safety        : 10     # range for safety maneuvers
+    range_visibility    : 20     # range of situations observation
+    range_ample_time    : 10     # range of collision avoidance 
+    range_safety        : 5      # range for safety maneuvers
 
 cargo:
     # Cargo properties

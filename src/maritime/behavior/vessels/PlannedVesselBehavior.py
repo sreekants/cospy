@@ -12,7 +12,7 @@ from cos.math.geometry.Distance import Distance
 from io import StringIO
 from math import atan2, cos, sin, degrees, radians
 
-import csv, random
+import csv, random, re
 import numpy as np
 
 
@@ -32,10 +32,6 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 		# Behavior watchdogs
 		self.watchdogs	= {}
-
-		self.anchor_time    = 0.5		# Duration to anchor
-
-
 
 		return
 
@@ -185,14 +181,16 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 
 	@staticmethod
-	def random_walk(path, dist, pt, nways):
+	def random_walk(path, dist, pt, nways, sog=1.0, cog=0.0):
+		x    = pt[0]
+		y    = pt[1]
 		for n in range(0, nways):
 			tn   = 0
-			x    = pt[0]+dist*float(random.randint(0, 100))/100.0
-			y    = pt[1]+dist*float(random.randint(0, 100))/100.0
+			x    = x+dist*(float(random.randint(0, 100))/100.0 -0.5)
+			y    = y+dist*(float(random.randint(0, 100))/100.0 -0.5)
 			z    = 0
 			
-			PathFollowingMotionBehavior.waypoint(path, tn, x, y, z, 1.0, 0.0)
+			PathFollowingMotionBehavior.waypoint(path, tn, x, y, z, sog, cog)
 
 		return path
 
@@ -201,10 +199,15 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 	def on_watch_course(self, ctxt):
 		return
 
-	def on_waypoint(self, world, t, n, pt):
-		match pt[3]:
-			case 'anchor':
-				self.anchor( self.anchor_time )        
+	def on_at_waypoint(self, world, t, n, pt):
+		if len(pt[3]):
+			activity  = pt[3].split('=')
+
+			match activity:
+				case 'anchor':
+					args  = re.search(r'\((.*)\)', pt[3])
+					if args is not None:
+						self.anchor( float(args[0]) )
 		return
 
 	def on_end_anchor(self, ctxt):
@@ -213,5 +216,6 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		self.vehicle.under_way()
 		return
 
+	
 if __name__ == "__main__":
 	test = PlannedVesselBehavior(None, None)

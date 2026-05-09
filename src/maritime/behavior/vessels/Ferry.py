@@ -15,16 +15,15 @@ class Ferry(PlannedVesselBehavior):
         # Sequence of behavior operations
         self.ops = [
             VesselManeuvers.tss_compliance,
-            VesselManeuvers.overtaking_separation,
-            # VesselManeuvers.apply_momentum,
+            VesselManeuvers.overtaking_distance,
+            VesselManeuvers.apply_momentum,
 
-            VesselManeuvers.crossing_separation
+            VesselManeuvers.crossing_slowdown
         ]
 
-        self.reverserun     = True
+        self.reverse    = True
         return
     
-
 
 if __name__ == "__main__":
     test = Ferry(None, None)

@@ -2,11 +2,11 @@
 # Filename: NavalFleet.py
 # Description: Implementation of the NavalFleet class
 
-from cos.behavior.motion.FleetBehavior import FleetBehavior
+from cos.behavior.motion.PreyBehavior import PreyBehavior
 
-class NavalFleet(FleetBehavior):
+class NavalFleet(PreyBehavior):
 	def __init__(self, ctxt, config):
-		FleetBehavior.__init__(self, ctxt, config)
+		PreyBehavior.__init__(self, ctxt, config)
 		return
 
 		

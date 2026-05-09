@@ -20,7 +20,7 @@ class Yacht(PlannedVesselBehavior):
         # Sequence of behavior operations
         self.ops = [
             VesselManeuvers.tss_compliance,
-            VesselManeuvers.overtaking_separation,
+            VesselManeuvers.overtaking_distance,
             VesselManeuvers.apply_momentum,
 
             VesselManeuvers.crossing_slowdown
@@ -39,17 +39,5 @@ class Yacht(PlannedVesselBehavior):
         return
 
         
-
-    def randomize_direction(self):
-        """Fast heading: large turns allowed. High momentum: speed magnitude preserved."""
-        speed = np.linalg.norm(self.dx)
-        super().randomize_direction()
-        new_speed = np.linalg.norm(self.dx)
-        if speed > 0 and new_speed > 0:
-            self.dx = self.dx * (speed / new_speed)
-
-        return
-
-
 if __name__ == "__main__":
     test = Yacht(None, None)
