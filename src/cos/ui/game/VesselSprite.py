@@ -10,6 +10,8 @@ import  pygame, math
 AQUABLUE=(57, 196, 242)
 BARBIEPINK=(240, 95, 92)
 
+MAX_TRAJECTORY	= 16
+
 class VesselIcon(AnimatedSprite):
 	def __init__(self, config):
 		""" Constructor
@@ -28,6 +30,8 @@ class VesselIcon(AnimatedSprite):
 
 	
 		self.initialize(12, 8, 2, self.get_color(config), size)
+
+		self.trajectory	= []
 		return
 	
 	def initialize(self, length, width, bowlen, color, size):
@@ -69,7 +73,18 @@ class VesselIcon(AnimatedSprite):
 			screen -- Reference ot the simulation screen
 			rect -- Bounding rectangle of the image
 		"""
-		self.render_polygon(screen, rect.center, self.angle)
+		pos		= rect.center
+
+		self.render_polygon(screen, pos, self.angle)
+
+		numpoints	= len(self.trajectory)
+		if numpoints > MAX_TRAJECTORY:
+			self.trajectory.pop(0)
+
+		self.trajectory.append(pos)
+		if numpoints > 5:
+			pygame.draw.lines(screen, (255, 255, 255), False, self.trajectory[:-4])
+			pygame.draw.lines(screen, (16, 16, 16), False, self.trajectory[-4:])
 		return
 
 
