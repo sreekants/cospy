@@ -25,7 +25,7 @@ class Vessel(ORPCService):
 		return inst.describe()
 
 
-	def init( self, id, config ):
+	def init( self, id ):
 		""" Initializes a vessel
 		Arguments
 			id -- Unique identifier

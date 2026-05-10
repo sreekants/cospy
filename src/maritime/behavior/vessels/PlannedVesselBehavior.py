@@ -6,7 +6,6 @@ from maritime.navigation.cartography.Map import Map
 from maritime.model.vessel.Vessel import Vessel, Operation
 from cos.core.time.Ticker import Ticker
 from cos.behavior.motion.PathFollowingMotionBehavior import PathFollowingMotionBehavior
-from cos.behavior.motion.VesselModel import VesselModel
 from cos.math.geometry.Distance import Distance
 
 from io import StringIO
@@ -20,7 +19,6 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 	def __init__(self, ctxt, config):
 		PathFollowingMotionBehavior.__init__(self, ctxt, config)
 		self.map	= ctxt.sim.objects.get("/Services/Controls/Navigation/Map")
-		self.model	= VesselModel()
 		self.mode	= Operation.TRANSPORT
 
 		self.mode 			= Operation.TRANSPORT
@@ -29,6 +27,7 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		# Sequence of behavior operations
 		self.ops 			= None
 		self.postops		= None
+		self.nearest		= []
 
 		# Behavior watchdogs
 		self.watchdogs	= {}
@@ -55,9 +54,6 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 		# Load the ship model
 		args		= self.get_settings( config )
-		if ('ship.model' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
-			self.load_model( ctxt, ctxt.sim.config.resolve(args['ship.model']) )
-
 		return
 
 	def add_watch(self, key, duration, fn, ctxt=None):
@@ -66,17 +62,6 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 	def remove_watch(self, key):
 		self.watchdogs[key]	= None
-		return
-
-
-	def load_model(self, ctxt, filename):
-		""" Loads a simulation model
-		Arguments
-			ctxt -- Simulation context
-			filename -- File name
-		"""
-
-		self.model.load(self.get_file(ctxt, filename))
 		return
 
 
@@ -109,8 +94,9 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 			self.dx = np.zeros(3)
 			return self.rect, self.dx
 
+		self.nearest	= self.map.get_nearest(self.vehicle, self.vehicle.model.range_visibility)
 
-		target_dx = pos[2]
+		target_dx 		= pos[2]
 
 		# Apply the simulated operation to the vessel
 		if self.ops is not None:

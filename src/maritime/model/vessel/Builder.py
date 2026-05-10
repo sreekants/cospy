@@ -74,7 +74,7 @@ class Builder(BuilderBaseClass):
 		# Delegate to the composer to build the configuration of the vessel
 		# including devices and drivers
 		composer	= VesselComposer()
-		composer.build( ctxt, inst, args )
+		composer.build( ctxt, inst, args, config )
 
 		inst.init( ctxt, args )
 

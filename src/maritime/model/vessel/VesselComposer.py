@@ -3,6 +3,7 @@
 # Description: Types of vessels and their properties, states and characteristics
 
 from maritime.model.vessel.Vessel import Vessel, Type
+from cos.behavior.motion.VesselModel import VesselModel
 from cos.core.kernel.Context import Context
 from cos.core.kernel.Configuration import Configuration
 from cos.core.kernel.BootLoader import BootLoader
@@ -16,7 +17,7 @@ class VesselComposer:
          """
          return
 
-    def build(self, ctxt:Context, vessel:Vessel, args:ArgList ):
+    def build(self, ctxt:Context, vessel:Vessel, args:ArgList, config ):
         """ Composes a vessel from a profile
         Arguments
         	ctxt -- Simulation context
@@ -26,6 +27,8 @@ class VesselComposer:
         profile = args['profile']
         if profile is not None:
             self.build_profile( ctxt, vessel, Configuration.resolve_path(profile) )
+
+        self.load_model(ctxt, vessel, args['ship.model'])
         return
 
     def build_profile(self, ctxt:Context, vessel:Vessel, filename:str ):
@@ -36,9 +39,21 @@ class VesselComposer:
         	filename -- File name
         """
         config	    = yaml.safe_load(ctxt.sim.fs.read_file_as_bytes(filename))
-
+        
         # Add the devices int the profile
         self.add_device( ctxt, vessel, config['devices'] )
+        return
+
+    def load_model(self, ctxt, vessel:Vessel, filespec):
+        """ Loads a vessel model
+        Arguments
+            ctxt -- Simulation context
+            filespec -- File name
+        """
+        if filespec:
+            filename        = ctxt.sim.config.resolve(filespec)
+            vessel.model    = VesselModel()
+            vessel.model.load( ctxt.sim.fs.read_file_as_bytes(filename) )
 
         return
 

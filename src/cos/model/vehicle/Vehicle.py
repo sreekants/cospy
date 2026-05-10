@@ -43,6 +43,7 @@ class Vehicle(Object):
         # Property sets
         self.intent         = Intent()
         self.mode           = ValueSet()
+        self.model          = None
         
         self.actor.create( ctxt, self, config )
 
