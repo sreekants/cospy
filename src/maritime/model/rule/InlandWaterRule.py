@@ -68,17 +68,22 @@ class InlandWaterRule(Rule):
 		Rule.notify(self, ctxt, method, arg)
 		return
 
-	def setup_zone(self, ctxt:Context, config:ArgList, typename:str):
+	def setup_zone(self, ctxt:Context, config:ArgList, typelist):
 		""" Sets up the rule, loading its configurations
 		Arguments
 			ctxt -- Simulation context
 			config -- Configuration attributes
+			typelist -- Types of zones to watch
 		"""
 		Rule.setup(self, ctxt, config)
 
 		zonekey		= config['zonekey']
 		objmgr		= ctxt.sim.objects
-		zones		= objmgr.get_all(f"/World/Sea/{typename}")
+
+		zones		= []
+		for typename in typelist:
+			z	= objmgr.get_all(f"/World/Sea/{typename}")
+			zones.extend(z)
 
 		# Match keys to all zones
 		if zonekey is not None:
@@ -98,10 +103,14 @@ class InlandWaterRule(Rule):
 		Arguments
 			evt -- TODO
 		""" 
+		if not self.zones:
+			return
+		
 		for z in self.zones:
 			if z.intersect(evt.os.boundary):
 				evt.zone	= z
 				self.sitations.put(evt)
+
 		return
 
 
@@ -138,6 +147,8 @@ class InlandWaterRule(Rule):
 		while self.sitations.empty() == False:
 			# Assign a new situation to the rule contxt
 			rule_ctxt.situation	= self.sitations.get()
+
+			#if rule_ctxt.situation.zone.name == 'Turkeli.TSS.SpeedZone1':
 
 			# Reset the resolver with the new context properties
 			resolver.reset( ctxt, rule_ctxt )

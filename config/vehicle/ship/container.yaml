@@ -41,6 +41,8 @@ behavior:
     range_ample_time    : 10     # range of collision avoidance 
     range_safety        : 5      # range for safety maneuvers
 
+    stop_on_traffic     : true
+
 cargo:
     # Cargo properties
     # Vessel type

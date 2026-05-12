@@ -59,7 +59,10 @@ class Ship:
         	width -- #TODO
         	dt -- #TODO
         """
-        self.mass = mass
+        self.mass       = mass
+        self.length     = length
+        self.width      = width
+        
         self.moment_of_inertia_z = mass*width*length*length*length/12
         self.lin_damping = linear_damping_coeff
         self.heading_constant = 10

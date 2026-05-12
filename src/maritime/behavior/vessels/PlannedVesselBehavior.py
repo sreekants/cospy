@@ -85,6 +85,13 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		self.vehicle.anchored()
 		return
 
+	def halt(self):
+		self.movable		= False
+		return
+	
+	def resume(self):
+		self.movable		= True
+		return
 
 	def move(self, world, t, config):
 		"""Follow the planned path, applying vessel-specific adjustments and momentum."""
@@ -170,14 +177,17 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 	def random_walk(path, dist, pt, nways, sog=1.0, cog=0.0):
 		x    = pt[0]
 		y    = pt[1]
+		
+		PathFollowingMotionBehavior.waypoint(path, len(path), pt[0], pt[1], 0, sog, cog)
 		for n in range(0, nways):
-			tn   = 0
+			tn   = len(path)
 			x    = x+dist*(float(random.randint(0, 100))/100.0 -0.5)
 			y    = y+dist*(float(random.randint(0, 100))/100.0 -0.5)
 			z    = 0
 			
 			PathFollowingMotionBehavior.waypoint(path, tn, x, y, z, sog, cog)
 
+		PathFollowingMotionBehavior.waypoint(path, len(path), pt[0], pt[1], 0, sog, cog)
 		return path
 
 

@@ -13,64 +13,8 @@ condition: {
 }
 
 
-clause['Turkeli.Harbour.TSS.South-North']:{
-    : {
-        condition: { 
-            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.South-to-North'
-            }
-        assure: { 
-            :OS.Velocity > 0            # No stopping and minimal speed
-            :OS.Heading in angle(181,359)    # South heading
-            }
-    }
-}
 
-clause['Turkeli.Harbour.TSS.South-North.DistanceKeeping']:{
-    : {
-        condition: { 
-            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.South-to-North'
-            }
-        assure: { 
-            :(OS,TS).Distance >= TSS.SafeDistance
-            }
-    }
-}
-
-clause['Turkeli.Harbour.TSS.North-South']:{
-    : {
-        condition: { 
-            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.North-to-South'
-            }
-        assure: { 
-            :OS.Velocity > 0           # No stopping and minimal speed
-            :OS.Heading in angle(1,179)     # North heading
-            }
-    }
-}
-
-clause['Turkeli.Harbour.TSS.North-South.DistanceKeeping']:{
-    : {
-        condition: { 
-            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.North-to-South'
-            }
-        assure: { 
-            :(OS,TS).Distance >= TSS.SafeDistance
-            }
-    }
-}
-
-clause['Turkeli.TSS.SeparationZone']:{
-    : {
-        condition: { 
-            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.SeparationZone'
-            }
-        assure: { 
-            : fail
-            }
-    }
-}
-
-clause['Turkeli.Harbour.SpeedLimit']:{
+clause['Turkeli.Bosphorous.SpeedLimit']:{
     : {
         condition: { 
             : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.SpeedZone1'
@@ -81,4 +25,15 @@ clause['Turkeli.Harbour.SpeedLimit']:{
     }
 }
 
+
+clause['Turkeli.Bosphorous.DeepDraft']:{
+    : {
+        condition: { 
+            : (OS,TrafficSeparationScheme).Name is 'Turkeli.TSS.SpeedZone1'
+            }
+        assure: { 
+            :OS.Draft < 10            # Deep draft vessels
+            }
+    }
+}
 

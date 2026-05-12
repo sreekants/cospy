@@ -94,7 +94,7 @@ class VirtualWorld:
 
 
 		pygame.font.init()
-		self.font = pygame.font.SysFont("arial", 15)
+		self.font = pygame.font.SysFont("arial", 14)
 
 
 		# Initialize I/O devices
@@ -290,6 +290,7 @@ class VirtualWorld:
 
 				entity.rect		= self.encoder.transform_rect( rect )
 				entity.angle	= math.degrees( math.atan2(-dx[1],dx[0]) )
+				entity.intent	= args["intent"]
 				return
 
 		return

@@ -124,7 +124,8 @@ class Vehicle(Object):
         world.sim.ipc.push( '/IPC', 'vessel.move', None, [{
             "guid":self.guid,
 			"rect": [rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top],
-            "angle": [dx[0],dx[1],dx[2]]
+            "angle": [dx[0],dx[1],dx[2]],
+            "intent": self.intent
             }] )
         return
 

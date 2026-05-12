@@ -31,6 +31,7 @@ class VesselIcon(AnimatedSprite):
 	
 		self.initialize(12, 8, 2, self.get_color(config), size)
 
+		self.intent		= []
 		self.trajectory	= []
 		return
 	
@@ -77,6 +78,7 @@ class VesselIcon(AnimatedSprite):
 
 		self.render_polygon(screen, pos, self.angle)
 
+		# Render trajectory
 		numpoints	= len(self.trajectory)
 		if numpoints > MAX_TRAJECTORY:
 			self.trajectory.pop(0)
@@ -85,6 +87,14 @@ class VesselIcon(AnimatedSprite):
 		if numpoints > 5:
 			pygame.draw.lines(screen, (255, 255, 255), False, self.trajectory[:-4])
 			pygame.draw.lines(screen, (16, 16, 16), False, self.trajectory[-4:])
+
+		if self.intent:
+			font = pygame.font.SysFont("arial", 12)
+			ndx		= 0
+			for i in self.intent:
+				text = font.render(f'{i}', True, (0,0,0))
+				screen.blit( text, (pos[0]+10, pos[1]+ndx*10))
+				ndx	= ndx+1
 		return
 
 

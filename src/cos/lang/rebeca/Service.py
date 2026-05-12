@@ -21,6 +21,8 @@ class Service(ServiceBase):
 
 		self.listen( f'/Services/{type}/{name}' )
 
+		self.name			= name
+		self.ipc_topic		= ''
 		self.timer			= None
 		self.poll_at		= 5
 		self.steps			= int( args.get("Steps", 100) )

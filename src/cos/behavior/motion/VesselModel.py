@@ -40,26 +40,36 @@ class VesselModel:
 							width=physics['width'],
 							dt=self.dt )
 		
-		self.momentum			= physics['momentum']
+		self.momentum	= physics['momentum']
+		self.draft		= physics['draft'] 	
 
 
 		maneuver = config.get('maneuverability',None)
 		if maneuver:
 			self.max_yaw_rate 	= maneuver['max_yaw_rate']  # degrees per timestep
 
-		behavior = config.get('behavior',None)
-		if behavior:
-			self.tss_min_dist     	= behavior['tss_min_dist']  	# metres; normal separation inside tss
-			self.overtake_lat_min 	= behavior['overtake_lat_min']  # metres; lateral separation while overtaking
-			self.tss_angle_tol    	= behavior['tss_angle_tol']   	# degrees; tolerance before lane correction kicks in
 
-			self.crossing_aft_min	= behavior['crossing_aft_min']  # metres; crossing at aft of tss vessel
-			self.crossing_fore_min	= behavior['crossing_fore_min'] # metres; crossing in front of approaching tss vessel
+		self.__load_behavior(config)
+		self.__load_activity(config)
+		self.__load_cargo(config)
+		return config
 
-			self.range_visibility 	= behavior['range_visibility'] 
-			self.range_ample_time 	= behavior['range_ample_time'] 
-			self.range_safety 		= behavior['range_safety'] 
+	def __load_cargo(self, config):
+		cargo = config.get('cargo',None)
 
+		self.cargo_flammable		= cargo['flammable'] if cargo else False
+		self.cargo_refrigerated		= cargo['refrigerated'] if cargo else False
+		self.cargo_livestock		= cargo['livestock'] if cargo else False
+		self.cargo_biohazard		= cargo['biohazard'] if cargo else False
+		self.cargo_heavy_lift		= cargo['heavy_lift'] if cargo else False
+		self.cargo_hazardous		= cargo['hazardous'] if cargo else False
+		self.cargo_bulk_solid		= cargo['bulk_solid'] if cargo else False
+		self.cargo_bulk_liquid		= cargo['bulk_liquid'] if cargo else False
+		self.cargo_liquid_gas		= cargo['liquid_gas'] if cargo else False
+		self.cargo_containerized	= cargo['containerized'] if cargo else False
+		self.cargo_general_cargo	= cargo['general_cargo'] if cargo else False
+
+	def __load_activity(self, config):
 		# Setup activities
 		activity = config.get('activity',None)
 		if activity:
@@ -70,9 +80,24 @@ class VesselModel:
 		if activity:
 			self.fishing_aft_dist 	= activity['fishing_aft_dist']  # metres; min distance from aft of any vessel while fishing
 
-		return config
+		return
 
+	def __load_behavior(self, config):
+		b = config.get('behavior',None)
+
+		self.tss_min_dist     	= 0.0 if not b else b['tss_min_dist']  		# metres; normal separation inside tss
+		self.overtake_lat_min 	= 0.0 if not b else b['overtake_lat_min']  	# metres; lateral separation while overtaking
+		self.tss_angle_tol    	= 0.0 if not b else b['tss_angle_tol']   	# degrees; tolerance before lane correction kicks in
+
+		self.crossing_aft_min	= 0.0 if not b else b['crossing_aft_min']  	# metres; crossing at aft of tss vessel
+		self.crossing_fore_min	= 0.0 if not b else b['crossing_fore_min'] 	# metres; crossing in front of approaching tss vessel
+
+		self.range_visibility 	= 0.0 if not b else b['range_visibility'] 
+		self.range_ample_time 	= 0.0 if not b else b['range_ample_time'] 
+		self.range_safety 		= 0.0 if not b else b['range_safety'] 
 		
+		self.stop_on_traffic	= False if not b else b['stop_on_traffic']
+		return
 
 if __name__ == "__main__":
 	test = VesselModel()

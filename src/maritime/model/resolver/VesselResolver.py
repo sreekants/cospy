@@ -94,6 +94,30 @@ class VesselResolver(Resolver):
 		""" 
 		return 'Territory.HighSea'
 
+	@simproperty
+	def Draft(self):
+		""" Returns the draft
+		""" 
+		return self.vessel.model.draft if self.vessel.model is not None else 0.0
+
+	@simproperty
+	def Mass(self):
+		""" Returns the mass
+		""" 
+		return self.vessel.model.ship.mass if self.vessel.model is not None else 0.0
+
+	@simproperty
+	def Length(self):
+		""" Returns the draft
+		""" 
+		return self.vessel.model.ship.length if self.vessel.model is not None else 0.0
+
+	@simproperty
+	def Width(self):
+		""" Returns the draft
+		""" 
+		return self.vessel.model.ship.width if self.vessel.model is not None else 0.0
+
 if __name__ == "__main__":
 	test = VesselResolver()
 

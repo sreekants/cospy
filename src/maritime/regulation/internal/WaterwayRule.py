@@ -25,7 +25,7 @@ class WaterwayRule(InlandWaterRule):
 		Rule.setup(self, ctxt, config)
 
 		# Create a list of the relevant zones
-		InlandWaterRule.setup_zone(self, ctxt, config, 'WATERWAY')
+		InlandWaterRule.setup_zone(self, ctxt, config, ['WATERWAY','TRAFFIC_SEPARATION_SCHEME'])
 		return
 
 

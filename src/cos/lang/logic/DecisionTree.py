@@ -65,7 +65,7 @@ class DecisionTree(Tree):
 			node -- Node to process
 		"""
 		result = node.apply(ctxt)
-		if result in  [ErrorCode.ERROR_NO_MORE_ITEMS, ErrorCode.S_OK, ErrorCode.ERROR_CONTINUE]:
+		if result in  [ErrorCode.ERROR_NO_MORE_ITEMS, ErrorCode.S_OK, ErrorCode.ERROR_CONTINUE, ErrorCode.ERROR_EXCEPTION_IN_SERVICE]:
 			return ErrorCode.ERROR_CONTINUE
 		return result
 
