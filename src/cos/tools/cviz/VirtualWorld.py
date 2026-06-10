@@ -8,6 +8,7 @@ from cos.tools.cviz.Dispatcher import Dispatcher
 from cos.tools.cviz.Encoder import Encoder
 from cos.tools.cviz.Keyboard import Keyboard
 from cos.tools.cviz.Gamepad import Gamepad
+from cos.ui.gui.Infobox import Infobox
 
 from cos.core.api.World import World
 from cos.core.kernel.ObjectManager import ObjectManager
@@ -48,12 +49,17 @@ class VirtualWorld:
 
 		self.reliefs	= []	# Traversable bodies (Sea)
 		self.bodies		= []	# Obstructon bodies (Land)
+		self.info		= Infobox()
 
 		self.objects	= ObjectManager()
 		self.parms		= ParameterManager()
 		self.world		= World()
 		self.dispatch	= Dispatcher(self)
 		self.encoder	= Encoder()
+
+		self.background	= None
+
+		self.debug		= True
 		return
 
 	def run(self):
@@ -92,14 +98,14 @@ class VirtualWorld:
 		pygame.time.set_timer(self.ADD_LAND, 1000)
 
 
-
 		pygame.font.init()
-		self.font = pygame.font.SysFont("arial", 14)
+		self.font = pygame.font.SysFont("helvetica", 12)
 
+		# Initialize the infobox
+		self.info.init()
 
 		# Initialize I/O devices
 		self.iodevice	= [Keyboard(self), Gamepad(self)]
-
 
 		# Build the world
 		builder	= Builder()
@@ -114,6 +120,7 @@ class VirtualWorld:
 		self.ipc	= RPCAgent()
 		self.ipc.connect()
 		return
+
 
 	def register(self, type, obj):
 		""" Register an object on the object directory
@@ -164,6 +171,10 @@ class VirtualWorld:
 	def render(self):
 		""" Renders the screen
 		"""
+
+		# Clear the log
+		self.info.clear()
+
 		# Fill the screen with sky blue
 		self.screen.fill(SEA_COLOR)
 
@@ -192,6 +203,8 @@ class VirtualWorld:
 			for entity in self.bodies:			# Foreground
 				entity.render(self, self.screen)
 
+
+
 		# Swap the screen
 		self.cos.render(self, self.screen)
 
@@ -200,10 +213,25 @@ class VirtualWorld:
 			for entity in group:
 				entity.commit(self, self.screen)
 
+
+		# Overlay the map on top of all rendered artifacts
+		if self.background:
+			self.screen.blit(self.background, (0, 0))
+
 		for geography in [self.reliefs, self.bodies]:
 			for entity in geography:
 				entity.commit(self, self.screen)
+
+		self.render_debug()
 		return
+
+	def render_debug(self):
+		if not self.debug:
+			return
+		
+		self.info.render(self)
+		return
+	
 
 	def listen(self):
 		""" Polls for events in the simulation
@@ -341,11 +369,17 @@ class VirtualWorld:
 
 		return
 
+	def toggle_debug(self):
+		self.debug	= False if self.debug else True
+		return
+
 	def select(self, vessel):
 		for dev in self.iodevice:
 			dev.vessel	= vessel
 
 		return
+
+		
 
 if __name__ == "__main__":
 	test = World()

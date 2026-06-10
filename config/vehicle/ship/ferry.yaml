@@ -14,6 +14,7 @@ physics:
     linear_damping_coeff: 500000000
     length: 20
     width: 3
+    draft: 40
     momentum: 0.75
 
 activity:
@@ -41,7 +42,9 @@ behavior:
     range_ample_time    : 10     # range of collision avoidance 
     range_safety        : 5      # range for safety maneuvers
 
+    stop_on_traffic     : true
+
 devices:
      - name: RADAR
-       driver: maritime.regulation.colreg.Evaluator
+       driver: maritime.device.communication.Radar
        args: sample.frequency=1

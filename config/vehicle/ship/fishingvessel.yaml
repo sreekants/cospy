@@ -14,7 +14,8 @@ physics:
     linear_damping_coeff: 500000000
     length: 20
     width: 3
-    momentum: 0.40
+    draft: 10
+    momentum: 0.10
 
 activity:
     type                : "fishing" 
@@ -39,11 +40,13 @@ behavior:
     range_ample_time    : 50     # range of collision avoidance 
     range_safety        : 10     # range for safety maneuvers
 
+    stop_on_traffic     : true
+
 # Activity behaviors
 fishing:
     fishing_aft_dist : 1000.0  # metres; min distance from aft of any vessel while fishing
 
 devices:
      - name: RADAR
-       driver: maritime.regulation.colreg.Evaluator
+       driver: maritime.device.communication.Radar
        args: sample.frequency=1

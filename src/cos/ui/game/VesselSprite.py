@@ -33,6 +33,7 @@ class VesselIcon(AnimatedSprite):
 
 		self.intent		= []
 		self.trajectory	= []
+		self.infobox	= True
 		return
 	
 	def initialize(self, length, width, bowlen, color, size):
@@ -79,16 +80,34 @@ class VesselIcon(AnimatedSprite):
 		self.render_polygon(screen, pos, self.angle)
 
 		# Render trajectory
+		self.render_trajectory(screen, pos)
+		self.render_infobox(screen, pos)
+		return
+
+	def render_trajectory(self, screen, pos):
 		numpoints	= len(self.trajectory)
+		if numpoints > 1:
+			last	= self.trajectory[-1]
+			dist	= abs(pos[0]-last[0]) + abs(pos[1]-last[1])	# Manhattan dist
+
+			if dist > 50:
+				self.trajectory.clear()
+				self.trajectory.append(pos)
+				return
+
+		self.trajectory.append(pos)
+
 		if numpoints > MAX_TRAJECTORY:
 			self.trajectory.pop(0)
 
-		self.trajectory.append(pos)
 		if numpoints > 5:
 			pygame.draw.lines(screen, (255, 255, 255), False, self.trajectory[:-4])
 			pygame.draw.lines(screen, (16, 16, 16), False, self.trajectory[-4:])
 
-		if self.intent:
+			return
+	
+	def render_infobox(self, screen, pos):
+		if self.intent and self.infobox:
 			font = pygame.font.SysFont("arial", 12)
 			ndx		= 0
 			for i in self.intent:
@@ -96,7 +115,6 @@ class VesselIcon(AnimatedSprite):
 				screen.blit( text, (pos[0]+10, pos[1]+ndx*10))
 				ndx	= ndx+1
 		return
-
 
 	def render_polygon(self, surface:pygame.Surface, pos, angle):
 		points = []
@@ -126,6 +144,18 @@ class VesselIcon(AnimatedSprite):
 		theta		= math.atan2(y, x)
 		return [ pivot[0]+r*math.cos(theta+deg), pivot[1]+r*math.sin(theta+deg) ]
 
+	def commit(self, ctxt, screen):
+		""" Renders the sprite to thescreen
+		Arguments
+			ctxt -- Simulation context
+			screen -- Reference ot the simulation screen
+		"""
+		if self.rect is not None:
+			pos = pygame.mouse.get_pos()
+			if self.rect.collidepoint(pos):
+				ctxt.info.append_object( f'Sky:{self.name} (Sky)' )
+		return
+
 class VesselSprite(AnimatedSprite):
 	def __init__(self, config):
 		""" Constructor
@@ -141,19 +171,6 @@ class VesselSprite(AnimatedSprite):
 		self.name	= config["name"]
 		self.id		= config["identifier"]
 		self.layer	= 6
-		return
-
-	def commit(self, ctxt, screen):
-		""" Renders the sprite to thescreen
-		Arguments
-			ctxt -- Simulation context
-			screen -- Reference ot the simulation screen
-		"""
-		if self.rect is not None:
-			pos = pygame.mouse.get_pos()
-			if self.rect.collidepoint(pos):
-				text = ctxt.font.render( f'{self.name} ({pos[0]},{pos[1]})', False, (0, 0, 0))
-				screen.blit( text, (100,0))
 		return
 
 

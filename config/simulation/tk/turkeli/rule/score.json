@@ -42,6 +42,14 @@
             "concern":"Speed limit violation",
             "penalty": 3,
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
+        },
+        "Turkeli.Bosphorous.DeepDraft":{
+            "fact":"traffic",
+            "concern":"Deep Draft violation",
+            "penalty": 1000000,
+            "type": "one-strike",
+            "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         }
+
     }
 }

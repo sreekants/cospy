@@ -75,6 +75,6 @@ cargo:
 
 
 devices:
-     - name: RADAR
-       driver: maritime.regulation.colreg.Evaluator
+     - name: Radar
+       driver: maritime.device.communication.Radar
        args: sample.frequency=1

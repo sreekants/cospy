@@ -164,6 +164,9 @@ class Radar(Device):
 		"""
 		return None
 
+	def readex( self, flags=0 ):
+		return None
+
 
 class Driver:
 	def __init__(self, ctxt, vehicle, dev, args=None ):

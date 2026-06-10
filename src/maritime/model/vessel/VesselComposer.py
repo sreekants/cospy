@@ -24,38 +24,41 @@ class VesselComposer:
         	vessel -- Reference to a new vessel to compose
         	args -- List of arguments
         """
-        profile = args['profile']
-        if profile is not None:
-            self.build_profile( ctxt, vessel, Configuration.resolve_path(profile) )
+        modelfile   = args['ship.model']
+        if not modelfile:
+            return
+        
+        filename    = ctxt.sim.config.resolve(modelfile)
+        model       = ctxt.sim.fs.read_file_as_bytes(filename)
 
-        self.load_model(ctxt, vessel, args['ship.model'])
+        modelconfig = self.load_model(ctxt, vessel, model)
+        self.build_profile(ctxt, vessel, modelconfig)
         return
 
-    def build_profile(self, ctxt:Context, vessel:Vessel, filename:str ):
+    def build_profile(self, ctxt:Context, vessel:Vessel, modelconfig ):
         """ Builds a vessel from a profile
         Arguments
         	ctxt -- Simulation context
         	vessel -- Vessel object
-        	filename -- File name
+        	modelconfig -- Model cofiguration
         """
-        config	    = yaml.safe_load(ctxt.sim.fs.read_file_as_bytes(filename))
         
         # Add the devices int the profile
-        self.add_device( ctxt, vessel, config['devices'] )
+        self.add_device( ctxt, vessel, modelconfig['devices'] )
         return
 
-    def load_model(self, ctxt, vessel:Vessel, filespec):
+    def load_model(self, ctxt, vessel:Vessel, model):
         """ Loads a vessel model
         Arguments
             ctxt -- Simulation context
             filespec -- File name
         """
-        if filespec:
-            filename        = ctxt.sim.config.resolve(filespec)
-            vessel.model    = VesselModel()
-            vessel.model.load( ctxt.sim.fs.read_file_as_bytes(filename) )
-
-        return
+        if not model:
+            return
+        
+        vessel.model    = VesselModel()
+        config          = vessel.model.load( model )
+        return config
 
 
     def add_device(self, ctxt:Context, vessel:Vessel, devices ):
@@ -71,20 +74,18 @@ class VesselComposer:
         for device in devices:
             name    = device["name"]
             driver  = device["driver"]
-            dev     = ctxt.sim.devices.create(
-                        name,
-                        device["type"],
-                        device["info"],
-                        device["data"] )
+            info    = device.get("info", None) 
+            data    = device.get("data", None)
+
+            klassname, klass	= BootLoader.load_class(driver)
+
+            dev     = klass( device.get("type", None), name )
 
             if dev is None:
                 ctxt.log.error( 'Vessel.Builder' , f'Failed to create device [{name}] for vessel[{vessel.id}]' )
                 continue
 
-            # Load the device driver for the device
-            klassname, klass	    = BootLoader.load_class(driver)
-
-            vessel.devices[name]    = klass(ctxt, vessel, dev, device["args"])
+            vessel.devices[name]    = dev
         return
 
 

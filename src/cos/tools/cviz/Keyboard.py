@@ -13,7 +13,10 @@ from pygame.locals import (
     K_PLUS,
     K_MINUS,
     K_ESCAPE,
+	K_d, 
     KEYDOWN,
+	KMOD_CTRL,
+	KMOD_ALT,
     QUIT,
 )
 
@@ -49,6 +52,9 @@ class Keyboard:
 
 		if event.key == K_RIGHT:
 			self.world.pan_left()
+
+		if event.key == K_d and (event.mod & KMOD_CTRL):
+			self.world.toggle_debug()
 
 		return True, True
 

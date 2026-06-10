@@ -17,7 +17,7 @@ class Environment(EnvironmentService):
 		# - self.bodies is used for rigid bodies
 		self.reliefs	= []	# Traversable bodies (Sea)
 		self.bodies		= []	# Obstructon bodies (Land)
-
+		self.files		= {}
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -68,28 +68,36 @@ class Environment(EnvironmentService):
 			}
 		}
 
+	def get_background(self):
+		return	{
+					'data': None,
+					'format': None,
+					'size': None,
+					'path': 'E:\\users\\ntnu\\cospy\\config\\map\\tk\\turkeli\\map.png'
+				}
+
 	def get_vessels(self):
-		""" #TODO: get_vessels
+		""" Returns objects in the environment of type - vessels
 		"""
 		return self.encode_object( "vessels", "vessel" )
 
 	def get_sea(self):
-		""" #TODO: get_sea
+		""" Returns objects in the environment of type - sea
 		"""
 		return self.encode_object( "sea", "sea" )
 
 	def get_land(self):
-		""" #TODO: get_land
+		""" Returns objects in the environment of type - land
 		"""
 		return self.encode_object( "land", "land" )
 
 	def get_sky(self):
-		""" #TODO: get_sky
+		""" Returns objects in the environment of type - sky
 		"""
 		return self.encode_object( "sky", "sky" )
 
 	def get_objects(self, type):
-		""" #TODO: get_objects
+		""" Returns objects in the simulation of a type 
 		Arguments
 			type -- Type of the object
 		"""

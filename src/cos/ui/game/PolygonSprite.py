@@ -60,14 +60,6 @@ class PolygonSprite:
 			ctxt -- Simulation context
 			screen -- Reference ot the simulation screen
 		"""
-		if self.area is not None:
-			pos = pygame.mouse.get_pos()
-
-			# TODO: To scale mouse to position
-			
-			if self.area.contains( geometry.Point((pos[0],pos[1])) ):
-				text = ctxt.font.render( f'{self.name} ({pos[0]},{pos[1]})', False, (0, 0, 0))
-				screen.blit( text, (100,0))
 		return
 
 	def getcolor(self, config, opacity=None):

@@ -91,22 +91,26 @@ class World(CompositeService):
 		Arguments
 			type -- Type of the object
 		"""
-		if type == "world":
-			return self.environ.get_world()
-		if type == "vessels":
-			return self.environ.get_vessels()
-		if type == "land":
-			return self.environ.get_land()
-		if type == "sea":
-			return self.environ.get_sea()
-		if type == "sky":
-			return self.environ.get_sky()
-		if type == "sea.current":
-			return self.environ.encode_object("sea.current","sea.current")
-		if type == "wind.current":
-			return self.environ.encode_object("wind.current","wind.current")
-		if type == "sea.wave":
-			return self.environ.encode_object("sea.wave","sea.wave")
+		match type:
+			case "world":
+				return self.environ.get_world()
+			case "vessels":
+				return self.environ.get_vessels()
+			case "land":
+				return self.environ.get_land()
+			case "sea":
+				return self.environ.get_sea()
+			case "sky":
+				return self.environ.get_sky()
+			case "sea.current":
+				return self.environ.encode_object("sea.current","sea.current")
+			case "wind.current":
+				return self.environ.encode_object("wind.current","wind.current")
+			case "sea.wave":
+				return self.environ.encode_object("sea.wave","sea.wave")
+			case "background":
+				return self.environ.get_background()
+		
 		return {}
 
 	def get_objects(self, type):

@@ -14,6 +14,9 @@ from cos.ui.game.BoundingBox import BoundingBox
 from cos.ui.game.VectorSprite import SeaCurrentSystem, WindCurrentSystem, SeaWaveSystem
 
 import uuid
+import pygame
+
+TRANSPARENCY		= (144, 217, 237)
 
 class AssetBuilder:
 	def __init__(self, world):
@@ -101,6 +104,7 @@ class Builder:
 		self.create_cos(world)
 		self.create_environ(world)
 		self.create_physics(world)
+		self.create_background(world)
 		return
 
 	def create_environ(self, world):
@@ -179,6 +183,32 @@ class Builder:
 				self.assets.add(type, sys)
 		return
 
+	def create_background(self, world):
+		scale		= (0.8,.8)
+		# Load the background map
+
+		#TODO Load the image from the server.
+		image 		= WorldService().describe("background")
+
+		if image['data']:
+			# Load the image from the binary data
+			background	= pygame.image.frombytes(image.data, image.size, image.format).convert()
+		elif image['path']:
+			# Load the image from a file path
+			background	= pygame.image.load(image['path']).convert()
+		else:
+			world.background	= None
+			return
+			
+
+		size		= background.get_size()
+		size		= (int(size[0] * scale[0]), int(size[1] * scale[1]))
+		background	= pygame.transform.scale(background, size)
+
+		background.set_colorkey(TRANSPARENCY)
+
+		world.background	= background
+		return
 
 if __name__ == "__main__":
 	test = Builder()

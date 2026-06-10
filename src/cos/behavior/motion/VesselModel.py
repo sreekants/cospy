@@ -12,12 +12,12 @@ class VesselModel:
 		self.ship	= None
 		return
 	
-	def load(self, path):
+	def load(self, data):
 		""" Loads a simulation model
 		Arguments
 			path -- Path to model file
 		"""
-		config			= yaml.safe_load( path )
+		config			= yaml.safe_load( data )
 
 		if 'hydrodynamics' in config:
 			dynamics		= config['hydrodynamics']
