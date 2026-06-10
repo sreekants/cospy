@@ -59,7 +59,7 @@ class VirtualWorld:
 
 		self.background	= None
 
-		self.debug		= True
+		self.debug		= False
 		return
 
 	def run(self):

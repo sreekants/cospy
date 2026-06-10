@@ -20,6 +20,10 @@ class Environment(EnvironmentService):
 		self.files		= {}
 		return
 
+	def set_background(self, image):
+		self.files['background']	= image
+		return
+	
 	def on_start(self, ctxt:Context, config):
 		""" Callback for simulation startup
 		Arguments
@@ -36,7 +40,7 @@ class Environment(EnvironmentService):
 		return
 
 	def get_world(self):
-		""" #TODO: get_world
+		""" Returns the word description
 		"""
 		return {
 			"type":"world",
@@ -47,7 +51,7 @@ class Environment(EnvironmentService):
 		}
 
 	def get_geography(self):
-		""" #TODO: get_geography
+		""" Returns the geography of the world
 		"""
 		return {
 				"sea": self.get_objects("sea"),
@@ -56,7 +60,7 @@ class Environment(EnvironmentService):
 				}
 
 	def encode_object(self, category, type):
-		""" #TODO: encode_object
+		""" Helper funciton to encode an object
 		Arguments
 			category -- Category of the object
 			type -- Type of the object
@@ -69,12 +73,9 @@ class Environment(EnvironmentService):
 		}
 
 	def get_background(self):
-		return	{
-					'data': None,
-					'format': None,
-					'size': None,
-					'path': 'E:\\users\\ntnu\\cospy\\config\\map\\tk\\turkeli\\map.png'
-				}
+		""" Returns an image background for the front end
+		"""
+		return	self.files.get('background', None)
 
 	def get_vessels(self):
 		""" Returns objects in the environment of type - vessels
@@ -114,9 +115,9 @@ class Environment(EnvironmentService):
 		return self.__get_objects_by_type( scopes[type] )
 
 	def __get_objects_by_type(self, namespace):
-		""" #TODO: __get_objects_by_type
+		""" Returns an object of a parciruclar type
 		Arguments
-			namespace -- #TODO
+			namespace -- Type namespace
 		"""
 		if type == None:
 			return []

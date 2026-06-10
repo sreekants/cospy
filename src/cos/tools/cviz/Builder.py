@@ -13,8 +13,7 @@ from cos.ui.game.SkySprite import SkySprite as Sky
 from cos.ui.game.BoundingBox import BoundingBox
 from cos.ui.game.VectorSprite import SeaCurrentSystem, WindCurrentSystem, SeaWaveSystem
 
-import uuid
-import pygame
+import uuid, pygame, io
 
 TRANSPARENCY		= (144, 217, 237)
 
@@ -184,23 +183,21 @@ class Builder:
 		return
 
 	def create_background(self, world):
-		scale		= (0.8,.8)
 		# Load the background map
-
-		#TODO Load the image from the server.
 		image 		= WorldService().describe("background")
 
 		if image['data']:
 			# Load the image from the binary data
-			background	= pygame.image.frombytes(image.data, image.size, image.format).convert()
-		elif image['path']:
+			bytes_io 	= io.BytesIO(image['data'])
+			background	= pygame.image.load(bytes_io, ".png").convert()
+		elif image['file']:
 			# Load the image from a file path
-			background	= pygame.image.load(image['path']).convert()
+			background	= pygame.image.load(image['file']).convert()
 		else:
 			world.background	= None
 			return
 			
-
+		scale		= image['scale']
 		size		= background.get_size()
 		size		= (int(size[0] * scale[0]), int(size[1] * scale[1]))
 		background	= pygame.transform.scale(background, size)

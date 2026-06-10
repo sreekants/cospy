@@ -85,6 +85,8 @@ class VesselIcon(AnimatedSprite):
 		return
 
 	def render_trajectory(self, screen, pos):
+		if pos ==(0,0):
+			return
 		numpoints	= len(self.trajectory)
 		if numpoints > 1:
 			last	= self.trajectory[-1]

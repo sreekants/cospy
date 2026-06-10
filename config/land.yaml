@@ -1,5 +1,11 @@
 packages:
   modules:  # Land & geographical mapping
+     - name: Builder.MAP
+       module: cos.model.geography.MapBuilder
+       service: Builder.MAP
+       args: 
+       database: $(MAP)/land.s3db
+
      - name: Builder.MOUNTAIN
        module: cos.model.geography.LandBuilder
        service: Builder.MOUNTAIN
