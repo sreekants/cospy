@@ -28,6 +28,14 @@ class Infobox:
 		self.objects		= ListView('Objects', (0,150))
 
 		self.children.extend( [self.zones, self.objects] )
+
+		self.show( False )
+		return
+
+	def show(self, istrue):
+		for c in self.children:
+			c.show(istrue)
+		self.visible		= istrue
 		return
 
 	def append_object(self, z:str):
@@ -58,6 +66,9 @@ class Infobox:
 		return
 
 	def render(self, ctxt):
+		if not self.visible:
+			return
+		
 		self.__render_mouse(ctxt)
 		self.__render_box(ctxt)
 

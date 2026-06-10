@@ -155,7 +155,7 @@ class VesselIcon(AnimatedSprite):
 		if self.rect is not None:
 			pos = pygame.mouse.get_pos()
 			if self.rect.collidepoint(pos):
-				ctxt.info.append_object( f'Sky:{self.name} (Sky)' )
+				ctxt.info.append_object( f'{self.name} (Vessel)' )
 		return
 
 class VesselSprite(AnimatedSprite):

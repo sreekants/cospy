@@ -184,10 +184,12 @@ class Actor:
 		# If scenarios are specified, then explicitly match
 		# scenarios
 		scenarios	= scenarios.split(',')
-		match		= syscfg['scenario']
-		for s in scenarios:
-			if match.find(s) != -1:
-				return True
+		matches		= syscfg['scenario'].split(',')
+
+		for match in matches:
+			for s in scenarios:
+				if match.find(s) != -1:
+					return True
 			
 		return False
 

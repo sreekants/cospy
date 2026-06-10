@@ -222,13 +222,10 @@ class VirtualWorld:
 			for entity in geography:
 				entity.commit(self, self.screen)
 
-		self.render_debug()
+		self.render_info()
 		return
 
-	def render_debug(self):
-		if not self.debug:
-			return
-		
+	def render_info(self):
 		self.info.render(self)
 		return
 	
@@ -371,6 +368,8 @@ class VirtualWorld:
 
 	def toggle_debug(self):
 		self.debug	= False if self.debug else True
+		
+		self.info.show(self.debug)
 		return
 
 	def select(self, vessel):

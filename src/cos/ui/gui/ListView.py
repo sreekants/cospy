@@ -11,6 +11,7 @@ class ListView:
 		self.title		= title
 		self.pos		= pos
 		self.items		= []
+		self.visible	= True
 		return
 
 	def clear(self):
@@ -21,7 +22,14 @@ class ListView:
 		self.items.append( (pos, size, txt, color) )
 		return
 
+	def show(self, istrue):
+		self.visible	= istrue
+		return
+	
 	def render(self, ctxt, parent):
+		if not self.visible:
+			return
+		
 		self.render_title(ctxt, parent)
 		self.render_items(ctxt, parent)
 		return
