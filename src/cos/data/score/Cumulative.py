@@ -2,7 +2,7 @@
 # Filename: Cumulative.py
 # Description: Implementation of the Cumulative class
 
-from Score import Score
+from cos.data.score.Score import Score
 
 class Cumulative(Score):
 	def __init__(self):

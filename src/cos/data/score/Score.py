@@ -3,13 +3,13 @@
 # Description: Implementation of the Score class
 
 class Score:
-	def __init__(self):
-		self.counter 	= 0.0
+	def __init__(self, counter=0.0):
+		self.counter 	= counter
 		self.duration	= 0.0
 		return
 
-	def reset(self):
-		self.counter 	= 0.0
+	def reset(self, counter=0.0):
+		self.counter 	= counter
 		self.duration	= 0.0
 		return
 	

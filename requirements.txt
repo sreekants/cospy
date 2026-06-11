@@ -21,9 +21,9 @@ psutil
 py-trees
 pydantic
 pydantic-core
-pygame
+pygame-ce
 pyproj
-PyYAML
+pyyaml
 pyzmq
 regex
 requests

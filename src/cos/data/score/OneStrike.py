@@ -2,7 +2,7 @@
 # Filename: OneStrike.py
 # Description: Implementation of the OneStrike class
 
-from Score import Score
+from cos.data.score.Score import Score
 
 class OneStrike(Score):
 	def __init__(self):

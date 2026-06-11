@@ -267,15 +267,18 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			return None
 		
 		sog		= self.current[2][0]
-		p1		= self.x
-		p2		= self.next[1]
-			
-		theta 	= atan2(p2[1]-p1[1], p2[0]-p1[0])
+		theta 	= self.get_heading()
 
 		return (t,
 				self.x,
 				np.array((sog*cos(theta), sog*sin(theta), 0.0))
 				)
+
+	def get_heading(self):
+		p1		= self.x
+		p2		= self.next[1]
+			
+		return atan2(p2[1]-p1[1], p2[0]-p1[0])
 
 	def on_end_path(self, world, t, n, pt):
 		# Pop any plan that might be queued

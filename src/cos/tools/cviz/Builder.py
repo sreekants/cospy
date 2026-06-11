@@ -186,6 +186,9 @@ class Builder:
 		# Load the background map
 		image 		= WorldService().describe("background")
 
+		if image is None:
+			return
+		
 		if image['data']:
 			# Load the image from the binary data
 			bytes_io 	= io.BytesIO(image['data'])

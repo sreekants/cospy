@@ -2,7 +2,7 @@
 # Filename: Binary.py
 # Description: Implementation of the Binary class
 
-from Score import Score
+from cos.data.score.Score import Score
 
 class Binary(Score):
 	def __init__(self):

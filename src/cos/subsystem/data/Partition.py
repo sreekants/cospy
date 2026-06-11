@@ -3,16 +3,19 @@
 # Description: Implementation of the Partition class
 
 from cos.core.utilities.TransactionalDatabase import TransactionalDatabase
+from cos.core.kernel.Context import Context
+
 import queue
 
 class Partition:
-	def __init__(self, topic:str, fields:list):
+	def __init__(self, ctxt:Context, topic:str, fields:list):
 		""" Constructor
 		Arguments
 			"""
 		self.topic		= topic
 		self.records	= queue.Queue()
 		self.fields		= fields
+		self.case_id	= ctxt.sim.case_id
 		return
 
 	def add(self, at, data):
@@ -51,6 +54,7 @@ class Partition:
 		AUDIT_REGISTER	= 1000
 
 		values	= []
+		# values.append( str(self.scenario) )
 		values.append( str(at) )
 		values.append( str(AUDIT_REGISTER) )
 		values.extend( map(str, data) )

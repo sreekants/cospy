@@ -141,7 +141,7 @@ class DataManager(Subsystem):
 			self.__init_database(config)
 
 			for topic, fields in topics.items():
-				self.partitions[topic]	= Partition( topic, fields )
+				self.partitions[topic]	= Partition( ctxt, topic, fields )
 		except Exception as e:
 			ctxt.log.error( 'DataManager', f'Failed to initialize: {str(e)}' )
 

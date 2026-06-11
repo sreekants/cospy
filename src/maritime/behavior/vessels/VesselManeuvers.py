@@ -217,7 +217,8 @@ class VesselManeuvers:
 		
 		intent	= 'Speed.SlowdownForTraffic'
 
-		# Half if any targetship is in the ample_time range of the ownship
+		# Half speed if any targetship is in the 
+		# ample time range of the ownship
 		for v in b.nearest:
 			dist  = v[0]
 
@@ -227,7 +228,20 @@ class VesselManeuvers:
 			
 		b.vehicle.intent.reset(intent)
 		return target_dx
-    
+
+	@staticmethod
+	def steer_overtaking(b, world, t, target_dx):			
+		return target_dx
+
+	@staticmethod
+	def steer_crossing(b, world, t, target_dx):
+		
+		return target_dx
+
+	@staticmethod
+	def steer_overtaking(b, world, t, target_dx):			
+		return target_dx
+
 if __name__ == "__main__":
 	test = VesselManeuvers()
 

@@ -14,6 +14,8 @@ from cos.core.kernel.Configuration import Configuration
 from cos.core.time.Clock import Clock
 from cos.core.utilities.Patterns import Manager
 
+import hashlib
+
 class Kernel:
 	def __init__(self):
 		""" Constructor
@@ -58,6 +60,12 @@ class Kernel:
 		self.scheduler	= self.create_thread_pool()
 		self.config	= Configuration(configfile, configpath, settings['image'])
 		self.log	= Logger( self.config )
+
+
+		# Generate SHA-256 and grab the first 4 bytes (32 bits)
+		scenario_key 	= self.config.env.get('SCENARIO', '')
+		hash_bytes		= hashlib.sha256(scenario_key.encode('utf-8')).digest()[:4]
+		self.case_id	= int.from_bytes(hash_bytes, byteorder='big')
 
 		self.log.info( "Kernel", "Initializing...")
 		self.loader.startup( self, self.config )
