@@ -38,6 +38,14 @@ class TargetShipResolver(VesselResolver):
 			self.vessel		= None
 		return
 
+	@simproperty
+	def RelativeSize(self):
+		""" Symbol property - InRange
+		""" 
+		if self.vessel is None:
+			return None
+		
+		return 'large'
 
 if __name__ == "__main__":
 	test = TargetShipResolver()

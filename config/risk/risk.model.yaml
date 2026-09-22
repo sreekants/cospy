@@ -1,0 +1,124 @@
+# Bindings for the Bayesian risk-assessment faculty.
+#
+# Each binding names one input node of the ASV risk network (Kristensen et al.
+# 2025, Fig. 2) and the simulation term that supplies its state. The terms are
+# resolved by the same resolver the rule faculties use, so a term that COLREG
+# already resolves needs no new code.
+#
+# Nodes left unbound keep their prior. That is the intended behaviour for the
+# grey static nodes of Fig. 2, whose priors come from Table A.6 and are baked
+# into the .xdsl at build time.
+risk:
+  collision:
+    # --- collision encounter -------------------------------------------------
+    - node: dcpa
+      term: "(OwnShip,TargetShip).DCPA"
+      discretize: bins
+      width: 20.0             # 0-20/20-40/.../over 180 [m]
+      count: 10
+
+    - node: tcpa
+      term: "(OwnShip,TargetShip).TCPA"
+      discretize: bins
+      width: 20.0             # 0-20/20-40/.../over 180 [s]
+      count: 10
+
+    - node: target_on_collision
+      term: "(OwnShip,TargetShip).OnCollisionCourse"
+      discretize: state       # already yes/no
+
+  target:
+    # --- target ---------------------------------------------------------
+    - node: size_other_vessel
+      term: "TargetShip.RelativeSize"
+      discretize: state       # small/large, relative to own vessel
+
+    - node: humans_present
+      term: "TargetShip.PersonsOnBoard"
+      discretize: threshold
+      states: [many, limited]
+      at: 12
+
+  environment:
+    # --- environment ---------------------------------------------------------
+    - node: wave_height
+      term: "(OwnShip,Map.Sea).WaveHeight"
+      discretize: threshold
+      states: [critical, noncritical]
+      at: 2.0                 # critical above 2 m
+
+    - node: wind_speed
+      term: "(OwnShip,Map.Sea).WindSpeed"
+      discretize: threshold
+      states: [critical, noncritical]
+      at: 8.0                 # critical above 8 m/s
+
+  at_sea:
+    # --- waterway ------------------------------------------------------------
+    - node: depth
+      term: "(OwnShip,Map.Sea).Depth"
+      discretize: threshold
+      states: [noncritical, critical]
+      at: 5.0                 # critical below 5 m, so the states are inverted
+
+    - node: distance_to_shore
+      term: "(OwnShip,Map.Land).Distance"
+      discretize: bins
+      width: 30.0             # 0-30/30-60/.../over 270 [m]
+      count: 10
+
+    - node: vessel_on_grounding
+      term: "(OwnShip,Map.Land).OnGroundingCourse"
+      discretize: state
+
+  auv_operation:
+    # --- AUV link ------------------------------------------------------------
+    - node: auv_asv_distance
+      term: "(OwnShip,Fleet).Distance"
+      discretize: bins        # 0-200/200-300/300-400/400-500/over 500 [m], not a
+      edges: [200, 300, 400, 500]   # uniform width, so the edges are given explicitly
+
+    - node: auv_asv_depth
+      term: "(OwnShip,Fleet).MinimumDepth"
+      discretize: bins        # 0-200/200-300/300-400/400-500/over 500 [m], not a
+      edges: [200, 300, 400, 500]   # uniform width, so the edges are given explicitly
+
+    # --- own vessel health ---------------------------------------------------
+    # Fig. 2 draws own_vessel_fails with two parents, so it is inferred rather
+    # than observed. Bind the parents instead if the simulation reports them.
+    # - node: manual_control_failure
+    #   term: "OwnShip.Control.Manual.Failed"
+    #   discretize: state
+    # - node: autonomous_control_failure
+    #   term: "OwnShip.Control.Autonomous.Failed"
+    #   discretize: state
+
+    # Economic loss per consequence state, Table A.5 [NOK].
+  loss:
+    harm_to_humans:
+      fatality: 54520000
+      none: 0
+    damage_other_vessel:
+      major: 9000000
+      minor: 4500000
+      none: 0
+    damage_asv:
+      major: 2000000
+      minor: 1000000
+      none: 0
+    damage_auv:
+      major: 1000000
+      minor: 500000
+      none: 0
+    mission_failure:
+      "yes": 10000            # quoted: PyYAML reads bare yes/no as booleans
+      "no": 0
+
+    # Which cross-cutting concern each consequence scores into. This is the one
+    # mapping the source paper does not supply - see the note in the faculty.
+  concerns:
+    harm_to_humans: safety
+    damage_other_vessel: traffic
+    damage_asv: safety
+    damage_auv: operational
+    mission_failure: operational

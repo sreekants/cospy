@@ -7,6 +7,9 @@ from cos.model.resolver.Resolver import Resolver, simproperty
 from cos.model.rule.Context import Context
 from cos.model.vehicle.Vehicle import Vehicle
 from cos.math.geometry.Distance import Distance
+from cos.math.geometry.Vector import Vector
+from cos.math.geometry.Position import Position
+from cos.math.geometry.CPA import CPA
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 
@@ -32,6 +35,7 @@ class TargetResolver(Resolver):
 		self.range		= range
 		self.distance	= None
 		self.velocity	= None
+		self.cpa		= None
 
 		self.visibility_threshold	= 0.8
 		return
@@ -45,6 +49,7 @@ class TargetResolver(Resolver):
 		self.range		= 0.0
 		self.distance	= None
 		self.velocity	= None
+		self.cpa		= None
 		situation		= rulectxt.situation
 
 		if situation is not None:
@@ -54,6 +59,15 @@ class TargetResolver(Resolver):
 			self.OS			= None
 			self.TS			= None
 		return
+
+	def get_cpa(self):
+		""" TODO: is_valid
+		""" 
+		if self.cpa is not None:
+			return self.cpa
+
+		self.cpa = CPA(self.OS.location, self.OS.velocity, self.TS.location, self.TS.velocity)
+		return self.cpa
 
 	def is_valid(self):
 		""" TODO: is_valid
@@ -185,6 +199,30 @@ class TargetResolver(Resolver):
 		""" 
 		return 1.0
 
+	@simproperty
+	def DCPA(self):
+		""" Symbol property - Visibility
+		""" 
+		return 1.0
+
+	@simproperty
+	def TCPA(self):
+		""" Symbol property - Visibility
+		""" 
+		return 1.0
+
+	@simproperty
+	def DCPA(self):
+		""" Symbol property - Visibility
+		""" 
+		return 1.0
+
+	@simproperty
+	def OnCollisionCourse(self):
+		""" Symbol property - Visibility
+		""" 
+		return False
+	
 if __name__ == "__main__":
 	test = TargetResolver()
 

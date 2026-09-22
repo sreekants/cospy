@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='utf-8'?>
+<smile version="1.0" id="ASV risk model (Kristensen et al. 2025, Fig. 2)">
+
+  <nodes>
+    <cpt id="comms_system_failure">
+      <state id="yes" />
+      <state id="no" />
+      <probabilities>5e-05 0.99995</probabilities>
+    </cpt>
+    <cpt id="target_vessel_fails">
+      <state id="yes" />
+      <state id="no" />
+      <probabilities>6e-05 0.99994</probabilities>
+    </cpt>
+    <cpt id="autonomous_control_failure">
+      <state id="yes" />
+      <state id="no" />
+      <probabilities>4e-07 1</probabilities>
+    </cpt>
+    <cpt id="manual_control_failure">
+      <state id="yes" />
+      <state id="no" />
+      <probabilities>0.000274 0.999726</probabilities>
+    </cpt>
+    <cpt id="own_vessel_fails">
+      <state id="yes" />
+      <state id="no" />
+      <parents>manual_control_failure autonomous_control_failure</parents>
+      <probabilities>0.99 0.01 0.5 0.5 0.2 0.8 0.0001 0.9999</probabilities>
+    </cpt>
+    <cpt id="depth">
+      <state id="critical" />
+      <state id="noncritical" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="distance_to_shore">
+      <state id="state_1" />
+      <state id="state_2" />
+      <state id="state_3" />
+      <state id="state_4" />
+      <state id="state_5" />
+      <state id="state_6" />
+      <state id="state_7" />
+      <state id="state_8" />
+      <state id="state_9" />
+      <state id="state_10" />
+      <probabilities>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</probabilities>
+    </cpt>
+    <cpt id="waterway_properties">
+      <state id="critical" />
+      <state id="noncritical" />
+      <parents>distance_to_shore depth</parents>
+      <probabilities>0.9825 0.0175 0.9475 0.0525 0.9125 0.0875 0.8775 0.1225 0.8425 0.1575 0.8075 0.1925 0.7725 0.2275 0.7375 0.2625 0.7025 0.2975 0.6675 0.3325 0.57 0.43 0.51 0.49 0.45 0.55 0.39 0.61 0.33 0.67 0.27 0.73 0.21 0.79 0.15 0.85 0.09 0.91 0.03 0.97</probabilities>
+    </cpt>
+    <cpt id="wave_height">
+      <state id="critical" />
+      <state id="noncritical" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="wind_speed">
+      <state id="critical" />
+      <state id="noncritical" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="environmental">
+      <state id="critical" />
+      <state id="noncritical" />
+      <parents>wind_speed wave_height</parents>
+      <probabilities>0.95 0.05 0.6 0.4 0.6 0.4 0.02 0.98</probabilities>
+    </cpt>
+    <cpt id="fail_recover_grounding">
+      <state id="yes" />
+      <state id="no" />
+      <parents>environmental own_vessel_fails waterway_properties</parents>
+      <probabilities>0.97 0.03 0.9 0.1 0.55 0.45 0.25 0.75 0.8 0.2 0.6 0.4 0.1 0.9 0.01 0.99</probabilities>
+    </cpt>
+    <cpt id="dcpa">
+      <state id="state_1" />
+      <state id="state_2" />
+      <state id="state_3" />
+      <state id="state_4" />
+      <state id="state_5" />
+      <state id="state_6" />
+      <state id="state_7" />
+      <state id="state_8" />
+      <state id="state_9" />
+      <state id="state_10" />
+      <probabilities>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</probabilities>
+    </cpt>
+    <cpt id="tcpa">
+      <state id="state_1" />
+      <state id="state_2" />
+      <state id="state_3" />
+      <state id="state_4" />
+      <state id="state_5" />
+      <state id="state_6" />
+      <state id="state_7" />
+      <state id="state_8" />
+      <state id="state_9" />
+      <state id="state_10" />
+      <probabilities>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</probabilities>
+    </cpt>
+    <cpt id="collision_encounter">
+      <state id="critical" />
+      <state id="noncritical" />
+      <parents>dcpa tcpa</parents>
+      <probabilities>0.97 0.03 0.656804 0.343196 0.446863 0.553137 0.306135 0.693865 0.211802 0.788198 0.148569 0.851431 0.106182 0.893818 0.0777696 0.92223 0.0587241 0.941276 0.0459575 0.954042 0.733903 0.266097 0.498544 0.501456 0.340777 0.659223 0.235024 0.764976 0.164135 0.835865 0.116616 0.883384 0.0847639 0.915236 0.0634125 0.936587 0.0491003 0.9509 0.0395065 0.960494 0.556482 0.443518 0.379615 0.620385 0.261057 0.738943 0.181585 0.818415 0.128314 0.871686 0.092605 0.907395 0.0686686 0.931331 0.0526235 0.947376 0.0418682 0.958132 0.0346587 0.965341 0.423154 0.576846 0.290242 0.709758 0.201149 0.798851 0.141428 0.858572 0.101395 0.898605 0.074561 0.925439 0.0565733 0.943427 0.0445158 0.955484 0.0364335 0.963567 0.0310157 0.968984 0.322961 0.677039 0.223081 0.776919 0.156129 0.843871 0.11125 0.88875 0.0811668 0.918833 0.0610013 0.938999 0.047484 0.952516 0.0384231 0.961577 0.0323494 0.967651 0.028278 0.971722 0.247668 0.752332 0.172611 0.827389 0.122298 0.877702 0.0885724 0.911428 0.0659655 0.934035 0.0508116 0.949188 0.0406536 0.959346 0.0338445 0.966155 0.0292803 0.97072 0.0262208 0.973779 0.191088 0.808912 0.134684 0.865316 0.0968747 0.903125 0.0715306 0.928469 0.054542 0.945458 0.0431542 0.956846 0.0355207 0.964479 0.0304039 0.969596 0.0269739 0.973026 0.0246748 0.975325 0.148569 0.851431 0.106182 0.893818 0.0777696 0.92223 0.0587241 0.941276 0.0459575 0.954042 0.0373999 0.9626 0.0316635 0.968337 0.0278183 0.972182 0.0252407 0.974759 0.023513 0.976487 0.116616 0.883384 0.0847639 0.915236 0.0634125 0.936587 0.0491003 0.9509 0.0395065 0.960494 0.0330756 0.966924 0.0287648 0.971235 0.0258752 0.974125 0.0239383 0.976062 0.0226399 0.97736 0.092605 0.907395 0.0686686 0.931331 0.0526235 0.947376 0.0418682 0.958132 0.0346587 0.965341 0.029826 0.970174 0.0265866 0.973413 0.0244151 0.975585 0.0229595 0.97704 0.0219838 0.978016</probabilities>
+    </cpt>
+    <cpt id="fail_recover_collision">
+      <state id="yes" />
+      <state id="no" />
+      <parents>collision_encounter target_vessel_fails environmental own_vessel_fails</parents>
+      <probabilities>0.99 0.01 0.7 0.3 0.9 0.1 0.5 0.5 0.95 0.05 0.6 0.4 0.85 0.15 0.4 0.6 0.85 0.15 0.25 0.75 0.45 0.55 0.06 0.94 0.7 0.3 0.12 0.88 0.25 0.75 0.01 0.99</probabilities>
+    </cpt>
+    <cpt id="auv_asv_distance">
+      <state id="state_1" />
+      <state id="state_2" />
+      <state id="state_3" />
+      <state id="state_4" />
+      <state id="state_5" />
+      <probabilities>0.2 0.2 0.2 0.2 0.2</probabilities>
+    </cpt>
+    <cpt id="loss_of_comms">
+      <state id="yes" />
+      <state id="no" />
+      <parents>auv_asv_distance comms_system_failure</parents>
+      <probabilities>0.999 0.001 0.999 0.001 0.999 0.001 0.999 0.001 0.999 0.001 0.002 0.998 0.01 0.99 0.05 0.95 0.2 0.8 0.6 0.4</probabilities>
+    </cpt>
+    <cpt id="damage_auv">
+      <state id="major" />
+      <state id="minor" />
+      <state id="none" />
+      <parents>loss_of_comms</parents>
+      <probabilities>0.1 0.35 0.55 0 0 1</probabilities>
+    </cpt>
+    <cpt id="humans_present">
+      <state id="many" />
+      <state id="limited" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="size_other_vessel">
+      <state id="small" />
+      <state id="large" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="vessel_on_grounding">
+      <state id="yes" />
+      <state id="no" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="grounding">
+      <state id="yes" />
+      <state id="no" />
+      <parents>vessel_on_grounding fail_recover_grounding</parents>
+      <probabilities>0.95 0.05 0.001 0.999 0.02 0.98 1e-05 0.99999</probabilities>
+    </cpt>
+    <cpt id="target_on_collision">
+      <state id="yes" />
+      <state id="no" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="collision">
+      <state id="yes" />
+      <state id="no" />
+      <parents>target_on_collision fail_recover_collision</parents>
+      <probabilities>0.95 0.05 0.001 0.999 0.02 0.98 1e-05 0.99999</probabilities>
+    </cpt>
+    <cpt id="damage_asv">
+      <state id="major" />
+      <state id="minor" />
+      <state id="none" />
+      <parents>collision grounding</parents>
+      <probabilities>0.7 0.28 0.02 0.25 0.65 0.1 0.35 0.6 0.05 0 0 1</probabilities>
+    </cpt>
+    <cpt id="damage_other_vessel">
+      <state id="major" />
+      <state id="minor" />
+      <state id="none" />
+      <parents>collision</parents>
+      <probabilities>0.3 0.65 0.05 0 0 1</probabilities>
+    </cpt>
+    <cpt id="mission_failure">
+      <state id="yes" />
+      <state id="no" />
+      <parents>collision grounding loss_of_comms</parents>
+      <probabilities>1 0 1 0 1 0 0.55 0.45 1 0 0.98 0.02 0.98 0.02 0.02 0.98</probabilities>
+    </cpt>
+    <cpt id="humans_exposed">
+      <state id="yes" />
+      <state id="no" />
+      <parents>size_other_vessel humans_present target_on_collision</parents>
+      <probabilities>0.85 0.15 0.95 0.05 0.5 0.5 0.65 0.35 0.05 0.95 0.08 0.92 0.02 0.98 0.03 0.97</probabilities>
+    </cpt>
+    <cpt id="harm_to_humans">
+      <state id="fatality" />
+      <state id="none" />
+      <parents>collision humans_exposed</parents>
+      <probabilities>0.12 0.88 0 1 0.001 0.999 0 1</probabilities>
+    </cpt>
+  </nodes>
+
+  <extensions>
+    <genie version="1.0" app="aGrUM 3.1.1" name="ASV risk model (Kristensen et al. 2025, Fig. 2)">
+      <node id="comms_system_failure">
+        <name>comms_system_failure</name>
+      <interior color="c0c0c0" /></node>
+      <node id="target_vessel_fails">
+        <name>target_vessel_fails</name>
+      <interior color="c0c0c0" /></node>
+      <node id="autonomous_control_failure">
+        <name>autonomous_control_failure</name>
+      <interior color="c0c0c0" /></node>
+      <node id="manual_control_failure">
+        <name>manual_control_failure</name>
+      <interior color="c0c0c0" /></node>
+      <node id="own_vessel_fails">
+        <name>own_vessel_fails</name>
+      <interior color="99ccff" /></node>
+      <node id="depth">
+        <name>depth</name>
+      <interior color="99ccff" /></node>
+      <node id="distance_to_shore">
+        <name>distance_to_shore</name>
+      <interior color="99ccff" /></node>
+      <node id="waterway_properties">
+        <name>waterway_properties</name>
+      <interior color="99ccff" /></node>
+      <node id="wave_height">
+        <name>wave_height</name>
+      <interior color="99ccff" /></node>
+      <node id="wind_speed">
+        <name>wind_speed</name>
+      <interior color="99ccff" /></node>
+      <node id="environmental">
+        <name>environmental</name>
+      <interior color="99ccff" /></node>
+      <node id="fail_recover_grounding">
+        <name>fail_recover_grounding</name>
+      <interior color="99ccff" /></node>
+      <node id="dcpa">
+        <name>dcpa</name>
+      <interior color="99ccff" /></node>
+      <node id="tcpa">
+        <name>tcpa</name>
+      <interior color="99ccff" /></node>
+      <node id="collision_encounter">
+        <name>collision_encounter</name>
+      <interior color="99ccff" /></node>
+      <node id="fail_recover_collision">
+        <name>fail_recover_collision</name>
+      <interior color="99ccff" /></node>
+      <node id="auv_asv_distance">
+        <name>auv_asv_distance</name>
+      <interior color="99ccff" /></node>
+      <node id="loss_of_comms">
+        <name>loss_of_comms</name>
+      <interior color="e0ffff" /></node>
+      <node id="damage_auv">
+        <name>damage_auv</name>
+      <interior color="ff8000" /></node>
+      <node id="humans_present">
+        <name>humans_present</name>
+      <interior color="99ccff" /></node>
+      <node id="size_other_vessel">
+        <name>size_other_vessel</name>
+      <interior color="99ccff" /></node>
+      <node id="vessel_on_grounding">
+        <name>vessel_on_grounding</name>
+      <interior color="99ccff" /></node>
+      <node id="grounding">
+        <name>grounding</name>
+      <interior color="e0ffff" /></node>
+      <node id="target_on_collision">
+        <name>target_on_collision</name>
+      <interior color="99ccff" /></node>
+      <node id="collision">
+        <name>collision</name>
+      <interior color="e0ffff" /></node>
+      <node id="damage_asv">
+        <name>damage_asv</name>
+      <interior color="ff8000" /></node>
+      <node id="damage_other_vessel">
+        <name>damage_other_vessel</name>
+      <interior color="ff8000" /></node>
+      <node id="mission_failure">
+        <name>mission_failure</name>
+      <interior color="ff8000" /></node>
+      <node id="humans_exposed">
+        <name>humans_exposed</name>
+      <interior color="99ccff" /></node>
+      <node id="harm_to_humans">
+        <name>harm_to_humans</name>
+      <interior color="ff8000" /></node>
+    </genie>
+  </extensions>
+
+</smile>

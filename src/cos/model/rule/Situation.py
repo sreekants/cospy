@@ -18,6 +18,7 @@ class Situation:
 		self.tss		= None
 		self.os			= OS
 		self.ts			= TS
+		self.fleet		= None
 		return
 
 

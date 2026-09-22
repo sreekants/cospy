@@ -1,0 +1,13 @@
+# Manifest fragment for the Bayesian risk-assessment faculty.
+#
+# Loads alongside rules.colreg.yaml. The faculty registers under
+# '/Faculty/Regulation/Examiner/Risk/RiskExaminer', which COLREG.Evaluator.init_faculties()
+# already collects, so it is driven by the existing monitor loop.
+
+packages:
+  modules:  # Bayesian risk assessment
+     - name: Risk.Bayesian
+       module: rules.examiner.risk.RiskExaminer
+       config: sample.frequency=1
+               network=$(CONFIG)/risk/risk.model.xdsl
+               bindings=$(CONFIG)/risk/risk.model.yaml

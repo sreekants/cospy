@@ -1083,3 +1083,15 @@ Approach,OwnShip,int,OwnShip,Own Ship
 Approach,TargetShip,int,TargetShip,Target Ship
 Approach,ReportTime,double,Report time,Time,
 Approach,Distance,double,Distance,Distance,
+Rb,CaseId,int,Scenario Key, Scenario hash key,
+Rb,ReportTime,double,Report time, Time,
+Rb,OwnShip,int,OwnShip,Own Ship
+Rb,PCollision,float,Probability of collision,P(collision),
+Rb,PGrounding,float,Probability of grounding,P(grounding),
+Rb,PCommsLoss,float,Probability of losing the AUV link,P(comms loss),
+Rb,PAnyHazard,float,Exact joint probability that any hazardous event occurs,P(any hazard),
+Rb,PSumHazard,float,Sum of the three marginals - an upper bound kept for comparison,Sum of marginals,
+Rb,Cost,float,Instantaneous expected economic loss,Expected Loss,NOK
+Rb,Increment,float,Survival-weighted amount added to the voyage total,Increment,NOK
+Rb,Survival,float,Probability of having reached this point without a hazardous event,Survival,
+Rb,Cumulative,float,Cumulative expected loss for the voyage,Cumulative Loss,NOK
