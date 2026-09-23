@@ -3,23 +3,29 @@ packages:
      - name: Builder.PowerDrivenVessels
        module: maritime.model.vessel.Builder
        service: Builder.PowerDrivenVessels
-       args: Type=POWER_DRIVEN
-       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db
+       args: Type=POWER_DRIVEN scenario=$(TRAFFIC)
+       database: $(SIMULATION)/vessel.s3db
 
      - name: Builder.SailingVessels
        module: maritime.model.vessel.Builder
        service: Builder.SailingVessels
-       args: Type=SAILING
-       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db
+       args: Type=SAILING scenario=$(TRAFFIC)
+       database: $(SIMULATION)/vessel.s3db
   
      - name: Builder.SeaPlanes
        module: maritime.model.vessel.Builder
        service: Builder.SeaPlanes
-       args: Type=SEAPLANE
-       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db
+       args: Type=SEAPLANE scenario=$(TRAFFIC)
+       database: $(SIMULATION)/vessel.s3db
 
      - name: WIGs
        module: maritime.model.vessel.Builder
        service: Builder.PowerDrivenVessels
-       args: Type=WIG
-       database: $(DB)/simulation/$$LOCATION$$/vessel.s3db
+       args: Type=WIG scenario=$(TRAFFIC)
+       database: $(SIMULATION)/vessel.s3db
+
+     - name: Fleets
+       module: maritime.model.vessel.Builder
+       service: Builder.Fleets
+       args: Type=FLEET scenario=$(TRAFFIC)
+       database: $(SIMULATION)/vessel.s3db

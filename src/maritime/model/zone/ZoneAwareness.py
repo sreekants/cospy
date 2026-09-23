@@ -118,7 +118,7 @@ class ZoneAware:
 			vessel -- Vessel in violation
 			event -- Violation identifier, keyed into the penalties scorecard
 			zone -- Name of the zone the violation happened in
-			value -- Quantity behind the violation, e.g. metres over or NOK
+			value -- Quantity behind the violation, e.g. metres over or USD
 			detail -- Optional free text for the log
 		"""
 		penalty		= self.rules.penalty( event )

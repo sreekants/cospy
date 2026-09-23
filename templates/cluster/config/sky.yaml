@@ -4,10 +4,10 @@ packages:
        module: cos.model.geography.SkyBuilder
        service: Builder.FOG
        args: Type=FOG
-       database: $(DB)/map/$$LOCATION$$/sky.s3db
+       database: $(MAP)/sky.s3db
 
      - name: Builder.CLOUD
        module: cos.model.geography.SkyBuilder
        service: Builder.CLOUD
        args: Type=CLOUD
-       database: $(DB)/map/$$LOCATION$$/sky.s3db
+       database: $(MAP)/sky.s3db

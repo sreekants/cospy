@@ -51,6 +51,7 @@ class DataManager(Subsystem):
 		self.thread		= None
 		self.partitions	= {}
 		self.storage	= None
+		self.trace		= False
 		return
 
 	def on_init(self, ctxt:Context, module):
@@ -121,11 +122,21 @@ class DataManager(Subsystem):
 		db		= TransactionalDatabase()
 		db.open( self.storage )
 
+		count 	= 0
+		tables	= 0
+
 		for p in self.partitions.values():
-			p.flush(db)
+			nrec	= p.flush(db)
+			if nrec == 0:
+				continue
+			tables	+= 1
+			count 	+= nrec
 
 		db.flush()
 		db.close()
+
+		if (count > 0) and (self.trace==True):
+			self.sim.log.info( 'DataManager', f'Flushed {count} record(s) into {tables} table(s).' )
 		return
 
 	def __build_partitions(self, ctxt:Context, config):

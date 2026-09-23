@@ -62,6 +62,11 @@ class COLREG(Rule):
 
 		resolver	= rule_ctxt.resolver
 
+		# The situation is shared with every other rule and examiner in this
+		# pass, so the entry value is restored once this rule's own encounters
+		# have been consumed - see COS.007.
+		saved		= rule_ctxt.situation
+
 		while self.sitations.empty() == False:
 			# Assign a new situation to the rule contxt
 			rule_ctxt.situation	= self.sitations.get()
@@ -76,6 +81,9 @@ class COLREG(Rule):
 
 			for err in result.error:
 				self.on_violate( ctxt, rule_ctxt, err )
+
+		rule_ctxt.situation	= saved
+		resolver.reset( ctxt, rule_ctxt )
 
 		return
 

@@ -59,17 +59,15 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 
 		self.gate = PreconditionSet( {
 				'collision': ['os','ts'],
+				'target': ['os','ts'],
 				'at_sea': ['os'],
-				'enviroment': ['os'],
+				'environment': ['os'],
 				'auv_operation': ['os','fleet']
 				})
-		
-		return
-		
-	def resolvable(self, binding, rule_ctxt:RuleContext):
-		if binding in ['enviroment', 'at_sea']:
-			return False
 
+		return
+
+	def resolvable(self, binding, rule_ctxt:RuleContext):
 		return self.gate.holds( binding, rule_ctxt.situation )
 
 	def on_init(self, ctxt:Context, module):
@@ -102,6 +100,11 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.__load_network( ctxt, config["network"] )
 		self.__load_bindings( ctxt, config["bindings"] )
 		self.__load_matrix( ctxt, config["territory"] )
+
+		gap	= self.gate.undeclared( self.bindings.keys() )
+		if gap:
+			raise ValueError( f'RiskExaminer: no precondition declared for binding group(s) {gap}' )
+
 		return
 
 	def on_start(self, ctxt:Context, config):

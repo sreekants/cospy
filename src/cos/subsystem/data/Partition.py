@@ -33,13 +33,15 @@ class Partition:
 			db -- Database to write to
 		"""
 		if self.records.empty():
-			return None
+			return 0
 
+		count = 0
 		with self.records.mutex:
 			while self.records.queue:
 				self.serialize( db, self.records.queue.popleft() )
+				count	+= 1
 
-		return
+		return count
 
 	def serialize(self, db:TransactionalDatabase, rec):
 		""" Serializes a record into the database
