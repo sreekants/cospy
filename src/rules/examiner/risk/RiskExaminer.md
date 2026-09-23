@@ -17,6 +17,8 @@ At startup the examiner loads a Bayesian network from `config/risk/risk.model.xd
 - Charges once per distinct evidence configuration, so a ten-minute encounter sampled at 1 Hz is not counted six hundred times.
 - Recording is unconditional and publishing advisory, which gives a natural controlled experiment: the same scenario with a vessel subscribing and not subscribing is comparable on cumulative cost.
 - The eq. (14) sum is still recorded alongside the exact joint, so the divergence between them is queryable across a whole sweep.
+- `Rl` is written as a single MATLAB matrix literal, `[a, b; c, d];`, rows being spatial zones and columns concerns. The fact schema is therefore fixed: a territory that adds a concern or a zone changes the shape of the literal and nothing else — no column to add, no warehouse schema to regenerate.
+- Every valuation is USD, declared once in `RiskModel.CURRENCY` rather than stored per row, so two territories cannot disagree about what a stored number means.
 
 ## Known limitations
 
@@ -29,3 +31,5 @@ These are live defects, not design trade-offs.
 - No resolver is registered for any `Map.*` or `Fleet` prefix in `config/legata.yaml`, so those terms cannot resolve even once the gating is fixed.
 - The class comment still describes registration under `/Faculty/Situation/Processors` and being driven by `Evaluator.monitor()`; it is now a `Regulation/Examiner` driven by `Evaluator.evaluate()`.
 - Conditional probability tables are placeholders apart from the four static priors of Table A.6.
+- A serialized `Rl` carries no axis labels in the row. The zone and concern order is logged once at startup by `__load_matrix`, and editing that order part way through a sweep makes earlier matrices undecodable.
+- `Rl` is no longer sliceable in SQL. A query that wants loss by concern across a sweep must deserialize every row in application code; only the `RiskAssessment` rollup stays dimensional.

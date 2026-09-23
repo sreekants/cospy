@@ -24,6 +24,7 @@ class ColregResolver(Resolver):
 		self.situation	= None
 		return
 
+	
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
 		""" Reset th resolver
 		Arguments
@@ -31,11 +32,12 @@ class ColregResolver(Resolver):
 			rulectxt -- Rule context
 		""" 
 		self.tr.reset( ctxt, rulectxt )
+		self.situation	= None
 		return
 
 	@simproperty
-	def Situation(self)->str:
-		""" TODO: Situation
+	def EncounterSituation(self)->str:
+		""" Simulation property: EncounterSituation
 		""" 
 		if self.tr is None:
 			return None
@@ -46,6 +48,8 @@ class ColregResolver(Resolver):
 		if self.situation is not None:
 			return self.situation
 
+		if self.tr.TS is None:
+			return None
 
 		α		= self.tr.Approach()
 		β		= self.tr.TargetApproach()

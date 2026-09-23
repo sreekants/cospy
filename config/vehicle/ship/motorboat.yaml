@@ -16,6 +16,7 @@ physics:
     width: 3
     draft: 10
     momentum: 0.42
+    relative_size: "small"
 
 activity:
     type                : "motorboat" 
@@ -41,6 +42,9 @@ behavior:
     range_safety        : 10     # range for safety maneuvers
 
     stop_on_traffic     : false
+
+cargo:
+    humans_present  : 2
 
 devices:
      - name: RADAR

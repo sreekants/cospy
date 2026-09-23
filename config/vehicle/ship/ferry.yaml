@@ -16,6 +16,7 @@ physics:
     width: 3
     draft: 40
     momentum: 0.75
+    relative_size: "medium"
 
 activity:
     type                : "ferry" 
@@ -44,6 +45,9 @@ behavior:
 
     stop_on_traffic     : true
 
+cargo:
+    humans_present  : 100
+    
 devices:
      - name: RADAR
        driver: maritime.device.communication.Radar

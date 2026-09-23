@@ -3,49 +3,49 @@
     "scores":{
         "Istanbul.Strait.Rule3.Heavy":{
             "fact":"score_berthing_risk",
-            "concern":"Berthing risk",
+            "concern":"Violation.BerthingRisk",
             "penalty": 6,
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Istanbul.Strait.Rule3.DangerousCargo":{
             "fact":"score_hazardous_transport",
-            "concern":"Hazardous transport",
+            "concern":"Violation.HazardousTransport",
             "penalty": 42,        
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.TSS.South-North":{
             "fact":"traffic",
-            "concern":"Wrong TSS direction",
+            "concern":"Violation.WrongDirection",
             "penalty": 100,
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.TSS.North-South":{
             "fact":"traffic",
-            "concern":"Wrong TSS direction",
+            "concern":"Violation.WrongDirection",
             "penalty": 100,
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.TSS.North-South.DistanceKeeping":{
             "fact":"traffic",
-            "concern":"Distance keeping violation",
+            "concern":"Violation.DistanceKeeping",
             "penalty": 100,
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.TSS.South-North.DistanceKeeping":{
             "fact":"traffic",
-            "concern":"Distance keeping violation",
+            "concern":"Violation.DistanceKeeping",
             "penalty": 100,
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Harbour.SpeedLimit":{
             "fact":"traffic",
-            "concern":"Speed limit violation",
+            "concern":"Violation.SpeedLimit",
             "penalty": 3,
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]
         },
         "Turkeli.Bosphorous.DeepDraft":{
             "fact":"traffic",
-            "concern":"Deep Draft violation",
+            "concern":"Violation.DeepDraft",
             "penalty": 1000000,
             "type": "one-strike",
             "filter":["bedc897f-512b-45a2-aea4-bcfc248d2a86"]

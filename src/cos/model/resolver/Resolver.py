@@ -89,7 +89,7 @@ class Resolver:
 		""" TODO: applies
 		Arguments
 			variable -- TODO
-		""" 
+		"""
 		if self.prefix is None:
 			return None
 
@@ -97,6 +97,27 @@ class Resolver:
 			return self
 
 		return None
+
+	def has_property(self, variable:str)->bool:
+		""" Checks whether this resolver's own dispatch table owns the
+		property named by a term, as opposed to applies() which only checks
+		the entity-tuple prefix.
+
+		Used by CompositeResolver to tell "this resolver is the rightful
+		owner of this term, and whatever it returns - including None - is
+		final" apart from "this resolver's prefix happens to match, but the
+		property belongs to someone else", which matters because two
+		resolvers over different entities (e.g. FleetResolver and
+		TargetResolver) can otherwise expose a same-named property such as
+		'Distance'.
+		Arguments
+			variable -- Term to check
+		"""
+		if not self.resolvers:
+			return False
+
+		fnname	= Resolver.get_property(variable)
+		return (fnname is not None) and (fnname in self.resolvers)
 
 	@staticmethod
 	def to_number(variable:str):

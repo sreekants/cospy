@@ -5,6 +5,7 @@
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from cos.core.kernel.Context import Context
+from cos.model.rule.Context import Context as RuleContext
 from cos.core.utilities.ArgList import ArgList
 
 # REQUIREMENT:
@@ -92,7 +93,7 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 		self.post( ctxt, rule_ctxt, vessel, imo, intent, situation )
 		return
 
-	def post(self, ctxt:Context, rule_ctxt, vessel, imo, intent, situation):
+	def post(self, ctxt:Context, rule_ctxt:RuleContext, vessel, imo, intent, situation):
 		""" Posts the (intent, situation) tuple for rule 34
 		Arguments
 			ctxt -- Simulation context
@@ -123,7 +124,7 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 		return payload
 
 	@staticmethod
-	def intent(rule_ctxt):
+	def intent(rule_ctxt:RuleContext):
 		""" What the own ship means to do
 		Arguments
 			rule_ctxt -- Rule context
@@ -142,13 +143,15 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 		return ','.join( sorted(values) ) if values else None
 
 	@staticmethod
-	def situation(rule_ctxt):
+	def situation(rule_ctxt:RuleContext):
 		""" How the encounter is classified
 		Arguments
 			rule_ctxt -- Rule context
 		"""
-		classified	= rule_ctxt.resolve( '(OwnShip,TargetShip).COLREG.Situation' )
-
+		if rule_ctxt.situation is None or rule_ctxt.situation.ts is None:
+			return None
+		
+		classified	= rule_ctxt.resolve( '(OwnShip,TargetShip).EncounterSituation' )
 		return None if classified is None else str( classified )
 
 

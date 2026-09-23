@@ -16,6 +16,7 @@ physics:
     momentum: 0.92
     draft: 100
     momentum: 0.92
+    relative_size: "small"
 
 activity:
     type                : "yacht" 
@@ -39,6 +40,9 @@ behavior:
     range_safety        : 10     # range for safety maneuvers
 
     stop_on_traffic     : true
+
+cargo:
+    humans_present  : 10
 
 devices:
      - name: RADAR

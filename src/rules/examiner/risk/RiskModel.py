@@ -71,26 +71,190 @@ def hazard_probabilities(engine, hazards=HAZARDS):
 	return result
 
 
-def exposure(engine, loss, concerns):
-	""" Expected economic loss per cross-cutting concern.
+# MATLAB matrix literal punctuation: [a, b; c, d];
+CELL_SEPARATOR		= ', '
+ROW_SEPARATOR		= '; '
+STATEMENT_TERMINATOR	= ';'
 
-	Summing expectations is valid whatever the dependence between consequences -
-	E[X+Y] = E[X] + E[Y] unconditionally - and is right physically: one collision
-	may damage both vessels and harm a person, and those costs accumulate.
+# Every valuation in the platform is USD. Declared once, here, rather than
+# stored per row: a currency column can only ever record a disagreement.
+CURRENCY			= 'USD'
+
+
+def number(value)->str:
+	""" One matrix cell, written so MATLAB reads it and a person can too.
+	Fixed notation rather than %g, because a loss of 5179400 should not be
+	stored as 5.1794e+06 in a column someone will eyeball.
 	Arguments
-		engine -- An engine built by make_engine(), already inferred
-		loss -- Consequence node -> {state: economic loss}
-		concerns -- Consequence node -> cross-cutting concern
+		value -- Cell value
 	"""
-	result	= {}
+	text	= f'{float(value):.4f}'.rstrip('0').rstrip('.')
 
-	for node, costs in loss.items():
-		posterior	= engine.posterior( node )
-		expected	= sum( float(posterior[{node: s}]) * c for s, c in costs.items() )
-		concern		= concerns.get( node, 'unclassified' )
-		result[concern]	= result.get( concern, 0.0 ) + expected
+	return text if text not in ('', '-0') else '0'
 
-	return result
+
+class LossMatrix:
+	""" Rl, the zone-specific loss matrix of the risk formalism.
+
+	Rl is the third facet of R_ev = Ro . Rw . Rl. The CS&Law paper leaves it to
+	be averaged from historical infraction penalties; here it is computed from
+	the risk network instead - the network supplies the probability of each
+	consequence, the territory's risk file supplies what that consequence is
+	worth, and the product is a cell:
+
+	    Rl[zone][concern] = SUM over the concern's consequence nodes of
+	                            SUM over states of P(state) * cost[node][state]
+	                        * zone_factor[zone][concern]
+
+	Nothing here is declared in code. A territory that prices a life
+	differently, or that treats a spill in confined water as worse than one at
+	sea, edits its own YAML and no Python changes.
+	"""
+
+	def __init__(self, config=None):
+		""" Constructor
+		Arguments
+			config -- The 'risk' block of a territory's risk file
+		"""
+		config				= config or {}
+
+		# No currency field. Every valuation in the platform is USD, so a
+		# per-territory currency would only invite two territories to disagree
+		# about what a stored number means.
+		self.concerns		= list( config.get('concerns', []) )
+		self.consequences	= dict( config.get('consequences', {}) or {} )
+		self.cost			= dict( config.get('cost', {}) or {} )
+		self.factors		= dict( config.get('zone_factor', {}) or {} )
+		return
+
+	def errors(self, bn=None):
+		""" Checks the matrix against its own declarations and, when given, the
+		network it will be evaluated over
+		Arguments
+			bn -- Bayesian network, optional
+		Returns
+			A list of problems, empty when the matrix is usable
+		"""
+		problems	= []
+
+		if not self.concerns:
+			problems.append( 'no concern vector declared' )
+
+		unknown		= sorted( set(self.consequences.values()) - set(self.concerns) )
+		if unknown:
+			problems.append( f'consequences map to undeclared concerns: {unknown}' )
+
+		unpriced	= sorted( set(self.consequences) - set(self.cost) )
+		if unpriced:
+			problems.append( f'consequence nodes with no cost: {unpriced}' )
+
+		unmapped	= sorted( set(self.cost) - set(self.consequences) )
+		if unmapped:
+			problems.append( f'costed nodes with no concern: {unmapped}' )
+
+		for zone, row in self.factors.items():
+			missing	= sorted( set(self.concerns) - set(row or {}) )
+			if missing:
+				problems.append( f'zone_factor[{zone}] is missing {missing}' )
+
+		if bn is not None:
+			names	= set( bn.names() )
+			absent	= sorted( set(self.cost) - names )
+			if absent:
+				problems.append( f'costed nodes absent from the network: {absent}' )
+			for node, states in self.cost.items():
+				if node not in names:
+					continue
+				variable	= bn.variable( node )
+				legal		= { variable.label(i) for i in range(variable.domainSize()) }
+				bad			= sorted( set(states) - legal )
+				if bad:
+					problems.append( f'cost[{node}] names unknown states {bad}' )
+
+		return problems
+
+	def base(self, engine):
+		""" Expected loss per concern before any zone factor is applied.
+
+		Summing expectations is valid whatever the dependence between
+		consequences - E[X+Y] = E[X] + E[Y] unconditionally - and is right
+		physically: one collision may damage both vessels and harm a person,
+		and those costs accumulate.
+		Arguments
+			engine -- An engine built by make_engine(), already inferred
+		"""
+		result	= { concern: 0.0 for concern in self.concerns }
+
+		for node, costs in self.cost.items():
+			posterior	= engine.posterior( node )
+			expected	= sum( float(posterior[{node: s}]) * c for s, c in costs.items() )
+			concern		= self.consequences.get( node, 'unclassified' )
+			result[concern]	= result.get( concern, 0.0 ) + expected
+
+		return result
+
+	def row(self, engine, zone):
+		""" One row of Rl: the expected loss per concern in a given zone
+		Arguments
+			engine -- An engine built by make_engine(), already inferred
+			zone -- Spatial zone the vessel is in
+		Note
+			An unknown zone takes a factor of 1.0 rather than zero. Silently
+			valuing every consequence at nothing would look like a safe vessel.
+		"""
+		factors	= self.factors.get( zone, {} ) or {}
+
+		return { concern: value * float( factors.get(concern, 1.0) )
+				 for concern, value in self.base(engine).items() }
+
+	def matrix(self, engine):
+		""" The whole of Rl for the current inference: zone -> concern -> loss.
+		Used for reporting a complete matrix rather than the single row the
+		vessel currently occupies.
+		Arguments
+			engine -- An engine built by make_engine(), already inferred
+		"""
+		base	= self.base( engine )
+
+		return { zone: { concern: base.get(concern, 0.0) * float(row.get(concern, 1.0))
+						 for concern in self.concerns }
+				 for zone, row in self.factors.items() }
+
+	def matlab(self, engine, zones):
+		""" The whole of Rl as a MATLAB matrix literal.
+
+		    [1.5, 2.7, 3.9; 4.1, 5.2, 6.3];
+
+		One row per spatial zone in the order given, one column per concern in
+		the order declared by the territory. Storing the matrix as a single
+		string keeps the fact schema fixed: a territory that adds a concern or
+		a zone changes the shape of this literal and nothing else, with no
+		column to add and no warehouse schema to regenerate.
+
+		The cost of that is a matrix whose axes are not in the row. Anything
+		reading these strings must know the zone and concern order that
+		produced them, which is why axis_labels() is logged at startup and why
+		the order must not be edited mid-sweep.
+		Arguments
+			engine -- An engine built by make_engine(), already inferred
+			zones -- Spatial zone names, in row order
+		"""
+		cells	= self.matrix( engine )
+
+		rows	= [ ROW_SEPARATOR.join(
+					CELL_SEPARATOR.join( number(cells.get(zone, {}).get(concern, 0.0))
+										 for concern in self.concerns )
+					for zone in zones ) ]
+
+		return f'[{"".join(rows)}]{STATEMENT_TERMINATOR}'
+
+	def axis_labels(self, zones):
+		""" The axis order a stored matrix was written with, for the log and
+		for anything decoding it later
+		Arguments
+			zones -- Spatial zone names, in row order
+		"""
+		return f'rows[{", ".join(zones)}] cols[{", ".join(self.concerns)}]'
 
 
 class Binding(dict):

@@ -185,5 +185,88 @@ class ZoneRules:
 		return len( names.intersection(listed) ) > 0
 
 
+class SpatialZones:
+	""" The i axis of the risk formalism: which of a territory's spatial zones
+	a vessel is in.
+
+	Four zones in the published formalism - high seas, territorial waters,
+	internal waters, port - but the membership of each is a matter of national
+	jurisdiction, so the Sea.Type mapping is supplied per territory rather
+	than fixed here.
+	"""
+
+	def __init__(self, config=None):
+		""" Constructor
+		Arguments
+			config -- The 'spatial_zones' block of a territory's risk file
+		"""
+		config			= config or {}
+
+		self.order		= list( config.get('order', []) )
+		self.fallback	= config.get( 'default' )
+		self.mapping	= {}
+
+		for zone, types in (config.get('mapping', {}) or {}).items():
+			for name in (types or []):
+				self.mapping[name]	= zone
+
+		return
+
+	def classify(self, shapes)->str:
+		""" The spatial zone a vessel is in
+		Arguments
+			shapes -- Map shapes enclosing the vessel
+		Returns
+			A zone name, or the configured default when nothing jurisdictional
+			encloses the vessel
+		Note
+			A vessel usually sits inside several overlapping shapes at once - a
+			traffic lane inside a strait inside a territorial sea - so the
+			INNERMOST match in the declared order wins. Types absent from the
+			mapping are ignored rather than defaulted, because a traffic lane
+			describes the water and not the jurisdiction over it.
+		"""
+		best	= None
+
+		for shape in (shapes or []):
+			zone	= self.mapping.get( ZoneRules.type_name(getattr(shape, 'type', None)) )
+			if zone is None:
+				continue
+
+			if (best is None) or (self.rank(zone) > self.rank(best)):
+				best	= zone
+
+		return best if best is not None else self.fallback
+
+	def rank(self, zone)->int:
+		""" How far inshore a zone is; higher is more confined
+		Arguments
+			zone -- Zone name
+		"""
+		try:
+			return self.order.index( zone )
+		except ValueError:
+			return -1
+
+	def errors(self):
+		""" Checks the declaration is usable
+		Returns
+			A list of problems, empty when the declaration is sound
+		"""
+		problems	= []
+
+		if not self.order:
+			problems.append( 'spatial_zones.order is empty' )
+
+		unordered	= sorted( set(self.mapping.values()) - set(self.order) )
+		if unordered:
+			problems.append( f'zones mapped but absent from order: {unordered}' )
+
+		if (self.fallback is not None) and (self.fallback not in self.order):
+			problems.append( f'default zone {self.fallback!r} is not in order' )
+
+		return problems
+
+
 if __name__ == "__main__":
 	test = ZoneRules()

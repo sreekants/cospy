@@ -1,34 +1,50 @@
 packages:
   modules:  # Examiner modules
+     # The concern examiners read their zone-local rules, thresholds and
+     # penalty scorecard from config/examiner/zones.yaml. 'zones' is the only
+     # argument most of them need, and it defaults to that path when omitted.
      - name: Approach
        module: rules.examiner.navigation.ApproachExaminer
 
      - name: Berthing
        module: rules.examiner.navigation.BerthingExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml
 
      - name: Collision
        module: rules.examiner.navigation.CollisionExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml report.dcpa=500
 
      - name: DayTime
        module: rules.examiner.navigation.DayTimeExaminer
 
+     - name: ExtremeWeather
+       module: rules.examiner.navigation.ExtremeWeatherExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml
+               network=$(CONFIG)/risk/capsize.model.xdsl
+               bindings=$(CONFIG)/risk/capsize.model.yaml
+
      - name: Grounding
        module: rules.examiner.navigation.GroundingExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml
 
      - name: LaneDiscipline
        module: rules.examiner.navigation.LaneDisciplineExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml
 
      - name: NightTime
        module: rules.examiner.navigation.NightTimeExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml
 
      - name: Overtaking
        module: rules.examiner.navigation.OvertakingExaminer
 
      - name: Signal
        module: rules.examiner.navigation.SignalExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml
 
      - name: Speed
        module: rules.examiner.navigation.SpeedExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml tolerance=0.5
 
      - name: Customs
        module: rules.examiner.security.CustomsExaminer
@@ -47,3 +63,4 @@ packages:
 
      - name: Environmental.Cargo
        module: rules.examiner.environmental.CargoExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml report.undeclared=1

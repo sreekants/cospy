@@ -16,6 +16,7 @@ physics:
     momentum: 0.92
     draft: 40
     momentum: 0.75
+    relative_size: "medium"
 
 activity:
     type                : "yacht" 
@@ -42,7 +43,10 @@ behavior:
     range_safety        : 10     # range for safety maneuvers
     
     stop_on_traffic     : false
-    
+
+cargo:
+    humans_present  : 5
+   
 devices:
      - name: RADAR
        driver: maritime.device.communication.Radar

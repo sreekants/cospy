@@ -54,7 +54,7 @@ class Partition:
 		AUDIT_REGISTER	= 1000
 
 		values	= []
-		# values.append( str(self.scenario) )
+		values.append( str(self.case_id) )
 		values.append( str(at) )
 		values.append( str(AUDIT_REGISTER) )
 		values.extend( map(str, data) )

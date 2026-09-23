@@ -16,6 +16,7 @@ physics:
     width: 3
     draft: 10
     momentum: 0.10
+    relative_size: "tiny"
 
 activity:
     type                : "fishing" 
@@ -45,6 +46,9 @@ behavior:
 # Activity behaviors
 fishing:
     fishing_aft_dist : 1000.0  # metres; min distance from aft of any vessel while fishing
+
+cargo:
+    humans_present  : 3
 
 devices:
      - name: RADAR

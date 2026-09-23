@@ -22,6 +22,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -74,6 +81,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Crs</Name>
  <Type>string</Type>
  <Display>Crs</Display>
@@ -124,6 +138,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -241,6 +262,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -354,6 +382,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -471,6 +506,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -584,6 +626,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -701,6 +750,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -814,6 +870,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -931,6 +994,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Pitch</Display>
@@ -1044,6 +1114,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -1161,6 +1238,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Heave</Display>
@@ -1274,6 +1358,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -1391,6 +1482,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -1504,6 +1602,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Trarget</Name>
@@ -1628,6 +1733,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Trarget</Name>
  <Type>int</Type>
  <Display>Target</Display>
@@ -1748,6 +1860,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Trarget</Name>
@@ -1872,6 +1991,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Trarget</Name>
  <Type>int</Type>
  <Display>Target</Display>
@@ -1992,6 +2118,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Trarget</Name>
@@ -2116,6 +2249,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Trarget</Name>
  <Type>int</Type>
  <Display>Target</Display>
@@ -2238,6 +2378,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Displacement</Display>
@@ -2351,6 +2498,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -2468,6 +2622,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Speed</Display>
@@ -2581,6 +2742,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -2698,6 +2866,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Payload</Display>
@@ -2811,6 +2986,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -2928,6 +3110,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>int</Type>
  <Display>Passengers</Display>
@@ -3043,6 +3232,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3081,6 +3277,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3117,6 +3320,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3178,6 +3388,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3235,6 +3452,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3296,6 +3520,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3353,6 +3584,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3414,6 +3652,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3471,6 +3716,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3532,6 +3784,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3589,6 +3848,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3650,6 +3916,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3707,6 +3980,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3768,6 +4048,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3825,6 +4112,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3886,6 +4180,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3943,6 +4244,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4004,6 +4312,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4061,6 +4376,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4122,6 +4444,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4179,6 +4508,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4240,6 +4576,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4297,6 +4640,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4358,6 +4708,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4415,6 +4772,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4476,6 +4840,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4533,6 +4904,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4594,6 +4972,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4651,6 +5036,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4712,6 +5104,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4769,6 +5168,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4830,6 +5236,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4887,6 +5300,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4948,6 +5368,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5005,6 +5432,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5066,6 +5500,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5123,6 +5564,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5184,6 +5632,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5241,6 +5696,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5302,6 +5764,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5359,6 +5828,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5420,6 +5896,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5477,6 +5960,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5538,6 +6028,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5595,6 +6092,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5656,6 +6160,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5713,6 +6224,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5774,6 +6292,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5831,6 +6356,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5892,6 +6424,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5949,6 +6488,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6010,6 +6556,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6067,6 +6620,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6128,6 +6688,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6185,6 +6752,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6246,6 +6820,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6303,6 +6884,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6364,6 +6952,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6421,6 +7016,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6482,6 +7084,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6539,6 +7148,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6600,6 +7216,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6657,6 +7280,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6718,6 +7348,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6775,6 +7412,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6836,6 +7480,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6893,6 +7544,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6954,6 +7612,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7011,6 +7676,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7072,6 +7744,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7129,6 +7808,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7190,6 +7876,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7247,6 +7940,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7308,6 +8008,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7365,6 +8072,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7426,6 +8140,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7483,6 +8204,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7544,6 +8272,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7601,6 +8336,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7662,6 +8404,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7719,6 +8468,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7780,6 +8536,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7837,6 +8600,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7898,6 +8668,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7955,6 +8732,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8016,6 +8800,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8073,6 +8864,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8134,6 +8932,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8191,6 +8996,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8252,6 +9064,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8309,6 +9128,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8370,6 +9196,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8427,6 +9260,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8488,6 +9328,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8545,6 +9392,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8606,6 +9460,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8663,6 +9524,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8724,6 +9592,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8781,6 +9656,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8842,6 +9724,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8899,6 +9788,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8960,6 +9856,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9017,6 +9920,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9078,6 +9988,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9135,6 +10052,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9196,6 +10120,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9253,6 +10184,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9314,6 +10252,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9371,6 +10316,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9432,6 +10384,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9489,6 +10448,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9550,6 +10516,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9607,6 +10580,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9668,6 +10648,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9727,6 +10714,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -9777,6 +10771,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>OwnShip</Name>
@@ -9831,6 +10832,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -9881,6 +10889,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>OwnShip</Name>
@@ -9935,6 +10950,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -9985,6 +11007,13 @@
  <Display>Audit status</Display>
  <Description>Audit status</Description>
  <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>OwnShip</Name>
@@ -10039,6 +11068,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -10091,6 +11127,13 @@
  <FieldName>audit_status</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -10117,6 +11160,274 @@
  <Display>Distance</Display>
  <Description>Distance</Description>
  <FieldName>distance</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Concern</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_concern</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Examiner</Name>
+ <Type>string</Type>
+ <Display>Examiner</Display>
+ <Description>Examiner that raised the finding</Description>
+ <FieldName>examiner</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Event</Name>
+ <Type>string</Type>
+ <Display>Event</Display>
+ <Description>Violation identifier</Description>
+ <FieldName>event</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Zone the violation occurred in</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty</Display>
+ <Description>Penalty score from the scorecard</Description>
+ <FieldName>penalty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Value</Name>
+ <Type>float</Type>
+ <Display>Value</Display>
+ <Description>Quantity behind the violation</Description>
+ <FieldName>value</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Rl</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_rl</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone - the i index of Rl</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern - the j index of Rl</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Currency</Name>
+ <Type>string</Type>
+ <Display>Currency</Display>
+ <Description>Currency the loss is denominated in</Description>
+ <FieldName>currency</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Loss</Name>
+ <Type>float</Type>
+ <Display>Expected Loss</Display>
+ <Description>Expected economic loss for this cell</Description>
+ <FieldName>loss</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>RiskAssessment</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_risk_assessment</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OwnShip</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>own_ship</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone the vessel was in</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>PCollision</Name>
+ <Type>float</Type>
+ <Display>P(collision)</Display>
+ <Description>Probability of collision</Description>
+ <FieldName>p_collision</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>PGrounding</Name>
+ <Type>float</Type>
+ <Display>P(grounding)</Display>
+ <Description>Probability of grounding</Description>
+ <FieldName>p_grounding</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>PCommsLoss</Name>
+ <Type>float</Type>
+ <Display>P(comms loss)</Display>
+ <Description>Probability of losing the AUV link</Description>
+ <FieldName>p_comms_loss</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>PAnyHazard</Name>
+ <Type>float</Type>
+ <Display>P(any hazard)</Display>
+ <Description>Exact joint probability that any hazard occurs</Description>
+ <FieldName>p_any_hazard</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>PSumHazard</Name>
+ <Type>float</Type>
+ <Display>Sum of marginals</Display>
+ <Description>Sum of the marginals - an upper bound kept for comparison</Description>
+ <FieldName>p_sum_hazard</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Cost</Name>
+ <Type>float</Type>
+ <Display>Expected Loss</Display>
+ <Description>Instantaneous expected loss summed over Rl</Description>
+ <FieldName>cost</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Increment</Name>
+ <Type>float</Type>
+ <Display>Increment</Display>
+ <Description>Survival-weighted amount added to the voyage total</Description>
+ <FieldName>increment</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Survival</Name>
+ <Type>float</Type>
+ <Display>Survival</Display>
+ <Description>Probability of reaching this point without a hazardous event</Description>
+ <FieldName>survival</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Cumulative</Name>
+ <Type>float</Type>
+ <Display>Cumulative Loss</Display>
+ <Description>Cumulative expected loss for the voyage</Description>
+ <FieldName>cumulative</FieldName>
  <Unit />
 </Measure>
 </Measures>

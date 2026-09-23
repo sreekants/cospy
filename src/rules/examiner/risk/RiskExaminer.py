@@ -2,8 +2,11 @@
 # Filename: RiskAssessment.py
 # Description: Bayesian risk-assessment faculty
 
-from rules.examiner.risk.RiskModel import HAZARDS, Binding, VoyageTrack
-from rules.examiner.risk.RiskModel import load, hazard_probabilities, exposure
+from rules.examiner.risk.RiskModel import HAZARDS, CURRENCY, Binding, VoyageTrack, LossMatrix
+from rules.examiner.risk.RiskModel import load, hazard_probabilities
+
+from maritime.model.zone.ZoneAwareness import ZoneAware
+from maritime.model.zone.ZoneRules import SpatialZones
 
 from cos.model.examiner.ConcernExaminer import ConcernExaminer
 from cos.core.kernel.Faculty import Faculty
@@ -11,6 +14,7 @@ from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
 from cos.model.rule.Context import Context as RuleContext
+from cos.model.examiner.Precondition import PreconditionSet
 
 import yaml
 
@@ -27,7 +31,7 @@ import yaml
 # accumulates over a voyage - lives in riskcore.py, which has no COS imports and
 # is unit-tested by verify_accumulation.py.
 
-class RiskExaminer(ConcernExaminer):
+class RiskExaminer(ZoneAware, ConcernExaminer):
 	TOPIC		= '/Faculty/Risk/Assessment'
 	MESSAGE		= 'risk.assessment'
 
@@ -38,8 +42,8 @@ class RiskExaminer(ConcernExaminer):
 
 		self.bn			= None
 		self.engine		= None
-		self.loss		= {}		# Consequence node -> {state: economic loss}
-		self.concerns	= {}		# Consequence node -> cross-cutting concern
+		self.matrix		= LossMatrix()	# Rl, from the territory's risk file
+		self.spatial	= SpatialZones()	# Sea.Type -> spatial zone, per territory
 		self.tracks		= {}		# Vessel IMO -> VoyageTrack
 		self.timer		= None
 		self.trace		= False
@@ -52,7 +56,21 @@ class RiskExaminer(ConcernExaminer):
 				'at_sea':[],
 				'auv_operation':[]
 			}
+
+		self.gate = PreconditionSet( {
+				'collision': ['os','ts'],
+				'at_sea': ['os'],
+				'enviroment': ['os'],
+				'auv_operation': ['os','fleet']
+				})
+		
 		return
+		
+	def resolvable(self, binding, rule_ctxt:RuleContext):
+		if binding in ['enviroment', 'at_sea']:
+			return False
+
+		return self.gate.holds( binding, rule_ctxt.situation )
 
 	def on_init(self, ctxt:Context, module):
 		""" Callback for simulation initialization
@@ -77,8 +95,22 @@ class RiskExaminer(ConcernExaminer):
 		poll_at		= config["sample.frequency"]
 		self.timer	= Ticker( int(poll_at) ) if poll_at is not None else Ticker( 1 )
 
+		# Zone awareness supplies the map shapes under a vessel, which the
+		# spatial classification of Rl needs.
+		self.init_zones( ctxt, config, requires=['os'] )
+
 		self.__load_network( ctxt, config["network"] )
 		self.__load_bindings( ctxt, config["bindings"] )
+		self.__load_matrix( ctxt, config["territory"] )
+		return
+
+	def on_start(self, ctxt:Context, config):
+		""" Callback for simulation startup
+		Arguments
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		self.cache_shapes( ctxt )
 		return
 
 	def evaluate(self, ctxt:Context, rule_ctxt:RuleContext):
@@ -107,12 +139,20 @@ class RiskExaminer(ConcernExaminer):
 			vessel -- Vessel under assessment
 		"""
 		evidence	= self.observe( ctxt, rule_ctxt, vessel )
+		if evidence is None:
+			return
 
 		self.engine.setEvidence( evidence )
 		self.engine.makeInference()
 
 		hazards		= hazard_probabilities( self.engine )
-		concerns	= exposure( self.engine, self.loss, self.concerns )
+
+		# Rl is indexed by where the vessel is as well as by what may happen to
+		# it, so the spatial zone is resolved before the loss row is taken.
+		shapes		= self.survey( vessel )[0]
+		zone		= self.spatial.classify( shapes )
+		concerns	= self.matrix.row( self.engine, zone )
+		serialized	= self.matrix.matlab( self.engine, self.spatial.order )
 		cost		= sum( concerns.values() )
 
 		imo			= vessel.config["identifier"]["imo"]
@@ -122,8 +162,10 @@ class RiskExaminer(ConcernExaminer):
 		report		= {
 			'vessel'		: imo,
 			'time'			: ctxt.sim.now(),
+			'zone'			: zone,			# spatial zone, the i index of Rl
+			'matrix'		: serialized,	# the whole of Rl, MATLAB literal, USD
 			'hazards'		: hazards,		# marginals, plus 'any' (exact) and 'sum' (eq. 14)
-			'exposure'		: concerns,		# concern -> expected economic loss [NOK]
+			'exposure'		: concerns,		# Rl row: concern -> expected economic loss
 			'cost'			: cost,			# instantaneous expected loss
 			'increment'		: increment,	# what was actually added to the voyage total
 			'survival'		: track.survival,
@@ -144,7 +186,7 @@ class RiskExaminer(ConcernExaminer):
 		Returns
 			A dictionary of BN node name -> state label
 		"""
-		evidence	= {}
+		evidence	= None
 
 		# NOTE: RuleContext.resolve() resolves against rule_ctxt.situation, which the
 		# conduct faculties populate per encounter. Terms naming TargetShip therefore
@@ -160,28 +202,13 @@ class RiskExaminer(ConcernExaminer):
 
 				state	= binding.discretize( value )
 				if state is not None:
+					if evidence is None:
+						evidence	= {}
+						
 					evidence[ binding['node'] ]	= state
 
 		return evidence
 
-	def resolvable(self, binding, rule_ctxt:RuleContext):
-		s = rule_ctxt.situation
-
-		if binding in ['collision']:
-			if (s is None) or (s.os is None) or (s.ts is None):
-				return False
-			return True
-		elif binding in ['enviroment', 'at_sea']:
-			return False
-			if (s is None) or (s.os is None):
-				return False
-			return True
-		elif binding in ['auv_operation']:
-			if (s is None) or (s.os is None) or (s.fleet is None):
-				return False
-			return True
-
-		return False
 
 	def track(self, imo):
 		""" Returns the voyage track for a vessel, creating it if needed
@@ -217,10 +244,12 @@ class RiskExaminer(ConcernExaminer):
 		"""
 		hazards		= report['hazards']
 
-		ctxt.sim.data.push( 'fact_Rb', (
-			ctxt.sim.case_id,
+		# The assessment rollup: one row per vessel per sample. CaseId is
+		# injected by the partition, so it is not passed here.
+		self.data( ctxt, 'risk_assessment', (
 			report['time'],
 			report['vessel'],
+			report['zone'],
 			hazards['collision'],
 			hazards['grounding'],
 			hazards['loss_of_comms'],
@@ -231,6 +260,21 @@ class RiskExaminer(ConcernExaminer):
 			report['survival'],
 			report['cumulative'],
 		) )
+
+		# Rl itself, serialized whole as a MATLAB literal in one column. The
+		# fact schema is then fixed: a territory that adds a concern or a zone
+		# changes the shape of the literal and nothing else, with no column to
+		# add and no warehouse schema to regenerate.
+		#
+		# The axes are not in the row. Anything decoding these strings needs
+		# the order logged at startup - see __load_matrix - and that order must
+		# not be edited part way through a sweep.
+		self.data( ctxt, 'rl', (
+			report['time'],
+			report['vessel'],
+			report['matrix'],
+		) )
+
 		return
 
 	def __load_network(self, ctxt:Context, file):
@@ -265,6 +309,38 @@ class RiskExaminer(ConcernExaminer):
 		for k in self.bindings.keys():
 			self.bindings[k]	= [ Binding(b) for b in risk.get(k, []) ]
 
-		self.loss		= risk.get("loss", {})
-		self.concerns	= risk.get("concerns", {})
+		# Valuation is NOT read here. What a consequence is worth is a national
+		# convention in a national currency, so it belongs to the territory and
+		# is loaded by __load_matrix from $(SIMULATION)/risk.yaml. This file
+		# binds the network to the simulation and nothing more.
+		return
+
+	def __load_matrix(self, ctxt:Context, file):
+		""" Loads Rl, the territory's zone-specific loss matrix
+		Arguments
+			ctxt -- Simulation context
+			file -- File path
+		"""
+		if file is None:
+			ctxt.log.error( self.id, 'No territory risk file specified; Rl is undefined' )
+			return
+
+		path		= ctxt.sim.config.resolve( file )
+		ctxt.log.info( self.id, f'Loading loss matrix Rl : {file}' )
+
+		config		= yaml.safe_load( ctxt.sim.fs.read_file_as_bytes(path) )
+		risk		= (config or {}).get( 'risk', {} ) or {}
+
+		self.matrix		= LossMatrix( risk )
+		self.spatial	= SpatialZones( risk.get('spatial_zones', {}) )
+
+		for problem in self.spatial.errors() + self.matrix.errors( self.bn ):
+			ctxt.log.error( self.id, f'Rl: {problem}' )
+
+		# Rl is stored as a bare matrix literal with no axis labels in the row,
+		# so the order that produced it is recorded here. Without this line a
+		# stored matrix cannot be decoded after the fact.
+		ctxt.log.info( self.id,
+					   f'Rl axes [{CURRENCY}]: {self.matrix.axis_labels(self.spatial.order)}' )
+
 		return

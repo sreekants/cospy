@@ -20,18 +20,18 @@ import inspect
 
 
 class TargetResolver(Resolver):
-	def __init__(self, resolver=None, OS:Vehicle=None, TS:Vehicle=None, range:float=0.0 ):
+	def __init__(self, resolver=None, os:Vehicle=None, ts:Vehicle=None, range:float=0.0 ):
 		""" Constructor
 		Arguments
 			resolver -- Parent composite resolver
-			OS -- Own ship
-			TS -- Target ship
+			os -- Own ship
+			ts -- Target ship
 			range -- Range of interest
 		""" 
 		Resolver.__init__(self, '(OwnShip,TargetShip).')
 
-		self.OS			= OS
-		self.TS			= TS
+		self.os			= os
+		self.ts			= ts
 		self.range		= range
 		self.distance	= None
 		self.velocity	= None
@@ -53,11 +53,11 @@ class TargetResolver(Resolver):
 		situation		= rulectxt.situation
 
 		if situation is not None:
-			self.OS			= situation.os
-			self.TS			= situation.ts
+			self.os			= situation.os
+			self.ts			= situation.ts
 		else:
-			self.OS			= None
-			self.TS			= None
+			self.os			= None
+			self.ts			= None
 		return
 
 	def get_cpa(self):
@@ -66,13 +66,13 @@ class TargetResolver(Resolver):
 		if self.cpa is not None:
 			return self.cpa
 
-		self.cpa = CPA(self.OS.location, self.OS.velocity, self.TS.location, self.TS.velocity)
+		self.cpa = CPA(self.os.location, self.os.velocity, self.ts.location, self.ts.velocity)
 		return self.cpa
 
 	def is_valid(self):
 		""" TODO: is_valid
 		""" 
-		if (self.OS is None) or (self.OS is None):
+		if (self.os is None) or (self.os is None):
 			return False
 
 		return True
@@ -93,11 +93,11 @@ class TargetResolver(Resolver):
 	def Distance(self):
 		""" Symbol property - Distance
 		""" 
-		if self.TS is None:
+		if self.ts is None:
 			return  float('inf')
 		
 		if self.distance is None:
-			self.distance	= Distance.euclidean(self.OS.location, self.TS.location)
+			self.distance	= Distance.euclidean(self.os.location, self.ts.location)
 		return self.distance
 
 	@simproperty
@@ -105,7 +105,7 @@ class TargetResolver(Resolver):
 		""" Symbol property - Velocity
 		""" 
 		if self.velocity is None:
-			Vos				= self.OS.velocity
+			Vos				= self.os.velocity
 			self.velocity	= math.sqrt(Vos[0]**2+Vos[1]**2)
 
 		return self.velocity
@@ -115,8 +115,8 @@ class TargetResolver(Resolver):
 		""" Symbol property - Approach
 		""" 
 		todeg		= 180/np.pi
-		Vos			= self.OS.velocity
-		Vts			= self.TS.velocity
+		Vos			= self.os.velocity
+		Vts			= self.ts.velocity
 		return math.atan2( Vos[1]-Vts[1], Vos[0]-Vts[0] )*todeg
 
 	@simproperty
@@ -124,16 +124,16 @@ class TargetResolver(Resolver):
 		""" Symbol property - Cargo
 		""" 
 
-		return self.OS.cargo
+		return self.os.cargo
 
 
 	@simproperty
 	def Draught(self)->str:
 		""" Symbol property - Draught
 		""" 
-		clearance		= self.OS.underkeel_clearance + \
-						  self.OS.motion_allowance + \
-						  self.OS.squat
+		clearance		= self.os.underkeel_clearance + \
+						  self.os.motion_allowance + \
+						  self.os.squat
 
 		return clearance
 	@simproperty
@@ -141,7 +141,7 @@ class TargetResolver(Resolver):
 		""" Symbol property - Weight
 		""" 
 
-		return self.OS.weight
+		return self.os.weight
 
 	@simproperty
 	def Undercurrent(self)->float:
@@ -154,7 +154,7 @@ class TargetResolver(Resolver):
 	def TargetVelocity(self)->float:
 		""" Symbol property - TargetVelocity
 		""" 
-		Vts			= self.TS.velocity
+		Vts			= self.ts.velocity
 		return math.sqrt(Vts[0]**2+Vts[1]**2)
 
 	@simproperty
@@ -162,8 +162,8 @@ class TargetResolver(Resolver):
 		""" Symbol property - TargetApproach
 		""" 
 		todeg		= 180/np.pi
-		Vos			= self.OS.velocity
-		Vts			= self.TS.velocity
+		Vos			= self.os.velocity
+		Vts			= self.ts.velocity
 		return math.atan2( Vts[1]-Vos[1], Vts[0]-Vos[0] )*todeg
 
 	@simproperty
@@ -202,19 +202,13 @@ class TargetResolver(Resolver):
 	@simproperty
 	def DCPA(self):
 		""" Symbol property - Visibility
-		""" 
+		"""
 		return 1.0
 
 	@simproperty
 	def TCPA(self):
 		""" Symbol property - Visibility
-		""" 
-		return 1.0
-
-	@simproperty
-	def DCPA(self):
-		""" Symbol property - Visibility
-		""" 
+		"""
 		return 1.0
 
 	@simproperty

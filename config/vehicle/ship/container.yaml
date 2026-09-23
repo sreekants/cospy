@@ -15,7 +15,7 @@ physics:
     width: 3
     draft: 100
     momentum: 0.92
-    
+    relative_size: "large"
 
 activity:
     type                : "container" 
@@ -72,6 +72,7 @@ cargo:
     liquid_gas      : false # IGC Code: Specifically covers liquefied natural gas (LNG) and liquefied petroleum gas (LPG) carried at low temperatures/high pressure.
     containerized   : true  # Containerized Cargo (CSS Code/CSC): Goods packed into standardized containers (20-foot or 40-foot). Key focus is on secure lashing and tracking.
     general_cargo   : false # Goods that are packaged (bags, boxes, pallets) or separate items loaded individually. These are often loaded in multi-purpose ships.
+    humans_present  : 20
 
 
 devices:

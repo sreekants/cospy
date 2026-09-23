@@ -55,6 +55,21 @@ language:
        module: maritime.model.resolver.ColregResolver
        config: 
 
+     - scope: 'fleet'
+       prefix: null
+       module: maritime.model.resolver.FleetResolver
+       config: 
+
+     - scope: 'sea'
+       prefix: null
+       module: maritime.model.resolver.SeaResolver
+       config:
+
+     - scope: 'land'
+       prefix: null
+       module: maritime.model.resolver.LandResolver
+       config:
+
      - scope: 'vessel'
        prefix: null
        module: maritime.model.resolver.VesselDeclarationsResolver

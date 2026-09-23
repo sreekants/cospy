@@ -100,6 +100,7 @@ class FleetBehavior(MotionBehavior):
 		for id, type in self.members:
 			vessel	= sim.objects.find("/World/Vehicle/Vessel", id )
 			if vessel is not None:
+				vessel.fleet = self.vehicle
 				self.vessels.append((vessel, type, id))
 			else:
 				sim.log.error( "Fleet", f"Warning: Vessel with id '{id}' not found in the simulation.")

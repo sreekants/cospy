@@ -93,32 +93,6 @@ risk:
     #   term: "OwnShip.Control.Autonomous.Failed"
     #   discretize: state
 
-    # Economic loss per consequence state, Table A.5 [NOK].
-  loss:
-    harm_to_humans:
-      fatality: 54520000
-      none: 0
-    damage_other_vessel:
-      major: 9000000
-      minor: 4500000
-      none: 0
-    damage_asv:
-      major: 2000000
-      minor: 1000000
-      none: 0
-    damage_auv:
-      major: 1000000
-      minor: 500000
-      none: 0
-    mission_failure:
-      "yes": 10000            # quoted: PyYAML reads bare yes/no as booleans
-      "no": 0
-
-    # Which cross-cutting concern each consequence scores into. This is the one
-    # mapping the source paper does not supply - see the note in the faculty.
-  concerns:
-    harm_to_humans: safety
-    damage_other_vessel: traffic
-    damage_asv: safety
-    damage_auv: operational
-    mission_failure: operational
+# Valuation lives in the territory file, $(SIMULATION)/risk.yaml, not here:
+# what a consequence is worth is a national convention in a national currency,
+# while this file binds the network to the simulation and is domain-neutral.

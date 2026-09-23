@@ -180,9 +180,11 @@ class InlandWaterRule(Rule):
 		now		= ctxt.sim.now()
 		fact	= score.get('fact', 'InlandWaterViolation.generic')
 		concern	= score.get('concern', 'Generic')
-		penalty	= score.get('penalty', 0)
+		penalty	= score.get('penalty', 0.0)
 		filter 	= score.get('filter', [])
 
+		if penalty <= -10.0:
+			return
 
 		# Match the vessel if a filter is specified.
 		if len(filter):
@@ -194,7 +196,7 @@ class InlandWaterRule(Rule):
 		self.data(ctxt, 'ro', [f'\'{concern}\'',now, imo, penalty])
 
 		# Override the function to score the violation
-		ctxt.log.error( self.regulation, f'Violated clause {clausename} for {concern}')
+		# ctxt.log.error( self.regulation, f'Violated clause {clausename} for {concern}')
 		return
 
 	def on_overtaking(self, ctxt:Context, evt):

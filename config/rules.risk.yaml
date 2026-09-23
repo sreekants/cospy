@@ -1,8 +1,21 @@
-# Manifest fragment for the Bayesian risk-assessment faculty.
+# Manifest fragment for the Bayesian risk-assessment examiner.
 #
-# Loads alongside rules.colreg.yaml. The faculty registers under
-# '/Faculty/Regulation/Examiner/Risk/RiskExaminer', which COLREG.Evaluator.init_faculties()
-# already collects, so it is driven by the existing monitor loop.
+# Loads alongside rules.colreg.yaml. The examiner registers under
+# '/Faculty/Regulation/Examiner/Risk/RiskExaminer', which
+# COLREG.Evaluator.init_faculties() already collects.
+#
+# Four configuration files, deliberately separate because they change for
+# different reasons and on different schedules:
+#
+#   network    the structure and conditional probabilities of the risk model.
+#              Changes when the hazard model is revised.
+#   bindings   which simulation terms supply which network inputs. Changes when
+#              the resolver vocabulary changes.
+#   territory  Rl, the zone-specific loss matrix. Changes per jurisdiction, and
+#              follows $(COUNTRY)/$(LOCATION) like every other local rule set,
+#              because what a consequence is worth and where it happened are
+#              both national questions.
+#   zones      the map lookup the spatial classification of Rl needs.
 
 packages:
   modules:  # Bayesian risk assessment
@@ -11,3 +24,5 @@ packages:
        config: sample.frequency=1
                network=$(CONFIG)/risk/risk.model.xdsl
                bindings=$(CONFIG)/risk/risk.model.yaml
+               territory=$(SIMULATION)/risk.yaml
+               zones=$(CONFIG)/examiner/zones.yaml

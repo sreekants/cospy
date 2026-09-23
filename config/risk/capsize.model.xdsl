@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!-- This network was created by pyAgrum 3.1.1 for any purpose you want -->
+<smile version="1.0" id="Capsize risk (placeholder tables)">
+
+  <nodes>
+    <cpt id="vessel_size">
+      <state id="small" />
+      <state id="large" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="payload">
+      <state id="light" />
+      <state id="laden" />
+      <state id="overladen" />
+      <probabilities>0.333333 0.333333 0.333333</probabilities>
+    </cpt>
+    <cpt id="stability">
+      <state id="stable" />
+      <state id="marginal" />
+      <state id="unstable" />
+      <parents>payload vessel_size</parents>
+      <probabilities>0.9 0.09 0.01 0.7 0.25 0.05 0.25 0.45 0.3 0.96 0.03 0.01 0.88 0.1 0.02 0.55 0.33 0.12</probabilities>
+    </cpt>
+    <cpt id="visibility">
+      <state id="good" />
+      <state id="poor" />
+      <probabilities>0.5 0.5</probabilities>
+    </cpt>
+    <cpt id="wave_height">
+      <state id="calm" />
+      <state id="moderate" />
+      <state id="severe" />
+      <probabilities>0.333333 0.333333 0.333333</probabilities>
+    </cpt>
+    <cpt id="capsize">
+      <state id="yes" />
+      <state id="no" />
+      <parents>stability wave_height visibility</parents>
+      <probabilities>0.0005 0.9995 0.002 0.998 0.008 0.992 0.006 0.994 0.03 0.97 0.09 0.91 0.04 0.96 0.18 0.82 0.42 0.58 0.001 0.999 0.004 0.996 0.015 0.985 0.012 0.988 0.055 0.945 0.16 0.84 0.075 0.925 0.29 0.71 0.6 0.4</probabilities>
+    </cpt>
+  </nodes>
+
+  <extensions>
+    <genie version="1.0" app="aGrUM 3.1.1" name="Capsize risk (placeholder tables)">
+      <node id="vessel_size">
+        <name>vessel_size</name>
+      </node>
+      <node id="payload">
+        <name>payload</name>
+      </node>
+      <node id="stability">
+        <name>stability</name>
+      </node>
+      <node id="visibility">
+        <name>visibility</name>
+      </node>
+      <node id="wave_height">
+        <name>wave_height</name>
+      </node>
+      <node id="capsize">
+        <name>capsize</name>
+      </node>
+    </genie>
+  </extensions>
+
+</smile>

@@ -123,7 +123,7 @@ class LaneDisciplineExaminer(ZoneAware, NavigationExaminer):
 			different name can then subclass and redeclare the tuple, and
 			SpeedExaminer picks up the same reading.
 		"""
-		situation	= rule_ctxt.resolve( '(OwnShip,TargetShip).COLREG.Situation' )
+		situation	= rule_ctxt.resolve( '(OwnShip,TargetShip).EncounterSituation' )
 		if situation is None:
 			return False
 

@@ -1,0 +1,33 @@
+# Evidence thresholds for the capsize network, ExtremeWeatherExaminer.
+#
+# Unlike risk.model.yaml these are not resolver-term bindings. Three of the
+# four inputs are not available as Legata terms - sea state is sampled from the
+# SEA_WAVE force field, and payload and size are read off the vessel - so the
+# examiner computes them and this file only says where the state boundaries
+# fall. Add resolver terms later and the shape here does not change.
+
+capsize:
+  # Magnitude of the SEA_WAVE force vector at the vessel's position.
+  wave_height:
+    states: [calm, moderate, severe]
+    edges: [1.25, 2.5]           # calm < 1.25 <= moderate < 2.5 <= severe
+
+  # Visibility in nautical miles. Poor below the edge.
+  visibility:
+    states: [poor, good]
+    edge: 1.0
+    default: good                # when nothing reports visibility
+
+  # Payload as a fraction of the vessel's declared capacity. A vessel that
+  # declares no capacity is treated as laden rather than light, so an
+  # unconfigured vessel is not silently the safest thing afloat.
+  payload:
+    states: [light, laden, overladen]
+    edges: [0.35, 0.95]
+    default: laden
+
+  # Length overall, metres.
+  vessel_size:
+    states: [small, large]
+    edge: 50.0
+    default: small

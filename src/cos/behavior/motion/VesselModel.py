@@ -57,17 +57,17 @@ class VesselModel:
 	def __load_cargo(self, config):
 		cargo = config.get('cargo',None)
 
-		self.cargo_flammable		= cargo['flammable'] if cargo else False
-		self.cargo_refrigerated		= cargo['refrigerated'] if cargo else False
-		self.cargo_livestock		= cargo['livestock'] if cargo else False
-		self.cargo_biohazard		= cargo['biohazard'] if cargo else False
-		self.cargo_heavy_lift		= cargo['heavy_lift'] if cargo else False
-		self.cargo_hazardous		= cargo['hazardous'] if cargo else False
-		self.cargo_bulk_solid		= cargo['bulk_solid'] if cargo else False
-		self.cargo_bulk_liquid		= cargo['bulk_liquid'] if cargo else False
-		self.cargo_liquid_gas		= cargo['liquid_gas'] if cargo else False
-		self.cargo_containerized	= cargo['containerized'] if cargo else False
-		self.cargo_general_cargo	= cargo['general_cargo'] if cargo else False
+		self.cargo_flammable		= cargo.get('flammable', False) if cargo else False
+		self.cargo_refrigerated		= cargo.get('refrigerated', False) if cargo else False
+		self.cargo_livestock		= cargo.get('livestock', False) if cargo else False
+		self.cargo_biohazard		= cargo.get('biohazard', False) if cargo else False
+		self.cargo_heavy_lift		= cargo.get('heavy_lift', False) if cargo else False
+		self.cargo_hazardous		= cargo.get('hazardous', False) if cargo else False
+		self.cargo_bulk_solid		= cargo.get('bulk_solid', False) if cargo else False
+		self.cargo_bulk_liquid		= cargo.get('bulk_liquid', False) if cargo else False
+		self.cargo_liquid_gas		= cargo.get('liquid_gas', False) if cargo else False
+		self.cargo_containerized	= cargo.get('containerized', False) if cargo else False
+		self.cargo_general_cargo	= cargo.get('general_cargo', False) if cargo else False
 
 	def __load_activity(self, config):
 		# Setup activities
