@@ -15,7 +15,7 @@ def get_app_info():
 		"executable": "coslaunch.py",
 		"name"		: "COS Simulation Operating system",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?][-i image][-c config]"
+		"usage"		:[ 	"[-h][-?][-i image][-c|-config path/to/cos.ini]"
 					],
 					
 		"help"		:[
@@ -23,6 +23,7 @@ def get_app_info():
 			    ["?"		, ["Print help.", usage]],
 			    ["i"		, ["Set the image.", set_image]],
 			    ["c"		, ["Path to cos.ini (optional).", set_config]],
+			    ["config"	, ["Same as -c.", set_config]],
 			    ["image"	, ["Code directory.", None]]
 				]		
 		}
@@ -63,9 +64,9 @@ def usage():
 	sys.exit(0)		    
 	return
 
-def set_image():
+def set_image(path):
 	global IMAGE
-	IMAGE	= sys.argv[-1]
+	IMAGE	= path
 	if os.path.isfile(IMAGE) == False:
 		print( f'[{IMAGE}] is not an image file.')
 		sys.exit(-1)
@@ -73,24 +74,31 @@ def set_image():
 
 def set_config(path):
 	global CONFIG
-	CONFIG	= path
-	if os.path.isfile(CONFIG) == False:
-		print( f'[{CONFIG}] is not a configuration file.')
+	if os.path.isfile(path) == False:
+		print( f'[{path}] is not a configuration file.')
 		sys.exit(-1)
+	CONFIG	= os.path.abspath(path)
 	return
+
+def normalize_argv(argv):
+	""" getopt does not support single-dash long options, so map
+	-config/-image/-help to their --long equivalents.
+	"""
+	longopts	= ['config', 'image', 'help']
+	return [ '-' + a if a.split('=')[0][1:] in longopts else a for a in argv ]
 
 def main():
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "hi:c:d", ["help", "config="])
+		opts, args = getopt.getopt(normalize_argv(sys.argv[1:]), "h?i:c:d", ["help", "image=", "config="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
 	for opt, arg in opts:
-		if opt in ("-h", "--help"):
+		if opt in ("-h", "-?", "--help"):
 			usage()                     
 			sys.exit()                  
-		elif opt in ("-i"):
-			set_image()
+		elif opt in ("-i", "--image"):
+			set_image(arg)
 		elif opt in ("-c", "--config"):
 			set_config(arg)
 		elif opt == '-d':
