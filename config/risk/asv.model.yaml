@@ -1,0 +1,557 @@
+# The Bayesian risk model of Kristensen et al. (2025), Fig. 2: its
+# structure, its states and its conditional probabilities, all as data.
+#
+# ASVModel.py builds the network from this file and writes
+# config/risk/risk.model.xdsl. Nothing about the model is declared in code.
+
+inference:
+  network:
+    # Node kinds carry the colour legend of Fig. 2 and nothing else; they
+    # decide how a node is drawn in GeNIe and how the report groups it.
+    # 'states' order is load-bearing: it is the column order of every
+    # matrix under 'nodes' below.
+    nodes:
+      # --- consequence nodes (orange in Fig. 2) ---
+      harm_to_humans:
+        kind: consequence
+        label: "Harm to humans"
+        states: [fatality, none]
+      damage_other_vessel:
+        kind: consequence
+        label: "Damage to other vessel"
+        states: [major, minor, none]
+      damage_asv:
+        kind: consequence
+        label: "Damage to ASV"
+        states: [major, minor, none]
+      mission_failure:
+        kind: consequence
+        label: "Mission failure"
+        states: ["yes", "no"]
+      damage_auv:
+        kind: consequence
+        label: "Damage to AUV"
+        states: [major, minor, none]
+
+      # --- hazardous events (light blue) ---
+      collision:
+        kind: HE
+        label: "Collision"
+        states: ["yes", "no"]
+      grounding:
+        kind: HE
+        label: "Grounding"
+        states: ["yes", "no"]
+      loss_of_comms:
+        kind: HE
+        label: "Loss of ASV/AUV communication connection"
+        states: ["yes", "no"]
+
+      # --- probability-influencing, updated during operation (blue) ---
+      humans_exposed:
+        kind: dynamic
+        label: "Humans exposed to collision risk"
+        states: ["yes", "no"]
+      fail_recover_collision:
+        kind: dynamic
+        label: "Failure of recovery from collision course"
+        states: ["yes", "no"]
+      fail_recover_grounding:
+        kind: dynamic
+        label: "Failure of recovery from grounding course"
+        states: ["yes", "no"]
+      collision_encounter:
+        kind: dynamic
+        label: "Collision encounter properties"
+        states: [critical, noncritical]
+      environmental:
+        kind: dynamic
+        label: "Environmental conditions"
+        states: [critical, noncritical]
+      own_vessel_fails:
+        kind: dynamic
+        label: "Own vessel fails to recover"
+        states: ["yes", "no"]
+      waterway_properties:
+        kind: dynamic
+        label: "Waterway properties"
+        states: [critical, noncritical]
+      target_on_collision:
+        kind: dynamic
+        label: "Target ship on collision course"
+        states: ["yes", "no"]
+      vessel_on_grounding:
+        kind: dynamic
+        label: "Vessel on grounding course"
+        states: ["yes", "no"]
+      size_other_vessel:
+        kind: dynamic
+        label: "Size of other vessel"
+        states: [small, large]
+      humans_present:
+        kind: dynamic
+        label: "Humans present on other vessel"
+        states: [many, limited]
+      auv_asv_distance:
+        kind: dynamic
+        label: "AUV/ASV distance"
+        states: [state_1, state_2, state_3, state_4, state_5]
+      tcpa:
+        kind: dynamic
+        label: "TCPA"
+        states: [state_1, state_2, state_3, state_4, state_5, state_6, state_7, state_8, state_9, state_10]
+      dcpa:
+        kind: dynamic
+        label: "DCPA"
+        states: [state_1, state_2, state_3, state_4, state_5, state_6, state_7, state_8, state_9, state_10]
+      wind_speed:
+        kind: dynamic
+        label: "Wind speed"
+        states: [critical, noncritical]
+      wave_height:
+        kind: dynamic
+        label: "Wave height"
+        states: [critical, noncritical]
+      distance_to_shore:
+        kind: dynamic
+        label: "Distance to shore"
+        states: [state_1, state_2, state_3, state_4, state_5, state_6, state_7, state_8, state_9, state_10]
+      depth:
+        kind: dynamic
+        label: "Depth"
+        states: [critical, noncritical]
+
+      # --- probability-influencing, static (grey) ---
+      manual_control_failure:
+        kind: static
+        label: "Manual control failure"
+        states: ["yes", "no"]
+      autonomous_control_failure:
+        kind: static
+        label: "Autonomous control failure"
+        states: ["yes", "no"]
+      target_vessel_fails:
+        kind: static
+        label: "Target vessel fails to recover"
+        states: ["yes", "no"]
+      comms_system_failure:
+        kind: static
+        label: "Failure of communication system"
+        states: ["yes", "no"]
+
+    # The hazardous events, read back as the joint target for P(any).
+    hazards: [collision, grounding, loss_of_comms]
+
+    # Arcs, parent first, read off the arrows in Fig. 2.
+    edges:
+      - [collision, harm_to_humans]
+      - [humans_exposed, harm_to_humans]
+      - [collision, damage_other_vessel]
+      - [collision, damage_asv]
+      - [grounding, damage_asv]
+      - [collision, mission_failure]
+      - [grounding, mission_failure]
+      - [loss_of_comms, mission_failure]
+      - [loss_of_comms, damage_auv]
+      - [target_on_collision, collision]
+      - [fail_recover_collision, collision]
+      - [vessel_on_grounding, grounding]
+      - [fail_recover_grounding, grounding]
+      - [auv_asv_distance, loss_of_comms]
+      - [comms_system_failure, loss_of_comms]
+      - [size_other_vessel, humans_exposed]
+      - [humans_present, humans_exposed]
+      - [target_on_collision, humans_exposed]
+      - [collision_encounter, fail_recover_collision]
+      - [target_vessel_fails, fail_recover_collision]
+      - [environmental, fail_recover_collision]
+      - [own_vessel_fails, fail_recover_collision]
+      - [environmental, fail_recover_grounding]
+      - [own_vessel_fails, fail_recover_grounding]
+      - [waterway_properties, fail_recover_grounding]
+      - [dcpa, collision_encounter]
+      - [tcpa, collision_encounter]
+      - [wind_speed, environmental]
+      - [wave_height, environmental]
+      - [manual_control_failure, own_vessel_fails]
+      - [autonomous_control_failure, own_vessel_fails]
+      - [distance_to_shore, waterway_properties]
+      - [depth, waterway_properties]
+
+
+# --- provenance of the numbers below --------------------------------------
+#
+# Only two groups come from the paper: the four static priors of Table A.6,
+# and the uniform priors on the dynamic input nodes, which is the paper's own
+# choice because their evidence is always supplied during operation. Every
+# conditional table is a PLACEHOLDER - monotone and sign-correct so the model
+# propagates sensibly, but not calibrated and not citable.
+
+sources:
+  table_a6: "Kristensen et al. (2025), Table A.6"
+  uniform_by_design: "Kristensen et al. (2025), Section 2.3 - uniform by design"
+  placeholder: "PLACEHOLDER - elicit with Vinnem et al. (2012) templates"
+
+nodes:
+  manual_control_failure:
+    source: table_a6
+    parents: []
+    table:
+      - [0.000274, 0.999726]    # prior
+
+  autonomous_control_failure:
+    source: table_a6
+    parents: []
+    table:
+      - [  4.0e-07, 0.9999996]    # prior
+
+  target_vessel_fails:
+    source: table_a6
+    parents: []
+    table:
+      - [6.0e-05, 0.99994]    # prior
+
+  comms_system_failure:
+    source: table_a6
+    parents: []
+    table:
+      - [5.0e-05, 0.99995]    # prior
+
+  dcpa:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]    # prior
+
+  tcpa:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]    # prior
+
+  distance_to_shore:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]    # prior
+
+  auv_asv_distance:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.2, 0.2, 0.2, 0.2, 0.2]    # prior
+
+  depth:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.5, 0.5]    # prior
+
+  wave_height:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.5, 0.5]    # prior
+
+  wind_speed:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.5, 0.5]    # prior
+
+  humans_present:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.5, 0.5]    # prior
+
+  size_other_vessel:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.5, 0.5]    # prior
+
+  target_on_collision:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.5, 0.5]    # prior
+
+  vessel_on_grounding:
+    source: uniform_by_design
+    parents: []
+    table:
+      - [0.5, 0.5]    # prior
+
+  environmental:
+    source: placeholder
+    parents: [wind_speed, wave_height]
+    table:
+      - [0.95, 0.05]    # critical, critical
+      - [ 0.6,  0.4]    # critical, noncritical
+      - [ 0.6,  0.4]    # noncritical, critical
+      - [0.02, 0.98]    # noncritical, noncritical
+
+  own_vessel_fails:
+    source: placeholder
+    parents: [manual_control_failure, autonomous_control_failure]
+    table:
+      - [  0.99,   0.01]    # yes, yes
+      - [   0.2,    0.8]    # yes, no
+      - [   0.5,    0.5]    # no, yes
+      - [0.0001, 0.9999]    # no, no
+
+  waterway_properties:
+    source: placeholder
+    parents: [distance_to_shore, depth]
+    table:
+      - [0.9825, 0.0175]    # state_1, critical
+      - [  0.57,   0.43]    # state_1, noncritical
+      - [0.9475, 0.0525]    # state_2, critical
+      - [  0.51,   0.49]    # state_2, noncritical
+      - [0.9125, 0.0875]    # state_3, critical
+      - [  0.45,   0.55]    # state_3, noncritical
+      - [0.8775, 0.1225]    # state_4, critical
+      - [  0.39,   0.61]    # state_4, noncritical
+      - [0.8425, 0.1575]    # state_5, critical
+      - [  0.33,   0.67]    # state_5, noncritical
+      - [0.8075, 0.1925]    # state_6, critical
+      - [  0.27,   0.73]    # state_6, noncritical
+      - [0.7725, 0.2275]    # state_7, critical
+      - [  0.21,   0.79]    # state_7, noncritical
+      - [0.7375, 0.2625]    # state_8, critical
+      - [  0.15,   0.85]    # state_8, noncritical
+      - [0.7025, 0.2975]    # state_9, critical
+      - [  0.09,   0.91]    # state_9, noncritical
+      - [0.6675, 0.3325]    # state_10, critical
+      - [  0.03,   0.97]    # state_10, noncritical
+
+  collision_encounter:
+    source: placeholder
+    parents: [dcpa, tcpa]
+    table:
+      - [           0.97,            0.03]    # state_1, state_1
+      - [ 0.733903428422,  0.266096571578]    # state_1, state_2
+      - [ 0.556482215907,  0.443517784093]    # state_1, state_3
+      - [ 0.423154203393,  0.576845796607]    # state_1, state_4
+      - [ 0.322961229458,  0.677038770542]    # state_1, state_5
+      - [  0.24766848462,   0.75233151538]    # state_1, state_6
+      - [ 0.191087696541,  0.808912303459]    # state_1, state_7
+      - [ 0.148568519075,  0.851431480925]    # state_1, state_8
+      - [ 0.116616322689,  0.883383677311]    # state_1, state_9
+      - [0.0926049726412,  0.907395027359]    # state_1, state_10
+      - [ 0.656804043734,  0.343195956266]    # state_2, state_1
+      - [ 0.498543779005,  0.501456220995]    # state_2, state_2
+      - [ 0.379614783664,  0.620385216336]    # state_2, state_3
+      - [ 0.290242344178,  0.709757655822]    # state_2, state_4
+      - [ 0.223080985277,  0.776919014723]    # state_2, state_5
+      - [ 0.172610749091,  0.827389250909]    # state_2, state_6
+      - [ 0.134683512621,  0.865316487379]    # state_2, state_7
+      - [ 0.106182055625,  0.893817944375]    # state_2, state_8
+      - [0.0847638578727,  0.915236142127]    # state_2, state_9
+      - [0.0686685686033,  0.931331431397]    # state_2, state_10
+      - [ 0.446862515911,  0.553137484089]    # state_3, state_1
+      - [ 0.340777487972,  0.659222512028]    # state_3, state_2
+      - [ 0.261056998341,  0.738943001659]    # state_3, state_3
+      - [  0.20114886059,   0.79885113941]    # state_3, state_4
+      - [   0.1561292554,    0.8438707446]    # state_3, state_5
+      - [ 0.122298044356,  0.877701955644]    # state_3, state_6
+      - [0.0968746574598,   0.90312534254]    # state_3, state_7
+      - [ 0.077769559494,  0.922230440506]    # state_3, state_8
+      - [0.0634125121907,  0.936587487809]    # state_3, state_9
+      - [0.0526235171466,  0.947376482853]    # state_3, state_10
+      - [ 0.306134501317,  0.693865498683]    # state_4, state_1
+      - [ 0.235023580505,  0.764976419495]    # state_4, state_2
+      - [ 0.181585338225,  0.818414661775]    # state_4, state_3
+      - [  0.14142771257,   0.85857228743]    # state_4, state_4
+      - [ 0.111250168746,  0.888749831254]    # state_4, state_5
+      - [0.0885724298023,  0.911427570198]    # state_4, state_6
+      - [0.0715306239274,  0.928469376073]    # state_4, state_7
+      - [0.0587240937794,  0.941275906221]    # state_4, state_8
+      - [0.0491002771702,   0.95089972283]    # state_4, state_9
+      - [0.0418681975156,  0.958131802484]    # state_4, state_10
+      - [ 0.211801692095,  0.788198307905]    # state_5, state_1
+      - [ 0.164134616383,  0.835865383617]    # state_5, state_2
+      - [ 0.128313891358,  0.871686108642]    # state_5, state_3
+      - [  0.10139542988,   0.89860457012]    # state_5, state_4
+      - [0.0811668173149,  0.918833182685]    # state_5, state_5
+      - [0.0659654743018,  0.934034525698]    # state_5, state_6
+      - [0.0545420102033,  0.945457989797]    # state_5, state_7
+      - [0.0459575363249,  0.954042463675]    # state_5, state_8
+      - [0.0395064991324,  0.960493500868]    # state_5, state_9
+      - [0.0346586911654,  0.965341308835]    # state_5, state_10
+      - [ 0.148568519075,  0.851431480925]    # state_6, state_1
+      - [ 0.116616322689,  0.883383677311]    # state_6, state_2
+      - [0.0926049726412,  0.907395027359]    # state_6, state_3
+      - [0.0745609883042,  0.925439011696]    # state_6, state_4
+      - [0.0610013437984,  0.938998656202]    # state_6, state_5
+      - [0.0508115788501,   0.94918842115]    # state_6, state_6
+      - [0.0431542018696,   0.95684579813]    # state_6, state_7
+      - [0.0373998569443,  0.962600143056]    # state_6, state_8
+      - [0.0330755973964,  0.966924402604]    # state_6, state_9
+      - [0.0298260145368,  0.970173985463]    # state_6, state_10
+      - [ 0.106182055625,  0.893817944375]    # state_7, state_1
+      - [0.0847638578727,  0.915236142127]    # state_7, state_2
+      - [0.0686685686033,  0.931331431397]    # state_7, state_3
+      - [0.0565733241918,  0.943426675808]    # state_7, state_4
+      - [0.0474840226625,  0.952515977338]    # state_7, state_5
+      - [0.0406536189532,  0.959346381047]    # state_7, state_6
+      - [0.0355207256632,  0.964479274337]    # state_7, state_7
+      - [0.0316634729079,  0.968336527092]    # state_7, state_8
+      - [0.0287648350487,  0.971235164951]    # state_7, state_9
+      - [0.0265865745166,  0.973413425483]    # state_7, state_10
+      - [ 0.077769559494,  0.922230440506]    # state_8, state_1
+      - [0.0634125121907,  0.936587487809]    # state_8, state_2
+      - [0.0526235171466,  0.947376482853]    # state_8, state_3
+      - [ 0.044515832356,  0.955484167644]    # state_8, state_4
+      - [0.0384230913363,  0.961576908664]    # state_8, state_5
+      - [0.0338445348075,  0.966155465192]    # state_8, state_6
+      - [ 0.030403853541,  0.969596146459]    # state_8, state_7
+      - [0.0278182596966,  0.972181740303]    # state_8, state_8
+      - [0.0258752446333,  0.974124755367]    # state_8, state_9
+      - [0.0244151129332,  0.975584887067]    # state_8, state_10
+      - [0.0587240937794,  0.941275906221]    # state_9, state_1
+      - [0.0491002771702,   0.95089972283]    # state_9, state_2
+      - [0.0418681975156,  0.958131802484]    # state_9, state_3
+      - [0.0364334538734,  0.963566546127]    # state_9, state_4
+      - [0.0323493674327,  0.967650632567]    # state_9, state_5
+      - [0.0292802692095,   0.97071973079]    # state_9, state_6
+      - [0.0269739115846,  0.973026088415]    # state_9, state_7
+      - [0.0252407361997,    0.9747592638]    # state_9, state_8
+      - [0.0239382942531,  0.976061705747]    # state_9, state_9
+      - [0.0229595387046,  0.977040461295]    # state_9, state_10
+      - [0.0459575363249,  0.954042463675]    # state_10, state_1
+      - [0.0395064991324,  0.960493500868]    # state_10, state_2
+      - [0.0346586911654,  0.965341308835]    # state_10, state_3
+      - [ 0.031015673557,  0.968984326443]    # state_10, state_4
+      - [ 0.028278028546,  0.971721971454]    # state_10, state_5
+      - [0.0262207504837,  0.973779249516]    # state_10, state_6
+      - [0.0246747527344,  0.975325247266]    # state_10, state_7
+      - [0.0235129705307,  0.976487029469]    # state_10, state_8
+      - [ 0.022639917585,  0.977360082415]    # state_10, state_9
+      - [0.0219838381207,  0.978016161879]    # state_10, state_10
+
+  fail_recover_collision:
+    source: placeholder
+    parents: [collision_encounter, target_vessel_fails, environmental, own_vessel_fails]
+    table:
+      - [0.99, 0.01]    # critical, yes, critical, yes
+      - [0.85, 0.15]    # critical, yes, critical, no
+      - [0.95, 0.05]    # critical, yes, noncritical, yes
+      - [ 0.7,  0.3]    # critical, yes, noncritical, no
+      - [ 0.9,  0.1]    # critical, no, critical, yes
+      - [0.45, 0.55]    # critical, no, critical, no
+      - [0.85, 0.15]    # critical, no, noncritical, yes
+      - [0.25, 0.75]    # critical, no, noncritical, no
+      - [ 0.7,  0.3]    # noncritical, yes, critical, yes
+      - [0.25, 0.75]    # noncritical, yes, critical, no
+      - [ 0.6,  0.4]    # noncritical, yes, noncritical, yes
+      - [0.12, 0.88]    # noncritical, yes, noncritical, no
+      - [ 0.5,  0.5]    # noncritical, no, critical, yes
+      - [0.06, 0.94]    # noncritical, no, critical, no
+      - [ 0.4,  0.6]    # noncritical, no, noncritical, yes
+      - [0.01, 0.99]    # noncritical, no, noncritical, no
+
+  fail_recover_grounding:
+    source: placeholder
+    parents: [environmental, own_vessel_fails, waterway_properties]
+    table:
+      - [0.97, 0.03]    # critical, yes, critical
+      - [ 0.8,  0.2]    # critical, yes, noncritical
+      - [0.55, 0.45]    # critical, no, critical
+      - [ 0.1,  0.9]    # critical, no, noncritical
+      - [ 0.9,  0.1]    # noncritical, yes, critical
+      - [ 0.6,  0.4]    # noncritical, yes, noncritical
+      - [0.25, 0.75]    # noncritical, no, critical
+      - [0.01, 0.99]    # noncritical, no, noncritical
+
+  humans_exposed:
+    source: placeholder
+    parents: [size_other_vessel, humans_present, target_on_collision]
+    table:
+      - [0.85, 0.15]    # small, many, yes
+      - [0.05, 0.95]    # small, many, no
+      - [ 0.5,  0.5]    # small, limited, yes
+      - [0.02, 0.98]    # small, limited, no
+      - [0.95, 0.05]    # large, many, yes
+      - [0.08, 0.92]    # large, many, no
+      - [0.65, 0.35]    # large, limited, yes
+      - [0.03, 0.97]    # large, limited, no
+
+  collision:
+    source: placeholder
+    parents: [target_on_collision, fail_recover_collision]
+    table:
+      - [   0.95,    0.05]    # yes, yes
+      - [   0.02,    0.98]    # yes, no
+      - [  0.001,   0.999]    # no, yes
+      - [1.0e-05, 0.99999]    # no, no
+
+  grounding:
+    source: placeholder
+    parents: [vessel_on_grounding, fail_recover_grounding]
+    table:
+      - [   0.95,    0.05]    # yes, yes
+      - [   0.02,    0.98]    # yes, no
+      - [  0.001,   0.999]    # no, yes
+      - [1.0e-05, 0.99999]    # no, no
+
+  loss_of_comms:
+    source: placeholder
+    parents: [auv_asv_distance, comms_system_failure]
+    table:
+      - [0.999, 0.001]    # state_1, yes
+      - [0.002, 0.998]    # state_1, no
+      - [0.999, 0.001]    # state_2, yes
+      - [ 0.01,  0.99]    # state_2, no
+      - [0.999, 0.001]    # state_3, yes
+      - [ 0.05,  0.95]    # state_3, no
+      - [0.999, 0.001]    # state_4, yes
+      - [  0.2,   0.8]    # state_4, no
+      - [0.999, 0.001]    # state_5, yes
+      - [  0.6,   0.4]    # state_5, no
+
+  harm_to_humans:
+    source: placeholder
+    parents: [collision, humans_exposed]
+    table:
+      - [ 0.12,  0.88]    # yes, yes
+      - [0.001, 0.999]    # yes, no
+      - [  0.0,   1.0]    # no, yes
+      - [  0.0,   1.0]    # no, no
+
+  damage_other_vessel:
+    source: placeholder
+    parents: [collision]
+    table:
+      - [ 0.3, 0.65, 0.05]    # yes
+      - [ 0.0,  0.0,  1.0]    # no
+
+  damage_asv:
+    source: placeholder
+    parents: [collision, grounding]
+    table:
+      - [ 0.7, 0.28, 0.02]    # yes, yes
+      - [0.35,  0.6, 0.05]    # yes, no
+      - [0.25, 0.65,  0.1]    # no, yes
+      - [ 0.0,  0.0,  1.0]    # no, no
+
+  damage_auv:
+    source: placeholder
+    parents: [loss_of_comms]
+    table:
+      - [ 0.1, 0.35, 0.55]    # yes
+      - [ 0.0,  0.0,  1.0]    # no
+
+  mission_failure:
+    source: placeholder
+    parents: [collision, grounding, loss_of_comms]
+    table:
+      - [ 1.0,  0.0]    # yes, yes, yes
+      - [ 1.0,  0.0]    # yes, yes, no
+      - [ 1.0,  0.0]    # yes, no, yes
+      - [0.98, 0.02]    # yes, no, no
+      - [ 1.0,  0.0]    # no, yes, yes
+      - [0.98, 0.02]    # no, yes, no
+      - [0.55, 0.45]    # no, no, yes
+      - [0.02, 0.98]    # no, no, no

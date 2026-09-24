@@ -10,9 +10,10 @@ import os, yaml
 # Reads the ASV risk model from YAML configuration.
 # 
 # The whole model - its structure, its states and its conditional probabilities -
-# lives in config/risk/asv.model.yaml. This module is the only reader of that
-# file, so the two halves cannot drift into disagreeing about what a node is
-# called or how many states it has.
+# lives in one file, which the caller names; config/risk/asv.model.yaml is the
+# one the platform ships. This module is the only reader of that file, so the
+# two halves cannot drift into disagreeing about what a node is called or how
+# many states it has.
 # 
 # 	inference:
 # 	  network:
@@ -33,11 +34,11 @@ import os, yaml
 # 	columns = the node's states, in the order inference.network declares them
 # 	every row sums to 1
 
-# Default location, used when no path is supplied. Callers inside a running
-# simulation should pass a path resolved through ctxt.sim.config instead.
-CONFIG = os.path.normpath(os.path.join(
-	os.path.dirname(os.path.abspath(__file__)), *([os.pardir] * 4),
-	'config', 'risk', 'asv.model.yaml'))
+# No default path. This module is a reader, and a reader that guesses where its
+# input lives is guessing on behalf of a caller that knows better: inside a
+# running simulation the path comes from ctxt.sim.config, which resolves
+# $(CONFIG) and the territory variables that a constant here cannot see. Every
+# entry point names its own file.
 
 UNKNOWN_SOURCE = 'unattributed'
 
@@ -120,18 +121,20 @@ class Network:
 		return problems
 
 
-def read(path=None)->tuple:
+def read(path)->tuple:
 	""" Reads the whole model from configuration
 	Arguments
-		path -- Path to the model file; defaults to config/risk/asv.model.yaml
+		path -- Path to the model file. Required: see the note above on why this
+			module holds no default.
 	Returns
 		(network, tables)
 	Raises
-		ValueError when the file is malformed. Matrix shapes are checked later,
-		by apply_all against the built network, which is the only place a
-		node's true dimensions are known.
+		ValueError when no path is given or the file is malformed. Matrix shapes
+		are checked later, by apply_all against the built network, which is the
+		only place a node's true dimensions are known.
 	"""
-	path		= path or CONFIG
+	if not path:
+		raise ValueError( 'no model file given; ASVCPT holds no default path' )
 
 	with open( path, encoding='utf-8' ) as handle:
 		config	= yaml.safe_load( handle ) or {}
@@ -155,7 +158,7 @@ def read(path=None)->tuple:
 	return network, tables
 
 
-def load(path=None):
+def load(path):
 	""" The tables alone, for a caller that does not need the structure
 	Arguments
 		path -- Path to the model file
@@ -217,7 +220,13 @@ def __tables(config):
 
 
 if __name__ == "__main__":
-	network, tables = read()
+	import sys
+
+	if len( sys.argv ) != 2:
+		print( f'usage: {os.path.basename(sys.argv[0])} <model.yaml>', file=sys.stderr )
+		sys.exit( 2 )
+
+	network, tables = read( sys.argv[1] )
 	print( f'nodes {len(network.nodes)}  edges {len(network.edges)}  '
 		   f'hazards {len(network.hazards)}  tables {len(tables)}' )
 	for table in tables:

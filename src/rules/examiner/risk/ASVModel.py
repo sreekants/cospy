@@ -57,8 +57,8 @@ TERRITORY = os.path.normpath(os.path.join(
     "config", "simulation", "no", "trondheim", "risk.yaml"))
 
 
-def build(model=None):
-    """Assemble the network described by config/risk/asv.model.yaml.
+def build(model):
+    """Assemble the network described by a model file.
 
     Nothing about the model is declared in this module: inference.network gives
     the nodes, their states and the arcs, and the tables give the conditional
@@ -67,12 +67,13 @@ def build(model=None):
     configuration is correctable in one pass.
 
     Arguments
-        model -- (network, tables) as returned by ASVCPT.read(); read from the
-            default configuration when omitted.
+        model -- (network, tables) as returned by ASVCPT.read(). Required:
+            neither this module nor ASVCPT guesses where the model lives, so a
+            caller that has not named a file has not said what to build.
     Returns
         (bn, network, tables)
     """
-    network, tables = model if model is not None else read_model()
+    network, tables = model
 
     bn = gum.BayesNet("ASV risk model (Kristensen et al. 2025, Fig. 2)")
     for node in network.nodes:
@@ -223,9 +224,14 @@ def report(bn, network, tables):
         print(f"  {count:>2}  {source}")
 
 
-DEPLOYED = os.path.normpath(os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), *([os.pardir] * 4),
-    "config", "risk", "risk.model.xdsl"))
+# The paths this command line defaults to. They are declared at the entry
+# point, not in the modules that consume them: one place names a file, and a
+# caller that wants another supplies it.
+CONFIG_DIR = os.path.normpath(os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), *([os.pardir] * 4), "config"))
+
+MODEL = os.path.join(CONFIG_DIR, "risk", "asv.model.yaml")
+DEPLOYED = os.path.join(CONFIG_DIR, "risk", "risk.model.xdsl")
 
 
 def parse(argv=None):
@@ -235,12 +241,15 @@ def parse(argv=None):
     regenerable source of the network the examiners load, rather than a script
     whose output has to be copied across by hand.
     """
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    # A literal, not __doc__: this module documents itself in comments rather
+    # than a docstring, so __doc__ is None.
+    parser = argparse.ArgumentParser(
+        description="Build the ASV risk network from its model file.")
     parser.add_argument("--out", default=DEPLOYED,
                         help="where to write the network (default: %(default)s)")
-    parser.add_argument("--model", default=None,
+    parser.add_argument("--model", default=MODEL,
                         help="model file carrying inference.network and the "
-                             "tables (default: config/risk/asv.model.yaml)")
+                             "tables (default: %(default)s)")
     parser.add_argument("--territory", default=TERRITORY,
                         help="territory risk file supplying cost "
                              "(default: %(default)s)")
@@ -250,7 +259,7 @@ def parse(argv=None):
 if __name__ == "__main__":
     args = parse()
 
-    bn, network, tables = build(read_model(args.model) if args.model else None)
+    bn, network, tables = build(read_model(args.model))
     report(bn, network, tables)
 
     matrix = load_territory(args.territory)
