@@ -34,8 +34,8 @@ behavior:
     overtake_lat_min    : 10     # metres; lateral separation while overtaking
 
     # crossing thresholds
-    crossing_aft_min    : 0.50   # kilometres; crossing at aft of tss vessel
-    crossing_fore_min   : 0.25   # kilometres; crossing in front of approaching tss vessel
+    crossing_aft_min    : 0.50   # meters; crossing at aft of tss vessel
+    crossing_fore_min   : 0.25   # meters; crossing in front of approaching tss vessel
 
     range_visibility    : 20     # range of situations observation
     range_ample_time    : 10     # range of collision avoidance 
