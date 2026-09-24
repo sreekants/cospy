@@ -1,4 +1,3 @@
-<head><link rel="stylesheet" href="https://www.nyun.ca/public/docs/style.css" type="text/css"></head>
 
 # The Co-Simulation Operating System: A Functional Overview
 
@@ -224,12 +223,12 @@ analysis cubes, also called OLAP.
   │      ▼                                                               │
   │   ┌──────────────┐  ┌────────────┐  ┌──────────────┐  ┌──────────┐   │
   │   │ ENVIRONMENT  │  │   ACTORS   │  │   MONITORS   │  │  RULES   │   │
-  │   │ land · sea   │  │  vessels   │─▶│  situations  │─▶│ Legata   │   │
-  │   │ sky · weather│─▶│  behaviour │  │  conduct     │  │ examiners│   │
+  │   │ land · sea   │─>│  vessels   │─>│  situations  │─>│ Legata   │   │
+  │   │ sky · weather│  │  behaviour │  │  conduct     │  │ examiners│   │
   │   └──────────────┘  └────────────┘  └──────────────┘  └────┬─────┘   │
   │            (b) topics on the internal message queue        │         │
   │                                                            │ (d)     │
-  │   SUBSYSTEMS   World · NetworkManager · DataManager ◀──────┘         │
+  │   SUBSYSTEMS   World · NetworkManager · DataManager <──────┘         │
   └──────────────────┬──────────────────────────────────────┬────────────┘
                      │ (c) RPC :5556 · events :5557         │ (d) every 5 s
                      ▼                                      ▼
@@ -888,4 +887,3 @@ confusion:
 | Source structure and class inventory | `docs/guide/cos-structure.html`, `docs/ARCHITECTURE.md` |
 | Known defects | `bugs/INDEX.md` |
 
-<footer class="copyright" />
