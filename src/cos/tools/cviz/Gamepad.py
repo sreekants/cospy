@@ -46,7 +46,11 @@ class Gamepad:
 		return False, False
 		
 
-	def poll(self):
+	def poll(self, pressed=None):
+		""" Polls active joysticks
+		Arguments
+			pressed -- Key state from pygame.key.get_pressed() (unused)
+		"""
 		self.thrust(100)
 		# For each joystick:
 		for joystick in self.joysticks.values():
