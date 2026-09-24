@@ -50,7 +50,8 @@ class MapBuilder(Service):
 			'size'		: None,
 			'scale'		: None,
 			'data'		: None,
-			'extent'	: None
+			'extent'	: None,
+			'bounds'	: None
 			}
 
 		db		= ActiveRecord.create('Config', path, 'configs')
@@ -83,10 +84,14 @@ class MapBuilder(Service):
 
 		# Declared map size in map units, so a viewer can fit the map to its screen.
 		# Maps without one are drawn one map unit per pixel, as before.
+		# map.bounds (left,top,right,bottom) restricts where vessels may move.
 		for r in db.get_all(f'type=\'geo.reference\''):
 			if r[1] == 'map.extent':
 				w, h				= ( float(v) for v in str(r[3]).split(',') )
 				background['extent']	= (w, h)
+
+			if r[1] == 'map.bounds':
+				background['bounds']	= tuple( float(v) for v in str(r[3]).split(',') )
 
 		if filepath:
 			background['data']		= ctxt.sim.fs.read_file_as_bytes(file)

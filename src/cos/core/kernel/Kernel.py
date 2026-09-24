@@ -15,6 +15,7 @@ from cos.core.time.Clock import Clock
 from cos.core.utilities.Patterns import Manager
 
 import hashlib
+import os
 
 class Kernel:
 	def __init__(self):
@@ -24,6 +25,7 @@ class Kernel:
 		self.ipc		= MessageQueue()
 		self.log		= None
 		self.config		= None
+		self.options	= {}		# Startup settings passed by the application
 
 		self.clock		= Clock()
 		self.objects	= ObjectManager()
@@ -57,10 +59,15 @@ class Kernel:
 			configfile -- Name of the configuration file
 			configpath -- Path to the configuration directory
 		"""
+		self.options	= settings
 		self.scheduler	= self.create_thread_pool()
 		self.config	= Configuration(configfile, configpath, settings['image'])
 		self.log	= Logger( self.config )
 
+		inifile		= self.config.inifile
+		if self.config.bootimage is None:
+			inifile	= os.path.abspath(inifile)
+		self.log.info( "Kernel", f"Loading simulation from {inifile}")
 
 		# Generate SHA-256 and grab the first 4 bytes (32 bits)
 		scenario_key 	= self.config.env.get('SCENARIO', '')

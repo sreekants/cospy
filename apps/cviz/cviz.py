@@ -13,7 +13,7 @@ def get_app_info():
 		"executable": "cviz.py",
 		"name"		: "COS Simulation Visualizer",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?] dir"
+		"usage"		:[ 	"[-h][-?] [host hostname:port]"
 					],
 					
 		"help"		:[
@@ -46,7 +46,9 @@ def usage():
 		else:
 			indent	= '\t'
 		
-		print( "    -{}{}{}".format(help[0], indent, help[1][0]) )
+		# Single letter entries are options, the rest are commands
+		prefix	= '-' if len(help[0]) == 1 else ''
+		print( "    {}{}{}{}".format(prefix, help[0], indent, help[1][0]) )
 	
 	sys.exit(0)		    
 	return

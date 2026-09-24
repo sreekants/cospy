@@ -46,9 +46,10 @@ class World(CompositeService):
 		ctxt.sim.world	= self
 
 		# Setup the physics modules
+		background		= self.environ.get_background() or {}
 		self.collider	= CollisionDetector([
 							ctxt.sim.objects.get_all("/World/Land")
-							])
+							], background.get('bounds', None) )
 
 		CompositeService.on_start(self, ctxt, config)
 		return

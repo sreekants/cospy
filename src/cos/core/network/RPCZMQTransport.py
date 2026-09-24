@@ -56,7 +56,7 @@ class RPCZMQTransport(Transport):
 		Arguments
 			args -- List of arguments
 		"""
-		port	= args["port"]
+		port	= self.sim.options.get('port') or args["port"]
 		if port == None:
 			return RPCPORT
 

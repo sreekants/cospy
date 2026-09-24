@@ -61,6 +61,7 @@ class VirtualWorld:
 		self.scaled		= None		# (scale, surface) cache of the background at the current zoom
 
 		self.debug		= False
+		self.show_zones	= True		# Ctrl+Z hides zone shapes (TSS, fairways, harbours...)
 		return
 
 	def run(self):
@@ -260,6 +261,11 @@ class VirtualWorld:
 		# Get the set of keys pressed and check for user input
 		pressed_keys = pygame.key.get_pressed()
 		self.cos.update(self, pressed_keys)
+
+		# Continuous input (held keys)
+		for dev in self.iodevice:
+			if hasattr(dev, 'poll'):
+				dev.poll(pressed_keys)
 		return True
 
 	def play(self):
@@ -375,14 +381,18 @@ class VirtualWorld:
 		self.encoder.translate(+5.0, 0.0)
 		return
 
-	def zoom(self, direction):
+	def zoom(self, direction, step=1.2):
 		match direction:
 			case 1:
-				self.encoder.zoom(1.2)
+				self.encoder.zoom(step)
 
 			case -1:
-				self.encoder.zoom(1.0/1.2)
+				self.encoder.zoom(1.0/step)
 
+		return
+
+	def toggle_zones(self):
+		self.show_zones	= False if self.show_zones else True
 		return
 
 	def toggle_debug(self):

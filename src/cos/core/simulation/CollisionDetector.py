@@ -10,14 +10,26 @@ from cos.ui.game.Config import(
 )
 
 class ScreenArea:
-	def __init__(self, viewarea):
+	def __init__(self, viewarea, origin=(0, 0)):
 		""" Constructor
 		Arguments
-			viewarea -- Screen viewport
+			viewarea -- Size of the area (width, height)
+			origin -- Top left corner of the area
 		"""
+		self.left	= origin[0]
+		self.top	= origin[1]
 		self.width	= viewarea[0]
 		self.height	= viewarea[1]
 		return
+
+	@staticmethod
+	def from_bounds(bounds):
+		""" Creates an area from (left, top, right, bottom) bounds
+		Arguments
+			bounds -- Bounds of the area
+		"""
+		left, top, right, bottom	= bounds
+		return ScreenArea( (right-left, bottom-top), (left, top) )
 
 	def intersect(self, rect):
 		""" Checks of a rectangle intersects with the screen area
@@ -44,21 +56,26 @@ class ScreenArea:
 			x -- X coordinate
 			y -- Y coordinate
 		"""
-		if x <0 or x > self.width:
+		if x < self.left or x > self.left+self.width:
 			return False
 
-		if y <0 or y > self.height:
+		if y < self.top or y > self.top+self.height:
 			return False
 
 		return True
 
 class CollisionDetector:
-	def __init__(self, obstructions):
+	def __init__(self, obstructions, bounds=None):
 		""" Constructor
 		Arguments
 			obstructions -- Obstructions in the simulation
+			bounds -- (left, top, right, bottom) area vessels may move in. Defaults
+				to the screen size, which is what maps without map.bounds were drawn for
 		"""
-		self.screen			= ScreenArea((SCREEN_WIDTH, SCREEN_HEIGHT))
+		if bounds is None:
+			self.screen		= ScreenArea((SCREEN_WIDTH, SCREEN_HEIGHT))
+		else:
+			self.screen		= ScreenArea.from_bounds(bounds)
 		self.obstructions	= obstructions
 		return
 
@@ -67,7 +84,7 @@ class CollisionDetector:
 		Arguments
 			rect -- Bouding box of the body to evaluate
 		"""
-		# Ensure the sprite is on screen. (ie, we collide with the screen boundry)
+		# Ensure the sprite is within the map bounds (ie, we collide with the boundary)
 		if self.screen.intersect(rect) == False:
 			return True
 

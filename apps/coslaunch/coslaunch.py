@@ -9,13 +9,14 @@ from app import COSLaunch
 
 IMAGE=None
 CONFIG=None
+PORT=None
 
 def get_app_info():
 	return {
 		"executable": "coslaunch.py",
 		"name"		: "COS Simulation Operating system",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?][-i image][-c|-config path/to/cos.ini]"
+		"usage"		:[ 	"[-h][-?][-i image][-c|-config path/to/cos.ini][-p|-port port]"
 					],
 					
 		"help"		:[
@@ -24,6 +25,8 @@ def get_app_info():
 			    ["i"		, ["Set the image.", set_image]],
 			    ["c"		, ["Path to cos.ini (optional).", set_config]],
 			    ["config"	, ["Same as -c.", set_config]],
+			    ["p"		, ["RPC port (optional, IPC uses port+1).", set_port]],
+			    ["port"		, ["Same as -p.", set_port]],
 			    ["image"	, ["Code directory.", None]]
 				]		
 		}
@@ -80,16 +83,24 @@ def set_config(path):
 	CONFIG	= os.path.abspath(path)
 	return
 
+def set_port(port):
+	global PORT
+	if port.isdigit() == False or not (0 < int(port) < 65535):
+		print( f'[{port}] is not a valid port.')
+		sys.exit(-1)
+	PORT	= int(port)
+	return
+
 def normalize_argv(argv):
 	""" getopt does not support single-dash long options, so map
-	-config/-image/-help to their --long equivalents.
+	-config/-image/-port/-help to their --long equivalents.
 	"""
-	longopts	= ['config', 'image', 'help']
+	longopts	= ['config', 'image', 'port', 'help']
 	return [ '-' + a if a.split('=')[0][1:] in longopts else a for a in argv ]
 
 def main():
 	try:
-		opts, args = getopt.getopt(normalize_argv(sys.argv[1:]), "h?i:c:d", ["help", "image=", "config="])
+		opts, args = getopt.getopt(normalize_argv(sys.argv[1:]), "h?i:c:p:d", ["help", "image=", "config=", "port="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -101,6 +112,8 @@ def main():
 			set_image(arg)
 		elif opt in ("-c", "--config"):
 			set_config(arg)
+		elif opt in ("-p", "--port"):
+			set_port(arg)
 		elif opt == '-d':
 			global _debug               
 			_debug = 1                  
@@ -109,7 +122,8 @@ def main():
 	theApp = COSLaunch()
 	theApp.run( args, get_app_info(), {
 			'image' : IMAGE,
-			'config': CONFIG
+			'config': CONFIG,
+			'port'	: PORT
 			})
 	
 

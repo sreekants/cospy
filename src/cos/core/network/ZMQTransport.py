@@ -34,6 +34,13 @@ class ZMQTransport:
 		DEFAULT_HOST = f'tcp://{host}'
 		return
 
+	@staticmethod
+	def get_host():
+		""" Returns the (host, port) of the transport
+		"""
+		host, port	= DEFAULT_HOST[len('tcp://'):].rsplit(':', 1)
+		return host, int(port)
+
 	def is_open(self):
 		""" Checks if the transport is open
 		"""
