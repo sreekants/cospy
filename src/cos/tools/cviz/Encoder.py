@@ -43,12 +43,19 @@ class Encoder:
 		return
 
 	def transform_polygon(self, polygon):
-		points	= []
-		for pt in polygon:
-			pt = self.transform_point( pt )
-			points.append( (int(pt[0]), int(pt[1])) )
+		""" Transforms a polygon to screen coordinates in one array operation (a per-point loop
+		costs ~0.3 s per frame on a map with a few thousand shapes)
+		Arguments
+			polygon -- Sequence of (x, y) points, or an (n, 2) numpy array
+		"""
+		pts		= np.asarray( polygon, dtype=float )
+		if pts.ndim != 2 or len(pts) == 0:
+			return []
 
-		return points
+		m		= self.transform
+		xs		= pts[:, 0]*m[0][0] + pts[:, 1]*m[0][1] + m[0][2] + self.move[0]
+		ys		= pts[:, 0]*m[1][0] + pts[:, 1]*m[1][1] + m[1][2] + self.move[1]
+		return np.stack( (xs, ys), axis=1 ).astype(int).tolist()
 
 	def zoom(self, scale):
 		self.transform	= self.transform * scale

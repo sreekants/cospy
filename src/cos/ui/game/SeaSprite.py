@@ -3,6 +3,7 @@
 # Description: Sea shapes
 
 from cos.ui.game.PolygonSprite import PolygonSprite
+from cos.ui.game import Palette
 from shapely import Polygon, geometry
 import pygame
 
@@ -19,7 +20,15 @@ class SeaSprite(PolygonSprite):
 		# Maritime zones (2xxxxx) and traffic schemes (3xxxxx) describe regulation,
 		# not water: they can be hidden without losing the map (SeaBuilder codes)
 		code		= int( config.get("type", 0) or 0 )
+		self.code	= code
 		self.zone	= ZONE_CODES[0] <= code < ZONE_CODES[1]
+
+		# Standard blue theme (Palette): physical water is shaded by depth, zones are styled by
+		# type. The colour stored with the shape is kept only for types the palette does not know.
+		self.physical	= Palette.is_physical( code )
+		self.style		= Palette.zone_style( code ) if self.zone else None
+		if self.physical:
+			self.color	= Palette.depth_colour( self.depth )
 		return
 
 	def render(self, ctxt, screen):
@@ -31,7 +40,23 @@ class SeaSprite(PolygonSprite):
 		if self.zone and (getattr(ctxt, 'show_zones', True) == False):
 			return
 
-		PolygonSprite.render(self, ctxt, screen)
+		overlay	= getattr( ctxt, 'zone_overlay', None )
+		if (self.style is None) or (overlay is None):
+			PolygonSprite.render(self, ctxt, screen)		# Physical water, or an unknown type
+			return
+
+		if (self.visible == False) or (ctxt.layer != self.layer):
+			return
+
+		# Zones go onto one translucent overlay that the world blits once, below the vessels
+		points			= ctxt.encoder.transform_polygon( self.array )
+		fill, outline	= self.style
+		if len(points) < 3:
+			return
+		if fill is not None:
+			pygame.draw.polygon( overlay, fill, points )
+		if outline is not None:
+			pygame.draw.polygon( overlay, outline, points, 1 )
 		return
 
 	def commit(self, ctxt, screen):

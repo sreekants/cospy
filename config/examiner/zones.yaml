@@ -1,0 +1,114 @@
+# Zone-local rules for the concern examiners.
+#
+# Resolution order, most specific winning:
+#   1. the 'settings' of the map shape the vessel is inside
+#   2. zones.named.<shape name>
+#   3. zones.types.<Sea.Type name>
+#   4. zones.default
+#
+# Units: speed in knots, distances and depths in metres, currency in NOK.
+# Type names must match cos.model.geography.Sea.Type members exactly.
+
+zones:
+  default:
+    speed_limit: null            # null = unrestricted
+    overtaking: true             # may one vessel overtake another here
+    restricted_cargo: []         # cargo classes barred from the zone
+
+    # Under-keel margin. A vessel is judged to have berthed or grounded when
+    # the seabed leaves less than this clearance beneath its draught.
+    berthing_margin: 1.0
+    grounding_margin: 2.0
+
+    # Which zone types each examiner is answerable for. Berthing is an inland
+    # concern, grounding a seagoing one; keeping the split here rather than in
+    # code lets a jurisdiction move the boundary.
+    berthing_zones:
+      - INTERNAL_WATERS
+      - HARBOUR
+      - WATERWAY
+    grounding_zones:
+      - TERRITORIAL_SEA
+      - CONTIGUOUS_ZONE
+      - EXCLUSIVE_ECONOMIC_ZONE
+      - STRAIT
+      - ARCHIPELAGIC_WATERS
+
+    # Night is taken from the simulation clock, local hours.
+    night_from: 20
+    night_to: 6
+    required_lights:
+      - masthead
+      - sidelights
+      - sternlight
+
+  types:
+    HARBOUR:
+      speed_limit: 5.0
+      overtaking: false
+      restricted_cargo: [explosive, radioactive]
+      berthing_margin: 0.5
+
+    STRAIT:
+      speed_limit: 10.0          # Istanbul Strait standard speed
+      overtaking: false
+      restricted_cargo: []
+
+    TRAFFIC_LANE:
+      overtaking: true
+
+    INSHORE_TRAFFIC_ZONE:
+      speed_limit: 8.0
+      overtaking: false
+
+    AREA_TO_AVOID:
+      restricted_cargo: [explosive, radioactive, oil, chemical]
+
+    INTERNAL_WATERS:
+      speed_limit: 6.0
+      restricted_cargo: [radioactive]
+
+  named:
+    # A named reach overrides its type. Overtaking between Vanikoy and Kanlica
+    # is barred outright by Turkish regulation regardless of lane markings.
+    IstanbulStrait.Vanikoy.Kanlica:
+      overtaking: false
+      speed_limit: 10.0
+
+# Penalty scores, in the same currency as the Legata scorecards so that a
+# violation here stacks against a rule violation there. Tune these to change
+# how the concerns trade off; nothing in the examiners hard-codes a score.
+penalties:
+  cargo.restricted: 42.0
+  cargo.undeclared: 12.0
+  berthing.contact: 60.0
+  berthing.margin: 18.0
+  grounding.contact: 95.0
+  grounding.margin: 30.0
+  lane.overtaking_prohibited: 35.0
+  speed.limit_exceeded: 20.0
+  speed.limit_exceeded_overtaking: 40.0
+  signal.not_posted: 15.0
+  night.lights_missing: 25.0
+  weather.capsize_risk: 55.0
+
+# Collision cost model. The examiner values a collision as the summed value of
+# the two vessels multiplied by a rate, so a scenario can express "a collision
+# costs a fraction of the hulls involved" without a per-pair table.
+collision:
+  penalty_rate: 0.35             # fraction of combined vessel value
+  default_vessel_value: 2000000  # NOK, used when a vessel declares no value
+  report_topic: /Faculty/Concern/Collision
+
+# Where the signal examiner posts its (intent, situation) tuples. COLREG rule
+# 34 governs manoeuvring and warning signals, so that rule set listens here.
+signal:
+  topic: /Faculty/Regulation/Rules
+  message: vessel.signal
+
+# Capsize assessment, ExtremeWeatherExaminer.
+weather:
+  network: $(CONFIG)/risk/capsize.model.xdsl
+  bindings: $(CONFIG)/risk/capsize.model.yaml
+  alarm_threshold: 0.25          # P(capsize) above which a penalty is scored
+  report_topic: /Faculty/Concern/Weather

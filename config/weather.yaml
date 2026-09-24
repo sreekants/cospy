@@ -4,18 +4,18 @@ packages:
      - name: Builder.SeaCurrent
        module: cos.model.environment.WeatherBuilder
        service: Builder.SeaCurrent
-       args: Type=SEA_CURRENT Distance=Euclidean Enabled=1 Sample.Rate=1
+       args: Type=SEA_CURRENT Distance=Manhattan Enabled=1 Sample.Rate=1
        database: $(CONFIG)/weather/$(COUNTRY)/$(LOCATION)/$(WEATHER)/environment.s3db
 
      - name: Builder.WindCurrent
        module: cos.model.environment.WeatherBuilder
        service: Builder.WindCurrent
-       args: Type=WIND_CURRENT Distance=Euclidean Enabled=1 Sample.Rate=1
+       args: Type=WIND_CURRENT Distance=Manhattan Enabled=1 Sample.Rate=1
        database: $(CONFIG)/weather/$(COUNTRY)/$(LOCATION)/$(WEATHER)/environment.s3db
 
      - name: Builder.SeaWave
        module: cos.model.environment.WeatherBuilder
        service: Builder.SeaWave
-       args: Type=SEA_WAVE Distance=Euclidean Enabled=1 Sample.Rate=1
+       args: Type=SEA_WAVE Distance=Manhattan Enabled=1 Sample.Rate=1
        database: $(CONFIG)/weather/$(COUNTRY)/$(LOCATION)/$(WEATHER)/environment.s3db
 

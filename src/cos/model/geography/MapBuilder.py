@@ -9,6 +9,7 @@ from cos.core.utilities.ActiveRecord import ActiveRecord
 from cos.core.utilities.ArgList import ArgList
 
 from pathlib import Path
+from cos.model.environment.Scales import Scales
 
 class MapBuilder(Service):
 	def __init__(self):
@@ -79,7 +80,11 @@ class MapBuilder(Service):
 		
 		background['format']	= None
 		background['size']		= None
-		background['scale']		= (scale[0], scale[1])
+		# The simulation runs in metres (World loads map.unit.metres before any builder runs).
+		# The background image, extent and bounds are authored in map units, so convert them.
+		metres					= Scales.of( ctxt ).map
+
+		background['scale']		= (scale[0]*metres[0], scale[1]*metres[1])
 		background['file']		= filepath
 
 		# Declared map size in map units, so a viewer can fit the map to its screen.
@@ -88,10 +93,11 @@ class MapBuilder(Service):
 		for r in db.get_all(f'type=\'geo.reference\''):
 			if r[1] == 'map.extent':
 				w, h				= ( float(v) for v in str(r[3]).split(',') )
-				background['extent']	= (w, h)
+				background['extent']	= (w*metres[0], h*metres[1])
 
 			if r[1] == 'map.bounds':
-				background['bounds']	= tuple( float(v) for v in str(r[3]).split(',') )
+				l, t, r_, b				= ( float(v) for v in str(r[3]).split(',') )
+				background['bounds']	= (l*metres[0], t*metres[1], r_*metres[0], b*metres[1])
 
 		if filepath:
 			background['data']		= ctxt.sim.fs.read_file_as_bytes(file)

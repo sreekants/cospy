@@ -1,0 +1,207 @@
+# Weather profiles, based on the Beaufort and Douglas scales.
+#
+# Read by the weather generator and validator in tools/mapping/WEATHERGEN.md,
+# which write and check config/weather/<cc>/<loc>/<type>/environment.s3db.
+#
+# Accepted profiles
+#
+#              Wind   Waves Hs  Current  Visib.   Rain     Capsize
+#   Type       m/s    m         m/s      nm       mm/h     band
+#   lightrain  3–8    0.5–1.2   0.1–0.5  2–5      0.5–2.5  calm
+#   heavyrain  8–14   1.3–2.4   0.2–0.7  0.5–1.5  8–25     moderate
+#   wind       14–20  2.5–4     0.3–1.0  5+       0        severe
+#   highsea    17–24  4–6       0.3–1.0  2–5      0–2      severe
+#   hurricane  ≥ 33   9–14      1.0–2.5  < 0.5    > 50     severe
+#
+# Units are physical: wind and current in m/s, waves as significant wave
+# height Hs in metres, visibility in nautical miles, precipitation in mm/h
+# (water equivalent for snow), relative humidity in %, temperature in °C.
+# Each range is [low, high], and the generator draws uniformly within it.
+# Open-ended entries are bounded for generation: wind ≥ 33 -> [33, 45],
+# visibility 5+ -> [5, 10], visibility < 0.5 -> [0.1, 0.5],
+# rain > 50 -> [50, 100].
+#
+# band is the capsize wave_height band that every wave sample must fall in
+# (edges in config/risk/capsize.model.yaml:
+# calm < 1.25 <= moderate < 2.5 <= severe).
+#
+# Weather Condition Ranges: the atmosphere of each condition. Temperature
+# depends on the site's climate zone (see climates:).
+#
+#              Precip.  Visib.    Rel.    Air temperature, °C
+#   Condition  mm/h     nm        hum. %  nordic  straits  tropical  atlantic
+#   clearsky   0        10–20     50–75   −10–25  0–32     24–40     8–24
+#   cloudy     0        5–10      65–85   −5–20   2–28     25–34     8–22
+#   foggy      0–0.2    0.03–0.5  95–100  −2–15   4–18     18–26     8–18
+#   lightrain  0.5–2.5  2–5       85–95   0–18    5–22     24–32     8–20
+#   heavyrain  8–25     0.5–1.5   92–100  2–20    8–25     24–30     10–22
+#   snow       0.5–5    0.2–2     85–100  −10–1   −4–2     n/a       −4–2
+#   wind       0        5–10      60–80   −8–15   0–20     26–42     5–18
+#   highsea    0–2      2–5       75–90   −5–15   2–18     24–34     6–18
+#   hurricane  50–100   0.1–0.5   95–100  −5–10   10–20    26–32     22–29
+#
+# Visibility terms (shipping forecast): good > 5 nm, moderate 2–5 nm,
+# poor 1000 m to 2 nm, very poor < 1000 m. Snow precipitation is water
+# equivalent (1 mm/h is about 1 cm/h of snow). n/a: not viable in that
+# climate, so the weather table is left empty. Absolute humidity (g/m3) is
+# not set here: the generator calculates it from temperature and relative
+# humidity.
+#
+# Status of the values:
+#   accepted  - everything in the Accepted profiles table
+#   proposed  - everything else: humidity for every type, all values of
+#               clearsky, cloudy, foggy and snow, and the temperatures
+
+profiles:
+  clearsky:                     # proposed
+    wind:          [1, 5]       # Beaufort 1-3
+    waves:         [0.1, 0.5]
+    current:       [0.05, 0.3]
+    visibility:    [10, 20]
+    precipitation: [0, 0]
+    humidity:      [50, 75]
+    band:          calm
+
+  cloudy:                       # proposed
+    wind:          [2, 7]       # Beaufort 2-4
+    waves:         [0.3, 0.9]
+    current:       [0.1, 0.4]
+    visibility:    [5, 10]
+    precipitation: [0, 0]
+    humidity:      [65, 85]
+    band:          calm
+
+  foggy:                        # proposed
+    wind:          [0.5, 4]     # Beaufort 0-3: fog needs light wind
+    waves:         [0.1, 0.4]
+    current:       [0.05, 0.3]
+    visibility:    [0.03, 0.5]  # fog is under 1 km (0.54 nm)
+    precipitation: [0, 0.2]
+    humidity:      [95, 100]
+    band:          calm
+    regions:       {cover: 0.5, between: cloudy}
+
+  lightrain:
+    wind:          [3, 8]       # Beaufort 3-4
+    waves:         [0.5, 1.2]
+    current:       [0.1, 0.5]
+    visibility:    [2, 5]
+    precipitation: [0.5, 2.5]
+    humidity:      [85, 95]     # proposed
+    band:          calm
+    regions:       {cover: 0.6, between: cloudy}
+
+  heavyrain:
+    wind:          [8, 14]      # Beaufort 5-6
+    waves:         [1.3, 2.4]
+    current:       [0.2, 0.7]
+    visibility:    [0.5, 1.5]
+    precipitation: [8, 25]
+    humidity:      [92, 100]    # proposed
+    band:          moderate
+    regions:       {cover: 0.5, between: lightrain}
+
+  snow:                         # proposed
+    wind:          [5, 12]      # Beaufort 3-6
+    waves:         [0.5, 1.2]
+    current:       [0.1, 0.5]
+    visibility:    [0.2, 2]
+    precipitation: [0.5, 5]     # water equivalent
+    humidity:      [85, 100]
+    band:          calm
+    regions:       {cover: 0.6, between: cloudy}
+
+  wind:
+    wind:          [14, 20]     # Beaufort 7-8
+    waves:         [2.5, 4.0]
+    current:       [0.3, 1.0]
+    visibility:    [5, 10]
+    precipitation: [0, 0]
+    humidity:      [60, 80]     # proposed
+    band:          severe
+
+  highsea:
+    wind:          [17, 24]     # Beaufort 8-9
+    waves:         [4.0, 6.0]
+    current:       [0.3, 1.0]
+    visibility:    [2, 5]
+    precipitation: [0, 2]
+    humidity:      [75, 90]     # proposed
+    band:          severe
+    swell:         30           # degrees between the waves and the wind
+
+  hurricane:
+    wind:          [33, 45]     # Beaufort 12
+    waves:         [9.0, 14.0]
+    current:       [1.0, 2.5]
+    visibility:    [0.1, 0.5]
+    precipitation: [50, 100]
+    humidity:      [95, 100]    # proposed
+    band:          severe
+
+# Climate zones (proposed). A site's zone sets the temperature of its weather
+# regions, one value per weather set. null means the condition is not viable
+# in that climate: the weather table is left empty.
+climates:
+  nordic:                       # Nordic and Baltic
+    sites: [no/alesund, no/bergen, no/oslo, no/tautra, no/trondheim,
+            fi/helsinki, po/gdansk]
+    temperature:
+      clearsky: [-10, 25]
+      cloudy:   [-5, 20]
+      foggy:    [-2, 15]
+      lightrain: [0, 18]
+      heavyrain: [2, 20]
+      snow:     [-10, 1]
+      wind:     [-8, 15]
+      highsea:  [-5, 15]
+      hurricane: [-5, 10]       # hurricane-force winter storms
+
+  straits:                      # Turkish Straits and Marmara
+    sites: [tk/istanbul, tk/kandilli, tk/kavak, tk/kavak-kandilli,
+            tk/turkeli]
+    temperature:
+      clearsky: [0, 32]
+      cloudy:   [2, 28]
+      foggy:    [4, 18]
+      lightrain: [5, 22]
+      heavyrain: [8, 25]
+      snow:     [-4, 2]
+      wind:     [0, 20]         # poyraz and lodos gales
+      highsea:  [2, 18]
+      hurricane: [10, 20]       # rare Mediterranean-type storms
+
+  tropical:                     # Tropical and Gulf
+    sites: [om/hormuz, sg/singapore]
+    temperature:
+      clearsky: [24, 40]
+      cloudy:   [25, 34]
+      foggy:    [18, 26]        # Gulf winter fog; none at Singapore
+      lightrain: [24, 32]
+      heavyrain: [24, 30]
+      snow:     null            # not viable
+      wind:     [26, 42]        # shamal
+      highsea:  [24, 34]
+      hurricane: [26, 32]       # Arabian Sea cyclones
+
+  atlantic:                     # Open Atlantic, mid-latitude
+    sites: [global/atlantic]
+    temperature:
+      clearsky: [8, 24]
+      cloudy:   [8, 22]
+      foggy:    [8, 18]
+      lightrain: [8, 20]
+      heavyrain: [10, 22]
+      snow:     [-4, 2]         # only north of about 50° N
+      wind:     [5, 18]
+      highsea:  [6, 18]
+      hurricane: [22, 29]       # tropical track
+
+# How the fields and regions are laid out (WEATHERGEN.md §5, §6). Shared by
+# every profile.
+generator:
+  jitter:  15      # degrees a sample's direction varies from the prevailing one
+  current: 20      # degrees the current sets to the right of the wind
+  grid:    [8, 6]  # samples across x and y before land is removed
+  keep:    0.9     # force kept at the farthest point from a sample (decay)
+  cells:   6       # weather regions: polygons the vessel range is split into

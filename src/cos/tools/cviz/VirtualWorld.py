@@ -62,6 +62,8 @@ class VirtualWorld:
 
 		self.debug		= False
 		self.show_zones	= True		# Ctrl+Z hides zone shapes (TSS, fairways, harbours...)
+		self.zone_overlay	= None		# Translucent layer the zone shapes draw onto (Palette)
+		self.relief_order	= None		# Draw order of self.reliefs, rebuilt when it changes
 		return
 
 	def run(self):
@@ -181,6 +183,11 @@ class VirtualWorld:
 		# Fill the screen with sky blue
 		self.screen.fill(SEA_COLOR)
 
+		# Zones draw onto one translucent overlay, blitted once below the vessels
+		if (self.zone_overlay is None) or (self.zone_overlay.get_size() != self.screen.get_size()):
+			self.zone_overlay	= pygame.Surface( self.screen.get_size(), pygame.SRCALPHA )
+		self.zone_overlay.fill( (0, 0, 0, 0) )
+
 		groups	= self.groups.values()
 		# Prepare all the sprites (pre-rendering)
 		for group in groups:
@@ -192,8 +199,11 @@ class VirtualWorld:
 			self.layer	= layer
 
 			# Draw all our sprites
-			for entity in self.reliefs:			# Background
+			for entity in self.draw_order():	# Background: water deepest first, then sky
 				entity.render(self, self.screen)
+
+			if layer == 0:						# Zones, over the water and under the vessels
+				self.screen.blit( self.zone_overlay, (0, 0) )
 
 			for group in self.forces.values():	# Physical forces
 				for entity in group:
@@ -227,6 +237,20 @@ class VirtualWorld:
 
 		self.render_info()
 		return
+
+	def draw_order(self):
+		""" Physical water from deepest to shallowest, so shallow bands stay visible, then the
+		rest (zones draw onto the overlay, so their order does not matter), then sky
+		"""
+		if (self.relief_order is None) or (len(self.relief_order) != len(self.reliefs)):
+			def key(entity):
+				if getattr(entity, 'physical', False):
+					return (0, -float(entity.depth or 0.0))
+				if getattr(entity, 'zone', False):
+					return (1, 0.0)
+				return (2, float(getattr(entity, 'depth', 0.0) or 0.0))
+			self.relief_order	= sorted( self.reliefs, key=key )
+		return self.relief_order
 
 	def get_background(self):
 		""" Returns the background scaled to the current zoom, rescaling only when the zoom changes

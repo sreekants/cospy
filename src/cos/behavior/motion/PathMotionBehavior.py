@@ -7,6 +7,7 @@ from cos.core.kernel.Configuration import Configuration
 import numpy as np
 import csv
 from io import StringIO
+from cos.model.environment.Scales import Scales
 
 class PathMotionBehavior(MotionBehavior):
 	def __init__(self, ctxt, config):
@@ -47,6 +48,9 @@ class PathMotionBehavior(MotionBehavior):
 		"""
 		data = ctxt.sim.fs.read_file(filename)
 
+		# Velocity schedules are authored in map units; the simulation runs in metres
+		scales	= Scales.of( ctxt )
+
 		path 	= csv.reader(StringIO(data), delimiter=',')
 		rownum	= 0
 		for waypoint in path:
@@ -60,18 +64,15 @@ class PathMotionBehavior(MotionBehavior):
 			t		= float(waypoint[1])
 
 			# Location
-			x		= float(waypoint[2])
-			y		= float(waypoint[3])
+			x, y	= scales.transpose( (float(waypoint[2]), float(waypoint[3])) )
 			z		= float(waypoint[4])
 
 			# Velocity
-			dx		= float(waypoint[5])
-			dy		= float(waypoint[6])
+			dx, dy	= scales.transpose( (float(waypoint[5]), float(waypoint[6])) )
 			dz		= float(waypoint[7])
 
 			# Accelearation
-			d2x		= float(waypoint[8])
-			d2y		= float(waypoint[9])
+			d2x, d2y	= scales.transpose( (float(waypoint[8]), float(waypoint[9])) )
 			d2z		= float(waypoint[10])
 
 

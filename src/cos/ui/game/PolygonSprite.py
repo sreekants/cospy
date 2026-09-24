@@ -4,6 +4,7 @@
 
 from cos.ui.game.Config import *
 from shapely import Polygon, geometry
+import numpy as np
 import pygame
 
 class PolygonSprite:
@@ -30,6 +31,7 @@ class PolygonSprite:
 	
 		self.color	= self.getcolor(config, opacity)
 		self.points	= self.getpolygon(config)
+		self.array	= np.asarray( self.points, dtype=float )	# Cached for the per-frame transform
 		self.area	= Polygon(self.points)
 		self.layer	= 0
 		return
@@ -46,7 +48,7 @@ class PolygonSprite:
 		if ctxt.layer != self.layer:
 			return
 
-		pygame.draw.polygon( screen, self.color, ctxt.encoder.transform_polygon(self.points) )
+		pygame.draw.polygon( screen, self.color, ctxt.encoder.transform_polygon(self.array) )
 		return
 
 	def update(self):

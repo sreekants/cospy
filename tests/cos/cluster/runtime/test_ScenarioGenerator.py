@@ -71,6 +71,31 @@ class ScenarioGeneratorTestCase(unittest.TestCase):
 		self.assertIn( 'map/tk/alesund', str(err.exception) )
 		return
 
+	def test_validate_missing_weather(self):
+		# The location exists, but not the weather type
+		cases	= [ (0, [(("COUNTRY","LOCATION"),("no","alesund")), ("WEATHER","nosuchweather")]) ]
+		with self.assertRaises( ValueError ) as err:
+			self.test.validate( cases )
+		self.assertIn( 'WEATHER=', str(err.exception) )
+		self.assertIn( 'weather/no/alesund/nosuchweather/environment.s3db', str(err.exception) )
+		self.assertNotIn( 'SIMULATION=', str(err.exception) )
+		self.assertNotIn( 'MAP=', str(err.exception) )
+		return
+
+	def test_validate_existing_weather(self):
+		cases	= [ (0, [(("COUNTRY","LOCATION"),("no","alesund")), ("WEATHER","hurricane")]) ]
+		self.test.validate( cases )
+		return
+
+	def test_weather_databases(self):
+		case	= (0, [(("COUNTRY","LOCATION"),("no","alesund")), ("WEATHER","foggy")])
+		with open( os.path.join(self.test.src, 'cos.ini'), 'rt' ) as f:
+			text	= self.test.declarations(case).replace_text( f.read() )
+		paths	= ScenarioGenerator.weather_databases( text, ScenarioGenerator.settings(text) )
+		self.assertEqual( len(paths), 1 )		# three fields, one database
+		self.assertTrue( paths[0].endswith(os.path.join('weather','no','alesund','foggy','environment.s3db')) )
+		return
+
 	def test_select_country(self):
 		cases	= self.test.permutation( [], list(self.test.scenarios.keys()), [] )
 		tk		= self.test.select( cases, 'tk' )

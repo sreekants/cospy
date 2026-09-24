@@ -14,8 +14,16 @@ from cos.model.environment.WeatherSystemGenerator import WeatherSystemGenerator
 
 import numpy as np
 import math, random
+from cos.model.environment.Scales import Scales
 
 EPSILON = 0.0001
+
+# Distance metrics selectable with the Distance= argument of a weather system
+DISTANCE_METRICS = {
+	'euclidean':	Distance.euclidean,
+	'manhattan':	Distance.manhattan,
+}
+DEFAULT_DISTANCE = 'manhattan'
 
 
 class WeatherSystem(Object):
@@ -32,6 +40,7 @@ class WeatherSystem(Object):
 		self.dirty	= False
 		self.build	= False
 		self.system	= system
+		self.distance	= DISTANCE_METRICS[DEFAULT_DISTANCE]
 		return
 
 	# Simulation functions
@@ -101,6 +110,13 @@ class WeatherSystem(Object):
 		# Parse configurations
 		self.poll_at		= args["Sample.Rate"]
 
+		# Select the distance metric used to find the nearest force vector
+		metric	= (args["Distance"] or DEFAULT_DISTANCE).lower()
+		if metric not in DISTANCE_METRICS:
+			raise ValueError( f'Unknown Distance [{args["Distance"]}] for [{self.__class__.__name__}]. '
+					f'Expected one of: {", ".join(k.capitalize() for k in DISTANCE_METRICS)}.' )
+		self.distance	= DISTANCE_METRICS[metric]
+
 		# Initialize timer ticks
 		if self.poll_at is not None:
 			self.timer	= Ticker( int(self.poll_at) )
@@ -134,8 +150,10 @@ class WeatherSystem(Object):
 		scale	= ctxt.sim.world.scales.weather[self.system]
 
 		for rec in records:
-			pos	= self.scale_vector([float(x) for x in rec[1].split(',')][:3], scale)	# Position vectors
-			Vx	= self.scale_vector([float(x) for x in rec[2].split(',')][:9], scale)	# Velocity vectors
+			# Positions and velocities are authored in map units; the simulation runs in metres
+			metres	= Scales.of( ctxt ).map
+			pos	= self.scale_vector(self.scale_vector([float(x) for x in rec[1].split(',')][:3], scale), metres)	# Position vectors
+			Vx	= self.scale_vector(self.scale_vector([float(x) for x in rec[2].split(',')][:9], scale), metres)	# Velocity vectors
 			Vr	= [float(x) for x in rec[3].split(',')][:9]								# Rotational vectors (DO NOT SCALE!)
 
 			args		= ArgList( rec[4] )
@@ -185,7 +203,7 @@ class WeatherSystem(Object):
 
 		# A minimalist exponential decay function
 		Vx		= (decay(Vx,dist))
-		Vx[Vx < EPSILON] = 0.0
+		Vx[np.abs(Vx) < EPSILON] = 0.0		# Drop negligible components, keep direction
 		return Vx
 
 	def nearest(self, x:float, y:float, z=None):
@@ -200,7 +218,7 @@ class WeatherSystem(Object):
 
 		for sample in self.data:
 			pos		= sample[0]
-			dist	= Distance.euclidean( (x,y), sample[0] )
+			dist	= self.distance( (x,y), sample[0] )
 
 			if matchdist == None:
 				matches.append( (sample,dist) )
@@ -209,6 +227,7 @@ class WeatherSystem(Object):
 
 			if dist < matchdist:
 				matches[0]	= (sample,dist)
+				matchdist	= dist
 
 		if len(matches) == 0:
 			return (None, None, None, None)

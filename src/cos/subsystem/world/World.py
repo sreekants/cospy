@@ -7,6 +7,7 @@ from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
 from cos.core.simulation.Simulation import Simulation
 from cos.core.simulation.CollisionDetector import CollisionDetector
+from cos.ui.game.Config import SCREEN_WIDTH, SCREEN_HEIGHT
 from cos.model.environment.Environment import Environment
 from cos.model.environment.Weather import Weather
 from cos.model.environment.Actors import Actors
@@ -37,6 +38,18 @@ class World(CompositeService):
 		"""
 		return self.environ.sim
 
+	def on_init(self, ctxt:Context, module):
+		""" Callback for simulation initialization. Loads the map scale before any faculty
+		loads map data, so that every builder converts map units to metres as it loads
+		Arguments
+			ctxt -- Simulation context
+			module -- Module information
+		"""
+		CompositeService.on_init(self, ctxt, module)
+		self.scales.load( ctxt )
+		ctxt.sim.log.info( 'World', f'Map scale: {self.scales.map[0]:g} x {self.scales.map[1]:g} metres per map unit' )
+		return
+
 	def on_start(self, ctxt:Context, config):
 		""" Callback for simulation startup
 		Arguments
@@ -46,10 +59,15 @@ class World(CompositeService):
 		ctxt.sim.world	= self
 
 		# Setup the physics modules
+		# Vessel range in metres: map.bounds, or the screen-sized default area scaled to metres
 		background		= self.environ.get_background() or {}
+		bounds			= background.get('bounds', None)
+		if bounds is None:
+			bounds		= (0.0, 0.0) + self.scales.transpose( (SCREEN_WIDTH, SCREEN_HEIGHT) )
+
 		self.collider	= CollisionDetector([
 							ctxt.sim.objects.get_all("/World/Land")
-							], background.get('bounds', None) )
+							], bounds )
 
 		CompositeService.on_start(self, ctxt, config)
 		return

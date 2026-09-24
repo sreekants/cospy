@@ -5,6 +5,7 @@
 from cos.behavior.motion.LinearMotionBehavior import LinearMotionBehavior
 from cos.math.geometry.Rectangle import Rectangle
 import random, math
+from cos.model.environment.Scales import Scales
 
 
 class BrownianMotionBehavior(LinearMotionBehavior):
@@ -19,10 +20,11 @@ class BrownianMotionBehavior(LinearMotionBehavior):
 
 		args		= self.get_settings( config )
 
-		self.set_zone( args['zone'] )
+		scales		= Scales.of( ctxt )
+		self.set_zone( args['zone'], scales )
 		return
 
-	def set_zone(self, zone):
+	def set_zone(self, zone, scales=None):
 		self.zone	= None
 		if zone is None:
 			self.zone	= None
@@ -33,6 +35,10 @@ class BrownianMotionBehavior(LinearMotionBehavior):
 		y		= int(parts[1])
 		width	= int(parts[2])
 		height	= int(parts[3])
+
+		# zone= is authored in map units; the simulation runs in metres
+		if scales is not None:
+			x, y, width, height	= scales.rect( x, y, width, height )
 
 		self.zone	= Rectangle(x, y, width, height)
 		return

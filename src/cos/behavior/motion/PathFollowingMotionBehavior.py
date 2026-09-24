@@ -10,6 +10,7 @@ from math import cos,sin,atan2
 from enum import Enum
 import numpy as np
 import csv
+from cos.model.environment.Scales import Scales
 
 class OperationState(Enum):
 	UNKNOWN			= -1
@@ -64,6 +65,9 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		"""
 		data = ctxt.sim.fs.read_file(filename)
 
+		# Trip files are authored in map units; the simulation runs in metres
+		scales	= Scales.of( ctxt )
+
 		path 	= csv.reader(StringIO(data), delimiter=',')
 		rownum	= 0
 		for waypoint in path:
@@ -77,12 +81,11 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			t		= float(waypoint[1])
 
 			# Location
-			x		= float(waypoint[2])
-			y		= float(waypoint[3])
+			x, y	= scales.transpose( (float(waypoint[2]), float(waypoint[3])) )
 			z		= float(waypoint[4])
 
 			# Trajectory
-			sog		= float(waypoint[5])	# Path over ground
+			sog		= scales.length( float(waypoint[5]) )	# Speed over ground
 			cog		= float(waypoint[6])	# Course over ground
 			action	= waypoint[7]			# An action to simulate at waypoint
 

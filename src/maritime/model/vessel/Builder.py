@@ -9,6 +9,7 @@ from cos.core.kernel.BootLoader import BootLoader
 from cos.core.utilities.ArgList import ArgList
 
 import json, datetime
+from cos.model.environment.Scales import Scales
 
 class Builder(BuilderBaseClass):
 	def __init__(self, args:dict):
@@ -41,8 +42,13 @@ class Builder(BuilderBaseClass):
 		X		= rec[8].strip()
 		R		= rec[9].strip()
 
+		# vessel.s3db is authored in map units; the simulation runs in metres
+		scales	= Scales.of( ctxt )
+
 		if len(X)>0:
 			X	= [float(x) for x in X.split(',')]
+			X[0:3]	= scales.point( X[0:3] )		# Velocity
+			X[3:6]	= scales.point( X[3:6] )		# Acceleration
 
 		if len(R)>0:
 			R	= [float(x) for x in R.split(',')]
@@ -59,7 +65,7 @@ class Builder(BuilderBaseClass):
 						"length": [float(x) for x in rec[6].split(',')],
 						"weight": rec[10],
 						"pose":{
-							"position": [float(x) for x in rec[7].split(',')],
+							"position": scales.point( [float(x) for x in rec[7].split(',')] ),
 							"X": X,
 							"R": R
 						},

@@ -61,8 +61,9 @@ class FishingVessel(PlannedVesselBehavior):
                         args        = args[1].split('|')
                         
                         nways       = int(args[0])
-                        dist        = float(args[1])
-                        sog         = float(args[2])
+                        # Trip actions are authored in map units; the simulation runs in metres
+                        dist        = world.scales.length( float(args[1]) )
+                        sog         = world.scales.length( float(args[2]) )
 
                         PlannedVesselBehavior.random_walk( path, dist, self.position, nways, sog )
                         self.plan( path )

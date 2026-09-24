@@ -4,7 +4,7 @@
 
 from cos.cluster.runtime.TemplateReplicator import TemplateReplicator, Declarations
 
-import sys, uuid, os, random, re, configparser
+import sys, uuid, os, random, re, configparser, yaml
 
 class ScenarioGenerator:
 	def __init__(self, templatedir, command, scenarios):
@@ -134,7 +134,8 @@ class ScenarioGenerator:
 		return selected
 
 	def validate(self, cases, keys=('SIMULATION','MAP')):
-		""" Checks that the data directories of every test case exist
+		""" Checks that the data of every test case exists: the data directories, and
+		the weather databases the case's weather.yaml will load
 		Arguments
 			cases -- List of test cases to validate
 			keys -- EnvironmentVariables in cos.ini that must name existing directories
@@ -144,17 +145,69 @@ class ScenarioGenerator:
 			text	= f.read()
 
 		missing	= {}
+		modules	= {}		# weather.yaml path -> its modules, parsed once
 		for case in cases:
-			settings	= ScenarioGenerator.settings( self.declarations(case).replace_text(text) )
+			inifile		= self.declarations(case).replace_text(text)
+			settings	= ScenarioGenerator.settings( inifile )
 			for key in keys:
 				path	= settings.get( key )
 				if (path is None) or (os.path.isdir(path) == False):
 					missing.setdefault( f'{key}={path}', [] ).append( case[1] )
 
+			for path in ScenarioGenerator.weather_databases( inifile, settings, modules ):
+				if os.path.isfile(path) == False:
+					missing.setdefault( f'WEATHER={path}', [] ).append( case[1] )
+
 		if missing:
 			lines	= [ f'  {k} ({len(v)} cases, e.g. {v[0]})' for k, v in missing.items() ]
-			raise ValueError( 'ScenarioGenerator: data directories do not exist:\n' + '\n'.join(lines) )
+			raise ValueError( 'ScenarioGenerator: scenario data does not exist:\n' + '\n'.join(lines) )
 		return
+
+	@staticmethod
+	def weather_databases(text, settings, cache=None):
+		""" Lists the weather databases a generated cos.ini will load
+		Arguments
+			text -- Contents of a generated cos.ini
+			settings -- Its resolved variables, from settings()
+			cache -- Optional mapping of weather.yaml path -> modules, to parse each file once
+		Returns
+			Resolved database paths of the enabled modules in [Environment] Weather, or the
+			weather.yaml path itself if that file does not exist
+		"""
+		parser	= configparser.ConfigParser( inline_comment_prefixes=(';',) )
+		parser.read_string( text )
+		if parser.has_option('Environment', 'Weather') == False:
+			return []
+
+		config	= ScenarioGenerator.resolve( parser.get('Environment', 'Weather', raw=True), settings )
+		if os.path.isfile(config) == False:
+			return [config]
+
+		if cache is None:
+			cache	= {}
+		if config not in cache:
+			with open( config, 'rt' ) as f:
+				data	= yaml.safe_load( f ) or {}
+			cache[config]	= (data.get('packages') or {}).get('modules') or []
+
+		paths	= []
+		for module in cache[config]:
+			if (module.get('enable', True) == False) or (module.get('database') is None):
+				continue
+			path	= ScenarioGenerator.resolve( module['database'], settings )
+			if path not in paths:
+				paths.append( path )
+		return paths
+
+	@staticmethod
+	def resolve(value, values):
+		""" Replaces $(NAME) references in a value
+		Arguments
+			value -- Text to resolve
+			values -- Mapping of upper-case variable name -> value
+		"""
+		return re.sub( r'\$\(([A-Za-z_]+)\)',
+			lambda m: values.get(m.group(1).upper(), m.group(0)), value )
 
 	@staticmethod
 	def settings(text):
@@ -172,8 +225,7 @@ class ScenarioGenerator:
 			if parser.has_section(section) == False:
 				continue
 			for k, v in parser.items(section, raw=True):
-				values[k.upper()]	= re.sub( r'\$\(([A-Za-z_]+)\)',
-					lambda m: values.get(m.group(1).upper(), m.group(0)), v )
+				values[k.upper()]	= ScenarioGenerator.resolve( v, values )
 		return values
 
 	@staticmethod
