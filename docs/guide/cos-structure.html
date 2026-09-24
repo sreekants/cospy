@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COS Source Structure</title>
+<style>
+  :root{
+    --ground:#0f1219; --ground2:#141824;
+    --panel:#191d28; --panel2:#1e2330; --border:#2b3242; --border2:#333c50;
+    --blue:#3d72e0; --blue-d:#24447f;
+    --green:#3f9d5f; --green-d:#245c39;
+    --purple:#7c5fd0; --purple-d:#463a78;
+    --amber:#b98637;
+    --ink:#e7edf6; --body:#aeb7c8; --muted:#7f8aa3; --rail:#39425a;
+    --mono: ui-monospace, "SFMono-Regular", "DejaVu Sans Mono", Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#05070b;color:var(--body);
+    font-family:var(--mono);-webkit-font-smoothing:antialiased}
+  .sheet{
+    width:794px;height:1123px;margin:0 auto;background:
+      radial-gradient(1100px 700px at 50% -8%, #172033 0%, rgba(23,32,51,0) 60%),
+      var(--ground);
+    padding:20px 22px 18px;display:flex;flex-direction:column;
+    justify-content:flex-start;gap:10px;overflow:hidden;
+  }
+  .tree{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+
+  /* ---------- header ---------- */
+  header{text-align:center;position:relative}
+  h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.10em;color:var(--ink)}
+  h1 .em{color:var(--blue)}
+  .path{margin:5px 0 0;font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .legend{display:flex;justify-content:center;gap:16px;margin-top:10px;
+    font-size:10px;color:var(--body);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+  .sw{width:12px;height:12px;border-radius:3px;flex:none}
+  .sw.b{background:var(--blue)} .sw.g{background:var(--green)} .sw.p{background:var(--purple)}
+  .sw.s{background:transparent;border:1px dashed var(--muted)}
+  .sw.a{background:transparent;border:1px solid var(--amber)}
+  .dots{position:absolute;top:-4px;right:0;color:var(--muted);
+    font-size:16px;letter-spacing:2px;background:var(--panel);border:1px solid var(--border);
+    border-radius:7px;padding:2px 10px 6px;line-height:.6}
+
+  /* ---------- tree ---------- */
+  .root{width:270px;margin:0 auto;background:var(--blue);color:#fff;
+    text-align:center;font-weight:700;font-size:14.5px;letter-spacing:.05em;
+    padding:9px 0;border-radius:8px;box-shadow:0 2px 0 var(--blue-d);position:relative}
+  .root::after{content:"";position:absolute;left:50%;bottom:-13px;width:2px;height:13px;
+    background:var(--rail)}
+  .rail{height:14px;position:relative;margin-top:13px}
+  .rail::before{content:"";position:absolute;top:0;left:7%;right:7%;height:2px;background:var(--rail)}
+
+  .cols{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;align-items:start}
+  .col{display:flex;flex-direction:column;gap:4px;position:relative;min-width:0}
+  .col::before{content:"";position:absolute;top:-14px;left:50%;width:2px;height:14px;
+    background:var(--rail)}
+  .chead{color:#fff;text-align:center;font-weight:700;font-size:11px;letter-spacing:.02em;
+    padding:6px 0;border-radius:6px}
+  .chead small{display:block;font-weight:400;font-size:7.8px;opacity:.82;letter-spacing:.02em;margin-top:2px}
+  .chead.b{background:var(--blue);box-shadow:0 2px 0 var(--blue-d)}
+  .chead.g{background:var(--green);box-shadow:0 2px 0 var(--green-d)}
+  .chead.p{background:var(--purple);box-shadow:0 2px 0 var(--purple-d)}
+
+  .box{background:var(--panel);border:1px solid var(--border);border-radius:5px;
+    padding:5px 6px 6px;font-size:8.1px;line-height:1.4;overflow-wrap:anywhere}
+  .box.alt{background:var(--panel2);border-color:var(--border2)}
+  .box .m{color:var(--ink);font-weight:700;font-size:9.2px;letter-spacing:.01em}
+  .box .m .t{color:var(--muted);font-weight:400;font-size:7.6px}
+  .box .m .kl{color:var(--muted);font-weight:400;font-size:7.4px;float:right}
+  .box .d{color:var(--body);margin-top:1px}
+  .box .d b{color:#c7d0e0;font-weight:600}
+  .tag{display:inline-block;font-size:7px;color:var(--muted);border:1px solid var(--border2);
+    border-radius:4px;padding:0 4px;margin-top:3px;letter-spacing:.03em}
+  .tag.stub{border-style:dashed;color:var(--muted)}
+  .tag.warn{border-color:var(--amber);color:var(--amber)}
+  .grn{border-left:2px solid var(--green)}
+  .plat{border-left:2px solid var(--purple)}
+  .stub{opacity:.62;border-style:dashed}
+
+  /* ---------- runtime band ---------- */
+  .band{border-top:1px solid var(--border);padding-top:10px}
+  .band h2{margin:0 0 8px;text-align:center;font-size:11.5px;color:var(--ink);
+    font-weight:700;letter-spacing:.04em}
+  .band h2 .q{color:var(--muted);font-weight:400}
+  .tier{font-size:8.6px;color:var(--green);font-weight:700;letter-spacing:.05em;
+    margin:0 0 5px;text-transform:uppercase}
+  .tier.two{margin-top:9px}
+  .tier .qq{color:var(--muted);font-weight:400;text-transform:none;letter-spacing:.02em}
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px 12px}
+  .cell .cn{color:var(--blue);font-weight:700;font-size:9.6px;letter-spacing:.02em}
+  .cell .cn .pt{color:var(--muted);font-weight:400;font-size:7.4px}
+  .cell .cd{color:var(--body);font-size:8px;line-height:1.36;margin-top:1px}
+
+  .foot{margin-top:9px;display:flex;flex-direction:column;gap:3px;
+    font-size:8.2px;color:var(--muted);letter-spacing:.03em}
+  .foot .row{display:flex;justify-content:space-between;gap:14px}
+  .foot b{color:var(--body);font-weight:600}
+
+  @media print{
+    @page{size:A4 portrait;margin:0}
+    html,body{background:#fff}
+    .sheet{width:210mm;height:297mm;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <header>
+    <div class="dots">···</div>
+    <h1><span class="em">COS</span> Co-Simulation OS — Source Structure</h1>
+    <p class="path">cospy/src · 553 files · 520 classes · 38.6k lines · rules → maritime → cos</p>
+    <div class="legend">
+      <span><i class="sw b"></i>Python packages <span style="color:var(--muted)">(src/)</span></span>
+      <span><i class="sw g"></i>Runtime apps <span style="color:var(--muted)">(apps/)</span></span>
+      <span><i class="sw p"></i>Config, data &amp; tooling</span>
+      <span><i class="sw s"></i>stub / unused</span>
+      <span><i class="sw a"></i>open defect</span>
+    </div>
+  </header>
+
+  <div class="tree">
+    <div class="root">cospy/&nbsp;<span style="opacity:.7;font-weight:400;font-size:10px">src/</span></div>
+    <div class="rail"></div>
+
+    <div class="cols">
+
+      <!-- ================= cos/core ================= -->
+      <div class="col">
+        <div class="chead b">cos/core/<small>kernel &amp; runtime · 10.2k</small></div>
+        <div class="box">
+          <div class="m">kernel/ <span class="kl">3.1k</span></div>
+          <div class="d"><b>the backbone</b> — Kernel · BootLoader · Configuration · Object → Service · Faculty · ObjectManager · MessageQueue</div>
+        </div>
+        <div class="box">
+          <div class="m">simulation/ <span class="kl">0.8k</span></div>
+          <div class="d"><b>Runner</b> tick loop (30 ms) · Builder s3db→objects · Actor + Behavior · CollisionDetector</div>
+        </div>
+        <div class="box">
+          <div class="m">utilities/ <span class="kl">3.3k</span></div>
+          <div class="d">ActiveRecord sqlite ORM · TransactionalDatabase · Tree · ArgList · ThreadPool · Patterns</div>
+        </div>
+        <div class="box">
+          <div class="m">network/ <span class="kl">0.7k</span></div>
+          <div class="d">ORPCService / ORPCProxy over <b>ZeroMQ</b> · WebSocket transport (off)</div>
+        </div>
+        <div class="box alt">
+          <div class="m">service/ <span class="t">·</span> api/</div>
+          <div class="d">same RPC surface, both ends — servers and client proxies</div>
+          <span class="tag warn">COS.018 misnamed · missing methods</span>
+        </div>
+        <div class="box alt">
+          <div class="m">time/ <span class="t">·</span> device/</div>
+          <div class="d">Clock · Ticker · NullDevice</div>
+        </div>
+      </div>
+
+      <!-- ================= cos/model + behavior ================= -->
+      <div class="col">
+        <div class="chead b">cos/model/<small>world · rules · 4.0k</small></div>
+        <div class="box">
+          <div class="m">environment/ <span class="kl">1.0k</span></div>
+          <div class="d">Environment · Actors · <b>Weather</b> fields — wind · current · waves</div>
+        </div>
+        <div class="box">
+          <div class="m">geography/ <span class="kl">1.0k</span></div>
+          <div class="d">Shape → Land·Sea·Sky · Land/Sea/Sky/Map builders by type code</div>
+          <span class="tag warn">COS.019 Plateau base</span>
+        </div>
+        <div class="box">
+          <div class="m">rule/ <span class="t">·</span> resolver/</div>
+          <div class="d">Rule faculty · <b>Automata</b> · RuleContext · CompositeResolver term lookup</div>
+        </div>
+        <div class="box alt">
+          <div class="m">examiner/ · vehicle/ · situation/</div>
+          <div class="d">Examiner · PreconditionSet · Vehicle · EncounterSituation</div>
+        </div>
+
+        <div class="chead b" style="margin-top:5px">cos/behavior/<small>motion · 2.3k</small></div>
+        <div class="box">
+          <div class="m">motion/ <span class="kl">1.8k</span></div>
+          <div class="d">Linear · Brownian · Path · <b>PathFollowing</b> · Fleet · Prey/Predator · hydrodynamics</div>
+          <span class="tag warn">COS.012 lastdx</span>
+        </div>
+        <div class="box alt">
+          <div class="m">swarm/ <span class="t">·</span> control/</div>
+          <div class="d">boids · collision avoidance · stop-on-traffic</div>
+        </div>
+      </div>
+
+      <!-- ================= cos language + support ================= -->
+      <div class="col">
+        <div class="chead b">cos/lang/<small>Legata DSL · 2.7k</small></div>
+        <div class="box">
+          <div class="m">legata/ <span class="kl">1.6k</span></div>
+          <div class="d"><b>PLY lexer + parser</b> · expression nodes → decision tree</div>
+          <span class="tag warn">COS.021 writes parsetab</span>
+        </div>
+        <div class="box alt">
+          <div class="m">logic/ <span class="t">·</span> symbol/</div>
+          <div class="d">DecisionTree · Decision · Condition · Assurance</div>
+        </div>
+        <div class="box stub">
+          <div class="m">rebeca/</div>
+          <div class="d">actor-language stubs</div>
+          <span class="tag stub">not wired in</span>
+        </div>
+
+        <div class="chead b" style="margin-top:5px">cos/ support<small>shared services · 7.0k</small></div>
+        <div class="box">
+          <div class="m">subsystem/ <span class="kl">0.8k</span></div>
+          <div class="d"><b>World</b> · DataManager fact partitions · RPC broker</div>
+        </div>
+        <div class="box">
+          <div class="m">math/ <span class="t">·</span> physics/</div>
+          <div class="d">Rectangle · Vector · CPA · PID · Delaunator · CPT</div>
+        </div>
+        <div class="box">
+          <div class="m">ui/ <span class="t">·</span> tools/cviz/</div>
+          <div class="d">pygame sprites · <b>VirtualWorld</b> viewer over RPC</div>
+        </div>
+        <div class="box alt">
+          <div class="m">cluster/ <span class="t">·</span> data/</div>
+          <div class="d"><b>ScenarioGenerator</b> sweeps · score types · BI cube</div>
+        </div>
+      </div>
+
+      <!-- ================= maritime ================= -->
+      <div class="col">
+        <div class="chead b">maritime/<small>domain layer · 7.4k</small></div>
+        <div class="box">
+          <div class="m">model/ <span class="kl">3.1k</span></div>
+          <div class="d"><b>Vessel</b> + builder · 17 zones (TSS, EEZ …) · 17 resolvers · COLREG &amp; inland rule bases · ZoneAware</div>
+          <span class="tag warn">COS.019 WIG base</span>
+        </div>
+        <div class="box">
+          <div class="m">regulation/ <span class="kl">0.7k</span></div>
+          <div class="d"><b>COLREG Evaluator</b> — drives situations, examiners, rules each tick</div>
+        </div>
+        <div class="box">
+          <div class="m">situation/ <span class="t">·</span> conduct/</div>
+          <div class="d">crossing · head-on · overtaking · give-way — collision · grounding · harbour (+ core/)</div>
+        </div>
+        <div class="box">
+          <div class="m">behavior/vessels/</div>
+          <div class="d">PlannedVessel → Container · Ferry · Fishing … · <b>VesselManeuvers</b></div>
+          <span class="tag warn">COS.014 anchor()</span>
+        </div>
+        <div class="box alt">
+          <div class="m">device/ <span class="kl">1.1k</span></div>
+          <div class="d">AIS · GPS · compasses · radar · echosounder</div>
+          <span class="tag warn">COS.020 six copies</span>
+        </div>
+        <div class="box stub">
+          <div class="m">navigation/ · traffic/</div>
+          <div class="d">Map · Route · VTS · port authority</div>
+          <span class="tag stub">mostly scaffolding</span>
+        </div>
+      </div>
+
+      <!-- ================= rules + cai ================= -->
+      <div class="col">
+        <div class="chead b">rules/<small>regulation · 4.9k</small></div>
+        <div class="box">
+          <div class="m">colreg/ruleN/ <span class="kl">1.9k</span></div>
+          <div class="d"><b>41 COLREG rules</b>, each paired with a .legata file</div>
+          <span class="tag stub">33 are 6-line stubs</span>
+        </div>
+        <div class="box">
+          <div class="m">navigation/ <span class="kl">1.3k</span></div>
+          <div class="d">examiners — collision · grounding · lane · speed · signals · night · extreme weather</div>
+        </div>
+        <div class="box">
+          <div class="m">risk/ <span class="kl">1.3k</span></div>
+          <div class="d"><b>RiskExaminer</b> — pyAgrum Bayesian net · loss matrix Rl</div>
+          <span class="tag warn">COS.005 · 006 · 008</span>
+        </div>
+        <div class="box stub">
+          <div class="m">planning/ · security/ · …</div>
+          <div class="d">comfort · economic · plan · customs · zone · approach · overtaking · day-time</div>
+          <span class="tag stub">9 of 19 examiners are stubs</span>
+        </div>
+
+        <div class="chead b" style="margin-top:5px">cai/<small>planning · 0.5k</small></div>
+        <div class="box stub">
+          <div class="m">planning/</div>
+          <div class="d">RRT · A* · Dijkstra experiments</div>
+          <span class="tag stub">imported by nothing</span>
+        </div>
+      </div>
+
+      <!-- ================= apps + data ================= -->
+      <div class="col">
+        <div class="chead g">apps/<small>runtime · outside src/</small></div>
+        <div class="box grn">
+          <div class="m">coslaunch/</div>
+          <div class="d"><b>runs one simulation</b> from a cos.ini</div>
+        </div>
+        <div class="box grn">
+          <div class="m">cviz/</div>
+          <div class="d">visualiser — renders a live run over RPC</div>
+        </div>
+        <div class="box grn alt">
+          <div class="m">costopic/ <span class="t">·</span> cosservice/</div>
+          <div class="d">event-stream reader · service control</div>
+        </div>
+
+        <div class="chead p" style="margin-top:5px">config &amp; data<small>outside src/</small></div>
+        <div class="box plat">
+          <div class="m">config/ <span class="t">manifests</span></div>
+          <div class="d">cos.ini → YAML module lists · legata.yaml resolvers · <b>54 .legata</b> (48 COLREG)</div>
+        </div>
+        <div class="box plat">
+          <div class="m">map/ · simulation/ · weather/</div>
+          <div class="d"><b>per location</b> — land/sea/sky/vessel .s3db, trips, weather DBs</div>
+        </div>
+        <div class="box plat alt">
+          <div class="m">templates/cluster/ <span class="t">·</span> tests/</div>
+          <div class="d">sweep template · 130 test modules</div>
+        </div>
+        <div class="box plat alt">
+          <div class="m">tools/ <span class="t">·</span> docs/ <span class="t">·</span> bugs/</div>
+          <div class="d">MAPGEN · WEATHERGEN · guide · COS.0xx tickets</div>
+        </div>
+      </div>
+
+    </div><!-- /cols -->
+  </div><!-- /tree -->
+
+  <!-- ================= runtime band ================= -->
+  <div class="band">
+    <h2>coslaunch &nbsp;<span class="q">— one COS process: configuration becomes objects, then every service ticks</span></h2>
+
+    <p class="tier">boot &mdash; config becomes objects <span class="qq">· BootLoader · Kernel → Faculties → Services</span></p>
+    <div class="grid">
+      <div class="cell"><div class="cn">cos.ini</div><div class="cd">Environment variables and the section list. Selects the location.</div></div>
+      <div class="cell"><div class="cn">manifests <span class="pt">yaml</span></div><div class="cd">Each section names YAML files that list the modules to load.</div></div>
+      <div class="cell"><div class="cn">BootLoader</div><div class="cd">Imports <b>a.b.C</b> and takes class C. Then init → start → run levels 0–4.</div></div>
+      <div class="cell"><div class="cn">builders <span class="pt">s3db</span></div><div class="cd">Read land, sea, sky and vessel rows by type code into /World.</div></div>
+      <div class="cell"><div class="cn">resolvers</div><div class="cd">legata.yaml loads term resolvers into the Evaluator.</div></div>
+      <div class="cell"><div class="cn">automata <span class="pt">×41</span></div><div class="cd">Each rule compiles its .legata file into a decision tree.</div></div>
+    </div>
+
+    <p class="tier two">every tick &mdash; /Services on_timer <span class="qq">· 30 ms step · exceptions caught per tick and logged</span></p>
+    <div class="grid">
+      <div class="cell"><div class="cn">World · Actors</div><div class="cd">Each vessel's behaviour moves it. Land and map bounds block the move.</div></div>
+      <div class="cell"><div class="cn">Weather</div><div class="cd">Wind, current and wave fields acting on vessels.</div></div>
+      <div class="cell"><div class="cn">monitor <span class="pt">0.5 s</span></div><div class="cd">Situations detect encounters. Then examiners score and record.</div></div>
+      <div class="cell"><div class="cn">evaluate <span class="pt">sample</span></div><div class="cd">Every /Faculty/Regulation rule runs its automata → violations.</div></div>
+      <div class="cell"><div class="cn">DataManager <span class="pt">5 s</span></div><div class="cd">Flushes fact rows, keyed by case_id, to the working set.</div></div>
+      <div class="cell"><div class="cn">RPCBroker <span class="pt">5556 · 5557</span></div><div class="cd">Serves /Services/API/* to cviz, costopic and cosservice.</div></div>
+    </div>
+
+    <div class="foot">
+      <div class="row">
+        <span>Dependency spine&nbsp; <b>rules → maritime → cos/model → cos/core/kernel</b></span>
+        <span>Object tree&nbsp; <b>/Services</b> ticked · <b>/Faculty</b> driven · <b>/World</b> built from s3db</span>
+      </div>
+      <div class="row">
+        <span>Loaded classes&nbsp; <b>one per file, named after the file</b></span>
+        <span>Locations&nbsp; <b>config/{map,simulation,weather}/&lt;cc&gt;/&lt;loc&gt;</b></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

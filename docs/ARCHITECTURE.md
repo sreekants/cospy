@@ -4,7 +4,14 @@ This document describes the physical structure of `src/` (where each class lives
 structure (how the classes cooperate at boot and on every tick). It reflects the tree on
 2026-09-24: 553 Python files, 520 classes, about 38,600 lines. Appendix A lists every class with its
 file and base classes. For building locations (land, sea and vessel databases), see
-[`MAPGEN.md`](../tools/mapping/MAPGEN.md).
+[`MAPGEN.md`](../tools/mapping/MAPGEN.md). For a functional walk-through of one run, see the
+[guide](guide/GUIDE.md).
+
+<p align="center"><a href="guide/cos-structure.html"><img src="guide/cos-structure.png" alt="COS source structure diagram" width="80%"></a></p>
+
+*Figure 1. The source tree on one page: packages by size, open defects (amber), stubs (dashed), and
+what one `coslaunch` process runs at boot and on every tick. The printable A4 version is
+[`guide/cos-structure.html`](guide/cos-structure.html). Sections 1 and 2 below explain each part.*
 
 ---
 
@@ -64,10 +71,12 @@ src/
 - `colreg/ruleN/RuleN.py`: 41 classes, one per COLREG rule. Each is a thin `COLREG` subclass paired
   with `config/maritime/regulation/colreg/RuleN.legata`. Only rules 3, 9, 10, 13, 15, 17, 19 and 34
   add behaviour; the rest are 6-line stubs whose logic, where it exists, is in the Legata file.
-- `examiner/*`: 24 examiners grouped by concern: navigation (collision, grounding, lane discipline,
-  speed, signals, night-time, extreme weather), risk (`RiskExaminer` with a pyAgrum Bayesian network),
-  environmental, planning and security. The planning and security examiners, `TestInspector`,
-  `ApproachExaminer` and `OvertakingExaminer` are stubs.
+- `examiner/*`: 19 concrete examiners, plus the `NavigationExaminer` base and risk helper classes,
+  grouped by concern: navigation (collision, grounding, lane discipline, speed, signals, night-time,
+  extreme weather), risk (`RiskExaminer` with a pyAgrum Bayesian network), environmental, planning
+  and security. **9 of the 19 are stubs:** seven copies of one empty 24-line template (`Approach`,
+  `Overtaking`, `Comfort`, `Plan`, `Economic`, `Customs`, `ZoneViolation`), plus `DayTimeExaminer`
+  and `TestInspector`.
 
 ### 1.4 Outside `src/`
 

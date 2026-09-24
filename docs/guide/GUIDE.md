@@ -2,7 +2,7 @@
 
 # The Co-Simulation Operating System: A Functional Overview
 
-Tools: [coslaunch](../../apps/coslaunch/coslaunch.md) · [cviz](../../apps/cviz/cviz.md) · [costopic](../../apps/costopic/costopic.md) · [cosservice](../../apps/cosservice/cosservice.md) · Data guides: [maps and vessels](../../tools/mapping/MAPGEN.md) · [weather](../../tools/mapping/WEATHERGEN.md)
+Tools: [coslaunch](../../apps/coslaunch/coslaunch.md) · [cviz](../../apps/cviz/cviz.md) · [costopic](../../apps/costopic/costopic.md) · [cosservice](../../apps/cosservice/cosservice.md) · Data guides: [maps and vessels](../../tools/mapping/MAPGEN.md) · [weather](../../tools/mapping/WEATHERGEN.md) · Code: [source structure](cos-structure.html) · [architecture](../ARCHITECTURE.md)
 
 How COS, a simulator built to test autonomous ships against the rules of the sea, is put
 together: what its parts are, what each one does, and why it is built that way. One example runs
@@ -253,6 +253,19 @@ There are five kinds of connection in that figure, and each one is explained in 
   every 5 seconds. [§11](#11-the-kernel-subsystems).
 - **(e) Merging.** After a sweep, the databases of many runs are merged into one for analysis.
   [§17](#17-from-one-run-to-a-thousand).
+
+Figure 2 shows how the process behaves. Figure 3 shows where each of its boxes is in the source
+tree. The kernel and the tick loop are in `cos/core`, the environment and the rule machinery in
+`cos/model`, vessels and situations in `maritime`, and the rules and examiners in `rules`. The band
+at the bottom of Figure 3 repeats connections (a) to (d) in terms of the classes that carry them.
+Amber tags mark open defects, and dashed boxes are stubs. The full class inventory, with every class
+and its file, is in [ARCHITECTURE.md](../ARCHITECTURE.md).
+
+<p align="center"><a href="cos-structure.html"><img src="cos-structure.png" alt="COS source structure: packages under src/, the apps and data outside it, and what one coslaunch process runs" width="80%"></a></p>
+
+*Figure 3. The COS source tree: the four packages under `src/` by size, the apps and data outside
+it, and, in the bottom band, what one `coslaunch` process does at boot and on every tick. Click
+for the printable A4 version.*
 
 **Roadmap.** [§7](#7-one-run-end-to-end) follows one real run through the whole figure before any
 box is opened. [§8](#8-the-life-of-a-simulation) and [§9](#9-what-cos-cannot-see) cover how a
@@ -872,6 +885,7 @@ confusion:
 | Sweep pipeline | `src/cos/cluster/runtime`, `src/cos/data/bi`, `templates/cluster` |
 | Tools and man pages | `apps/*/` |
 | Site data | `config/map`, `config/simulation`, `config/weather` |
+| Source structure and class inventory | `docs/guide/cos-structure.html`, `docs/ARCHITECTURE.md` |
 | Known defects | `bugs/INDEX.md` |
 
 <footer class="copyright" />
