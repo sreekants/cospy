@@ -21,7 +21,8 @@ class Simulation:
 			""" Starts the simulation kernel
 			"""
 			# Start the kernel
-			Kernel.start(self, 'cos.ini', 'COS_CONFIG', settings)
+			configfile	= settings.get('config') or 'cos.ini'
+			Kernel.start(self, configfile, 'COS_CONFIG', settings)
 
 			# Run the simulation
 			self.runner	= Runner()

@@ -8,19 +8,21 @@ import os.path
 from app import COSLaunch
 
 IMAGE=None
+CONFIG=None
 
 def get_app_info():
 	return {
 		"executable": "coslaunch.py",
 		"name"		: "COS Simulation Operating system",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?][-i image]"
+		"usage"		:[ 	"[-h][-?][-i image][-c config]"
 					],
 					
 		"help"		:[
 			    ["h"		, ["Print help.", usage]],
 			    ["?"		, ["Print help.", usage]],
 			    ["i"		, ["Set the image.", set_image]],
+			    ["c"		, ["Path to cos.ini (optional).", set_config]],
 			    ["image"	, ["Code directory.", None]]
 				]		
 		}
@@ -69,9 +71,17 @@ def set_image():
 		sys.exit(-1)
 	return
 
+def set_config(path):
+	global CONFIG
+	CONFIG	= path
+	if os.path.isfile(CONFIG) == False:
+		print( f'[{CONFIG}] is not a configuration file.')
+		sys.exit(-1)
+	return
+
 def main():
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "hi:d", ["help"])
+		opts, args = getopt.getopt(sys.argv[1:], "hi:c:d", ["help", "config="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -81,6 +91,8 @@ def main():
 			sys.exit()                  
 		elif opt in ("-i"):
 			set_image()
+		elif opt in ("-c", "--config"):
+			set_config(arg)
 		elif opt == '-d':
 			global _debug               
 			_debug = 1                  
@@ -88,7 +100,8 @@ def main():
 	preamble()
 	theApp = COSLaunch()
 	theApp.run( args, get_app_info(), {
-			'image' : IMAGE
+			'image' : IMAGE,
+			'config': CONFIG
 			})
 	
 

@@ -97,13 +97,11 @@ class FleetResolver(Resolver):
 		return self.nearest
 
 	def __members(self):
-		""" Normalizes situation.fleet into a flat list of vessels.
+		""" Normalizes situation.ts.fleet into a flat list of vessels.
 
-		situation.fleet has no established shape yet - nothing in the conduct
-		tree assigns it (see RiskExaminer.requirements.md COM-X-04) - so this
-		accepts whatever a future assignment turns out to produce: a bare
-		vessel, an iterable of vessels, or an iterable of (vessel, type, id)
-		tuples as FleetBehavior builds internally.
+		FleetBehavior assigns vessel.fleet the fleet's vehicle, so this is
+		normally a bare vessel. An iterable of vessels, or of (vessel, type, id)
+		tuples as FleetBehavior builds internally, is accepted as well.
 		"""
 		fleet	= self.fleet
 		if fleet is None:

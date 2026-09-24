@@ -8,7 +8,8 @@
 # an encounter, and asking for it when no target ship is in scope is a category
 # error rather than a missing observation.
 #
-# A Precondition names the situation attributes a group of terms needs. Groups
+# A Precondition names the situation attributes a group of terms needs, either
+# directly ('os') or as a dotted path through them ('ts.fleet'). Groups
 # whose precondition does not hold are skipped whole, so an unresolved term
 # always means "applicable but unobserved" and never "not applicable here".
 #
@@ -24,7 +25,7 @@ class Precondition:
 		""" Constructor
 		Arguments
 			group -- Name of the binding group being guarded
-			requires -- Situation attribute names that must all be present
+			requires -- Situation attribute names or dotted paths that must all be present
 		"""
 		self.group		= group
 		self.requires	= list( requires or [] )
@@ -39,10 +40,27 @@ class Precondition:
 			return False
 
 		for name in self.requires:
-			if getattr( situation, name, None ) is None:
+			if Precondition.resolve( situation, name ) is None:
 				return False
 
 		return True
+
+	@staticmethod
+	def resolve(situation, path):
+		""" Follows a dotted attribute path from the situation
+		Arguments
+			situation -- Situation reference
+			path -- Attribute name or dotted path, e.g. 'ts.fleet'
+		Returns
+			The attribute value, or None if any step along the path is absent
+		"""
+		value	= situation
+		for name in path.split('.'):
+			value	= getattr( value, name, None )
+			if value is None:
+				return None
+
+		return value
 
 	def __repr__(self):
 		return f'Precondition({self.group} requires {self.requires})'
@@ -66,7 +84,7 @@ class PreconditionSet:
 		""" Reads 'requires' declarations out of a bindings configuration
 		Arguments
 			config -- Mapping of group name -> group configuration
-			known -- Situation attribute names that may be required
+			known -- Situation attribute names that may be required, or begin a dotted path
 		Returns
 			A list of problems, empty when every declaration is usable
 		"""
@@ -77,7 +95,7 @@ class PreconditionSet:
 				continue
 
 			requires	= body.get( 'requires', [] )
-			unknown		= [ r for r in requires if r not in known ]
+			unknown		= [ r for r in requires if r.split('.')[0] not in known ]
 			if unknown:
 				problems.append( f'{group}: unknown situation attribute {unknown}' )
 				continue

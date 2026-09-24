@@ -19,9 +19,11 @@ pipx
 ply
 psutil
 py-trees
+pyagrum
 pydantic
 pydantic-core
 pygame-ce
+pygtrie
 pyproj
 pyyaml
 pyzmq

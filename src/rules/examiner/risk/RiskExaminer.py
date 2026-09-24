@@ -62,7 +62,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 				'target': ['os','ts'],
 				'at_sea': ['os'],
 				'environment': ['os'],
-				'auv_operation': ['os','fleet']
+				'auv_operation': ['os','ts.fleet']
 				})
 
 		return

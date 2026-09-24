@@ -49,7 +49,8 @@ class MapBuilder(Service):
 			'format'	: None,
 			'size'		: None,
 			'scale'		: None,
-			'data'		: None
+			'data'		: None,
+			'extent'	: None
 			}
 
 		db		= ActiveRecord.create('Config', path, 'configs')
@@ -79,6 +80,13 @@ class MapBuilder(Service):
 		background['size']		= None
 		background['scale']		= (scale[0], scale[1])
 		background['file']		= filepath
+
+		# Declared map size in map units, so a viewer can fit the map to its screen.
+		# Maps without one are drawn one map unit per pixel, as before.
+		for r in db.get_all(f'type=\'geo.reference\''):
+			if r[1] == 'map.extent':
+				w, h				= ( float(v) for v in str(r[3]).split(',') )
+				background['extent']	= (w, h)
 
 		if filepath:
 			background['data']		= ctxt.sim.fs.read_file_as_bytes(file)

@@ -30,9 +30,11 @@ class Examiner(Faculty):
 			ctxt -- Simulation context
 			module -- Module information
 		"""
-		Faculty.on_init(self, ctxt, module)
+		# Set up before registering, so an examiner whose setup fails is never
+		# reached by the rule evaluator half-initialized. BootLoader logs the error.
 		config		= ArgList( module.get("config", "") )
 		self.setup( ctxt, config )
+		Faculty.on_init(self, ctxt, module)
 		return
 
 	def on_start(self, ctxt:Context, config:ArgList):

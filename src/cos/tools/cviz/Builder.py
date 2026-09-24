@@ -188,7 +188,13 @@ class Builder:
 
 		if image is None:
 			return
-		
+
+		# A map that declares its extent is fitted to the screen; others keep one
+		# map unit per pixel, which is what their background images were drawn for.
+		extent		= image.get('extent', None)
+		if extent:
+			world.encoder.fit( extent, world.screen.get_size() )
+
 		if image['data']:
 			# Load the image from the binary data
 			bytes_io 	= io.BytesIO(image['data'])

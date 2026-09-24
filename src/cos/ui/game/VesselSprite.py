@@ -154,7 +154,7 @@ class VesselIcon(AnimatedSprite):
 		"""
 		if self.rect is not None:
 			pos = pygame.mouse.get_pos()
-			if self.rect.collidepoint(pos):
+			if ctxt.encoder.transform_rect(self.rect).collidepoint(pos):
 				ctxt.info.append_object( f'{self.name} (Vessel)' )
 		return
 

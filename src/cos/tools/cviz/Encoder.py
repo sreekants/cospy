@@ -13,15 +13,39 @@ class Encoder:
 		return
 
 	def transform_rect(self, rect):
-		topleft		= Encoder.dot2D(self.transform, self.move, (rect[0],rect[1],1.) )
-		bottomright	= Encoder.dot2D(self.transform, self.move, (rect[2],rect[3],1.) )
-		return pygame.Rect( topleft[0], topleft[1], bottomright[0], bottomright[1] )
+		""" Transforms a [left, top, width, height] rectangle to screen coordinates
+		"""
+		topleft		= self.transform_point( (rect[0], rect[1]) )
+
+		# Width and height are extents, not a corner: scale them, never translate them
+		size		= ( rect[2]*self.transform[0][0], rect[3]*self.transform[1][1] )
+		return pygame.Rect( topleft[0], topleft[1], size[0], size[1] )
+
+	def transform_point(self, pt):
+		""" Transforms a map point to screen coordinates
+		"""
+		return Encoder.dot2D(self.transform, self.move, (float(pt[0]),float(pt[1]),1.) )
+
+	def inverse_point(self, pt):
+		""" Transforms a screen point (e.g. the mouse) back to map coordinates
+		"""
+		return ( (pt[0]-self.move[0])/self.transform[0][0], (pt[1]-self.move[1])/self.transform[1][1] )
+
+	def fit(self, extent, screen):
+		""" Scales and centres a map of the given extent on the screen
+		Arguments
+			extent -- Map size in map units (width, height)
+			screen -- Screen size in pixels (width, height)
+		"""
+		scale			= min( screen[0]/extent[0], screen[1]/extent[1] )
+		self.transform	= np.array([[scale,0.0,0.0],[0.0,scale,0.0],[0.0,0.0,1.0]])
+		self.move		= np.array([ (screen[0]-extent[0]*scale)/2.0, (screen[1]-extent[1]*scale)/2.0, 0.0 ])
+		return
 
 	def transform_polygon(self, polygon):
-		result	= polygon
 		points	= []
 		for pt in polygon:
-			pt = Encoder.dot2D(self.transform, self.move, (float(pt[0]),float(pt[1]),1.) )
+			pt = self.transform_point( pt )
 			points.append( (int(pt[0]), int(pt[1])) )
 
 		return points

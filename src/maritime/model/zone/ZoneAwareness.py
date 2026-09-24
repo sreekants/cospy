@@ -39,7 +39,9 @@ class ZoneAware:
 
 		self.sea		= []
 		self.land		= []
-		self.gate		= PreconditionSet( {'vessel': list(requires or ['os'])} )
+		# Named zone_gate, not gate: a mixin must not overwrite the gate of the
+		# examiner it is mixed into (RiskExaminer declares its own per group).
+		self.zone_gate	= PreconditionSet( {'vessel': list(requires or ['os'])} )
 		return
 
 	def cache_shapes(self, ctxt:Context):
@@ -62,7 +64,7 @@ class ZoneAware:
 		Arguments
 			rule_ctxt -- Rule context
 		"""
-		return self.gate.holds( 'vessel', rule_ctxt.situation )
+		return self.zone_gate.holds( 'vessel', rule_ctxt.situation )
 
 	def survey(self, vessel):
 		""" Everything the examiners need to know about where a vessel is

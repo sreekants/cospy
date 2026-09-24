@@ -22,10 +22,7 @@ class SeaSprite(PolygonSprite):
 			screen -- Reference ot the simulation screen
 		"""
 		if self.area is not None:
-			pos = pygame.mouse.get_pos()
-
-			# TODO: To scale mouse to position
-			
+			pos = ctxt.encoder.inverse_point( pygame.mouse.get_pos() )
 			if self.area.contains( geometry.Point((pos[0],pos[1])) ):
 				ctxt.info.append_sea( f'{self.name} (Sea)' )
 		return

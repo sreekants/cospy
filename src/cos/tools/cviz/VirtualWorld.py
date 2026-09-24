@@ -58,6 +58,7 @@ class VirtualWorld:
 		self.encoder	= Encoder()
 
 		self.background	= None
+		self.scaled		= None		# (scale, surface) cache of the background at the current zoom
 
 		self.debug		= False
 		return
@@ -215,9 +216,9 @@ class VirtualWorld:
 				entity.commit(self, self.screen)
 
 
-		# Overlay the map on top of all rendered artifacts
+		# Overlay the map on top of all rendered artifacts, panned and zoomed with them
 		if self.background:
-			self.screen.blit(self.background, (0, 0))
+			self.screen.blit( self.get_background(), self.encoder.transform_point((0, 0)) )
 
 		for geography in [self.reliefs, self.bodies]:
 			for entity in geography:
@@ -225,6 +226,21 @@ class VirtualWorld:
 
 		self.render_info()
 		return
+
+	def get_background(self):
+		""" Returns the background scaled to the current zoom, rescaling only when the zoom changes
+		"""
+		scale	= self.encoder.transform[0][0]
+		if scale == 1.0:
+			return self.background
+
+		if (self.scaled is None) or (self.scaled[0] != scale):
+			w, h		= self.background.get_size()
+			surface		= pygame.transform.scale( self.background, (int(w*scale), int(h*scale)) )
+			surface.set_colorkey( self.background.get_colorkey() )
+			self.scaled	= (scale, surface)
+
+		return self.scaled[1]
 
 	def render_info(self):
 		self.info.render(self)
@@ -314,7 +330,9 @@ class VirtualWorld:
 				entity.rotate( theta )
 				'''
 
-				entity.rect		= self.encoder.transform_rect( rect )
+				# Keep map coordinates; Sprite.render transforms them each frame, so a
+				# vessel stays aligned with the map while panning or zooming
+				entity.rect		= pygame.Rect( rect )
 				entity.angle	= math.degrees( math.atan2(-dx[1],dx[0]) )
 				entity.intent	= args["intent"]
 				return

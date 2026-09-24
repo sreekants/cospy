@@ -47,7 +47,7 @@ class ScreenArea:
 		if x <0 or x > self.width:
 			return False
 
-		if y <0 or y > self.width:
+		if y <0 or y > self.height:
 			return False
 
 		return True

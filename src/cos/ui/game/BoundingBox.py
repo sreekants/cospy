@@ -28,7 +28,7 @@ class BoundingBox:
 		if ctxt.layer != self.layer:
 			return
 
-		pygame.draw.rect( screen, self.color, ctxt.encoder.tranform_rect(self.rect), self.width )
+		pygame.draw.rect( screen, self.color, ctxt.encoder.transform_rect(self.rect), self.width )
 		return
 
 	def update(self):
