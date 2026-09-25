@@ -38,7 +38,6 @@
   .sw{width:12px;height:12px;border-radius:3px;flex:none}
   .sw.b{background:var(--blue)} .sw.g{background:var(--green)} .sw.p{background:var(--purple)}
   .sw.s{background:transparent;border:1px dashed var(--muted)}
-  .sw.a{background:transparent;border:1px solid var(--amber)}
   .dots{position:absolute;top:-4px;right:0;color:var(--muted);
     font-size:16px;letter-spacing:2px;background:var(--panel);border:1px solid var(--border);
     border-radius:7px;padding:2px 10px 6px;line-height:.6}
@@ -74,7 +73,6 @@
   .tag{display:inline-block;font-size:7px;color:var(--muted);border:1px solid var(--border2);
     border-radius:4px;padding:0 4px;margin-top:3px;letter-spacing:.03em}
   .tag.stub{border-style:dashed;color:var(--muted)}
-  .tag.warn{border-color:var(--amber);color:var(--amber)}
   .grn{border-left:2px solid var(--green)}
   .plat{border-left:2px solid var(--purple)}
   .stub{opacity:.62;border-style:dashed}
@@ -117,7 +115,6 @@
       <span><i class="sw g"></i>Runtime apps <span style="color:var(--muted)">(apps/)</span></span>
       <span><i class="sw p"></i>Config, data &amp; tooling</span>
       <span><i class="sw s"></i>stub / unused</span>
-      <span><i class="sw a"></i>open defect</span>
     </div>
   </header>
 
@@ -144,12 +141,11 @@
         </div>
         <div class="box">
           <div class="m">network/ <span class="kl">0.7k</span></div>
-          <div class="d">ORPCService / ORPCProxy over <b>ZeroMQ</b> · WebSocket transport (off)</div>
+          <div class="d">ORPCService / ORPCProxy over <b>ZeroMQ</b> · WebSocket transport</div>
         </div>
         <div class="box alt">
           <div class="m">service/ <span class="t">·</span> api/</div>
           <div class="d">same RPC surface, both ends — servers and client proxies</div>
-          <span class="tag warn">COS.018 misnamed · missing methods</span>
         </div>
         <div class="box alt">
           <div class="m">time/ <span class="t">·</span> device/</div>
@@ -167,7 +163,6 @@
         <div class="box">
           <div class="m">geography/ <span class="kl">1.0k</span></div>
           <div class="d">Shape → Land·Sea·Sky · Land/Sea/Sky/Map builders by type code</div>
-          <span class="tag warn">COS.019 Plateau base</span>
         </div>
         <div class="box">
           <div class="m">rule/ <span class="t">·</span> resolver/</div>
@@ -182,7 +177,6 @@
         <div class="box">
           <div class="m">motion/ <span class="kl">1.8k</span></div>
           <div class="d">Linear · Brownian · Path · <b>PathFollowing</b> · Fleet · Prey/Predator · hydrodynamics</div>
-          <span class="tag warn">COS.012 lastdx</span>
         </div>
         <div class="box alt">
           <div class="m">swarm/ <span class="t">·</span> control/</div>
@@ -196,7 +190,6 @@
         <div class="box">
           <div class="m">legata/ <span class="kl">1.6k</span></div>
           <div class="d"><b>PLY lexer + parser</b> · expression nodes → decision tree</div>
-          <span class="tag warn">COS.021 writes parsetab</span>
         </div>
         <div class="box alt">
           <div class="m">logic/ <span class="t">·</span> symbol/</div>
@@ -233,11 +226,10 @@
         <div class="box">
           <div class="m">model/ <span class="kl">3.1k</span></div>
           <div class="d"><b>Vessel</b> + builder · 17 zones (TSS, EEZ …) · 17 resolvers · COLREG &amp; inland rule bases · ZoneAware</div>
-          <span class="tag warn">COS.019 WIG base</span>
         </div>
         <div class="box">
           <div class="m">regulation/ <span class="kl">0.7k</span></div>
-          <div class="d"><b>COLREG Evaluator</b> — drives situations, examiners, rules each tick</div>
+          <div class="d"><b>COLREG Evaluator</b> — drives monitors, then rules and examiners</div>
         </div>
         <div class="box">
           <div class="m">situation/ <span class="t">·</span> conduct/</div>
@@ -246,12 +238,10 @@
         <div class="box">
           <div class="m">behavior/vessels/</div>
           <div class="d">PlannedVessel → Container · Ferry · Fishing … · <b>VesselManeuvers</b></div>
-          <span class="tag warn">COS.014 anchor()</span>
         </div>
         <div class="box alt">
           <div class="m">device/ <span class="kl">1.1k</span></div>
           <div class="d">AIS · GPS · compasses · radar · echosounder</div>
-          <span class="tag warn">COS.020 six copies</span>
         </div>
         <div class="box stub">
           <div class="m">navigation/ · traffic/</div>
@@ -275,7 +265,6 @@
         <div class="box">
           <div class="m">risk/ <span class="kl">1.3k</span></div>
           <div class="d"><b>RiskExaminer</b> — pyAgrum Bayesian net · loss matrix Rl</div>
-          <span class="tag warn">COS.005 · 006 · 008</span>
         </div>
         <div class="box stub">
           <div class="m">planning/ · security/ · …</div>
@@ -321,8 +310,8 @@
           <div class="d">sweep template · 130 test modules</div>
         </div>
         <div class="box plat alt">
-          <div class="m">tools/ <span class="t">·</span> docs/ <span class="t">·</span> bugs/</div>
-          <div class="d">MAPGEN · WEATHERGEN · guide · COS.0xx tickets</div>
+          <div class="m">tools/ <span class="t">·</span> docs/ <span class="t">·</span> idl/</div>
+          <div class="d">MAPGEN · WEATHERGEN · this guide · API contracts</div>
         </div>
       </div>
 
@@ -347,8 +336,8 @@
     <div class="grid">
       <div class="cell"><div class="cn">World · Actors</div><div class="cd">Each vessel's behaviour moves it. Land and map bounds block the move.</div></div>
       <div class="cell"><div class="cn">Weather</div><div class="cd">Wind, current and wave fields acting on vessels.</div></div>
-      <div class="cell"><div class="cn">monitor <span class="pt">0.5 s</span></div><div class="cd">Situations detect encounters. Then examiners score and record.</div></div>
-      <div class="cell"><div class="cn">evaluate <span class="pt">sample</span></div><div class="cd">Every /Faculty/Regulation rule runs its automata → violations.</div></div>
+      <div class="cell"><div class="cn">monitor <span class="pt">0.5 s</span></div><div class="cd">Situation and conduct monitors detect encounters and post them to the rules.</div></div>
+      <div class="cell"><div class="cn">evaluate <span class="pt">sample</span></div><div class="cd">Everything under /Faculty/Regulation: rules walk automata, examiners score.</div></div>
       <div class="cell"><div class="cn">DataManager <span class="pt">5 s</span></div><div class="cd">Flushes fact rows, keyed by case_id, to the working set.</div></div>
       <div class="cell"><div class="cn">RPCBroker <span class="pt">5556 · 5557</span></div><div class="cd">Serves /Services/API/* to cviz, costopic and cosservice.</div></div>
     </div>
