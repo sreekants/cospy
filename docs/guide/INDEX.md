@@ -109,7 +109,10 @@ meaning is which.
 
 ---
 
-<iframe src="cos-structure.html" title="COS — one-page source structure" style="width:100%; height:1140px; border:none;"></iframe>
+![COS Architecture](cos-structure.png)
+
+<a href="cos-structure.html" target="_blank">Click here for detailed image</a>
+
 
 ## 2. The packages of `src/`
 
