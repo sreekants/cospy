@@ -230,4 +230,4 @@ as above. The sweep generator picks the location up once it has folders under `c
 
 3. **Read the log.** Look for `Failed to load`, `Runtime error` and `No such topic`. Then query the scratch
    database for the rows you expected.
-4. **Only then sweep.** A defect that costs one line in one run costs a thousand runs in a sweep.
+4. **Only then sweep.** A mistake that costs one line in one run costs a thousand runs in a sweep.

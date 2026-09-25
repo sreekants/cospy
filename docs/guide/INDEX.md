@@ -132,7 +132,7 @@ A module existing is not evidence that a feature exists. See [`scaffolding.md`](
 | Directory | Purpose |
 |---|---|
 | `src/` | All Python source, in the four packages above. The only place you edit code |
-| `apps/` | The four programs, `coslaunch`, `cviz`, `costopic` and `cosservice`, each with a man page |
+| `apps/` | The four programs: `coslaunch`, `cviz`, `costopic` and `cosservice`. Their man pages are in `docs/tools/` |
 | `config/` | `cos.ini`, the YAML manifests that say what to load, Legata rule texts, and per-location data under `map/`, `simulation/` and `weather/` |
 | `templates/cluster/` | The configuration template the sweep generator copies once per case |
 | `tests/` | pytest suites mirroring `src/`: `tests/cos`, `tests/maritime`, `tests/rules` |
@@ -140,7 +140,7 @@ A module existing is not evidence that a feature exists. See [`scaffolding.md`](
 | `idl/` | Interface contracts for the remote API, one `.idl` per service |
 | `samples/` | Standalone examples: a minimal simulation (`minsim`) and an OpenBridge conning-display prototype |
 | `papers/` | The research the platform serves: the ER 2024 paper and current work |
-| `docs/` | This guide, the taxonomies, references, and the generated API pages (`mkdocs`) |
+| `docs/` | This guide, the tools' man pages (`docs/tools/`), taxonomies, references, and the generated API pages (`mkdocs`) |
 | `build/` | Run output: the system log and metrics databases |
 
 Details of each are in [`support.md`](support.md).
@@ -153,7 +153,7 @@ Details of each are in [`support.md`](support.md).
 |---|---|
 | Understand what COS is for | [`concepts.md`](concepts.md) |
 | See one run from start to finish | [`walkthrough.md`](walkthrough.md#one-run-end-to-end) |
-| Run a simulation or watch one | [`communication.md`](communication.md) and the man page for [coslaunch](../../apps/coslaunch/coslaunch.md) |
+| Run a simulation or watch one | [`communication.md`](communication.md) and the man page for [coslaunch](../tools/coslaunch.md) |
 | Understand what happens in one step | [`kernel.md`](kernel.md#one-step-in-code) |
 | Find which class owns a path such as `/World/Sea` | [`kernel.md`](kernel.md#the-path-reference) |
 | Build a new location | [`MAPGEN.md`](../../tools/mapping/MAPGEN.md), then [`SHIPGEN.md`](../../tools/mapping/SHIPGEN.md) and [`WEATHERGEN.md`](../../tools/mapping/WEATHERGEN.md) |
@@ -184,7 +184,7 @@ Details of each are in [`support.md`](support.md).
 | Remote API | `src/cos/core/service`, `src/cos/core/api`, `config/api.yaml`, `idl/` |
 | Database layout | `config/data/maritime.xml` |
 | Sweep pipeline | `src/cos/cluster/runtime`, `src/cos/data/bi`, `templates/cluster` |
-| Tools and man pages | `apps/*/` |
+| Tools and man pages | `apps/*/`, `docs/tools/` |
 | Site data | `config/map`, `config/simulation`, `config/weather` |
 
 **Further reading.**
@@ -196,4 +196,4 @@ Details of each are in [`support.md`](support.md).
 | The risk formalism used in current work | `papers/IEEE-Access/DEFINITIONS.md` |
 | Building a location: land, sea, vessels | [`MAPGEN.md`](../../tools/mapping/MAPGEN.md), [`SHIPGEN.md`](../../tools/mapping/SHIPGEN.md) |
 | Generating weather | [`WEATHERGEN.md`](../../tools/mapping/WEATHERGEN.md) |
-| Running the programs | the man pages for [coslaunch](../../apps/coslaunch/coslaunch.md), [cviz](../../apps/cviz/cviz.md), [costopic](../../apps/costopic/costopic.md), [cosservice](../../apps/cosservice/cosservice.md) |
+| Running the programs | the man pages for [coslaunch](../tools/coslaunch.md), [cviz](../tools/cviz.md), [costopic](../tools/costopic.md), [cosservice](../tools/cosservice.md) |

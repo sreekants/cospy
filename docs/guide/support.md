@@ -73,7 +73,8 @@ by hand.
 
 ## `apps/` — the programs
 
-`coslaunch`, `cviz`, `costopic` and `cosservice`, each a thin program over `src/` with its own man page.
+`coslaunch`, `cviz`, `costopic` and `cosservice`, each a thin program over `src/`. Their man pages are in
+`docs/tools/`.
 What each does is in [communication.md](communication.md#talking-to-a-running-simulation).
 
 ## `idl/`, `samples/`, `papers/`, `docs/`, `build/`

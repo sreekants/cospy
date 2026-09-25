@@ -1,6 +1,6 @@
 # Communication: talking to a running simulation
 
-[← INDEX](INDEX.md) · [kernel](kernel.md) · tools: [coslaunch](../../apps/coslaunch/coslaunch.md) · [cviz](../../apps/cviz/cviz.md) · [costopic](../../apps/costopic/costopic.md) · [cosservice](../../apps/cosservice/cosservice.md)
+[← INDEX](INDEX.md) · [kernel](kernel.md) · tools: [coslaunch](../tools/coslaunch.md) · [cviz](../tools/cviz.md) · [costopic](../tools/costopic.md) · [cosservice](../tools/cosservice.md)
 
 How programs outside a simulation watch and question it, and how the parts inside it pass
 messages to each other.
