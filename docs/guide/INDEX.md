@@ -116,12 +116,12 @@ meaning is which.
 `src/` holds four top-level packages. The dependencies run one way: `rules` → `maritime` → `cos`.
 Sizes count lines of Python. The full treatment of each package is in [`layers.md`](layers.md).
 
-| Package | Size | Classes | Role | Status |
-|---|---|---|---|---|
-| [`cos`](layers.md#cos--the-simulation-operating-system) | 25.8k | 335 | The domain-neutral simulation OS: kernel, object tree, tick loop, messaging, persistence, Legata, a generic world of shapes and vehicles | ok |
-| [`maritime`](layers.md#maritime--the-domain-layer) | 7.4k | 118 | The maritime domain: vessels, sea zones, encounters, manoeuvres, the COLREG evaluator | navigation and traffic are scaffolding |
-| [`rules`](layers.md#rules--regulation-content) | 4.9k | 65 | Regulation content: 41 COLREG rule classes and the examiners | ⚠ 33 rule classes and 9 examiners are stubs |
-| [`cai`](layers.md#cai--planning-experiments) | 0.5k | 2 | Path-planning experiments (RRT, A*, Dijkstra) | ⚠ not used by COS |
+| Package | Classes | Role | Status |
+|---|---|---|---|
+| [`cos`](layers.md#cos--the-simulation-operating-system) | 335 | The domain-neutral simulation OS: kernel, object tree, tick loop, messaging, persistence, Legata, a generic world of shapes and vehicles | ok |
+| [`maritime`](layers.md#maritime--the-domain-layer) | 118 | The maritime domain: vessels, sea zones, encounters, manoeuvres, the COLREG evaluator | navigation and traffic are scaffolding |
+| [`rules`](layers.md#rules--regulation-content) |  65 | Regulation content: 41 COLREG rule classes and the examiners | ⚠ 33 rule classes and 9 examiners are stubs |
+| [`cai`](layers.md#cai--planning-experiments) |  2 | Path-planning experiments (RRT, A*, Dijkstra) | ⚠ not used by COS |
 
 A module existing is not evidence that a feature exists. See [`scaffolding.md`](scaffolding.md).
 
