@@ -53,6 +53,15 @@ class TargetShipResolver(VesselResolver):
 		return 'large' if self.vessel.weight >= self.os.weight else 'small'
 
 	@simproperty
+	def FogSignal(self):
+		""" Symbol property - FogSignal, whether the target ship is sounding its fog signal
+		"""
+		if self.vessel is None:
+			return None
+
+		return self.vessel.is_signaled('Signal', 'FogHorn')
+
+	@simproperty
 	def PersonsOnBoard(self):
 		""" Symbol property - PersonsOnBoard
 

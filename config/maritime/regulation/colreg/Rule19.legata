@@ -80,7 +80,7 @@ clause['COLREG.Rule19.d']:{
 clause['COLREG.Rule19.e']:{
     : {
         condition: { 
-            : (OS, TS).Detect in ['Signal.FogHorn'] 
+            : TS.FogSignal is true
             : ((OS, TS).Direction in ['Position.Abeam']) and
               ((OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.SafeRange) 
         }

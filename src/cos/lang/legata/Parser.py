@@ -891,18 +891,14 @@ class Parser:
         self.throw( p, f'Ambiguous logical expression using {type} in {typename}. Try using braces.' )
         return
 
-    def to_map(self, pairmap, value):
+    def to_map(self, pairs, pairmap):
         # Iterate through the definitions and add them to the list
-        for d in value:
+        for d in pairs:
             name        = str(d[0])
             value       = d[1]
             if isinstance(value, SymbolType):
                 value	= value.value
-            elif isinstance(value, int) == True:
-                value   = str(value)
-            elif isinstance(value, float) == True:
-                value   = str(value)
-            elif isinstance(value) is not str:
+            elif isinstance(value, str) == False:
                 value   = str(value)
             pairmap[name] = value
         return

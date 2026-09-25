@@ -85,6 +85,11 @@ class Vessel(Vehicle):
         self.status         = Status.UNKNOWN
         self.restriction    = Restriction.NONE
 
+        # Maps an intent category to the value set its actions are recorded in
+        self.intents        = {
+            'Signal': self.intent
+        }
+
         # TODO: Load from the configuration
         self.underkeel_clearance   = .1
         self.motion_allowance      = 0
@@ -141,6 +146,37 @@ class Vessel(Vehicle):
         """
         self.state( Status.AGROUND )
 
+
+    def signal(self, category:str, action:str, state:bool):
+        """ Raises or lowers a signal, recorded as the intent '<category>.<action>'
+        in the value set mapped to the category
+        Arguments
+        	category -- Intent category (e.g. 'Signal')
+        	action -- Action within the category (e.g. 'FogHorn')
+        	state -- True to raise the signal, False to lower it
+        """
+        values  = self.intents.get(category, None)
+        if values is None:
+            return False
+
+        intent  = f'{category}.{action}'
+        if state:
+            values.set(intent)
+        else:
+            values.reset(intent)
+        return True
+
+    def is_signaled(self, category:str, action:str)->bool:
+        """ Checks whether a signal is raised
+        Arguments
+        	category -- Intent category (e.g. 'Signal')
+        	action -- Action within the category (e.g. 'FogHorn')
+        """
+        values  = self.intents.get(category, None)
+        if values is None:
+            return False
+
+        return values.has(f'{category}.{action}')
 
     def force(self, type, value):
         """ Updates he force vector on the vessel

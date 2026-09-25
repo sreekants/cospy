@@ -38,6 +38,15 @@ class OwnShipResolver(VesselResolver):
 			self.vessel		= None
 		return
 
+	@simproperty
+	def FogSignal(self):
+		""" Symbol property - FogSignal, whether the own ship is sounding its fog signal
+		"""
+		if self.vessel is None:
+			return None
+
+		return self.vessel.is_signaled('Signal', 'FogHorn')
+
 
 if __name__ == "__main__":
 	test = OwnShipResolver()
