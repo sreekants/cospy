@@ -52,5 +52,7 @@ To simmarize, `cospy` is best understood as the foundational software layer for 
 
 ## Quick Links
   * [Getting Started Guide](docs/GettingStarted.md)
+  * [Architecture Guide](docs/guide/INDEX.md)
+
 
 <sub>Copyright 2023, Norwegian University of Science and Technology.</sub>
