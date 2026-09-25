@@ -13,8 +13,8 @@ class Headon(Maneuver):
 		Arguments
 			"""
 		Maneuver.__init__( self, 'HEADON', 'vessel.headon',
-					[EncounterType.HO]
-					  )
+					[EncounterType.HO],
+					'head_on' )
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -37,17 +37,6 @@ class Headon(Maneuver):
 		self.range	= 10.0
 		return
 
-	def regulate(self, ctxt:Context, vessel:Vessel, msg, arg):
-		""" Invokes a regulation event for a vessel
-		Arguments
-			ctxt -- Simulation context
-			vessel -- Vessel that triggered the regulation event
-			msg -- Message describing the regulation event
-			arg -- Opaque argument to pass as context
-		"""
-		Maneuver.regulate(self, ctxt, vessel, msg, arg)
-		self.data( ctxt, 'head_on', (arg[2].OS.recid, arg[2].TS.recid, ctxt.sim.tickcount(), ctxt.sim.tickcount) )
-		return
 
 
 if __name__ == "__main__":

@@ -10,6 +10,9 @@ from cos.core.kernel.Context import Context
 from cos.model.rule.Situation import Situation as RuleSituation
 from cos.model.rule.Context import Context as RuleContext
 from cos.math.geometry.Distance import Distance
+from cos.core.utilities.ArgList import ArgList
+from maritime.regulation.colreg.Classification import Thresholds, classify, configure
+import maritime.regulation.colreg.Classification as Classification
 
 import numpy as np
 import math
@@ -33,7 +36,20 @@ class Encounter(EncounterSituation):
 		Arguments
 			"""
 		EncounterSituation.__init__(self, 'Situation/Maritime', 'Incident')
-		self.range		= 10.0
+		self.range		= Classification.THRESHOLDS.range
+		return
+
+	def on_start(self, ctxt:Context, config):
+		""" Loads the classification thresholds, shared with ColregResolver
+		Arguments
+			ctxt -- Simulation context
+			config -- Module information; arg thresholds= names evaluator.yaml
+		"""
+		args	= ArgList( (config or {}).get('arg', '') or '' )
+		if args['thresholds'] is not None:
+			configure( Thresholds.load(ctxt.sim.config.resolve(args['thresholds'])) )
+
+		self.range	= Classification.THRESHOLDS.range
 		return
 
 	def evaluate(self, ctxt:Context, rule_ctxt:RuleContext):
@@ -86,35 +102,14 @@ class Encounter(EncounterSituation):
 
 	@staticmethod
 	def maneuver(OS:Vessel, TS:Vessel):
-		""" Compute the maneuver of two ships
+		""" Classifies the encounter of two ships from bearings and courses (COS.025)
 		Arguments
 			OS -- Own ship
 			TS -- Target ship
+		Returns
+			(α, β, type) as Classification.classify()
 		"""
-		todeg	= 180/np.pi
-		Vos		= OS.velocity
-		Vts		= TS.velocity
-
-		α		= math.atan2( Vos[1]-Vts[1], Vos[0]-Vts[0] )*todeg
-		β		= math.atan2( Vts[1]-Vos[1], Vts[0]-Vos[0] )*todeg
-
-		uα		= math.sqrt(Vos[0]**2+Vos[1]**2)
-		uβ		= math.sqrt(Vts[0]**2+Vts[1]**2)
-
-		situation = Type.NAR
-		if abs(β)<13 and abs(α)<13:
-			situation = Type.HO			# Head On
-		elif abs(β)<112.5 and abs(α)<45 and (uβ>uα):
-			situation = Type.OTSO		# Overtaken
-		elif abs(α)<112.5 and abs(β)<45 and (uα<uβ):
-			situation = Type.OTGW		# Overtaking
-		elif (-112.5 < β < 0.0) and (-10 < α < 112.5):
-			situation = Type.CRSO		# Stand On
-		elif (-112.5 <  α < 0.0) and ( -10 < β < 112.5):
-			situation = Type.CRGW		# Give Way
-
-		# print( f'DEFAULT: α={α}, β={β}, uα={uα}, uβ={uβ}')
-		return α, β, situation
+		return classify( OS, TS )
 
 	def trigger_maneuver(self, rule_ctxt:RuleContext, type, OS:Vessel, TS:Vessel, args ):
 		""" Trigger a maneuver event

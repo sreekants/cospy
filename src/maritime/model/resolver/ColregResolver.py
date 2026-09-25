@@ -7,6 +7,7 @@ from maritime.model.vessel.Vessel import Vessel, Status
 from cos.model.resolver.Resolver import Resolver, simproperty
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
+from maritime.regulation.colreg.Classification import classify, NAMES
 
 import numpy as np
 import math
@@ -66,26 +67,10 @@ class ColregResolver(Resolver):
 		if self.situation is not None:
 			return self.situation
 
-		if self.tr.TS is None:
+		if self.tr.ts is None:
 			return None
 
-		α		= self.tr.Approach()
-		β		= self.tr.TargetApproach()
-
-		uα		= self.tr.Velocity()
-		uβ		= self.tr.TargetVelocity()
-
-		situation = ''
-		if abs(β)<13 and abs(α)<13:
-			situation = 'HeadOn'			# Head On
-		elif abs(β)<112.5 and abs(α)<45 and (uβ>uα):
-			situation = 'Overtaken'			# Overtaken
-		elif abs(α)<112.5 and abs(β)<45 and (uα<uβ):
-			situation = 'Overtaking'		# Overtaking
-		elif (-112.5 < β < 0.0) and (-10 < α < 112.5):
-			situation = 'StandOn'			# Stand On
-		elif (-112.5 <  α < 0.0) and ( -10 < β < 112.5):
-			situation = 'GiveWay'			# Give Way
+		situation	= NAMES[ classify(self.tr.os, self.tr.ts)[2] ]
 
 		self.situation	= situation
 		return self.situation

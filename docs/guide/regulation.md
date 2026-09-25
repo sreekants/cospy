@@ -27,7 +27,9 @@ bearing, and the **closest point of approach** (CPA), the smallest distance the 
 neither changes course. The thresholds are in `config/evaluator.yaml`. An encounter is followed in
 stages as the range closes through 4,000 m, 1,100 m and 200 m. A pass closer than 100 m is too
 close, closer than 50 m is a near miss, and closer than 30 m would most likely have been a collision.
-The angles between the two headings decide whether it is head-on, crossing or overtaking.
+Where each vessel lies relative to the other's course, and whether the courses cross, decide whether it
+is head-on, crossing or overtaking (`maritime/regulation/colreg/Classification.py`, with the `theta_*`
+angles in `config/evaluator.yaml`). Only vessels that are under way and closing are classified.
 
 **What it produces.** Two things for each situation it finds: a row in a `fact_…` table, and an event
 on the message queue, such as `vessel.crossing`, for the rules to pick up.

@@ -30,10 +30,15 @@ language:
        module: maritime.model.resolver.MEZResolver
        config: 
 
+     # Own ship against target ship (COS.026). collision.dcpa: predicted passing
+     # distance in metres under which a closing pair is OnCollisionCourse
+     # (evaluator.yaml r_min_cpa). Visibility is the midpoint of the scenario
+     # WEATHER profile's range in config/weather/profiles.yaml, in nautical miles;
+     # visibility.default applies when the profile has none.
      - scope: 'target'
        prefix: null
        module: maritime.model.resolver.TargetResolver
-       config: 
+       config: collision.dcpa=100 visibility.default=10
 
      - scope: 'tss'
        prefix: null

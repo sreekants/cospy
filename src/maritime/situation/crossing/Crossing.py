@@ -13,8 +13,8 @@ class Crossing(Maneuver):
 		Arguments
 			"""
 		Maneuver.__init__( self, 'Crossing', 'vessel.crossing',
-					[EncounterType.CRGW, EncounterType.CRSO]
-					  )
+					[EncounterType.CRGW, EncounterType.CRSO],
+					'crossing' )
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -36,17 +36,6 @@ class Crossing(Maneuver):
 		self.range	= 10.0
 		return
 
-	def regulate(self, ctxt:Context, vessel:Vessel, msg, arg):
-		""" Invokes a regulation event for a vessel
-		Arguments
-			ctxt -- Simulation context
-			vessel -- Vessel that triggered the regulation event
-			msg -- Message describing the regulation event
-			arg -- Opaque argument to pass as context
-		"""
-		Maneuver.regulate(self, ctxt, vessel, msg, arg)
-		self.data( ctxt, 'crossing', (arg[2].OS.recid, arg[2].TS.recid, ctxt.sim.tickcount(), ctxt.sim.tickcount) )
-		return
 
 if __name__ == "__main__":
 	test = Crossing("XXX")

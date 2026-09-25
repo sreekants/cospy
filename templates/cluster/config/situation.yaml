@@ -10,7 +10,7 @@ packages:
       # Situation transformers (coverts ground observattions into incidents)
      - name: Encounter
        module: maritime.regulation.colreg.Encounter
-       arg: 
+       arg: thresholds=$(CONFIG)/evaluator.yaml   # theta_* angles for head-on, overtaking, crossing; r_colregs_2_max range
 
       # Situation evaluators (coverts incidents into situations)
      - name: Crossing
