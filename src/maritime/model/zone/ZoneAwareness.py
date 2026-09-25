@@ -16,10 +16,20 @@ from maritime.model.zone.Ledger import Ledger, FindingGuard, SOURCE_EXAMINER, se
 from cos.model.examiner.Precondition import PreconditionSet
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
+from cos.model.rule.Situation import Situation
+
+import queue
 
 # Situation attributes an examiner may declare a dependency on.
 SITUATION_ATTRIBUTES = ('os', 'ts', 'fleet', 'zone', 'eez', 'harbour',
 						'lane', 'mez', 'tss')
+
+# Encounter messages the conduct and situation faculties post (COS.023 L4)
+ENCOUNTER_MESSAGES	= ('vessel.approach', 'vessel.overtaking', 'vessel.crossing')
+
+# Where an examiner's situations come from (COS.023 L5)
+ENCOUNTERS	= 'encounters'		# subscribed encounter messages
+SUBJECTS	= 'subjects'		# each vessel under test, alone
 
 
 class ZoneAware:
@@ -28,6 +38,7 @@ class ZoneAware:
 
 	# Finding scope; overridable per class under 'findings' in zones.yaml
 	FINDING		= {'scope': 'change'}
+	SITUATIONS	= SUBJECTS
 
 	def init_zones(self, ctxt:Context, config:ArgList, requires=None):
 		""" Loads the zone rules and declares the examiner's preconditions
@@ -46,6 +57,79 @@ class ZoneAware:
 		# Named zone_gate, not gate: a mixin must not overwrite the gate of the
 		# examiner it is mixed into (RiskExaminer declares its own per group).
 		self.zone_gate	= PreconditionSet( {'vessel': list(requires or ['os'])} )
+
+		self.situations	= queue.Queue()
+		for message in ENCOUNTER_MESSAGES:
+			self.subscribe( message, self.on_encounter )
+		return
+
+	def on_encounter(self, ctxt:Context, evt):
+		""" Queues an encounter; ignored by examiners that iterate subjects
+		Arguments
+			ctxt -- Simulation context
+			evt -- (kind, own ship, target or EncounterEvent, ...)
+		"""
+		if self.SITUATIONS != ENCOUNTERS:
+			return
+
+		own		= evt[1]
+		target	= getattr( evt[2], 'TS', evt[2] )
+		self.situations.put( Situation(own, target) )
+		return
+
+	def evaluate(self, ctxt:Context, rule_ctxt):
+		""" Judges each situation in turn, restoring the shared one afterwards (COS.007)
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		saved	= rule_ctxt.situation
+		try:
+			for situation in self.pending( rule_ctxt ):
+				rule_ctxt.situation	= situation
+				self.reset_resolver( ctxt, rule_ctxt )
+				self.judge( ctxt, rule_ctxt )
+		finally:
+			rule_ctxt.situation	= saved
+			self.reset_resolver( ctxt, rule_ctxt )
+		return
+
+	def pending(self, rule_ctxt):
+		""" This pass's situations: queued encounters, or each subject alone
+		Arguments
+			rule_ctxt -- Rule context
+		"""
+		queued	= []
+		while not self.situations.empty():
+			queued.append( self.situations.get() )
+
+		if self.SITUATIONS == SUBJECTS:
+			subjects	= getattr( rule_ctxt, 'subjects', None ) or rule_ctxt.vessels or []
+			return [ Situation(vessel, None) for vessel in subjects ]
+
+		unique	= {}
+		for situation in queued:
+			unique.setdefault( (situation.os.id, situation.ts.id), situation )
+		return list( unique.values() )
+
+	@staticmethod
+	def reset_resolver(ctxt:Context, rule_ctxt):
+		""" Points the resolver at the current situation
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		resolver	= getattr( rule_ctxt, 'resolver', None )
+		if resolver is not None:
+			resolver.reset( ctxt, rule_ctxt )
+		return
+
+	def judge(self, ctxt:Context, rule_ctxt):
+		""" Judges rule_ctxt.situation; each examiner supplies this
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
 		return
 
 	def finding_guard(self, rules:ZoneRules)->FindingGuard:
@@ -122,6 +206,8 @@ class ZoneAware:
 		if draught is None:
 			draught	= getattr( vessel, 'draught', None )
 		if draught is None:
+			draught	= getattr( getattr(vessel, 'model', None), 'draft', None )	# where OS.Draft reads it
+		if draught is None:
 			return None
 
 		allowance	= getattr( vessel, 'underkeel_clearance', 0.0 ) or 0.0
@@ -181,17 +267,18 @@ class ZoneAware:
 		return ( self.identify(vessel), event, subject )
 
 	def announce(self, ctxt:Context, topic:str, message:str, payload):
-		""" Posts a message to an IPC topic
+		""" Posts a message to one IPC topic or several
 		Arguments
 			ctxt -- Simulation context
-			topic -- IPC topic
+			topic -- IPC topic, or a list of them
 			message -- Message name
 			payload -- Message body
 		"""
 		if topic is None:
 			return
 
-		ctxt.ipc.push( topic, message, ctxt, payload, 8 )
+		for t in ([topic] if isinstance(topic, str) else topic):
+			ctxt.ipc.push( t, message, ctxt, payload, 8 )
 		return
 
 	@staticmethod

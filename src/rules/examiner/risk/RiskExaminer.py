@@ -2,7 +2,7 @@
 # Filename: RiskAssessment.py
 # Description: Bayesian risk-assessment faculty
 
-from rules.examiner.risk.RiskModel import HAZARDS, CURRENCY, Binding, VoyageTrack, LossMatrix
+from rules.examiner.risk.RiskModel import HAZARDS, CURRENCY, Binding, VoyageTrack, LossMatrix, ConcernWeights
 from rules.examiner.risk.RiskModel import load, hazard_probabilities
 
 from maritime.model.zone.ZoneAwareness import ZoneAware
@@ -15,6 +15,8 @@ from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
 from cos.model.rule.Context import Context as RuleContext
 from cos.model.examiner.Precondition import PreconditionSet
+from cos.model.rule.Situation import Situation
+from cos.math.geometry.Distance import Distance
 
 import yaml
 
@@ -43,10 +45,14 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.bn			= None
 		self.engine		= None
 		self.matrix		= LossMatrix()	# Rl, from the territory's risk file
+		self.weights	= ConcernWeights()	# Rw, from the same file
 		self.spatial	= SpatialZones()	# Sea.Type -> spatial zone, per territory
-		self.tracks		= {}		# Vessel IMO -> VoyageTrack
+		self.tracks		= {}		# Vessel id -> VoyageTrack; IMOs repeat in scenario data
 		self.timer		= None
 		self.trace		= False
+		self.range		= 4000.0	# Encounter range for pair evidence [m], COLREG stage 2
+		self.states		= {}		# Node -> state labels
+		self.rejected	= set()		# (node, state) pairs already logged
 
 		# Evidence bindings, simulation term -> BN node
 		self.bindings	={
@@ -92,6 +98,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		"""
 		poll_at		= config["sample.frequency"]
 		self.timer	= Ticker( int(poll_at) ) if poll_at is not None else Ticker( 1 )
+		self.range	= config.ToFloat( 'range', self.range )
 
 		# Zone awareness supplies the map shapes under a vessel, which the
 		# spatial classification of Rl needs.
@@ -114,6 +121,20 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			config -- Configuration attributes
 		"""
 		self.cache_shapes( ctxt )
+		self.record_weights( ctxt )
+		return
+
+	def record_weights(self, ctxt:Context):
+		""" Records Rw once per run, unapplied to Rl (REQ-004-08)
+		Arguments
+			ctxt -- Simulation context
+		"""
+		if self.weights.errors():
+			return
+
+		now		= ctxt.sim.now()
+		for concern, weight in self.weights.normalised().items():
+			self.data( ctxt, 'rw', (now, concern, weight, float(self.weights.declared[concern])) )
 		return
 
 	def evaluate(self, ctxt:Context, rule_ctxt:RuleContext):
@@ -126,29 +147,74 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		if (self.engine is None) or (self.timer.signaled() == False):
 			return
 
+		saved	= rule_ctxt.situation
 		try:
 			for vessel in rule_ctxt.subjects:
-				self.assess( ctxt, rule_ctxt, vessel )
-		except Exception as e:
-			ctxt.log.error( self.id, f'Runtime error: {str(e)}' )
+				try:
+					self.assess( ctxt, rule_ctxt, vessel )
+				except Exception as e:
+					ctxt.log.error( self.id, f'{getattr(vessel, "name", vessel)}: {e}' )
+		finally:
+			rule_ctxt.situation	= saved
+			self.reset_resolver( ctxt, rule_ctxt )
 
 		return
 
+	def encounters(self, rule_ctxt:RuleContext, vessel):
+		""" The situations a vessel is assessed in (COS.008)
+		Arguments
+			rule_ctxt -- Rule context
+			vessel -- Vessel under assessment
+		Returns
+			One situation per other vessel within range, or the vessel alone when none is
+		"""
+		targets	= [ v for v in (rule_ctxt.vessels or []) if (v is not vessel)
+					and Distance.euclidean(vessel.location, v.location) <= self.range ]
+
+		if not targets:
+			return [ Situation(vessel, None) ]
+
+		return [ Situation(vessel, target) for target in targets ]
+
+	def infer(self, ctxt:Context, rule_ctxt:RuleContext, situation):
+		""" Runs one inference pass for one situation
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+			situation -- Own ship, and target if any
+		Returns
+			(evidence, hazards), or None when nothing resolves
+		"""
+		evidence	= self.observe( ctxt, rule_ctxt, situation )
+		if evidence is None:
+			return None
+
+		self.engine.setEvidence( evidence )
+		self.engine.makeInference()
+
+		return evidence, hazard_probabilities( self.engine )
+
 	def assess(self, ctxt:Context, rule_ctxt:RuleContext, vessel):
-		""" Runs one inference pass and scores the vessel
+		""" Scores the vessel once, in its worst encounter
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
 			vessel -- Vessel under assessment
 		"""
-		evidence	= self.observe( ctxt, rule_ctxt, vessel )
-		if evidence is None:
+		worst	= None
+		for situation in self.encounters( rule_ctxt, vessel ):
+			result	= self.infer( ctxt, rule_ctxt, situation )
+			if (result is not None) and ((worst is None) or (result[1]['any'] > worst[1]['any'])):
+				worst	= result + ( situation.ts, )
+
+		if worst is None:
 			return
 
+		evidence, hazards, target	= worst
+
+		# Rl is read from the engine, so restore the worst encounter's posterior
 		self.engine.setEvidence( evidence )
 		self.engine.makeInference()
-
-		hazards		= hazard_probabilities( self.engine )
 
 		# Rl is indexed by where the vessel is as well as by what may happen to
 		# it, so the spatial zone is resolved before the loss row is taken.
@@ -159,7 +225,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		cost		= sum( concerns.values() )
 
 		imo			= vessel.config["identifier"]["imo"]
-		track		= self.track( imo )
+		track		= self.track( vessel.id )
 		increment	= track.charge( cost, hazards['any'], evidence )
 
 		report		= {
@@ -174,26 +240,27 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			'survival'		: track.survival,
 			'cumulative'	: track.cost,
 			'evidence'		: evidence,
+			'target'		: target.config["identifier"]["imo"] if target is not None else None,
 		}
 
 		self.publish( ctxt, vessel, report )
 		self.record( ctxt, report )
 		return
 
-	def observe(self, ctxt:Context, rule_ctxt:RuleContext, vessel):
+	def observe(self, ctxt:Context, rule_ctxt:RuleContext, situation):
 		""" Resolves each bound simulation term into a BN evidence state
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
-			vessel -- Vessel under assessment
+			situation -- Own ship, and target if any; terms resolve against it alone
 		Returns
 			A dictionary of BN node name -> state label
 		"""
 		evidence	= None
 
-		# NOTE: RuleContext.resolve() resolves against rule_ctxt.situation, which the
-		# conduct faculties populate per encounter. Terms naming TargetShip therefore
-		# only resolve while an encounter is in scope; see the note in the manifest.
+		rule_ctxt.situation	= situation
+		self.reset_resolver( ctxt, rule_ctxt )
+
 		for k,v in self.bindings.items():
 			if self.resolvable(k, rule_ctxt) == False:
 				continue
@@ -204,6 +271,10 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 					continue			# Unobserved: the node keeps its prior
 
 				state	= binding.discretize( value )
+				if (state is not None) and (state not in self.labels( binding['node'] )):
+					self.reject( ctxt, binding, state )
+					continue
+
 				if state is not None:
 					if evidence is None:
 						evidence	= {}
@@ -213,15 +284,39 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		return evidence
 
 
-	def track(self, imo):
+	def labels(self, node):
+		""" The states of a network node, cached
+		Arguments
+			node -- Node name
+		"""
+		if node not in self.states:
+			self.states[node]	= set( self.bn.variable(node).labels() )
+
+		return self.states[node]
+
+	def reject(self, ctxt:Context, binding, state):
+		""" Logs, once per node and state, an observation the node has no state for
+		Arguments
+			ctxt -- Simulation context
+			binding -- Binding that produced it
+			state -- Offending state label
+		"""
+		key	= ( binding['node'], state )
+		if key not in self.rejected:
+			self.rejected.add( key )
+			ctxt.log.error( self.id, f'{binding["term"]} gave state {state!r}, which node '
+									 f'{binding["node"]} does not have; left unobserved' )
+		return
+
+	def track(self, key):
 		""" Returns the voyage track for a vessel, creating it if needed
 		Arguments
-			imo -- Vessel IMO
+			key -- Vessel id
 		"""
-		if imo not in self.tracks:
-			self.tracks[imo]	= VoyageTrack()
+		if key not in self.tracks:
+			self.tracks[key]	= VoyageTrack()
 
-		return self.tracks[imo]
+		return self.tracks[key]
 
 	def publish(self, ctxt:Context, vessel, report):
 		""" Publishes the assessment. Advisory only - a vessel that did not
@@ -278,6 +373,16 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			report['matrix'],
 		) )
 
+		# Rb long form: one row per concern, zeros included (REQ.018)
+		for concern, exposure in report['exposure'].items():
+			self.data( ctxt, 'rb', (
+				report['time'],
+				report['vessel'],
+				report['zone'],
+				concern,
+				exposure,
+			) )
+
 		return
 
 	def __load_network(self, ctxt:Context, file):
@@ -309,8 +414,15 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		config		= yaml.safe_load( ctxt.sim.fs.read_file_as_bytes(path) )
 		risk		= config['risk']
 
+		names	= set( self.bn.names() ) if self.bn is not None else None
 		for k in self.bindings.keys():
-			self.bindings[k]	= [ Binding(b) for b in risk.get(k, []) ]
+			bindings	= [ Binding(b) for b in risk.get(k, []) ]
+			if names is not None:
+				for b in bindings:
+					if b.get('node') not in names:
+						ctxt.log.error( self.id, f'Binding {k}: node {b.get("node")!r} is not in the network; dropped (COS.006)' )
+				bindings	= [ b for b in bindings if b.get('node') in names ]
+			self.bindings[k]	= bindings
 
 		# Valuation is NOT read here. What a consequence is worth is a national
 		# convention in a national currency, so it belongs to the territory and
@@ -336,9 +448,25 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 
 		self.matrix		= LossMatrix( risk )
 		self.spatial	= SpatialZones( risk.get('spatial_zones', {}) )
+		self.weights	= ConcernWeights( risk )
 
 		for problem in self.spatial.errors() + self.matrix.errors( self.bn ):
 			ctxt.log.error( self.id, f'Rl: {problem}' )
+
+		problems	= self.weights.errors()
+		for problem in problems:
+			ctxt.log.error( self.id, f'Rw: {problem} in {file}' )
+
+		vocabulary	= set( getattr(getattr(self, 'rules', None), 'vocabulary', []) or [] )
+		if vocabulary and (set(self.matrix.concerns) != vocabulary):
+			problem	= f'concerns {sorted(self.matrix.concerns)} differ from the Ro vocabulary {sorted(vocabulary)} (REQ-018-04)'
+			ctxt.log.error( self.id, f'Rb: {problem} in {file}' )
+			problems.append( problem )
+
+		if problems:
+			raise ValueError( f'{self.id}: {file}: {"; ".join(problems)}' )
+
+		ctxt.log.info( self.id, f'Rw: {self.weights.normalised()}' )
 
 		# Rl is stored as a bare matrix literal with no axis labels in the row,
 		# so the order that produced it is recorded here. Without this line a

@@ -119,7 +119,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 		self.current	= self.path[0]
 		self.next		= self.path[1]
-		self.atpoint	= 0
+		self.atpoint	= 1				# Index of next
 		self.x			= self.current[1]
 		self.atstate	= OperationState.START
 		return
@@ -128,7 +128,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.path		= path
 		self.current	= self.path[0]
 		self.next		= self.path[1]
-		self.atpoint	= 0
+		self.atpoint	= 1				# Index of next
 		self.x			= self.current[1]
 		self.looprun	= looprun
 		self.reverse	= reverse
@@ -210,7 +210,8 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			self.next		= self.path[1]
 			self.x			= self.current[1]
 			self.atstate	= OperationState.START
-			self.on_at_waypoint(world, t, self.atpoint, self.current)
+			self.on_at_waypoint(world, t, 0, self.current)
+			self.atpoint	= 1				# Index of next
 			return False
 		
 		if self.delay > t.timestep:

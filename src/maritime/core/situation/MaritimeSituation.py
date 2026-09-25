@@ -9,6 +9,9 @@ from cos.core.kernel.Context import Context
 from cos.math.geometry.Distance import Distance
 
 
+REGULATION_TOPICS	= [ '/Faculty/Regulation/Rules', '/Faculty/Practice/Examiners' ]
+
+
 class MaritimeSituation(EncounterSituation):
 	def __init__(self, type, scope='Situation/Maritime'):
 		""" Constructor
@@ -27,8 +30,8 @@ class MaritimeSituation(EncounterSituation):
 			msg -- Message describing the regulation event
 			arg -- Opaque argument to pass as context
 		"""
-		# Notify regulations
-		self.post( ctxt, ['/Faculty/Regulation/Rules'], msg, arg )
+		# Rules and examiners are separate namespaces, each addressed explicitly (REQ.027)
+		self.post( ctxt, REGULATION_TOPICS, msg, arg )
 
 		# Notify the vessel
 		if vessel is not None:

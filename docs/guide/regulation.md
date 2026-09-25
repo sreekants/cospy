@@ -37,7 +37,7 @@ monitor (first in `situation.yaml`) loads the list from `$(SIMULATION)/undertest
 `VesselFilter` at `/Faculty/Situation/Filter`. The evaluator puts those vessels on the own-ship side of
 every pair (`rule_ctxt.subjects`) and every vessel on the other side (`rule_ctxt.vessels`). The monitors,
 the local rules and the risk examiner then judge only the vessels under test, and with one vessel in a
-fleet of N the pairs per pass fall from N(N−1) to about 2N. The same file can name fact tables whose
+fleet of N the pairs per pass fall from N(N−1) to N−1: 462 to 21 for Türkeli's 22 vessels. The same file can name fact tables whose
 rows the data manager keeps only when a vessel column names a vessel under test:
 
 ```yaml
@@ -50,6 +50,10 @@ telemetry:                         # optional
 With no file, or an empty list, every vessel is under test, as before. An entry that matches no
 vessel, or several, stops the run at start and names the entry. IMO numbers and names repeat in the
 scenario databases, so `guid` or `recid` are the safe keys.
+
+Each run records its list in `fact_under_test`: one row per vessel under test, with the entry that named
+it, the source file and the filtered tables. With no list there is one row with `filtered` = 0, so every
+row of a sweep says which vessels were under test.
 
 **When it runs.** On a timer set to half a second, which in practice fires about once a second
 ([levels and timescales](synthesis.md#levels-and-timescales)).

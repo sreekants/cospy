@@ -257,6 +257,71 @@ class LossMatrix:
 		return f'rows[{", ".join(zones)}] cols[{", ".join(self.concerns)}]'
 
 
+class ConcernWeights:
+	""" Rw, the relative weight of the concerns, normalised to sum to 1 (DEFINITIONS 1.6)
+	"""
+
+	def __init__(self, config=None):
+		""" Constructor
+		Arguments
+			config -- The 'risk' block of a territory's risk file
+		"""
+		config			= config or {}
+
+		self.concerns	= list( config.get('concerns', []) )
+		self.declared	= dict( config.get('weights', {}) or {} )
+		return
+
+	def errors(self):
+		""" Checks the weights are keyed on exactly the declared concerns (REQ-004-05)
+		Returns
+			A list of problems, empty when the weights are usable
+		"""
+		problems	= []
+
+		missing		= sorted( set(self.concerns) - set(self.declared) )
+		if missing:
+			problems.append( f'weights is missing {missing}' )
+
+		unknown		= sorted( set(self.declared) - set(self.concerns) )
+		if unknown:
+			problems.append( f'weights names undeclared concerns {unknown}' )
+
+		for concern, weight in self.declared.items():
+			try:
+				if float( weight ) < 0.0:
+					problems.append( f'weights[{concern}] is negative' )
+			except (TypeError, ValueError):
+				problems.append( f'weights[{concern}] is not a number: {weight!r}' )
+
+		if (not problems) and (sum( float(w) for w in self.declared.values() ) <= 0.0):
+			problems.append( 'weights sum to zero' )
+
+		return problems
+
+	def normalised(self):
+		""" Rw as used: concern -> weight, summing to 1
+		"""
+		total	= sum( float(self.declared[c]) for c in self.concerns )
+
+		return { c: float(self.declared[c]) / total for c in self.concerns }
+
+
+def compose_ev(ro, rw, rl):
+	""" R_ev[i][j] = Ro[i][j] * Rw[j] * Rl[i][j], composed at rollup (D4)
+	Arguments
+		ro -- zone -> concern -> observed violations
+		rw -- concern -> normalised weight
+		rl -- zone -> concern -> loss
+	Returns
+		zone -> concern -> R_ev, over the zones and concerns of rl
+	"""
+	return { zone: { concern: float( (ro.get(zone, {}) or {}).get(concern, 0.0) )
+							  * rw.get(concern, 0.0) * loss
+					 for concern, loss in row.items() }
+			 for zone, row in rl.items() }
+
+
 class Binding(dict):
 	""" One evidence binding: a simulation term, the BN node it feeds, and the
 	discretization that turns an observation into a node state.
@@ -272,6 +337,8 @@ class Binding(dict):
 		method	= self.get("discretize", "state")
 
 		if method == "state":
+			if isinstance( value, bool ):
+				return 'yes' if value else 'no'		# Predicates such as OnCollisionCourse
 			return str(value)
 
 		if method == "threshold":

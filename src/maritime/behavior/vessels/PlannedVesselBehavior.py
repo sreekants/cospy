@@ -32,6 +32,8 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		# Behavior watchdogs
 		self.watchdogs	= {}
 
+		self.log			= ctxt.log if ctxt is not None else None
+		self.unknown		= set()		# Trip actions already reported as unknown
 		return
 
 	def intialize(self, ctxt, actor, vehicle, config:dict):
@@ -197,13 +199,33 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 	def on_at_waypoint(self, world, t, n, pt):
 		if len(pt[3]):
-			activity  = pt[3].split('=')
+			activity  = pt[3].split('(')
 
-			match activity:
+			match activity[0].strip():
 				case 'anchor':
+					# Duration in seconds on the simulation clock
 					args  = re.search(r'\((.*)\)', pt[3])
-					if args is not None:
-						self.anchor( float(args[0]) )
+					try:
+						self.anchor( float(args[1]) )
+						return
+					except (TypeError, ValueError):
+						pass
+
+			self.on_unknown_action( pt[3] )
+		return
+
+	def on_unknown_action(self, action):
+		""" Logs a trip action no behavior handles, once per vessel and action
+		Arguments
+			action -- Action as written in the trip file
+		"""
+		if action in self.unknown:
+			return
+
+		self.unknown.add( action )
+		if self.log is not None:
+			name	= getattr( getattr(self, 'vehicle', None), 'name', '?' )
+			self.log.warning( 'Trip', f'{name}: unknown trip action {action!r} ignored' )
 		return
 
 	def on_end_anchor(self, ctxt):

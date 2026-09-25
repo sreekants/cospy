@@ -1,5 +1,11 @@
 packages:
   modules:  # Examiner modules
+     # Drives every examiner under /Faculty/Practice/Examiners, separately from
+     # the COLREG evaluator that drives the rules, with its own cadence (REQ.028).
+     - name: Practice.Evaluator
+       module: maritime.practice.PracticeEvaluator
+       config: sample.frequency=1 resolvers=$(CONFIG)/legata.yaml
+
      # The concern examiners read their zone-local rules, thresholds and
      # penalty scorecard from config/examiner/zones.yaml. 'zones' is the only
      # argument most of them need, and it defaults to that path when omitted.

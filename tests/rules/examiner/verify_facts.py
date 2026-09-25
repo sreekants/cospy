@@ -187,6 +187,30 @@ def main():
 	for zone, concern, n, total in matrix:
 		report.info( f'{zone:20} {concern:14} {n:>6} rows  {total:>12.1f}' )
 
+	# ---- Rb long form (REQ.018) ---------------------------------------------
+	print( 'Rb' )
+	rb		= count( db, 'select count(*) from fact_rb' )
+	if rb == 0:
+		report.skip( 'RB-X1', 'fact_rb is empty; nothing to reconcile' )
+	else:
+		short	= db.execute( 'select report_time, vessel_id, count(distinct concern) from fact_rb '
+							  'group by report_time, vessel_id having count(distinct concern) != ?',
+							  (len(vocabulary),) ).fetchall()
+		report.check( 'RB-X1', not short, f'every sample has a row for each of the {len(vocabulary)} concerns'
+					  + (f' - {len(short)} samples short' if short else '') )
+
+		concerns	= { c for (c,) in db.execute('select distinct concern from fact_rb') }
+		zones		= { z for (z,) in db.execute('select distinct zone from fact_rb') }
+		report.check( 'RB-X2', (concerns == vocabulary) and zones <= spatial,
+					  f'Rb indexed on the Ro basis: concerns {sorted(concerns)}, zones {sorted(zones)}' )
+
+		off		= db.execute( 'select a.report_time, a.own_ship, a.cost, sum(b.exposure) '
+							  'from fact_risk_assessment a join fact_rb b '
+							  'on a.report_time = b.report_time and a.own_ship = b.vessel_id and a.case_id = b.case_id '
+							  'group by a.id having abs(a.cost - sum(b.exposure)) > 1e-6 * max(1.0, abs(a.cost))' ).fetchall()
+		report.check( 'RB-X3', not off, f'cost equals the sum of each sample\'s exposure'
+					  + (f' - {len(off)} samples differ' if off else '') )
+
 	print( f'{"FAILED" if report.failed else "PASSED"}: {report.failed} failure(s)' )
 	return 1 if report.failed else 0
 

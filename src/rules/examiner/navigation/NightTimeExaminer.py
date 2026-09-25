@@ -59,8 +59,8 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		self.cache_shapes( ctxt )
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Evaluates the expression
+	def judge(self, ctxt:Context, rule_ctxt):
+		""" Judges rule_ctxt.situation
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context

@@ -2852,6 +2852,38 @@ CREATE TABLE fact_concern
 
 CREATE INDEX idx_fact_concern ON fact_concern(dim_gps_id,dim_vessel_id);
 
+CREATE TABLE fact_rw
+(
+	dim_gps_id INTEGER,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	creation_time TIMESTAMP,
+	audit_status INTEGER,
+	case_id INTEGER,
+	report_time REAL,
+	concern VARCHAR(255),
+	weight REAL,
+	declared REAL
+);
+
+CREATE INDEX idx_fact_rw ON fact_rw(dim_gps_id);
+
+CREATE TABLE fact_rb
+(
+	dim_gps_id INTEGER,
+	dim_vessel_id INTEGER,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	creation_time TIMESTAMP,
+	audit_status INTEGER,
+	case_id INTEGER,
+	report_time REAL,
+	vessel_id INTEGER,
+	zone VARCHAR(255),
+	concern VARCHAR(255),
+	exposure REAL
+);
+
+CREATE INDEX idx_fact_rb ON fact_rb(dim_gps_id,dim_vessel_id);
+
 CREATE TABLE fact_rl
 (
 	dim_gps_id INTEGER,
@@ -2893,4 +2925,24 @@ CREATE TABLE fact_risk_assessment
 );
 
 CREATE INDEX idx_fact_risk_assessment ON fact_risk_assessment(dim_gps_id,dim_vessel_id);
+
+CREATE TABLE fact_under_test
+(
+	dim_gps_id INTEGER,
+	dim_vessel_id INTEGER,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	creation_time TIMESTAMP,
+	audit_status INTEGER,
+	case_id INTEGER,
+	report_time REAL,
+	filtered INTEGER,
+	vessel_id INTEGER,
+	guid VARCHAR(255),
+	name VARCHAR(255),
+	entry VARCHAR(255),
+	source VARCHAR(255),
+	telemetry VARCHAR(255)
+);
+
+CREATE INDEX idx_fact_under_test ON fact_under_test(dim_gps_id,dim_vessel_id);
 

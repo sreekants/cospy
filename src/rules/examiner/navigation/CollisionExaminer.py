@@ -3,7 +3,7 @@
 # Description: Implementation of the CollisionExaminer class
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
-from maritime.model.zone.ZoneAwareness import ZoneAware
+from maritime.model.zone.ZoneAwareness import ZoneAware, ENCOUNTERS
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 
@@ -29,6 +29,7 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 	TOPIC		= '/Faculty/Concern/Collision'
 	MESSAGE		= 'vessel.collision.cost'
 	EVENT		= 'collision.cost'
+	SITUATIONS	= ENCOUNTERS
 
 	def __init__(self):
 		""" Constructor
@@ -68,8 +69,8 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 		self.cache_shapes( ctxt )
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Evaluates the expression
+	def judge(self, ctxt:Context, rule_ctxt):
+		""" Judges rule_ctxt.situation
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context

@@ -78,8 +78,8 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 		self.waves	= ctxt.sim.objects.get_all( self.WAVE_FIELD )
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Evaluates the expression
+	def judge(self, ctxt:Context, rule_ctxt):
+		""" Judges rule_ctxt.situation
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context

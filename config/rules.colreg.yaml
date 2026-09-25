@@ -57,9 +57,11 @@ packages:
        module: rules.colreg.rule13.Rule13
        config: automata=$(CONFIG)/maritime/regulation/colreg/Rule13.legata
 
+     # Head-on (COS.022). Onset: courses reciprocal and the other vessel ahead within headon.angle
+     # degrees, closing, predicted passing distance under headon.dcpa metres, within headon.range.
      - name: Rule14
        module: rules.colreg.rule14.Rule14
-       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule14.legata
+       config: automata=$(CONFIG)/maritime/regulation/colreg/Rule14.legata headon.angle=13 headon.range=4000 headon.dcpa=500
 
      - name: Rule15
        module: rules.colreg.rule15.Rule15

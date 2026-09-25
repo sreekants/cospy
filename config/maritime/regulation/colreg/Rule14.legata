@@ -1,5 +1,5 @@
 # COLREG.Rule14 :
-# Status        : REVIEW
+# Status        : IMPLEMENTED (COS.022) - fed by Rule14.py, judged at the closest point of approach
 
 define: {
     OS: OwnShip
@@ -10,13 +10,18 @@ define: {
 # (a) When two power-driven vessels are meeting on reciprocal or nearly reciprocal courses so as to
 # involve risk of collision each shall alter her course to starboard so that each shall pass on the port
 # side of the other.
+#
+# Judged by its outcome. Rule14.py queues a pair once it has passed its closest approach, marked
+# HeadOn if the pair met the definition in (b) when the encounter began. Each vessel must then have
+# the other on her port side. Altering course to port, or standing on into a starboard-to-starboard
+# pass, both show up here.
 clause['COLREG.Rule14.a']:{
     :{
-        condition: { 
-            : (OS, TS).ClosestApproachPoint in Vessel.Collision.TimeToEncounter.CollisionRange
+        condition: {
+            : (OS, TS).HeadOn is true
             }
         assure:{
-            : OS.Heading in range(1, 90)
+            : (OS, TS).PassingSide is 'Port'
         }
     }
 }
@@ -24,20 +29,15 @@ clause['COLREG.Rule14.a']:{
 # (b) Such a situation shall be deemed to exist when a vessel sees the other ahead or nearly ahead and
 # by night she could see the masthead lights of the other in a line or nearly in a line and/or both
 # sidelights and by day she observes the corresponding aspect of the other vessel.
-clause['COLREG.Rule14.b']:{
-    :{
-        condition: { 
-            :((OS, TS).Visible is true) or ((OS, TS).LightVisible is true)
-            }
-        assure:{
-            : OS.Heading in range(1, 90)
-        }
-    }
-}
+#
+# A definition, not an obligation, so it is not a clause. Rule14.head_on() applies it: courses
+# reciprocal within headon.angle, the other vessel ahead within headon.angle, closing, and a predicted
+# passing distance under headon.dcpa (rules.colreg.yaml). The masthead-light and aspect tests reduce
+# to the same geometry.
 
 # (c) When a vessel is in any doubt as to whether such a situation exists she shall assume that it does
 # exist and act accordingly.
 ################################################################
 # clause['COLREG.Rule14.c'] {}
-# Clauses of intentional doubt beyond the scope 
+# Clauses of intentional doubt beyond the scope
 ################################################################

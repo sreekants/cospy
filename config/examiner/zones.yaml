@@ -158,6 +158,9 @@ collision:
 
 # Where the signal examiner posts its (intent, situation) tuples. COLREG rule
 # 34 governs manoeuvring and warning signals, so that rule set listens here.
+# A single topic or a list: rules and examiners are separate namespaces
+# (/Faculty/Regulation/Rules, /Faculty/Practice/Examiners), so a consumer on
+# the practice side must be named explicitly (REQ.027).
 signal:
   topic: /Faculty/Regulation/Rules
   message: vessel.signal

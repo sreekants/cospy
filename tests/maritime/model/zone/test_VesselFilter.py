@@ -94,6 +94,19 @@ class VesselFilterTestCase(unittest.TestCase):
 		vf.resolve( FLEET )
 		self.assertTrue( vf.keeps('fact_crossing', ['own_ship'], [108]) )
 
+	def test_records_name_the_vessels_and_source(self):
+		vf	= self.loaded( 'under_test:\n  - name: True North\n'
+						   'telemetry:\n  fact_collision: [own_ship]\n  fact_approach: [own_ship]\n' )
+		vf.resolve( FLEET )
+		self.assertEqual( vf.records(), [ (1, '9627837', FLEET[0].id, 'True North', 'name=True North',
+										   vf.source, 'fact_approach,fact_collision') ] )
+
+	def test_records_say_when_nothing_is_filtered(self):
+		vf	= VesselFilter()
+		vf.load( '/nonexistent/undertest.yaml' )
+		vf.resolve( FLEET )
+		self.assertEqual( vf.records(), [ (0, 0, '', '', '', '/nonexistent/undertest.yaml', '') ] )
+
 
 if __name__ == '__main__':
 	unittest.main()

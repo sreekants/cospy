@@ -22,7 +22,7 @@ class Examiner(Faculty):
 
 	@property
 	def category(self):
-		return 'Regulation/Examiner'
+		return 'Practice/Examiners'
 
 	def on_init(self, ctxt:Context, module):
 		""" Callback for simulation initialization

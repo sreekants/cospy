@@ -9,6 +9,26 @@ copyright: Maintained by <a href="https://.com"></a>.
 
 nav:
   - Home: index.md
+  - Guide:
+      - Overview: guide/INDEX.md
+      - Concepts: guide/concepts.md
+      - Walkthrough: guide/walkthrough.md
+      - Kernel: guide/kernel.md
+      - World: guide/world.md
+      - Regulation: guide/regulation.md
+      - Communication: guide/communication.md
+      - Sweeps: guide/sweeps.md
+      - Synthesis: guide/synthesis.md
+      - Packages: guide/layers.md
+      - Outside src: guide/support.md
+      - Extending: guide/extending.md
+      - Scaffolding: guide/scaffolding.md
+      - Glossary: guide/glossary.md
+  - Tools:
+      - coslaunch: tools/coslaunch.md
+      - cviz: tools/cviz.md
+      - costopic: tools/costopic.md
+      - cosservice: tools/cosservice.md
   - Modules: modules.md
 plugins:
   - search

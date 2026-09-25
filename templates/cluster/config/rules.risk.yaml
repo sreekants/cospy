@@ -1,8 +1,8 @@
 # Manifest fragment for the Bayesian risk-assessment examiner.
 #
 # Loads alongside rules.colreg.yaml. The examiner registers under
-# '/Faculty/Regulation/Examiner/Risk/RiskExaminer', which
-# COLREG.Evaluator.init_faculties() already collects.
+# '/Faculty/Practice/Examiners/Risk/RiskExaminer', which the
+# PracticeEvaluator (rules.examiner.yaml) collects and drives (REQ.027/028).
 #
 # Four configuration files, deliberately separate because they change for
 # different reasons and on different schedules:

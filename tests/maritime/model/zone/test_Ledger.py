@@ -233,7 +233,11 @@ class Grounder(ZoneAware):
 	id		= 'Grounder'
 
 	def __init__(self, ctxt):
+		self.callbacks	= {}
 		self.init_zones( ctxt, {'zones': None, 'territory': None} )
+
+	def subscribe(self, method, handler):
+		self.callbacks[method]	= handler
 
 
 class ZoneAwareTestCase(unittest.TestCase):
@@ -277,6 +281,7 @@ class NightKeyTestCase(unittest.TestCase):
 		ctxt		= Ctxt( [Shape('Turkeli.Strait', 'STRAIT')] )
 		exam		= NightTimeExaminer.__new__( NightTimeExaminer )
 		exam.id		= 'NightTime'
+		exam.callbacks	= {}
 		exam.init_zones( ctxt, {'zones': None, 'territory': None} )
 		shapes		= exam.ledger.shapes( ctxt, Vessel(1) )
 		rules		= exam.rules.rules_at( shapes )

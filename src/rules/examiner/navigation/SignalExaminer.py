@@ -20,9 +20,8 @@ from cos.core.utilities.ArgList import ArgList
 #
 #     (intent, situation)
 #
-#   to the topic the rule set listens on - by default /Faculty/Regulation/Rules,
-#   the same topic MaritimeSituation.regulate() posts regulation events to - and
-#   lets rule 34 decide. Keeping the judgement there keeps implementation of the
+#   to the topics listed in zones.yaml - by default /Faculty/Regulation/Rules,
+#   where rule 34 listens - and lets rule 34 decide. Keeping the judgement there keeps implementation of the
 #   rule in one place.
 #
 #   The tuple is only posted when it changes. Rule 34 is about the signal
@@ -33,7 +32,7 @@ from cos.core.utilities.ArgList import ArgList
 
 class SignalExaminer(ZoneAware, NavigationExaminer):
 	MESSAGE		= 'vessel.signal'
-	TOPIC		= '/Faculty/Regulation/Rules'
+	TOPIC		= ['/Faculty/Regulation/Rules']
 
 	def __init__(self):
 		""" Constructor
@@ -67,8 +66,8 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 		self.cache_shapes( ctxt )
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Evaluates the expression
+	def judge(self, ctxt:Context, rule_ctxt):
+		""" Judges rule_ctxt.situation
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context

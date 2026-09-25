@@ -20,6 +20,7 @@ class VesselFilter:
 		self.vessels	= []		# Resolved vessels under test
 		self.ids		= set()		# Object ids of the vessels under test
 		self.values		= set()		# Every identifier they carry, as strings
+		self.named		= {}		# Object id -> entry that named it, as key=value
 		return
 
 	@property
@@ -69,6 +70,7 @@ class VesselFilter:
 		self.vessels	= []
 		self.ids		= set()
 		self.values		= set()
+		self.named		= {}
 
 		problems	= []
 		for n, entry in enumerate( self.entries ):
@@ -84,6 +86,7 @@ class VesselFilter:
 			if vessel.id not in self.ids:
 				self.vessels.append( vessel )
 				self.ids.add( vessel.id )
+				self.named[vessel.id]	= f'{key}={value}'
 				self.values.update( str(self.identifier(vessel, k)) for k in KEYS
 									if self.identifier(vessel, k) not in (None, '', 0, '0') )
 
@@ -149,6 +152,19 @@ class VesselFilter:
 				return True
 
 		return False
+
+	def records(self):
+		""" Rows for fact_under_test, recording the list with the data (REQ-024-06)
+		Returns
+			One row per vessel under test, or one row with filtered=0 when nothing is filtered
+		"""
+		source	= self.source or ''
+		tables	= ','.join( sorted(self.telemetry) )
+		if not self.active:
+			return [ (0, 0, '', '', '', source, '') ]
+
+		return [ (1, self.identifier(v, 'imo') or 0, v.id, getattr(v, 'name', '') or '',
+				  self.named.get(v.id, ''), source, tables) for v in self.vessels ]
 
 	def describe(self)->str:
 		""" One line for the log

@@ -42,6 +42,10 @@ class UnderTest(Situation):
 
 		ctxt.log.info( self.id, self.filter.describe() )
 
+		now		= ctxt.sim.now()
+		for row in self.filter.records():
+			ctxt.sim.data.push( 'fact_under_test', (now,) + row )
+
 		for key, value in self.filter.ambiguous( vessels ):
 			ctxt.log.warning( self.id, f'{key}={value} of a vessel under test is shared by another '
 									   f'vessel; telemetry filtered on it may keep that vessel\'s rows' )

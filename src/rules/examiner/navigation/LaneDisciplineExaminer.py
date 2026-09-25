@@ -3,7 +3,7 @@
 # Description: Implementation of the LaneDisciplineExaminer class
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
-from maritime.model.zone.ZoneAwareness import ZoneAware
+from maritime.model.zone.ZoneAwareness import ZoneAware, ENCOUNTERS
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 
@@ -25,6 +25,7 @@ class LaneDisciplineExaminer(ZoneAware, NavigationExaminer):
 	TOPIC		= '/Faculty/Concern/Lane'
 	MESSAGE		= 'vessel.lane'
 	EVENT		= 'lane.overtaking_prohibited'
+	SITUATIONS	= ENCOUNTERS
 
 	OVERTAKING	= ('overtaking', 'overtake', 'overtaking_to_port', 'overtaking_to_starboard')
 
@@ -52,8 +53,8 @@ class LaneDisciplineExaminer(ZoneAware, NavigationExaminer):
 		self.cache_shapes( ctxt )
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Evaluates the expression
+	def judge(self, ctxt:Context, rule_ctxt):
+		""" Judges rule_ctxt.situation
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context

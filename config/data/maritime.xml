@@ -11207,6 +11207,131 @@
 </Measures>
 
 </Fact>
+<Fact> <Name>Rw</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_rw</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern - the j index of Rw</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Weight</Name>
+ <Type>float</Type>
+ <Display>Weight</Display>
+ <Description>Normalised weight of the concern; weights sum to 1</Description>
+ <FieldName>weight</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Declared</Name>
+ <Type>float</Type>
+ <Display>Declared</Display>
+ <Description>Weight as declared in the territory risk file, before normalisation</Description>
+ <FieldName>declared</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Rb</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_rb</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time - the sample, as in fact_risk_assessment</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone - the i index, as in fact_concern</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern - the j index, as in fact_concern</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Exposure</Name>
+ <Type>float</Type>
+ <Display>Exposure</Display>
+ <Description>Expected loss this concern contributes to the sample, USD</Description>
+ <FieldName>exposure</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
 <Fact> <Name>Rl</Name>
  <Type>Fact</Type>
  <Display />
@@ -11390,6 +11515,93 @@
  <Display>Cumulative Loss</Display>
  <Description>Cumulative expected loss for the voyage</Description>
  <FieldName>cumulative</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>UnderTest</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_under_test</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Filtered</Name>
+ <Type>int</Type>
+ <Display>Filtered</Display>
+ <Description>1 when a list restricts the run; 0 when every vessel is under test</Description>
+ <FieldName>filtered</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Guid</Name>
+ <Type>string</Type>
+ <Display>Guid</Display>
+ <Description>Vessel guid as in vessel.s3db</Description>
+ <FieldName>guid</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Name</Name>
+ <Type>string</Type>
+ <Display>Name</Display>
+ <Description>Vessel name</Description>
+ <FieldName>name</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Entry</Name>
+ <Type>string</Type>
+ <Display>Entry</Display>
+ <Description>List entry that named the vessel; key=value</Description>
+ <FieldName>entry</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>File the list was loaded from</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Telemetry</Name>
+ <Type>string</Type>
+ <Display>Telemetry</Display>
+ <Description>Fact tables whose rows are kept only for vessels under test</Description>
+ <FieldName>telemetry</FieldName>
  <Unit />
 </Measure>
 </Measures>
