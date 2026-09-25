@@ -95,10 +95,13 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 		zone	= self.zone_name( shapes )
 
 		if clearance > margin:
+			# Clear water ends the finding, so a regrounding counts again
+			self.settle( vessel, self.CONTACT, shapes )
+			self.settle( vessel, self.NEAR_MISS, shapes )
 			return 0.0
 
 		event	= self.CONTACT if clearance <= 0.0 else self.NEAR_MISS
-		penalty	= self.violate( ctxt, vessel, event, zone, value=clearance,
+		penalty	= self.violate( ctxt, vessel, event, shapes, value=clearance,
 								detail=f'depth {depth:.1f} m, clearance {clearance:.2f} m, '
 									   f'margin {margin:.2f} m' )
 

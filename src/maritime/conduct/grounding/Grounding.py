@@ -45,7 +45,7 @@ class Grounding(MaritimeConductSituation):
 			rule_ctxt -- Rule context
 		"""
 		self.for_each_pair( ctxt, rule_ctxt,
-				rule_ctxt.vessels,
+				rule_ctxt.subjects,
 				rule_ctxt.world.environ.reliefs,
 				self.on_ground )
 

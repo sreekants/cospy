@@ -17,6 +17,7 @@ class Context:
 		self.ctxt		= ctxt
 		self.resolver	= resolver
 		self.vessels	= vessels			# Vessels to be included in motion analysis
+		self.subjects	= vessels			# Own-ship side of each pair: the vessels under test
 		self.bodies		= None				# Rigid bodies to be included in obstruction analysis
 		self.world		= world
 

@@ -37,13 +37,13 @@ class Collision(MaritimeConductSituation):
 		"""
 		self.for_each_in_range( ctxt, rule_ctxt,
 				self.interest_range,
-				rule_ctxt.vessels,
+				rule_ctxt.subjects,
 				rule_ctxt.vessels,
 				self.on_monitor_vessel )
 
 		self.for_each_in_range( ctxt, rule_ctxt,
 				self.interest_range,
-				rule_ctxt.vessels,
+				rule_ctxt.subjects,
 				rule_ctxt.bodies,
 				self.on_monitor_obstacle )
 

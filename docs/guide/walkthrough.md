@@ -93,15 +93,18 @@ is fog. The traffic level is `hdta`, high density.
    restricted in the strait. *True North* entered that zone, and the clause failed.
 7. **Price.** The site's scorecard, `rule/score.json`, prices a broken `Turkeli.Bosphorous.DeepDraft`
    clause at 1,000,000 under the concern `Violation.DeepDraft`, for this vessel only.
-8. **Record.** The rule hands the data manager a row for the table `fact_ro`: concern, time, the
-   vessel's IMO number (9627837), penalty. Every 5 seconds the data manager writes its rows to the
-   run's database file.
+8. **Record.** The rule hands the data manager a row for `fact_concern`, the one table that holds
+   `Ro`: the vessel's IMO number (9627837), the rule and clause that fired, the map area, the spatial
+   zone (`internal_waters`), the concern (`Violation.DeepDraft` maps to `safety` in
+   `config/examiner/zones.yaml`) and the penalty. The clause keeps failing on every pass while the ship
+   is in the zone, but it is one violation, so it is recorded once per occurrence. Every 5 seconds the
+   data manager writes its rows to the run's database file.
 9. **Stop.** After 1,500 steps, about 58 seconds of wall-clock time, the runner stops, the faculties
    shut down in reverse order, and the last rows are written.
 
-The result: `fact_ro` gained 435 rows. Thirty of them are `Violation.DeepDraft` for *True North*,
-1,000,000 each. The other 405 are `Generic` rows with a penalty of 0, from clauses that have no price
-on the scorecard.
+The result: `fact_concern` gained one row for each time *True North* was found too deep in the zone,
+1,000,000 each. Clauses with no price on the scorecard failed too; they are named in the log, not
+recorded.
 
 Two things generalise from that walk. First, **nothing in the run was scripted as a test.** Nobody
 wrote "check *True North* at step 400". The encounters were found by monitors, and the violation was

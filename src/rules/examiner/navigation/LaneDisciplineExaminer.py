@@ -82,7 +82,7 @@ class LaneDisciplineExaminer(ZoneAware, NavigationExaminer):
 			shapes -- Map shapes enclosing the vessel
 		"""
 		zone	= self.zone_name( shapes )
-		penalty	= self.violate( ctxt, vessel, self.EVENT, zone,
+		penalty	= self.violate( ctxt, vessel, self.EVENT, shapes,
 								detail='overtaking where the zone bars it' )
 
 		self.announce( ctxt, self.TOPIC, self.MESSAGE, {

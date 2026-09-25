@@ -66,7 +66,7 @@ class Harbour(MaritimeConductSituation):
 			if len(zones) <= 0:
 				continue
 			
-			for lhs in rule_ctxt.vessels:
+			for lhs in rule_ctxt.subjects:
 				for rhs in zones:
 					self.on_oversee_zone( ctxt, rule_ctxt, (lhs, rhs), f'{zone_type}.enter' )
 

@@ -7,6 +7,10 @@ from cos.core.kernel.Context import Context
 
 import queue
 
+# Fields every fact table opens with, supplied by serialize()
+AUDIT_FIELDS	= 3
+AUDIT_REGISTER	= 1000
+
 class Partition:
 	def __init__(self, ctxt:Context, topic:str, fields:list):
 		""" Constructor
@@ -17,6 +21,12 @@ class Partition:
 		self.fields		= fields
 		self.case_id	= ctxt.sim.case_id
 		return
+
+	@property
+	def width(self)->int:
+		""" Number of values a caller's payload must carry
+		"""
+		return len(self.fields) - AUDIT_FIELDS
 
 	def add(self, at, data):
 		""" Queues data for write
@@ -52,13 +62,11 @@ class Partition:
 		at		= rec[0]
 		data	= rec[1]
 
-		# If all the fields are provided
-		AUDIT_REGISTER	= 1000
-
+		# creation_time, audit_status, case_id
 		values	= []
-		values.append( str(self.case_id) )
 		values.append( str(at) )
 		values.append( str(AUDIT_REGISTER) )
+		values.append( str(self.case_id) )
 		values.extend( map(str, data) )
 
 		db.addkv( self.topic, self.fields, values )		

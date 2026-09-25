@@ -163,8 +163,9 @@ assure*.
 clause for crossings is never evaluated. In the running example no COLREG rule raised a violation.
 
 **An unpriced clause costs nothing.** The Türkeli rule has a speed-limit clause, but the scorecard has
-no price for it. When it fails, a `Generic` row with a penalty of 0 is written. The 405 zero rows in
-[one run, end to end](walkthrough.md#one-run-end-to-end) are exactly this.
+no price for it. When it fails, nothing is written to `Ro`: a violation nobody has priced is not an
+observed violation. The run log names each such clause once (`Unpriced clause … failed`), so the list of
+prices still to be set is not lost.
 
 **An unmeasured term keeps its default.** Legata reads the world through resolvers
 ([the rules faculty](regulation.md#the-rules-faculty--legata-rules-and-examiners)). Some resolvers return fixed values

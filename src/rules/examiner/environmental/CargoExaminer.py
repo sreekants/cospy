@@ -92,7 +92,7 @@ class CargoExaminer(ZoneAware, ConcernExaminer):
 
 		if len( manifest ) == 0:
 			if self.report_empty:
-				self.violate( ctxt, vessel, self.UNDECLARED, zone,
+				self.violate( ctxt, vessel, self.UNDECLARED, shapes,
 							  detail='vessel declares no cargo manifest' )
 			return
 
@@ -100,7 +100,7 @@ class CargoExaminer(ZoneAware, ConcernExaminer):
 		if len( carried ) == 0:
 			return
 
-		penalty	= self.violate( ctxt, vessel, self.RESTRICTED, zone, value=len(carried),
+		penalty	= self.violate( ctxt, vessel, self.RESTRICTED, shapes, value=len(carried),
 								detail=f'carrying {", ".join(carried)} where '
 									   f'{", ".join(sorted(restricted))} is barred' )
 

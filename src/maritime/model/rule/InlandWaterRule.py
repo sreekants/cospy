@@ -9,13 +9,17 @@ from cos.model.rule.Context import Context as RuleContext
 from cos.core.utilities.ArgList import ArgList
 from cos.lang.logic.Decision import Decision
 from cos.model.rule.Situation import Situation
+from maritime.model.rule.ScoredRule import ScoredRule
+from maritime.model.zone.Ledger import SOURCE_LOCAL
 
 from typing import Any
 import queue, fnmatch
 
 
 
-class InlandWaterRule(Rule):
+class InlandWaterRule(ScoredRule, Rule):
+	SOURCE		= SOURCE_LOCAL
+
 	def __init__(self, zonetype):
 		""" Constructor
 		Arguments
@@ -76,9 +80,15 @@ class InlandWaterRule(Rule):
 			typelist -- Types of zones to watch
 		"""
 		Rule.setup(self, ctxt, config)
+		self.init_scoring( ctxt )
+		self.check_scorecard( ctxt )
 
 		zonekey		= config['zonekey']
 		objmgr		= ctxt.sim.objects
+
+		# A single type name, not a string to iterate by character
+		if isinstance( typelist, str ):
+			typelist	= [ typelist ]
 
 		zones		= []
 		for typename in typelist:
@@ -95,6 +105,26 @@ class InlandWaterRule(Rule):
 			self.zones	= zones
 		
 
+		return
+
+	def check_scorecard(self, ctxt:Context):
+		""" Checks every priced clause names a concern that maps into the vocabulary
+		Arguments
+			ctxt -- Simulation context
+		"""
+		problems	= []
+		for clause, entry in self.scorecard.scores.items():
+			named	= (entry or {}).get( 'concern' )
+			if named is None:
+				problems.append( f'clause {clause!r} names no concern' )
+			elif self.ledger.rules.concern( named ) is None:
+				problems.append( f'clause {clause!r} names {named!r}, which maps to no concern' )
+
+		for problem in problems:
+			ctxt.log.error( self.regulation, f'Scorecard: {problem}' )
+
+		if problems:
+			raise ValueError( f'{self.regulation}: {len(problems)} scorecard problem(s)' )
 		return
 
 
@@ -126,7 +156,7 @@ class InlandWaterRule(Rule):
 		if self.zones is None:
 			return
 		
-		for v in rule_ctxt.vessels:
+		for v in rule_ctxt.subjects:
 			self.add_situation( Situation(v, None) )
 
 		self.evaluate_rule( ctxt, rule_ctxt )
@@ -178,33 +208,23 @@ class InlandWaterRule(Rule):
 			rule_ctxt -- Rule context
 			err -- Error attribute
 		"""
-		os		= rule_ctxt.situation.os
-		ts		= rule_ctxt.situation.ts
-		imo		= int(os.imo)
-		score	= self.scorecard.evaluate(clausename) 
-		if score is None:
-			return
-		
-		now		= ctxt.sim.now()
-		fact	= score.get('fact', 'InlandWaterViolation.generic')
-		concern	= score.get('concern', 'Generic')
-		penalty	= score.get('penalty', 0.0)
-		filter 	= score.get('filter', [])
+		situation	= rule_ctxt.situation
+		os			= situation.os
 
-		if penalty <= -10.0:
+		score		= self.score( ctxt, situation, clausename )
+		if score is None:
+			self.note_unpriced( ctxt, clausename )
 			return
 
 		# Match the vessel if a filter is specified.
+		filter 		= score.get('filter', [])
 		if len(filter):
 			if os.id not in filter:
 				return
 
-		# Log the error in the database
-		# self.data(ctxt, fact, [os.recid, ts.recid if ts is not None else 0, now, now])
-		self.data(ctxt, 'ro', [f'\'{concern}\'',now, imo, penalty])
-
-		# Override the function to score the violation
-		# ctxt.log.error( self.regulation, f'Violated clause {clausename} for {concern}')
+		zone		= getattr( situation, 'zone', None )
+		self.record_violation( ctxt, self.regulation, os, clausename,
+							   getattr(zone, 'name', None), score['penalty'], score.get('concern') )
 		return
 
 	def on_overtaking(self, ctxt:Context, evt):

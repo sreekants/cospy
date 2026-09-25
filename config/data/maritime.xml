@@ -60,65 +60,6 @@
 </Measures>
 
 </Fact>
-<Fact> <Name>Ro</Name>
- <Type>Fact</Type>
- <Display />
- <Description />
- <TableName>fact_ro</TableName>
- <Dimensions>Location.gps</Dimensions>
-
- <Measures><Measure> <Name>CreationTime</Name>
- <Type>time</Type>
- <Display>Creation time</Display>
- <Description>Creation time</Description>
- <FieldName>creation_time</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>AuditStatus</Name>
- <Type>int</Type>
- <Display>Audit status</Display>
- <Description>Audit status</Description>
- <FieldName>audit_status</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>CaseId</Name>
- <Type>int</Type>
- <Display>Scenario hash key</Display>
- <Description>Scenario Key</Description>
- <FieldName>case_id</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Crs</Name>
- <Type>string</Type>
- <Display>Crs</Display>
- <Description>Crs</Description>
- <FieldName>crs</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>ReportTime</Name>
- <Type>double</Type>
- <Display>Time</Display>
- <Description>Report time</Description>
- <FieldName>report_time</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>VesselId</Name>
- <Type>int</Type>
- <Display>Vessel IMO</Display>
- <Description>Vessel IMO</Description>
- <FieldName>vessel_id</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Penalty</Name>
- <Type>float</Type>
- <Display>Penalty Score</Display>
- <Description>Penalty Score</Description>
- <FieldName>penalty</FieldName>
- <Unit />
-</Measure>
-</Measures>
-
-</Fact>
 <Fact> <Name>Heading</Name>
  <Type>Fact</Type>
  <Display />
@@ -11207,10 +11148,17 @@
  <FieldName>vessel_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Producer family - examiner, colreg or local</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Examiner</Name>
  <Type>string</Type>
- <Display>Examiner</Display>
- <Description>Examiner that raised the finding</Description>
+ <Display>Raised by</Display>
+ <Description>Examiner class or rule that raised the finding</Description>
  <FieldName>examiner</FieldName>
  <Unit />
 </Measure>
@@ -11221,11 +11169,25 @@
  <FieldName>event</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Area</Name>
+ <Type>string</Type>
+ <Display>Area</Display>
+ <Description>Innermost named map shape the vessel was in</Description>
+ <FieldName>area</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Zone</Name>
  <Type>string</Type>
  <Display>Zone</Display>
- <Description>Zone the violation occurred in</Description>
+ <Description>Spatial zone - the i index of Ro, as in fact_rl</Description>
  <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern - the j index of Ro, as in fact_rl</Description>
+ <FieldName>concern</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Penalty</Name>

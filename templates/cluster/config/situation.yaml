@@ -1,5 +1,12 @@
 packages:
   modules:  # Situation analysis modules
+     # The vessels under test (REQ.024). Situations are evaluated with these on
+     # the own-ship side of each encounter, and the fact tables listed in the
+     # file keep only their rows. No file, or an empty list: every vessel.
+     - name: UnderTest
+       module: maritime.situation.undertest.UnderTest
+       arg: file=$(SIMULATION)/undertest.yaml
+
       # Situation transformers (coverts ground observattions into incidents)
      - name: Encounter
        module: maritime.regulation.colreg.Encounter

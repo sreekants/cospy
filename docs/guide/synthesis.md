@@ -45,7 +45,7 @@ The same questions, asked of every part.
 | Environment | Map and weather databases | Shapes, fields, regions | `/World/...` | For the run | Yes: land, depth, zones, waves |
 | Actors | Fleet database, trip files | Vessels and behaviours | `/World/Vehicle/Vessel` | For the run | Yes: every movement |
 | Monitors | Vessel states | Situations | Topics, `fact_…` rows | Rows on disk | Yes: what the rules see |
-| Rules | Legata files, scorecards | Clause results, penalties | `fact_ro`, examiner tables | Rows on disk | Yes: the score |
+| Rules | Legata files, scorecards | Clause results, penalties | `fact_concern`, examiner tables | Rows on disk | Yes: the score |
 | Data manager | Faculties | Rows in memory | The run database | On disk, every 5 s | No |
 | Tools | Ports 5556/5557 | Nothing | Command line | No | No |
 | Sweep pipeline | Scenario variables | Folders, task file, merged database | Files | On disk | Decides which runs exist |
@@ -80,8 +80,9 @@ alone.
 6. **The vessel under test is just another vessel.** Because behaviours are plug-ins, an external
    navigation system is tested by putting it in the fleet file. Its penalties are then priced by the same
    scorecards as every other ship. ([the actors faculty](world.md#the-actors-faculty--the-vessels) + [the rules faculty](regulation.md#the-rules-faculty--legata-rules-and-examiners))
-7. **A price of 0 is a finding.** `Generic` rows show that a clause failed but nobody decided what it costs.
-   Counting them across a sweep lists the clauses whose price still needs to be set.
+7. **A missing price is a finding.** A failed clause with no price is named in the run log
+   (`Unpriced clause … failed`) rather than recorded. Collecting those lines across a sweep lists the
+   clauses whose price still needs to be set.
    ([what COS cannot see](concepts.md#what-cos-cannot-see) + [the rules faculty](regulation.md#the-rules-faculty--legata-rules-and-examiners))
 
 ---

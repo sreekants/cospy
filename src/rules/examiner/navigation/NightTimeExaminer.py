@@ -32,12 +32,13 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 	MESSAGE		= 'vessel.lights'
 	EVENT		= 'night.lights_missing'
 
+	# Once per vessel per night: the night is the finding's subject
+	FINDING		= {'scope': 'episode'}
+
 	def __init__(self):
 		""" Constructor
 		"""
 		NavigationExaminer.__init__(self)
-
-		self.reported	= set()		# Vessel IMOs already reported this night
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):
@@ -71,7 +72,6 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		shapes, rules, _depth	= self.survey( vessel )
 
 		if self.is_night( ctxt, rules ) == False:
-			self.reported.clear()		# A new day; report each vessel afresh
 			return
 
 		required	= rules.get( 'required_lights' ) or []
@@ -85,30 +85,27 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		if len( missing ) == 0:
 			return
 
-		self.score( ctxt, vessel, shapes, required, missing )
+		self.score( ctxt, vessel, shapes, rules, required, missing )
 		return
 
-	def score(self, ctxt:Context, vessel, shapes, required, missing):
+	def score(self, ctxt:Context, vessel, shapes, rules, required, missing):
 		""" Scores a vessel showing fewer lights than the zone requires
 		Arguments
 			ctxt -- Simulation context
 			vessel -- Own ship
 			shapes -- Map shapes enclosing the vessel
+			rules -- Merged zone rules
 			required -- Lights the zone requires
 			missing -- Lights not being shown
 		"""
 		imo		= self.identify( vessel )
 
-		# Once per vessel per night: an unlit ship is one finding, not one
-		# finding per tick for as long as it stays dark.
-		if imo in self.reported:
-			return 0.0
-
-		self.reported.add( imo )
-
 		zone	= self.zone_name( shapes )
-		penalty	= self.violate( ctxt, vessel, self.EVENT, zone, value=len(missing),
-								detail=f'not showing {", ".join(missing)}' )
+		penalty	= self.violate( ctxt, vessel, self.EVENT, shapes, value=len(missing),
+								detail=f'not showing {", ".join(missing)}',
+								subject=self.night( ctxt, rules ) )
+		if not penalty:
+			return 0.0
 
 		self.announce( ctxt, self.TOPIC, self.MESSAGE, {
 			'vessel'	: imo,
@@ -145,6 +142,31 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 			return (hour >= start) or (hour < end)
 
 		return start <= hour < end
+
+	def night(self, ctxt:Context, rules):
+		""" Which night it is: the date the current night began
+		Arguments
+			ctxt -- Simulation context
+			rules -- Merged zone rules
+		"""
+		now		= ctxt.sim.now()
+		end		= int( rules.get('night_to', 6) )
+		hour	= self.hour( ctxt )
+
+		if isinstance( now, datetime.datetime ):
+			day	= now.date()
+			if (hour is not None) and (hour < end):
+				day	= day - datetime.timedelta( days=1 )
+			return day.isoformat()
+
+		try:
+			day	= int( float(now) // 86400 )
+		except (TypeError, ValueError):
+			return None
+
+		if (hour is not None) and (hour < end):
+			day	-= 1
+		return day
 
 	@staticmethod
 	def hour(ctxt:Context):

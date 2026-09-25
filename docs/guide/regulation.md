@@ -32,6 +32,25 @@ The angles between the two headings decide whether it is head-on, crossing or ov
 **What it produces.** Two things for each situation it finds: a row in a `fact_…` table, and an event
 on the message queue, such as `vessel.crossing`, for the rules to pick up.
 
+**Vessels under test.** A run usually tests one own ship against background traffic. The `UnderTest`
+monitor (first in `situation.yaml`) loads the list from `$(SIMULATION)/undertest.yaml` and publishes a
+`VesselFilter` at `/Faculty/Situation/Filter`. The evaluator puts those vessels on the own-ship side of
+every pair (`rule_ctxt.subjects`) and every vessel on the other side (`rule_ctxt.vessels`). The monitors,
+the local rules and the risk examiner then judge only the vessels under test, and with one vessel in a
+fleet of N the pairs per pass fall from N(N−1) to about 2N. The same file can name fact tables whose
+rows the data manager keeps only when a vessel column names a vessel under test:
+
+```yaml
+under_test:                        # one of guid, recid, imo, mmsi, name per entry
+  - guid: bedc897f-512b-45a2-aea4-bcfc248d2a86
+telemetry:                         # optional
+  fact_collision: [own_ship, target_ship]
+```
+
+With no file, or an empty list, every vessel is under test, as before. An entry that matches no
+vessel, or several, stops the run at start and names the entry. IMO numbers and names repeat in the
+scenario databases, so `guid` or `recid` are the safe keys.
+
 **When it runs.** On a timer set to half a second, which in practice fires about once a second
 ([levels and timescales](synthesis.md#levels-and-timescales)).
 
@@ -76,16 +95,26 @@ computes. The paper calls resolvers *probes* into the simulated world.
 
 | Kind | Loaded from | Checks | Records |
 |---|---|---|---|
-| COLREG | `config/rules.colreg.yaml`: one module and one Legata file per rule, 41 in all | Situations handed to it by monitors | A log line when a clause fails |
-| Local rules | `$(SIMULATION)/rules.yaml`, per site | Every vessel inside the site's named zones | A priced row in `fact_ro` |
-| Examiners | `config/rules.examiner.yaml`, `config/rules.risk.yaml` | Specific concerns: approach, berthing, collision, grounding, lane discipline, weather, risk | Their own fact tables |
+| COLREG | `config/rules.colreg.yaml`: one module and one Legata file per rule, 41 in all | Situations handed to it by monitors | A priced row in `fact_concern` when a clause fails |
+| Local rules | `$(SIMULATION)/rules.yaml`, per site | Every vessel inside the site's named zones | A priced row in `fact_concern` |
+| Examiners | `config/rules.examiner.yaml`, `config/rules.risk.yaml` | Specific concerns: approach, berthing, collision, grounding, lane discipline, weather, risk | Priced rows in `fact_concern`; the risk examiner writes its own tables |
 
-**Scorecards.** A local rule's `score.json` gives each clause a price, a *concern* (the kind of harm or
-breach) and, optionally, the vessels it applies to. A clause without an entry is recorded as `Generic`
-with a penalty of 0.
+**Scorecards.** A local rule's `score.json` gives each clause a price, an event id such as
+`Violation.DeepDraft` and, optionally, the vessels it applies to. The event id maps to a cross-cutting
+*concern* (safety, traffic, environmental, operational) in the `concerns:` block of
+`config/examiner/zones.yaml`; a scorecard naming an unmapped id stops the rule at load. COLREG rules have
+no scorecard of their own and are priced from the `penalties:` block of the same file, where `COLREG`
+prices every clause and `COLREG.Rule14` or `COLREG.Rule14.a` refine it. A clause without a price is not
+recorded; the log names it once.
+
+**One row per violation, not per tick.** A condition that holds for a minute is one violation. Rules and
+examiners record through the same guard (`FindingGuard` in `maritime/model/zone/Ledger.py`), which
+counts a finding once per occurrence: once per encounter, per zone entry or per night, as each producer
+declares in the `findings:` block of `zones.yaml`.
 
 **Two measures of risk.** Current work (the P3 paper) separates two things. **Normative risk**, written
-`Ro`, counts rule violations along the path the vessel actually took: the `fact_ro` rows. **Consequential
+`Ro`, counts rule violations along the path the vessel actually took: the `fact_concern` rows, summed by
+spatial zone and concern. **Consequential
 risk**, written `Rb`, estimates the chance and cost of harm on paths not taken. The risk examiner does
 this with a Bayesian network, a probability model of how hazards lead to consequences, loaded from
 `config/risk/risk.model.xdsl` and priced per zone and concern in each site's `risk.yaml`. The weather

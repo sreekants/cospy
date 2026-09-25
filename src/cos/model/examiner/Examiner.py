@@ -62,7 +62,6 @@ class Examiner(Faculty):
 			situation -- Situation reference
 		"""
 		# print( f'end {self.scope}/{self.id}' )
-		# self.score(ctxt, situation, 'TODO')
 		return
 
 	def evaluate(self, ctxt:Context, situation):
@@ -73,13 +72,7 @@ class Examiner(Faculty):
 		"""
 		pass
 
-	def score(self, ctxt:Context, situation, event:str):
-		""" Scores the rule
-		Arguments
-			ctxt -- Simulation context
-			situation -- Situation reference
-		"""
-		pass
+	# No score() here: examiners record through ZoneAware.violate() (REQ.017)
 
 	def setup(self, ctxt:Context, config:ArgList):
 		""" Sets up the rule, loading its configurations

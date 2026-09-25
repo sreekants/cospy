@@ -32,13 +32,13 @@ class Obstruction(MaritimeConductSituation):
 		"""
 		self.for_each_in_range( ctxt, rule_ctxt,
 				self.range,
-				rule_ctxt.vessels,
+				rule_ctxt.subjects,
 				rule_ctxt.vessels,
 				self.on_obstruct )
 
 		self.for_each_in_range( ctxt, rule_ctxt,
 				self.range,
-				rule_ctxt.vessels,
+				rule_ctxt.subjects,
 				rule_ctxt.bodies,
 				self.on_obstruct )
 		return

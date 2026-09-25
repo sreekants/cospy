@@ -4,19 +4,34 @@
 
 from cos.model.rule.Rule import Rule
 from cos.model.rule.Automata import Automata
+from maritime.model.rule.ScoredRule import ScoredRule
+from maritime.model.zone.Ledger import Ledger, SOURCE_COLREG
+from cos.core.utilities.ArgList import ArgList
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 from cos.lang.logic.Decision import Decision
 
 import queue, fnmatch
 
-class COLREG(Rule):
+class COLREG(ScoredRule, Rule):
+	SOURCE		= SOURCE_COLREG
+
 	def __init__(self):
 		""" Constructor
 		"""
 		Rule.__init__(self, "COLREG")
 
 		self.sitations	= queue.Queue()
+		return
+
+	def setup(self, ctxt:Context, config:ArgList):
+		""" Sets up the rule, loading its automata and joining the ledger
+		Arguments
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		Rule.setup( self, ctxt, config )
+		self.init_scoring( ctxt )
 		return
 
 	def begin(self, ctxt:Context, rule_ctxt):
@@ -87,16 +102,48 @@ class COLREG(Rule):
 
 		return
 
+	def score(self, ctxt:Context, situation, event:str):
+		""" Prices a violated clause
+		Arguments
+			ctxt -- Simulation context
+			situation -- Situation reference
+			event -- Name of the violated clause
+		Returns
+			The scorecard entry, or None when the clause is unpriced
+		Note
+			The rule's own scorecard wins; otherwise the penalties in zones.yaml
+		"""
+		entry	= Rule.score( self, ctxt, situation, event )
+		if entry is not None:
+			return entry
+
+		penalty	= self.ledger.rules.penalty( event )
+		if penalty <= 0.0:
+			return None
+
+		return {'penalty': penalty}
+
 	def on_violate(self, ctxt:Context, rule_ctxt:RuleContext, err:Decision):
-		""" Evaluates the expression
+		""" Scores and records a violated clause
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
-			err -- Error attribute
+			err -- The failed decision
 		"""
+		clause		= self.clause_name( err )
+		situation	= rule_ctxt.situation
 
-		# Override the function to score the violation
-		ctxt.log.error( 'COLREG', f'Violated rule {err}')
+		entry		= self.score( ctxt, situation, clause )
+		if entry is None:
+			self.note_unpriced( ctxt, clause )
+			return
+
+		# One finding per encounter
+		target		= getattr( situation, 'ts', None )
+		subject		= Ledger.identify( target ) if target is not None else None
+
+		self.record_violation( ctxt, self.__class__.__name__, situation.os, clause, subject,
+							   entry['penalty'], entry.get('concern') )
 		return
 
 if __name__ == "__main__":

@@ -6,13 +6,16 @@ from cos.core.simulation.SimulationThread import SimulationThread
 from cos.core.simulation.SimulationThread import SimulationThread
 from cos.core.kernel.Subsystem import Subsystem
 from cos.core.kernel.Context import Context
-from cos.subsystem.data.Partition import Partition
+from cos.subsystem.data.Partition import Partition, AUDIT_FIELDS
 from cos.core.utilities.ArgList import ArgList
 from cos.core.utilities.TransactionalDatabase import TransactionalDatabase
 from cos.core.utilities.ActiveRecord import ActiveRecord
 
 import os, time, shutil
 from xml.dom import minidom
+
+# Where the vessels-under-test filter is published, if one is loaded
+FILTER_PATH	= '/Faculty/Situation/Filter'
 
 class DataManagerThread(SimulationThread):
 	def __init__(self, sim):
@@ -52,6 +55,8 @@ class DataManager(Subsystem):
 		self.partitions	= {}
 		self.storage	= None
 		self.trace		= False
+		self.filter		= None		# Telemetry filter, found at the first push
+		self.filtered	= {}		# Topic -> rows withheld by the filter
 		return
 
 	def on_init(self, ctxt:Context, module):
@@ -97,6 +102,9 @@ class DataManager(Subsystem):
 		self.thread.stop()
 		self.thread.join()
 		self.flush()
+
+		for topic, count in sorted( self.filtered.items() ):
+			ctxt.log.info( 'DataManager', f'{count} row(s) of {topic} withheld: no vessel under test' )
 		return
 
 
@@ -107,11 +115,42 @@ class DataManager(Subsystem):
 			data -- Message payload
 		"""
 		partition	= self.partitions.get(topic, None)
-		if partition is not None:
-			partition.add( self.sim.now(), data )
-		else:
+		if partition is None:
 			self.sim.log.error( 'DataManager', f'Failed to push data to topic {topic}: No such topic' )
+			return
+
+		# A wrong-width row would raise in the flush thread and stop all writes
+		if len(data) != partition.width:
+			self.sim.log.error( 'DataManager', f'Failed to push data to topic {topic}: '
+								f'payload has {len(data)} values, schema expects {partition.width}' )
+			return
+
+		if self.keeps( topic, partition, data ) == False:
+			self.filtered[topic]	= self.filtered.get( topic, 0 ) + 1
+			return
+
+		partition.add( self.sim.now(), data )
 		return
+
+	def keeps(self, topic, partition, data)->bool:
+		""" Whether a row passes the vessels-under-test filter (REQ.024)
+		Arguments
+			topic -- Fact table
+			partition -- Its partition
+			data -- Payload
+		"""
+		if self.filter is None:
+			self.filter	= False
+			for handle in self.sim.objects.get_all( FILTER_PATH ):
+				candidate	= getattr( handle, 'filter', None )
+				if hasattr( candidate, 'keeps' ):
+					self.filter	= candidate
+					break
+
+		if self.filter is False:
+			return True
+
+		return self.filter.keeps( topic, partition.fields[AUDIT_FIELDS:], data )
 
 	def flush(self):
 		""" Flushes all the cached data to the file system.

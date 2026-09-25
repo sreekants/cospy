@@ -127,7 +127,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			return
 
 		try:
-			for vessel in rule_ctxt.vessels:
+			for vessel in rule_ctxt.subjects:
 				self.assess( ctxt, rule_ctxt, vessel )
 		except Exception as e:
 			ctxt.log.error( self.id, f'Runtime error: {str(e)}' )

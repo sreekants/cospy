@@ -141,21 +141,6 @@ CREATE TABLE fact_log
 
 CREATE INDEX idx_fact_log ON fact_log(dim_gps_id);
 
-CREATE TABLE fact_ro
-(
-	dim_gps_id INTEGER,
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	creation_time TIMESTAMP,
-	audit_status INTEGER,
-	case_id INTEGER,
-	crs VARCHAR(255),
-	report_time REAL,
-	vessel_id INTEGER,
-	penalty REAL
-);
-
-CREATE INDEX idx_fact_ro ON fact_ro(dim_gps_id);
-
 CREATE TABLE fact_heading
 (
 	dim_gps_id INTEGER,
@@ -2855,9 +2840,12 @@ CREATE TABLE fact_concern
 	case_id INTEGER,
 	report_time REAL,
 	vessel_id INTEGER,
+	source VARCHAR(255),
 	examiner VARCHAR(255),
 	event VARCHAR(255),
+	area VARCHAR(255),
 	zone VARCHAR(255),
+	concern VARCHAR(255),
 	penalty REAL,
 	value REAL
 );

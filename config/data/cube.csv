@@ -2,7 +2,6 @@ Fact,Dimension1,Dimension2,Dimension3,Dimension4,Dimension5,Dimension6
 Log,Location.gps,,,,,
 ScoreBerthingRisk,Location.gps,,,,,
 ScoreHazardousTransport,Location.gps,,,,,
-Ro,Location.gps,,,,,
 Heading,Location.gps,Fleet.vessel,,,,
 Velocity,Location.gps,Fleet.vessel,,,,
 Acceleration,Location.gps,Fleet.vessel,,,,

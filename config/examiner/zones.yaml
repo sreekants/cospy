@@ -6,7 +6,7 @@
 #   3. zones.types.<Sea.Type name>
 #   4. zones.default
 #
-# Units: speed in knots, distances and depths in metres, currency in NOK.
+# Units: speed in knots, distances and depths in metres, currency in USD.
 # Type names must match cos.model.geography.Sea.Type members exactly.
 
 zones:
@@ -91,13 +91,69 @@ penalties:
   signal.not_posted: 15.0
   night.lights_missing: 25.0
   weather.capsize_risk: 55.0
+  collision.cost: 70.0           # PLACEHOLDER - unsourced, see COS.013
+
+  # COLREG clauses are priced by prefix: 'COLREG' prices every clause of the
+  # rule set, and 'COLREG.Rule14' or 'COLREG.Rule14.a' would refine it. A rule
+  # with its own scorecard is priced from that instead.
+  COLREG: 50.0                   # PLACEHOLDER - unsourced, see COS.013
+
+# The concern each violation scores into - the j axis of Ro. The vocabulary is
+# the one the territory risk.yaml files declare for Rl, so Ro and Rb share one
+# basis (REQ.018). Every priced event must map here; an unmapped one stops the
+# examiner or rule at load rather than being defaulted at analysis time.
+# Lookup falls back by prefix, as for penalties.
+concerns:
+  vocabulary: [safety, traffic, environmental, operational]
+  events:
+    cargo.restricted: environmental
+    cargo.undeclared: operational
+    berthing.contact: safety
+    berthing.margin: safety
+    grounding.contact: safety
+    grounding.margin: safety
+    lane.overtaking_prohibited: traffic
+    speed.limit_exceeded: traffic
+    speed.limit_exceeded_overtaking: traffic
+    signal.not_posted: traffic
+    night.lights_missing: traffic
+    weather.capsize_risk: safety
+    collision.cost: traffic      # hull damage, as damage_other_vessel in Rl
+    COLREG: traffic
+
+    # Event ids named by the local-rule scorecards (rule/score.json)
+    Violation.BerthingRisk: safety
+    Violation.DeepDraft: safety
+    Violation.DistanceKeeping: traffic
+    Violation.HazardousTransport: environmental
+    Violation.SpeedLimit: traffic
+    Violation.WrongDirection: traffic
+
+# How findings are counted, so a condition that persists is one finding and
+# not one per tick (REQ.019). Times are seconds of the simulation clock.
+#   scope    episode  -- once per (vessel, event, subject) for the run
+#            change   -- once per occurrence; it ends when unseen for 'release'
+#            interval -- as change, repeated every 'interval' while it lasts
+#   dwell    a condition must persist this long before it scores
+# Each examiner declares its own scope in code (ZoneAware.FINDING); an entry
+# here named after the examiner class overrides it. 'rules' covers COLREG and
+# the local rules.
+findings:
+  default:
+    scope: change
+    release: 10.0
+  rules:
+    scope: change
+    release: 10.0
+  SpeedExaminer:
+    dwell: 2.0                   # a one-sample spike over the limit does not score
 
 # Collision cost model. The examiner values a collision as the summed value of
 # the two vessels multiplied by a rate, so a scenario can express "a collision
 # costs a fraction of the hulls involved" without a per-pair table.
 collision:
   penalty_rate: 0.35             # fraction of combined vessel value
-  default_vessel_value: 2000000  # NOK, used when a vessel declares no value
+  default_vessel_value: 2000000  # USD, used when a vessel declares no value
   report_topic: /Faculty/Concern/Collision
 
 # Where the signal examiner posts its (intent, situation) tuples. COLREG rule

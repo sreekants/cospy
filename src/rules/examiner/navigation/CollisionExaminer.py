@@ -105,8 +105,10 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 		shapes, _rules, _depth	= self.survey( own )
 		zone		= self.zone_name( shapes )
 
-		self.violate( ctxt, own, self.EVENT, zone, value=cost,
-					  detail=f'{values[0]:,.0f} + {values[1]:,.0f} at rate {self.rate}' )
+		# One finding per encounter with this target
+		self.violate( ctxt, own, self.EVENT, shapes, value=cost,
+					  detail=f'{values[0]:,.0f} + {values[1]:,.0f} at rate {self.rate}',
+					  subject=self.identify(target) )
 
 		self.announce( ctxt, self.report_topic, self.MESSAGE, {
 			'own'		: self.identify( own ),

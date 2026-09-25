@@ -107,7 +107,7 @@ class SpeedExaminer(ZoneAware, NavigationExaminer):
 		zone	= self.zone_name( shapes )
 		over	= speed - limit
 
-		penalty	= self.violate( ctxt, vessel, event, zone, value=over,
+		penalty	= self.violate( ctxt, vessel, event, shapes, value=over,
 								detail=f'{speed:.1f} kn in a {limit:.1f} kn zone'
 									   f'{" while overtaking" if overtaking else ""}' )
 

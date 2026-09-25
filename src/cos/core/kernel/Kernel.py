@@ -73,6 +73,7 @@ class Kernel:
 		scenario_key 	= self.config.env.get('SCENARIO', '')
 		hash_bytes		= hashlib.sha256(scenario_key.encode('utf-8')).digest()[:4]
 		self.case_id	= int.from_bytes(hash_bytes, byteorder='big')
+		self.log.info( "Kernel", f"Case id {self.case_id} for scenario '{scenario_key}'")
 
 		self.log.info( "Kernel", "Initializing...")
 		self.loader.startup( self, self.config )

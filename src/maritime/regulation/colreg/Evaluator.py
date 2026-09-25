@@ -9,6 +9,7 @@ from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
+from maritime.situation.undertest.UnderTest import UnderTest
 
 class Evaluator(Service):
 	def __init__(self):
@@ -28,6 +29,7 @@ class Evaluator(Service):
 		self.API			= API()
 
 		self.monitor_timer	= Ticker( 0.5 )	# Monitor every half second	
+		self.filter			= None			# Vessels under test, from the Monitors faculty
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -99,6 +101,7 @@ class Evaluator(Service):
 		self.postprocessors	= objmgr.get_all("/Faculty/Situation/Processors")
 
 		self.rules			= objmgr.get_all("/Faculty/Regulation")
+		self.filter			= UnderTest.find( ctxt )
 		return
 
 	def init_objects(self, ctxt:Context, config):
@@ -122,8 +125,7 @@ class Evaluator(Service):
 		Arguments
 			ctxt -- Simulation context
 		"""
-		rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels, self.API)
-
+		rule_ctxt = self.context( ctxt )
 
 		# Preprocess situations
 		[s.evaluate(ctxt, rule_ctxt) for s in self.preprocessors]
@@ -143,7 +145,7 @@ class Evaluator(Service):
 		"""
 
 		try:
-			rule_ctxt = RuleContext(ctxt, self.resolver, self.world, self.vessels, self.API)
+			rule_ctxt = self.context( ctxt )
 
 			# Initialize for rule evaluation.
 			[r.begin(ctxt, rule_ctxt) for r in self.rules]
@@ -158,6 +160,18 @@ class Evaluator(Service):
 		
 
 		return
+
+	def context(self, ctxt:Context)->RuleContext:
+		""" A rule context for one pass, with the vessels under test as subjects (REQ.024)
+		Arguments
+			ctxt -- Simulation context
+		"""
+		rule_ctxt	= RuleContext(ctxt, self.resolver, self.world, self.vessels, self.API)
+
+		if self.filter is not None:
+			rule_ctxt.subjects	= self.filter.select( self.vessels )
+
+		return rule_ctxt
 
 if __name__ == "__main__":
 	test = Evaluator()

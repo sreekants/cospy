@@ -32,6 +32,8 @@ class ZoneRules:
 		self.types		= {}		# Sea.Type name -> rules
 		self.defaults	= {}
 		self.penalties	= {}		# Event -> penalty score
+		self.concerns	= {}		# Event -> cross-cutting concern
+		self.vocabulary	= []		# Concerns an event may map to - the j axis
 		self.sections	= {}		# Examiner-specific blocks, e.g. 'collision'
 		return
 
@@ -53,11 +55,79 @@ class ZoneRules:
 		self.zones		= rules.get( 'named', {} ) or {}
 		self.penalties	= (config.get('penalties', {}) if config else {}) or {}
 
+		concerns		= (config.get('concerns', {}) if config else {}) or {}
+		self.vocabulary	= list( concerns.get('vocabulary', []) or [] )
+		self.concerns	= concerns.get( 'events', {} ) or {}
+
 		# Everything else in the file is an examiner-specific block, reached
 		# through section(). Keeping them here means one file and one load.
 		self.sections	= { k: v for k, v in (config or {}).items()
-							if k not in ('zones', 'penalties') }
+							if k not in ('zones', 'penalties', 'concerns') }
 		return
+
+	def errors(self):
+		""" Checks the scorecard and the concern mapping agree
+		Returns
+			A list of problems, empty when every priced event maps to a concern
+		"""
+		problems	= []
+
+		if not self.vocabulary:
+			problems.append( 'concerns.vocabulary is empty' )
+
+		for event in self.penalties:
+			concern	= self.concern( event )
+			if concern is None:
+				problems.append( f'event {event!r} is priced but maps to no concern' )
+			elif concern not in self.vocabulary:
+				problems.append( f'event {event!r} maps to {concern!r}, which is not in the vocabulary' )
+
+		for event, concern in self.concerns.items():
+			if concern not in self.vocabulary:
+				problems.append( f'event {event!r} maps to {concern!r}, which is not in the vocabulary' )
+
+		return problems
+
+	@staticmethod
+	def lookup(table:dict, event:str):
+		""" Most specific entry for an event: 'COLREG.Rule14.a', then 'COLREG.Rule14', then 'COLREG'
+		Arguments
+			table -- Event -> value
+			event -- Event identifier
+		Returns
+			The value, or None when nothing on the path is listed
+		"""
+		if event is None:
+			return None
+
+		if event in table:
+			return table[event]
+
+		name	= str(event).split('/')[0]
+		while name:
+			if name in table:
+				return table[name]
+			if '.' not in name:
+				break
+			name	= name.rsplit('.', 1)[0]
+
+		return None
+
+	def concern(self, event:str):
+		""" The cross-cutting concern a violation scores into
+		Arguments
+			event -- Violation identifier
+		Returns
+			A concern from the vocabulary, or None when the event is unmapped
+		"""
+		return self.lookup( self.concerns, event )
+
+	def priced(self, event:str)->bool:
+		""" Whether the scorecard prices an event
+		Arguments
+			event -- Violation identifier
+		"""
+		return self.lookup( self.penalties, event ) is not None
 
 	def section(self, name:str)->dict:
 		""" An examiner-specific configuration block
@@ -151,8 +221,12 @@ class ZoneRules:
 			event -- Violation identifier
 			fallback -- Score to use when the event is not in the scorecard
 		"""
+		value	= self.lookup( self.penalties, event )
+		if value is None:
+			return float( fallback )
+
 		try:
-			return float( self.penalties.get(event, fallback) )
+			return float( value )
 		except (TypeError, ValueError):
 			return float( fallback )
 

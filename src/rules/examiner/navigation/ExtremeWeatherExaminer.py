@@ -134,7 +134,7 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 		penalty	= 0.0
 
 		if capsize >= self.threshold:
-			penalty	= self.violate( ctxt, vessel, self.EVENT, zone, value=capsize,
+			penalty	= self.violate( ctxt, vessel, self.EVENT, shapes, value=capsize,
 									detail=f'P(capsize) {capsize:.3f} from {evidence}' )
 
 		self.announce( ctxt, self.report_topic, self.MESSAGE, {

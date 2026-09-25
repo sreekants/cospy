@@ -74,7 +74,7 @@ tries to leave it, or to sail onto land, is stopped.
 one bucket per table, and every 5 seconds writes them to the file named by `storage=` in
 `subsystem.yaml`. The file must already contain the tables; their layout is defined in
 `config/data/maritime.xml`. Tables are named `fact_…`, one per kind of event: `fact_crossing`,
-`fact_head_on`, `fact_approach`, `fact_collision`, `fact_ro` and many more.
+`fact_head_on`, `fact_approach`, `fact_collision`, `fact_concern` and many more.
 
 **Why it's built this way.** Writing to disk on every event would slow each step. Batching every 5 seconds
 keeps the simulation fast, at the cost that a run killed without a clean shutdown loses up to 5 seconds

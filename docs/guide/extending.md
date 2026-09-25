@@ -65,12 +65,15 @@ driven by the COLREG evaluator, in the same pass as the rules
            vessel = rule_ctxt.situation.os
            shapes, rules, depth = self.survey(vessel)
            # ... decide whether the vessel breaks the concern, then:
-           # self.violate(ctxt, vessel, 'wake.speed', zone_name, value=measured)
+           # self.violate(ctxt, vessel, 'wake.speed', shapes, value=measured)
    ```
 
-2. **Price the event.** `violate()` writes a row to the shared `fact_Concern` table and takes the penalty
+2. **Price the event.** `violate()` writes a row to the shared `fact_concern` table and takes the penalty
    for the event name from the `penalties:` section of `config/examiner/zones.yaml`. Add
-   `wake.speed: <penalty>` there, and any zone-local thresholds the examiner reads.
+   `wake.speed: <penalty>` there, map it to a concern under `concerns: events:` (the examiner refuses to
+   load otherwise), and add any zone-local thresholds the examiner reads. A condition that persists is
+   recorded once per occurrence; set `FINDING` on the class, or an entry under `findings:`, if the
+   default of once per occurrence in each area does not fit.
 3. **List it** in `config/rules.examiner.yaml`, and in `templates/cluster/config/rules.examiner.yaml` so
    sweeps load it too.
 
@@ -88,7 +91,10 @@ undeclared table is logged as `No such topic` and dropped.
 2. Add its `CREATE TABLE` to `config/data/maritime.sql`, and apply it to the template `maritime.s3db`.
 3. Add it to `config/data/facts.csv` and `cube.csv`, which list the facts and dimensions for analysis.
 4. Delete `config/data/maritime.workingset.s3db` so the next run copies the updated template.
-5. Write rows with `ctxt.sim.data.push('fact_<name>', (case_id, time, …))`, in the declared field order.
+5. Write rows with `ctxt.sim.data.push('fact_<name>', (…))`, in the declared field order, **leaving out
+   the first three fields**: the data manager supplies `creation_time`, `audit_status` and `case_id`
+   itself. A payload of the wrong length is rejected and logged (`payload has N values, schema expects
+   M`). `tests/rules/examiner/verify_facts.py` checks a run's tables against their declarations.
 
 ## Add a local rule
 
@@ -111,7 +117,8 @@ Local rules are site law: they apply to every vessel inside the site's named zon
    `OS.Draft`, `OS.Cargo` and `OS.Weight`; zone terms take the form `(OS,<ZoneType>).Name`.
 
 2. **Price it** in the site's `rule/score.json`: each clause gets a price, a concern and, optionally, the
-   vessels it applies to. An unpriced clause is recorded as `Generic` with a penalty of 0.
+   vessels it applies to. The concern is an event id mapped in the `concerns:` block of
+   `config/examiner/zones.yaml`. An unpriced clause is not recorded; the log names it once.
 3. **List it** in the site's `rules.yaml`. Local rules reuse the zone rule classes; only the configuration
    differs:
 

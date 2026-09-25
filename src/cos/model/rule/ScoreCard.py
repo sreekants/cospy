@@ -28,6 +28,13 @@ class ScoreCard:
 	def evaluate(self, event:str):
 		return self.scores.get(event, self.basescore)
 
+	def lookup(self, event:str):
+		""" The scorecard entry for an event, or None when it is unpriced
+		Arguments
+			event -- Clause or event name
+		"""
+		return self.scores.get(event, None)
+
 if __name__ == "__main__":
 	test = ScoreCard()
 

@@ -12,6 +12,7 @@
 # violation lands in the same fact table with the same shape.
 
 from maritime.model.zone.ZoneRules import ZoneRules
+from maritime.model.zone.Ledger import Ledger, FindingGuard, SOURCE_EXAMINER, seconds
 from cos.model.examiner.Precondition import PreconditionSet
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
@@ -20,12 +21,13 @@ from cos.core.utilities.ArgList import ArgList
 SITUATION_ATTRIBUTES = ('os', 'ts', 'fleet', 'zone', 'eez', 'harbour',
 						'lane', 'mez', 'tss')
 
-FACT = 'Concern'
-
 
 class ZoneAware:
 	""" Zone rules, map lookup and violation recording for a concern examiner.
 	"""
+
+	# Finding scope; overridable per class under 'findings' in zones.yaml
+	FINDING		= {'scope': 'change'}
 
 	def init_zones(self, ctxt:Context, config:ArgList, requires=None):
 		""" Loads the zone rules and declares the examiner's preconditions
@@ -34,8 +36,10 @@ class ZoneAware:
 			config -- Configuration attributes
 			requires -- Situation attributes this examiner needs
 		"""
-		self.rules		= ZoneRules()
-		self.rules.load( ctxt, config["zones"] or '$(CONFIG)/examiner/zones.yaml' )
+		self.ledger		= Ledger()
+		self.ledger.load( ctxt, self.id, config["zones"], config["territory"] )
+		self.rules		= self.ledger.rules
+		self.guard		= self.finding_guard( self.rules )
 
 		self.sea		= []
 		self.land		= []
@@ -43,6 +47,21 @@ class ZoneAware:
 		# examiner it is mixed into (RiskExaminer declares its own per group).
 		self.zone_gate	= PreconditionSet( {'vessel': list(requires or ['os'])} )
 		return
+
+	def finding_guard(self, rules:ZoneRules)->FindingGuard:
+		""" The guard counting this examiner's findings
+		Arguments
+			rules -- Loaded zone rules
+		"""
+		findings	= rules.section( 'findings' )
+		settings	= dict( findings.get('default', {}) or {} )
+		settings.update( self.FINDING )
+		settings.update( findings.get(self.__class__.__name__, {}) or {} )
+
+		return FindingGuard( scope=settings.get('scope', 'change'),
+							 release=settings.get('release', 10.0),
+							 interval=settings.get('interval'),
+							 dwell=settings.get('dwell', 0.0) )
 
 	def cache_shapes(self, ctxt:Context):
 		""" Caches the map shapes once the world has been built.
@@ -86,12 +105,7 @@ class ZoneAware:
 		Arguments
 			shapes -- Map shapes enclosing the vessel
 		"""
-		for shape in reversed( shapes ):
-			name	= getattr( shape, 'name', None )
-			if name:
-				return name
-
-		return 'open water'
+		return Ledger.area( shapes )
 
 	def clearance(self, vessel, depth):
 		""" Water left beneath the keel
@@ -113,33 +127,58 @@ class ZoneAware:
 		allowance	= getattr( vessel, 'underkeel_clearance', 0.0 ) or 0.0
 		return float(depth) - float(draught) - float(allowance)
 
-	def violate(self, ctxt:Context, vessel, event:str, zone:str, value=0.0, detail=None):
-		""" Records a violation and returns the penalty scored
+	def violate(self, ctxt:Context, vessel, event:str, shapes, value=0.0, detail=None, subject=None):
+		""" Records a violation, once per occurrence, and returns the penalty scored
 		Arguments
 			ctxt -- Simulation context
 			vessel -- Vessel in violation
 			event -- Violation identifier, keyed into the penalties scorecard
-			zone -- Name of the zone the violation happened in
+			shapes -- Map shapes enclosing the vessel
 			value -- Quantity behind the violation, e.g. metres over or USD
 			detail -- Optional free text for the log
+			subject -- What the finding is about beyond vessel and event, e.g.
+					   the target ship; defaults to the innermost area
+		Returns
+			The penalty, or 0.0 when the finding is already recorded
 		"""
-		penalty		= self.rules.penalty( event )
+		key			= self.finding_key( vessel, event, shapes, subject )
+		if self.guard.admit( key, seconds(ctxt.sim.now()) ) == False:
+			return 0.0
 
-		ctxt.sim.data.push( f'fact_{FACT}', (
-			ctxt.sim.case_id,
-			ctxt.sim.now(),
-			self.identify( vessel ),
-			self.__class__.__name__,
-			event,
-			zone,
-			penalty,
-			float( value ),
-		) )
+		penalty		= self.rules.penalty( event )
+		recorded	= self.ledger.record( ctxt, SOURCE_EXAMINER, self.__class__.__name__,
+										  vessel, event, shapes, penalty, value )
+		if recorded == False:
+			return 0.0
 
 		if detail is not None:
-			ctxt.log.info( self.id, f'{event} [{zone}] {detail}' )
+			ctxt.log.info( self.id, f'{event} [{self.zone_name(shapes)}] {detail}' )
 
 		return penalty
+
+	def settle(self, vessel, event:str, shapes, subject=None):
+		""" Ends a finding the examiner has seen end
+		Arguments
+			vessel -- Vessel
+			event -- Violation identifier
+			shapes -- Map shapes enclosing the vessel
+			subject -- As passed to violate()
+		"""
+		self.guard.clear( self.finding_key(vessel, event, shapes, subject) )
+		return
+
+	def finding_key(self, vessel, event:str, shapes, subject=None):
+		""" What a finding is about, for the guard
+		Arguments
+			vessel -- Vessel
+			event -- Violation identifier
+			shapes -- Map shapes enclosing the vessel
+			subject -- Explicit subject, else the innermost area
+		"""
+		if subject is None:
+			subject	= self.zone_name( shapes )
+
+		return ( self.identify(vessel), event, subject )
 
 	def announce(self, ctxt:Context, topic:str, message:str, payload):
 		""" Posts a message to an IPC topic
@@ -161,10 +200,7 @@ class ZoneAware:
 		Arguments
 			vessel -- Vessel
 		"""
-		try:
-			return vessel.config["identifier"]["imo"]
-		except (KeyError, TypeError):
-			return 0
+		return Ledger.identify( vessel )
 
 
 if __name__ == "__main__":

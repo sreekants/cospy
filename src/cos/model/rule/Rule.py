@@ -76,13 +76,28 @@ class Rule(Faculty):
 		return
 
 	def score(self, ctxt:Context, situation, event:str):
-		""" Scores the rule
+		""" Prices a violated clause from the rule's scorecard
 		Arguments
 			ctxt -- Simulation context
 			situation -- Situation reference
+			event -- Name of the violated clause
+		Returns
+			The scorecard entry, or None when the clause is unpriced or priced at nothing
 		"""
-		# print( f'score {self.scope}' )
-		return
+		entry	= self.scorecard.lookup( event )
+		if entry is None:
+			return None
+
+		try:
+			penalty	= float( entry.get('penalty', 0.0) or 0.0 )
+		except (TypeError, ValueError):
+			ctxt.log.error( self.id, f'Clause {event} has an unreadable penalty {entry.get("penalty")!r}' )
+			return None
+
+		if penalty <= 0.0:
+			return None
+
+		return dict( entry, penalty=penalty )
 
 	def setup(self, ctxt:Context, config:ArgList):
 		""" Sets up the rule, loading its configurations
