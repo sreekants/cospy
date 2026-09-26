@@ -76,7 +76,7 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 
 		clearance	= self.clearance( vessel, depth )
 		if clearance is None:
-			return			# The map reports no depth here; nothing to judge
+			return			# The vessel declares no draught; nothing to judge
 
 		self.score( ctxt, vessel, shapes, rules, depth, clearance )
 		return

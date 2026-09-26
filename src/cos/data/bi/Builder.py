@@ -24,9 +24,19 @@ class Builder:
 
 
 	def merge(self, tgt, files:list, tables:list):
+		""" Copies every file's tables into tgt
+		Arguments
+			tgt -- Path of the target database
+			files -- Partitioned source databases
+			tables -- Table names to copy
+		Returns
+			A list of (file, rows, notes), one per file
+		"""
+		outcomes	= []
 		for f in files:
-			self.copy_data(f, tgt, tables)
-		return
+			rows, notes	= self.copy_data(f, tgt, tables)
+			outcomes.append( (f, rows, notes) )
+		return outcomes
 	
 	def calculate_maxrange(self, files:list):
 		maxid		= 0			
@@ -50,6 +60,7 @@ class Builder:
 		for f in files:
 			conn    = sqlite3.connect(f)
 			self.increment_ids(conn, index*increment)
+			conn.close()
 			index	= index+1
 		return
 
@@ -78,48 +89,57 @@ class Builder:
 		return
 
 	def copy_data(self, src, tgt, tables):
+		""" Copies every row of the given tables from src into tgt, by column name
+		Arguments
+			src -- Path of the source database
+			tgt -- Path of the target database
+			tables -- Table names to copy
+		Returns
+			(rows, notes) - rows copied per table, and one note per table skipped or narrowed
 		"""
-		Copies all records for a given table from a source database to a target database.
+		rows	= {}
+		notes	= []
 
-		Args:
-			src (str): The file path of the source SQLite database.
-			tgt (str): The file path of the target SQLite database.
-			table_name (str): The name of the table to copy.
-		"""
-		# Ensure the target table exists in the target database before inserting.
-		# The schema must match exactly.
-		# You might want to add a check here to create the table if it doesn't exist.
-
+		conn	= sqlite3.connect(src)
+		c		= conn.cursor()
+		c.execute( 'ATTACH DATABASE ? AS target_db', (tgt,) )
 		try:
-			# Connect to the source database
-			conn = sqlite3.connect(src)
-			c = conn.cursor()
+			for table in tables:
+				source	= Builder.columns( c, 'main', table )
+				target	= Builder.columns( c, 'target_db', table )
+				if not source:
+					notes.append( f'{table}: absent from source' )
+					continue
+				if not target:
+					notes.append( f'{table}: absent from target' )
+					continue
 
-			# Attach the target database to the source connection with an alias
-			attach_query = f"ATTACH DATABASE '{tgt}' AS target_db"
-			c.execute(attach_query)
-			for table_name in tables:
-				# Copy data from the source table (main.table_name) to the target table (target_db.table_name)
-				# Use INSERT OR REPLACE if you want to overwrite existing records with the same primary key
-				copy_query = f"INSERT INTO target_db.{table_name} SELECT * FROM main.{table_name}"
-				c.execute('BEGIN TRANSACTION')
-				c.execute(copy_query)
-				c.execute('COMMIT')
+				dropped	= [col for col in source if col not in target]
+				if dropped:
+					notes.append( f'{table}: source columns not in target, not copied: {", ".join(dropped)}' )
 
-				# Commit the changes to the target database
-				conn.commit()
-
-				print(f"Data successfully copied from '{src}' table '{table_name}' to '{tgt}'")
-
-		except sqlite3.Error as e:
-			print(f"SQLite error: {e}")
-
+				shared	= ', '.join( f'"{col}"' for col in source if col in target )
+				c.execute( 'BEGIN TRANSACTION' )
+				c.execute( f'INSERT INTO target_db."{table}" ({shared}) SELECT {shared} FROM main."{table}"' )
+				rows[table]	= c.rowcount
+				c.execute( 'COMMIT' )
 		finally:
-			# Detach the database and close the connection
-			if conn:
-				c.execute("DETACH DATABASE target_db")
-				conn.close()
+			conn.commit()
+			c.execute( 'DETACH DATABASE target_db' )
+			conn.close()
 
+		return rows, notes
+
+	@staticmethod
+	def columns(cursor, schema, table):
+		""" Column names of a table in an attached schema, empty when the table is absent
+		Arguments
+			cursor -- Cursor
+			schema -- 'main' or an attached alias
+			table -- Table name
+		"""
+		cursor.execute( f'PRAGMA {schema}.table_info("{table}")' )
+		return [ row[1] for row in cursor.fetchall() ]
 
 
 if __name__ == "__main__":

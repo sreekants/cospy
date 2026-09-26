@@ -3,7 +3,7 @@
 # Description: Bayesian risk-assessment faculty
 
 from rules.examiner.risk.RiskModel import HAZARDS, CURRENCY, Binding, VoyageTrack, LossMatrix, ConcernWeights
-from rules.examiner.risk.RiskModel import load, hazard_probabilities
+from rules.examiner.risk.RiskModel import load, hazard_probabilities, individual_risk
 
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from maritime.model.zone.ZoneRules import SpatialZones
@@ -87,12 +87,10 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			ctxt -- Simulation context
 			module -- Module information
 		"""
-		ConcernExaminer.on_init(self, ctxt, module)
+		ConcernExaminer.on_init(self, ctxt, module)		# runs setup(); calling it again loads everything twice
 
 		config		= ArgList( module.get("config", "") )
 		self.trace	= config.IsTrue('trace')
-
-		self.setup( ctxt, config )
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):
@@ -257,6 +255,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		concerns	= self.matrix.row( self.engine, zone )
 		serialized	= self.matrix.matlab( self.engine, self.spatial.order )
 		cost		= sum( concerns.values() )
+		ir			= individual_risk( self.engine )		# same inference pass as cost (REQ-020-02)
 
 		# Keyed on the guid, which is unique by construction; the IMO is
 		# recorded beside it rather than keyed on (COS-029-02).
@@ -272,6 +271,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			'zone'			: zone,			# spatial zone, the i index of Rl
 			'matrix'		: serialized,	# the whole of Rl, MATLAB literal, USD
 			'hazards'		: hazards,		# marginals, plus 'any' (exact) and 'sum' (eq. 14)
+			'individual_risk'	: ir,		# P(harm_to_humans = fatality), IR [K, eq. (4)]
 			'exposure'		: concerns,		# Rl row: concern -> expected economic loss
 			'cost'			: cost,			# instantaneous expected loss
 			'increment'		: increment,	# what was actually added to the voyage total
@@ -392,6 +392,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			hazards['loss_of_comms'],
 			hazards['any'],
 			hazards['sum'],
+			report['individual_risk'],
 			report['cost'],
 			report['increment'],
 			report['survival'],

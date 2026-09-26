@@ -14,7 +14,7 @@ from cos.core.kernel.Configuration import Configuration
 from cos.core.time.Clock import Clock
 from cos.core.utilities.Patterns import Manager
 
-import hashlib
+from cos.core.utilities.CaseId import case_id
 import os
 
 class Kernel:
@@ -69,10 +69,8 @@ class Kernel:
 			inifile	= os.path.abspath(inifile)
 		self.log.info( "Kernel", f"Loading simulation from {inifile}")
 
-		# Generate SHA-256 and grab the first 4 bytes (32 bits)
-		scenario_key 	= self.config.env.get('SCENARIO', '')
-		hash_bytes		= hashlib.sha256(scenario_key.encode('utf-8')).digest()[:4]
-		self.case_id	= int.from_bytes(hash_bytes, byteorder='big')
+		scenario_key 	= self.config.env.get('SCENARIO', None)
+		self.case_id	= case_id( scenario_key )		# Refuses an absent or empty key
 		self.log.info( "Kernel", f"Case id {self.case_id} for scenario '{scenario_key}'")
 
 		self.log.info( "Kernel", "Initializing...")

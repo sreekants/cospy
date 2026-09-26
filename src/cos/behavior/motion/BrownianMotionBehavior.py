@@ -7,6 +7,8 @@ from cos.math.geometry.Rectangle import Rectangle
 import random, math
 from cos.model.environment.Scales import Scales
 
+import numpy as np
+
 
 class BrownianMotionBehavior(LinearMotionBehavior):
 	# Default class behavior uses the linear vectors defined in the configuration to move the object
@@ -66,7 +68,7 @@ class BrownianMotionBehavior(LinearMotionBehavior):
 	def limit_to(self, region, pos):
 		if region.encloses(pos[0], pos[1]) == False:
 			norm		= self.bound_norm(region, pos)
-			dx			= self.lastdx
+			dx			= np.array( self.lastdx )
 			dx[0]		= abs(self.dx[0])*norm[0]
 			dx[1]		= abs(self.dx[1])*norm[1]
 				

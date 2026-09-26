@@ -41,7 +41,6 @@ class LinearMotionBehavior(MotionBehavior):
 			R -- Rotational vector
 		"""
 		self.x		= np.array( (loc[0], loc[1], loc[2]) )	# Position vector
-		null_vector	= np.zeros(3)
 		self.ranges	= [
 			(1, 2, 0)		# Default velocity range
 			]
@@ -51,16 +50,18 @@ class LinearMotionBehavior(MotionBehavior):
 			self.d2x	= np.array( (X[3], X[4], X[5]) )		# Acceleration vector
 			self.ranges[0]	= (abs(X[0]), abs(X[1]), abs(X[2]))
 		else:
-			self.dx		= null_vector		# Velocity vector
-			self.d2x	= null_vector		# Acceleration vector
+			self.dx		= np.zeros(3)		# Velocity vector
+			self.d2x	= np.zeros(3)		# Acceleration vector
+
+		self.lastdx	= self.dx.copy()		# Velocity at the last good position, paired with self.last
 
 
 		if R is not None:
 			self.θ		= np.array( (R[0], R[1], R[2]) )	# Rotational velocity vector
 			self.dθ		= np.array( (R[3], R[4], R[5]) )	# Rotational vector
 		else:
-			self.θ		= null_vector	# Rotational velocity vector
-			self.dθ		= null_vector	# Rotational vector
+			self.θ		= np.zeros(3)	# Rotational velocity vector
+			self.dθ		= np.zeros(3)	# Rotational vector
 
 		return
 
@@ -84,7 +85,7 @@ class LinearMotionBehavior(MotionBehavior):
 		# If the sprite has collided, reverse the vehicle
 		if self.can_move(world, self.rect):
 			self.last	= self.rect
-			self.lastdx	= self.dx
+			self.lastdx	= self.dx.copy()
 			self.x		= newpos
 		else:
 			# Randomly accelerate

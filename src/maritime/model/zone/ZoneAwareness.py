@@ -13,6 +13,7 @@
 
 from maritime.model.zone.ZoneRules import ZoneRules
 from maritime.model.zone.Ledger import Ledger, FindingGuard, SOURCE_EXAMINER, seconds
+from maritime.model.zone.Location import Location
 from cos.model.examiner.Precondition import PreconditionSet
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
@@ -21,7 +22,7 @@ from cos.model.rule.Situation import Situation
 import queue
 
 # Situation attributes an examiner may declare a dependency on.
-SITUATION_ATTRIBUTES = ('os', 'ts', 'fleet', 'zone', 'eez', 'harbour',
+SITUATION_ATTRIBUTES = ('os', 'ts', 'zone', 'eez', 'harbour',
 						'lane', 'mez', 'tss')
 
 # Encounter messages the conduct and situation faculties post (COS.023 L4)
@@ -51,6 +52,7 @@ class ZoneAware:
 		self.ledger.load( ctxt, self.id, config["zones"], config["territory"] )
 		self.rules		= self.ledger.rules
 		self.guard		= self.finding_guard( self.rules )
+		self.location	= Location.shared( ctxt, config['location'] if 'location' in config else None )
 
 		self.sea		= []
 		self.land		= []
@@ -175,12 +177,13 @@ class ZoneAware:
 			vessel -- Vessel under examination
 		Returns
 			(shapes, rules, depth) - the map shapes enclosing the vessel, the
-			merged zone rules, and the shallowest seabed beneath it
+			merged zone rules, and the shallowest seabed beneath it, or the
+			location's nominal depth when no shape reports one (REQ.022)
 		"""
 		position	= getattr( vessel, 'location', None )
 		shapes		= ZoneRules.enclosing( self.sea, position )
 		rules		= self.rules.rules_at( shapes )
-		depth		= self.rules.seabed_depth( shapes )
+		depth		= self.location.seabed_depth( self.rules.seabed_depth(shapes) )
 
 		return shapes, rules, depth
 
@@ -195,13 +198,10 @@ class ZoneAware:
 		""" Water left beneath the keel
 		Arguments
 			vessel -- Vessel under examination
-			depth -- Seabed depth, or None when the map does not report one
+			depth -- Seabed depth
 		Returns
-			Metres of clearance, or None when it cannot be computed
+			Metres of clearance, or None when the vessel declares no draught
 		"""
-		if depth is None:
-			return None
-
 		draught		= getattr( vessel, 'draft', None )
 		if draught is None:
 			draught	= getattr( vessel, 'draught', None )

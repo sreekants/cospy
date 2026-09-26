@@ -43,7 +43,6 @@ class Analyzer:
 			if minval == 0:
 				minval  = row[0] 
 				maxval  = row[1]
-				print( f'{table}: {row[0]}-{row[1]}')
 				continue
 
 			if  row[0] < minval:
@@ -52,7 +51,6 @@ class Analyzer:
 			if  row[1] > maxval:
 				maxval  = row[1]
 
-			print( f'{table}: {row[0]}-{row[1]}')
 
 		c.close()
 		db.close()

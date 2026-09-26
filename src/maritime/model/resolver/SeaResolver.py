@@ -5,6 +5,7 @@
 from maritime.model.resolver.TargetResolver import TargetResolver
 from maritime.model.vessel.Vessel import Vessel, Status
 from maritime.model.zone.ZoneRules import ZoneRules
+from maritime.model.zone.Location import Location
 from cos.model.resolver.Resolver import Resolver, simproperty
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
@@ -26,6 +27,8 @@ class SeaResolver(Resolver):
 		self.sea		= None
 		self.os			= None
 		self.shapes		= None
+		self.location	= None
+		self.ctxt		= None
 		return
 
 
@@ -43,6 +46,7 @@ class SeaResolver(Resolver):
 		# the first time it is needed rather than on every reset.
 		if self.sea is None:
 			self.sea	= ctxt.sim.objects.get_all( "/World/Sea" ) or []
+		self.ctxt	= ctxt
 		return
 
 	@simproperty
@@ -67,12 +71,14 @@ class SeaResolver(Resolver):
 
 	@simproperty
 	def Depth(self):
-		""" Simulation property: shallowest nominal seabed depth beneath the own ship
+		""" Simulation property: shallowest seabed depth beneath the own ship, else the nominal depth
 		"""
 		if self.os is None:
 			return None			# Unresolved: the bound node keeps its prior
 
-		return self.rules.seabed_depth( self.__enclosing() )
+		if self.location is None:
+			self.location	= Location.shared( self.ctxt )
+		return self.location.seabed_depth( self.rules.seabed_depth(self.__enclosing()) )
 
 	def __enclosing(self):
 		""" Map shapes enclosing the own ship, cached for this resolve cycle

@@ -39,7 +39,32 @@ class Actors(EnvironmentService):
 		# Initialize all the vessels to simulate
 		for vessel in self.vehicles[ActorType.VESSEL]:
 			vessel.sim_init(self, None)
+			self.check_spawn( ctxt, vessel )
 
+		return
+
+	def check_spawn(self, ctxt:Context, vessel):
+		""" Warns when a vessel starts on land or outside the vessel range, where it can never move
+		Arguments
+			ctxt -- Simulation context
+			vessel -- Vessel just placed
+		"""
+		rect	= vessel.boundary
+		has		= getattr( self.world, 'has_collision', None )
+		if (rect is None) or (has is None) or (vessel.motion is None):
+			return
+		if 'Fleet' in type(vessel.motion).__name__:
+			return					# Fleet controllers never move; their box stays at (0,0)
+
+		try:
+			blocked	= has( rect )
+		except Exception:
+			return					# No collider yet; nothing to check against
+
+		if blocked:
+			name	= vessel.config.get( 'name', vessel.id ) if isinstance( vessel.config, dict ) else vessel.id
+			ctxt.log.warning( 'Actors', f'{name} starts in collision at ({rect.left:.0f}, {rect.top:.0f}): '
+									   f'on land or outside the vessel range, so it cannot move' )
 		return
 
 	def on_timer(self, ctxt:Context, unused):

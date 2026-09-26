@@ -5,6 +5,7 @@
 from maritime.regulation.colreg.Resolver import Resolver
 from maritime.regulation.colreg.API import API
 from maritime.situation.undertest.UnderTest import UnderTest
+from maritime.model.zone.Location import Location
 from cos.model.rule.Context import Context as RuleContext
 from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
@@ -28,6 +29,7 @@ class PracticeEvaluator(Service):
 		self.resolver	= Resolver()
 		self.API		= API()
 		self.passes		= 0
+		self.location	= None
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -42,6 +44,8 @@ class PracticeEvaluator(Service):
 		poll_at			= args["sample.frequency"]
 		self.timer		= Ticker( int(poll_at) ) if poll_at is not None else None
 		self.resolver.init( ctxt, args["resolvers"] )
+		self.location	= Location.shared( ctxt, args["location"] )		# Fatal when absent (REQ.022)
+		ctxt.log.info( self.id, f'Nominal depth {self.location.nominal_depth:.0f} m from {self.location.path}' )
 
 		objmgr			= ctxt.sim.objects
 		self.world		= ctxt.sim.world
@@ -54,6 +58,16 @@ class PracticeEvaluator(Service):
 
 		ctxt.log.info( self.id, f'Driving {len(self.examiners)} examiner(s) every {poll_at} s' )
 		return
+
+	def on_stop(self, ctxt:Context, unused):
+		""" Reports how often the nominal depth stood in for the map (REQ-022-03)
+		Arguments
+			ctxt -- Simulation context
+			unused -- Unused variable
+		"""
+		if self.location is not None:
+			ctxt.log.info( self.id, self.location.describe() )
+		return Service.on_stop( self, ctxt, unused )
 
 	def on_timer(self, ctxt:Context, unused):
 		""" Callback handling timer events

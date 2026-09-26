@@ -3,8 +3,11 @@
 # Description: Implementation of the ScenarioGenerator class
 
 from cos.cluster.runtime.TemplateReplicator import TemplateReplicator, Declarations
+from cos.core.utilities.CaseId import case_id
 
-import sys, uuid, os, random, re, configparser, yaml
+import sys, uuid, os, random, re, configparser, yaml, csv
+
+MANIFEST	= 'cases.csv'
 
 class ScenarioGenerator:
 	def __init__(self, templatedir, command, scenarios):
@@ -21,7 +24,7 @@ class ScenarioGenerator:
 		self.scenarios	= scenarios
 		return
 
-	def generate(self, outdir, taskfile, count=-1, seed=None, country=None):
+	def generate(self, outdir, taskfile, count=-1, seed=None, country=None, replicates=1):
 		""" Generates the  cluster task including profiles for all the scenarios
 		Arguments
 			outdir -- Output directory
@@ -30,6 +33,7 @@ class ScenarioGenerator:
 			seed -- Seed used to shuffle the scenarios when count is specified
 			country -- Optional country code (e.g. 'tk'), to generate only the
 				scenarios in that country
+			replicates -- Runs of each scenario, told apart by CASE
 		"""
 		self.maxcount	= count
 
@@ -51,8 +55,11 @@ class ScenarioGenerator:
 		# Refuse to generate anything if a case points at missing data
 		self.validate( cases )
 
+		cases	= self.replicate( cases, replicates )
+
 		# Generate the templates
 		configs	= self.generate_templates( outdir, cases )
+		self.write_manifest( outdir, configs )
 
 		# Generate the taskfile
 		self.generate_tasks( taskfile, configs )
@@ -81,8 +88,6 @@ class ScenarioGenerator:
 		"""
 		configs	= []
 
-		ncases	= 0
-
 		# For each scenario, generate a runtime template
 		for case in cases:
 			decl	= self.declarations( case )
@@ -97,12 +102,62 @@ class ScenarioGenerator:
 
 			configs.append( path )
 
-			ncases = ncases+1
-
-			if ncases == self.maxcount:
-				break
-
 		return configs
+
+	def replicate(self, cases, replicates):
+		""" Expands each case into its replicates, each with its own folder and CASE
+		Arguments
+			cases -- List of test cases
+			replicates -- Runs per case
+		"""
+		if int(replicates) < 1:
+			raise ValueError( f'ScenarioGenerator: replicates must be at least 1, not {replicates}' )
+
+		return [ ( uuid.uuid1(), dims + [('CASE', str(n))] )
+				 for _id, dims in cases for n in range(int(replicates)) ]
+
+	def write_manifest(self, outdir, configs):
+		""" Writes cases.csv, joining each case_id to its folder and parameters (COS.003)
+		Arguments
+			outdir -- Output directory
+			configs -- Generated case folders
+		Raises
+			ValueError when two cases share a case_id
+		"""
+		rows	= [ self.case_row(path) for path in configs ]
+
+		seen	= {}
+		for r in rows:
+			other	= seen.setdefault( r['case_id'], r )
+			if other is not r:
+				raise ValueError( f'ScenarioGenerator: {other["folder"]} and {r["folder"]} share case_id {r["case_id"]} '
+								  f'({r["SCENARIO"]!r}); a swept dimension is missing from SCENARIO' )
+
+		columns	= ['folder', 'case_id', 'SCENARIO'] + sorted( { k for r in rows for k in r } - {'folder', 'case_id', 'SCENARIO'} )
+		with open( os.path.join(outdir, MANIFEST), 'w', newline='' ) as f:
+			writer	= csv.DictWriter( f, fieldnames=columns )
+			writer.writeheader()
+			writer.writerows( rows )
+		return rows
+
+	@staticmethod
+	def case_row(path):
+		""" A case's identity as the kernel will compute it, from its generated cos.ini
+		Arguments
+			path -- Case folder
+		"""
+		ini		= configparser.ConfigParser( inline_comment_prefixes=(';',), interpolation=None )
+		ini.optionxform	= str
+		ini.read( os.path.join(path, 'cos.ini') )
+		env		= dict( ini['EnvironmentVariables'] )
+
+		scenario	= env.get( 'SCENARIO', '' )
+		for _ in range( 8 ):
+			scenario	= re.sub( r'\$\((\w+)\)', lambda m: env.get(m.group(1), m.group(0)), scenario )
+
+		row		= { k: v for k, v in env.items() if k.isupper() and '$(' not in v }
+		row.update( folder=os.path.basename(path), SCENARIO=scenario, case_id=case_id(scenario) )
+		return row
 
 	def declarations(self, case):
 		""" Builds the template declarations for a test case

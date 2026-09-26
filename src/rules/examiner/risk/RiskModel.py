@@ -45,6 +45,22 @@ def load(path, hazards=HAZARDS):
 	return bn, make_engine( bn, hazards )
 
 
+# Individual risk [K, eq. (4)]: one consequence marginal, not recomputed from eq. (1)'s product (REQ.020)
+IR_NODE, IR_STATE	= 'harm_to_humans', 'fatality'
+
+def individual_risk(engine):
+	""" P(harm_to_humans = fatality) from the inference the engine last made
+	Arguments
+		engine -- An engine built by make_engine(), already inferred
+	Returns
+		The marginal, or 0.0 when the network has no such node
+	"""
+	if IR_NODE not in engine.BN().names():
+		return 0.0
+
+	return float( engine.posterior(IR_NODE)[{IR_NODE: IR_STATE}] )
+
+
 def hazard_probabilities(engine, hazards=HAZARDS):
 	""" Probability of each hazardous event, and of any of them occurring.
 

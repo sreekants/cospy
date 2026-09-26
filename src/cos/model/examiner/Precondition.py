@@ -17,6 +17,10 @@
 # it beside the group it guards; a misspelt group name is then a load-time
 # error instead of a group that silently never fires.
 
+from cos.model.rule.Situation import Situation
+
+SITUATION	= set( vars(Situation()) )		# Attributes a precondition path may start from
+
 class Precondition:
 	""" The situation attributes a group of bindings requires.
 	"""
@@ -29,6 +33,12 @@ class Precondition:
 		"""
 		self.group		= group
 		self.requires	= list( requires or [] )
+
+		for name in self.requires:
+			head	= name.split('.')[0]
+			if head not in SITUATION:
+				hint	= "; use 'os.fleet' or 'ts.fleet'" if head == 'fleet' else ''
+				raise ValueError( f'Precondition {group}: {name!r} is not a situation attribute{hint}' )
 		return
 
 	def holds(self, situation)->bool:

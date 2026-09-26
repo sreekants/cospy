@@ -206,11 +206,14 @@ class DataManager(Subsystem):
 		if startrow == None:
 			startrow	= int(config['rowstart'])
 
-		if os.path.exists(self.storage) == False:
-			# Create the file if it does not exist
-			template = self.storage.replace( 'workingset.', '' )
+		# Recreate the working set from the template every run so schema changes always reach it
+		template = self.storage.replace( 'workingset.', '' )
+		if template != self.storage:
+			for path in (self.storage, self.storage + '-journal'):
+				if os.path.exists(path):
+					os.remove(path)
 			shutil.copy( template, self.storage )
-		
+
 		conn	= ActiveRecord.connect(self.storage)
 
 		tables	= ActiveRecord.tables(conn)
