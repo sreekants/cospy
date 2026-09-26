@@ -7,6 +7,7 @@ from rules.examiner.risk.RiskModel import load, hazard_probabilities
 
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from maritime.model.zone.ZoneRules import SpatialZones
+from maritime.model.zone.Ledger import Ledger
 
 from cos.model.examiner.ConcernExaminer import ConcernExaminer
 from cos.core.kernel.Faculty import Faculty
@@ -17,6 +18,10 @@ from cos.model.rule.Context import Context as RuleContext
 from cos.model.examiner.Precondition import PreconditionSet
 from cos.model.rule.Situation import Situation
 from cos.math.geometry.Distance import Distance
+
+# maritime.model.vessel.Builder's FLEET prototype. A controller is a flocking
+# driver, not a ship, and carries a FLEET-<hash8(guid)> tag rather than an IMO.
+FLEET_CONTROLLER	= 800000
 
 import yaml
 
@@ -47,7 +52,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.matrix		= LossMatrix()	# Rl, from the territory's risk file
 		self.weights	= ConcernWeights()	# Rw, from the same file
 		self.spatial	= SpatialZones()	# Sea.Type -> spatial zone, per territory
-		self.tracks		= {}		# Vessel id -> VoyageTrack; IMOs repeat in scenario data
+		self.tracks		= {}		# Vessel guid -> VoyageTrack (COS-029-02)
 		self.timer		= None
 		self.trace		= False
 		self.range		= 4000.0	# Encounter range for pair evidence [m], COLREG stage 2
@@ -150,6 +155,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		saved	= rule_ctxt.situation
 		try:
 			for vessel in rule_ctxt.subjects:
+				if self.tracked( vessel ) == False:
+					continue
 				try:
 					self.assess( ctxt, rule_ctxt, vessel )
 				except Exception as e:
@@ -159,6 +166,33 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			self.reset_resolver( ctxt, rule_ctxt )
 
 		return
+
+	@staticmethod
+	def tracked(vessel)->bool:
+		""" Whether a vessel carries a voyage of its own (COS-029-04)
+		Arguments
+			vessel -- Candidate vessel
+		Returns
+			False for a fleet controller, True otherwise
+
+		A fleet controller is not a vessel. It never moves, its box stays at
+		(0,0), and it exists only to fly its members. Assessing it would put a
+		voyage track and a run of fact rows against something that is not at
+		sea. It is excluded here, explicitly, rather than by its identity
+		happening not to collide with a real one.
+
+		The record type is the test, not the class: Fleet passes Type.SEAPLANE
+		to its base constructor, so the runtime type of a controller is not
+		distinctive. The class name is checked as well, so a Fleet built from
+		JSON with no type still resolves.
+		"""
+		try:
+			if int( vessel.config["type"] ) == FLEET_CONTROLLER:
+				return False
+		except (KeyError, TypeError, ValueError, AttributeError):
+			pass
+
+		return vessel.__class__.__name__ != 'Fleet'
 
 	def encounters(self, rule_ctxt:RuleContext, vessel):
 		""" The situations a vessel is assessed in (COS.008)
@@ -224,12 +258,16 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		serialized	= self.matrix.matlab( self.engine, self.spatial.order )
 		cost		= sum( concerns.values() )
 
-		imo			= vessel.config["identifier"]["imo"]
-		track		= self.track( vessel.id )
+		# Keyed on the guid, which is unique by construction; the IMO is
+		# recorded beside it rather than keyed on (COS-029-02).
+		key			= Ledger.identify( vessel )
+		imo			= Ledger.imo( vessel )
+		track		= self.track( key )
 		increment	= track.charge( cost, hazards['any'], evidence )
 
 		report		= {
-			'vessel'		: imo,
+			'vessel'		: key,
+			'imo'			: imo,
 			'time'			: ctxt.sim.now(),
 			'zone'			: zone,			# spatial zone, the i index of Rl
 			'matrix'		: serialized,	# the whole of Rl, MATLAB literal, USD
@@ -240,7 +278,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			'survival'		: track.survival,
 			'cumulative'	: track.cost,
 			'evidence'		: evidence,
-			'target'		: target.config["identifier"]["imo"] if target is not None else None,
+			'target'		: Ledger.identify( target ) if target is not None else None,
 		}
 
 		self.publish( ctxt, vessel, report )
@@ -311,7 +349,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 	def track(self, key):
 		""" Returns the voyage track for a vessel, creating it if needed
 		Arguments
-			key -- Vessel id
+			key -- Vessel guid (COS-029-02)
 		"""
 		if key not in self.tracks:
 			self.tracks[key]	= VoyageTrack()
@@ -347,6 +385,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.data( ctxt, 'risk_assessment', (
 			report['time'],
 			report['vessel'],
+			report['imo'],
 			report['zone'],
 			hazards['collision'],
 			hazards['grounding'],
@@ -370,6 +409,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.data( ctxt, 'rl', (
 			report['time'],
 			report['vessel'],
+			report['imo'],
 			report['matrix'],
 		) )
 
@@ -378,6 +418,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			self.data( ctxt, 'rb', (
 				report['time'],
 				report['vessel'],
+				report['imo'],
 				report['zone'],
 				concern,
 				exposure,

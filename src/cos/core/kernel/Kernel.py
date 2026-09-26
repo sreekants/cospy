@@ -53,7 +53,7 @@ class Kernel:
 		"""
 		return self.clock.tickcount
 
-	def start(self, configfile, configpath, settings):
+	def start(self, configfile, settings):
 		""" Starts the kernel
 		Arguments
 			configfile -- Name of the configuration file
@@ -61,7 +61,7 @@ class Kernel:
 		"""
 		self.options	= settings
 		self.scheduler	= self.create_thread_pool()
-		self.config	= Configuration(configfile, configpath, settings['image'])
+		self.config	= Configuration(configfile, settings['image'])
 		self.log	= Logger( self.config )
 
 		inifile		= self.config.inifile

@@ -8,10 +8,66 @@ from cos.core.kernel.Context import Context
 from cos.core.kernel.BootLoader import BootLoader
 from cos.core.utilities.ArgList import ArgList
 
-import json, datetime
+import json, datetime, collections
+from cos.core.utilities.ActiveRecord import ActiveRecord
 from cos.model.environment.Scales import Scales
 
 class Builder(BuilderBaseClass):
+	# Databases already checked for duplicate identity, so the guard runs once
+	# per vessel.s3db rather than once per builder. Five builders share one
+	# database, and each reads only the rows of its own type, so the check has
+	# to be made over the whole table by one of them.
+	audited	= set()
+
+	@classmethod
+	def audit(cls, ctxt:Context, path:str):
+		""" COS-029-03: refuses a vessel database that cannot be attributed
+		Arguments
+			ctxt -- Simulation context
+			path -- Path of the vessel database
+		Returns
+			The number of duplicated values found
+
+		A duplicated guid, IMO or MMSI means two vessels' findings merge into
+		one bucket for the whole run, and nothing downstream can separate them
+		again. The run is allowed to continue - stopping a sweep on a data
+		defect is its own kind of damage - but it is logged as an error, once,
+		with the offending values named.
+		"""
+		if path in cls.audited:
+			return 0
+
+		cls.audited.add( path )
+
+		try:
+			db		= ActiveRecord.create( 'vessel', path, 'vessels' )
+			records	= db.get_all()
+		except Exception as e:
+			ctxt.log.warning( 'Builder/Vessel', f'Identity audit skipped for {path}: {e}' )
+			return 0
+
+		# (column index, what it is called in the log)
+		fields	= ( (2, 'guid'), (4, 'imo'), (5, 'mmsi') )
+		total	= 0
+
+		for index, label in fields:
+			counts	= collections.Counter( str(r[index]) for r in records )
+			repeats	= { v: n for v, n in counts.items() if n > 1 }
+			for value, n in sorted( repeats.items(), key=lambda kv: -kv[1] ):
+				names	= [ str(r[1]) for r in records if str(r[index]) == value ]
+				ctxt.log.error( 'Builder/Vessel',
+								f'{label} {value!r} is shared by {n} vessels '
+								f'({", ".join(names[:6])}{" ..." if n > 6 else ""}); '
+								f'their findings cannot be told apart (COS.029)' )
+			total	+= len( repeats )
+
+		if total:
+			ctxt.log.error( 'Builder/Vessel',
+							f'{path}: {total} duplicated identity value(s). '
+							f'Run tools/mapping/fix_identity.py --apply' )
+
+		return total
+
 	def __init__(self, args:dict):
 		""" Constructor
 		Arguments
@@ -30,6 +86,22 @@ class Builder(BuilderBaseClass):
 
 		return
 
+
+
+	def build(self, ctxt:Context, args, path:str, type:str):
+		""" Builds the vessels of one type, auditing the database first
+		Arguments
+			ctxt -- Simulation context
+			args -- Builder arguments
+			path -- Path of the vessel database
+			type -- Prototype name
+		"""
+		# COS-029-03. Five builders share one vessel.s3db and each sees only
+		# its own type's rows, so the duplicate check runs here, over the whole
+		# table, and only for the first builder to reach it.
+		Builder.audit( ctxt, path )
+
+		return BuilderBaseClass.build( self, ctxt, args, path, type )
 
 	def create(self, ctxt:Context, klass, rec):
 		""" Builds all the vessels in a simulation

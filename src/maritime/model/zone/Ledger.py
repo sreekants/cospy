@@ -233,19 +233,61 @@ class Ledger:
 
 	@staticmethod
 	def identify(vessel):
-		""" IMO of a vessel, or 0 when it declares none
+		""" The key a vessel's findings are attributed to: its guid
 		Arguments
 			vessel -- Vessel
+
+		The guid, not the IMO (COS-029-02). Both are unique now, but the guid is
+		unique by construction - it is what fleet membership already matches on
+		- so attribution does not depend on the identity data staying repaired.
+		The IMO is recorded beside it; see imo().
+
+		The fallbacks matter as much as the preference. Every degradation here
+		is to another value that still *distinguishes* vessels, because the
+		failure this whole ticket is about is two vessels sharing one key. A
+		fallback to a constant - '', or 0 - would recreate it exactly, and
+		would do so silently, so there is none: an object carrying no
+		distinguishing value at all yields its identity, which is unique per
+		object.
+		"""
+		for attr in ( 'guid', 'recid', 'id' ):
+			value	= getattr( vessel, attr, None )
+			if value not in (None, '', 0):
+				return str( value )
+
+		for key in ( 'guid', 'id' ):
+			try:
+				value	= vessel.config[key]
+			except (KeyError, TypeError, AttributeError):
+				continue
+			if value not in (None, '', 0):
+				return str( value )
+
+		# Nothing declared. The IMO is unique since COS-029-01, so it is a
+		# usable last resort; failing that, the object's own identity keeps
+		# distinct vessels distinct.
+		imo	= Ledger.imo( vessel )
+		return imo if imo else f'anon-{id(vessel):x}'
+
+	@staticmethod
+	def imo(vessel):
+		""" IMO of a vessel as recorded, or '' when it declares none
+		Arguments
+			vessel -- Vessel
+
+		A fleet controller carries FLEET-<hash8(guid)> rather than an IMO
+		(COS-029-04), so this is a string in every case and is never parsed as
+		a number.
 		"""
 		try:
-			return vessel.config["identifier"]["imo"]
+			return str( vessel.config["identifier"]["imo"] )
 		except (KeyError, TypeError, AttributeError):
 			pass
 
 		try:
-			return int( vessel.imo )
+			return str( vessel.imo )
 		except (AttributeError, TypeError, ValueError):
-			return 0
+			return ''
 
 	def record(self, ctxt:Context, source:str, raiser:str, vessel, event:str,
 			   shapes, penalty:float, value=0.0, concern=None)->bool:
@@ -271,9 +313,13 @@ class Ledger:
 			ctxt.log.error( raiser, f'Violation {event!r} maps to no concern; not recorded' )
 			return False
 
+		# Keyed on the guid, with the IMO recorded beside it (COS-029-02). The
+		# field order matches fact_concern in maritime.xml, which is the
+		# payload contract Partition.serialize writes against.
 		ctxt.sim.data.push( FACT, (
 			ctxt.sim.now(),
 			self.identify( vessel ),
+			self.imo( vessel ),
 			source,
 			raiser,
 			event,

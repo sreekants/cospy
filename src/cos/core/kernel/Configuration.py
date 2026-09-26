@@ -9,20 +9,18 @@ import os
 import re
 
 class Configuration:
-	def __init__(self, configfile='cos.ini', configenv=None, imagefile=None):
+	def __init__(self, configfile=None, imagefile=None):
 		""" Constructor:
 		Arguments
 			configfile='cos.ini' -- File name of the configuration file
-			configenv=None -- Environment variable for the configuration path
-			imagefile=None -- Boot image file
+			imagefile=None -- Boot image file (.tar file)
 		"""
-		if configenv is None:
-			configenv='COS_CONFIG'
-			
-		self.approot		= configenv
-		self.inifile		= configfile
+
+		self.approot		= 'COS_CONFIG'
 		self.config			= None
 		self.bootimage		= None
+
+		self.inifile		= self.__set_config_env(configfile)
 
 		# Loads the configuration
 		self.__load_config( imagefile )
@@ -34,6 +32,14 @@ class Configuration:
 
 		return
 
+	def __set_config_env(self, configfile):
+		if configfile is not None:
+			os.environ["COS_CONFIG"]	= os.path.dirname(os.path.abspath(configfile))
+			return configfile
+
+		return self.find_config_file('cos.ini')
+		
+		
 	def __load_config(self, imagefile):
 		""" Loads the configuration settings
 		Arguments
@@ -53,7 +59,7 @@ class Configuration:
 			# Find the config file in the path if
 			# one is not in the current directory
 			if self.exists(self.inifile) == False:
-				self.inifile = self.find_config_file()
+				raise Exception( f"Configuration file [{self.inifile}] not found]" )
 
 			self.parser = configparser.ConfigParser()
 			self.parser.read(self.inifile)
@@ -219,17 +225,20 @@ class Configuration:
 		"""
 		return int(float(self.parser.get(type,key)))
 
-	def find_config_file(self):
+	def find_config_file(self, filepath):
 		""" Finds the confituration file in the path
 		Arguments
 			"""
-		filepath = self.inifile
 		if filepath is None:
 			return None
 
+		if self.exists(filepath):
+			return filepath
+
+		# If the file needs to be computed from a relative path to the configuration folder
 		if self.approot is not None:
 			self.config = os.environ[self.approot]
-			filepath = os.path.join( self.config, self.inifile)
+			filepath = os.path.join( self.config, filepath)
 
 		if self.exists(filepath) == True:
 			return filepath
