@@ -9,15 +9,17 @@ import os
 import re
 
 class Configuration:
-	def __init__(self, configfile='cos.ini', configpath='COS_CONFIG', imagefile=None):
+	def __init__(self, configfile='cos.ini', configenv=None, imagefile=None):
 		""" Constructor:
 		Arguments
 			configfile='cos.ini' -- File name of the configuration file
-			configpath=None -- Environment variable for the configuration path
+			configenv=None -- Environment variable for the configuration path
 			imagefile=None -- Boot image file
 		"""
-		self.appconfig		= configpath
-		self.approot		= 'COS_CONFIG'
+		if configenv is None:
+			configenv='COS_CONFIG'
+			
+		self.approot		= configenv
 		self.inifile		= configfile
 		self.config			= None
 		self.bootimage		= None
@@ -225,8 +227,8 @@ class Configuration:
 		if filepath is None:
 			return None
 
-		if self.appconfig is not None:
-			self.config = os.environ[self.appconfig]
+		if self.approot is not None:
+			self.config = os.environ[self.approot]
 			filepath = os.path.join( self.config, self.inifile)
 
 		if self.exists(filepath) == True:
