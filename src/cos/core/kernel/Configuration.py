@@ -162,8 +162,7 @@ class Configuration:
 		for p in matches:
 			key	= str(p)
 			if args.find(key) == -1:
-				 continue
-			
+				continue
 			value	= self.resolve(key)
 			args	= args.replace(key, value)
 		return args

@@ -88,9 +88,6 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			module -- Module information
 		"""
 		ConcernExaminer.on_init(self, ctxt, module)		# runs setup(); calling it again loads everything twice
-
-		config		= ArgList( module.get("config", "") )
-		self.trace	= config.IsTrue('trace')
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):
@@ -99,6 +96,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			ctxt -- Simulation context
 			config -- Configuration attributes
 		"""
+		self.trace	= config.IsTrue('trace')
 		poll_at		= config["sample.frequency"]
 		self.timer	= Ticker( int(poll_at) ) if poll_at is not None else Ticker( 1 )
 		self.range	= config.ToFloat( 'range', self.range )
