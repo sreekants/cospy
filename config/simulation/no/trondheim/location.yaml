@@ -1,0 +1,16 @@
+# Settings of this location, loaded once at simulation startup.
+#
+# depth.nominal
+#   Seabed depth, in metres, assumed wherever no sea shape of the map reports a
+#   depth (REQ.022). Every depth accessor returns this rather than nothing, so a
+#   stretch of unmapped water reads as open sea. 4000 m is about the mean depth
+#   of the ocean: under-keel clearance against it is never marginal, so the
+#   fallback can never cause a grounding finding. Lower it where unmapped water
+#   is known to be shallow, e.g. an inland waterway. The run log reports how many
+#   depth queries fell back to it.
+
+location:
+  country: "no"
+  location: "trondheim"
+  depth:
+    nominal: 4000.0
