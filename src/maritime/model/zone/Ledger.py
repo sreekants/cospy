@@ -240,7 +240,6 @@ class Ledger:
 		The guid, not the IMO (COS-029-02). Both are unique now, but the guid is
 		unique by construction - it is what fleet membership already matches on
 		- so attribution does not depend on the identity data staying repaired.
-		The IMO is recorded beside it; see imo().
 
 		The fallbacks matter as much as the preference. Every degradation here
 		is to another value that still *distinguishes* vessels, because the
@@ -268,6 +267,23 @@ class Ledger:
 		# distinct vessels distinct.
 		imo	= Ledger.imo( vessel )
 		return imo if imo else f'anon-{id(vessel):x}'
+
+	@staticmethod
+	def recid(vessel):
+		""" Database id of a vessel: its IMO as an integer, as every fact table records it
+		Arguments
+			vessel -- Vessel
+		Returns
+			The IMO, or None when the vessel declares none
+		"""
+		value	= getattr( vessel, 'recid', None )
+		if value is not None:
+			return value
+
+		try:
+			return int( vessel.config['identifier']['imo'] )
+		except (KeyError, TypeError, AttributeError, ValueError):
+			return None
 
 	@staticmethod
 	def imo(vessel):
@@ -313,13 +329,10 @@ class Ledger:
 			ctxt.log.error( raiser, f'Violation {event!r} maps to no concern; not recorded' )
 			return False
 
-		# Keyed on the guid, with the IMO recorded beside it (COS-029-02). The
-		# field order matches fact_concern in maritime.xml, which is the
-		# payload contract Partition.serialize writes against.
+		# vessel_id is the vessel IMO, as in every fact table; field order matches fact_concern in maritime.xml
 		ctxt.sim.data.push( FACT, (
 			ctxt.sim.now(),
-			self.identify( vessel ),
-			self.imo( vessel ),
+			self.recid( vessel ),
 			source,
 			raiser,
 			event,

@@ -264,6 +264,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 
 		report		= {
 			'vessel'		: key,
+			'recid'			: Ledger.recid( vessel ),	# database id written to every fact row
 			'imo'			: imo,
 			'time'			: ctxt.sim.now(),
 			'zone'			: zone,			# spatial zone, the i index of Rl
@@ -382,8 +383,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# injected by the partition, so it is not passed here.
 		self.data( ctxt, 'risk_assessment', (
 			report['time'],
-			report['vessel'],
-			report['imo'],
+			report['recid'],
 			report['zone'],
 			hazards['collision'],
 			hazards['grounding'],
@@ -407,8 +407,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# not be edited part way through a sweep.
 		self.data( ctxt, 'rl', (
 			report['time'],
-			report['vessel'],
-			report['imo'],
+			report['recid'],
 			report['matrix'],
 		) )
 
@@ -416,8 +415,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		for concern, exposure in report['exposure'].items():
 			self.data( ctxt, 'rb', (
 				report['time'],
-				report['vessel'],
-				report['imo'],
+				report['recid'],
 				report['zone'],
 				concern,
 				exposure,

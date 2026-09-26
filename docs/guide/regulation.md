@@ -159,8 +159,8 @@ own timer and preconditions, whether it has anything to score.
 A Legata clause refers to terms such as `(OwnShip,TargetShip).DCPA` or `OS.Draft`. When an
 automaton needs one, the rule context asks the evaluator's `CompositeResolver`. It picks a resolver
 from `config/legata.yaml` by the term's prefix and property name. The resolver reads the **current
-situation** in the rule context: the own ship, the target ship, the fleet and the zone that a monitor
-or rule has put there. It computes the value from the live objects under `/World`.
+situation** in the rule context: the own ship, the target ship and the zone that a monitor
+or rule has put there. A fleet is a vessel's: a term or precondition names `os.fleet` or `ts.fleet`. It computes the value from the live objects under `/World`.
 
 Two consequences follow. A term is only as good as its resolver, so a resolver that returns a fixed
 value makes every rule that uses it see that value ([what COS cannot see](concepts.md#what-cos-cannot-see)).

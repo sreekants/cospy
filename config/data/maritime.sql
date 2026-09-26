@@ -2852,6 +2852,31 @@ CREATE TABLE fact_concern
 
 CREATE INDEX idx_fact_concern ON fact_concern(dim_gps_id,dim_vessel_id);
 
+CREATE TABLE fact_risk_assessment
+(
+	dim_gps_id INTEGER,
+	dim_vessel_id INTEGER,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	creation_time TIMESTAMP,
+	audit_status INTEGER,
+	case_id INTEGER,
+	report_time REAL,
+	own_ship INTEGER,
+	zone VARCHAR(255),
+	p_collision REAL,
+	p_grounding REAL,
+	p_comms_loss REAL,
+	p_any_hazard REAL,
+	p_sum_hazard REAL,
+	individual_risk REAL,
+	cost REAL,
+	increment REAL,
+	survival REAL,
+	cumulative REAL
+);
+
+CREATE INDEX idx_fact_risk_assessment ON fact_risk_assessment(dim_gps_id,dim_vessel_id);
+
 CREATE TABLE fact_rw
 (
 	dim_gps_id INTEGER,
@@ -2894,37 +2919,10 @@ CREATE TABLE fact_rl
 	case_id INTEGER,
 	report_time REAL,
 	own_ship INTEGER,
-	zone VARCHAR(255),
-	concern VARCHAR(255),
-	currency VARCHAR(255),
-	loss REAL
+	matrix VARCHAR(255)
 );
 
 CREATE INDEX idx_fact_rl ON fact_rl(dim_gps_id,dim_vessel_id);
-
-CREATE TABLE fact_risk_assessment
-(
-	dim_gps_id INTEGER,
-	dim_vessel_id INTEGER,
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	creation_time TIMESTAMP,
-	audit_status INTEGER,
-	case_id INTEGER,
-	report_time REAL,
-	own_ship INTEGER,
-	zone VARCHAR(255),
-	p_collision REAL,
-	p_grounding REAL,
-	p_comms_loss REAL,
-	p_any_hazard REAL,
-	p_sum_hazard REAL,
-	cost REAL,
-	increment REAL,
-	survival REAL,
-	cumulative REAL
-);
-
-CREATE INDEX idx_fact_risk_assessment ON fact_risk_assessment(dim_gps_id,dim_vessel_id);
 
 CREATE TABLE fact_under_test
 (

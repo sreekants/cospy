@@ -153,9 +153,13 @@ Shutdown is the same in reverse: run levels 5 down to 1 (`on_term`), then module
 1,000,000, is effectively "until you stop it".
 
 **Identity.** At boot the kernel turns the scenario name, `SCENARIO=scenario-0:tk/turkeli/foggy/hdta`,
-into a number, the first 4 bytes of its SHA-256 hash. That number is the run's **case id**, stored
-with every row it writes. In the running example it is 1,002,191,103. The case id is how rows from a
-thousand runs are told apart after they are merged.
+into a number, the top 52 bits of its SHA-256 hash (`cos.core.utilities.CaseId`). That number is the
+run's **case id**, stored with every row it writes. In the running example it is 1,050,873,538,455,668.
+52 bits keeps the id exact in a floating-point column, and makes two cases colliding in a million-case
+sweep unlikely (about 1 in 10 000). A run without a `SCENARIO` refuses to start. The `scenario-0` part
+is `CASE`, the replicate number. A sweep's generator writes `cases.csv`, which maps each case id to its
+folder and parameters. The case id is how rows from a thousand runs are told apart after they are
+merged.
 
 **In our running example**, the log shows the three groups loading in order (`Loading Kernel:
 Subsystem`, `Loading Faculties: …`, `Loading Services: NetworkServices`), and one line near the end
