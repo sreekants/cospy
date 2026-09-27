@@ -12,6 +12,8 @@ from cos.math.geometry.Point import Point
 from cos.math.geometry.Vector import Vector
 from maritime.traffic import actor
 
+import yaml
+
 class WorldAdapter:
 	""" Adapter class to provide a consistent interface for the swarm behavior to interact with the simulation world.
 	"""
@@ -115,8 +117,14 @@ class PreyBehavior(FleetBehavior):
 		preycfg = PreyConfig()
 		predcfg = PredatorConfig()
 
-		preycfg.speed  = 0.5
+		preycfg.speed  = 0.5						# defaults when the controller names no swarm= file
 		predcfg.speed  = 0.5
+
+		args	= self.get_settings( config )
+		if args['swarm'] is not None:
+			swarm	= yaml.safe_load( ctxt.sim.fs.read_file_as_bytes(ctxt.sim.config.resolve(args['swarm'])) ) or {}
+			preycfg.load( swarm.get('prey') )
+			predcfg.load( swarm.get('predator') )
 
 		preys = []
 		predators = []
