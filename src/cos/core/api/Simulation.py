@@ -3,7 +3,7 @@
 from cos.core.network.ORPCProxy import ORPCProxy
 
 
-class Service(ORPCProxy):
+class Simulation(ORPCProxy):
 	def __init__(self,arg=None):
 		""" Constructor
 		Arguments

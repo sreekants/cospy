@@ -99,7 +99,7 @@ class Collision(MaritimeConductSituation):
 		if distance < self.collision_range:
 			# Last point of approach was the closest point of approach (CPA) in the simulation
 			#print( f'Collision: CPA {lhs.config["name"]} and {rhs.config["name"]} at distance {lpa}')
-			ctxt.sim.data.push(f'fact_collision', (lhs.recid, rhs.recid, ctxt.sim.tickcount(), round(lpa, 4)))
+			ctxt.sim.data.push(f'fact_collision', (lhs.recid, rhs.recid, ctxt.sim.seconds(), round(lpa, 4)))
 			return
 
 		# print( f'COLLISION! {lhs.config["name"]} and {rhs.config["name"]} at distance {info[2]:0.2}')
@@ -137,7 +137,7 @@ class Collision(MaritimeConductSituation):
 		self.lpa[(lhs.vid, rhs.vid)]	= distance
 
 		if distance is not None:
-			ctxt.sim.data.push(f'fact_approach', (lhs.recid, rhs.recid, ctxt.sim.tickcount(), round(distance, 4)))
+			ctxt.sim.data.push(f'fact_approach', (lhs.recid, rhs.recid, ctxt.sim.seconds(), round(distance, 4)))
 		return
 
 

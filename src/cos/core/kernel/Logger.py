@@ -4,7 +4,8 @@
 
 from cos.core.kernel.Configuration import Configuration
 from cos.core.utilities.ActiveRecord import ActiveRecord
-import os, datetime, colorama, time
+from cos.core.time.Clock import utcnow
+import os, colorama
 
 # Error codes match Win32 error log codes
 EVENTLOG_ERROR_TYPE				= 0x0001	# Log and exit
@@ -14,12 +15,11 @@ EVENTLOG_SYSTEM_ERROR			= 0x1001	# Log errorcode & exit
 EVENTLOG_ABNORMAL_TERMINATION	= 0x2001	# Log errorcode, core dump & exit
 
 class LogFile:
-	def __init__(self, dbpath, table='system', utcmode=False):
+	def __init__(self, dbpath, table='system'):
 		""" Constructor
 		Arguments
 			dbpath -- Database repository to add logs to
 			table -- Table to save to.
-			utcmode -- Time log mode (local vs. UTC)
 		"""
 
 		if dbpath is None:
@@ -37,7 +37,6 @@ class LogFile:
 				'[description] VARCHAR(128) NULL, [category] VARCHAR(32) NULL,'\
 				'[computer] VARCHAR(64) NULL, [user] VARCHAR(64) NULL,'\
 				'[source] VARCHAR(64) NULL)' )
-		self.utcmode	= utcmode
 		self.path		= dbpath
 		return
 
@@ -51,10 +50,7 @@ class LogFile:
 		if self.model is None:
 			return
 
-		if self.utcmode == False:
-			logtime = datetime.datetime.now()
-		else:
-			logtime	= datetime.datetime.utcnow()
+		logtime	= utcnow().isoformat(timespec='microseconds')
 
 		print(text)
 
@@ -328,7 +324,7 @@ class Logger:
 	def get_timestamp(self):
 		""" Generates a time stamp for the log
 		"""
-		return time.strftime('%d/%m/%y %H:%M:%S')
+		return utcnow().strftime('%d/%m/%y %H:%M:%SZ')
 
 if __name__ == "__main__":
 	test = LogFile("test.s3db")

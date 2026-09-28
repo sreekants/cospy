@@ -32,7 +32,7 @@ class UnderTest(Situation):
 
 		problems	= self.filter.load( path )
 		vessels		= ctxt.sim.objects.get_all( "/World/Vehicle/Vessel" )
-		problems	+= self.filter.resolve( vessels )
+		problems	+= self.filter.resolve( vessels, (getattr(ctxt.sim, 'disabled_vessels', None) or {}).values() )
 
 		for problem in problems:
 			ctxt.log.error( self.id, problem )
@@ -42,7 +42,7 @@ class UnderTest(Situation):
 
 		ctxt.log.info( self.id, self.filter.describe() )
 
-		now		= ctxt.sim.now()
+		now		= ctxt.sim.seconds()
 		for row in self.filter.records():
 			ctxt.sim.data.push( 'fact_under_test', (now,) + row )
 

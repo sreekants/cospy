@@ -8,7 +8,7 @@ from cos.core.kernel.Topic import Topic
 from cos.core.utilities.Tree import Tree, TreeNode
 from cos.core.utilities.Errors import ErrorCode
 
-import fnmatch
+import fnmatch, queue, threading
 
 DEFAULT_THROTTLE_RATE	= 1000
 
@@ -40,6 +40,7 @@ class MessageQueue:
 		self.broker		= None
 
 		self.throttle_rate	= DEFAULT_THROTTLE_RATE
+		self.lock			= threading.RLock()		# Guards the queue tree and routes across threads
 		return
 
 	def pump(self, path:str, throttle_rate:int=-1):
@@ -56,7 +57,8 @@ class MessageQueue:
 		if path is None:
 			self.queues.traverse( MessageQueue.__pump_node, ctxt )
 		else:
-			node	= self.queues.find( path )
+			with self.lock:
+				node	= self.queues.find( path )
 			if node is not None:
 				node.traverse( MessageQueue.__pump_node, ctxt, 8 )
 
@@ -92,12 +94,13 @@ class MessageQueue:
 		if depth <= 0:
 			return None
 
-		node = self.queues.find(path)
-		if node is not None:
-			return node
+		with self.lock:
+			node = self.queues.find(path)
+			if node is not None:
+				return node
 
-		if path in self.routes:
-			return self.get_node(self.routes[path], depth-1)
+			if path in self.routes:
+				return self.get_node(self.routes[path], depth-1)
 
 		return None
 
@@ -110,20 +113,21 @@ class MessageQueue:
 		if path.startswith('/') == False:
 			raise Exception( f'Invalid topic name [{path}]' )
 
-		node	= self.queues.get( path )
+		with self.lock:
+			node	= self.queues.get( path )
 
-		# Check the data of the node to verify that this is a new node
-		if node.data is None:
-			slot		= Topic()
-			node.data	= slot
+			# Check the data of the node to verify that this is a new node
+			if node.data is None:
+				node.data	= Topic()
+			slot	= node.data
 
-		if listener is None:
-			return True
+			if listener is None:
+				return True
 
-		if listener in slot.subscribers:
-			return False
+			if listener in slot.subscribers:
+				return False
 
-		slot.subscribers.append(listener)
+			slot.subscribers.append(listener)
 		return True
 
 	def route(self, path:str, dest):
@@ -132,13 +136,14 @@ class MessageQueue:
 			path -- Route path
 			dest -- Destination path
 		"""
-		if path in self.routes:
-			return
+		with self.lock:
+			if path in self.routes:
+				return
 
-		if self.queues.exists(path):
-			return
+			if self.queues.exists(path):
+				return
 
-		self.routes[path]	= dest
+			self.routes[path]	= dest
 		return
 
 	def unroute(self, path:str):
@@ -146,10 +151,8 @@ class MessageQueue:
 		Arguments
 			path -- Route path
 		"""
-		if path not in self.routes:
-			return
-
-		self.routes.pop( path )
+		with self.lock:
+			self.routes.pop( path, None )
 		return
 
 	def unsubscribe(self, path:str, listener):
@@ -190,10 +193,10 @@ class MessageQueue:
 		if slot is None:
 			return None
 
-		if slot.queue.empty():
+		try:
+			return slot.queue.get_nowait()
+		except queue.Empty:
 			return None
-
-		return slot.queue.get()
 
 	def push(self, path:str, msg:str, ctxt:Context=None, arg=None, depth=1):
 		""" Pushs a message to a queue
@@ -213,7 +216,8 @@ class MessageQueue:
 			slot.queue.put(evt)
 			return True
 
-		node = self.queues.find(path)
+		with self.lock:
+			node = self.queues.find(path)
 		if node is None:
 			return False
 
@@ -399,8 +403,11 @@ class MessageQueue:
 		#if slot.queue.empty() == False:
 		#	print( f'Pumping {slot.queue.qsize()} messages from {node.path}' )
 			
-		while slot.queue.empty() == False:
-			evt = slot.queue.get()
+		while True:
+			try:
+				evt = slot.queue.get_nowait()
+			except queue.Empty:
+				break
 
 			for s in slot.subscribers:
 				s.notify( evt.ctxt, evt.msg, evt.arg )

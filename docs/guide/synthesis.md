@@ -15,23 +15,20 @@ COS acts at several rates, and they are not all measured in the same kind of tim
 
 | Level | Rate | Clock | Decides |
 |---|---|---|---|
-| Step | Every ~30–40 ms | Wall clock (a 30 ms sleep plus the work) | Vessel movement |
-| Situation monitoring | About once a second | Wall clock | Encounters and conduct events |
-| Rule evaluation | About every 2 seconds | Wall clock | Violations and penalties |
-| Weather update | About every 2 seconds | Wall clock | Rotation of the weather fields |
+| Step | A 30 ms sleep plus the motion work | Simulated clock: one tick is `SecondsPerTick` simulated seconds | Vessel movement |
+| Situation monitoring | Every 0.5 simulated seconds, on the latest tick | Simulated clock | Encounters and conduct events |
+| Rule evaluation | Every `sample.frequency` simulated seconds, on the latest tick | Simulated clock | Violations and penalties |
+| Weather update | Every `Sample.Rate` simulated seconds | Simulated clock | Rotation of the weather fields |
 | Recording | Every 5 seconds | Wall clock | Rows written to disk |
 | Run | `RunCycles` steps | Step count | When the simulation stops |
 | Sweep | Hours to days | Cluster | Which conditions are compared |
 
-**One consequence to know.** Monitors, rules and weather run on timers measured in real seconds, and
-those timers round down to whole seconds. A timer set to 0.5 s fires about once a second; one set to
-1 s fires about every 2 seconds. Vessels, by contrast, move once per step. So **the number of times a
-rule is checked during a voyage depends on how fast the computer is.** A slower machine takes more
-steps per real second of rule timing, and so checks less often per metre sailed. When comparing runs,
-compare them on the same kind of machine, or count per step rather than per second.
-
-**In our example.** 1,500 steps took about 58 seconds, roughly 39 ms per step. On a machine twice as fast
-the same 1,500 steps would take about half the time, and the rules would run about half as often.
+**One consequence to know.** With `[ProcessManager] Affinity` set, vessels move on one thread and the
+monitors and rules run on a second, each pass judging the latest tick and skipping the ticks that went
+by during the previous pass. Motion never waits for the rules. So **the number of ticks the rules judge
+during a voyage depends on how fast the computer is.** Every row records the `tick` it was judged on
+and its time in simulated seconds, so rows from different machines line up on simulated time, but a
+faster machine records more of them. The runner logs each pass's lag in ticks.
 
 ---
 

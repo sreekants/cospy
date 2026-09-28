@@ -80,14 +80,14 @@ class Future(CallbackPoolTask):
 			return
 
 		while self.complete == False:
-			start	= time.clock()
+			start	= time.monotonic()
 
 			# Wait for an event
 			if self.pool.WaitForEvent(timeout)==False:
 				break
 
 			# Subtract the elapsed time from the timeout
-			timeout	-= time.clock() - start
+			timeout	-= time.monotonic() - start
 
 		return
 

@@ -11,7 +11,7 @@ from cos.core.kernel.ParameterManager import ParameterManager
 from cos.core.kernel.BootLoader import BootLoader
 from cos.core.kernel.ThreadPool import ThreadPool
 from cos.core.kernel.Configuration import Configuration
-from cos.core.time.Clock import Clock
+from cos.core.time.Clock import Clock, DEFAULT_STEP, DEFAULT_EPOCH
 from cos.core.utilities.Patterns import Manager
 
 from cos.core.utilities.CaseId import case_id
@@ -43,13 +43,22 @@ class Kernel:
 		return
 
 	def now(self):
-		""" Returns the current kernel time
+		""" Returns the simulated time in UTC
 		"""
 		return self.clock.utc
 
+	def localtime(self):
+		""" Returns the simulated time in the scenario's timezone
+		"""
+		return self.clock.local
+
+	def seconds(self):
+		""" Returns the simulated seconds since the epoch
+		"""
+		return self.clock.seconds
 
 	def tickcount(self):
-		""" Returns the current kernel tick count
+		""" Returns the simulation tick
 		"""
 		return self.clock.tickcount
 
@@ -72,6 +81,8 @@ class Kernel:
 		scenario_key 	= self.config.env.get('SCENARIO', None)
 		self.case_id	= case_id( scenario_key )		# Refuses an absent or empty key
 		self.log.info( "Kernel", f"Case id {self.case_id} for scenario '{scenario_key}'")
+
+		self.__init_clock()
 
 		self.log.info( "Kernel", "Initializing...")
 		self.loader.startup( self, self.config )
@@ -105,6 +116,21 @@ class Kernel:
 		self.__settings	= {
 				"Folders":	{}
 			}
+		return
+
+	def __init_clock(self):
+		""" Sets the simulated clock from [ProcessManager] SecondsPerTick and Epoch
+		"""
+		step	= DEFAULT_STEP
+		epoch	= DEFAULT_EPOCH
+		if self.config.exists_value( 'ProcessManager', 'SecondsPerTick' ):
+			step	= float( self.config.get_value('ProcessManager', 'SecondsPerTick') )
+		if self.config.exists_value( 'ProcessManager', 'Epoch' ):
+			epoch	= self.config.get_value( 'ProcessManager', 'Epoch' )
+
+		self.clock.configure( step, epoch )
+		self.clock.reset()
+		self.log.info( "Kernel", f"Simulated clock: {self.clock.step:g} s per tick from {self.clock.epoch.isoformat()}" )
 		return
 
 	@property

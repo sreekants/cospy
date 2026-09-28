@@ -59,7 +59,7 @@ class Map(Service):
 
 		# Initialize timer ticks
 		if self.poll_at is not None:
-			self.timer	= Ticker( int(self.poll_at) )
+			self.timer	= Ticker( float(self.poll_at), ctxt.sim.clock )
 		else:
 			self.timer	= None
 

@@ -98,7 +98,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		"""
 		self.trace	= config.IsTrue('trace')
 		poll_at		= config["sample.frequency"]
-		self.timer	= Ticker( int(poll_at) ) if poll_at is not None else Ticker( 1 )
+		self.timer	= Ticker( float(poll_at) if poll_at is not None else 1, ctxt.sim.clock )
 		self.range	= config.ToFloat( 'range', self.range )
 
 		# Zone awareness supplies the map shapes under a vessel, which the
@@ -133,7 +133,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		if self.weights.errors():
 			return
 
-		now		= ctxt.sim.now()
+		now		= ctxt.sim.seconds()
 		for concern, weight in self.weights.normalised().items():
 			self.data( ctxt, 'rw', (now, concern, weight, float(self.weights.declared[concern])) )
 		return
@@ -266,7 +266,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			'vessel'		: key,
 			'recid'			: Ledger.recid( vessel ),	# database id written to every fact row
 			'imo'			: imo,
-			'time'			: ctxt.sim.now(),
+			'time'			: ctxt.sim.seconds(),
 			'zone'			: zone,			# spatial zone, the i index of Rl
 			'matrix'		: serialized,	# the whole of Rl, MATLAB literal, USD
 			'hazards'		: hazards,		# marginals, plus 'any' (exact) and 'sum' (eq. 14)

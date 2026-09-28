@@ -42,8 +42,7 @@ class MQ(ORPCProxy):
 			 'queuename':queuename,
 			 'config':config
 			}
-		ORPCProxy.invoke(self,'pop', args)
-		return ORPCProxy.GetResponseBody(self)
+		return ORPCProxy.invoke(self,'pop', args)
 
 	def peek(self, domain, queuename, config ):
 		""" Reads a message from a queue without popping it.
@@ -57,8 +56,7 @@ class MQ(ORPCProxy):
 			 'queuename':queuename,
 			 'config':config
 			}
-		ORPCProxy.invoke(self,'peek', args)
-		return ORPCProxy.GetResponseBody(self)
+		return ORPCProxy.invoke(self,'peek', args)
 
 	def move(self, domain, criteria, sourcequeuename, targetqueuename, config ):
 		""" Moves a queue

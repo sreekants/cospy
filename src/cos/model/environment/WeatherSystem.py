@@ -102,10 +102,11 @@ class WeatherSystem(Object):
 		return
 
 
-	def init_config(self, args:ArgList):
+	def init_config(self, args:ArgList, clock=None):
 		""" Initializes the weather system configurations
 		Arguments
 			args -- List of arguments
+			clock -- Simulated clock the sample rate counts in
 		"""
 		# Parse configurations
 		self.poll_at		= args["Sample.Rate"]
@@ -119,7 +120,7 @@ class WeatherSystem(Object):
 
 		# Initialize timer ticks
 		if self.poll_at is not None:
-			self.timer	= Ticker( int(self.poll_at) )
+			self.timer	= Ticker( float(self.poll_at), clock )
 		else:
 			self.timer	= None
 		return
@@ -143,7 +144,7 @@ class WeatherSystem(Object):
 			records -- Records loaded from a weather system
 			file -- File path  #TODO: Remove
 		"""
-		self.init_config( args )
+		self.init_config( args, ctxt.sim.clock )
 
 		# TODO: Should each weather system type (simulation-level) have a scale,
 		# or should each weather database (file-level) have its own scale??

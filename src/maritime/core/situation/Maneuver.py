@@ -37,7 +37,7 @@ class Maneuver(MaritimeEncounterSituation):
 				self.on_trigger )
 
 		# An encounter ends once unclassified for longer than the release window
-		now		= ctxt.sim.tickcount()
+		now		= ctxt.sim.seconds()
 		release	= Classification.THRESHOLDS.release
 		self.close( ctxt, [key for key, e in self.open.items() if (key not in self.seen) and (now - e[3] > release)] )
 		return result
@@ -64,7 +64,7 @@ class Maneuver(MaritimeEncounterSituation):
 			event -- EncounterEvent
 		"""
 		key		= ( event.OS.id, event.TS.id )
-		now		= ctxt.sim.tickcount()
+		now		= ctxt.sim.seconds()
 		self.seen.add( key )
 
 		episode	= self.open.get( key )

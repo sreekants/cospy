@@ -8,7 +8,7 @@ from cos.core.kernel.Context import Context
 import queue
 
 # Fields every fact table opens with, supplied by serialize()
-AUDIT_FIELDS	= 3
+AUDIT_FIELDS	= 4
 AUDIT_REGISTER	= 1000
 
 class Partition:
@@ -28,13 +28,14 @@ class Partition:
 		"""
 		return len(self.fields) - AUDIT_FIELDS
 
-	def add(self, at, data):
+	def add(self, at, tick, data):
 		""" Queues data for write
 		Arguments
-			at -- Time of record
+			at -- Host time of the record, a timezone-aware datetime
+			tick -- Simulation tick the record belongs to
 			data -- Data to be queued
 		"""
-		self.records.put( [at, data] )
+		self.records.put( [at, tick, data] )
 		return
 
 	def flush(self, db:TransactionalDatabase):
@@ -60,13 +61,15 @@ class Partition:
 			rec -- Record to write
 		"""
 		at		= rec[0]
-		data	= rec[1]
+		tick	= rec[1]
+		data	= rec[2]
 
-		# creation_time, audit_status, case_id
+		# creation_time, audit_status, case_id, tick
 		values	= []
-		values.append( str(at) )
+		values.append( at.isoformat(timespec='microseconds') )
 		values.append( str(AUDIT_REGISTER) )
 		values.append( str(self.case_id) )
+		values.append( str(tick) )
 		values.extend( map(str, data) )
 
 		db.addkv( self.topic, self.fields, values )		

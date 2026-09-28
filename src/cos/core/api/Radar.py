@@ -18,7 +18,7 @@ class Radar(ORPCProxy):
 		args={
 			 'id':id
 			}
-		return ORPCProxy.Invoke(self,'describe', args)
+		return ORPCProxy.invoke(self,'describe', args)
 
 
 

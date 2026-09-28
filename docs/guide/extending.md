@@ -87,13 +87,16 @@ table declared in `config/data/maritime.xml`, and copies the template database
 `config/data/maritime.s3db` to the working set if the working set does not exist. A push to an
 undeclared table is logged as `No such topic` and dropped.
 
-1. Declare the table and its fields in `config/data/maritime.xml`, next to a similar `fact_…` table.
-2. Add its `CREATE TABLE` to `config/data/maritime.sql`, and apply it to the template `maritime.s3db`.
-3. Add it to `config/data/facts.csv` and `cube.csv`, which list the facts and dimensions for analysis.
-4. Delete `config/data/maritime.workingset.s3db` so the next run copies the updated template.
-5. Write rows with `ctxt.sim.data.push('fact_<name>', (…))`, in the declared field order, **leaving out
-   the first three fields**: the data manager supplies `creation_time`, `audit_status` and `case_id`
-   itself. A payload of the wrong length is rejected and logged (`payload has N values, schema expects
+1. Declare the fact and its fields in `config/data/facts.csv`, starting with `CaseId` and `Tick` like
+   every other fact, and its dimensions in `cube.csv`. The CSVs (`facts.csv`, `dimensions.csv`,
+   `cube.csv`, `enumeration.csv`) are the only source of the schema.
+2. Regenerate the schema from `config/data`: `cubegen -schema maritime -generate -sql`. It writes
+   `maritime.xml`, `maritime.sql` and the template `maritime.s3db`; never edit those by hand.
+3. The next run copies the updated template to the working set.
+4. Write rows with `ctxt.sim.data.push('fact_<name>', (…))`, in the declared field order, **leaving out
+   the first four fields**: the data manager supplies `creation_time` (host time, UTC), `audit_status`,
+   `case_id` and `tick` (the simulation tick the row was judged on) itself. Time columns such as
+   `report_time` hold simulated seconds, `ctxt.sim.seconds()`. A payload of the wrong length is rejected and logged (`payload has N values, schema expects
    M`). `tests/rules/examiner/verify_facts.py` checks a run's tables against their declarations.
 
 ## Add a local rule

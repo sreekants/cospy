@@ -73,8 +73,9 @@ class ObjectNode(TreeNode):
 			ref -- #TODO
 		"""
 		TreeNode.__init__(self, name, parent)
-		self.type	= type
-		self.ref	= ref
+		self.type		= type
+		self.ref		= ref
+		self.faculty	= None		# Configuration section the object was loaded from
 		return
 
 	def __del__(self):
@@ -116,8 +117,9 @@ class ObjectManager:
 	def __init__(self):
 		""" Constructor
 		"""
-		self.lock	= threading.Lock()
-		self.ot		= ObjectTree()
+		self.lock		= threading.Lock()
+		self.ot			= ObjectTree()
+		self.faculty	= None		# Faculty being loaded; stamped on every node registered meanwhile
 		return
 
 	def dump(self):
@@ -135,6 +137,7 @@ class ObjectManager:
 		"""
 		parent	= self.ot.get( path )
 		node	= ObjectNode( name, parent, type, obj )
+		node.faculty	= self.faculty
 		with self.lock: return parent.add( node )
 
 	def unregister( self, path:str, name:str ):

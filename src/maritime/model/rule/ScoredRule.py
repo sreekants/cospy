@@ -2,7 +2,7 @@
 # Filename: ScoredRule.py
 # Description: Mixin recording a rule's violations into Ro through the shared Ledger
 
-from maritime.model.zone.Ledger import Ledger, FindingGuard, seconds
+from maritime.model.zone.Ledger import Ledger, FindingGuard
 from cos.core.kernel.Context import Context
 
 ANONYMOUS	= 'def'		# Name the Legata parser gives an unnamed ':{...}' body
@@ -59,7 +59,7 @@ class ScoredRule:
 			True when a row was written
 		"""
 		key		= ( Ledger.identify(vessel), event, subject )
-		if self.findings.admit( key, seconds(ctxt.sim.now()) ) == False:
+		if self.findings.admit( key, ctxt.sim.seconds() ) == False:
 			return False
 
 		rules	= self.ledger.rules

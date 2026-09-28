@@ -208,6 +208,14 @@ class Configuration:
 			value	= value[:comment].rstrip()
 		return value
 
+	def exists_value(self,type,key):
+		""" Checks if a key is set
+		Arguments
+			type -- Section that defines the type
+			key -- Key name
+		"""
+		return self.parser.has_option(type,key)
+
 	def get_bool(self,type,key):
 		""" Returns a boolean value
 		Arguments

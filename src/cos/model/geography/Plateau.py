@@ -5,7 +5,7 @@
 from cos.model.geography.Land import Land, Type
 from cos.core.kernel.Context import Context
 
-class Plateau:
+class Plateau(Land):
 	def __init__( self, ctxt:Context, id=None, config=None ):
 		""" Constructor
 		Arguments

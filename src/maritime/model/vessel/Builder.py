@@ -8,9 +8,12 @@ from cos.core.kernel.Context import Context
 from cos.core.kernel.BootLoader import BootLoader
 from cos.core.utilities.ArgList import ArgList
 
-import json, datetime, collections
+import json, datetime, collections, csv, io, types
 from cos.core.utilities.ActiveRecord import ActiveRecord
 from cos.model.environment.Scales import Scales
+
+ENABLED		= 14		# column index of vessels.enabled (REQ.035)
+FLEET		= 800000
 
 class Builder(BuilderBaseClass):
 	# Databases already checked for duplicate identity, so the guard runs once
@@ -46,6 +49,8 @@ class Builder(BuilderBaseClass):
 			ctxt.log.warning( 'Builder/Vessel', f'Identity audit skipped for {path}: {e}' )
 			return 0
 
+		cls.register_disabled( ctxt, path, records )
+
 		# (column index, what it is called in the log)
 		fields	= ( (2, 'guid'), (4, 'imo'), (5, 'mmsi') )
 		total	= 0
@@ -67,6 +72,69 @@ class Builder(BuilderBaseClass):
 							f'Run tools/mapping/fix_identity.py --apply' )
 
 		return total
+
+	@classmethod
+	def register_disabled(cls, ctxt:Context, path:str, records):
+		""" REQ.035: records and logs the vessels switched off with enabled=0
+		Arguments
+			ctxt -- Simulation context
+			path -- Path of the vessel database
+			records -- Every row of its vessels table
+		"""
+		if records and len(records[0]) <= ENABLED:
+			ctxt.log.error( 'Builder/Vessel', f'{path} has no enabled column, so no vessel will load (REQ.035). Add it with '
+							f'ALTER TABLE vessels ADD COLUMN [enabled] INTEGER NOT NULL DEFAULT 1 CHECK ([enabled] IN (0, 1))' )
+			return
+
+		disabled	= getattr( ctxt.sim, 'disabled_vessels', None )
+		if disabled is None:
+			disabled	= ctxt.sim.disabled_vessels	= {}
+
+		off	= [ r for r in records if r[ENABLED] == 0 ]
+		for r in off:
+			imo	= str( r[4] )
+			disabled[ str(r[2]) ]	= types.SimpleNamespace( id=str(r[2]), name=r[1], type=r[3], imo=r[4], mmsi=r[5],
+															 recid=int(imo) if imo.isdigit() else None )
+		if off:
+			ctxt.log.info( 'Builder/Vessel', f'{path}: {len(off)} vessel(s) disabled: {", ".join(str(r[1]) for r in off)}' )
+
+		# A disabled controller leaves its enabled members built but without motion
+		enabled	= { str(r[2]): r[1] for r in records if r[ENABLED] != 0 }
+		for r in off:
+			if r[3] != FLEET:
+				continue
+			members	= [ enabled[g] for g in cls.formation( ctxt, r[13] ) if g in enabled ]
+			if members:
+				ctxt.log.warning( 'Builder/Vessel', f'fleet controller {r[1]} is disabled; its {len(members)} enabled member(s) '
+								  f'({", ".join(members)}) will be built but will not move. Disable them too' )
+		return
+
+	@staticmethod
+	def formation(ctxt:Context, settings):
+		""" Member guids of a fleet controller's formation file
+		Arguments
+			ctxt -- Simulation context
+			settings -- The controller's settings
+		Returns
+			A list of guids, empty when there is no readable formation
+		"""
+		path	= ArgList( settings )['membership']
+		if path is None:
+			return []
+		try:
+			rows	= list( csv.reader(io.StringIO(ctxt.sim.fs.read_file(ctxt.sim.config.resolve(path)))) )
+		except Exception:
+			return []
+		return [ row[1].strip() for row in rows[1:] if len(row) > 1 ]
+
+	def criteria(self, profile):
+		""" SQL filter for the rows this builder loads: only enabled vessels (REQ.035)
+		Arguments
+			profile -- (type code, class path) of the prototype
+		Returns
+			A WHERE clause
+		"""
+		return f'type={profile[0]} AND enabled=1'
 
 	def __init__(self, args:dict):
 		""" Constructor

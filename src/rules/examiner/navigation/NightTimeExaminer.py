@@ -149,7 +149,7 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 			ctxt -- Simulation context
 			rules -- Merged zone rules
 		"""
-		now		= ctxt.sim.now()
+		now		= ctxt.sim.localtime()
 		end		= int( rules.get('night_to', 6) )
 		hour	= self.hour( ctxt )
 
@@ -174,7 +174,7 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		Arguments
 			ctxt -- Simulation context
 		"""
-		now	= ctxt.sim.now()
+		now	= ctxt.sim.localtime()
 		if now is None:
 			return None
 

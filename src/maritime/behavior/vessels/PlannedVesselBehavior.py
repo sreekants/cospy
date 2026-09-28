@@ -29,8 +29,9 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		self.postops		= None
 		self.nearest		= []
 
-		# Behavior watchdogs
+		# Behavior watchdogs, counted in simulated seconds
 		self.watchdogs	= {}
+		self.clock		= ctxt.sim.clock
 
 		self.log			= ctxt.log if ctxt is not None else None
 		self.unknown		= set()		# Trip actions already reported as unknown
@@ -59,7 +60,7 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		return
 
 	def add_watch(self, key, duration, fn, ctxt=None):
-		self.watchdogs[key]	= (Ticker(duration), fn, ctxt)
+		self.watchdogs[key]	= (Ticker(duration, self.clock), fn, ctxt)
 		return
 
 	def remove_watch(self, key):

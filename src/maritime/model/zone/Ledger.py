@@ -2,7 +2,7 @@
 # Filename: Ledger.py
 # Description: The one write path for observed violations (Ro) into fact_concern
 
-import datetime, yaml
+import yaml
 
 from maritime.model.zone.ZoneRules import ZoneRules, SpatialZones
 from cos.core.kernel.Context import Context
@@ -16,20 +16,6 @@ TERRITORY	= '$(SIMULATION)/risk.yaml'
 SOURCE_EXAMINER	= 'examiner'
 SOURCE_COLREG	= 'colreg'
 SOURCE_LOCAL	= 'local'
-
-
-def seconds(now)->float:
-	""" Simulation time as seconds
-	Arguments
-		now -- ctxt.sim.now(), a datetime or a number
-	"""
-	if isinstance( now, datetime.datetime ):
-		return now.timestamp()
-
-	try:
-		return float( now )
-	except (TypeError, ValueError):
-		return 0.0
 
 
 class FindingGuard:
@@ -331,7 +317,7 @@ class Ledger:
 
 		# vessel_id is the vessel IMO, as in every fact table; field order matches fact_concern in maritime.xml
 		ctxt.sim.data.push( FACT, (
-			ctxt.sim.now(),
+			ctxt.sim.seconds(),
 			self.recid( vessel ),
 			source,
 			raiser,

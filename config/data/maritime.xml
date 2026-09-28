@@ -29,6 +29,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -86,6 +93,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -210,6 +224,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -330,6 +351,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -454,6 +482,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -574,6 +609,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -698,6 +740,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -818,6 +867,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -942,6 +998,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Pitch</Display>
@@ -1062,6 +1125,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -1186,6 +1256,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Heave</Display>
@@ -1306,6 +1383,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -1430,6 +1514,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Velocity</Display>
@@ -1550,6 +1641,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Trarget</Name>
@@ -1681,6 +1779,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Trarget</Name>
  <Type>int</Type>
  <Display>Target</Display>
@@ -1808,6 +1913,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Trarget</Name>
@@ -1939,6 +2051,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Trarget</Name>
  <Type>int</Type>
  <Display>Target</Display>
@@ -2066,6 +2185,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Trarget</Name>
@@ -2197,6 +2323,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Trarget</Name>
  <Type>int</Type>
  <Display>Target</Display>
@@ -2326,6 +2459,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Displacement</Display>
@@ -2446,6 +2586,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -2570,6 +2717,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Speed</Display>
@@ -2690,6 +2844,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -2814,6 +2975,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>double</Type>
  <Display>Payload</Display>
@@ -2934,6 +3102,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
@@ -3058,6 +3233,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>Value</Name>
  <Type>int</Type>
  <Display>Passengers</Display>
@@ -3180,6 +3362,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3225,6 +3414,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3268,6 +3464,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3336,6 +3539,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3400,6 +3610,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3468,6 +3685,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3532,6 +3756,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3600,6 +3831,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3664,6 +3902,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3732,6 +3977,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3796,6 +4048,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3864,6 +4123,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -3928,6 +4194,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -3996,6 +4269,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4060,6 +4340,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4128,6 +4415,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4192,6 +4486,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4260,6 +4561,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4324,6 +4632,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4392,6 +4707,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4456,6 +4778,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4524,6 +4853,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4588,6 +4924,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4656,6 +4999,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4720,6 +5070,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4788,6 +5145,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4852,6 +5216,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -4920,6 +5291,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -4984,6 +5362,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5052,6 +5437,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5116,6 +5508,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5184,6 +5583,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5248,6 +5654,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5316,6 +5729,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5380,6 +5800,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5448,6 +5875,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5512,6 +5946,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5580,6 +6021,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5644,6 +6092,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5712,6 +6167,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5776,6 +6238,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5844,6 +6313,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -5908,6 +6384,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -5976,6 +6459,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6040,6 +6530,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6108,6 +6605,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6172,6 +6676,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6240,6 +6751,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6304,6 +6822,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6372,6 +6897,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6436,6 +6968,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6504,6 +7043,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6568,6 +7114,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6636,6 +7189,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6700,6 +7260,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6768,6 +7335,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6832,6 +7406,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -6900,6 +7481,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -6964,6 +7552,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7032,6 +7627,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7096,6 +7698,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7164,6 +7773,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7228,6 +7844,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7296,6 +7919,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7360,6 +7990,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7428,6 +8065,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7492,6 +8136,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7560,6 +8211,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7624,6 +8282,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7692,6 +8357,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7756,6 +8428,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7824,6 +8503,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -7888,6 +8574,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -7956,6 +8649,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8020,6 +8720,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8088,6 +8795,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8152,6 +8866,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8220,6 +8941,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8284,6 +9012,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8352,6 +9087,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8416,6 +9158,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8484,6 +9233,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8548,6 +9304,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8616,6 +9379,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8680,6 +9450,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8748,6 +9525,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8812,6 +9596,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -8880,6 +9671,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -8944,6 +9742,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9012,6 +9817,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9076,6 +9888,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9144,6 +9963,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9208,6 +10034,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9276,6 +10109,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9340,6 +10180,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9408,6 +10255,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9472,6 +10326,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9540,6 +10401,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9604,6 +10472,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9672,6 +10547,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9736,6 +10618,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9804,6 +10693,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -9868,6 +10764,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -9936,6 +10839,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -10000,6 +10910,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -10068,6 +10985,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -10132,6 +11056,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -10200,6 +11131,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -10264,6 +11202,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -10332,6 +11277,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -10396,6 +11348,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -10464,6 +11423,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -10528,6 +11494,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -10596,6 +11569,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -10662,6 +11642,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -10719,6 +11706,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>OwnShip</Name>
@@ -10780,6 +11774,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -10837,6 +11838,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>OwnShip</Name>
@@ -10898,6 +11906,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -10955,6 +11970,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>OwnShip</Name>
@@ -11016,6 +12038,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -11075,6 +12104,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>OwnShip</Name>
  <Type>int</Type>
  <Display>Own Ship</Display>
@@ -11132,6 +12168,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -11233,6 +12276,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -11357,6 +12407,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -11414,6 +12471,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>
@@ -11482,6 +12546,13 @@
  <FieldName>case_id</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
@@ -11532,6 +12603,13 @@
  <Display>Scenario hash key</Display>
  <Description>Scenario Key</Description>
  <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>ReportTime</Name>

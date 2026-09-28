@@ -10,6 +10,7 @@ from cos.model.vehicle.ValueSet import ValueSet
 from cos.core.kernel.Object import Object
 from cos.core.kernel.Context import Context
 from cos.core.simulation.Actor import Actor, ActorBehavior
+from cos.core.simulation.Snapshot import Snapshot
 from cos.math.geometry.Rectangle import Rectangle
 from cos.core.utilities.ArgList import ArgList
 
@@ -84,6 +85,10 @@ class Vehicle(Object):
         if self.actor == None:
             return None
 
+        state = Snapshot.state(self.guid)
+        if state is not None:
+            return state.x
+
         return self.actor.get_position()
 
     @property
@@ -92,6 +97,10 @@ class Vehicle(Object):
         """
         if self.actor == None:
             return None
+
+        state = Snapshot.state(self.guid)
+        if state is not None:
+            return state.dx
 
         return self.actor.get_velocity()
 
@@ -102,6 +111,10 @@ class Vehicle(Object):
         if self.actor == None:
             return None
 
+        state = Snapshot.state(self.guid)
+        if state is not None:
+            return state.d2x
+
         return self.actor.get_acceleration()
 
     @property
@@ -110,6 +123,11 @@ class Vehicle(Object):
         """
         if self.actor == None:
             return None
+
+        state = Snapshot.state(self.guid)
+        if state is not None:
+            return state.rect
+
         return self.actor.rect
 
     # Simulation functions

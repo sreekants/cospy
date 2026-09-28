@@ -4,7 +4,7 @@
 
 from maritime.model.vessel.Vessel import Vessel, Type
 
-class WIG:
+class WIG(Vessel):
 	def __init__( self, ctxt, id=None, config:dict=None ):
 		""" Constructor
 		Arguments

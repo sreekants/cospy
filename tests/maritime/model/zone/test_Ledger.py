@@ -76,6 +76,10 @@ class Sim:
 		self.clock		= datetime.datetime( 2026, 9, 25, 22, 0, 0 )
 	def now(self):
 		return self.clock
+	def localtime(self):
+		return self.clock
+	def seconds(self):
+		return (self.clock - datetime.datetime( 2026, 1, 1 )).total_seconds()
 	def advance(self, seconds):
 		self.clock	= self.clock + datetime.timedelta( seconds=seconds )
 
@@ -103,8 +107,9 @@ class Shape:
 
 
 class Vessel:
-	def __init__(self, imo, location=(0.0, 0.0)):
+	def __init__(self, imo, location=(0.0, 0.0), recid=None):
 		self.config		= {'identifier': {'imo': imo}}
+		self.recid		= recid
 		self.location	= location
 
 
@@ -196,7 +201,7 @@ class LedgerTestCase(unittest.TestCase):
 		self.ledger.load( self.ctxt, 'test' )
 
 	def test_row_matches_the_declared_schema(self):
-		self.ledger.record( self.ctxt, SOURCE_EXAMINER, 'GroundingExaminer', Vessel(9000001),
+		self.ledger.record( self.ctxt, SOURCE_EXAMINER, 'GroundingExaminer', Vessel(9000001, recid=101),
 							'grounding.contact', self.ledger.shapes(self.ctxt, Vessel(1)), 95.0, -0.5 )
 
 		topic, row	= self.ctxt.sim.data.rows[0]
@@ -210,7 +215,7 @@ class LedgerTestCase(unittest.TestCase):
 		self.assertEqual( len(row) + AUDIT_FIELDS, len(fields) )
 
 		named	= dict( zip(fields[AUDIT_FIELDS:], row) )
-		self.assertEqual( named['vessel_id'], 9000001 )
+		self.assertEqual( named['vessel_id'], 101 )
 		self.assertEqual( named['source'], SOURCE_EXAMINER )
 		self.assertEqual( named['event'], 'grounding.contact' )
 		self.assertEqual( named['area'], 'Turkeli.Harbour' )

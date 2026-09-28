@@ -102,6 +102,8 @@ class FleetBehavior(MotionBehavior):
 			if vessel is not None:
 				vessel.fleet = self.vehicle
 				self.vessels.append((vessel, type, id))
+			elif id in (getattr(sim, 'disabled_vessels', None) or {}):
+				sim.log.info( "Fleet", f"Member '{id}' is disabled (enabled=0) and left out of the fleet")
 			else:
 				sim.log.error( "Fleet", f"Warning: Vessel with id '{id}' not found in the simulation.")
 

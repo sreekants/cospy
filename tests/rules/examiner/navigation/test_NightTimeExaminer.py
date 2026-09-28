@@ -1,37 +1,39 @@
 #!/usr/bin/python
 # Filename: test_NightTimeExaminer.py
-# Description: Test cases for the NightTimeExaminer class
+# Description: Test cases for the NightTimeExaminer class: night follows the scenario clock (COS.024)
 
-import unittest
+import types, unittest
+
+from cos.core.time.Clock import Clock
+from rules.examiner.navigation.NightTimeExaminer import NightTimeExaminer
+
+
+def context(epoch):
+	clock	= Clock( 60.0, epoch )
+	sim		= types.SimpleNamespace( clock=clock, localtime=lambda: clock.local, now=lambda: clock.utc )
+	return types.SimpleNamespace( sim=sim ), clock
+
+
+def examiner():
+	return NightTimeExaminer.__new__( NightTimeExaminer )		# The night test needs no configuration
+
 
 class NightTimeExaminerTestCase(unittest.TestCase):
-	@classmethod
-	def setUpClass(self):
-		return
-		
-	@classmethod
-	def tearDownClass(self):
-		return
-		
-	def setUp(self):
-		return
-		
-	def tearDown(self):
-		return
-		
-	def test_upper(self):
-		self.assertEqual('foo'.upper(), 'FOO')
+	def test_a_scenario_starting_at_21_needs_lights(self):
+		ctxt, clock	= context( '2026-06-01T21:00:00+03:00' )
+		self.assertEqual( NightTimeExaminer.hour(ctxt), 21 )
+		self.assertTrue( examiner().is_night(ctxt, {}) )
 
-	def test_isupper(self):
-		self.assertTrue('FOO'.isupper())
-		self.assertFalse('Foo'.isupper())
+	def test_night_ends_on_the_scenario_clock(self):
+		ctxt, clock	= context( '2026-06-01T05:00:00+03:00' )
+		self.assertTrue( examiner().is_night(ctxt, {}) )
+		for _ in range(60):		# One simulated hour at 60 s per tick
+			clock.advance()
+		self.assertFalse( examiner().is_night(ctxt, {}) )
 
-	def test_split(self):
-		s = 'hello world'
-		self.assertEqual(s.split(), ['hello', 'world'])
-		# check that s.split fails when the separator is not a string
-		with self.assertRaises(TypeError):
-			s.split(2)
+	def test_the_night_is_dated_by_the_evening_it_began(self):
+		ctxt, clock	= context( '2026-06-02T02:00:00+03:00' )
+		self.assertEqual( examiner().night(ctxt, {}), '2026-06-01' )
 
 if __name__ == '__main__':
     unittest.main()

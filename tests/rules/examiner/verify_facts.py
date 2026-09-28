@@ -14,7 +14,7 @@ ZONES		= os.path.join( ROOT, 'config', 'examiner', 'zones.yaml' )
 TERRITORY	= os.path.join( ROOT, 'config', 'simulation', 'tk', 'turkeli', 'risk.yaml' )
 
 RO			= 'fact_concern'
-AUDIT		= ['creation_time', 'audit_status', 'case_id']
+AUDIT		= ['creation_time', 'audit_status', 'case_id', 'tick']
 AUDIT_REGISTER	= 1000
 DERIVED		= ('id',)			# Columns the table adds that the schema does not declare
 
@@ -91,7 +91,7 @@ def main():
 			drift.append( f'{table}: declared, absent from the database' )
 		elif columns(db, table) != fields:
 			drift.append( f'{table}: declared {fields}, table has {columns(db, table)}' )
-		elif fields[:3] != AUDIT:
+		elif fields[:len(AUDIT)] != AUDIT:
 			drift.append( f'{table}: does not open with {AUDIT}' )
 
 	report.check( 'SCHEMA', not drift, f'{len(tables)} fact tables declared in maritime.xml match the database' )
@@ -210,6 +210,16 @@ def main():
 							  'group by a.id having abs(a.cost - sum(b.exposure)) > 1e-6 * max(1.0, abs(a.cost))' ).fetchall()
 		report.check( 'RB-X3', not off, f'cost equals the sum of each sample\'s exposure'
 					  + (f' - {len(off)} samples differ' if off else '') )
+
+	# ---- Baselines on one row (REQ.020) -------------------------------------
+	ra		= count( db, 'select count(*) from fact_risk_assessment' )
+	if ra == 0:
+		report.skip( 'IR-X1', 'fact_risk_assessment is empty' )
+	else:
+		bad		= count( db, 'select count(*) from fact_risk_assessment where individual_risk is null '
+							 'or individual_risk < 0 or individual_risk > 1 or p_any_hazard is null or cost is null' )
+		report.check( 'IR-X1', bad == 0, f'EL, P_HE and IR on every one of {ra} rows, IR in [0, 1]'
+					  + (f' - {bad} rows fail' if bad else '') )
 
 	print( f'{"FAILED" if report.failed else "PASSED"}: {report.failed} failure(s)' )
 	return 1 if report.failed else 0
