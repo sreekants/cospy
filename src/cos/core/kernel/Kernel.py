@@ -119,18 +119,18 @@ class Kernel:
 		return
 
 	def __init_clock(self):
-		""" Sets the simulated clock from [ProcessManager] SecondsPerTick and Epoch
+		""" Sets the simulated clock's epoch from [ProcessManager] Epoch; World sets its step from the scales
 		"""
-		step	= DEFAULT_STEP
-		epoch	= DEFAULT_EPOCH
 		if self.config.exists_value( 'ProcessManager', 'SecondsPerTick' ):
-			step	= float( self.config.get_value('ProcessManager', 'SecondsPerTick') )
+			raise ValueError( '[ProcessManager] SecondsPerTick is replaced by SpeedUp x DeltaT (REQ.032)' )
+
+		epoch	= DEFAULT_EPOCH
 		if self.config.exists_value( 'ProcessManager', 'Epoch' ):
 			epoch	= self.config.get_value( 'ProcessManager', 'Epoch' )
 
-		self.clock.configure( step, epoch )
+		self.clock.configure( DEFAULT_STEP, epoch )
 		self.clock.reset()
-		self.log.info( "Kernel", f"Simulated clock: {self.clock.step:g} s per tick from {self.clock.epoch.isoformat()}" )
+		self.log.info( "Kernel", f"Simulated clock from {self.clock.epoch.isoformat()}" )
 		return
 
 	@property

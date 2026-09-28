@@ -11,6 +11,7 @@ from cos.math.geometry.Rectangle import Rectangle
 from enum import Enum, Flag
 from typing import Any
 import math, random
+import numpy as np
 
 class Type(Flag):
     """Enum for the different types of vessel power drive."""
@@ -269,6 +270,7 @@ class Vessel(Vehicle):
         """
         boundary            = self.actor.rect
         self.actor.rect     = Rectangle(position[0] - boundary.w/2, position[1] - boundary.h/2, boundary.width, boundary.height) 
+        self.actor.x        = np.array(position, dtype=float)      # What location and the rule snapshots read
         return
 
     def heading_towards(self, velocity):

@@ -20,6 +20,7 @@ class WorldAdapter:
 	def __init__(self, world, predators=None):
 		self.world = world
 		self.predatorList = predators if predators is not None else []
+		self.seconds = MotionBehavior.seconds(world)		# Simulated seconds per tick
 		return
 
 	@property
@@ -36,8 +37,8 @@ class WorldAdapter:
 			obj.vel = vel * -1.0
 			return obj.last_pos
 
-		x 				= pos.x + vel.x
-		y 				= pos.y + vel.y
+		x 				= pos.x + vel.x*self.seconds		# vel in m/s
+		y 				= pos.y + vel.y*self.seconds
 		nextpos 		= Point(x, y)
 		obj.last_pos 	= pos
 		return nextpos

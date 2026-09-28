@@ -117,7 +117,7 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 		# Check for any collision with rigid bodies (land, flotillas etc.)
 		center    = self.rect.center
-		newpos    = self.x + self.dx + self.d2x/2.0
+		newpos    = self.x + (self.dx + self.d2x/2.0)*self.seconds(world)
 		self.rect = self.rect.move(newpos[0] - center[0], newpos[1] - center[1])
 
 		if self.can_move(world, self.rect):

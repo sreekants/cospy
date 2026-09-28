@@ -194,7 +194,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			return self.x
 
 		self.dx		= pos[2]
-		return self.x + self.dx + self.d2x/2.0
+		return self.x + (self.dx + self.d2x/2.0)*self.seconds(world)
 
 	def move_next(self, world, t):
 		""" Moves to the next point
@@ -214,7 +214,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			self.atpoint	= 1				# Index of next
 			return False
 		
-		if self.delay > t.timestep:
+		if self.delay > t.tick:		# Trip delay in simulated seconds
 			return False
 		
 		sog		= self.current[2][0]
@@ -223,7 +223,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 		# If there is no more distance to cover in the current 
 		# waypoint segment, we do not shift.
-		if Distance.euclidean(p1, p2) > sog:
+		if Distance.euclidean(p1, p2) > sog*self.seconds(world):
 			return  True
 
 		# print(f'{self.atpoint}{self.next}={self.atstate}')		

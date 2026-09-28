@@ -90,7 +90,7 @@ class TripAnchorTestCase(unittest.TestCase):
 	def test_reaching_an_anchor_waypoint_on_the_path_anchors(self):
 		b			= self.behavior( Ferry )
 		b.path		= PathFollowingMotionBehavior.waypoint( [], 0, 0.0, 0.0, 0.0, 1.5, 0.0, '' ) + [ self.waypoint('anchor(2)') ]
-		t			= mock.Mock( timestep=1.0 )
+		t			= mock.Mock( timestep=1.0, tick=1.0 )
 
 		b.move_next( None, t )
 		b.x			= np.array( (9.5, 0.0, 0.0) )
@@ -104,7 +104,7 @@ class TripAnchorTestCase(unittest.TestCase):
 		for n, x in enumerate( (0.0, 10.0, 20.0) ):
 			PathFollowingMotionBehavior.waypoint( path, n, x, 0.0, 0.0, 1.5, 0.0, f'wp{n}' )
 		b.path, b.looprun, b.reverse	= path, True, True
-		t			= mock.Mock( timestep=1.0 )
+		t			= mock.Mock( timestep=1.0, tick=1.0 )
 
 		seen		= []
 		b.on_at_waypoint	= lambda world, t, n, pt: seen.append( pt[3] )

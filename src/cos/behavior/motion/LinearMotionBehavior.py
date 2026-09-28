@@ -107,13 +107,14 @@ class LinearMotionBehavior(MotionBehavior):
 			world -- Reference ot the simulation world
 			t -- Time on the simulation clock
 		"""
+		dt			= self.seconds( world )
 		if not np.any(self.θ):
-			return self.x + self.dx
+			return self.x + self.dx*dt
 
 		θ			= np.radians( self.θ[0] )
 		cosθ, sinθ	= np.cos(θ), np.sin(θ*(t.timestep/100))
 
-		grad		= self.apply_force(world, self.dx)
+		grad		= self.apply_force(world, self.dx)*dt
 		dx 			= grad[0]
 		dy 			= grad[1]
 		delta		= np.array(
@@ -124,10 +125,12 @@ class LinearMotionBehavior(MotionBehavior):
 		return self.x + delta
 
 	def apply_force(self, world:World, delta):
-		""" Applies environmental forces to the vehicle
+		""" Adds the environmental drifts to a velocity
 		Arguments
 			world -- Reference ot the simulation world
-			delta -- Offset if the vehicle
+			delta -- Velocity of the vehicle, m/s
+		Returns
+			Velocity with the drifts, m/s
 		"""
 		if self.has_forces == False:
 			return delta

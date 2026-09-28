@@ -31,7 +31,7 @@ class Config:
     def load(self, values:dict):
         """ Overrides the defaults from a swarm.yaml section
         Arguments
-            values -- Settings; maxTurnAngle in degrees per tick
+            values -- Settings; speed in m/s, maxTurnAngle in degrees per simulated second
         Returns
             The configuration
         """
@@ -42,7 +42,7 @@ def load_settings(cfg, values:dict, fields):
     """ Applies swarm settings to a configuration, refusing unknown keys
     Arguments
         cfg -- Configuration to update
-        values -- Settings; maxTurnAngle in degrees per tick
+        values -- Settings; speed in m/s, maxTurnAngle in degrees per simulated second
         fields -- Names the section may set
     Returns
         The configuration
@@ -124,7 +124,7 @@ class Prey(Boid):
         else:
             desired_dir = change.normalize()
 
-        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle)
+        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle*getattr(world, 'seconds', 1.0))
         self.vel = new_heading * cfg.speed
         self.pos = world.bound(self, self.pos, self.vel)
         return

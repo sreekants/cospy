@@ -15,7 +15,7 @@ COS acts at several rates, and they are not all measured in the same kind of tim
 
 | Level | Rate | Clock | Decides |
 |---|---|---|---|
-| Step | A 30 ms sleep plus the motion work | Simulated clock: one tick is `SecondsPerTick` simulated seconds | Vessel movement |
+| Step | A 30 ms sleep plus the motion work | Simulated clock: one tick is `SpeedUp × DeltaT` simulated seconds (default 1, REQ.032) | Vessel movement |
 | Situation monitoring | Every 0.5 simulated seconds, on the latest tick | Simulated clock | Encounters and conduct events |
 | Rule evaluation | Every `sample.frequency` simulated seconds, on the latest tick | Simulated clock | Violations and penalties |
 | Weather update | Every `Sample.Rate` simulated seconds | Simulated clock | Rotation of the weather fields |

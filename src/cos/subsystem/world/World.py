@@ -48,6 +48,14 @@ class World(CompositeService):
 		CompositeService.on_init(self, ctxt, module)
 		self.scales.load( ctxt )
 		ctxt.sim.log.info( 'World', f'Map scale: {self.scales.map[0]:g} x {self.scales.map[1]:g} metres per map unit' )
+
+		# The simulated clock steps by the scales' seconds per tick (REQ-032-05, -06)
+		self.scales.load_time( ctxt.sim.config )
+		clock	= ctxt.sim.clock
+		clock.configure( self.scales.seconds_per_tick, clock.epoch )
+		speedup	= 'none' if self.scales.speedup is None else f'{self.scales.speedup:g}x'
+		ctxt.sim.log.info( 'World', f'Time scale: {self.scales.seconds_per_tick:g} simulated s per tick '
+									f'(speed-up {speedup}, delta_t {self.scales.dt:g} s)' )
 		return
 
 	def on_start(self, ctxt:Context, config):

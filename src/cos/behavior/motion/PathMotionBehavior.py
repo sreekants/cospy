@@ -124,7 +124,7 @@ class PathMotionBehavior(MotionBehavior):
 		# If the sprite is animated using a velocity vector, we
 		#  move it relative to the original position
 		center		= self.rect.center
-		newpos		= self.translate(t)
+		newpos		= self.translate(world, t)
 		self.rect	= self.rect.move( newpos[0]-center[0], newpos[1]-center[1] )
 
 		# If we cannot move to a region on the map, revert back to the previous position
@@ -134,9 +134,10 @@ class PathMotionBehavior(MotionBehavior):
 
 		return self.rect, self.dx
 
-	def translate(self, t):
+	def translate(self, world, t):
 		""" Moves the vehicle to a new point
 		Arguments
+			world -- Reference ot the simulation world
 			t -- Time on the simulation clock
 		"""
 		# Find the matching waypoint
@@ -146,7 +147,7 @@ class PathMotionBehavior(MotionBehavior):
 			return self.x
 
 		self.dx		= pos[2]
-		return self.x + self.dx
+		return self.x + self.dx*self.seconds(world)
 
 	def get_pos(self, t):
 		""" Returns position and orientation vector

@@ -25,7 +25,7 @@ class Config:
     def load(self, values:dict):
         """ Overrides the defaults from a swarm.yaml section
         Arguments
-            values -- Settings; maxTurnAngle in degrees per tick
+            values -- Settings; speed in m/s, maxTurnAngle in degrees per simulated second
         Returns
             The configuration
         """
@@ -84,7 +84,7 @@ class Predator(Boid):
             return
 
         desired_dir = closest_disp.normalize()
-        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle)
+        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle*getattr(world, 'seconds', 1.0))
         self.vel = new_heading * cfg.speed
         self.pos = world.bound(self, self.pos, self.vel)
 
