@@ -183,7 +183,7 @@ class ZoneAware:
 		position	= getattr( vessel, 'location', None )
 		shapes		= ZoneRules.enclosing( self.sea, position )
 		rules		= self.rules.rules_at( shapes )
-		depth		= self.location.seabed_depth( self.rules.seabed_depth(shapes) )
+		depth		= self.location.seabed_depth( self.rules.seabed_depth(shapes), self.rules.nominal_depth(shapes) )
 
 		return shapes, rules, depth
 

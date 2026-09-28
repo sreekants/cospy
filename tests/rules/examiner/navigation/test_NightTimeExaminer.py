@@ -6,12 +6,22 @@ import types, unittest
 
 from cos.core.time.Clock import Clock
 from rules.examiner.navigation.NightTimeExaminer import NightTimeExaminer
+from maritime.model.vessel.Vessel import Vessel
 
 
 def context(epoch):
 	clock	= Clock( 60.0, epoch )
 	sim		= types.SimpleNamespace( clock=clock, localtime=lambda: clock.local, now=lambda: clock.utc )
 	return types.SimpleNamespace( sim=sim ), clock
+
+
+def vessel():
+	config	= { 'name': 'A', 'identifier': {'imo': '1', 'mmsi': '2'}, 'weight': 1.0, 'length': [10, 5, -1],
+				'pose': {'position': [0, 0, 0], 'X': [0]*12, 'R': [0]*12} }
+	return Vessel( types.SimpleNamespace(log=None, sim=None), 'Vessel', 'A', config )
+
+
+LIGHTS	= ['masthead', 'sidelights', 'sternlight']
 
 
 def examiner():
@@ -34,6 +44,18 @@ class NightTimeExaminerTestCase(unittest.TestCase):
 	def test_the_night_is_dated_by_the_evening_it_began(self):
 		ctxt, clock	= context( '2026-06-02T02:00:00+03:00' )
 		self.assertEqual( examiner().night(ctxt, {}), '2026-06-01' )
+
+	def test_a_vessel_declaring_no_light_intent_shows_none(self):
+		self.assertEqual( NightTimeExaminer.missing(vessel(), LIGHTS), LIGHTS )
+
+	def test_a_light_counts_once_its_intent_is_set(self):
+		v	= vessel()
+		v.signal( 'Light', 'masthead', True )
+		v.signal( 'Light', 'sidelights', True )
+		self.assertEqual( NightTimeExaminer.missing(v, LIGHTS), ['sternlight'] )
+
+		v.signal( 'Light', 'sidelights', False )
+		self.assertEqual( NightTimeExaminer.missing(v, LIGHTS), ['sidelights', 'sternlight'] )
 
 if __name__ == '__main__':
     unittest.main()

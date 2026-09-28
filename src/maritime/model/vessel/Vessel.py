@@ -87,7 +87,8 @@ class Vessel(Vehicle):
 
         # Maps an intent category to the value set its actions are recorded in
         self.intents        = {
-            'Signal': self.intent
+            'Signal': self.intent,
+            'Light': self.intent
         }
 
         # TODO: Load from the configuration

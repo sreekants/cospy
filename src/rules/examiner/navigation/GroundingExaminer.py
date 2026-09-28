@@ -74,6 +74,12 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 		if ZoneRules.applies_in( rules, self.ZONES, shapes ) == False:
 			return
 
+		# A nominal reading is clear water, whichever layer set it (REQ-022-A4)
+		if ZoneRules.seabed_depth( shapes ) is None:
+			self.settle( vessel, self.CONTACT, shapes )
+			self.settle( vessel, self.NEAR_MISS, shapes )
+			return
+
 		clearance	= self.clearance( vessel, depth )
 		if clearance is None:
 			return			# The vessel declares no draught; nothing to judge

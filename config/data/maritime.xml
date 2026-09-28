@@ -12376,6 +12376,20 @@
  <FieldName>cumulative</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>Depth</Name>
+ <Type>double</Type>
+ <Display>Depth</Display>
+ <Description>Seabed depth beneath the vessel - the risk network&apos;s depth evidence</Description>
+ <FieldName>depth</FieldName>
+ <Unit>m</Unit>
+</Measure>
+<Measure> <Name>DepthSource</Name>
+ <Type>string</Type>
+ <Display>Depth source</Display>
+ <Description>measured off a map shape or nominal from the location or zone fallback (REQ.022)</Description>
+ <FieldName>depth_source</FieldName>
+ <Unit />
+</Measure>
 </Measures>
 
 </Fact>

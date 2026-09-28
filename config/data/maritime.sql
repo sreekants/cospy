@@ -3022,7 +3022,9 @@ CREATE TABLE fact_risk_assessment
 	cost REAL,
 	increment REAL,
 	survival REAL,
-	cumulative REAL
+	cumulative REAL,
+	depth REAL,
+	depth_source VARCHAR(255)
 );
 
 CREATE INDEX idx_fact_risk_assessment ON fact_risk_assessment(dim_gps_id,dim_vessel_id);

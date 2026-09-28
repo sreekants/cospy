@@ -20,10 +20,9 @@ import datetime
 #   and by jurisdiction, and because COLREG part C is exactly the sort of list a
 #   scenario designer needs to vary.
 #
-#   The lights a vessel is actually showing are read from its operation ValueSet,
-#   the same property set the bridge model raises signals into. A vessel with no
-#   operation set at all is reported once as unlit rather than passed, since an
-#   absent set and a dark ship are indistinguishable here.
+#   A light counts as shown when the vessel declares the intent 'Light.<name>'
+#   (Vessel.signal('Light', name, True)). A vessel that declares no intent is
+#   reported as unlit.
 
 
 
@@ -193,11 +192,12 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 			vessel -- Vessel
 			required -- Lights the zone requires
 		"""
-		showing	= getattr( vessel, 'operation', None )
-		if showing is None:
+		signaled	= getattr( vessel, 'is_signaled', None )
+		if signaled is None:
 			return list( required )
 
-		return [ light for light in required if showing.has(light) == False ]
+		# A light counts as shown when the vessel declares the intent 'Light.<name>'
+		return [ light for light in required if signaled('Light', light) == False ]
 
 
 if __name__ == "__main__":

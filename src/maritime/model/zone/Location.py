@@ -7,6 +7,8 @@ from cos.core.kernel.Context import Context
 import yaml
 
 DEFAULT		= '$(SIMULATION)/location.yaml'
+MEASURED	= 'measured'		# Depth off a map shape
+NOMINAL		= 'nominal'			# Depth from the fallback
 
 
 class Location:
@@ -62,17 +64,26 @@ class Location:
 		self.nominal_depth	= float( nominal )
 		return
 
-	def seabed_depth(self, measured):
+	def seabed_depth(self, measured, nominal=None):
 		""" The measured depth, or the nominal depth when the map reports none
 		Arguments
 			measured -- Depth off the map shapes, or None
+			nominal -- The zones' nominal depth where they set one, else None for the location's
 		"""
 		self.queries	+= 1
 		if measured is not None:
 			return measured
 
 		self.fallbacks	+= 1
-		return self.nominal_depth
+		return self.nominal_depth if nominal is None else nominal
+
+	@staticmethod
+	def provenance(measured)->str:
+		""" Where a depth came from, for the recorded data (REQ-022-04)
+		Arguments
+			measured -- Depth off the map shapes, or None
+		"""
+		return MEASURED if measured is not None else NOMINAL
 
 	def describe(self)->str:
 		""" One line for the run log

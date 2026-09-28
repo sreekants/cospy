@@ -8,6 +8,15 @@
 #
 # Units: speed in knots, distances and depths in metres, currency in USD.
 # Type names must match cos.model.geography.Sea.Type members exactly.
+#
+# nominal_depth (REQ.022): the seabed depth assumed where no map shape reports one. The base is
+# location.depth.nominal in $(SIMULATION)/location.yaml (4000 m, open sea). A shape's settings,
+# a named zone or a Sea.Type may lower it, e.g. for an inland waterway with no bathymetry:
+#     types:
+#       WATERWAY:
+#         nominal_depth: 8.0
+# The most specific layer wins, and the shallowest value within it. zones.default is not a
+# layer for this key: the location file is.
 
 zones:
   default:

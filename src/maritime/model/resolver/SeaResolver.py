@@ -13,6 +13,8 @@ from cos.model.rule.Context import Context as RuleContext
 import numpy as np
 import math
 
+ZONES	= '$(CONFIG)/examiner/zones.yaml'		# The zone rules every examiner names
+
 class SeaResolver(Resolver):
 	def __init__(self, resolver):
 		""" Constructor
@@ -21,9 +23,7 @@ class SeaResolver(Resolver):
 		"""
 		Resolver.__init__(self, '(OwnShip,Map.Sea).')
 
-		# Unloaded - only the shape-geometry helpers (seabed_depth) are used
-		# here, which need no zones.yaml, unlike ZoneAware's copy.
-		self.rules		= ZoneRules()
+		self.rules		= None			# Zone rules for the nominal depth overrides, loaded on first use
 		self.sea		= None
 		self.os			= None
 		self.shapes		= None
@@ -78,7 +78,11 @@ class SeaResolver(Resolver):
 
 		if self.location is None:
 			self.location	= Location.shared( self.ctxt )
-		return self.location.seabed_depth( self.rules.seabed_depth(self.__enclosing()) )
+			self.rules		= ZoneRules()
+			self.rules.load( self.ctxt, ZONES )
+
+		shapes	= self.__enclosing()
+		return self.location.seabed_depth( self.rules.seabed_depth(shapes), self.rules.nominal_depth(shapes) )
 
 	def __enclosing(self):
 		""" Map shapes enclosing the own ship, cached for this resolve cycle
