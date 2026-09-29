@@ -15,16 +15,12 @@ class Timer(ORPCService):
 		return
 
 	def get_utc( self,):
-		""" #TODO: get_utc
-		Arguments
-			 -- #TODO
+		""" Returns the simulated time as UTC epoch seconds
 		"""
-		return self.clock.utc
+		return int( self.clock.utc.timestamp() )
 
 	def get_tickcount( self,):
-		""" #TODO: get_tickcount
-		Arguments
-			 -- #TODO
+		""" Returns the simulation tick
 		"""
 		return self.clock.tickcount
 

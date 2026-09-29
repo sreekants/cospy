@@ -8,7 +8,9 @@ from cos.tools.cviz.Dispatcher import Dispatcher
 from cos.tools.cviz.Encoder import Encoder
 from cos.tools.cviz.Keyboard import Keyboard
 from cos.tools.cviz.Gamepad import Gamepad
+from cos.tools.cviz.Mouse import Mouse
 from cos.ui.gui.Infobox import Infobox
+import cos.ui.gui.Style as Style
 
 from cos.core.api.World import World
 from cos.core.kernel.ObjectManager import ObjectManager
@@ -30,6 +32,7 @@ from pygame.locals import (
 )
 
 SEA_COLOR			= (135, 206, 250)
+PICK_RADIUS			= 12		# Pixels around a vessel that a click selects it
 
 class VirtualWorld:
 	def __init__(self):
@@ -64,6 +67,9 @@ class VirtualWorld:
 		self.show_zones	= True		# Ctrl+Z hides zone shapes (TSS, fairways, harbours...)
 		self.zone_overlay	= None		# Translucent layer the zone shapes draw onto (Palette)
 		self.relief_order	= None		# Draw order of self.reliefs, rebuilt when it changes
+
+		self.metres		= (1.0, 1.0)	# Metres per map unit (map.unit.metres), set by the Builder
+		self.selected	= None			# Vessel whose popup is shown
 		return
 
 	def run(self):
@@ -110,7 +116,7 @@ class VirtualWorld:
 		self.info.init()
 
 		# Initialize I/O devices
-		self.iodevice	= [Keyboard(self), Gamepad(self)]
+		self.iodevice	= [Keyboard(self), Mouse(self), Gamepad(self)]
 
 		# Build the world
 		builder	= Builder()
@@ -179,6 +185,7 @@ class VirtualWorld:
 
 		# Clear the log
 		self.info.clear()
+		self.describe_selection()
 
 		# Fill the screen with sky blue
 		self.screen.fill(SEA_COLOR)
@@ -235,6 +242,7 @@ class VirtualWorld:
 			for entity in geography:
 				entity.commit(self, self.screen)
 
+		self.render_selection()
 		self.render_info()
 		return
 
@@ -270,6 +278,60 @@ class VirtualWorld:
 	def render_info(self):
 		self.info.render(self)
 		return
+
+	def describe_selection(self):
+		""" Lists the selected vessel's details first under Objects in the infobox
+		"""
+		vessel	= self.selected
+		if (vessel is None) or (vessel.position is None):
+			return
+
+		x, y	= self.to_map_units( vessel.position )
+		for line in [vessel.name, f'IMO: {vessel.imo}', f'Position: {x:.1f}, {y:.1f}', f'Behavior: {vessel.model}']:
+			self.info.append_object( line, Style.TEXT_PRIMARY )
+		return
+
+	def render_selection(self):
+		""" Rings the selected vessel
+		"""
+		vessel	= self.selected
+		if (vessel is None) or (vessel.position is None):
+			return
+
+		at		= self.encoder.transform_point( vessel.position )
+		pygame.draw.circle( self.screen, Style.ACCENT_FOCUS, (int(at[0]), int(at[1])), PICK_RADIUS, width=1 )
+		return
+
+	def to_map_units(self, pt):
+		""" Converts a simulation point in metres to map units, as in vessel.s3db and trip files
+		"""
+		return ( pt[0]/self.metres[0], pt[1]/self.metres[1] )
+
+	def screen_to_map(self, pos):
+		""" Converts a screen point (e.g. the mouse) to map units
+		"""
+		return self.to_map_units( self.encoder.inverse_point(pos) )
+
+	def pick(self, pos):
+		""" Selects the vessel nearest to a screen point, or clears the selection if none is close
+		Arguments
+			pos -- Screen point in pixels
+		"""
+		best, nearest	= None, PICK_RADIUS**2
+		for entity in self.groups["vessel"]:
+			if entity.position is None:
+				continue
+
+			at		= self.encoder.transform_point( entity.position )
+			dist	= (at[0]-pos[0])**2 + (at[1]-pos[1])**2
+			if dist <= nearest:
+				best, nearest	= entity, dist
+
+		self.selected	= best
+		if best is not None:		# Pop up the infobox with the vessel under Objects
+			self.debug	= True
+			self.info.show(True)
+		return best
 	
 
 	def listen(self):
@@ -363,6 +425,7 @@ class VirtualWorld:
 				# Keep map coordinates; Sprite.render transforms them each frame, so a
 				# vessel stays aligned with the map while panning or zooming
 				entity.rect		= pygame.Rect( rect )
+				entity.position	= ( rect[0]+rect[2]/2.0, rect[1]+rect[3]/2.0 )	# Unrounded centre in metres
 				entity.angle	= math.degrees( math.atan2(-dx[1],dx[0]) )
 				entity.intent	= args["intent"]
 				return

@@ -17,7 +17,7 @@ class LandBuilder(Builder):
 			"MOUNTAIN": (100000, "cos.model.geography.Mountain"),
 			"PLAIN": (200000, "cos.model.geography.Plain"),
 			"PLATEAU": (300000, "cos.model.geography.Plateau"),
-			"DESERT": (300000, "cos.model.geography.Desert")
+			"DESERT": (400000, "cos.model.geography.Desert")
 			} )
 
 		return

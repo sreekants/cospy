@@ -1,11 +1,10 @@
 #!/usr/bin/python
-# Source File: Service.py
+# Source File: Simulation.py
 # Description: Web service implementation.
 
 from cos.core.network.ORPCService import ORPCService
-from cos.core.simulation.Simulation import Simulation
 
-class Service(ORPCService):
+class Simulation(ORPCService):
 	def __init__(self):
 		""" Constructor
 		"""

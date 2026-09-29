@@ -10,6 +10,7 @@ from cos.subsystem.data.Partition import Partition, AUDIT_FIELDS
 from cos.core.utilities.ArgList import ArgList
 from cos.core.utilities.TransactionalDatabase import TransactionalDatabase
 from cos.core.utilities.ActiveRecord import ActiveRecord
+from cos.core.time.Clock import utcnow
 
 import os, time, shutil
 from xml.dom import minidom
@@ -129,7 +130,7 @@ class DataManager(Subsystem):
 			self.filtered[topic]	= self.filtered.get( topic, 0 ) + 1
 			return
 
-		partition.add( self.sim.now(), data )
+		partition.add( utcnow(), self.sim.tickcount(), data )
 		return
 
 	def keeps(self, topic, partition, data)->bool:

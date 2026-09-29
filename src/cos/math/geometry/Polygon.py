@@ -2,8 +2,6 @@
 # Filename: Polygon.py
 # Description: Implementation of the Polygon class
 
-from cos.math.geometry.Distance import Distance
-
 import shapely
 
 class Polygon:
@@ -32,32 +30,12 @@ class Polygon:
 
 
 	def clearance(self, x, y):
-		""" Shortest distance from a point to the a line in the polygon exterior
+		""" Shortest distance from a point to the polygon exterior
 		Arguments
 			x -- X coordinate
 			y -- Y coordinate
-		""" 
-		
-		p			= (x, y)
-		V			= tuple(self.geom.exterior.coords)
-		nedges		= len(V)
-		if nedges < 2:
-			return 0.0
-		
-		start		= V[0]
-		P1		 	= (start[0], start[1])
-		distance	= float('infinity')
-
-		for i in range(1, nedges):
-			e		= V[i%nedges]	# Next edge is modulo(i+1)
-			P2	 	= (e[0], e[1])
-			d		= Distance.point_to_line( p, P1, P2 )
-			if d < distance:
-				distance	= d
-
-			P1		= P2
-
-		return distance
+		"""
+		return self.geom.exterior.distance( shapely.Point(x, y) )
 
 	@property
 	def vertices(self):

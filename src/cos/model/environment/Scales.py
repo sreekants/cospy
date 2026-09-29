@@ -7,6 +7,8 @@ from cos.model.environment.Types import DynamicForce
 import numpy as np
 import os
 
+DEFAULT_DT		= 0.030		# Nominal wall seconds per tick (REQ-032-01)
+
 class Scales:
 	def __init__(self):
 		""" Constructor
@@ -15,6 +17,10 @@ class Scales:
 
 		# Scaling vector for maps
 		self.map		= unit_vector
+
+		# Time factors: seconds_per_tick = speedup x dt; no speed-up means one simulated second per tick
+		self.dt			= DEFAULT_DT
+		self.speedup	= None
 
 		# Scaling vectors for environmental forces
 		self.weather	= {
@@ -54,11 +60,38 @@ class Scales:
 					scale[0]	= float( r[3] )
 				if r[1] == 'map.unit.metres.y':
 					scale[1]	= float( r[3] )
+			for r in db.get_all( 'type=\'sim.clock\'' ):
+				if r[1] == 'sim.clock.speedup':
+					self.speedup	= float( r[3] )
 		except Exception:
 			pass		# No map database: one map unit is one metre
 
 		self.map	= np.array( [scale[0], scale[1], 1.0] )
 		return self.map
+
+	def load_time(self, config):
+		""" Loads [ProcessManager] DeltaT and SpeedUp; SpeedUp overrides the location's speed-up
+		Arguments
+			config -- Simulation configuration
+		"""
+		if config.exists_value( 'ProcessManager', 'DeltaT' ):
+			self.dt			= float( config.get_value('ProcessManager', 'DeltaT') )
+		if config.exists_value( 'ProcessManager', 'SpeedUp' ):
+			self.speedup	= float( config.get_value('ProcessManager', 'SpeedUp') )
+
+		if self.dt <= 0:
+			raise ValueError( f'Scales: DeltaT must be positive, not {self.dt}' )
+		if (self.speedup is not None) and (self.speedup <= 0):
+			raise ValueError( f'Scales: SpeedUp must be positive, not {self.speedup}' )
+		return self.seconds_per_tick
+
+	@property
+	def seconds_per_tick(self):
+		""" Simulated seconds one tick stands for
+		"""
+		if self.speedup is None:
+			return 1.0
+		return self.speedup * self.dt
 
 	@staticmethod
 	def of(ctxt):

@@ -12,7 +12,7 @@
 # violation lands in the same fact table with the same shape.
 
 from maritime.model.zone.ZoneRules import ZoneRules
-from maritime.model.zone.Ledger import Ledger, FindingGuard, SOURCE_EXAMINER, seconds
+from maritime.model.zone.Ledger import Ledger, FindingGuard, SOURCE_EXAMINER
 from maritime.model.zone.Location import Location
 from cos.model.examiner.Precondition import PreconditionSet
 from cos.core.kernel.Context import Context
@@ -26,7 +26,7 @@ SITUATION_ATTRIBUTES = ('os', 'ts', 'zone', 'eez', 'harbour',
 						'lane', 'mez', 'tss')
 
 # Encounter messages the conduct and situation faculties post (COS.023 L4)
-ENCOUNTER_MESSAGES	= ('vessel.approach', 'vessel.overtaking', 'vessel.crossing')
+ENCOUNTER_MESSAGES	= ('vessel.approach', 'vessel.overtaking', 'vessel.crossing', 'vessel.headon')
 
 # Where an examiner's situations come from (COS.023 L5)
 ENCOUNTERS	= 'encounters'		# subscribed encounter messages
@@ -183,7 +183,7 @@ class ZoneAware:
 		position	= getattr( vessel, 'location', None )
 		shapes		= ZoneRules.enclosing( self.sea, position )
 		rules		= self.rules.rules_at( shapes )
-		depth		= self.location.seabed_depth( self.rules.seabed_depth(shapes) )
+		depth		= self.location.seabed_depth( self.rules.seabed_depth(shapes), self.rules.nominal_depth(shapes) )
 
 		return shapes, rules, depth
 
@@ -228,7 +228,7 @@ class ZoneAware:
 			The penalty, or 0.0 when the finding is already recorded
 		"""
 		key			= self.finding_key( vessel, event, shapes, subject )
-		if self.guard.admit( key, seconds(ctxt.sim.now()) ) == False:
+		if self.guard.admit( key, ctxt.sim.seconds() ) == False:
 			return 0.0
 
 		penalty		= self.rules.penalty( event )

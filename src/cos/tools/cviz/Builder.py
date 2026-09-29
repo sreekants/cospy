@@ -195,6 +195,11 @@ class Builder:
 		if extent:
 			world.encoder.fit( extent, world.screen.get_size() )
 
+		# Metres per map unit, to show positions in the units of vessel.s3db and trip files
+		metres		= image.get('metres', None)
+		if metres:
+			world.metres	= (float(metres[0]), float(metres[1]))
+
 		if image['data']:
 			# Load the image from the binary data
 			bytes_io 	= io.BytesIO(image['data'])

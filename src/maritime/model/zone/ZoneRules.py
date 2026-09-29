@@ -160,7 +160,8 @@ class ZoneRules:
 
 		return found
 
-	def seabed_depth(self, shapes):
+	@staticmethod
+	def seabed_depth(shapes):
 		""" Shallowest nominal depth among the shapes a vessel is inside.
 		Shallowest rather than mean: a vessel grounds on the shallowest thing
 		beneath it, not on the average.
@@ -173,6 +174,29 @@ class ZoneRules:
 					if getattr(s, 'nominal_depth', None) is not None ]
 
 		return min( depths ) if depths else None
+
+	def nominal_depth(self, shapes):
+		""" Nominal depth the zones set for where the map reports none (REQ-022-06).
+		The most specific layer wins - a shape's own settings, then its named zone, then its
+		Sea.Type - and the shallowest value within that layer. zones.default is not a layer:
+		the location's nominal depth is the base.
+		Arguments
+			shapes -- Map shapes enclosing the vessel
+		Returns
+			Depth in metres, or None to use the location's nominal depth
+		"""
+		layers	= (
+			lambda s: self.overrides( s ).get( 'nominal_depth' ),
+			lambda s: (self.zones.get( getattr(s, 'name', None) ) or {}).get( 'nominal_depth' ),
+			lambda s: (self.types.get( self.type_name(getattr(s, 'type', None)) ) or {}).get( 'nominal_depth' ),
+		)
+
+		for layer in layers:
+			depths	= [ float(d) for d in (layer(s) for s in (shapes or [])) if d is not None ]
+			if depths:
+				return min( depths )
+
+		return None
 
 	def rules_at(self, shapes):
 		""" Merged rules for the shapes a vessel is inside
@@ -208,7 +232,7 @@ class ZoneRules:
 		overrides	= {}
 
 		for key in ('speed_limit', 'overtaking', 'berthing_margin',
-					'grounding_margin', 'restricted_cargo'):
+					'grounding_margin', 'restricted_cargo', 'nominal_depth'):
 			value	= args[key]
 			if value is not None:
 				overrides[key]	= value

@@ -60,10 +60,11 @@ class VesselFilter:
 
 		return problems
 
-	def resolve(self, vessels):
+	def resolve(self, vessels, disabled=()):
 		""" Matches the entries against the scenario's vessels
 		Arguments
 			vessels -- Every vessel in the simulation
+			disabled -- Vessels switched off with enabled=0 (REQ.035), which are not in the simulation
 		Returns
 			A list of problems, empty when every entry names exactly one vessel
 		"""
@@ -76,6 +77,12 @@ class VesselFilter:
 		for n, entry in enumerate( self.entries ):
 			key, value	= next( iter(entry.items()) )
 			found		= [ v for v in vessels if str(self.identifier(v, key)) == str(value) ]
+
+			off			= [ v for v in disabled if str(self.identifier(v, key)) == str(value) ]
+			if not found and off:
+				problems.append( f'{self.source}: under_test[{n}] {key}={value} names {off[0].name}, which is disabled '
+								 f'(enabled=0 in vessel.s3db); enable it or remove it from the list' )
+				continue
 
 			if len( found ) != 1:
 				problems.append( f'{self.source}: under_test[{n}] {key}={value} matches '

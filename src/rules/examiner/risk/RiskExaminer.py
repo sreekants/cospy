@@ -6,8 +6,9 @@ from rules.examiner.risk.RiskModel import HAZARDS, CURRENCY, Binding, VoyageTrac
 from rules.examiner.risk.RiskModel import load, hazard_probabilities, individual_risk
 
 from maritime.model.zone.ZoneAwareness import ZoneAware
-from maritime.model.zone.ZoneRules import SpatialZones
+from maritime.model.zone.ZoneRules import ZoneRules, SpatialZones
 from maritime.model.zone.Ledger import Ledger
+from maritime.model.zone.Location import Location
 
 from cos.model.examiner.ConcernExaminer import ConcernExaminer
 from cos.core.kernel.Faculty import Faculty
@@ -98,7 +99,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		"""
 		self.trace	= config.IsTrue('trace')
 		poll_at		= config["sample.frequency"]
-		self.timer	= Ticker( int(poll_at) ) if poll_at is not None else Ticker( 1 )
+		self.timer	= Ticker( float(poll_at) if poll_at is not None else 1, ctxt.sim.clock )
 		self.range	= config.ToFloat( 'range', self.range )
 
 		# Zone awareness supplies the map shapes under a vessel, which the
@@ -133,7 +134,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		if self.weights.errors():
 			return
 
-		now		= ctxt.sim.now()
+		now		= ctxt.sim.seconds()
 		for concern, weight in self.weights.normalised().items():
 			self.data( ctxt, 'rw', (now, concern, weight, float(self.weights.declared[concern])) )
 		return
@@ -248,7 +249,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 
 		# Rl is indexed by where the vessel is as well as by what may happen to
 		# it, so the spatial zone is resolved before the loss row is taken.
-		shapes		= self.survey( vessel )[0]
+		shapes, _, depth	= self.survey( vessel )
 		zone		= self.spatial.classify( shapes )
 		concerns	= self.matrix.row( self.engine, zone )
 		serialized	= self.matrix.matlab( self.engine, self.spatial.order )
@@ -264,8 +265,9 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 
 		report		= {
 			'vessel'		: key,
+			'recid'			: Ledger.recid( vessel ),	# database id written to every fact row
 			'imo'			: imo,
-			'time'			: ctxt.sim.now(),
+			'time'			: ctxt.sim.seconds(),
 			'zone'			: zone,			# spatial zone, the i index of Rl
 			'matrix'		: serialized,	# the whole of Rl, MATLAB literal, USD
 			'hazards'		: hazards,		# marginals, plus 'any' (exact) and 'sum' (eq. 14)
@@ -277,6 +279,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			'cumulative'	: track.cost,
 			'evidence'		: evidence,
 			'target'		: Ledger.identify( target ) if target is not None else None,
+			'depth'			: depth,		# seabed beneath the vessel, as the depth node sees it
+			'depth_source'	: Location.provenance( ZoneRules.seabed_depth(shapes) ),	# REQ-022-04
 		}
 
 		self.publish( ctxt, vessel, report )
@@ -382,7 +386,11 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# injected by the partition, so it is not passed here.
 		self.data( ctxt, 'risk_assessment', (
 			report['time'],
+<<<<<<< HEAD
 			report['imo'],
+=======
+			report['recid'],
+>>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 			report['zone'],
 			hazards['collision'],
 			hazards['grounding'],
@@ -394,6 +402,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			report['increment'],
 			report['survival'],
 			report['cumulative'],
+			report['depth'],
+			report['depth_source'],
 		) )
 
 		# Rl itself, serialized whole as a MATLAB literal in one column. The
@@ -406,7 +416,11 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# not be edited part way through a sweep.
 		self.data( ctxt, 'rl', (
 			report['time'],
+<<<<<<< HEAD
 			report['imo'],
+=======
+			report['recid'],
+>>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 			report['matrix'],
 		) )
 
@@ -414,7 +428,11 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		for concern, exposure in report['exposure'].items():
 			self.data( ctxt, 'rb', (
 				report['time'],
+<<<<<<< HEAD
 				report['imo'],
+=======
+				report['recid'],
+>>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 				report['zone'],
 				concern,
 				exposure,

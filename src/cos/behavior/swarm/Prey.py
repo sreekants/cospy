@@ -10,6 +10,10 @@ from cos.behavior.swarm.Boid import Boid
 import math, random
 
 class Config:
+    # Settings a swarm.yaml 'prey' section may override
+    FIELDS = ('speed', 'maxTurnAngle', 'minSeparation', 'minFlockDist', 'predatorSightDist',
+              'cohesion', 'alignment', 'separation', 'flee')
+
     def __init__(self):
         self.count = 25
         self.speed = 2.6
@@ -21,8 +25,34 @@ class Config:
         self.alignment = 0.9
         self.separation = 1.3
         self.flee = 2.5
-        self.predatorAvoidance = 2.0 
+        self.predatorAvoidance = 2.0
         return
+
+    def load(self, values:dict):
+        """ Overrides the defaults from a swarm.yaml section
+        Arguments
+            values -- Settings; speed in m/s, maxTurnAngle in degrees per simulated second
+        Returns
+            The configuration
+        """
+        return load_settings( self, values, self.FIELDS )
+
+
+def load_settings(cfg, values:dict, fields):
+    """ Applies swarm settings to a configuration, refusing unknown keys
+    Arguments
+        cfg -- Configuration to update
+        values -- Settings; speed in m/s, maxTurnAngle in degrees per simulated second
+        fields -- Names the section may set
+    Returns
+        The configuration
+    """
+    unknown = set(values or {}) - set(fields)
+    if unknown:
+        raise ValueError( f'Unknown swarm setting(s): {sorted(unknown)}' )
+    for k, v in (values or {}).items():
+        setattr( cfg, k, math.radians(float(v)) if k == 'maxTurnAngle' else float(v) )
+    return cfg
 
 class Prey(Boid):
     def __init__(self, pos: Point, vel: Vector, ref=None):
@@ -94,7 +124,7 @@ class Prey(Boid):
         else:
             desired_dir = change.normalize()
 
-        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle)
+        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle*getattr(world, 'seconds', 1.0))
         self.vel = new_heading * cfg.speed
         self.pos = world.bound(self, self.pos, self.vel)
         return

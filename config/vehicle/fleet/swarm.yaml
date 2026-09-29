@@ -1,0 +1,23 @@
+# Swarm settings for fleet controllers (NavalFleet -> cos.behavior.motion.PreyBehavior).
+# Referenced from a controller's settings as swarm=$(CONFIG)/vehicle/fleet/swarm.yaml.
+# Units (REQ.032): metres, metres per simulated second, degrees per simulated second. Each tick
+# the swarm moves speed x seconds-per-tick and turns at most maxTurnAngle x seconds-per-tick.
+# These values reproduce the behaviour before externalisation (2026-09-27) at one second per tick;
+# they are not yet re-authored to the ship model (REQ-032-10). 0.5 m/s is about 1 kn, which is why
+# fleets barely move on real-scale maps.
+
+prey:                         # fleet members, formation type 100000
+  speed: 0.5                  # m/s; was hard-coded in PreyBehavior
+  maxTurnAngle: 9.0           # degrees per simulated second
+  minSeparation: 18.0         # m; closer neighbours are pushed away
+  minFlockDist: 55.0          # m; cohesion applies when the mean distance exceeds this
+  predatorSightDist: 100.0    # m; predators farther than this are ignored
+  cohesion: 0.7               # steering weights
+  alignment: 0.9
+  separation: 1.3
+  flee: 2.5
+
+predator:                     # formation type 200000
+  speed: 0.5                  # m/s; was hard-coded in PreyBehavior
+  maxTurnAngle: 8.0           # degrees per simulated second
+  killDist: 10.0              # m

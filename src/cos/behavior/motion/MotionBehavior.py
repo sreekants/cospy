@@ -48,6 +48,15 @@ class MotionBehavior(Behavior):
 		"""
 		return ArgList( config.get("settings", None) )
 
+	@staticmethod
+	def seconds(world):
+		""" Simulated seconds one tick stands for; a rate times this is the tick's displacement
+		Arguments
+			world -- Reference ot the simulation world
+		"""
+		scales	= getattr( world, 'scales', None )
+		return scales.seconds_per_tick if scales is not None else 1.0
+
 	@property
 	def force(self):
 		""" Returns the forces acting on the vehicle

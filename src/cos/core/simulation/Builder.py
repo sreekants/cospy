@@ -64,7 +64,7 @@ class Builder(Service):
 		"""
 		profile	= self.prototypes[type]
 		db		= ActiveRecord.create(self.model, path, self.table)
-		records	= db.get_all(f'type={profile[0]}')
+		records	= db.get_all( self.criteria(profile) )
 
 		klassname, klass	= BootLoader.load_class( profile[1] )
 
@@ -86,6 +86,15 @@ class Builder(Service):
 
 		return
 
+
+	def criteria(self, profile):
+		""" SQL filter for the rows this builder loads
+		Arguments
+			profile -- (type code, class path) of the prototype
+		Returns
+			A WHERE clause
+		"""
+		return f'type={profile[0]}'
 
 	def scale_polygon2D( self, ctxt:Context, path:str):
 		""" Scakes a 2D polygon

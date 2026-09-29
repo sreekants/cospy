@@ -22,6 +22,11 @@ class VesselIcon(AnimatedSprite):
 
 		self.name	= config["name"]
 		self.id		= config["identifier"]
+		self.imo	= self.id.get("imo", None) if isinstance(self.id, dict) else None
+		self.model	= self.get_model(config)
+		pose		= config.get("pose", None) or {}
+		start		= pose.get("position", None)
+		self.position	= (float(start[0]), float(start[1])) if start else None	# Centre in metres, updated by vessel.move
 
 		self.layer	= 6
 
@@ -49,6 +54,12 @@ class VesselIcon(AnimatedSprite):
 		self.color		= color
 		self.angle		= 0
 		return
+
+	def get_model(self, config):
+		""" Returns the class name of the motion behavior, e.g. ContainerShip
+		"""
+		motion		= ArgList( config.get("behavior", None) )['motion']
+		return motion.split('.')[-1] if motion else 'n/a'
 
 	def get_color(self, config):
 		settings		= ArgList( config.get("settings", None) )

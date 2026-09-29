@@ -5,19 +5,31 @@
 from cos.math.geometry.Rectangle import Rectangle
 from cos.math.geometry.Point import Point
 from cos.math.geometry.Vector import Vector
-from cos.behavior.swarm.Prey import Prey
+from cos.behavior.swarm.Prey import Prey, load_settings
 from cos.behavior.swarm.Boid import Boid
 
 import random, math
 from typing import Optional
 
 class Config:
+    # Settings a swarm.yaml 'predator' section may override
+    FIELDS = ('speed', 'maxTurnAngle', 'killDist')
+
     def __init__(self):
         self.count = 2
         self.speed = 3.2
         self.killDist = 10.0
         self.maxTurnAngle = math.radians(8.0)
         return
+
+    def load(self, values:dict):
+        """ Overrides the defaults from a swarm.yaml section
+        Arguments
+            values -- Settings; speed in m/s, maxTurnAngle in degrees per simulated second
+        Returns
+            The configuration
+        """
+        return load_settings( self, values, self.FIELDS )
 
 class Predator(Boid):
     def __init__(self, pos: Point, vel: Vector, ref=None):
@@ -72,7 +84,7 @@ class Predator(Boid):
             return
 
         desired_dir = closest_disp.normalize()
-        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle)
+        new_heading = Boid.turn(self.vel, desired_dir, cfg.maxTurnAngle*getattr(world, 'seconds', 1.0))
         self.vel = new_heading * cfg.speed
         self.pos = world.bound(self, self.pos, self.vel)
 

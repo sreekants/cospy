@@ -31,6 +31,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.next		= None
 		self.atpoint	= 0
 		self.atstate	= OperationState.UNKNOWN
+		self.arrived	= None			# Waypoint reached this tick; the vessel lands on it
 
 		args			= self.get_settings( config )
 
@@ -122,6 +123,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		self.atpoint	= 1				# Index of next
 		self.x			= self.current[1]
 		self.atstate	= OperationState.START
+		self.arrived	= None			# A loop jumps to its start
 		return
 
 	def plan(self, path, looprun=False, reverse=False):
@@ -189,12 +191,15 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		"""
 		# Find the matching waypoint
 		pos	= self.get_pos(world, t)
+		arrived, self.arrived	= self.arrived, None
 		if pos is None:
 			self.dx	= np.zeros(3)
-			return self.x
+			return self.x if arrived is None else arrived
 
 		self.dx		= pos[2]
-		return self.x + self.dx + self.d2x/2.0
+		if arrived is not None:
+			return arrived			# Land on the waypoint; the next leg starts from it
+		return self.x + (self.dx + self.d2x/2.0)*self.seconds(world)
 
 	def move_next(self, world, t):
 		""" Moves to the next point
@@ -214,7 +219,7 @@ class PathFollowingMotionBehavior(MotionBehavior):
 			self.atpoint	= 1				# Index of next
 			return False
 		
-		if self.delay > t.timestep:
+		if self.delay > t.tick:		# Trip delay in simulated seconds
 			return False
 		
 		sog		= self.current[2][0]
@@ -223,8 +228,10 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 		# If there is no more distance to cover in the current 
 		# waypoint segment, we do not shift.
-		if Distance.euclidean(p1, p2) > sog:
+		if Distance.euclidean(p1, p2) > sog*self.seconds(world):
 			return  True
+
+		self.arrived	= np.array( p2, dtype=float )
 
 		# print(f'{self.atpoint}{self.next}={self.atstate}')		
 		if self.atstate == OperationState.START:

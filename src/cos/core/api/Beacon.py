@@ -1,7 +1,7 @@
 from cos.core.network.ORPCProxy import ORPCProxy
 
 
-class World(ORPCProxy):
+class Beacon(ORPCProxy):
 	def __init__(self,arg=None):
 		""" Constructor
 		Arguments

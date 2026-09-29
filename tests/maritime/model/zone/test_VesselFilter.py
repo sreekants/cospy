@@ -16,7 +16,9 @@ class Vessel:
 		self.name	= name
 
 
-# As in tk/turkeli/vessel.s3db: IMO 9627837 is carried by two vessels
+# Two vessels on one IMO. This was tk/turkeli's real state until COS.029 gave
+# every vessel a unique one; kept as a fixture because the filter must still
+# behave if identity is ever duplicated again.
 FLEET	= [ Vessel('bedc897f-512b-45a2-aea4-bcfc248d2a86', 101, '9627837', 'True North'),
 			Vessel('bedc897f-512b-45a2-aea4-bcfc248d2a8e', 102, '9930064', 'MSC NICOLA MASTRO'),
 			Vessel('bedc897f-512b-45a2-aea4-bcfc248d2a84', 108, '9627837', 'BERGE ODEL') ]

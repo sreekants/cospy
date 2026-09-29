@@ -11,6 +11,7 @@ from cos.math.geometry.Rectangle import Rectangle
 from enum import Enum, Flag
 from typing import Any
 import math, random
+import numpy as np
 
 class Type(Flag):
     """Enum for the different types of vessel power drive."""
@@ -79,7 +80,7 @@ class Vessel(Vehicle):
         self.imo            = identifier["imo"]
         self.mmsi           = identifier["mmsi"]
         self.weight         = config['weight']
-        self.recid          = config['id']
+        self.recid          = int( identifier["imo"] )     # Vessel IMO: the vessel's id in every fact table
 
         self.operation      = 0
         self.status         = Status.UNKNOWN
@@ -87,7 +88,8 @@ class Vessel(Vehicle):
 
         # Maps an intent category to the value set its actions are recorded in
         self.intents        = {
-            'Signal': self.intent
+            'Signal': self.intent,
+            'Light': self.intent
         }
 
         # TODO: Load from the configuration
@@ -268,6 +270,7 @@ class Vessel(Vehicle):
         """
         boundary            = self.actor.rect
         self.actor.rect     = Rectangle(position[0] - boundary.w/2, position[1] - boundary.h/2, boundary.width, boundary.height) 
+        self.actor.x        = np.array(position, dtype=float)      # What location and the rule snapshots read
         return
 
     def heading_towards(self, velocity):

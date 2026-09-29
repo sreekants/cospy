@@ -174,30 +174,30 @@ class InlandWaterRule(ScoredRule, Rule):
 
 		resolver	= rule_ctxt.resolver
 
-		# The situation is shared with every other rule and examiner in this
-		# pass, so the entry value is restored once this rule's own encounters
-		# have been consumed - see COS.007.
+		# The situation is shared by every rule and examiner in the pass (COS.007)
 		saved		= rule_ctxt.situation
 
-		while self.sitations.empty() == False:
-			# Assign a new situation to the rule contxt
-			rule_ctxt.situation	= self.sitations.get()
+		try:
+			while self.sitations.empty() == False:
+				# Assign a new situation to the rule contxt
+				rule_ctxt.situation	= self.sitations.get()
 
-			#if rule_ctxt.situation.zone.name == 'Turkeli.TSS.SpeedZone1':
+				#if rule_ctxt.situation.zone.name == 'Turkeli.TSS.SpeedZone1':
 
-			# Reset the resolver with the new context properties
+				# Reset the resolver with the new context properties
+				resolver.reset( ctxt, rule_ctxt )
+
+				# Evaluate the automata
+				result		= self.automata.evaluate(rule_ctxt)
+				if result.error is None:
+					continue
+
+				for err in result.error:
+					self.on_violate( ctxt, rule_ctxt, err.parent.name )
+
+		finally:
+			rule_ctxt.situation	= saved
 			resolver.reset( ctxt, rule_ctxt )
-
-			# Evaluate the automata
-			result		= self.automata.evaluate(rule_ctxt)
-			if result.error is None:
-				continue
-
-			for err in result.error:
-				self.on_violate( ctxt, rule_ctxt, err.parent.name )
-
-		rule_ctxt.situation	= saved
-		resolver.reset( ctxt, rule_ctxt )
 
 		return
 

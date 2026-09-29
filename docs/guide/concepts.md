@@ -113,8 +113,9 @@ What the design deliberately does **not** commit to matters as much:
   written in the same language ([the rules faculty](regulation.md#the-rules-faculty--legata-rules-and-examiners)).
 - **No claim of completeness.** The paper's own lesson is *what you model is what you assure*. A rule
   that is not written, or a term that is not measured, is simply not tested.
-- **No real-time guarantee.** A simulation step takes as long as the computer needs. Some timers use
-  the wall clock, and that has consequences ([levels and timescales](synthesis.md#levels-and-timescales)).
+- **No real-time guarantee.** A simulation step takes as long as the computer needs. Time inside the
+  simulation is simulated time, but how many steps the rules judge depends on the computer
+  ([levels and timescales](synthesis.md#levels-and-timescales)).
 
 ---
 

@@ -42,7 +42,7 @@ class PracticeEvaluator(Service):
 
 		args			= ArgList( config["config"] )
 		poll_at			= args["sample.frequency"]
-		self.timer		= Ticker( int(poll_at) ) if poll_at is not None else None
+		self.timer		= Ticker( float(poll_at), ctxt.sim.clock ) if poll_at is not None else None
 		self.resolver.init( ctxt, args["resolvers"] )
 		self.location	= Location.shared( ctxt, args["location"] )		# Fatal when absent (REQ.022)
 		ctxt.log.info( self.id, f'Nominal depth {self.location.nominal_depth:.0f} m from {self.location.path}' )

@@ -5,8 +5,9 @@
 from cos.core.utilities.MultiTableActiveObject import MultiTableActiveObject
 from cos.core.utilities.ActiveRecord import ActiveRecord
 
+from cos.core.time.Clock import utcnow
+
 import uuid
-from datetime import datetime
 
 class GraphDatabaseConnection:
 	def __init__(self, dbpath):
@@ -168,7 +169,7 @@ class GraphDatabase:
 		elif isinstance(guid, uuid.UUID):
 			guid	= str(guid).lower()
 			
-		creation_time = datetime.utcnow()
+		creation_time = utcnow().isoformat(timespec='microseconds')
 		values = {
 			'graph_id':self.graph_id,
 			'guid': guid,
@@ -317,7 +318,7 @@ class GraphDatabase:
 		if name == None:
 			name	= ''
 
-		creation_time = datetime.utcnow()
+		creation_time = utcnow().isoformat(timespec='microseconds')
 		values = {
 			'graph_id':self.graph_id,
 			'guid': guid,

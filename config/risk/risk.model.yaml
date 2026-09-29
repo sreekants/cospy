@@ -78,10 +78,8 @@ risk:
       discretize: bins        # 0-200/200-300/300-400/400-500/over 500 [m], not a
       edges: [200, 300, 400, 500]   # uniform width, so the edges are given explicitly
 
-    - node: auv_asv_depth
-      term: "(OwnShip,Fleet).MinimumDepth"
-      discretize: bins        # 0-200/200-300/300-400/400-500/over 500 [m], not a
-      edges: [200, 300, 400, 500]   # uniform width, so the edges are given explicitly
+    # AUV depth is not a node of the Fig. 2 network; the slant range that would fold it into
+    # auv_asv_distance is REQ.034.
 
     # --- own vessel health ---------------------------------------------------
     # Fig. 2 draws own_vessel_fails with two parents, so it is inferred rather

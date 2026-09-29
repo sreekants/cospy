@@ -56,16 +56,20 @@ class BootLoader:
 			inst.on_init( ctxt, None )
 			inst.on_start( ctxt, None )
 
-		for inst, config in self.seq:
+		for inst, config, faculty in self.seq:
+			sim.objects.faculty	= faculty
 			inst.on_start( ctxt, config )
 
 		for runlevel in range(0,5):
+			sim.objects.faculty	= None
 			for inst in sim.subsystems:
 				inst.on_run( ctxt, runlevel )
 
-			for inst, config in self.seq:
+			for inst, config, faculty in self.seq:
+				sim.objects.faculty	= faculty
 				inst.on_run( ctxt, runlevel)
 
+		sim.objects.faculty	= None
 		return
 
 	def stop(self, sim):
@@ -79,10 +83,10 @@ class BootLoader:
 			for inst in sim.subsystems:
 				inst.on_term( ctxt, runlevel )
 
-			for inst, config in self.seq:
+			for inst, config, faculty in self.seq:
 				inst.on_term( ctxt, -1*runlevel)
 
-		for inst, config in self.seq:
+		for inst, config, faculty in self.seq:
 			inst.on_stop( ctxt, config )
 
 		# Stop the kernel subsystems
@@ -145,7 +149,7 @@ class BootLoader:
 			return objects
 
 		for module in modules:
-			self.__load_package( sim, config, objects, module )
+			self.__load_package( sim, config, objects, module, section )
 
 		return objects
 
@@ -161,14 +165,16 @@ class BootLoader:
 		klass = getattr(mod, klassname)
 		return klassname, klass
 
-	def __load_package(self, sim, config:Configuration, objects, module ):
+	def __load_package(self, sim, config:Configuration, objects, module, section:str=None ):
 		""" Internal function to load a python package
 		Arguments
 			sim -- Reference ot the simulation
 			config -- Configuration attributes
 			objects -- Object list
 			module -- Module information
+			section -- Faculty (configuration section) the module belongs to
 		"""
+		sim.objects.faculty	= section
 		try:
 			package				= module['module']
 			klassname, klass	= BootLoader.load_class(package)
@@ -189,10 +195,11 @@ class BootLoader:
 			inst.on_init( Context(sim, config, sim.ipc), module )
 
 			# Append the class instance to the loaded list
-			self.seq.append( (inst, module) )
+			self.seq.append( (inst, module, section) )
 		except Exception as e:
 			sim.log.error( self.module, f'Failed to load [{package}]: {str(e)}' )
 
+		sim.objects.faculty	= None
 		return objects
 
 if __name__ == '__main__':

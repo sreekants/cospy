@@ -19,7 +19,7 @@ class Infobox:
 		self.font_title		= pygame.font.SysFont("helvetica", 16, bold=True)
 		self.font_body		= pygame.font.SysFont("helvetica", 14)
 		self.font_small		= pygame.font.SysFont("helvetica", 10)
-		self.box_rect 		= pygame.Rect(950, 10, 200, 400)
+		self.box_rect 		= pygame.Rect(900, 10, 250, 400)	# Wide enough for vessel behavior names
 		self.margin			= 20
 		self.pos			= (self.box_rect.left + self.margin, self.box_rect.top+15)
 
@@ -38,8 +38,8 @@ class Infobox:
 		self.visible		= istrue
 		return
 
-	def append_object(self, z:str):
-		self.objects.append(z)
+	def append_object(self, z:str, color=None):
+		self.objects.append(z, color=color)
 		return
 
 
@@ -116,7 +116,8 @@ class Infobox:
 		else:
 			pos			= (cursor[0], cursor[1])
 
-		text		= self.font_body.render( f'cursor:{cursor[0]-self.box_rect.left},{cursor[1]-self.box_rect.top}', False, (0,0,0))
+		x, y		= ctxt.screen_to_map( cursor )	# Map units, as in vessel.s3db and trip files
+		text		= self.font_body.render( f'cursor:{x:.1f},{y:.1f}', False, (0,0,0))
 		ctxt.screen.blit( text, pos)
 		return
 

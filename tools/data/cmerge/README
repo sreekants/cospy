@@ -1,1 +1,10 @@
-Generated python application for $$Model$$ class
+cmerge - consolidates the run databases of a sweep
+
+    PYTHONPATH=src python tools/data/cmerge/main.py [-t template] [-o output] [-f] runs.txt
+
+runs.txt names one maritime.workingset.s3db per line (relative paths are taken from the
+list's folder; blank lines and # comments are skipped). Each database is copied, its copy
+renumbered by cos.data.bi.Builder so ids do not collide, and every row merged into a fresh,
+empty replica of the template (default config/data/maritime.s3db). Only id and dim_*_id
+columns are renumbered; case_id and vessel_id are copied unchanged. The sources are never
+written.

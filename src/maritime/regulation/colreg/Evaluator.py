@@ -28,7 +28,7 @@ class Evaluator(Service):
 		self.resolver		= Resolver()
 		self.API			= API()
 
-		self.monitor_timer	= Ticker( 0.5 )	# Monitor every half second	
+		self.monitor_timer	= None			# Monitor every half second
 		self.filter			= None			# Vessels under test, from the Monitors faculty
 		return
 
@@ -58,7 +58,7 @@ class Evaluator(Service):
 
 		# Monitor all the time. So so we do not miss any events
   		# in between signaling
-		if self.monitor_timer.signaled() == True:
+		if (self.monitor_timer is not None) and (self.monitor_timer.signaled() == True):
 			self.monitor(ctxt)
 
 		if (self.timer is None) or (self.timer.signaled() == False):
@@ -78,9 +78,10 @@ class Evaluator(Service):
 
 		self.poll_at		= args["sample.frequency"]
 
-		# Initialize timer ticks
+		# Initialize timer ticks, in simulated seconds
+		self.monitor_timer	= Ticker( 0.5, ctxt.sim.clock )
 		if self.poll_at is not None:
-			self.timer	= Ticker( int(self.poll_at) )
+			self.timer	= Ticker( float(self.poll_at), ctxt.sim.clock )
 		else:
 			self.timer	= None
 

@@ -18,8 +18,6 @@ class ScenarioGeneratorTestCase(unittest.TestCase):
 			("COUNTRY","LOCATION"):ScenarioGenerator.sites(self.configdir),
 			"WEATHER":["clearsky","cloudy","foggy","heavyrain","highsea","hurricane","lightrain","snow","wind"],
 			"TRAFFIC":["hdta","mdta","ldta","ctz","rdta","vdta","seasonal"],
-			"LEGAL_CASES":["singapore"],
-			"TECHNICAL_CASES":["basic","stpa"],
 		})
 
 		return

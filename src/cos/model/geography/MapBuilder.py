@@ -52,7 +52,8 @@ class MapBuilder(Service):
 			'scale'		: None,
 			'data'		: None,
 			'extent'	: None,
-			'bounds'	: None
+			'bounds'	: None,
+			'metres'	: None
 			}
 
 		db		= ActiveRecord.create('Config', path, 'configs')
@@ -86,6 +87,7 @@ class MapBuilder(Service):
 
 		background['scale']		= (scale[0]*metres[0], scale[1]*metres[1])
 		background['file']		= filepath
+		background['metres']	= (float(metres[0]), float(metres[1]))	# Viewers convert back to map units
 
 		# Declared map size in map units, so a viewer can fit the map to its screen.
 		# Maps without one are drawn one map unit per pixel, as before.

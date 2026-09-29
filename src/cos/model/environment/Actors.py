@@ -4,6 +4,7 @@
 
 from cos.model.environment.EnvironmentService import EnvironmentService
 from cos.core.kernel.Context import Context
+from cos.core.simulation.Snapshot import Snapshot
 
 from enum import Enum
 
@@ -74,6 +75,7 @@ class Actors(EnvironmentService):
 			unused -- Unused variable
 		"""
 		self.update()
+		Snapshot.publish( Snapshot.capture(ctxt.sim.tickcount(), self.vehicles[ActorType.VESSEL]) )
 		return
 
 
