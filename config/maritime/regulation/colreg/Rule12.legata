@@ -19,7 +19,7 @@ condition: {
 clause['COLREG.Rule12.a.i']:{
     :{
         condition: { 
-            : ((OS, TS).Direction in ['Position.Abeam']) and
+            : ((OS, TS).Beam in ['Position.Abeam']) and
               ([OS.Position, Weather.Wind].Direction in range(180,360))
             }
         assure:{
@@ -33,7 +33,7 @@ clause['COLREG.Rule12.a.i']:{
 clause['COLREG.Rule12.a.ii']:{
     :{
         condition: { 
-            : ( ((OS, TS).Direction in ['Position.Abeam']) and
+            : ( ((OS, TS).Beam in ['Position.Abeam']) and
                 ([OS.Position, Weather.Wind].Direction in range(0,180)))
             }
         assure:{

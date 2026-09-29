@@ -1,5 +1,5 @@
 # COLREG.Rule35 :
-# Status        : TODO
+# Status        : IMPLEMENTED (COS.022) - (a) to (c); fed by Rule35.py for every vessel under test
 
 define: {
     OS: OwnShip
@@ -12,10 +12,42 @@ define: {
 # prescribed in this Rule shall be used as follows:
 # (a) A power-driven vessel making way through the water shall sound at intervals of
 # not more than 2 minutes one prolonged blast.
+#
+# Restricted visibility is the scenario's visibility under Vessel.RestrictedVisibility.Range (nautical
+# miles); making way is moving faster than Vessel.MakingWay.Speed. OS.FogSignal says a fog signal is
+# being sounded, not which one, so (a) to (c) check that a signal is sounded at all.
+clause['COLREG.Rule35.a']:{
+    :{
+        condition: {
+            : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and (OS.Type is Vessel.Type.PowerDriven) and
+              (OS.Velocity > Vessel.MakingWay.Speed)
+            }
+        exclude: {
+            : ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing))
+            }
+        assure:{
+            : OS.FogSignal is true
+        }
+    }
+}
 
 # (b) A power-driven vessel underway but stopped and making no way through the
 # water shall sound at intervals of not more than 2 minutes two prolonged blasts in
 # succession with an interval of about 2 seconds between them.
+clause['COLREG.Rule35.b']:{
+    :{
+        condition: {
+            : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and (OS.Type is Vessel.Type.PowerDriven) and
+              (OS.Status is Vessel.Status.UNDERWAY) and (OS.Velocity <= Vessel.MakingWay.Speed)
+            }
+        exclude: {
+            : ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing))
+            }
+        assure:{
+            : OS.FogSignal is true
+        }
+    }
+}
 
 # (c) A vessel not under command, a vessel restricted in her ability to manoeuvre, a
 # vessel constrained by her draught, a sailing vessel, a vessel engaged in fishing and a
@@ -23,6 +55,20 @@ define: {
 # prescribed in paragraphs (a) or (b) of this Rule sound at intervals of not more than 2
 # minutes three blasts in succession, namely one prolonged followed by two short
 # blasts.
+#
+# Constrained by draught and towing or pushing are not modelled separately (Restriction.DRAUGHT
+# shares its value with TRANSPORTING), so they are not covered.
+clause['COLREG.Rule35.c']:{
+    :{
+        condition: {
+            : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing)) and
+              (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.AGROUND])
+            }
+        assure:{
+            : OS.FogSignal is true
+        }
+    }
+}
 
 # (d) A vessel engaged in fishing, when at anchor, and a vessel restricted in her ability
 # to manoeuvre when carrying out her work at anchor, shall instead of the signals

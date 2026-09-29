@@ -25,7 +25,7 @@ class Infobox:
 
 		# Add child views
 		self.zones			= ListView('Zones', (0,0))
-		self.objects		= ListView('Objects', (0,150))
+		self.objects		= ListView('Objects', (0,200))
 
 		self.children.extend( [self.zones, self.objects] )
 

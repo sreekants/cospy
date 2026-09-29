@@ -1,5 +1,5 @@
 # COLREG.Rule13 :
-# Status        : REVIEW
+# Status        : IMPLEMENTED (COS.022) - fed by Rule13.py, judged at the closest point of approach
 
 define: {
     OS: OwnShip
@@ -9,20 +9,39 @@ define: {
 # Overtaking
 # (a) Notwithstanding anything contained in the Rules of Part B, Sections I and II any vessel overtaking
 # any other shall keep out of the way of the vessel being overtaken.
+#
+# Judged by its outcome. Rule13.py queues a pair once it has passed its closest approach, marked
+# Overtaking if own ship was overtaking with a risk of collision when the encounter began. The
+# overtaking vessel must then have passed at least the minimum passing distance clear.
+clause['COLREG.Rule13.a']:{
+    :{
+        condition: {
+            : (OS, TS).EncounterSituation is 'Overtaking'
+            }
+        assure:{
+            : (OS, TS).Distance >= Vessel.Collision.PassingDistance
+        }
+    }
+}
 
 # (b) A vessel shall be deemed to be overtaking when coming up with another vessel from a direction
 # more than 22.5 degrees abaft her beam, that is, in such a position with reference to the vessel she is
 # overtaking, that at night she would be able to see only the sternlight of that vessel but neither of her
 # sidelights.
+#
+# A definition, not an obligation, so it is not a clause. Classification.classify() applies it
+# (theta_ot_min/theta_ot_max in evaluator.yaml); EncounterWatch records it at onset.
 
 # (c) When a vessel is in any doubt as to whether she is overtaking another, she shall assume that this
 # is the case and act accordingly.
+################################################################
+# clause['COLREG.Rule13.c'] {}
+# Clauses of intentional doubt beyond the scope
+################################################################
 
 # (d) Any subsequent alteration of the bearing between the two vessels shall not make the overtaking
 # vessel a crossing vessel within the meaning of these Rules or relieve her of the duty of keeping clear
 # of the overtaken vessel until she is finally past and clear.
-
-################################################################
-# clause['COLREG.Rule13'] {}
-# Definitions of what constitutes overtaking is implemented in the software
-################################################################
+#
+# Met by construction: the role recorded at onset is the one (a) is judged on, whatever the bearing
+# at the closest approach.

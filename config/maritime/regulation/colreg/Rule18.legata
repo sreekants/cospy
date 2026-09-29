@@ -6,7 +6,7 @@ define: {
 }
 
 condition: {
-    : OS.Speed > 0      # Vessel underway
+    : OS.Velocity > 0      # Vessel underway
 }
 
 # Responsibilities between Vessels
@@ -23,8 +23,8 @@ clause['COLREG.Rule18.a']:{
         condition: { 
             :(OS.Type is Vessel.Type.PowerDriven) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
-            : (TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.Fishing','Vessel.Operation.RestrictedMovement','Vessel.Operation.Sailing']) or 
-              (TS.Type in [Vessel.Type.Sailing, Vessel.Type.Fishing])
+            : (TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or 
+              (TS.Operation is Vessel.Operation.Fishing) or (TS.Type is Vessel.Type.Sailing)
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -39,10 +39,10 @@ clause['COLREG.Rule18.a']:{
 clause['COLREG.Rule18.b']:{
     : {
         condition: { 
-            :(OS.Type is Vessel.Type.SailingVessel) and 
+            :(OS.Type is Vessel.Type.Sailing) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
-            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement']) or 
-             (TS.Type is Vessel.Type.Fishing)
+            :(TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or 
+             (TS.Operation is Vessel.Operation.Fishing)
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -57,9 +57,9 @@ clause['COLREG.Rule18.b']:{
 clause['COLREG.Rule18.c']:{
     : {
         condition: { 
-            :((OS.Type is Vessel.Type.Fishing) or (TS.Operation has 'Vessel.Operation.Fishing')) and 
+            :(OS.Operation is Vessel.Operation.Fishing) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
-            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement'])
+            :(TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED])
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'
@@ -74,9 +74,9 @@ clause['COLREG.Rule18.c']:{
 clause['COLREG.Rule18.d.i']:{
     : {
         condition: { 
-            :((OS.Type is Vessel.Type.Fishing) or (TS.Operation has 'Vessel.Operation.Fishing')) and 
+            :(OS.Operation is Vessel.Operation.Fishing) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
-            :(TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.RestrictedMovement'])
+            :(TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED])
          }
          exclude: {
             :(OS.Operation has 'Vessel.Operation.NotUnderCommand') or
@@ -138,8 +138,8 @@ clause['COLREG.Rule18.f.ii']:{
         condition: { 
             :(OS.Type is Vessel.Type.WIG) and 
              ((OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange)
-            : (TS.Operation in ['Vessel.Operation.NotUnderCommand','Vessel.Operation.Fishing','Vessel.Operation.RestrictedMovement','Vessel.Operation.Sailing']) or 
-              (TS.Type in [Vessel.Type.Sailing,Vessel.Type.Fishing])
+            : (TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or 
+              (TS.Operation is Vessel.Operation.Fishing) or (TS.Type is Vessel.Type.Sailing)
          }
         assure: { 
             :OS.Intent has 'Manouever.KeepClear'

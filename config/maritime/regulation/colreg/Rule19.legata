@@ -24,10 +24,10 @@ clause['COLREG.Rule19.b']:{
     : {
         condition: { 
             :(OS.Type is Vessel.Type.PowerDriven) and 
-             (OS.Speed in Vessel.RestrictedVisibility.Speed.SafeRange)
+             (OS.Velocity in Vessel.RestrictedVisibility.Speed.SafeRange)
          }
         assure: { 
-            :OS.Engine.State in ['Vessel.Engine.ON'] 
+            :OS.EngineState in ['Vessel.Engine.ON'] 
         }
     }
 }
@@ -61,8 +61,8 @@ clause['COLREG.Rule19.d']:{
         # being overtaken;
         # (ii) an alteration of course towards a vessel abeam or abaft the beam.
         exclude: {
-            : (OS, TS).Direction in ['Position.Abeam']
-            : (OS, TS).Direction in ['Position.Abaft']
+            : (OS, TS).Beam in ['Position.Abeam']
+            : (OS, TS).Beam in ['Position.Abaft']
         }
         assure: { 
             :OS.Manouever in [
@@ -81,14 +81,14 @@ clause['COLREG.Rule19.e']:{
     : {
         condition: { 
             : TS.FogSignal is true
-            : ((OS, TS).Direction in ['Position.Abeam']) and
+            : ((OS, TS).Beam in ['Position.Forward']) and
               ((OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.SafeRange) 
         }
         exclude: {
             : (OS, TS).TimeToEncounter not in Vessel.Collision.TimeToEncounter.SafeRange
         }
         assure: { 
-            : OS.Engine.Acceleration < 0         # Reduce speed
+            : OS.Acceleration < 0         # Reduce speed
             : (OS, TS).Heading.Gradient > 0     # Turn away
         }
     }

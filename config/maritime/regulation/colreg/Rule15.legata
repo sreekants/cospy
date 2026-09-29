@@ -1,5 +1,5 @@
 # COLREG.Rule15 :
-# Status        : REVIEW
+# Status        : IMPLEMENTED (COS.022) - fed by Rule15.py, judged at the closest point of approach
 
 define: {
     OS: OwnShip
@@ -10,15 +10,29 @@ define: {
 # When two power-driven vessels are crossing so as to involve risk of collision, the vessel which has the
 # other on her own starboard side shall keep out of the way and shall, if the circumstances of the case
 # admit, avoid crossing ahead of the other vessel.
-clause['COLREG.Rule15']:{
+#
+# Judged by its outcome. Rule15.py queues a pair once it has passed its closest approach, marked
+# GiveWay if own ship had the other on her starboard side with a risk of collision when the crossing
+# began. Own ship must then have passed at least the minimum passing distance clear, and astern of
+# the other vessel: at the closest approach she is abaft the other's beam.
+clause['COLREG.Rule15/KeepClear']:{
     :{
-        condition: { 
-            : ((OS, TS).ClosestApproachPoint in Vessel.Collision.TimeToEncounter.CollisionRange) and
-              ((OS, TS).Direction in ['Position.Starboard'])
+        condition: {
+            : (OS, TS).EncounterSituation is 'GiveWay'
             }
         assure:{
-            : OS.Intent in ['Manouever.CollisionAvoidance.*','Manouever.GiveWay','Manouever.StandOn']
-            : (OS,TS).Speed < 0
+            : (OS, TS).Distance >= Vessel.Collision.PassingDistance
+        }
+    }
+}
+
+clause['COLREG.Rule15/CrossAstern']:{
+    :{
+        condition: {
+            : (OS, TS).EncounterSituation is 'GiveWay'
+            }
+        assure:{
+            : (OS, TS).AheadOfTarget is false
         }
     }
 }

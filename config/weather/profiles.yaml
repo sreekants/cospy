@@ -197,6 +197,32 @@ climates:
       highsea:  [6, 18]
       hurricane: [22, 29]       # tropical track
 
+  northsea:                     # Southern North Sea, Scheldt, Maas, Weser and Elbe estuaries (proposed)
+    sites: [be/antwerp, nl/rotterdam, de/bremen, de/hamburg]
+    temperature:
+      clearsky: [-5, 30]
+      cloudy:   [-2, 22]
+      foggy:    [-2, 15]
+      lightrain: [2, 20]
+      heavyrain: [4, 22]
+      snow:     [-6, 1]
+      wind:     [-2, 16]        # autumn and winter gales
+      highsea:  [0, 15]
+      hurricane: [0, 12]        # hurricane-force winter storms, e.g. Xaver 2013
+
+  mediterranean:                # Western Mediterranean, Catalan and Valencian coast (proposed)
+    sites: [es/barcelona, es/valencia]
+    temperature:
+      clearsky: [5, 35]
+      cloudy:   [6, 28]
+      foggy:    [8, 20]
+      lightrain: [8, 24]
+      heavyrain: [10, 26]       # autumn DANA cloudbursts
+      snow:     [-2, 2]         # rare
+      wind:     [5, 22]         # tramontana and mistral
+      highsea:  [8, 20]
+      hurricane: [12, 22]       # medicanes
+
 # How the fields and regions are laid out (WEATHERGEN.md §5, §6). Shared by
 # every profile.
 generator:
