@@ -185,6 +185,7 @@ class VirtualWorld:
 
 		# Clear the log
 		self.info.clear()
+		self.describe_selection()
 
 		# Fill the screen with sky blue
 		self.screen.fill(SEA_COLOR)
@@ -241,8 +242,8 @@ class VirtualWorld:
 			for entity in geography:
 				entity.commit(self, self.screen)
 
-		self.render_info()
 		self.render_selection()
+		self.render_info()
 		return
 
 	def draw_order(self):
@@ -278,39 +279,27 @@ class VirtualWorld:
 		self.info.render(self)
 		return
 
-	def render_selection(self):
-		""" Renders the popup of the selected vessel next to it
+	def describe_selection(self):
+		""" Lists the selected vessel's details first under Objects in the infobox
 		"""
 		vessel	= self.selected
 		if (vessel is None) or (vessel.position is None):
 			return
 
 		x, y	= self.to_map_units( vessel.position )
-		lines	= [
-			vessel.name,
-			f'IMO: {vessel.imo}',
-			f'Position: {x:.1f}, {y:.1f}',
-			f'Behavior: {vessel.model}'
-		]
+		for line in [vessel.name, f'IMO: {vessel.imo}', f'Position: {x:.1f}, {y:.1f}', f'Behavior: {vessel.model}']:
+			self.info.append_object( line, Style.TEXT_PRIMARY )
+		return
 
-		font	= self.info.font_body
-		width	= max( font.size(l)[0] for l in lines ) + 16
-		height	= len(lines)*18 + 10
+	def render_selection(self):
+		""" Rings the selected vessel
+		"""
+		vessel	= self.selected
+		if (vessel is None) or (vessel.position is None):
+			return
 
-		# Place the box beside the vessel, kept on screen
 		at		= self.encoder.transform_point( vessel.position )
-		sw, sh	= self.screen.get_size()
-		left	= min( int(at[0])+14, sw-width-4 )
-		top		= min( max( int(at[1])-height//2, 4 ), sh-height-4 )
-		box		= pygame.Rect( left, top, width, height )
-
 		pygame.draw.circle( self.screen, Style.ACCENT_FOCUS, (int(at[0]), int(at[1])), PICK_RADIUS, width=1 )
-		pygame.draw.rect( self.screen, Style.BOX_COLOR, box )
-		pygame.draw.rect( self.screen, Style.BORDER_COLOR, box, width=1 )
-
-		for n, line in enumerate(lines):
-			color	= Style.TEXT_PRIMARY if n == 0 else Style.TEXT_MUTED
-			self.screen.blit( font.render(line, True, color), (box.left+8, box.top+6+n*18) )
 		return
 
 	def to_map_units(self, pt):
@@ -339,6 +328,9 @@ class VirtualWorld:
 				best, nearest	= entity, dist
 
 		self.selected	= best
+		if best is not None:		# Pop up the infobox with the vessel under Objects
+			self.debug	= True
+			self.info.show(True)
 		return best
 	
 

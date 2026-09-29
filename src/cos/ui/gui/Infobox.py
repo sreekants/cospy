@@ -19,7 +19,7 @@ class Infobox:
 		self.font_title		= pygame.font.SysFont("helvetica", 16, bold=True)
 		self.font_body		= pygame.font.SysFont("helvetica", 14)
 		self.font_small		= pygame.font.SysFont("helvetica", 10)
-		self.box_rect 		= pygame.Rect(950, 10, 200, 400)
+		self.box_rect 		= pygame.Rect(900, 10, 250, 400)	# Wide enough for vessel behavior names
 		self.margin			= 20
 		self.pos			= (self.box_rect.left + self.margin, self.box_rect.top+15)
 
@@ -38,8 +38,8 @@ class Infobox:
 		self.visible		= istrue
 		return
 
-	def append_object(self, z:str):
-		self.objects.append(z)
+	def append_object(self, z:str, color=None):
+		self.objects.append(z, color=color)
 		return
 
 
