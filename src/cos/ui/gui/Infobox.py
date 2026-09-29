@@ -116,7 +116,8 @@ class Infobox:
 		else:
 			pos			= (cursor[0], cursor[1])
 
-		text		= self.font_body.render( f'cursor:{cursor[0]-self.box_rect.left},{cursor[1]-self.box_rect.top}', False, (0,0,0))
+		x, y		= ctxt.screen_to_map( cursor )	# Map units, as in vessel.s3db and trip files
+		text		= self.font_body.render( f'cursor:{x:.1f},{y:.1f}', False, (0,0,0))
 		ctxt.screen.blit( text, pos)
 		return
 

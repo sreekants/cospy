@@ -100,8 +100,11 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		"""Follow the planned path, applying vessel-specific adjustments and momentum."""
 
 		pos = self.get_pos(world, t)
+		arrived, self.arrived	= self.arrived, None
 		if pos is None:
 			self.dx = np.zeros(3)
+			if arrived is not None:
+				self.land_on(world, arrived)
 			return self.rect, self.dx
 
 		self.nearest	= self.map.get_nearest(self.vehicle, self.vehicle.model.range_visibility)
@@ -116,15 +119,11 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		self.dx   = target_dx
 
 		# Check for any collision with rigid bodies (land, flotillas etc.)
-		center    = self.rect.center
-		newpos    = self.x + (self.dx + self.d2x/2.0)*self.seconds(world)
-		self.rect = self.rect.move(newpos[0] - center[0], newpos[1] - center[1])
-
-		if self.can_move(world, self.rect):
-			self.last = self.rect
-			self.x    = newpos
+		if arrived is not None:
+			newpos	= arrived			# Land on the waypoint; the next leg starts from it
 		else:
-			self.rect = self.last
+			newpos	= self.x + (self.dx + self.d2x/2.0)*self.seconds(world)
+		self.land_on(world, newpos)
 
 		# Apply post-operation methods. These methods are expected to not
 		# interfere with the simulated position of the vessel
@@ -134,6 +133,22 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 		return self.rect, self.dx
 
+
+	def land_on(self, world, newpos):
+		""" Moves the vessel to a position unless its box would collide there
+		Arguments
+			world -- Reference ot the simulation world
+			newpos -- Position to move to
+		"""
+		center    = self.rect.center
+		self.rect = self.rect.move(newpos[0] - center[0], newpos[1] - center[1])
+
+		if self.can_move(world, self.rect):
+			self.last = self.rect
+			self.x    = newpos
+		else:
+			self.rect = self.last
+		return
 
 	# Navigation path management
 	def heading(self):
