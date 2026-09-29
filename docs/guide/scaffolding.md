@@ -25,18 +25,17 @@ nothing hands a situation to never fails, whatever happens at sea
 
 ## Examiners with no evaluation
 
-Nine of the 19 examiners are stubs whose `evaluate` returns without doing anything:
+Eight of the 18 examiners are stubs whose `evaluate` returns without doing anything:
 
 | Examiner | Package |
 |---|---|
 | `ApproachExaminer`, `OvertakingExaminer`, `DayTimeExaminer` | `rules/examiner/navigation` |
 | `ComfortExaminer`, `EconomicExaminer`, `PlanExaminer` | `rules/examiner/planning` |
 | `CustomsExaminer`, `ZoneViolationExaminer` | `rules/examiner/security` |
-| `TestInspector` | `rules/examiner/inspector` |
 
-Seven of them are the same 24-line template with a different name. All except `TestInspector` are
-listed in `config/rules.examiner.yaml`, so eight stub examiners load and run in every evaluation pass,
-and record nothing.
+Seven of them are the same 24-line template with a different name. All are listed in
+`config/rules.examiner.yaml`, so eight stub examiners load and run in every evaluation pass, and record
+nothing. `TestInspector`, once a ninth stub here, is now an inspector (`rules/assurance`).
 
 ## Empty manifests
 

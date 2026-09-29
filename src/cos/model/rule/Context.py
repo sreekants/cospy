@@ -6,6 +6,8 @@ from cos.model.rule.Situation import Situation
 from cos.lang.symbol.Symbol import Symbol, SymbolType
 from cos.core.kernel.Context import Context as KernelContext
 
+import fnmatch
+
 class Context:
 	def __init__(self, ctxt:KernelContext, resolver, world, vessels, api):
 		""" Constructor
@@ -69,15 +71,31 @@ class Context:
 
 		if isinstance(rhs, Symbol.Range) or isinstance(rhs, Symbol.AngularRange):
 			return rhs.IN(lhs)
-		
-		if match_all == False:
+
+		if isinstance(rhs, list) == False:
 			return True if lhs in rhs else False
-		
-		for x in lhs:
-			if x not in rhs:
-				return False
-			
-		return True
+
+		# Array elements arrive as unresolved symbols
+		rhs		= [ self.resolve(x) if isinstance(x, SymbolType) else x for x in rhs ]
+
+		# A set (e.g. an intent) matches when any of its members does
+		values	= list(lhs) if isinstance(lhs, (list, tuple, set)) else [lhs]
+		if match_all == False:
+			return any( Context.match(v, r) for v in values for r in rhs )
+
+		return all( any(Context.match(v, r) for r in rhs) for v in values )
+
+	@staticmethod
+	def match(value, pattern)->bool:
+		""" Whether a value matches an array element, with shell wildcards for strings
+		Arguments
+			value -- Value from the subject
+			pattern -- Array element
+		"""
+		if isinstance(value, str) and isinstance(pattern, str):
+			return fnmatch.fnmatchcase( value, pattern )
+
+		return value == pattern
 
 	def LT(self, lhs, rhs, convert=None):
 		""" operator LT

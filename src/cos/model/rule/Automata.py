@@ -233,11 +233,23 @@ class Automata:
 			for d in clause['definition']:
 				define	= decision.add( Decision('def', None, DecisionType.TYPE_BASIC_DECISION) )
 				self.__add_clause_conditions(clause, define, d['conditions'])
+				self.__add_clause_exclusions(clause, define, d['exclusions'])
 				self.__add_clause_assurances(clause, define, d['assurances'])
 
 		except Exception as e:
 			print( f'{location} {str(e)}')
 			sys.exit(-1)
+		return
+
+	def __add_clause_exclusions(self, clause, define, exclusions):
+		""" Adds the exclusions that take a clause out of scope
+		Arguments
+			clause -- Clause definition
+			define -- Decision the exclusions apply to
+			exclusions -- Exclusion statements, or None
+		"""
+		for e in exclusions or []:
+			define.EXCEPT(e)
 		return
 
 	def __add_clause_conditions(self, clause, define, conditions):

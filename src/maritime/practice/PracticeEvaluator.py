@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # Filename: PracticeEvaluator.py
-# Description: Drives the examiners under /Faculty/Practice/Examiners (REQ.028)
+# Description: Drives the examiners and inspectors under /Faculty/Practice (REQ.028)
 
 from maritime.regulation.colreg.Resolver import Resolver
 from maritime.regulation.colreg.API import API
-from maritime.situation.undertest.UnderTest import UnderTest
+from rules.assurance.TestInspector import TestInspector
 from maritime.model.zone.Location import Location
 from cos.model.rule.Context import Context as RuleContext
 from cos.core.kernel.Service import Service
@@ -12,7 +12,7 @@ from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
 
-PRACTICE	= '/Faculty/Practice/Examiners'
+PRACTICE	= ['/Faculty/Practice/Examiners', '/Faculty/Practice/Inspectors']
 
 
 class PracticeEvaluator(Service):
@@ -23,6 +23,7 @@ class PracticeEvaluator(Service):
 
 		self.timer		= None
 		self.examiners	= []
+		self.inspectors	= []
 		self.vessels	= []
 		self.world		= None
 		self.filter		= None
@@ -50,13 +51,16 @@ class PracticeEvaluator(Service):
 		objmgr			= ctxt.sim.objects
 		self.world		= ctxt.sim.world
 		self.vessels	= objmgr.get_all( "/World/Vehicle/Vessel" )
-		self.examiners	= objmgr.get_all( PRACTICE )
-		self.filter		= UnderTest.find( ctxt )
+		self.examiners	= objmgr.get_all( PRACTICE[0] )
+		self.inspectors	= objmgr.get_all( PRACTICE[1] )
+		if len( self.inspectors ) == 0:
+			ctxt.log.error( self.id, 'No inspector loaded: add Assurance=$(CONFIG)/rules.assurance.yaml to [Rules] in cos.ini' )
+		self.filter		= TestInspector.under_test( ctxt )
 
-		# Pump the examiner namespace here, not in the COLREG evaluator (COS.023 L2)
-		self.poll_ipc( ctxt, [PRACTICE] )
+		# Pump the examiner and inspector namespaces here, not in the COLREG evaluator (COS.023 L2)
+		self.poll_ipc( ctxt, PRACTICE )
 
-		ctxt.log.info( self.id, f'Driving {len(self.examiners)} examiner(s) every {poll_at} s' )
+		ctxt.log.info( self.id, f'Driving {len(self.examiners)} examiner(s) and {len(self.inspectors)} inspector(s) every {poll_at} s' )
 		return
 
 	def on_stop(self, ctxt:Context, unused):
@@ -96,7 +100,7 @@ class PracticeEvaluator(Service):
 		return rule_ctxt
 
 	def evaluate(self, ctxt:Context):
-		""" Runs one pass over every examiner, each isolated from the others' failures
+		""" Runs one pass over every examiner, then every inspector, each isolated from the others' failures
 		Arguments
 			ctxt -- Simulation context
 		"""
@@ -104,11 +108,13 @@ class PracticeEvaluator(Service):
 		self.passes	+= 1
 
 		for phase in ('begin', 'evaluate', 'end'):
-			for examiner in self.examiners:
+			for faculty in self.examiners + self.inspectors:
+				if self.running == False:
+					return
 				try:
-					getattr( examiner, phase )( ctxt, rule_ctxt )
+					getattr( faculty, phase )( ctxt, rule_ctxt )
 				except Exception as e:
-					ctxt.log.error( self.id, f'{examiner.id}.{phase}: {e}' )
+					ctxt.log.error( self.id, f'{faculty.id}.{phase}: {e}' )
 		return
 
 

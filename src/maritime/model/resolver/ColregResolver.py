@@ -7,7 +7,7 @@ from maritime.model.vessel.Vessel import Vessel, Status
 from cos.model.resolver.Resolver import Resolver, simproperty
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
-from maritime.regulation.colreg.Classification import classify, NAMES
+from maritime.regulation.colreg.Classification import classify, bearing, NAMES
 
 import numpy as np
 import math
@@ -55,6 +55,19 @@ class ColregResolver(Resolver):
 		return passing_side( self.tr.os, self.tr.ts )
 
 	@simproperty
+	def AheadOfTarget(self)->bool:
+		""" Simulation property: AheadOfTarget - own ship is forward of the target's beam; judged at
+		the closest approach, own ship crossed ahead of the target (Rule 15)
+		"""
+		if (self.tr is None) or (self.tr.is_valid() == False) or (self.tr.ts is None):
+			return None
+
+		if not np.any( self.tr.ts.velocity ):
+			return None
+
+		return abs( bearing(self.tr.ts, self.tr.os) ) < 90.0
+
+	@simproperty
 	def EncounterSituation(self)->str:
 		""" Simulation property: EncounterSituation
 		""" 
@@ -69,6 +82,13 @@ class ColregResolver(Resolver):
 
 		if self.tr.ts is None:
 			return None
+
+		# The role a rule recorded at onset outlives the geometry at the closest approach
+		maneuvers	= getattr( self.encounter, 'maneuvers', None ) or {}
+		for name in NAMES.values():
+			if name and (name in maneuvers):
+				self.situation	= name
+				return self.situation
 
 		situation	= NAMES[ classify(self.tr.os, self.tr.ts)[2] ]
 

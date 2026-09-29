@@ -6,6 +6,8 @@ from cos.core.kernel.Object import Object
 from cos.core.kernel.Context import Context
 
 class Service(Object):
+	running	= True		# Cleared on abort; long passes check it between steps
+
 	def __init__(self, type, name):
 		""" Constructor
 		Arguments
@@ -21,6 +23,12 @@ class Service(Object):
 		Object.__init__( self, scope, name )
 
 		self.ipc_nodes	= []
+		return
+
+	def halt(self):
+		""" Stops the service from running any further steps
+		"""
+		self.running	= False
 		return
 
 	def on_start(self, ctxt:Context, config):

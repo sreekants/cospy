@@ -225,6 +225,18 @@ class TargetResolver(Resolver):
 		return 'Position.Starboard' if b > 0.0 else 'Position.Port'
 
 	@simproperty
+	def Beam(self):
+		""" Symbol property - Beam: target forward of, abeam or abaft own ship's beam
+		"""
+		if (not self.is_valid()) or (not np.any(self.os.velocity)):
+			return None
+
+		b	= abs( self.bearing() )
+		if b < 67.5:
+			return 'Position.Forward'
+		return 'Position.Abeam' if b <= 112.5 else 'Position.Abaft'
+
+	@simproperty
 	def Direction(self):
 		""" Symbol property - Direction, as Position (Rule 15)
 		"""

@@ -3,8 +3,10 @@
 # Description: Implementation of COLREG Rule
 
 from maritime.model.rule.COLREG import COLREG
+from maritime.model.rule.EncounterWatch import EncounterWatch
+from maritime.core.situation.Types import Encounter
 from cos.core.kernel.Context import Context
-from cos.model.rule.Situation import Situation
+from cos.core.utilities.ArgList import ArgList
 
 '''
 Overtaking
@@ -22,10 +24,37 @@ of the overtaken vessel until she is finally past and clear.
 '''
 
 class Rule13(COLREG):
+	RANGE	= 4000.0	# Metres within which an onset is recorded (evaluator.yaml r_colregs_2_max)
+	DCPA	= 500.0		# Metres of predicted passing distance that is a risk of collision
+
 	def __init__(self):
 		""" Constructor
 		"""
 		COLREG.__init__(self)
+
+		self.watch	= EncounterWatch( Encounter.OTGW, self.DCPA, self.RANGE )
+		return
+
+	def setup(self, ctxt:Context, config:ArgList):
+		""" Sets up the rule and its overtaking thresholds
+		Arguments
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		COLREG.setup( self, ctxt, config )
+
+		self.watch.dcpa		= float( config['encounter.dcpa'] or self.DCPA )
+		self.watch.range	= float( config['encounter.range'] or self.RANGE )
+		return
+
+	def evaluate(self, ctxt:Context, rule_ctxt):
+		""" Queues overtaking encounters that have passed their closest approach, then judges them
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		self.watch.observe( ctxt, rule_ctxt, self )
+		COLREG.evaluate( self, ctxt, rule_ctxt )
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -38,7 +67,6 @@ class Rule13(COLREG):
 
 		self.subscribe("vessel.overtaking", self.on_overtaking)
 		self.subscribe("vessel.crossing", self.on_crossing)
-		self.subscribe("vessel.approach", self.on_close_encounter)
 		return
 
 	def on_overtaking(self, ctxt:Context, evt):
@@ -60,18 +88,6 @@ class Rule13(COLREG):
 		"""
 		OS		= evt[1]
 		TS		= evt[2]
-		return
-
-	def on_close_encounter(self, ctxt:Context, evt):
-		""" Event handler for close encounters
-		Arguments
-			ctxt -- Simulation context
-			evt -- Event data
-		"""
-		OS			= evt[1]
-		TS			= evt[2]
-		distance	= evt[3]
-		self.add_situation( Situation(OS, TS) )
 		return
 
 if __name__ == "__main__":

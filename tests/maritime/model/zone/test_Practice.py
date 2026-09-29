@@ -116,6 +116,7 @@ class PracticeEvaluatorTestCase(unittest.TestCase):
 		pe.vessels		= ['a', 'b']
 		pe.filter		= self.Filter()
 		pe.examiners	= examiners
+		pe.inspectors	= []
 		pe.passes		= 0
 		return pe
 

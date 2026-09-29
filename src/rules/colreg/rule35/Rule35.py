@@ -3,6 +3,8 @@
 # Description: Implementation of COLREG Rule
 
 from maritime.model.rule.COLREG import COLREG
+from cos.core.kernel.Context import Context
+from cos.model.rule.Situation import Situation
 
 '''
 Sound Signals in restricted Visibility
@@ -59,6 +61,19 @@ class Rule35(COLREG):
 		""" Constructor
 		"""
 		COLREG.__init__(self)
+		return
+
+	def evaluate(self, ctxt:Context, rule_ctxt):
+		""" Judges every vessel under test on each pass; the finding guard keeps one row per episode
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		vessels		= rule_ctxt.vessels or []
+		for own in getattr( rule_ctxt, 'subjects', None ) or vessels:
+			self.add_situation( Situation(own, None) )
+
+		COLREG.evaluate( self, ctxt, rule_ctxt )
 		return
 
 

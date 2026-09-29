@@ -8,8 +8,6 @@ from cos.core.kernel.Context import Context
 from cos.core.kernel.BootLoader import BootLoader
 from cos.core.utilities.ArgList import ArgList
 
-import time
-
 
 class RPCBrokerThread(SimulationThread):
 	def __init__(self, sim, broker, args:ArgList, package:str):
@@ -112,9 +110,6 @@ class RPCBroker(Subsystem):
 		for thread in self.threads:
 			thread.stop()
 			thread.join()
-
-		# Wait for sockets to close
-		time.sleep(.5)
 		return
 
 	def invoke_service(self, objpath, req, args ):

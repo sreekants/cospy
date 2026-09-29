@@ -8,6 +8,8 @@ import numpy as np
 
 from cos.core.kernel.ObjectManager import ObjectManager
 from cos.core.kernel.ObjectManager import ObjectType
+from cos.core.kernel.Faculty import Faculty
+from cos.core.kernel.Service import Service
 from cos.core.simulation.Runner import Runner, Affinity
 from cos.core.simulation.Snapshot import Snapshot
 from cos.core.time.Clock import Clock
@@ -76,7 +78,22 @@ class Rules:
 		self.passes.append( (first, last, self.sim.clock.live) )
 
 
-def simulation(affinity, work=0.3):
+class SteppedRules(Rules, Service):
+	""" A pass of many short steps that ends early once halted, as the Evaluator's does """
+	def __init__(self, sim, boat, work):
+		Rules.__init__( self, sim, boat, work )
+		Service.__init__( self, 'Regulation', 'Rules' )
+	def on_timer(self, ctxt, unused):
+		for _ in range(100):
+			if self.running == False:
+				return
+			end	= time.perf_counter() + self.work / 100
+			while time.perf_counter() < end:
+				pass
+		self.passes.append( self.sim.clock.tick )
+
+
+def simulation(affinity, work=0.3, rules_type=Rules):
 	sim			= types.SimpleNamespace()
 	sim.config	= Config( affinity )
 	sim.log		= Log()
@@ -89,7 +106,7 @@ def simulation(affinity, work=0.3):
 	motion		= Motion( sim, boat )
 	sim.objects.register( '/Services/Kernel', 'Motion', motion )
 	sim.objects.faculty	= 'Rules'
-	rules		= Rules( sim, boat, work )
+	rules		= rules_type( sim, boat, work )
 	sim.objects.register( '/Services/Regulation', 'Rules', rules )
 	sim.objects.faculty	= None
 	return sim, motion, rules
@@ -160,6 +177,40 @@ class RunnerTestCase(unittest.TestCase):
 		judged	= [first[0] for first, _, _ in rules.passes]
 		self.assertEqual( judged, ticks )
 		self.assertEqual( ticks, list(range(1, len(ticks)+1)) )
+
+
+class AbortTestCase(unittest.TestCase):
+	def setUp(self):
+		Snapshot.reset()
+		self.addCleanup( Snapshot.reset )
+
+	def start(self):
+		sim, motion, rules	= simulation( AFFINITY, work=3.0, rules_type=SteppedRules )
+		runner	= Runner()
+		runner.run( sim )
+		time.sleep( 0.5 )		# A 3 s pass is under way
+		return sim, runner, rules
+
+	def test_abort_ends_the_pass_in_progress(self):
+		sim, runner, rules	= self.start()
+		began	= time.perf_counter()
+		runner.abort( sim )
+		self.assertLess( time.perf_counter() - began, 0.5 )
+		self.assertFalse( rules.running )
+		self.assertEqual( rules.passes, [] )
+
+	def test_abort_halts_the_faculties(self):
+		sim, runner, rules	= self.start()
+		faculty	= Faculty( 'Practice', 'Examiners', 'Risk' )
+		sim.objects.register( '/Faculty/Practice/Examiners', 'Risk', faculty )
+		runner.abort( sim )
+		self.assertFalse( faculty.running )
+
+	def test_stop_finishes_the_pass_in_progress(self):
+		sim, runner, rules	= self.start()
+		runner.stop()
+		self.assertTrue( rules.running )
+		self.assertEqual( len(rules.passes), 1 )
 
 
 class SnapshotTestCase(unittest.TestCase):

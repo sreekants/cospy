@@ -52,10 +52,9 @@ class Decision(TreeNode):
 				if self.trace == True:
 					ctxt.ctxt.ctxt.log.trace( 'Logic', f'Applying {self.parent} = {condition}')
 
-				# Check if any exception apply; if so bail out.
-				if self.is_any(ctxt.ctxt, self.exceptions):
-					ctxt.error.append(self)
-					return ErrorCode.ERROR_EXCEPTION_IN_SERVICE
+				# An exclusion that holds takes the decision out of scope
+				if self.is_any(ctxt.ctxt, self.exceptions) is not None:
+					return ErrorCode.S_OK
 
 		# Apply all the assurances on the children
 		result = self.traverse( Decision.__apply_child, ctxt, 8 )
@@ -83,7 +82,7 @@ class Decision(TreeNode):
 		"""
 		for expinfo in expressions:
 			c	= expinfo[0][1]
-			result = c.evaluate(ctxt)
+			result = Decision.evaluate_terms(ctxt, expinfo)
 			if result in [ErrorCode.S_OK, ErrorCode.S_TRUE]:
 				return c
 
@@ -105,11 +104,37 @@ class Decision(TreeNode):
 				return e.evaluate(ctxt.ctxt)
 			
 			case 'expression':
-				return e[0][1][0][1].evaluate(ctxt.ctxt)
+				return Decision.evaluate_terms(ctxt.ctxt, e)
 		
 		if self.trace == True:
 			print(f'Evaluating {self.name} assurance expressions:')
 		return ErrorCode.S_OK
+
+	@staticmethod
+	def evaluate_terms(ctxt, terms):
+		""" Evaluates terms as the parser folds them, e.g. [('?', a), ('AND', b)], left to right
+		Arguments
+			ctxt -- Simulation context
+			terms -- (operator, term) pairs; a term is an expression or a nested list of pairs
+		Returns
+			S_TRUE, S_FALSE, or ERROR_CONTINUE when undecided
+		"""
+		result	= None
+		for operator, term in terms:
+			if ((operator == 'AND') and (result is False)) or ((operator == 'OR') and (result is True)):
+				continue
+
+			value	= Decision.evaluate_terms(ctxt, term) if isinstance(term, list) else term.evaluate(ctxt)
+			value	= { ErrorCode.S_TRUE: True, ErrorCode.S_FALSE: False }.get( value )
+
+			if operator == 'AND':
+				result	= False if (value is False) else (None if (result is None) or (value is None) else True)
+			elif operator == 'OR':
+				result	= True if (value is True) else (None if (result is None) or (value is None) else False)
+			else:
+				result	= value
+
+		return { True: ErrorCode.S_TRUE, False: ErrorCode.S_FALSE }.get( result, ErrorCode.ERROR_CONTINUE )
 
 	def IF(self, expression):
 		""" Adds a condition.

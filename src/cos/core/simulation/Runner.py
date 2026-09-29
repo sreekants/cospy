@@ -6,6 +6,8 @@ from cos.core.simulation.SimulationThread import SimulationThread
 from cos.core.simulation.Snapshot import Snapshot
 from cos.core.kernel.Context import Context
 from cos.core.kernel.ObjectManager import ObjectNode, ObjectType
+from cos.core.kernel.Faculty import Faculty
+from cos.core.kernel.Service import Service
 from cos.core.utilities.Tree	import ErrorCode
 from threading import Thread
 import time
@@ -215,6 +217,9 @@ class RunnerThread(SimulationThread):
 		if simulant.handle == None:
 			return ErrorCode.ERROR_CONTINUE
 
+		if getattr( simulant.handle, 'running', True ) == False:
+			return ErrorCode.ERROR_CONTINUE
+
 		if thread.affinity.owns( thread.index, simulant.faculty ) == False:
 			return ErrorCode.ERROR_CONTINUE
 
@@ -264,6 +269,29 @@ class Runner:
 		for t in self.threads:
 			t.join()
 		return
+
+	def abort(self, sim):
+		""" Halts every service and faculty so a pass in progress ends early, then stops the threads
+		Arguments
+			sim -- Reference ot the simulation
+		"""
+		for t in self.threads:
+			t.stop()
+		for path in ('/Services', '/Faculty'):
+			sim.objects.traverse( path, Runner.__halt, None, 8 )
+		self.stop()
+		return
+
+	@staticmethod
+	def __halt(unused, simulant:ObjectNode):
+		""" Halts a service or faculty
+		Arguments
+			unused -- Unused variable
+			simulant -- The object being halted
+		"""
+		if isinstance( simulant.handle, (Service, Faculty) ):
+			simulant.handle.halt()
+		return ErrorCode.ERROR_CONTINUE
 
 	def runnable(self):
 		""" Checks if the simulation is runnable

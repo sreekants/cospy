@@ -152,6 +152,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		saved	= rule_ctxt.situation
 		try:
 			for vessel in rule_ctxt.subjects:
+				if self.running == False:
+					break
 				if self.tracked( vessel ) == False:
 					continue
 				try:

@@ -34,9 +34,9 @@ angles in `config/evaluator.yaml`). Only vessels that are under way and closing 
 **What it produces.** Two things for each situation it finds: a row in a `fact_…` table, and an event
 on the message queue, such as `vessel.crossing`, for the rules to pick up.
 
-**Vessels under test.** A run usually tests one own ship against background traffic. The `UnderTest`
-monitor (first in `situation.yaml`) loads the list from `$(SIMULATION)/undertest.yaml` and publishes a
-`VesselFilter` at `/Faculty/Situation/Filter`. The evaluator puts those vessels on the own-ship side of
+**Vessels under test.** A run usually tests one own ship against background traffic. The `TestInspector`
+(an inspector, loaded from `rules.assurance.yaml`) loads the list from `$(SIMULATION)/undertest.yaml` at
+startup and owns the `VesselFilter`; it is published at `/Faculty/Practice/Inspectors`. The evaluator puts those vessels on the own-ship side of
 every pair (`rule_ctxt.subjects`) and every vessel on the other side (`rule_ctxt.vessels`). The monitors,
 the local rules and the risk examiner then judge only the vessels under test, and with one vessel in a
 fleet of N the pairs per pass fall from N(N−1) to N−1: 462 to 21 for Türkeli's 22 vessels. The same file can name fact tables whose

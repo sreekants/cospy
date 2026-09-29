@@ -43,6 +43,19 @@ class Simulation:
 			Kernel.stop(self)
 			return
 
+		def abort(self):
+			""" Stops the simulation kernel without finishing the pass in progress
+			"""
+			self.runner.abort(self)
+
+			# Write out the data before the faculties shut down
+			data	= getattr( self, 'data', None )
+			if data is not None:
+				data.abort()
+
+			Kernel.stop(self)
+			return
+
 		def create_thread_pool(self):
 			""" Creates the simulation thread pool
 			"""

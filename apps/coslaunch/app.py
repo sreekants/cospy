@@ -22,7 +22,8 @@ class COSLaunch:
 				# Wait briefly instead of busy-spinning on the runner state.
 				self.sim.runner.thread.join(timeout=0.2)
 		except KeyboardInterrupt:
-			pass
+			self.sim.abort()
+			return
 
 		self.sim.stop()
 		return

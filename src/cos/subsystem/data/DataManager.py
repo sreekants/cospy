@@ -12,11 +12,11 @@ from cos.core.utilities.TransactionalDatabase import TransactionalDatabase
 from cos.core.utilities.ActiveRecord import ActiveRecord
 from cos.core.time.Clock import utcnow
 
-import os, time, shutil
+import os, time, shutil, threading
 from xml.dom import minidom
 
-# Where the vessels-under-test filter is published, if one is loaded
-FILTER_PATH	= '/Faculty/Situation/Filter'
+# Where the test inspector owning the vessels-under-test filter is published, if one is loaded
+FILTER_PATH	= '/Faculty/Practice/Inspectors'
 
 class DataManagerThread(SimulationThread):
 	def __init__(self, sim):
@@ -26,18 +26,18 @@ class DataManagerThread(SimulationThread):
 		"""
 		SimulationThread.__init__(self, sim)
 		self.running	= True
-		self.ticktime	= 5		# Ticks every .3 seconds
+		self.ticktime	= 5		# Seconds between flushes
+		self.wakeup		= threading.Event()		# Cuts the wait short on stop
 		return
 
 	def run(self):
 		""" Runs the data manager loop
 		"""
-		# sim.objects.dump()
-		time.sleep(self.ticktime)		# Delayed start
+		self.wakeup.wait(self.ticktime)		# Delayed start
 
 		while self.running:
 			self.sim.data.flush()
-			time.sleep(self.ticktime)
+			self.wakeup.wait(self.ticktime)
 		return
 
 
@@ -45,6 +45,7 @@ class DataManagerThread(SimulationThread):
 		""" Stops the simulation
 		"""
 		self.running	= False
+		self.wakeup.set()
 		return
 
 class DataManager(Subsystem):
@@ -108,6 +109,15 @@ class DataManager(Subsystem):
 			ctxt.log.info( 'DataManager', f'{count} row(s) of {topic} withheld: no vessel under test' )
 		return
 
+
+	def abort(self):
+		""" Stops the flush thread and writes out everything cached so far
+		"""
+		if self.thread is not None:
+			self.thread.stop()
+			self.thread.join()
+		self.flush()
+		return
 
 	def push(self, topic, data):
 		""" Posts amessage to an IPC topic

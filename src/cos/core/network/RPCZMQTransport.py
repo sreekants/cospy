@@ -11,6 +11,8 @@ import time, zmq, random, msgpack, struct, datetime, socket
 
 RPCPORT			= 5556
 MAX_MESSAGES	= 1024
+POLL_MS			= 200		# RPC poll timeout; also bounds how long the broker takes to stop
+LINGER_MS		= 200		# Longest wait for unsent messages on close
 
 class RPCZMQTransport(Transport):
 	def __init__(self, sim, broker, args:dict):
@@ -97,14 +99,14 @@ class RPCZMQTransport(Transport):
 			self.ipcsock.close()
 
 		if self.context is not None:
-			self.context.destroy()
+			self.context.destroy( linger=LINGER_MS )
 			self.context = None
 		return
 
 	def is_pending(self):
 		""" Checks if a request is queued
 		"""
-		socks = dict(self.poller.poll(800))
+		socks = dict(self.poller.poll(POLL_MS))
 		if self.rpcsocket in socks and socks[self.rpcsocket] == zmq.POLLIN:
 			return True
 
@@ -113,7 +115,7 @@ class RPCZMQTransport(Transport):
 	def runrpc(self):
 		""" Runs the RPC loop
 		"""
-		socks = dict(self.poller.poll(800))
+		socks = dict(self.poller.poll(POLL_MS))
 		if self.rpcsocket in socks and socks[self.rpcsocket] == zmq.POLLIN:
 			# Receive the frame and unpack it
 			req 	= self.rpcsocket.recv_multipart()

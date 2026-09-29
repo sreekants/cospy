@@ -2,7 +2,7 @@
 # Filename: VesselResolver.py
 # Description: Implementation of the VesselResolver class
 
-from maritime.model.vessel.Vessel import Vessel, Status
+from maritime.model.vessel.Vessel import Vessel, Status, Operation
 from cos.model.resolver.Resolver import Resolver, simproperty
 from cos.model.vehicle.Vehicle import Vehicle
 from cos.math.geometry.Distance import Distance
@@ -45,6 +45,25 @@ class VesselResolver(Resolver):
 		""" Returns the type of the vessel
 		""" 
 		return self.vessel.type
+
+	@simproperty
+	def Status(self):
+		""" Navigational status, e.g. Vessel.Status.ANCHORED
+		"""
+		return self.vessel.status
+
+	@simproperty
+	def Operation(self):
+		""" Operation the vessel is engaged in, e.g. Vessel.Operation.FISHING
+		"""
+		value	= self.vessel.operation
+		return Operation(value) if isinstance(value, int) else value
+
+	@simproperty
+	def Restriction(self):
+		""" Restriction on the vessel's ability to manoeuvre, e.g. Vessel.Restriction.DRAUGHT
+		"""
+		return self.vessel.restriction
 
 	@simproperty
 	def EngineState(self):

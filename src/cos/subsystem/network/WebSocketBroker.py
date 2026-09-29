@@ -186,9 +186,6 @@ class WebSocketBroker(Subsystem):
 		for thread in self.threads:
 			thread.stop()
 			thread.join()
-
-		# Wait for sockets to close
-		time.sleep(.5)
 		return
 
 	def invoke_service(self, objpath, req, args ):

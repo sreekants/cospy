@@ -5,6 +5,8 @@
 from cos.core.kernel.Object import Object
 
 class Faculty(Object):
+	running	= True		# Cleared on abort; long passes check it between steps
+
 	def __init__(self, category, type, name=None):
 		""" Constructor
 		Arguments
@@ -31,6 +33,12 @@ class Faculty(Object):
 		Object.__init__( self, self.scope, name )
 
 		self.listen( f'/{self.scope}/{name}' )
+		return
+
+	def halt(self):
+		""" Stops the faculty from running any further steps
+		"""
+		self.running	= False
 		return
 
 	def on_timer(self, ctxt, sim):

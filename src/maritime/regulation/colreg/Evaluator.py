@@ -9,7 +9,7 @@ from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
-from maritime.situation.undertest.UnderTest import UnderTest
+from rules.assurance.TestInspector import TestInspector
 
 class Evaluator(Service):
 	def __init__(self):
@@ -102,7 +102,7 @@ class Evaluator(Service):
 		self.postprocessors	= objmgr.get_all("/Faculty/Situation/Processors")
 
 		self.rules			= objmgr.get_all("/Faculty/Regulation")
-		self.filter			= UnderTest.find( ctxt )
+		self.filter			= TestInspector.under_test( ctxt )
 		return
 
 	def init_objects(self, ctxt:Context, config):
@@ -128,14 +128,11 @@ class Evaluator(Service):
 		"""
 		rule_ctxt = self.context( ctxt )
 
-		# Preprocess situations
-		[s.evaluate(ctxt, rule_ctxt) for s in self.preprocessors]
-
-		# Evaluate situations
-		[s.evaluate(ctxt, rule_ctxt) for s in self.situations]
-
-		# Postprocess situations
-		[s.evaluate(ctxt, rule_ctxt) for s in self.postprocessors]
+		# Preprocess, evaluate and postprocess situations, stopping on abort
+		for s in self.preprocessors + self.situations + self.postprocessors:
+			if self.running == False:
+				return
+			s.evaluate(ctxt, rule_ctxt)
 
 		return
 
@@ -148,14 +145,12 @@ class Evaluator(Service):
 		try:
 			rule_ctxt = self.context( ctxt )
 
-			# Initialize for rule evaluation.
-			[r.begin(ctxt, rule_ctxt) for r in self.rules]
-
-			# Evaluate the rules.
-			[r.evaluate(ctxt, rule_ctxt) for r in self.rules]
-
-			# Finalize the rules for scoring and bookkeeping.
-			[r.end(ctxt, rule_ctxt) for r in self.rules]
+			# Initialize, evaluate, then finalize the rules for scoring; stopping on abort
+			for step in ('begin', 'evaluate', 'end'):
+				for r in self.rules:
+					if self.running == False:
+						return
+					getattr(r, step)(ctxt, rule_ctxt)
 		except Exception as e:
 			ctxt.log.error( 'RuleEvaluator', f'Runtime error: {str(e)}' )
 		
