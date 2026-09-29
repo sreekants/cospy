@@ -386,11 +386,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# injected by the partition, so it is not passed here.
 		self.data( ctxt, 'risk_assessment', (
 			report['time'],
-<<<<<<< HEAD
-			report['imo'],
-=======
 			report['recid'],
->>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 			report['zone'],
 			hazards['collision'],
 			hazards['grounding'],
@@ -416,11 +412,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# not be edited part way through a sweep.
 		self.data( ctxt, 'rl', (
 			report['time'],
-<<<<<<< HEAD
-			report['imo'],
-=======
 			report['recid'],
->>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 			report['matrix'],
 		) )
 
@@ -428,11 +420,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		for concern, exposure in report['exposure'].items():
 			self.data( ctxt, 'rb', (
 				report['time'],
-<<<<<<< HEAD
-				report['imo'],
-=======
 				report['recid'],
->>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 				report['zone'],
 				concern,
 				exposure,

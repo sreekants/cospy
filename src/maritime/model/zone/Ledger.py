@@ -317,13 +317,8 @@ class Ledger:
 
 		# vessel_id is the vessel IMO, as in every fact table; field order matches fact_concern in maritime.xml
 		ctxt.sim.data.push( FACT, (
-<<<<<<< HEAD
-			ctxt.sim.now(),
-			self.imo( vessel ),
-=======
 			ctxt.sim.seconds(),
 			self.recid( vessel ),
->>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 			source,
 			raiser,
 			event,

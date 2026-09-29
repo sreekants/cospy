@@ -39,6 +39,8 @@ class Log:
 		self.errors.append( (module, text) )
 	def info(self, module, text):
 		pass
+	def debug(self, module, text):
+		pass
 
 
 class Data:
@@ -107,17 +109,9 @@ class Shape:
 
 
 class Vessel:
-<<<<<<< HEAD
-	def __init__(self, imo, location=(0.0, 0.0), guid=None):
-		# Findings are keyed on the guid and record the IMO (COS-029-02), so
-		# the stub carries both, as a real vessel does.
-		self.guid		= guid or f'guid-{imo}'
-		self.config		= {'guid': self.guid, 'identifier': {'imo': imo}}
-=======
 	def __init__(self, imo, location=(0.0, 0.0), recid=None):
 		self.config		= {'identifier': {'imo': imo}}
 		self.recid		= recid
->>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 		self.location	= location
 
 
@@ -223,12 +217,7 @@ class LedgerTestCase(unittest.TestCase):
 		self.assertEqual( len(row) + AUDIT_FIELDS, len(fields) )
 
 		named	= dict( zip(fields[AUDIT_FIELDS:], row) )
-<<<<<<< HEAD
-		self.assertEqual( named['vessel_id'], 'guid-9000001' )		# the key: the guid
-		self.assertEqual( named['imo'], '9000001' )					# recorded beside it
-=======
 		self.assertEqual( named['vessel_id'], 101 )
->>>>>>> 8197873fae3708d55d8586076a571af1d2990f3e
 		self.assertEqual( named['source'], SOURCE_EXAMINER )
 		self.assertEqual( named['event'], 'grounding.contact' )
 		self.assertEqual( named['area'], 'Turkeli.Harbour' )

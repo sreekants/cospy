@@ -72,6 +72,7 @@ class Kernel:
 		self.scheduler	= self.create_thread_pool()
 		self.config	= Configuration(configfile, settings['image'])
 		self.log	= Logger( self.config )
+		self.__init_debug()
 
 		inifile		= self.config.inifile
 		if self.config.bootimage is None:
@@ -116,6 +117,17 @@ class Kernel:
 		self.__settings	= {
 				"Folders":	{}
 			}
+		return
+
+	def __init_debug(self):
+		""" Turns on the debug trace when [SystemUtilities.Logger] DebugTrace is true
+		"""
+		if not self.config.exists_value( 'SystemUtilities.Logger', 'DebugTrace' ):
+			return
+
+		if self.config.get_value( 'SystemUtilities.Logger', 'DebugTrace' ).lower() == 'true':
+			self.log.set_debug( True )
+			self.log.info( "Kernel", "Debug trace on" )
 		return
 
 	def __init_clock(self):

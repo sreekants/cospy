@@ -309,6 +309,8 @@ class FleetTestCase(unittest.TestCase):
 				self.errors.append( text )
 			def info(self, module, text):
 				pass
+			def debug(self, module, text):
+				pass
 
 		ctxt		= Ctxt()
 		ctxt.log	= Log()
