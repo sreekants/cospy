@@ -75,7 +75,7 @@ class Rule34(COLREG):
 			evt -- Event data
 		"""
 		vessel	= evt[1]
-		print( f'{self.__class__.__name__}.overtaking:{vessel.config["name"]}' )
+		# print( f'{self.__class__.__name__}.overtaking:{vessel.config["name"]}' )
 		return
 
 

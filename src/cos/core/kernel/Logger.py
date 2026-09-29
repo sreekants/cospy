@@ -147,6 +147,16 @@ class Logger:
 			config -- Configuration attributes
 		"""
 		self.settings	= LoggerSettings(config)
+		self.debug_on	 = False;
+		return
+
+
+	def set_debug(self, is_on:bool=True):
+		""" Sets the debug tracing on (dump on the console)
+		Arguments
+			is_silent -- Sets the silent mode
+		"""
+		self.debug_on	= is_on
 		return
 
 
@@ -156,6 +166,7 @@ class Logger:
 			is_silent -- Sets the silent mode
 		"""
 		self.settings.silentmode	= is_silent
+		return
 
 
 	def error(self, module:str, text:str, log_to_file:bool=False):
@@ -206,6 +217,9 @@ class Logger:
 			module -- Module name
 			text -- Log text
 		"""
+		if self.debug_on	== False:
+			return
+
 		self.__print_debug(module, text)
 		return
 

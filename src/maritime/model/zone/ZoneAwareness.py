@@ -238,7 +238,7 @@ class ZoneAware:
 			return 0.0
 
 		if detail is not None:
-			ctxt.log.info( self.id, f'{event} [{self.zone_name(shapes)}] {detail}' )
+			ctxt.log.debug( self.id, f'{event} [{self.zone_name(shapes)}] {detail}' )
 
 		return penalty
 

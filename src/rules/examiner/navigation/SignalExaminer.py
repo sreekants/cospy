@@ -7,6 +7,7 @@ from maritime.model.zone.ZoneAwareness import ZoneAware
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 from cos.core.utilities.ArgList import ArgList
+from cos.model.examiner.Precondition import PreconditionSet
 
 # REQUIREMENT:
 # Signals: collates what a vessel means to do with what is happening around it,
@@ -66,6 +67,9 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 		self.cache_shapes( ctxt )
 		return
 
+	def resolvable(self, binding, rule_ctxt:RuleContext):
+		return self.gate.holds( binding, rule_ctxt.situation )
+	
 	def judge(self, ctxt:Context, rule_ctxt):
 		""" Judges rule_ctxt.situation
 		Arguments
@@ -105,8 +109,8 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 		shapes, _rules, _depth	= self.survey( vessel )
 
 		payload	= {
-			'vessel'	: imo,
-			'target'	: self.identify( rule_ctxt.situation.ts ),
+			'vessel'	: situation.os,
+			'target'	: situation.ts,
 			'time'		: ctxt.sim.now(),
 			'zone'		: self.zone_name( shapes ),
 			'intent'	: intent,

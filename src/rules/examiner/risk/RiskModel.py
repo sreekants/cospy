@@ -270,7 +270,7 @@ class LossMatrix:
 		Arguments
 			zones -- Spatial zone names, in row order
 		"""
-		return f'rows[{", ".join(zones)}] cols[{", ".join(self.concerns)}]'
+		return f'row=[{", ".join(zones)}]x col=[{", ".join(self.concerns)}]'
 
 
 class ConcernWeights:

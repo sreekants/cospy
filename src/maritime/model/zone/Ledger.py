@@ -318,7 +318,6 @@ class Ledger:
 		# payload contract Partition.serialize writes against.
 		ctxt.sim.data.push( FACT, (
 			ctxt.sim.now(),
-			self.identify( vessel ),
 			self.imo( vessel ),
 			source,
 			raiser,

@@ -382,7 +382,6 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# injected by the partition, so it is not passed here.
 		self.data( ctxt, 'risk_assessment', (
 			report['time'],
-			report['vessel'],
 			report['imo'],
 			report['zone'],
 			hazards['collision'],
@@ -407,7 +406,6 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# not be edited part way through a sweep.
 		self.data( ctxt, 'rl', (
 			report['time'],
-			report['vessel'],
 			report['imo'],
 			report['matrix'],
 		) )
@@ -416,7 +414,6 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		for concern, exposure in report['exposure'].items():
 			self.data( ctxt, 'rb', (
 				report['time'],
-				report['vessel'],
 				report['imo'],
 				report['zone'],
 				concern,
@@ -512,6 +509,6 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		# so the order that produced it is recorded here. Without this line a
 		# stored matrix cannot be decoded after the fact.
 		ctxt.log.info( self.id,
-					   f'Rl axes [{CURRENCY}]: {self.matrix.axis_labels(self.spatial.order)}' )
+					   f'Rl: {{currency:[{CURRENCY}], axis: {self.matrix.axis_labels(self.spatial.order)}}}' )
 
 		return

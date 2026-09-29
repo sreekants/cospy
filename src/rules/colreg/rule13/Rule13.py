@@ -49,7 +49,7 @@ class Rule13(COLREG):
 		"""
 		OS		= evt[1]
 		TS		= evt[2]
-		print( f'{self.__class__.__name__}.overtaking:{OS.config["name"]}' )
+		#print( f'{self.__class__.__name__}.overtaking:{OS.config["name"]}' )
 		return
 
 	def on_crossing(self, ctxt:Context, evt):

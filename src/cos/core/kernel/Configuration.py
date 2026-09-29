@@ -242,8 +242,7 @@ class Configuration:
 		if self.exists(filepath) == True:
 			return filepath
 
-		self.config = '.'
-		return None
+		raise FileNotFoundError(f"The configuration file '{filepath}' is missing.")
 
 	@staticmethod
 	def resolve_path( value:str, sep=None ):
