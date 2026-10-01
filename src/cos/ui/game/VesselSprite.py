@@ -24,6 +24,7 @@ class VesselIcon(AnimatedSprite):
 		self.id		= config["identifier"]
 		self.imo	= self.id.get("imo", None) if isinstance(self.id, dict) else None
 		self.model	= self.get_model(config)
+		self.trip	= self.get_trip(config)
 		pose		= config.get("pose", None) or {}
 		start		= pose.get("position", None)
 		self.position	= (float(start[0]), float(start[1])) if start else None	# Centre in metres, updated by vessel.move
@@ -60,6 +61,12 @@ class VesselIcon(AnimatedSprite):
 		"""
 		motion		= ArgList( config.get("behavior", None) )['motion']
 		return motion.split('.')[-1] if motion else 'n/a'
+
+	def get_trip(self, config):
+		""" Returns the trip file name without its directory, or None if the vessel has none
+		"""
+		path		= ArgList( config.get("settings", None) )['pathfile']
+		return path.replace('\\', '/').rsplit('/', 1)[-1] if path else None
 
 	def get_color(self, config):
 		settings		= ArgList( config.get("settings", None) )

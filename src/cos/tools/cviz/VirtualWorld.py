@@ -287,7 +287,10 @@ class VirtualWorld:
 			return
 
 		x, y	= self.to_map_units( vessel.position )
-		for line in [vessel.name, f'IMO: {vessel.imo}', f'Position: {x:.1f}, {y:.1f}', f'Behavior: {vessel.model}']:
+		lines	= [vessel.name, f'IMO: {vessel.imo}', f'Position: {x:.1f}, {y:.1f}', f'Behavior: {vessel.model}']
+		if getattr( vessel, 'trip', None ):
+			lines.append( f'Trip: {vessel.trip}' )
+		for line in lines:
 			self.info.append_object( line, Style.TEXT_PRIMARY )
 		return
 
