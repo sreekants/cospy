@@ -97,7 +97,7 @@ class WeatherSystem(Object):
 		if self.dirty == False:
 			return
 
-		world.sim.ipc.push( '/IPC', 'weather.update', None, [self.describe()] )
+		world.sim.ipc.publish( 'weather.update', self.guid, self.describe() )
 		self.dirty	= False
 		return
 

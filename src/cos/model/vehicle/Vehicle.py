@@ -140,12 +140,13 @@ class Vehicle(Object):
         if rect == None:
             return
 
-        world.sim.ipc.push( '/IPC', 'vessel.move', None, [{
+        world.sim.ipc.publish( 'vessel.move', self.guid, {
             "guid":self.guid,
 			"rect": [rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top],
             "angle": [dx[0],dx[1],dx[2]],
-            "intent": self.intent
-            }] )
+            "intent": self.intent,
+            "time": world.sim.clock.local.isoformat()     # Scenario local time, for the viewer's clock
+            } )
         return
 
     def sim_init(self, world, rect):

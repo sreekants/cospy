@@ -1,5 +1,12 @@
 packages:
   modules:  # Network services
+     # Bins vessel.move and weather.update per sender and pushes the latest of each to the
+     # brokers every interval (wall seconds), so a broker flush carries one entry per vessel.
+     # Runs on the tick of the thread owning NetworkServices; without it events go straight out.
+     - name: Publisher
+       module: cos.subsystem.network.Publisher
+       config: interval=0.2
+
      - name: RPCBroker
        module: cos.subsystem.network.RPCBroker
        config: transport=cos.core.network.RPCZMQTransport

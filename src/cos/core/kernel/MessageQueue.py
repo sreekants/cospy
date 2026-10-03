@@ -38,6 +38,7 @@ class MessageQueue:
 		self.ipc		= '/IPC'
 
 		self.broker		= None
+		self.publisher	= None		# Bins viewer events per tick, if loaded
 
 		self.throttle_rate	= DEFAULT_THROTTLE_RATE
 		self.lock			= threading.RLock()		# Guards the queue tree and routes across threads
@@ -197,6 +198,19 @@ class MessageQueue:
 			return slot.queue.get_nowait()
 		except queue.Empty:
 			return None
+
+	def publish(self, msg:str, key, arg):
+		""" Publishes a viewer event through the publisher, or straight to /IPC without one
+		Arguments
+			msg -- Event name, e.g. vessel.move
+			key -- Identity of the sender; a later event with the same key replaces it
+			arg -- Event argument
+		"""
+		if self.publisher is None:
+			return self.push( self.ipc, msg, None, [arg] )
+
+		self.publisher.post( msg, key, arg )
+		return True
 
 	def push(self, path:str, msg:str, ctxt:Context=None, arg=None, depth=1):
 		""" Pushs a message to a queue

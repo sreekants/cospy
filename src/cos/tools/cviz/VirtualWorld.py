@@ -17,6 +17,7 @@ from cos.core.kernel.ObjectManager import ObjectManager
 from cos.core.kernel.ParameterManager import ParameterManager
 
 import numpy as np
+import datetime
 import math
 import random
 import pygame
@@ -33,6 +34,8 @@ from pygame.locals import (
 
 SEA_COLOR			= (135, 206, 250)
 PICK_RADIUS			= 12		# Pixels around a vessel that a click selects it
+SELECT_COLOR		= (0, 0, 0)	# Ring around the selected vessel
+CLOCK_MARGIN		= 10		# Pixels between the clock and the screen corner
 
 class VirtualWorld:
 	def __init__(self):
@@ -70,6 +73,7 @@ class VirtualWorld:
 
 		self.metres		= (1.0, 1.0)	# Metres per map unit (map.unit.metres), set by the Builder
 		self.selected	= None			# Vessel whose popup is shown
+		self.sim_time	= None			# Scenario local time from vessel.move
 		return
 
 	def run(self):
@@ -111,6 +115,7 @@ class VirtualWorld:
 
 		pygame.font.init()
 		self.font = pygame.font.SysFont("helvetica", 12)
+		self.clock_font = pygame.font.SysFont("consolas,dejavusansmono,monospace", 16)
 
 		# Initialize the infobox
 		self.info.init()
@@ -244,6 +249,7 @@ class VirtualWorld:
 
 		self.render_selection()
 		self.render_info()
+		self.render_clock()
 		return
 
 	def draw_order(self):
@@ -279,6 +285,29 @@ class VirtualWorld:
 		self.info.render(self)
 		return
 
+	@staticmethod
+	def format_clock(t):
+		""" Formats a time as dd:hh:mm (day of month, hour, minute)
+		Arguments
+			t -- Datetime, or None before the first vessel.move
+		"""
+		if t is None:
+			return '--:--:--'
+		return f'{t.day:02d}:{t.hour:02d}:{t.minute:02d}'
+
+	def render_clock(self):
+		""" Draws the scenario's local time in the bottom-right corner
+		"""
+		text	= self.clock_font.render( self.format_clock(self.sim_time), True, Style.TEXT_PRIMARY )
+		w, h	= self.screen.get_size()
+		box		= text.get_rect().inflate( 12, 6 )
+		box.bottomright	= ( w-CLOCK_MARGIN, h-CLOCK_MARGIN )
+
+		pygame.draw.rect( self.screen, Style.BOX_COLOR, box )
+		pygame.draw.rect( self.screen, Style.BORDER_COLOR, box, width=1 )
+		self.screen.blit( text, text.get_rect(center=box.center) )
+		return
+
 	def describe_selection(self):
 		""" Lists the selected vessel's details first under Objects in the infobox
 		"""
@@ -302,7 +331,7 @@ class VirtualWorld:
 			return
 
 		at		= self.encoder.transform_point( vessel.position )
-		pygame.draw.circle( self.screen, Style.ACCENT_FOCUS, (int(at[0]), int(at[1])), PICK_RADIUS, width=1 )
+		pygame.draw.circle( self.screen, SELECT_COLOR, (int(at[0]), int(at[1])), PICK_RADIUS, width=1 )
 		return
 
 	def to_map_units(self, pt):
@@ -410,6 +439,8 @@ class VirtualWorld:
 			args -- List of arguments
 		"""
 		guid	= args["guid"]
+		if "time" in args:
+			self.sim_time	= datetime.datetime.fromisoformat( args["time"] )
 
 		groups	= self.groups.values()
 		for group in groups:
