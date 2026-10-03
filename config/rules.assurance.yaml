@@ -4,11 +4,6 @@ packages:
      # PracticeEvaluator drives them after the examiners in each pass and pumps
      # their IPC topics; examiners report to them by message. A 'scorecard'
      # argument loads a scorecard of the inspector's own.
-     #
-     # The TestInspector conducts the test run. At startup it selects the
-     # vessels under test (REQ.024), usually one. Situations are evaluated with
-     # these on the own-ship side of each encounter, and the fact tables listed
-     # in the file keep only their rows. No file, or an empty list: every vessel.
      - name: TestInspector
-       module: rules.assurance.TestInspector
+       module: rules.assurance.inspection.TestInspector
        config: file=$(SIMULATION)/undertest.yaml

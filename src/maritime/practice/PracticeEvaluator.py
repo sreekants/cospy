@@ -4,7 +4,7 @@
 
 from maritime.regulation.colreg.Resolver import Resolver
 from maritime.regulation.colreg.API import API
-from rules.assurance.TestInspector import TestInspector
+from rules.assurance.inspection.TestInspector import TestInspector
 from maritime.model.vessel.Vessel import afloat
 from maritime.model.zone.Location import Location
 from cos.model.rule.Context import Context as RuleContext

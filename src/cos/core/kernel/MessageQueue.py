@@ -419,6 +419,9 @@ class MessageQueue:
 			
 		while True:
 			try:
+				if slot.queue.empty():
+					break
+				
 				evt = slot.queue.get_nowait()
 			except queue.Empty:
 				break
