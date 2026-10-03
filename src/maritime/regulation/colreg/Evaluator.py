@@ -9,7 +9,7 @@ from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
-from rules.assurance.TestInspector import TestInspector
+from rules.assurance.inspection.TestInspector import TestInspector
 from maritime.model.vessel.Vessel import afloat
 
 class Evaluator(Service):

@@ -2,7 +2,7 @@
 # Filename: TestInspector.py
 # Description: Inspector conducting the test run; selects the vessels under test (REQ.024)
 
-from rules.assurance.Inspector import Inspector, INSPECTORS
+from rules.assurance.inspection.Inspector import Inspector, INSPECTORS
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 from maritime.core.situation.VesselFilter import VesselFilter
