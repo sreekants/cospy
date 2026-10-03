@@ -1,0 +1,86 @@
+hydrodynamics:
+    north: 1
+    east: 2
+    yaw: 0 
+    yaw_ref: 45 
+    speed: 5
+    speed_ref: 7
+    yaw_rate: 0
+    dt: 0.0002
+
+physics:
+    # Category values for a multipurpose general cargo ship: representative of the class, not of one ship.
+    # mass is the displacement at the design load line, in tonnes, and the default weight of a
+    # vessel whose vessel.s3db record gives none. deadweight is what it can carry, in tonnes;
+    # lightship = mass - deadweight. The hydrodynamic model uses each vessel's own weight.
+    mass: 17000
+    deadweight: 12000
+    linear_damping_coeff: 500000000
+    length: 140             # metres, length overall
+    width: 3
+    draft: 100
+    momentum: 0.92
+    relative_size: "large"
+
+activity:
+    type                : "generalcargo" 
+    activity            : "cargo" 
+
+maneuverability:
+    max_yaw_rate        : 10.0   # degrees per timestep
+    max_speed           : 100    # speed per timestep
+
+behavior:
+    # distance thresholds
+    tss_min_dist        : 20     # metres; normal separation inside tss
+    tss_angle_tol       : 30.0   # degrees; tolerance before lane correction kicks in
+    
+    # overtaking thresholds
+    overtake_lat_min    : 10     # metres; lateral separation while overtaking
+
+    # crossing thresholds
+    crossing_aft_min    : 0.50   # meters; crossing at aft of tss vessel
+    crossing_fore_min   : 0.25   # meters; crossing in front of approaching tss vessel
+
+    range_visibility    : 20     # range of situations observation
+    range_ample_time    : 10     # range of collision avoidance 
+    range_safety        : 5      # range for safety maneuvers
+
+    stop_on_traffic     : true
+
+cargo:
+    # Cargo properties
+    # Vessel type
+        # - Container ships (standardized boxes), 
+        # - Bulk carriers (loose goods like coal/grain), 
+        # - Tankers (liquids), 
+        # - Ro-Ro vessels (wheeled vehicles), 
+        # - General cargo ships (packaged goods), 
+        # - Reefers (refrigerated),  
+        # - Heavy lift ships (oversized cargo).
+
+    # Regulated cargo
+        # Regulatory instruments:
+        # - SOLAS (Safety of Life at Sea): Overall safety construction and equipment.
+        # - MARPOL (Marine Pollution): Prevention of pollution by oil and noxious liquids.
+        # - IMDG Code: Mandatory regulations for transporting dangerous goods.
+        # - IMSBC Code: International Maritime Solid Bulk Cargoes Code for safe stowage of solid bulk. 
+
+    flammable       : false
+    refrigerated    : false # Reefer - Perishable goods requiring specific temperatures (fruits, meat, pharmaceuticals).
+    livestock       : false # pecialized transport for live animals with strict ventilation and health regulations.
+    biohazard       : false # Biological hazard
+    heavy_lift      : false # Oversized or extremely heavy items (e.g., wind turbines, machinery) requiring special loading procedures.
+    hazardous       : false  # IMDG Code: Packaged hazardous materials classified into nine classes (explosives, gases, flammable liquids, toxic substances, etc.).
+    bulk_solid      : false # SOLAS Ch. VI & XII: Unpackaged materials loaded directly into cargo spaces, such as grain, coal, ore, and cement. Regulations focus on stability and structural integrity of bulk carriers.
+    bulk_liquid     : false # MARPOL Annex I & II / IBC Code: Liquids transported in tanks, including crude oil, refined petroleum products, chemicals, and edible oils. These are handled by oil tankers or chemical tankers.
+    liquid_gas      : false # IGC Code: Specifically covers liquefied natural gas (LNG) and liquefied petroleum gas (LPG) carried at low temperatures/high pressure.
+    containerized   : false  # Containerized Cargo (CSS Code/CSC): Goods packed into standardized containers (20-foot or 40-foot). Key focus is on secure lashing and tracking.
+    general_cargo   : true # Goods that are packaged (bags, boxes, pallets) or separate items loaded individually. These are often loaded in multi-purpose ships.
+    humans_present  : 16
+
+
+devices:
+     - name: Radar
+       driver: maritime.device.communication.Radar
+       args: sample.frequency=1

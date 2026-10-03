@@ -1,0 +1,52 @@
+# Signal vocabulary (REQ.036): every light, day shape and sound signal a vessel may show.
+#
+# A vessel shows signals in Vehicle.signal, a value set separate from its intents. Raising a
+# name that is not listed here is an error, and so is a rule or a zones.yaml entry that names
+# one. Rules and examiners may match names with wildcards, case-sensitively:
+#     OS.Signal.ON has 'Light.Masthead.*'        (Legata)
+#     vessel.is_signaled('Sound.Foghorn*')       (Python)
+#
+# Prefixes:
+#     Light.*   lights (COLREG Part C, Rules 20-31, and the light signals of Rule 34)
+#     Sound.*   sound signals (COLREG Part D, Rules 32-37)
+#     Shape.*   day shapes (Rules 24-30); none listed yet
+#
+# class says when a signal may be shown. NuisanceExaminer judges it:
+#     navigation             shown by status and time of day, encounter or not. Never a nuisance;
+#                            NightTimeExaminer and Rules 23-31 judge whether it is shown.
+#     restricted_visibility  required in or near restricted visibility, encounter or not (Rule 35).
+#                            A nuisance outside restricted visibility when the vessel is in no
+#                            encounter.
+#     encounter              a manoeuvring or warning signal to another vessel (Rule 34). A
+#                            nuisance whenever the vessel is in no encounter.
+#
+# rule is for reference only.
+
+signals:
+  # Navigation lights, by the names the COLREG rules test
+  Light.Masthead.Forward.1x:    { class: navigation, rule: "COLREG 23(a)(i)" }
+  Light.Masthead.Forward.2x:    { class: navigation, rule: "COLREG 23(a)(ii)" }
+  Light.Masthead.Abaft:         { class: navigation, rule: "COLREG 23(a)(ii)" }
+  Light.Sidelight:              { class: navigation, rule: "COLREG 21(b), 23(a)(iii)" }
+  Light.Sternlight:             { class: navigation, rule: "COLREG 21(c), 23(a)(iv)" }
+  Light.TowingLight:            { class: navigation, rule: "COLREG 21(d), 24" }
+  Light.Allround.White:         { class: navigation, rule: "COLREG 23(d)" }
+  Light.Diamond:                { class: navigation, rule: "COLREG 24" }
+  Light.Flashing.Yellow:        { class: navigation, rule: "COLREG 23(b)" }
+  Light.Flashing.Red:           { class: navigation, rule: "COLREG 23(c)" }
+
+  # Fog signals (Rule 35). Sound.Foghorn* matches every one of them.
+  Sound.Foghorn:                { class: restricted_visibility, rule: "COLREG 35" }
+  Sound.Foghorn.Prolonged.1x:   { class: restricted_visibility, rule: "COLREG 35(a)" }
+  Sound.Foghorn.Prolonged.2x:   { class: restricted_visibility, rule: "COLREG 35(b)" }
+  Sound.Foghorn.Prolonged.Short.2x: { class: restricted_visibility, rule: "COLREG 35(c)" }
+
+  # Manoeuvring and warning signals (Rule 34), to a vessel in sight
+  Sound.Blast.Short.1x:         { class: encounter, rule: "COLREG 34(a)(i), altering to starboard" }
+  Sound.Blast.Short.2x:         { class: encounter, rule: "COLREG 34(a)(i), altering to port" }
+  Sound.Blast.Short.3x:         { class: encounter, rule: "COLREG 34(a)(i), astern propulsion" }
+  Sound.Blast.Short.5x:         { class: encounter, rule: "COLREG 34(d), doubt" }
+  Light.Flash.1x:               { class: encounter, rule: "COLREG 34(b)(i), altering to starboard" }
+  Light.Flash.2x:               { class: encounter, rule: "COLREG 34(b)(i), altering to port" }
+  Light.Flash.3x:               { class: encounter, rule: "COLREG 34(b)(i), astern propulsion" }
+  Light.Flash.5x:               { class: encounter, rule: "COLREG 34(d), doubt" }

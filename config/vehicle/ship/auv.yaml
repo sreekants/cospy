@@ -1,0 +1,58 @@
+hydrodynamics:
+    north: 1
+    east: 2
+    yaw: 0 
+    yaw_ref: 45 
+    speed: 5
+    speed_ref: 7
+    yaw_rate: 0
+    dt: 0.0002
+
+physics:
+    # Category values for an autonomous underwater vehicle (AUV) of the survey class:
+    # representative of the class, not of one vehicle. deadweight is its payload.
+    # mass is the displacement at the design load line, in tonnes, and the default weight of a
+    # vessel whose vessel.s3db record gives none. deadweight is what it can carry, in tonnes;
+    # lightship = mass - deadweight. The hydrodynamic model uses each vessel's own weight.
+    mass: 1.0
+    deadweight: 0.2
+    linear_damping_coeff: 500000000
+    length: 5              # metres, length overall
+    width: 3
+    draft: 40
+    momentum: 0.75
+    relative_size: "tiny"
+
+activity:
+    type                : "auv" 
+    activity            : "survey" 
+
+
+maneuverability:
+    max_yaw_rate        : 10.0   # degrees per timestep
+    max_speed           : 100    # speed per timestep
+
+behavior:
+    tss_min_dist     : 800.0  # metres; normal separation inside tss
+    tss_angle_tol    : 30.0   # degrees; tolerance before lane correction kicks in
+
+    # overtaking thresholds
+    overtake_lat_min : 55.0   # metres; lateral separation while overtaking
+
+    # crossing thresholds
+    crossing_aft_min    : 50.0   # metres; crossing at aft of tss vessel
+    crossing_fore_min   : 250.0  # metres; crossing in front of approaching tss vessel
+
+    range_visibility    : 100    # range of situations observation
+    range_ample_time    : 50     # range of collision avoidance 
+    range_safety        : 10     # range for safety maneuvers
+    
+    stop_on_traffic     : false
+
+cargo:
+    humans_present  : 0       # unmanned
+   
+devices:
+     - name: RADAR
+       driver: maritime.device.communication.Radar
+       args: sample.frequency=1

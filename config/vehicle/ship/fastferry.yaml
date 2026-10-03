@@ -1,0 +1,59 @@
+hydrodynamics:
+    north: 1
+    east: 2
+    yaw: 0 
+    yaw_ref: 45 
+    speed: 5
+    speed_ref: 7
+    yaw_rate: 0
+    dt: 0.0002
+
+# Specification: medium momentum, fast heading, crosses TSS perpendicularly.
+physics:
+    # Category values for a high-speed passenger craft (catamaran): representative of the class, not of one ship.
+    # mass is the displacement at the design load line, in tonnes, and the default weight of a
+    # vessel whose vessel.s3db record gives none. deadweight is what it can carry, in tonnes;
+    # lightship = mass - deadweight. The hydrodynamic model uses each vessel's own weight.
+    mass: 180
+    deadweight: 40
+    linear_damping_coeff: 500000000
+    length: 40             # metres, length overall
+    width: 3
+    draft: 40
+    momentum: 0.75
+    relative_size: "small"
+
+activity:
+    type                : "ferry" 
+    activity            : "transport" 
+
+maneuverability:
+    max_yaw_rate        : 10.0   # degrees per timestep
+    max_speed           : 100    # speed per timestep
+
+
+behavior:
+    # distance thresholds
+    tss_min_dist        : 20     # metres; normal separation inside tss
+    tss_angle_tol       : 30.0   # degrees; tolerance before lane correction kicks in
+    
+    # overtaking thresholds
+    overtake_lat_min    : 10     # metres; lateral separation while overtaking
+
+    # crossing thresholds
+    crossing_aft_min    : 0.50   # metres; crossing at aft of tss vessel
+    crossing_fore_min   : 0.25   # metres; crossing in front of approaching tss vessel
+
+    range_visibility    : 20     # range of situations observation
+    range_ample_time    : 10     # range of collision avoidance 
+    range_safety        : 5      # range for safety maneuvers
+
+    stop_on_traffic     : true
+
+cargo:
+    humans_present  : 300
+    
+devices:
+     - name: RADAR
+       driver: maritime.device.communication.Radar
+       args: sample.frequency=1
