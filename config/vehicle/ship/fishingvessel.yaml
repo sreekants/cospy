@@ -10,9 +10,14 @@ hydrodynamics:
 
 # Specification: low momentum (quick to respond), fast heading
 physics:
-    mass: 50000 
+    # Category values for a coastal stern trawler: representative of the class, not of one ship.
+    # mass is the displacement at the design load line, in tonnes, and the default weight of a
+    # vessel whose vessel.s3db record gives none. deadweight is what it can carry, in tonnes;
+    # lightship = mass - deadweight. The hydrodynamic model uses each vessel's own weight.
+    mass: 250
+    deadweight: 100
     linear_damping_coeff: 500000000
-    length: 20
+    length: 25             # metres, length overall
     width: 3
     draft: 10
     momentum: 0.10

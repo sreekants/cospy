@@ -50,6 +50,9 @@ class TargetShipResolver(VesselResolver):
 		if (self.vessel is None) or (self.os is None):
 			return None
 
+		if (self.vessel.weight is None) or (self.os.weight is None):
+			return None
+
 		return 'large' if self.vessel.weight >= self.os.weight else 'small'
 
 	@simproperty
@@ -59,7 +62,7 @@ class TargetShipResolver(VesselResolver):
 		if self.vessel is None:
 			return None
 
-		return self.vessel.is_signaled('Signal', 'FogHorn')
+		return self.vessel.is_signaled( 'Sound.Foghorn*' )
 
 	@simproperty
 	def PersonsOnBoard(self):

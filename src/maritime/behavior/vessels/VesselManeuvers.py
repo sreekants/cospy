@@ -78,10 +78,15 @@ class VesselManeuvers:
 
 		for v in b.nearest:
 			dist  = v[0]
+			ahead = np.dot(b.dx, v[1].location - b.x)
+
+			# A vessel astern, or on top of this one, is no reason to slow: both would brake to a standstill
+			if (ahead < 0) or (dist <= 0):
+				continue
 
 			if dist < min_dist:
 				min_dist      = dist
-				is_overtaking = np.dot(b.dx, v[1].location - b.x) > 0
+				is_overtaking = ahead > 0
 
 		# Apply rules here
 		# Maintain the safe distance defaulting to the TSS distance rules 
@@ -115,7 +120,7 @@ class VesselManeuvers:
 
 			if dist < min_dist:
 				min_dist        = dist
-				fore_crossing   = np.dot(b.dx, v[0] - b.x) > 0
+				fore_crossing   = np.dot(b.dx, v[1].location - b.x) > 0
 
 		min_sep = model.crossing_fore_min if fore_crossing else model.crossing_aft_min
 		if min_dist < min_sep:

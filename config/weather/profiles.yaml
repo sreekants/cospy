@@ -145,7 +145,7 @@ profiles:
 climates:
   nordic:                       # Nordic and Baltic
     sites: [no/alesund, no/bergen, no/oslo, no/tautra, no/trondheim,
-            fi/helsinki, po/gdansk]
+            fi/helsinki, po/gdansk, dk/copenhagen]
     temperature:
       clearsky: [-10, 25]
       cloudy:   [-5, 20]
@@ -159,7 +159,7 @@ climates:
 
   straits:                      # Turkish Straits and Marmara
     sites: [tk/istanbul, tk/kandilli, tk/kavak, tk/kavak-kandilli,
-            tk/turkeli]
+            tk/turkeli, tk/canakkale]
     temperature:
       clearsky: [0, 32]
       cloudy:   [2, 28]

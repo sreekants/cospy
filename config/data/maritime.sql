@@ -3100,3 +3100,29 @@ CREATE TABLE fact_under_test
 
 CREATE INDEX idx_fact_under_test ON fact_under_test(dim_gps_id,dim_vessel_id);
 
+CREATE TABLE fact_capsize
+(
+	dim_gps_id INTEGER,
+	dim_vessel_id INTEGER,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	creation_time TIMESTAMP,
+	audit_status INTEGER,
+	case_id INTEGER,
+	tick INTEGER,
+	report_time REAL,
+	vessel_id INTEGER,
+	zone VARCHAR(255),
+	wave_height REAL,
+	wave_state VARCHAR(255),
+	visibility REAL,
+	visibility_state VARCHAR(255),
+	payload REAL,
+	payload_state VARCHAR(255),
+	length REAL,
+	size_state VARCHAR(255),
+	p_capsize REAL,
+	threshold REAL
+);
+
+CREATE INDEX idx_fact_capsize ON fact_capsize(dim_gps_id,dim_vessel_id);
+

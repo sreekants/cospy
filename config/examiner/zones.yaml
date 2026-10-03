@@ -44,13 +44,14 @@ zones:
       - STRAIT
       - ARCHIPELAGIC_WATERS
 
-    # Night is taken from the simulation clock, local hours.
+    # Night is taken from the simulation clock, local hours. Required lights are
+    # names or wildcard patterns from $(CONFIG)/maritime/signals.yaml (REQ.036).
     night_from: 20
     night_to: 6
     required_lights:
-      - masthead
-      - sidelights
-      - sternlight
+      - Light.Masthead.*
+      - Light.Sidelight
+      - Light.Sternlight
 
   types:
     HARBOUR:
@@ -100,6 +101,7 @@ penalties:
   speed.limit_exceeded_overtaking: 40.0
   signal.not_posted: 15.0
   night.lights_missing: 25.0
+  signal.nuisance: 10.0          # PLACEHOLDER - unsourced, see COS.013
   weather.capsize_risk: 55.0
   collision.cost: 70.0           # PLACEHOLDER - unsourced, see COS.013
 
@@ -127,6 +129,7 @@ concerns:
     speed.limit_exceeded_overtaking: traffic
     signal.not_posted: traffic
     night.lights_missing: traffic
+    signal.nuisance: traffic
     weather.capsize_risk: safety
     collision.cost: traffic      # hull damage, as damage_other_vessel in Rl
     COLREG: traffic

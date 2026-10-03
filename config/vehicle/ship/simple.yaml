@@ -9,9 +9,14 @@ hydrodynamics:
     dt: 0.0002
 
 physics:
-    mass: 50000000000 
+    # Category values for a small yacht: representative of the class, not of one ship.
+    # mass is the displacement at the design load line, in tonnes, and the default weight of a
+    # vessel whose vessel.s3db record gives none. deadweight is what it can carry, in tonnes;
+    # lightship = mass - deadweight. The hydrodynamic model uses each vessel's own weight.
+    mass: 20
+    deadweight: 4
     linear_damping_coeff: 500000000
-    length: 20
+    length: 15             # metres, length overall
     width: 3
     momentum: 0.92
     draft: 100

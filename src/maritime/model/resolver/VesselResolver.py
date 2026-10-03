@@ -35,6 +35,18 @@ class VesselResolver(Resolver):
 		return self.vessel.intent
 
 	@simproperty
+	def Signal(self):
+		""" Lights, shapes and sound signals the vessel is showing (REQ.036)
+		"""
+		return getattr( self.vessel, 'signal', None )
+
+	@simproperty
+	def Signal_ON(self):
+		""" Signals shown, as COLREG Rules 23-25 name them: OS.Signal.ON has 'Light.Sidelight'
+		"""
+		return self.Signal()
+
+	@simproperty
 	def Mode(self):
 		""" Returns the vessel intent property set
 		""" 
@@ -42,9 +54,9 @@ class VesselResolver(Resolver):
 
 	@simproperty
 	def Type(self):
-		""" Returns the type of the vessel
+		""" The vessel's Type enum, as Vessel.Type.PowerDriven resolves
 		""" 
-		return self.vessel.type
+		return getattr( self.vessel, 'vessel_type', self.vessel.type )
 
 	@simproperty
 	def Status(self):
@@ -121,9 +133,9 @@ class VesselResolver(Resolver):
 
 	@simproperty
 	def Mass(self):
-		""" Returns the mass
+		""" Displacement in tonnes, the vessel's own or its category's
 		""" 
-		return self.vessel.model.ship.mass if self.vessel.model is not None else 0.0
+		return getattr( self.vessel, 'weight', None )
 
 	@simproperty
 	def Length(self):

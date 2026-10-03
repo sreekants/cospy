@@ -1283,3 +1283,18 @@ UnderTest,Name,string,Vessel name,Name,
 UnderTest,Entry,string,List entry that named the vessel - key=value,Entry,
 UnderTest,Source,string,File the list was loaded from,Source,
 UnderTest,Telemetry,string,Fact tables whose rows are kept only for vessels under test,Telemetry,
+Capsize,CaseId,int,Scenario Key, Scenario hash key,
+Capsize,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Capsize,ReportTime,double,Report time,Time,
+Capsize,VesselId,int,Vessel IMO,Vessel IMO,
+Capsize,Zone,string,Spatial zone the vessel was in,Zone,
+Capsize,WaveHeight,double,Significant wave height at the vessel - largest SEA_WAVE vector - empty when no wave field covers it,Wave height,m
+Capsize,WaveState,string,wave_height evidence - calm moderate or severe - empty when not observed,Wave state,
+Capsize,Visibility,double,Scenario visibility,Visibility,nm
+Capsize,VisibilityState,string,visibility evidence - poor or good,Visibility state,
+Capsize,Payload,double,Load as a fraction of deadweight - (weight - lightship) / deadweight - empty when unknown,Payload,
+Capsize,PayloadState,string,payload evidence - light laden or overladen,Payload state,
+Capsize,Length,double,Length overall from the ship model - empty when the vessel has none,Length,m
+Capsize,SizeState,string,vessel_size evidence - small or large,Size state,
+Capsize,PCapsize,float,P(capsize = yes) given the evidence,P(capsize),
+Capsize,Threshold,float,alarm_threshold above which weather.capsize_risk is scored,Threshold,

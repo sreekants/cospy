@@ -64,7 +64,7 @@ class Builder(Service):
 		"""
 		profile	= self.prototypes[type]
 		db		= ActiveRecord.create(self.model, path, self.table)
-		records	= db.get_all( self.criteria(profile) )
+		records	= self.expand( ctxt, db.get_all(self.criteria(profile)), path )
 
 		klassname, klass	= BootLoader.load_class( profile[1] )
 
@@ -86,6 +86,15 @@ class Builder(Service):
 
 		return
 
+
+	def expand(self, ctxt:Context, records, path:str):
+		""" Turns database records into the records to build; one each unless a subclass multiplies them
+		Arguments
+			ctxt -- Simulation context
+			records -- Records read from the database
+			path -- Path of the database
+		"""
+		return records
 
 	def criteria(self, profile):
 		""" SQL filter for the rows this builder loads

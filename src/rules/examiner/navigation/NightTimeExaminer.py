@@ -6,6 +6,8 @@ from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
+from cos.model.vehicle.Signal import Signal
+from maritime.model.vessel.Vessel import Vessel
 
 import datetime
 
@@ -20,8 +22,9 @@ import datetime
 #   and by jurisdiction, and because COLREG part C is exactly the sort of list a
 #   scenario designer needs to vary.
 #
-#   A light counts as shown when the vessel declares the intent 'Light.<name>'
-#   (Vessel.signal('Light', name, True)). A vessel that declares no intent is
+#   A required light is a name or wildcard pattern from the signal vocabulary
+#   (REQ.036), e.g. 'Light.Masthead.*'. It counts as shown when the vessel's
+#   signal set matches it (Vehicle.is_signaled). A vessel with no signal set is
 #   reported as unlit.
 
 
@@ -47,7 +50,37 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 			config -- Configuration attributes
 		"""
 		self.init_zones( ctxt, config, requires=['os'] )
+		Vessel.load_signals( ctxt )
+		self.check_lights()
 		return
+
+	def check_lights(self):
+		""" Checks every required light in the zone rules against the signal vocabulary
+		Raises
+			ValueError naming the zones file and the entry when a light is not in the vocabulary
+		"""
+		vocabulary	= Signal.vocabulary
+		if vocabulary is None:
+			return
+
+		layers	= [ ('default', self.rules.defaults) ]
+		layers	+= [ (f'types.{name}', rules or {}) for name, rules in self.rules.types.items() ]
+		layers	+= [ (f'named.{name}', rules or {}) for name, rules in self.rules.zones.items() ]
+
+		for where, rules in layers:
+			for light in NightTimeExaminer.lights( rules.get('required_lights') ):
+				vocabulary.check( light, f'{self.rules.source}: zones.{where}.required_lights' )
+		return
+
+	@staticmethod
+	def lights(required):
+		""" The required lights as a list
+		Arguments
+			required -- A list, or a comma-separated string as a shape's settings give it
+		"""
+		if isinstance( required, str ):
+			return [ l.strip() for l in required.split(',') if l.strip() ]
+		return list( required or [] )
 
 	def on_start(self, ctxt:Context, config):
 		""" Callback for simulation startup
@@ -73,9 +106,7 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		if self.is_night( ctxt, rules ) == False:
 			return
 
-		required	= rules.get( 'required_lights' ) or []
-		if isinstance( required, str ):
-			required	= [ l.strip() for l in required.split(',') if l.strip() ]
+		required	= NightTimeExaminer.lights( rules.get('required_lights') )
 
 		if len( required ) == 0:
 			return
@@ -196,8 +227,7 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		if signaled is None:
 			return list( required )
 
-		# A light counts as shown when the vessel declares the intent 'Light.<name>'
-		return [ light for light in required if signaled('Light', light) == False ]
+		return [ light for light in required if signaled(light) == False ]
 
 
 if __name__ == "__main__":

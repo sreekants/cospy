@@ -40,5 +40,10 @@ class PartitionTestCase(unittest.TestCase):
 		created	= datetime.datetime.fromisoformat( row['creation_time'] )
 		self.assertEqual( created.utcoffset(), datetime.timedelta(0) )
 
+	def test_none_is_written_as_null(self):
+		self.partition.add( utcnow(), 3, (3.0, None) )
+		self.partition.flush( self.db )
+		self.assertIsNone( self.db.rows[0]['value'] )
+
 if __name__ == '__main__':
     unittest.main()

@@ -45,7 +45,7 @@ class OwnShipResolver(VesselResolver):
 		if self.vessel is None:
 			return None
 
-		return self.vessel.is_signaled('Signal', 'FogHorn')
+		return self.vessel.is_signaled( 'Sound.Foghorn*' )
 
 
 if __name__ == "__main__":

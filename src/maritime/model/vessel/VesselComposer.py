@@ -58,6 +58,7 @@ class VesselComposer:
         
         vessel.model    = VesselModel()
         config          = vessel.model.load( model )
+        vessel.model.displace( vessel.weight )         # The vessel's own weight drives its dynamics
         return config
 
 

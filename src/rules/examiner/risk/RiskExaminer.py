@@ -180,11 +180,13 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		sea. It is excluded here, explicitly, rather than by its identity
 		happening not to collide with a real one.
 
-		The record type is the test, not the class: Fleet passes Type.SEAPLANE
-		to its base constructor, so the runtime type of a controller is not
-		distinctive. The class name is checked as well, so a Fleet built from
-		JSON with no type still resolves.
+		A controller is a meta vessel (Type.FLEET); the evaluators leave it out of
+		their vessel lists already. The record type and the class name are checked
+		as well, for a vessel built without the Vessel type.
 		"""
+		if getattr( vessel, 'meta', False ):
+			return False
+
 		try:
 			if int( vessel.config["type"] ) == FLEET_CONTROLLER:
 				return False

@@ -319,6 +319,8 @@ class VirtualWorld:
 		lines	= [vessel.name, f'IMO: {vessel.imo}', f'Position: {x:.1f}, {y:.1f}', f'Behavior: {vessel.model}']
 		if getattr( vessel, 'trip', None ):
 			lines.append( f'Trip: {vessel.trip}' )
+		if getattr( vessel, 'signal', None ):
+			lines.append( f'Signals: {", ".join(sorted(vessel.signal))}' )
 		for line in lines:
 			self.info.append_object( line, Style.TEXT_PRIMARY )
 		return
@@ -462,6 +464,7 @@ class VirtualWorld:
 				entity.position	= ( rect[0]+rect[2]/2.0, rect[1]+rect[3]/2.0 )	# Unrounded centre in metres
 				entity.angle	= math.degrees( math.atan2(-dx[1],dx[0]) )
 				entity.intent	= args["intent"]
+				entity.signal	= args.get( "signal", [] )
 				return
 
 		return

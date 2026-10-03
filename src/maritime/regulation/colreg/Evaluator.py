@@ -10,6 +10,7 @@ from cos.core.kernel.Context import Context
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
 from rules.assurance.TestInspector import TestInspector
+from maritime.model.vessel.Vessel import afloat
 
 class Evaluator(Service):
 	def __init__(self):
@@ -114,7 +115,7 @@ class Evaluator(Service):
 		# Load all the actors in the simulation
 		objmgr				= ctxt.sim.objects
 		self.world			= ctxt.sim.world
-		self.vessels		= objmgr.get_all("/World/Vehicle/Vessel")
+		self.vessels		= afloat( objmgr.get_all("/World/Vehicle/Vessel") )
 		self.land			= objmgr.get_all("/World/Land")
 		self.sea			= objmgr.get_all("/World/Sea")
 

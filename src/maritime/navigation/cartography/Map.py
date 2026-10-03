@@ -2,7 +2,7 @@
 # Filename: Map.py
 # Description: Fasade for Map related classes
 
-from maritime.model.vessel.Vessel import Vessel, Status
+from maritime.model.vessel.Vessel import Vessel, Status, afloat
 from cos.math.geometry.Rectangle import Rectangle
 from cos.core.kernel.Service import Service
 from cos.core.kernel.Context import Context
@@ -74,7 +74,7 @@ class Map(Service):
 		# Load all the actors in the simulation
 		objmgr				= ctxt.sim.objects
 		self.world			= ctxt.sim.world
-		self.vessels		= objmgr.get_all("/World/Vehicle/Vessel")
+		self.vessels		= afloat( objmgr.get_all("/World/Vehicle/Vessel") )
 		self.land			= objmgr.get_all("/World/Land")
 		self.sea			= objmgr.get_all("/World/Sea")
 
@@ -153,6 +153,13 @@ class Map(Service):
 		return result
 	
 	def get_nearest(self, vessel:Vessel, distance:float):
+		""" Lists the other vessels within a distance of a vessel
+		Arguments
+			vessel -- Vessel to search around
+			distance -- Search radius in metres
+		Returns
+			A list of (distance, neighbour) pairs
+		"""
 		result	= []
 		vndx	= self.vmap[vessel.vid]
 
@@ -162,7 +169,7 @@ class Map(Service):
 			
 			d	= self.dist_map[vndx[0]][n]
 			if d < distance:
-				result.append((d, vndx[1]))
+				result.append((d, self.vessels[n]))
 		return result
 
 	def in_tss(self, obj):

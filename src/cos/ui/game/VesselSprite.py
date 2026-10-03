@@ -38,6 +38,7 @@ class VesselIcon(AnimatedSprite):
 		self.initialize(12, 8, 2, self.get_color(config), size)
 
 		self.intent		= []
+		self.signal		= []		# Lights and sound signals shown (REQ.036)
 		self.trajectory	= []
 		self.infobox	= True
 		return

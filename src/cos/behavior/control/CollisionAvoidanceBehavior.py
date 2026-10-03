@@ -58,7 +58,7 @@ class CollisionAvoidanceBehavior(Behavior):
 		vehicles	= []
 		
 		for v in world.sim.objects.get_all('/World/Vehicle/Vessel'):
-			if v is self.vehicle:
+			if (v is self.vehicle) or getattr( v, 'meta', False ):		# A fleet controller is not at sea
 				continue
 
 			if Distance.euclidean_squared(v.location, self.vehicle.location) > range:

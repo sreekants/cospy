@@ -5,6 +5,7 @@
 from maritime.regulation.colreg.Resolver import Resolver
 from maritime.regulation.colreg.API import API
 from rules.assurance.TestInspector import TestInspector
+from maritime.model.vessel.Vessel import afloat
 from maritime.model.zone.Location import Location
 from cos.model.rule.Context import Context as RuleContext
 from cos.core.kernel.Service import Service
@@ -50,7 +51,7 @@ class PracticeEvaluator(Service):
 
 		objmgr			= ctxt.sim.objects
 		self.world		= ctxt.sim.world
-		self.vessels	= objmgr.get_all( "/World/Vehicle/Vessel" )
+		self.vessels	= afloat( objmgr.get_all("/World/Vehicle/Vessel") )
 		self.examiners	= objmgr.get_all( PRACTICE[0] )
 		self.inspectors	= objmgr.get_all( PRACTICE[1] )
 		if len( self.inspectors ) == 0:

@@ -41,6 +41,10 @@ packages:
        module: rules.examiner.navigation.NightTimeExaminer
        config: zones=$(CONFIG)/examiner/zones.yaml
 
+     - name: Nuisance
+       module: rules.examiner.navigation.NuisanceExaminer
+       config: zones=$(CONFIG)/examiner/zones.yaml
+
      - name: Overtaking
        module: rules.examiner.navigation.OvertakingExaminer
 

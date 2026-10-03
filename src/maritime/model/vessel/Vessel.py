@@ -5,6 +5,7 @@
 from cos.core.kernel.Context import Context
 from cos.math.geometry import Rectangle
 from cos.model.vehicle.Vehicle import Vehicle
+from cos.model.vehicle.Signal import Signal
 from cos.core.utilities.ArgList import ArgList
 from cos.math.geometry.Rectangle import Rectangle
 
@@ -12,6 +13,15 @@ from enum import Enum, Flag
 from typing import Any
 import math, random
 import numpy as np
+
+SIGNALS     = '$(CONFIG)/maritime/signals.yaml'     # Signal vocabulary (REQ.036)
+
+def afloat(vessels)->list:
+    """ The vessels at sea: every vessel but the meta vessels, such as fleet controllers
+    Arguments
+    	vessels -- Vessels, e.g. every object under /World/Vehicle/Vessel
+    """
+    return [ v for v in vessels if not getattr(v, 'meta', False) ]
 
 class Type(Flag):
     """Enum for the different types of vessel power drive."""
@@ -73,24 +83,21 @@ class Vessel(Vehicle):
             id	= self.__class__.__name__
 
         Vehicle.__init__( self, ctxt, category, type, id, config )
+        self.vessel_type    = type      # Type enum; self.type is the object scope, e.g. 'Vessel.Type.POWER_DRIVEN'
 
         self.name           = config["name"]
 
         identifier          = config["identifier"]
         self.imo            = identifier["imo"]
         self.mmsi           = identifier["mmsi"]
-        self.weight         = config['weight']
+        self.weight         = config['weight']     # Tonnes; None or 0 falls back to the category mass
         self.recid          = int( identifier["imo"] )     # Vessel IMO: the vessel's id in every fact table
 
         self.operation      = 0
         self.status         = Status.UNKNOWN
         self.restriction    = Restriction.NONE
 
-        # Maps an intent category to the value set its actions are recorded in
-        self.intents        = {
-            'Signal': self.intent,
-            'Light': self.intent
-        }
+        Vessel.load_signals( ctxt )
 
         # TODO: Load from the configuration
         self.underkeel_clearance   = .1
@@ -99,11 +106,44 @@ class Vessel(Vehicle):
         return
 
     @property
+    def meta(self)->bool:
+        """ Whether this is a meta vessel, e.g. a fleet controller, rather than a vessel at sea
+        """
+        return bool( self.vessel_type & Type.META_VESSEL )
+
+    @property
+    def weight(self):
+        """ Displacement in tonnes: the vessel record's, else the ship model's, else None
+        """
+        if self.instance_weight:
+            return float( self.instance_weight )
+
+        model   = getattr( self, 'model', None )
+        return model.mass if model is not None else None
+
+    @weight.setter
+    def weight(self, value):
+        self.instance_weight    = value
+
+    @property
     def heading(self):
         """ Returns the object heading
         """
         V	= self.velocity
         return math.degrees(math.atan2( V[1], V[0] ))
+
+    @staticmethod
+    def load_signals(ctxt):
+        """ Loads the signal vocabulary of the scenario once
+        Arguments
+        	ctxt -- Simulation context; without a configuration nothing is loaded
+        """
+        sim     = getattr( ctxt, 'sim', None )
+        config  = getattr( sim, 'config', None )
+        if config is None:
+            return None
+
+        return Signal.configure( config.resolve(SIGNALS), getattr(ctxt, 'log', None) )
 
     def describe(self):
         """ Returns a description of the vessel
@@ -148,37 +188,6 @@ class Vessel(Vehicle):
         """
         self.state( Status.AGROUND )
 
-
-    def signal(self, category:str, action:str, state:bool):
-        """ Raises or lowers a signal, recorded as the intent '<category>.<action>'
-        in the value set mapped to the category
-        Arguments
-        	category -- Intent category (e.g. 'Signal')
-        	action -- Action within the category (e.g. 'FogHorn')
-        	state -- True to raise the signal, False to lower it
-        """
-        values  = self.intents.get(category, None)
-        if values is None:
-            return False
-
-        intent  = f'{category}.{action}'
-        if state:
-            values.set(intent)
-        else:
-            values.reset(intent)
-        return True
-
-    def is_signaled(self, category:str, action:str)->bool:
-        """ Checks whether a signal is raised
-        Arguments
-        	category -- Intent category (e.g. 'Signal')
-        	action -- Action within the category (e.g. 'FogHorn')
-        """
-        values  = self.intents.get(category, None)
-        if values is None:
-            return False
-
-        return values.has(f'{category}.{action}')
 
     def force(self, type, value):
         """ Updates he force vector on the vessel

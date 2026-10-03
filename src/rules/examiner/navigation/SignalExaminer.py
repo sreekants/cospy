@@ -19,9 +19,11 @@ from cos.model.examiner.Precondition import PreconditionSet
 #   and wrong when altering to port. So this examiner does not judge. It publishes
 #   the tuple
 #
-#     (intent, situation)
+#     (intent, signal, situation)
 #
-#   to the topics listed in zones.yaml - by default /Faculty/Regulation/Rules,
+#   where signal is what the vessel is showing (REQ.036), so the rule can tell a
+#   manoeuvre from the signal that accompanies it. It posts the tuple to the
+#   topics listed in zones.yaml - by default /Faculty/Regulation/Rules,
 #   where rule 34 listens - and lets rule 34 decide. Keeping the judgement there keeps implementation of the
 #   rule in one place.
 #
@@ -81,23 +83,24 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 
 		vessel		= rule_ctxt.situation.os
 		intent		= self.intent( rule_ctxt )
+		signal		= self.signal( rule_ctxt )
 		situation	= self.situation( rule_ctxt )
 
-		if (intent is None) and (situation is None):
+		if (intent is None) and (signal is None) and (situation is None):
 			return
 
 		imo			= self.identify( vessel )
-		pair		= ( intent, situation )
+		posted		= ( intent, signal, situation )
 
-		if self.posted.get( imo ) == pair:
+		if self.posted.get( imo ) == posted:
 			return			# Unchanged: not a signalling event
 
-		self.posted[imo]	= pair
-		self.post( ctxt, rule_ctxt, vessel, imo, intent, situation )
+		self.posted[imo]	= posted
+		self.post( ctxt, rule_ctxt, vessel, imo, intent, situation, signal )
 		return
 
-	def post(self, ctxt:Context, rule_ctxt:RuleContext, vessel, imo, intent, situation):
-		""" Posts the (intent, situation) tuple for rule 34
+	def post(self, ctxt:Context, rule_ctxt:RuleContext, vessel, imo, intent, situation, signal=None):
+		""" Posts the (intent, signal, situation) tuple for rule 34
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
@@ -105,6 +108,7 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 			imo -- Own ship IMO
 			intent -- Declared manoeuvring intent
 			situation -- COLREG encounter classification
+			signal -- Signals shown, as one token
 		"""
 		shapes, _rules, _depth	= self.survey( vessel )
 
@@ -114,6 +118,7 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 			'time'		: ctxt.sim.now(),
 			'zone'		: self.zone_name( shapes ),
 			'intent'	: intent,
+			'signal'	: signal,
 			'situation'	: situation,
 		}
 
@@ -132,12 +137,25 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 		Arguments
 			rule_ctxt -- Rule context
 		"""
-		declared	= rule_ctxt.resolve( 'OwnShip.Intent' )
+		return SignalExaminer.token( rule_ctxt.resolve('OwnShip.Intent') )
+
+	@staticmethod
+	def signal(rule_ctxt:RuleContext):
+		""" What the own ship is showing: lights, shapes and sound signals (REQ.036)
+		Arguments
+			rule_ctxt -- Rule context
+		"""
+		return SignalExaminer.token( rule_ctxt.resolve('OwnShip.Signal') )
+
+	@staticmethod
+	def token(declared):
+		""" A value set as one readable token, which is what rule 34 matches on
+		Arguments
+			declared -- Value set, a list, or None
+		"""
 		if declared is None:
 			return None
 
-		# Intent is a ValueSet, which derives from list; a single readable
-		# token is what rule 34 matches on.
 		try:
 			values	= [ str(v) for v in declared ]
 		except TypeError:

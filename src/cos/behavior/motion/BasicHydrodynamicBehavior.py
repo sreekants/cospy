@@ -26,6 +26,7 @@ class BasicHydrodynamicBehavior(MotionBehavior):
 
 		if ('ship.model' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
 			self.load_model( ctxt, ctxt.sim.config.resolve(args['ship.model']) )
+			self.model.displace( config.get('weight') )		# Tonnes; none keeps the category mass
 
 		pose 	  	= config["pose"]
 

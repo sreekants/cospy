@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Filename: Fleet.py
-# Description: Implementation of a simulation object for a sea plane
+# Description: Implementation of a fleet controller: a meta vessel that flies its members, not a vessel at sea
 
 from maritime.model.vessel.Vessel import Vessel, Type
 
@@ -12,7 +12,7 @@ class Fleet(Vessel):
 			id -- Unique identifier
 			config -- Configuration attributes
 		"""
-		Vessel.__init__( self, ctxt, Type.SEAPLANE, id, config )
+		Vessel.__init__( self, ctxt, Type.FLEET, id, config )
 		return
 
 

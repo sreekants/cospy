@@ -12,7 +12,7 @@ class SailingVessel(Vessel):
 			id -- Unique identifier
 			config -- Configuration attributes
 		"""
-		Vessel.__init__( self, ctxt, Type.SAILING, config )
+		Vessel.__init__( self, ctxt, Type.SAILING, id, config )
 		return
 
 

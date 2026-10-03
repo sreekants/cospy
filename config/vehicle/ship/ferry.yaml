@@ -10,9 +10,14 @@ hydrodynamics:
 
 # Specification: medium momentum, fast heading, crosses TSS perpendicularly.
 physics:
-    mass: 50000 
+    # Category values for a commuter passenger ferry: representative of the class, not of one ship.
+    # mass is the displacement at the design load line, in tonnes, and the default weight of a
+    # vessel whose vessel.s3db record gives none. deadweight is what it can carry, in tonnes;
+    # lightship = mass - deadweight. The hydrodynamic model uses each vessel's own weight.
+    mass: 1200
+    deadweight: 350
     linear_damping_coeff: 500000000
-    length: 20
+    length: 75             # metres, length overall
     width: 3
     draft: 40
     momentum: 0.75

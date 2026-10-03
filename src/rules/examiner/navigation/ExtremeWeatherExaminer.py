@@ -5,6 +5,7 @@
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from rules.examiner.risk.RiskModel import load
+from maritime.model.zone.Ledger import Ledger
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 
@@ -29,6 +30,9 @@ import yaml
 # directly: sea state by sampling the SEA_WAVE force field at the vessel, and
 # payload and size off the vessel itself. Only visibility comes from a term.
 # config/risk/capsize.model.yaml holds the state boundaries.
+#
+# Every assessment is written to fact_capsize with its raw inputs and evidence,
+# whether or not it crosses the alarm threshold (COS.043).
 
 
 
@@ -87,8 +91,8 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 		if (self.engine is None) or (self.applicable(rule_ctxt) == False):
 			return
 
-		vessel		= rule_ctxt.situation.os
-		evidence	= self.observe( ctxt, rule_ctxt, vessel )
+		vessel			= rule_ctxt.situation.os
+		evidence, raw	= self.observe( ctxt, rule_ctxt, vessel )
 		if len( evidence ) == 0:
 			return
 
@@ -97,7 +101,7 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 
 		capsize		= float( self.engine.posterior('capsize')[{'capsize': 'yes'}] )
 
-		self.report( ctxt, vessel, evidence, capsize )
+		self.report( ctxt, vessel, evidence, capsize, raw )
 		return
 
 	def observe(self, ctxt:Context, rule_ctxt, vessel):
@@ -107,31 +111,54 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 			rule_ctxt -- Rule context
 			vessel -- Own ship
 		Returns
-			A dictionary of node name -> state label
+			(evidence, raw) - node name -> state label, and node name -> the value observed or None
 		"""
-		evidence	= {}
+		raw			= {
+			'wave_height'	: self.sea_state( vessel ),
+			'visibility'	: self.reported_visibility( rule_ctxt ),
+			'payload'		: self.load_fraction( vessel ),
+			'vessel_size'	: self.length( rule_ctxt, vessel ),
+		}
 
-		sea			= self.sea_state( vessel )
-		if sea is not None:
-			evidence['wave_height']		= self.band( 'wave_height', sea )
+		evidence	= {
+			'wave_height'	: self.band( 'wave_height', raw['wave_height'] ) if raw['wave_height'] is not None else None,
+			'visibility'	: self.visibility( rule_ctxt ),
+			'payload'		: self.payload( vessel ),
+			'vessel_size'	: self.size( rule_ctxt, vessel ),
+		}
 
-		evidence['visibility']		= self.visibility( rule_ctxt )
-		evidence['payload']			= self.payload( vessel )
-		evidence['vessel_size']		= self.size( rule_ctxt, vessel )
+		return { k: v for k, v in evidence.items() if v is not None }, raw
 
-		return { k: v for k, v in evidence.items() if v is not None }
-
-	def report(self, ctxt:Context, vessel, evidence, capsize):
+	def report(self, ctxt:Context, vessel, evidence, capsize, raw=None):
 		""" Records the assessment and scores it when it crosses the threshold
 		Arguments
 			ctxt -- Simulation context
 			vessel -- Own ship
 			evidence -- Evidence used
 			capsize -- P(capsize)
+			raw -- Values observed, by node; None when unknown
 		"""
 		shapes, _rules, _depth	= self.survey( vessel )
 		zone	= self.zone_name( shapes )
 		penalty	= 0.0
+		raw		= raw or {}
+
+		# Field order matches fact_capsize in maritime.xml
+		ctxt.sim.data.push( 'fact_capsize', (
+			ctxt.sim.seconds(),
+			Ledger.recid( vessel ),
+			zone,
+			raw.get( 'wave_height' ),
+			evidence.get( 'wave_height' ),
+			raw.get( 'visibility' ),
+			evidence.get( 'visibility' ),
+			raw.get( 'payload' ),
+			evidence.get( 'payload' ),
+			raw.get( 'vessel_size' ),
+			evidence.get( 'vessel_size' ),
+			capsize,
+			self.threshold,
+		) )
 
 		if capsize >= self.threshold:
 			penalty	= self.violate( ctxt, vessel, self.EVENT, shapes, value=capsize,
@@ -175,43 +202,77 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 
 		return strongest
 
+	@staticmethod
+	def reported_visibility(rule_ctxt):
+		""" Scenario visibility in nautical miles, or None; the term needs no target ship
+		Arguments
+			rule_ctxt -- Rule context
+		"""
+		reported	= rule_ctxt.resolve( '(OwnShip,TargetShip).Visibility' )
+		try:
+			return float( reported ) if reported is not None else None
+		except (TypeError, ValueError):
+			return None
+
 	def visibility(self, rule_ctxt):
 		""" Visibility state
 		Arguments
 			rule_ctxt -- Rule context
 		"""
-		band	= self.bands.get( 'visibility', {} )
+		band		= self.bands.get( 'visibility', {} )
+		reported	= self.reported_visibility( rule_ctxt )
 
-		if rule_ctxt.situation.ts is not None:
-			reported	= rule_ctxt.resolve( '(OwnShip,TargetShip).Visibility' )
-			if reported is not None:
-				try:
-					poor, good	= band.get( 'states', ['poor', 'good'] )
-					return poor if float(reported) < float(band.get('edge', 1.0)) else good
-				except (TypeError, ValueError):
-					pass
+		if reported is None:
+			return band.get( 'default' )
 
-		return band.get( 'default' )
+		poor, good	= band.get( 'states', ['poor', 'good'] )
+		return poor if reported < float(band.get('edge', 1.0)) else good
 
-	def payload(self, vessel):
-		""" Payload state, as a fraction of declared capacity
+	@staticmethod
+	def load_fraction(vessel):
+		""" Load as a fraction of deadweight, (weight - lightship) / deadweight, or None when unknown
 		Arguments
 			vessel -- Own ship
 		"""
-		band		= self.bands.get( 'payload', {} )
 		config		= getattr( vessel, 'config', None ) or {}
-		args		= ArgList( config.get('settings', None) )
-
-		capacity	= args['capacity'] or args['deadweight']
+		override	= ArgList( config.get('settings', None) )['deadweight']		# Tonnes, overrides the ship model's
+		model		= getattr( vessel, 'model', None )
 		weight		= getattr( vessel, 'weight', None )
 
-		if (capacity is None) or (weight is None):
-			return band.get( 'default' )
-
 		try:
-			return self.band( 'payload', float(weight) / float(capacity) )
+			if model is not None:
+				return model.load_fraction( weight, override )
+			return float( weight ) / float( override ) if (weight is not None) and override else None
 		except (TypeError, ValueError, ZeroDivisionError):
-			return band.get( 'default' )
+			return None
+
+	def payload(self, vessel):
+		""" Payload state, from the load as a fraction of deadweight
+		Arguments
+			vessel -- Own ship
+		"""
+		fraction	= self.load_fraction( vessel )
+		if fraction is None:
+			return self.bands.get( 'payload', {} ).get( 'default' )
+
+		return self.band( 'payload', fraction )
+
+	@staticmethod
+	def length(rule_ctxt, vessel):
+		""" Length overall in metres, or None for a vessel with no ship model
+		Arguments
+			rule_ctxt -- Rule context
+			vessel -- Own ship
+		"""
+		# OwnShip.Length reads 0.0 without a model, which would pass for a small hull
+		if getattr( vessel, 'model', None ) is None:
+			return None
+
+		length	= rule_ctxt.resolve( 'OwnShip.Length' )
+		try:
+			return float( length ) if length is not None else None
+		except (TypeError, ValueError):
+			return None
 
 	def size(self, rule_ctxt, vessel):
 		""" Size state, from length overall
@@ -220,7 +281,7 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 			vessel -- Own ship
 		"""
 		band	= self.bands.get( 'vessel_size', {} )
-		length	= rule_ctxt.resolve( 'OwnShip.Length' )
+		length	= self.length( rule_ctxt, vessel )
 
 		if length is None:
 			return band.get( 'default' )

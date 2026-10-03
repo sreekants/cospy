@@ -5,6 +5,7 @@
 from turtle import position
 
 from cos.model.vehicle.Intent import Intent
+from cos.model.vehicle.Signal import Signal
 from cos.model.vehicle.Engine import Engine
 from cos.model.vehicle.ValueSet import ValueSet
 from cos.core.kernel.Object import Object
@@ -43,6 +44,7 @@ class Vehicle(Object):
 
         # Property sets
         self.intent         = Intent()
+        self.signal         = Signal()          # Lights, shapes and sound signals shown (REQ.036)
         self.mode           = ValueSet()
         self.model          = None
         self.fleet          = None
@@ -145,6 +147,7 @@ class Vehicle(Object):
 			"rect": [rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top],
             "angle": [dx[0],dx[1],dx[2]],
             "intent": self.intent,
+            "signal": self.signal,
             "time": world.sim.clock.local.isoformat()     # Scenario local time, for the viewer's clock
             } )
         return
@@ -184,6 +187,29 @@ class Vehicle(Object):
         	name -- Name of the object
         """
         return self.devices.get(name)
+
+    def raise_signal(self, name:str):
+        """ Shows a light, shape or sound signal
+        Arguments
+        	name -- Signal name from the vocabulary, e.g. 'Sound.Foghorn'
+        """
+        self.signal.set( name )
+        return
+
+    def lower_signal(self, name:str):
+        """ Stops showing a signal
+        Arguments
+        	name -- Signal name
+        """
+        self.signal.reset( name )
+        return
+
+    def is_signaled(self, pattern:str)->bool:
+        """ Checks whether a signal matching a pattern is shown
+        Arguments
+        	pattern -- Signal name or wildcard pattern, e.g. 'Sound.Foghorn*'
+        """
+        return self.signal.find( pattern )
 
     def ioctl( self, op, arg ):
         """ Sends a signal to the actors

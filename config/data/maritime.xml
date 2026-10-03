@@ -12685,6 +12685,135 @@
 </Measures>
 
 </Fact>
+<Fact> <Name>Capsize</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_capsize</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone the vessel was in</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>WaveHeight</Name>
+ <Type>double</Type>
+ <Display>Wave height</Display>
+ <Description>Significant wave height at the vessel - largest SEA_WAVE vector - empty when no wave field covers it</Description>
+ <FieldName>wave_height</FieldName>
+ <Unit>m</Unit>
+</Measure>
+<Measure> <Name>WaveState</Name>
+ <Type>string</Type>
+ <Display>Wave state</Display>
+ <Description>wave_height evidence - calm moderate or severe - empty when not observed</Description>
+ <FieldName>wave_state</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Visibility</Name>
+ <Type>double</Type>
+ <Display>Visibility</Display>
+ <Description>Scenario visibility</Description>
+ <FieldName>visibility</FieldName>
+ <Unit>nm</Unit>
+</Measure>
+<Measure> <Name>VisibilityState</Name>
+ <Type>string</Type>
+ <Display>Visibility state</Display>
+ <Description>visibility evidence - poor or good</Description>
+ <FieldName>visibility_state</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Payload</Name>
+ <Type>double</Type>
+ <Display>Payload</Display>
+ <Description>Load as a fraction of deadweight - (weight - lightship) / deadweight - empty when unknown</Description>
+ <FieldName>payload</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>PayloadState</Name>
+ <Type>string</Type>
+ <Display>Payload state</Display>
+ <Description>payload evidence - light laden or overladen</Description>
+ <FieldName>payload_state</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Length</Name>
+ <Type>double</Type>
+ <Display>Length</Display>
+ <Description>Length overall from the ship model - empty when the vessel has none</Description>
+ <FieldName>length</FieldName>
+ <Unit>m</Unit>
+</Measure>
+<Measure> <Name>SizeState</Name>
+ <Type>string</Type>
+ <Display>Size state</Display>
+ <Description>vessel_size evidence - small or large</Description>
+ <FieldName>size_state</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>PCapsize</Name>
+ <Type>float</Type>
+ <Display>P(capsize)</Display>
+ <Description>P(capsize = yes) given the evidence</Description>
+ <FieldName>p_capsize</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Threshold</Name>
+ <Type>float</Type>
+ <Display>Threshold</Display>
+ <Description>alarm_threshold above which weather.capsize_risk is scored</Description>
+ <FieldName>threshold</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
 </Facts>
 
  <Dimensions><Dimension> <Name>Location</Name>

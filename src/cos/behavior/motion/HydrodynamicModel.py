@@ -59,11 +59,9 @@ class Ship:
         	width -- #TODO
         	dt -- #TODO
         """
-        self.mass       = mass
         self.length     = length
         self.width      = width
-        
-        self.moment_of_inertia_z = mass*width*length*length*length/12
+        self.displace( mass )
         self.lin_damping = linear_damping_coeff
         self.heading_constant = 10
 
@@ -78,6 +76,15 @@ class Ship:
             kp=4E9, kd=0, ki=1E8, sampling_time=dt
         )  # controller gains should not be hardcoded
 
+
+    def displace(self, mass):
+        """ Sets the mass and the yaw inertia that follows from it
+        Arguments
+        	mass -- Mass in kilograms
+        """
+        self.mass       = mass
+        self.moment_of_inertia_z = mass*self.width*self.length*self.length*self.length/12
+        return
 
     def dynamics(self, states, speed_ref, wind_speed, heading_ref, time_step):
         """ #TODO: dynamics

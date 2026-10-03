@@ -43,6 +43,13 @@ class PathFollowingMotionBehavior(MotionBehavior):
 		if ('pathfile' in args) and (ctxt is not None) and (ctxt.sim.config is not None):
 			self.load( ctxt, ctxt.sim.config.resolve(args['pathfile']) )
 
+			# headstart=<ticks>: start under way, where the trip would have taken it by then
+			headstart	= args.ToFloat( 'headstart' )
+			if headstart:
+				short	= self.advance( headstart * Scales.of(ctxt).seconds_per_tick )
+				if short and (ctxt.log is not None):
+					ctxt.log.warning( 'PathFollowing', f'{args["pathfile"]}: headstart={headstart:g} runs past the end of the trip' )
+
 		self.plans		= []	# Stack of plans 
 		return
 	
@@ -263,6 +270,42 @@ class PathFollowingMotionBehavior(MotionBehavior):
 
 		self.next		= self.path[self.atpoint]
 		return True
+
+	def advance(self, seconds):
+		""" Starts the trip part-way, where sailing it for a time would have taken the vessel
+		Arguments
+			seconds -- Simulated seconds of sailing, at each leg's speed
+		Returns
+			True when a trip that does not loop ends first; the vessel then starts on its last leg
+		"""
+		legs	= [ (Distance.euclidean(self.path[n][1], self.path[n+1][1]), self.path[n][2][0]) for n in range(len(self.path) - 1) ]
+		total	= sum( d / v for d, v in legs if v > 0 )
+		if (len(legs) == 0) or (seconds <= 0) or (total <= 0):
+			return False
+
+		if self.looprun:
+			seconds	= seconds % total
+
+		short	= False
+		n		= 0
+		while True:
+			d, v	= legs[n]
+			if (v <= 0) or (seconds < d / v):
+				break
+			seconds	-= d / v
+			if n == len(legs) - 1:
+				short, seconds	= True, d / v
+				break
+			n		+= 1
+
+		start, end		= self.path[n][1], self.path[n+1][1]
+		d, v			= legs[n]
+		fraction		= min( 1.0, seconds * v / d ) if (d > 0) and (v > 0) else 0.0
+		self.current	= self.path[n]
+		self.next		= self.path[n+1]
+		self.atpoint	= n + 1
+		self.x			= start + (end - start) * fraction
+		return short
 
 	def get_pos(self, world, t):
 		""" Returns position and orientation vector

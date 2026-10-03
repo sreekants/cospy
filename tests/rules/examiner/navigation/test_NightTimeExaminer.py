@@ -7,6 +7,11 @@ import types, unittest
 from cos.core.time.Clock import Clock
 from rules.examiner.navigation.NightTimeExaminer import NightTimeExaminer
 from maritime.model.vessel.Vessel import Vessel
+from cos.model.vehicle.Signal import Signal, Vocabulary
+
+import os
+
+VOCABULARY	= os.path.join( os.path.dirname(__file__), '..', '..', '..', '..', 'config', 'maritime', 'signals.yaml' )
 
 
 def context(epoch):
@@ -21,7 +26,7 @@ def vessel():
 	return Vessel( types.SimpleNamespace(log=None, sim=None), 'Vessel', 'A', config )
 
 
-LIGHTS	= ['masthead', 'sidelights', 'sternlight']
+LIGHTS	= ['Light.Masthead.*', 'Light.Sidelight', 'Light.Sternlight']
 
 
 def examiner():
@@ -45,17 +50,37 @@ class NightTimeExaminerTestCase(unittest.TestCase):
 		ctxt, clock	= context( '2026-06-02T02:00:00+03:00' )
 		self.assertEqual( examiner().night(ctxt, {}), '2026-06-01' )
 
-	def test_a_vessel_declaring_no_light_intent_shows_none(self):
+	def test_a_vessel_showing_no_light_shows_none(self):
 		self.assertEqual( NightTimeExaminer.missing(vessel(), LIGHTS), LIGHTS )
 
-	def test_a_light_counts_once_its_intent_is_set(self):
+	def test_a_light_counts_once_it_is_raised(self):
 		v	= vessel()
-		v.signal( 'Light', 'masthead', True )
-		v.signal( 'Light', 'sidelights', True )
-		self.assertEqual( NightTimeExaminer.missing(v, LIGHTS), ['sternlight'] )
+		v.raise_signal( 'Light.Masthead.Forward.1x' )		# Matches 'Light.Masthead.*'
+		v.raise_signal( 'Light.Sidelight' )
+		self.assertEqual( NightTimeExaminer.missing(v, LIGHTS), ['Light.Sternlight'] )
 
-		v.signal( 'Light', 'sidelights', False )
-		self.assertEqual( NightTimeExaminer.missing(v, LIGHTS), ['sidelights', 'sternlight'] )
+		v.lower_signal( 'Light.Sidelight' )
+		self.assertEqual( NightTimeExaminer.missing(v, LIGHTS), ['Light.Sidelight', 'Light.Sternlight'] )
+
+	def test_lights_are_not_intents(self):
+		v	= vessel()
+		v.raise_signal( 'Light.Sidelight' )
+		self.assertEqual( list(v.intent), [] )
+
+	def test_required_lights_outside_the_vocabulary_fail_at_setup(self):
+		Signal.vocabulary	= Vocabulary( VOCABULARY )
+		try:
+			rules	= types.SimpleNamespace( source='zones.yaml', defaults={'required_lights': ['Light.Sidelights']},
+											 types={}, zones={} )
+			e		= examiner()
+			e.rules	= rules
+			with self.assertRaisesRegex( ValueError, r"zones.yaml: zones.default.required_lights: 'Light.Sidelights'" ):
+				e.check_lights()
+
+			rules.defaults	= {'required_lights': LIGHTS}
+			e.check_lights()
+		finally:
+			Signal.vocabulary	= None
 
 if __name__ == '__main__':
     unittest.main()

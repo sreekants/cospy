@@ -53,7 +53,7 @@ class OperatorTestCase(unittest.TestCase):
 		self.assertFalse( judge("OS.Intent has 'Manouever.CollisionAvoidance.*'") )
 
 	def test_in_matches_an_intent_set_against_an_array(self):
-		self.assertTrue( judge("OS.Intent in ['Alert.*', 'Signal.FogHorn']", ['Signal.FogHorn']) )
+		self.assertTrue( judge("OS.Intent in ['Alert.*', 'Sound.Foghorn']", ['Sound.Foghorn']) )
 		self.assertFalse( judge("OS.Intent not in ['*Anchoring*']", ['Operation.Anchoring']) )
 
 	def test_array_elements_may_be_constants(self):

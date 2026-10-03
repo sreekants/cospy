@@ -106,8 +106,8 @@ class GeometryTestCase(unittest.TestCase):
 			self.assertEqual( r.Direction(), expected )
 
 	def test_detect_reports_the_targets_signals(self):
-		r, _	= resolver( Vessel('OS', (0, 0), (5, 0)), Vessel('TS', (100, 0), (0, 0), ['Signal.FogHorn']) )
-		self.assertEqual( r.Detect(), ['Signal.FogHorn'] )
+		r, _	= resolver( Vessel('OS', (0, 0), (5, 0)), Vessel('TS', (100, 0), (0, 0), ['Sound.Foghorn']) )
+		self.assertEqual( r.Detect(), ['Sound.Foghorn'] )
 
 	def test_no_target_gives_no_value(self):
 		r, _	= resolver( Vessel('OS', (0, 0), (5, 0)), None )

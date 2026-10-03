@@ -35,6 +35,7 @@ class ZoneRules:
 		self.concerns	= {}		# Event -> cross-cutting concern
 		self.vocabulary	= []		# Concerns an event may map to - the j axis
 		self.sections	= {}		# Examiner-specific blocks, e.g. 'collision'
+		self.source		= None		# Resolved path of the file loaded
 		return
 
 	def load(self, ctxt:Context, path:str):
@@ -47,6 +48,7 @@ class ZoneRules:
 			return
 
 		resolved	= ctxt.sim.config.resolve( path )
+		self.source	= resolved
 		config		= yaml.safe_load( ctxt.sim.fs.read_file_as_bytes(resolved) )
 		rules		= config.get( 'zones', {} ) if config else {}
 

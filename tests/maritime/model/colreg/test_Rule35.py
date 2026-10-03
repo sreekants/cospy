@@ -11,7 +11,7 @@ FOG, CLEAR	= 1.0, 10.0		# Visibility, nautical miles
 
 def vessel(velocity=(5.0, 0.0), signal=False, **kwargs):
 	own	= Vessel( 'OS', (0.0, 0.0), velocity, **kwargs )
-	own.intent.set( 'Signal.FogHorn' ) if signal else None
+	own.signal.set( 'Sound.Foghorn' ) if signal else None
 	return Situation( own, None )
 
 
@@ -37,6 +37,13 @@ class Rule35TestCase(unittest.TestCase):
 	def test_an_anchored_vessel_is_not_judged_under_a_to_c(self):
 		self.assertEqual( judge('Rule35', vessel(velocity=(0.0, 0.0), status=Status.ANCHORED), FOG), [] )
 
+
+	def test_a_live_vessel_is_judged_by_its_type_enum(self):
+		# A built vessel's .type is its object scope; the enum is vessel_type (Vessel.__init__)
+		situation	= vessel()
+		situation.os.vessel_type	= situation.os.type
+		situation.os.type			= 'Vessel.Type.POWER_DRIVEN'
+		self.assertEqual( judge('Rule35', situation, FOG), ['COLREG.Rule35.a'] )
 
 if __name__ == '__main__':
 	unittest.main()

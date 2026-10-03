@@ -70,7 +70,7 @@ class Partition:
 		values.append( str(AUDIT_REGISTER) )
 		values.append( str(self.case_id) )
 		values.append( str(tick) )
-		values.extend( map(str, data) )
+		values.extend( None if v is None else str(v) for v in data )	# None is NULL, not the text 'None'
 
 		db.addkv( self.topic, self.fields, values )		
 		return

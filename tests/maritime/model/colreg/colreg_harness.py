@@ -11,6 +11,8 @@ from tests.maritime.model.risk.test_ConcernWeights import source_module, CONFIG
 
 VesselModel		= source_module( 'maritime.model.vessel.Vessel' )
 Intent			= source_module( 'cos.model.vehicle.Intent' ).Intent
+Signal			= source_module( 'cos.model.vehicle.Signal' ).Signal
+Vehicle			= source_module( 'cos.model.vehicle.Vehicle' ).Vehicle
 Type, Status	= VesselModel.Type, VesselModel.Status
 Operation		= VesselModel.Operation
 Restriction		= VesselModel.Restriction
@@ -28,8 +30,8 @@ class Vessel(Ship):
 		self.operation		= operation
 		self.restriction	= restriction
 		self.intent			= Intent()
-		self.intents		= {'Signal': self.intent, 'Light': self.intent}
-		self.is_signaled	= types.MethodType( VesselModel.Vessel.is_signaled, self )
+		self.signal			= Signal()
+		self.is_signaled	= types.MethodType( Vehicle.is_signaled, self )
 
 
 class Pass:

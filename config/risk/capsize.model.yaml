@@ -18,12 +18,16 @@ capsize:
     edge: 1.0
     default: good                # when nothing reports visibility
 
-  # Payload as a fraction of the vessel's declared capacity. A vessel that
-  # declares no capacity is treated as laden rather than light, so an
+  # Load as a fraction of deadweight: (weight - lightship) / deadweight, with
+  # weight the vessel's displacement in tonnes (vessel.s3db, else the ship
+  # model's mass) and lightship = mass - deadweight from its ship model. A
+  # vessel at its category weight is loaded to its design deadweight, 1.0, so
+  # 'overladen' starts above it: more than 5 % beyond the design load. A
+  # vessel with no deadweight is treated as laden rather than light, so an
   # unconfigured vessel is not silently the safest thing afloat.
   payload:
     states: [light, laden, overladen]
-    edges: [0.35, 0.95]
+    edges: [0.35, 1.05]
     default: laden
 
   # Length overall, metres.
