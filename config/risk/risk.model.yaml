@@ -27,6 +27,16 @@ risk:
       term: "(OwnShip,TargetShip).OnCollisionCourse"
       discretize: state       # already yes/no
 
+  vessel:
+    # --- own ship  ------------------------------------------------------
+    - node: vessel_size
+      term: "OwnShip.RelativeSize"
+      discretize: state       # small/large, relative to own vessel
+
+    - node: payload
+      term: "OwnShip.Payload"
+      discretize: state       # small/large, relative to own vessel
+
   target:
     # --- target ---------------------------------------------------------
     - node: size_other_vessel
@@ -52,6 +62,12 @@ risk:
       discretize: threshold
       states: [critical, noncritical]
       at: 8.0                 # critical above 8 m/s
+
+    - node: visibility
+      term: "(OwnShip,Map.Sea).Visibility"
+      discretize: threshold
+      states: [poor, good]
+      at: 1.0                 # poor below 1.0
 
   at_sea:
     # --- waterway ------------------------------------------------------------

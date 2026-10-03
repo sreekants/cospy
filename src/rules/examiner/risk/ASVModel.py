@@ -263,7 +263,11 @@ if __name__ == "__main__":
     report(bn, network, tables)
 
     matrix = load_territory(args.territory)
-    print(f"\nexpected loss [{CURRENCY}], placeholder tables")
+    # The label names where the tables came from rather than asserting they are
+    # placeholders, which stopped being true once ASVCPTBuilder replaced the
+    # fifteen conditional tables with the paper's own.
+    sources = sorted({t.source for t in tables})
+    print(f"\nexpected loss [{CURRENCY}], from {len(sources)} table source(s)")
     print(f"  valuation from {args.territory}")
     print(f"  no evidence                      {expected_loss(bn, matrix=matrix):>14,.0f}")
     print(f"  target on collision course       "

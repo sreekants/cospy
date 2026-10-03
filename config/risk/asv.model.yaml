@@ -181,16 +181,27 @@ inference:
 
 # --- provenance of the numbers below --------------------------------------
 #
-# Only two groups come from the paper: the four static priors of Table A.6,
-# and the uniform priors on the dynamic input nodes, which is the paper's own
-# choice because their evidence is always supplied during operation. Every
-# conditional table is a PLACEHOLDER - monotone and sign-correct so the model
-# propagates sensibly, but not calibrated and not citable.
+#   table_a6           4 tables. Table A.6 of the paper, verbatim.
+#   uniform_by_design  11 tables. The paper's own choice for the dynamic
+#                      input nodes, whose evidence is always supplied during
+#                      operation, so the prior never shows.
+#   paper_cpt         15 tables. The conditional tables, transcribed
+#                      from the paper's risk-model CSV by ASVCPTBuilder.py.
+#                      Do not hand-edit them: rerun the builder.
+#
+# Parent order follows the CSV, not the model's earlier arbitrary order, so
+# that a reader can lay a table beside the source and check it row by row.
+#
+# own_vessel_fails names two parents the paper does not: the CSV calls them
+# "Incorrect control action" and "Loss of control", while Fig. 2 and Table A.4
+# call them manual and autonomous control failure and describe them
+# identically. The mapping below is arbitrary and harmless - that table is
+# symmetric, so either assignment gives the same matrix.
 
 sources:
   table_a6: "Kristensen et al. (2025), Table A.6"
   uniform_by_design: "Kristensen et al. (2025), Section 2.3 - uniform by design"
-  placeholder: "PLACEHOLDER - elicit with Vinnem et al. (2012) templates"
+  paper_cpt: "Kristensen et al. (2025), risk model CSV - EvaluatingTheEffectOfRiskMetrics_risk_model_info.csv"
 
 nodes:
   manual_control_failure:
@@ -283,275 +294,292 @@ nodes:
     table:
       - [0.5, 0.5]    # prior
 
-  environmental:
-    source: placeholder
-    parents: [wind_speed, wave_height]
-    table:
-      - [0.95, 0.05]    # critical, critical
-      - [ 0.6,  0.4]    # critical, noncritical
-      - [ 0.6,  0.4]    # noncritical, critical
-      - [0.02, 0.98]    # noncritical, noncritical
-
+  # Elicitation weight per parent: manual_control_failure=High, autonomous_control_failure=High
   own_vessel_fails:
-    source: placeholder
+    source: paper_cpt
     parents: [manual_control_failure, autonomous_control_failure]
     table:
-      - [  0.99,   0.01]    # yes, yes
-      - [   0.2,    0.8]    # yes, no
-      - [   0.5,    0.5]    # no, yes
-      - [0.0001, 0.9999]    # no, no
+      - [  0.9,   0.1]    # yes, yes
+      - [0.455, 0.545]    # yes, no
+      - [0.455, 0.545]    # no, yes
+      - [ 0.01,  0.99]    # no, no
 
-  waterway_properties:
-    source: placeholder
-    parents: [distance_to_shore, depth]
-    table:
-      - [0.9825, 0.0175]    # state_1, critical
-      - [  0.57,   0.43]    # state_1, noncritical
-      - [0.9475, 0.0525]    # state_2, critical
-      - [  0.51,   0.49]    # state_2, noncritical
-      - [0.9125, 0.0875]    # state_3, critical
-      - [  0.45,   0.55]    # state_3, noncritical
-      - [0.8775, 0.1225]    # state_4, critical
-      - [  0.39,   0.61]    # state_4, noncritical
-      - [0.8425, 0.1575]    # state_5, critical
-      - [  0.33,   0.67]    # state_5, noncritical
-      - [0.8075, 0.1925]    # state_6, critical
-      - [  0.27,   0.73]    # state_6, noncritical
-      - [0.7725, 0.2275]    # state_7, critical
-      - [  0.21,   0.79]    # state_7, noncritical
-      - [0.7375, 0.2625]    # state_8, critical
-      - [  0.15,   0.85]    # state_8, noncritical
-      - [0.7025, 0.2975]    # state_9, critical
-      - [  0.09,   0.91]    # state_9, noncritical
-      - [0.6675, 0.3325]    # state_10, critical
-      - [  0.03,   0.97]    # state_10, noncritical
-
+  # Developed based on template method but tuned
+  # Elicitation weight per parent: dcpa=3, tcpa=3
   collision_encounter:
-    source: placeholder
+    source: paper_cpt
     parents: [dcpa, tcpa]
     table:
-      - [           0.97,            0.03]    # state_1, state_1
-      - [ 0.733903428422,  0.266096571578]    # state_1, state_2
-      - [ 0.556482215907,  0.443517784093]    # state_1, state_3
-      - [ 0.423154203393,  0.576845796607]    # state_1, state_4
-      - [ 0.322961229458,  0.677038770542]    # state_1, state_5
-      - [  0.24766848462,   0.75233151538]    # state_1, state_6
-      - [ 0.191087696541,  0.808912303459]    # state_1, state_7
-      - [ 0.148568519075,  0.851431480925]    # state_1, state_8
-      - [ 0.116616322689,  0.883383677311]    # state_1, state_9
-      - [0.0926049726412,  0.907395027359]    # state_1, state_10
-      - [ 0.656804043734,  0.343195956266]    # state_2, state_1
-      - [ 0.498543779005,  0.501456220995]    # state_2, state_2
-      - [ 0.379614783664,  0.620385216336]    # state_2, state_3
-      - [ 0.290242344178,  0.709757655822]    # state_2, state_4
-      - [ 0.223080985277,  0.776919014723]    # state_2, state_5
-      - [ 0.172610749091,  0.827389250909]    # state_2, state_6
-      - [ 0.134683512621,  0.865316487379]    # state_2, state_7
-      - [ 0.106182055625,  0.893817944375]    # state_2, state_8
-      - [0.0847638578727,  0.915236142127]    # state_2, state_9
-      - [0.0686685686033,  0.931331431397]    # state_2, state_10
-      - [ 0.446862515911,  0.553137484089]    # state_3, state_1
-      - [ 0.340777487972,  0.659222512028]    # state_3, state_2
-      - [ 0.261056998341,  0.738943001659]    # state_3, state_3
-      - [  0.20114886059,   0.79885113941]    # state_3, state_4
-      - [   0.1561292554,    0.8438707446]    # state_3, state_5
-      - [ 0.122298044356,  0.877701955644]    # state_3, state_6
-      - [0.0968746574598,   0.90312534254]    # state_3, state_7
-      - [ 0.077769559494,  0.922230440506]    # state_3, state_8
-      - [0.0634125121907,  0.936587487809]    # state_3, state_9
-      - [0.0526235171466,  0.947376482853]    # state_3, state_10
-      - [ 0.306134501317,  0.693865498683]    # state_4, state_1
-      - [ 0.235023580505,  0.764976419495]    # state_4, state_2
-      - [ 0.181585338225,  0.818414661775]    # state_4, state_3
-      - [  0.14142771257,   0.85857228743]    # state_4, state_4
-      - [ 0.111250168746,  0.888749831254]    # state_4, state_5
-      - [0.0885724298023,  0.911427570198]    # state_4, state_6
-      - [0.0715306239274,  0.928469376073]    # state_4, state_7
-      - [0.0587240937794,  0.941275906221]    # state_4, state_8
-      - [0.0491002771702,   0.95089972283]    # state_4, state_9
-      - [0.0418681975156,  0.958131802484]    # state_4, state_10
-      - [ 0.211801692095,  0.788198307905]    # state_5, state_1
-      - [ 0.164134616383,  0.835865383617]    # state_5, state_2
-      - [ 0.128313891358,  0.871686108642]    # state_5, state_3
-      - [  0.10139542988,   0.89860457012]    # state_5, state_4
-      - [0.0811668173149,  0.918833182685]    # state_5, state_5
-      - [0.0659654743018,  0.934034525698]    # state_5, state_6
-      - [0.0545420102033,  0.945457989797]    # state_5, state_7
-      - [0.0459575363249,  0.954042463675]    # state_5, state_8
-      - [0.0395064991324,  0.960493500868]    # state_5, state_9
-      - [0.0346586911654,  0.965341308835]    # state_5, state_10
-      - [ 0.148568519075,  0.851431480925]    # state_6, state_1
-      - [ 0.116616322689,  0.883383677311]    # state_6, state_2
-      - [0.0926049726412,  0.907395027359]    # state_6, state_3
-      - [0.0745609883042,  0.925439011696]    # state_6, state_4
-      - [0.0610013437984,  0.938998656202]    # state_6, state_5
-      - [0.0508115788501,   0.94918842115]    # state_6, state_6
-      - [0.0431542018696,   0.95684579813]    # state_6, state_7
-      - [0.0373998569443,  0.962600143056]    # state_6, state_8
-      - [0.0330755973964,  0.966924402604]    # state_6, state_9
-      - [0.0298260145368,  0.970173985463]    # state_6, state_10
-      - [ 0.106182055625,  0.893817944375]    # state_7, state_1
-      - [0.0847638578727,  0.915236142127]    # state_7, state_2
-      - [0.0686685686033,  0.931331431397]    # state_7, state_3
-      - [0.0565733241918,  0.943426675808]    # state_7, state_4
-      - [0.0474840226625,  0.952515977338]    # state_7, state_5
-      - [0.0406536189532,  0.959346381047]    # state_7, state_6
-      - [0.0355207256632,  0.964479274337]    # state_7, state_7
-      - [0.0316634729079,  0.968336527092]    # state_7, state_8
-      - [0.0287648350487,  0.971235164951]    # state_7, state_9
-      - [0.0265865745166,  0.973413425483]    # state_7, state_10
-      - [ 0.077769559494,  0.922230440506]    # state_8, state_1
-      - [0.0634125121907,  0.936587487809]    # state_8, state_2
-      - [0.0526235171466,  0.947376482853]    # state_8, state_3
-      - [ 0.044515832356,  0.955484167644]    # state_8, state_4
-      - [0.0384230913363,  0.961576908664]    # state_8, state_5
-      - [0.0338445348075,  0.966155465192]    # state_8, state_6
-      - [ 0.030403853541,  0.969596146459]    # state_8, state_7
-      - [0.0278182596966,  0.972181740303]    # state_8, state_8
-      - [0.0258752446333,  0.974124755367]    # state_8, state_9
-      - [0.0244151129332,  0.975584887067]    # state_8, state_10
-      - [0.0587240937794,  0.941275906221]    # state_9, state_1
-      - [0.0491002771702,   0.95089972283]    # state_9, state_2
-      - [0.0418681975156,  0.958131802484]    # state_9, state_3
-      - [0.0364334538734,  0.963566546127]    # state_9, state_4
-      - [0.0323493674327,  0.967650632567]    # state_9, state_5
-      - [0.0292802692095,   0.97071973079]    # state_9, state_6
-      - [0.0269739115846,  0.973026088415]    # state_9, state_7
-      - [0.0252407361997,    0.9747592638]    # state_9, state_8
-      - [0.0239382942531,  0.976061705747]    # state_9, state_9
-      - [0.0229595387046,  0.977040461295]    # state_9, state_10
-      - [0.0459575363249,  0.954042463675]    # state_10, state_1
-      - [0.0395064991324,  0.960493500868]    # state_10, state_2
-      - [0.0346586911654,  0.965341308835]    # state_10, state_3
-      - [ 0.031015673557,  0.968984326443]    # state_10, state_4
-      - [ 0.028278028546,  0.971721971454]    # state_10, state_5
-      - [0.0262207504837,  0.973779249516]    # state_10, state_6
-      - [0.0246747527344,  0.975325247266]    # state_10, state_7
-      - [0.0235129705307,  0.976487029469]    # state_10, state_8
-      - [ 0.022639917585,  0.977360082415]    # state_10, state_9
-      - [0.0219838381207,  0.978016161879]    # state_10, state_10
+      - [ 0.9999,  0.0001]    # state_1, state_1
+      - [ 0.9995,  0.0005]    # state_1, state_2
+      - [  0.999,   0.001]    # state_1, state_3
+      - [  0.995,   0.005]    # state_1, state_4
+      - [   0.99,    0.01]    # state_1, state_5
+      - [   0.95,    0.05]    # state_1, state_6
+      - [    0.9,     0.1]    # state_1, state_7
+      - [    0.8,     0.2]    # state_1, state_8
+      - [    0.7,     0.3]    # state_1, state_9
+      - [    0.6,     0.4]    # state_1, state_10
+      - [ 0.9995,  0.0005]    # state_2, state_1
+      - [  0.999,   0.001]    # state_2, state_2
+      - [  0.995,   0.005]    # state_2, state_3
+      - [   0.99,    0.01]    # state_2, state_4
+      - [   0.95,    0.05]    # state_2, state_5
+      - [    0.9,     0.1]    # state_2, state_6
+      - [    0.8,     0.2]    # state_2, state_7
+      - [    0.7,     0.3]    # state_2, state_8
+      - [    0.6,     0.4]    # state_2, state_9
+      - [    0.5,     0.5]    # state_2, state_10
+      - [  0.999,   0.001]    # state_3, state_1
+      - [   0.99,    0.01]    # state_3, state_2
+      - [   0.95,    0.05]    # state_3, state_3
+      - [    0.9,     0.1]    # state_3, state_4
+      - [   0.85,    0.15]    # state_3, state_5
+      - [    0.8,     0.2]    # state_3, state_6
+      - [    0.7,     0.3]    # state_3, state_7
+      - [    0.6,     0.4]    # state_3, state_8
+      - [    0.5,     0.5]    # state_3, state_9
+      - [    0.4,     0.6]    # state_3, state_10
+      - [   0.99,    0.01]    # state_4, state_1
+      - [    0.8,     0.2]    # state_4, state_2
+      - [   0.75,    0.25]    # state_4, state_3
+      - [    0.7,     0.3]    # state_4, state_4
+      - [   0.65,    0.35]    # state_4, state_5
+      - [    0.6,     0.4]    # state_4, state_6
+      - [   0.55,    0.45]    # state_4, state_7
+      - [    0.5,     0.5]    # state_4, state_8
+      - [    0.4,     0.6]    # state_4, state_9
+      - [    0.3,     0.7]    # state_4, state_10
+      - [    0.8,     0.2]    # state_5, state_1
+      - [   0.75,    0.25]    # state_5, state_2
+      - [    0.7,     0.3]    # state_5, state_3
+      - [   0.65,    0.35]    # state_5, state_4
+      - [    0.6,     0.4]    # state_5, state_5
+      - [   0.55,    0.45]    # state_5, state_6
+      - [    0.5,     0.5]    # state_5, state_7
+      - [    0.4,     0.6]    # state_5, state_8
+      - [    0.3,     0.7]    # state_5, state_9
+      - [    0.2,     0.8]    # state_5, state_10
+      - [    0.6,     0.4]    # state_6, state_1
+      - [   0.55,    0.45]    # state_6, state_2
+      - [    0.5,     0.5]    # state_6, state_3
+      - [    0.4,     0.6]    # state_6, state_4
+      - [    0.3,     0.7]    # state_6, state_5
+      - [    0.2,     0.8]    # state_6, state_6
+      - [   0.15,    0.85]    # state_6, state_7
+      - [    0.1,     0.9]    # state_6, state_8
+      - [   0.08,    0.92]    # state_6, state_9
+      - [   0.08,    0.92]    # state_6, state_10
+      - [    0.4,     0.6]    # state_7, state_1
+      - [    0.3,     0.7]    # state_7, state_2
+      - [    0.2,     0.8]    # state_7, state_3
+      - [   0.15,    0.85]    # state_7, state_4
+      - [    0.1,     0.9]    # state_7, state_5
+      - [   0.08,    0.92]    # state_7, state_6
+      - [   0.05,    0.95]    # state_7, state_7
+      - [   0.03,    0.97]    # state_7, state_8
+      - [   0.02,    0.98]    # state_7, state_9
+      - [   0.01,    0.99]    # state_7, state_10
+      - [    0.2,     0.8]    # state_8, state_1
+      - [   0.15,    0.85]    # state_8, state_2
+      - [    0.1,     0.9]    # state_8, state_3
+      - [   0.08,    0.92]    # state_8, state_4
+      - [   0.05,    0.95]    # state_8, state_5
+      - [   0.03,    0.97]    # state_8, state_6
+      - [   0.02,    0.98]    # state_8, state_7
+      - [   0.01,    0.99]    # state_8, state_8
+      - [  0.005,   0.995]    # state_8, state_9
+      - [ 0.0025,  0.9975]    # state_8, state_10
+      - [    0.1,     0.9]    # state_9, state_1
+      - [   0.08,    0.92]    # state_9, state_2
+      - [   0.05,    0.95]    # state_9, state_3
+      - [   0.03,    0.97]    # state_9, state_4
+      - [   0.02,    0.98]    # state_9, state_5
+      - [   0.01,    0.99]    # state_9, state_6
+      - [  0.005,   0.995]    # state_9, state_7
+      - [ 0.0025,  0.9975]    # state_9, state_8
+      - [ 0.0001,  0.9999]    # state_9, state_9
+      - [5.0e-05, 0.99995]    # state_9, state_10
+      - [   0.05,    0.95]    # state_10, state_1
+      - [   0.03,    0.97]    # state_10, state_2
+      - [   0.02,    0.98]    # state_10, state_3
+      - [   0.01,    0.99]    # state_10, state_4
+      - [  0.005,   0.995]    # state_10, state_5
+      - [ 0.0025,  0.9975]    # state_10, state_6
+      - [ 0.0001,  0.9999]    # state_10, state_7
+      - [5.0e-05, 0.99995]    # state_10, state_8
+      - [2.0e-05, 0.99998]    # state_10, state_9
+      - [1.0e-05, 0.99999]    # state_10, state_10
 
+  # Elicitation weight per parent: own_vessel_fails=3, target_vessel_fails=3, environmental=1, collision_encounter=3
   fail_recover_collision:
-    source: placeholder
-    parents: [collision_encounter, target_vessel_fails, environmental, own_vessel_fails]
+    source: paper_cpt
+    parents: [own_vessel_fails, target_vessel_fails, environmental, collision_encounter]
     table:
-      - [0.99, 0.01]    # critical, yes, critical, yes
-      - [0.85, 0.15]    # critical, yes, critical, no
-      - [0.95, 0.05]    # critical, yes, noncritical, yes
-      - [ 0.7,  0.3]    # critical, yes, noncritical, no
-      - [ 0.9,  0.1]    # critical, no, critical, yes
-      - [0.45, 0.55]    # critical, no, critical, no
-      - [0.85, 0.15]    # critical, no, noncritical, yes
-      - [0.25, 0.75]    # critical, no, noncritical, no
-      - [ 0.7,  0.3]    # noncritical, yes, critical, yes
-      - [0.25, 0.75]    # noncritical, yes, critical, no
-      - [ 0.6,  0.4]    # noncritical, yes, noncritical, yes
-      - [0.12, 0.88]    # noncritical, yes, noncritical, no
-      - [ 0.5,  0.5]    # noncritical, no, critical, yes
-      - [0.06, 0.94]    # noncritical, no, critical, no
-      - [ 0.4,  0.6]    # noncritical, no, noncritical, yes
-      - [0.01, 0.99]    # noncritical, no, noncritical, no
+      - [  0.87,   0.13]    # yes, yes, critical, critical
+      - [ 0.603,  0.397]    # yes, yes, critical, noncritical
+      - [  0.85,   0.15]    # yes, yes, noncritical, critical
+      - [0.8286, 0.1714]    # yes, yes, noncritical, noncritical
+      - [ 0.603,  0.397]    # yes, no, critical, critical
+      - [ 0.336,  0.664]    # yes, no, critical, noncritical
+      - [0.0583, 0.9417]    # yes, no, noncritical, critical
+      #   ^ SUSPECTED TYPO: published 0.0583, implied 0.583 - ten times smaller than the mirror configuration (no/yes/noncritical/critical = 0.583) and lower than the same case in worse weather
+      - [ 0.316,  0.684]    # yes, no, noncritical, noncritical
+      - [ 0.603,  0.397]    # no, yes, critical, critical
+      - [ 0.336,  0.664]    # no, yes, critical, noncritical
+      - [ 0.583,  0.417]    # no, yes, noncritical, critical
+      - [ 0.316,  0.684]    # no, yes, noncritical, noncritical
+      - [ 0.336,  0.664]    # no, no, critical, critical
+      - [ 0.069,  0.931]    # no, no, critical, noncritical
+      - [ 0.316,  0.684]    # no, no, noncritical, critical
+      - [ 0.049,  0.951]    # no, no, noncritical, noncritical
 
-  fail_recover_grounding:
-    source: placeholder
-    parents: [environmental, own_vessel_fails, waterway_properties]
-    table:
-      - [0.97, 0.03]    # critical, yes, critical
-      - [ 0.8,  0.2]    # critical, yes, noncritical
-      - [0.55, 0.45]    # critical, no, critical
-      - [ 0.1,  0.9]    # critical, no, noncritical
-      - [ 0.9,  0.1]    # noncritical, yes, critical
-      - [ 0.6,  0.4]    # noncritical, yes, noncritical
-      - [0.25, 0.75]    # noncritical, no, critical
-      - [0.01, 0.99]    # noncritical, no, noncritical
-
-  humans_exposed:
-    source: placeholder
-    parents: [size_other_vessel, humans_present, target_on_collision]
-    table:
-      - [0.85, 0.15]    # small, many, yes
-      - [0.05, 0.95]    # small, many, no
-      - [ 0.5,  0.5]    # small, limited, yes
-      - [0.02, 0.98]    # small, limited, no
-      - [0.95, 0.05]    # large, many, yes
-      - [0.08, 0.92]    # large, many, no
-      - [0.65, 0.35]    # large, limited, yes
-      - [0.03, 0.97]    # large, limited, no
-
+  # Elicitation weight per parent: target_on_collision=Assumption, fail_recover_collision=3
   collision:
-    source: placeholder
+    source: paper_cpt
     parents: [target_on_collision, fail_recover_collision]
     table:
-      - [   0.95,    0.05]    # yes, yes
-      - [   0.02,    0.98]    # yes, no
-      - [  0.001,   0.999]    # no, yes
-      - [1.0e-05, 0.99999]    # no, no
+      - [ 0.9,  0.1]    # yes, yes
+      - [0.01, 0.99]    # yes, no
+      - [ 0.0,  1.0]    # no, yes
+      - [ 0.0,  1.0]    # no, no
 
+  # Elicitation weight per parent: wind_speed=3, wave_height=3
+  environmental:
+    source: paper_cpt
+    parents: [wind_speed, wave_height]
+    table:
+      - [  0.9,   0.1]    # critical, critical
+      - [0.455, 0.545]    # critical, noncritical
+      - [0.455, 0.545]    # noncritical, critical
+      - [ 0.01,  0.99]    # noncritical, noncritical
+
+  # Elicitation weight per parent: waterway_properties=3, environmental=1, own_vessel_fails=3
+  fail_recover_grounding:
+    source: paper_cpt
+    parents: [waterway_properties, environmental, own_vessel_fails]
+    table:
+      - [0.857142857, 0.142857143]    # critical, critical, yes
+      - [0.475714286, 0.524285714]    # critical, critical, no
+      - [0.828571429, 0.171428571]    # critical, noncritical, yes
+      - [0.447142857, 0.552857143]    # critical, noncritical, no
+      - [0.475714286, 0.524285714]    # noncritical, critical, yes
+      - [0.094285714, 0.905714286]    # noncritical, critical, no
+      - [0.447142857, 0.552857143]    # noncritical, noncritical, yes
+      - [0.065714286, 0.934285714]    # noncritical, noncritical, no
+
+  # Elicitation weight per parent: distance_to_shore=3, depth=3
+  waterway_properties:
+    source: paper_cpt
+    parents: [distance_to_shore, depth]
+    table:
+      - [    0.9,     0.1]    # state_1, critical
+      - [  0.455,   0.545]    # state_1, noncritical
+      - [  0.475,   0.525]    # state_2, critical
+      - [   0.03,    0.97]    # state_2, noncritical
+      - [   0.46,    0.54]    # state_3, critical
+      - [  0.015,   0.985]    # state_3, noncritical
+      - [  0.455,   0.545]    # state_4, critical
+      - [   0.01,    0.99]    # state_4, noncritical
+      - [  0.454,   0.546]    # state_5, critical
+      - [  0.009,   0.991]    # state_5, noncritical
+      - [  0.452,   0.548]    # state_6, critical
+      - [  0.007,   0.993]    # state_6, noncritical
+      - [ 0.4515,  0.5485]    # state_7, critical
+      - [ 0.0065,  0.9935]    # state_7, noncritical
+      - [0.45125, 0.54875]    # state_8, critical
+      - [0.00625, 0.99375]    # state_8, noncritical
+      - [0.45075, 0.54925]    # state_9, critical
+      - [0.00575, 0.99425]    # state_9, noncritical
+      - [ 0.4505,  0.5495]    # state_10, critical
+      - [ 0.0055,  0.9945]    # state_10, noncritical
+
+  # Elicitation weight per parent: vessel_on_grounding=Assumption, fail_recover_grounding=Assumption
   grounding:
-    source: placeholder
+    source: paper_cpt
     parents: [vessel_on_grounding, fail_recover_grounding]
     table:
-      - [   0.95,    0.05]    # yes, yes
-      - [   0.02,    0.98]    # yes, no
-      - [  0.001,   0.999]    # no, yes
-      - [1.0e-05, 0.99999]    # no, no
-
-  loss_of_comms:
-    source: placeholder
-    parents: [auv_asv_distance, comms_system_failure]
-    table:
-      - [0.999, 0.001]    # state_1, yes
-      - [0.002, 0.998]    # state_1, no
-      - [0.999, 0.001]    # state_2, yes
-      - [ 0.01,  0.99]    # state_2, no
-      - [0.999, 0.001]    # state_3, yes
-      - [ 0.05,  0.95]    # state_3, no
-      - [0.999, 0.001]    # state_4, yes
-      - [  0.2,   0.8]    # state_4, no
-      - [0.999, 0.001]    # state_5, yes
-      - [  0.6,   0.4]    # state_5, no
-
-  harm_to_humans:
-    source: placeholder
-    parents: [collision, humans_exposed]
-    table:
-      - [ 0.12,  0.88]    # yes, yes
-      - [0.001, 0.999]    # yes, no
-      - [  0.0,   1.0]    # no, yes
+      - [  0.9,   0.1]    # yes, yes
+      - [ 0.01,  0.99]    # yes, no
+      - [0.455, 0.545]    # no, yes
       - [  0.0,   1.0]    # no, no
 
+  # Elicitation weight per parent: comms_system_failure=Assumption, auv_asv_distance=3
+  loss_of_comms:
+    source: paper_cpt
+    parents: [comms_system_failure, auv_asv_distance]
+    table:
+      - [ 1.0,  0.0]    # yes, state_1
+      - [ 1.0,  0.0]    # yes, state_2
+      - [ 1.0,  0.0]    # yes, state_3
+      - [ 1.0,  0.0]    # yes, state_4
+      - [ 1.0,  0.0]    # yes, state_5
+      - [0.01, 0.99]    # no, state_1
+      - [0.02, 0.98]    # no, state_2
+      - [0.03, 0.97]    # no, state_3
+      - [0.04, 0.96]    # no, state_4
+      - [ 0.9,  0.1]    # no, state_5
+
+  # Elicitation weight per parent: collision=High
   damage_other_vessel:
-    source: placeholder
+    source: paper_cpt
     parents: [collision]
     table:
-      - [ 0.3, 0.65, 0.05]    # yes
-      - [ 0.0,  0.0,  1.0]    # no
+      - [0.9, 0.1, 0.0]    # yes
+      - [0.0, 0.0, 1.0]    # no
 
+  # Elicitation weight per parent: collision=3, grounding=3
   damage_asv:
-    source: placeholder
+    source: paper_cpt
     parents: [collision, grounding]
     table:
-      - [ 0.7, 0.28, 0.02]    # yes, yes
-      - [0.35,  0.6, 0.05]    # yes, no
-      - [0.25, 0.65,  0.1]    # no, yes
-      - [ 0.0,  0.0,  1.0]    # no, no
+      - [   0.9,    0.1,    0.0]    # yes, yes
+      - [0.4505, 0.5495,    0.0]    # yes, no
+      - [0.4505, 0.5495,    0.0]    # no, yes
+      - [   0.0,    0.0,    1.0]    # no, no
 
+  # Elicitation weight per parent: loss_of_comms=Assumption
   damage_auv:
-    source: placeholder
+    source: paper_cpt
     parents: [loss_of_comms]
     table:
-      - [ 0.1, 0.35, 0.55]    # yes
+      - [0.01, 0.09,  0.9]    # yes
       - [ 0.0,  0.0,  1.0]    # no
 
+  # Elicitation weight per parent: collision=Deterministic, grounding=Deterministic, loss_of_comms=Deterministic
   mission_failure:
-    source: placeholder
+    source: paper_cpt
     parents: [collision, grounding, loss_of_comms]
     table:
-      - [ 1.0,  0.0]    # yes, yes, yes
-      - [ 1.0,  0.0]    # yes, yes, no
-      - [ 1.0,  0.0]    # yes, no, yes
-      - [0.98, 0.02]    # yes, no, no
-      - [ 1.0,  0.0]    # no, yes, yes
-      - [0.98, 0.02]    # no, yes, no
-      - [0.55, 0.45]    # no, no, yes
-      - [0.02, 0.98]    # no, no, no
+      - [1.0, 0.0]    # yes, yes, yes
+      - [1.0, 0.0]    # yes, yes, no
+      - [1.0, 0.0]    # yes, no, yes
+      - [1.0, 0.0]    # yes, no, no
+      - [1.0, 0.0]    # no, yes, yes
+      - [1.0, 0.0]    # no, yes, no
+      - [1.0, 0.0]    # no, no, yes
+      - [0.0, 1.0]    # no, no, no
+
+  # Elicitation weight per parent: humans_present=3, size_other_vessel=3, target_on_collision=Deterministic
+  humans_exposed:
+    source: paper_cpt
+    parents: [humans_present, size_other_vessel, target_on_collision]
+    table:
+      - [0.455, 0.545]    # many, small, yes
+      - [  0.0,   1.0]    # many, small, no
+      - [  0.9,   0.1]    # many, large, yes
+      - [  0.0,   1.0]    # many, large, no
+      - [ 0.01,  0.99]    # limited, small, yes
+      - [  0.0,   1.0]    # limited, small, no
+      - [0.455, 0.545]    # limited, large, yes
+      - [  0.0,   1.0]    # limited, large, no
+
+  # Elicitation weight per parent: humans_exposed=Assumption, collision=Assumption
+  harm_to_humans:
+    source: paper_cpt
+    parents: [humans_exposed, collision]
+    table:
+      - [0.1, 0.9]    # yes, yes
+      - [0.0, 1.0]    # yes, no
+      - [0.0, 1.0]    # no, yes
+      - [0.0, 1.0]    # no, no
