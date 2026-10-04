@@ -1,10 +1,10 @@
 <!--: vessel.cfm — vessel page in three tabs (UX §2.3, VES-19), composed from components (CP-01). Each component also runs alone. -->
 <cfset composed = 1>
-<cfinclude template="../shared/config.cfm">
+<cfinclude template="shared/config.cfm">
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<cfinclude template="../shared/head.cfm">
+<cfinclude template="shared/head.cfm">
 <title>COS — Vessel</title>
 </head>
 <body>
