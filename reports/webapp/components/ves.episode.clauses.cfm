@@ -1,5 +1,6 @@
 <!--: V15 ves.episode.clauses (DASH.038) — one encounter: what is recorded, and what cannot yet be said. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="ves.episode.clauses" data-endpoint="#cos_root#/data/ves.episode.clauses.data.cfm"></section></cfoutput>
 <script>
 (function () {
@@ -34,4 +35,4 @@
     if (ctx) COS.on('time-cursor', function () { ctx.reload(); });
 })();
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

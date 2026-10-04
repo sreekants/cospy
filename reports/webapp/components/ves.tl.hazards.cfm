@@ -1,5 +1,6 @@
 <!--: V7 ves.tl.hazards (DASH.030) — collision and grounding probability over the voyage. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="ves.tl.hazards" data-endpoint="#cos_root#/data/ves.tl.hazards.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.tl.hazards', {
@@ -37,4 +38,4 @@ COS.component('ves.tl.hazards', {
     }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

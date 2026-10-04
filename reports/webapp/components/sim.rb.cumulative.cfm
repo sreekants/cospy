@@ -1,5 +1,6 @@
 <!--: S10 sim.rb.cumulative (DASH.012) — how consequential risk accumulated for every vessel. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="sim.rb.cumulative" data-endpoint="#cos_root#/data/sim.rb.cumulative.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.rb.cumulative', {
@@ -55,4 +56,4 @@ COS.component('sim.rb.cumulative', {
     }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

@@ -1,5 +1,6 @@
 <!--: S19 sim.scatter (DASH.021) — normative and consequential on one plane, undivided. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="sim.scatter" data-endpoint="#cos_root#/data/sim.scatter.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.scatter', {
@@ -28,4 +29,4 @@ COS.component('sim.scatter', {
     caption: function (ctx, data) { return data.rows.length + ' vessels.'; }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

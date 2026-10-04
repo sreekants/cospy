@@ -1,5 +1,6 @@
 <!--: V3 ves.kpis (DASH.026) — where the voyage ended up, and under which regimes. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="ves.kpis" data-endpoint="#cos_root#/data/ves.kpis.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.kpis', {
@@ -26,4 +27,4 @@ COS.component('ves.kpis', {
     }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

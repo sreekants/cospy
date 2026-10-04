@@ -1,5 +1,6 @@
 <!--: V5 ves.tl.zone (DASH.028) — which regime governed the vessel at every moment. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="ves.tl.zone" data-endpoint="#cos_root#/data/ves.tl.zone.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.tl.zone', {
@@ -51,4 +52,4 @@ COS.component('ves.tl.zone', {
     }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

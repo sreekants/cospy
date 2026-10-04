@@ -1,5 +1,6 @@
 <!--: V20 ves.rb.matrix — the voyage by zone and concern. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="ves.rb.matrix" data-endpoint="#cos_root#/data/ves.rb.matrix.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.rb.matrix', {
@@ -25,4 +26,4 @@ COS.component('ves.rb.matrix', {
     caption: function (ctx, data) { return (function () { var s = 0; data.rows.forEach(function (r) { s += r.v; }); return data.final && Math.abs(s - data.final) <= 1e-9 * Math.max(1, data.final) ? 'The cells add up to ' + COS.fmt.usd(s) + ', the voyage total.' : 'The cells add up to ' + COS.fmt.usd(s) + ', but the voyage total is ' + COS.fmt.usd(data.final) + '.'; })(); }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

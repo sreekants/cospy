@@ -1,5 +1,6 @@
 <!--: S11 sim.rb.byconcern (DASH.013) — what the run's consequential risk is made of. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="sim.rb.byconcern" data-endpoint="#cos_root#/data/sim.rb.byconcern.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.rb.byconcern', {
@@ -44,4 +45,4 @@ COS.component('sim.rb.byconcern', {
     }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

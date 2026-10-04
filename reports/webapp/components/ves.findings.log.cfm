@@ -1,5 +1,6 @@
 <!--: V23 ves.findings.log (DASH.046) — the citeable record of findings for the voyage. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="ves.findings.log" data-endpoint="#cos_root#/data/ves.findings.log.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.findings.log', {
@@ -25,4 +26,4 @@ COS.component('ves.findings.log', {
     caption: function (ctx, data) { return data.rows.length + ' findings.'; }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

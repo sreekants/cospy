@@ -1,5 +1,6 @@
 <!--: V24 ves.baselines (DASH.047) — the metric-only baselines beside Rb: EL, P_HE (exact and bound), IR. -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="ves.baselines" data-endpoint="#cos_root#/data/ves.baselines.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.baselines', {
@@ -41,4 +42,4 @@ COS.component('ves.baselines', {
     }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>

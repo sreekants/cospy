@@ -1,5 +1,6 @@
 <!--: C2 run.provenance (DASH.002) — what a reader must know before trusting a figure (SH-07). -->
-<cfinclude template="../shared/open.cfm">
+<cfparam name="composed" default="0">
+<cfif composed EQ 0><cfinclude template="../shared/open.cfm"></cfif>
 <cfoutput><section data-component="run.provenance" data-endpoint="#cos_root#/data/run.provenance.data.cfm"></section></cfoutput>
 <script>
 COS.component('run.provenance', {
@@ -22,4 +23,4 @@ COS.component('run.provenance', {
     }
 });
 </script>
-<cfinclude template="../shared/close.cfm">
+<cfif composed EQ 0><cfinclude template="../shared/close.cfm"></cfif>
