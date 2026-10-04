@@ -1,0 +1,152 @@
+/* COS dashboards — tokens and layout (TK-03). Every colour is a custom property; theming is
+   deferred, but light and dark are both defined (dataviz reference palette). */
+
+:root {
+    color-scheme: light;
+    --surface-0: #f4f4f2;
+    --surface-1: #fcfcfb;
+    --surface-2: #ffffff;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #7a7974;
+    --text-hint: #74736e;      /* softest text that still clears 4.5:1 on the card */
+    --line: #d9d8d3;
+    --grid: #ecebe7;
+    --accent: #2a78d6;
+
+    /* categorical, fixed order: concerns use 1-4, hazards 5-7 (never cycled) */
+    --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100;
+    --series-5: #e87ba4; --series-6: #008300; --series-7: #4a3aa7; --series-8: #e34948;
+
+    /* zones: neutral ordinal ramp, so zone context never competes with series colour */
+    --zone-1: #e3e2dd; --zone-2: #c4c3bd; --zone-3: #9a9993; --zone-4: #6b6a65;
+    --zone-text-1: #0b0b0b; --zone-text-2: #0b0b0b; --zone-text-3: #0b0b0b; --zone-text-4: #ffffff;
+
+    /* record sources: ink steps, distinguished by marker shape (UX P4) */
+    --src-colreg: #2b2a28; --src-local: #6b6a65; --src-practice: #a9a8a2;
+
+    /* sequential magnitude: blue ramp 100-700 */
+    --seq-0: #f4f4f2; --seq-1: #cde2fb; --seq-2: #b7d3f6; --seq-3: #9ec5f4; --seq-4: #86b6ef;
+    --seq-5: #5598e7; --seq-6: #2a78d6; --seq-7: #1c5cab; --seq-8: #0d366b;
+
+    /* status: data flags only, never vessels (UX P6) */
+    --critical: #d03b3b; --warning: #fab219; --good: #0ca30c;
+    --mock: #7a5c00; --mock-bg: #fff4d6;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+        color-scheme: dark;
+        --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #232321;
+        --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #8f8e86; --text-hint: #8f8e86;
+        --line: #3a3a37; --grid: #2a2a28; --accent: #3987e5;
+        --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+        --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
+        --zone-1: #3a3a37; --zone-2: #55554f; --zone-3: #7a7974; --zone-4: #a9a8a2;
+        --zone-text-1: #ffffff; --zone-text-2: #ffffff; --zone-text-3: #0b0b0b; --zone-text-4: #0b0b0b;
+        --src-colreg: #f0efea; --src-local: #b5b4ad; --src-practice: #75746e;
+        --seq-0: #1a1a19; --seq-1: #0d366b; --seq-2: #104281; --seq-3: #184f95; --seq-4: #1c5cab;
+        --seq-5: #256abf; --seq-6: #2a78d6; --seq-7: #5598e7; --seq-8: #9ec5f4;
+        --mock: #f5d27a; --mock-bg: #3a2f10;
+    }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------------------------------------------------------------- page */
+.cos-app { max-width: 1440px; margin: 0 auto; padding: 16px; }
+.cos-single { max-width: 1000px; }
+.cos-pagehead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin: 0 0 12px; }
+.cos-pagehead h1 { margin: 0; font-size: 20px; font-weight: 600; }
+.cos-pagehead nav a { color: var(--accent); margin-right: 12px; }
+.cos-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
+.span-12 { grid-column: span 12; } .span-8 { grid-column: span 8; } .span-6 { grid-column: span 6; }
+.span-4 { grid-column: span 4; } .span-3 { grid-column: span 3; }
+@media (max-width: 1100px) { .span-8, .span-6, .span-4, .span-3 { grid-column: span 12; } }
+.cos-group { grid-column: span 12; margin: 12px 0 0; font-size: 13px; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--text-secondary); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+.cos-tabs { grid-column: span 12; display: flex; gap: 4px; flex-wrap: wrap; }
+.cos-tabs button { font: inherit; padding: 4px 10px; border: 1px solid var(--line); background: var(--surface-1);
+    color: var(--text-primary); border-radius: 6px; cursor: pointer; }
+.cos-tabs button[aria-selected="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cos-tabpanel[hidden] { display: none; }
+.cos-tabs { margin: 4px 0 4px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.cos-tabs button { font-weight: 600; }
+
+/* ---------------------------------------------------------------- component frame */
+.part { background: var(--surface-1); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+.part-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.part-titles { margin: 0 auto 0 0; min-width: 0; }
+.part-head { align-items: flex-start; }
+.part-head h2 { margin: 0; font-size: 14px; font-weight: 600; }
+.part-hint { margin: 1px 0 0; font-size: 11.5px; font-weight: 400; line-height: 1.35; color: var(--text-hint); }
+.part-code { color: var(--text-muted); font-weight: 500; margin-right: 2px; }
+.part-badges { display: flex; gap: 4px; flex-wrap: wrap; }
+.part-cite { font: inherit; font-size: 12px; border: 1px solid var(--line); background: transparent; color: var(--text-secondary);
+    border-radius: 4px; padding: 1px 8px; cursor: pointer; }
+.part-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 0 0 6px; font-size: 12px; color: var(--text-secondary); }
+.part-controls label { display: inline-flex; gap: 4px; align-items: center; }
+.part-controls select, .part-controls input { font: inherit; }
+.part-caption { margin: 6px 0 0; font-size: 12px; color: var(--text-secondary); min-height: 1em; }
+.badge { font-size: 11px; padding: 1px 6px; border-radius: 10px; border: 1px solid var(--line); white-space: nowrap; }
+.badge-mock { background: var(--mock-bg); color: var(--mock); border-color: var(--mock); font-weight: 600; }
+.badge-flag { color: var(--critical); border-color: var(--critical); }
+.badge-error { color: var(--critical); }
+.badge-live { color: var(--good); border-color: var(--good); }
+.badge-ended { color: var(--text-muted); }
+
+.cos-notice { margin: 8px 0; padding: 8px 10px; border-left: 3px solid var(--line); color: var(--text-secondary); background: var(--surface-0); }
+.cos-notice.cos-error { border-color: var(--critical); }
+.cos-notice.cos-placeholder { border-color: var(--mock); background: var(--mock-bg); color: var(--mock); }
+.cos-missing { color: var(--text-muted); font-style: italic; }
+.cos-empty { color: var(--text-muted); font-style: italic; text-align: center; }
+
+/* ---------------------------------------------------------------- tables, key-value, tiles */
+.cos-tablewrap { overflow: auto; max-height: 520px; }
+.cos-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.cos-table th, .cos-table td { padding: 4px 8px; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }
+.cos-table thead th { position: sticky; top: 0; background: var(--surface-1); color: var(--text-secondary); font-weight: 600;
+    border-bottom: 1px solid var(--line); }
+.cos-table th[data-sort] { cursor: pointer; }
+.cos-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.cos-table tr.clickable:hover td, .cos-table td.clickable:hover { background: var(--surface-0); cursor: pointer; }
+.cos-table tr.cos-hl th, .cos-table tr.cos-hl td, .cos-table tr.cos-selected td { outline: 2px solid var(--accent); outline-offset: -2px; }
+.cos-table .cos-sub { display: block; font-size: 11px; color: inherit; opacity: .8; }
+.cos-table tr.cos-group-row td { font-weight: 600; background: var(--surface-0); }
+.cos-matrix td { min-width: 72px; }
+.seq-0 { background: var(--seq-0); } .seq-1 { background: var(--seq-1); } .seq-2 { background: var(--seq-2); }
+.seq-3 { background: var(--seq-3); } .seq-4 { background: var(--seq-4); } .seq-5 { background: var(--seq-5); color: #fff; }
+.seq-6 { background: var(--seq-6); color: #fff; } .seq-7 { background: var(--seq-7); color: #fff; } .seq-8 { background: var(--seq-8); color: #fff; }
+.cos-seqlegend { display: flex; align-items: center; gap: 2px; margin-top: 6px; font-size: 11px; color: var(--text-secondary); }
+.cos-seqlegend i { display: inline-block; width: 18px; height: 10px; }
+.cos-seqlegend span { margin: 0 4px; }
+
+.cos-kv { display: grid; grid-template-columns: minmax(140px, max-content) 1fr; gap: 3px 16px; margin: 0; }
+.cos-kv dt { color: var(--text-secondary); }
+.cos-kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+.cos-strip { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.cos-strip div { display: flex; flex-direction: column; }
+.cos-strip span { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .03em; }
+.cos-strip b { font-weight: 600; }
+
+.cos-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.cos-tile { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border: 1px solid var(--grid); border-radius: 6px;
+    background: var(--surface-2); color: inherit; text-decoration: none; font: inherit; text-align: left; }
+a.cos-tile:hover, button.cos-tile:hover { border-color: var(--accent); cursor: pointer; }
+.cos-tile-label { font-size: 12px; color: var(--text-secondary); }
+.cos-tile-value { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.cos-tile-sub { font-size: 12px; color: var(--text-secondary); }
+
+.chip { display: inline-block; font-size: 11px; padding: 0 5px; border-radius: 3px; margin: 0 2px 2px 0; }
+.chip-z1 { background: var(--zone-1); color: var(--zone-text-1); } .chip-z2 { background: var(--zone-2); color: var(--zone-text-2); }
+.chip-z3 { background: var(--zone-3); color: var(--zone-text-3); } .chip-z4 { background: var(--zone-4); color: var(--zone-text-4); }
+.swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: baseline; }
+.cos-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+.cos-chart { width: 100%; }
+.cos-footer { margin-top: 16px; }

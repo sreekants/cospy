@@ -1,0 +1,1 @@
+<cfoutput>"meta":{"case":"#cos_case#","asked_case":"#Int(URL.case)#","nf_case":#cos_nf_case#,"imo":#Int(cos_imo)#,"asked_imo":#Int(URL.imo)#,"nf_imo":#cos_nf_imo#,"imo_default":#cos_imo_default#,"maxtick":#Int(cos_maxtick)#,"t0":#Int(cos_t0)#,"t1":#Int(cos_t1)#,"since":#cos_since#,"written":"#URLEncodedFormat(cos_written)#"}</cfoutput>
