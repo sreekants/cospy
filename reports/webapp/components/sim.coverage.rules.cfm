@@ -1,5 +1,5 @@
 <!--: S7 sim.coverage.rules (DASH.009) — breaches beside the encounters where each rule could apply. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="sim.coverage.rules" data-endpoint="#cos_root#/data/sim.coverage.rules.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.coverage.rules', {
@@ -26,4 +26,4 @@ COS.component('sim.coverage.rules', {
     }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

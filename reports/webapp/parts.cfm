@@ -1,10 +1,10 @@
 <!--: parts.cfm — index of every component, standalone and mock, with its endpoint (CP-11). -->
 <cfset composed = 1>
-<cfinclude template="shared/config.cfm">
+<cfinclude template="../shared/config.cfm">
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<cfinclude template="shared/head.cfm">
+<cfinclude template="../shared/head.cfm">
 <title>COS — Components</title>
 </head>
 <body>

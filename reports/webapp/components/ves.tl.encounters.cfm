@@ -1,5 +1,5 @@
 <!--: V10 ves.tl.encounters (DASH.033) — when the vessel was in which kind of encounter, and with whom. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="ves.tl.encounters" data-endpoint="#cos_root#/data/ves.tl.encounters.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.tl.encounters', {
@@ -41,4 +41,4 @@ COS.component('ves.tl.encounters', {
     }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

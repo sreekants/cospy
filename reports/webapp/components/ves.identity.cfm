@@ -1,5 +1,5 @@
 <!--: V1 ves.identity (DASH.024) — which vessel, and its role in the run. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="ves.identity" data-endpoint="#cos_root#/data/ves.identity.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.identity', {
@@ -22,4 +22,4 @@ COS.component('ves.identity', {
     caption: function () { return ''; }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

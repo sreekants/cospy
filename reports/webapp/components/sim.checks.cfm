@@ -1,5 +1,5 @@
 <!--: S2 sim.checks (DASH.004) — what is wrong with the data, and what was verified (SIM-03, SIM-06). -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="sim.checks" data-endpoint="#cos_root#/data/sim.checks.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.checks', {
@@ -35,4 +35,4 @@ COS.component('sim.checks', {
     }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

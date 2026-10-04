@@ -1,5 +1,5 @@
 <!--: S14 sim.heat.zoneconcern (DASH.016) — the run's observed-violation input to Ro. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="sim.heat.zoneconcern" data-endpoint="#cos_root#/data/sim.heat.zoneconcern.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.heat.zoneconcern', {
@@ -30,4 +30,4 @@ COS.component('sim.heat.zoneconcern', {
     }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

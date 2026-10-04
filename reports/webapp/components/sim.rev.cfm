@@ -1,5 +1,5 @@
 <!--: S20 sim.rev (DASH.022) — the normative side that cannot yet be computed, and why. No endpoint. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <section data-component="sim.rev"></section>
 <script>
 COS.component('sim.rev', {
@@ -25,4 +25,4 @@ COS.component('sim.rev', {
     caption: function () { return 'Every value in this table is made up.'; }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

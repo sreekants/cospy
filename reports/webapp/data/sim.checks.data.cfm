@@ -1,5 +1,5 @@
 <!--: S2 sim.checks (DASH.004): data checks for the run; n = offending rows (0 = pass). -->
-<cfinclude template="shared/params.cfm">
+<cfinclude template="../shared/params.cfm">
 <cfquery name="s2_q" datasource="cos.bi">
 with ra as (select * from fact_risk_assessment where case_id = #cos_case#),
      fc as (select * from fact_concern where case_id = #cos_case#),
@@ -36,4 +36,4 @@ union all select 'enc0', 'Encounters seen only once', 'COS.044',
 <cfquery name="s2_n" datasource="cos.bi">
 select count(*) as n from fact_risk_assessment where case_id = #cos_case#
 </cfquery>
-{<cfinclude template="shared/meta.cfm">,"rows":[<cfif s2_n.n GT 0><cfloop query="s2_q"><cfoutput>{"id":"#s2_q.id#","label":"#URLEncodedFormat(s2_q.label)#","ticket":"#URLEncodedFormat(s2_q.ticket)#","n":#s2_q.n#},</cfoutput></cfloop></cfif>null]}
+{<cfinclude template="../shared/meta.cfm">,"rows":[<cfif s2_n.n GT 0><cfloop query="s2_q"><cfoutput>{"id":"#s2_q.id#","label":"#URLEncodedFormat(s2_q.label)#","ticket":"#URLEncodedFormat(s2_q.ticket)#","n":#s2_q.n#},</cfoutput></cfloop></cfif>null]}

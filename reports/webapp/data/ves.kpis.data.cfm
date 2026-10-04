@@ -1,5 +1,5 @@
 <!--: V3 ves.kpis (DASH.026): four voyage figures. -->
-<cfinclude template="shared/params.cfm">
+<cfinclude template="../shared/params.cfm">
 <cfquery name="v3_q" datasource="cos.bi">
 with ra as (select * from fact_risk_assessment where case_id = #cos_case# and own_ship = #Int(cos_imo)#)
 select (select count(*) from ra) as n,
@@ -16,4 +16,4 @@ select (select count(*) from ra) as n,
        coalesce((select cast(sum(exposure_dt) as text) from ra where zone = 'internal_waters'), '0') as z3,
        coalesce((select cast(sum(exposure_dt) as text) from ra where zone = 'port'), '0') as z4
 </cfquery>
-{<cfinclude template="shared/meta.cfm">,"rows":[<cfloop query="v3_q"><cfif v3_q.n GT 0><cfoutput>{"rb":#v3_q.rb#,"surv":#v3_q.surv#,"nc":#v3_q.nc#,"np":#v3_q.np#,"enc":#v3_q.enc#,"enc0":#v3_q.enc0#,"z":[#v3_q.z1#,#v3_q.z2#,#v3_q.z3#,#v3_q.z4#]},</cfoutput></cfif></cfloop>null]}
+{<cfinclude template="../shared/meta.cfm">,"rows":[<cfloop query="v3_q"><cfif v3_q.n GT 0><cfoutput>{"rb":#v3_q.rb#,"surv":#v3_q.surv#,"nc":#v3_q.nc#,"np":#v3_q.np#,"enc":#v3_q.enc#,"enc0":#v3_q.enc0#,"z":[#v3_q.z1#,#v3_q.z2#,#v3_q.z3#,#v3_q.z4#]},</cfoutput></cfif></cfloop>null]}

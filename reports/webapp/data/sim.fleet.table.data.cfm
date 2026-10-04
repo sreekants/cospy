@@ -1,5 +1,5 @@
 <!--: S13 sim.fleet.table (DASH.015): one row per vessel. -->
-<cfinclude template="shared/params.cfm">
+<cfinclude template="../shared/params.cfm">
 <cfquery name="s13_q" datasource="cos.bi">
 with ra as (select own_ship as v, cast(max(cumulative) as text) as rb, cast(min(survival) as text) as s,
                    cast(max(p_collision) as text) as pc, cast(max(p_grounding) as text) as pg,
@@ -19,4 +19,4 @@ from ra left join fc on fc.v = ra.v left join en on en.v = ra.v
 <cfquery name="s13_v" datasource="cos.vessels">
 select imo, name from vessels
 </cfquery>
-{<cfinclude template="shared/meta.cfm">,"names":[<cfloop query="s13_v"><cfoutput>["#URLEncodedFormat(s13_v.imo)#","#URLEncodedFormat(s13_v.name)#"],</cfoutput></cfloop>null],"rows":[<cfloop query="s13_q"><cfoutput>{"imo":#s13_q.imo#,"rb":#s13_q.rb#,"surv":#s13_q.s#,"pc":#s13_q.pc#,"pg":#s13_q.pg#,"pl0":#s13_q.pl0#,"pl1":#s13_q.pl1#,"nc":#s13_q.nc#,"np":#s13_q.np#,"enc":#s13_q.enc#},</cfoutput></cfloop>null]}
+{<cfinclude template="../shared/meta.cfm">,"names":[<cfloop query="s13_v"><cfoutput>["#URLEncodedFormat(s13_v.imo)#","#URLEncodedFormat(s13_v.name)#"],</cfoutput></cfloop>null],"rows":[<cfloop query="s13_q"><cfoutput>{"imo":#s13_q.imo#,"rb":#s13_q.rb#,"surv":#s13_q.s#,"pc":#s13_q.pc#,"pg":#s13_q.pg#,"pl0":#s13_q.pl0#,"pl1":#s13_q.pl1#,"nc":#s13_q.nc#,"np":#s13_q.np#,"enc":#s13_q.enc#},</cfoutput></cfloop>null]}

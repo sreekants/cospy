@@ -1,5 +1,5 @@
 <!--: V11 ves.tl.environment (DASH.034) — depth beneath the vessel, with assumed readings visible. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="ves.tl.environment" data-endpoint="#cos_root#/data/ves.tl.environment.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.tl.environment', {
@@ -43,4 +43,4 @@ COS.component('ves.tl.environment', {
     }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

@@ -1,5 +1,5 @@
 <!--: V29 ves.rb.byconcern (DASH.052) — what this vessel's consequential risk is made of. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="ves.rb.byconcern" data-endpoint="#cos_root#/data/ves.rb.byconcern.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.rb.byconcern', {
@@ -40,4 +40,4 @@ COS.component('ves.rb.byconcern', {
     }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

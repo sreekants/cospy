@@ -1,5 +1,5 @@
 <!--: V19 ves.ro.matrix — the voyage by zone and concern. -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="ves.ro.matrix" data-endpoint="#cos_root#/data/ves.ro.matrix.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.ro.matrix', {
@@ -25,4 +25,4 @@ COS.component('ves.ro.matrix', {
     caption: function (ctx, data) { return 'Rule-based risk (R_ev) is not computed yet (REQ.031, COS.044 §1).'; }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">

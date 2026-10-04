@@ -1,5 +1,5 @@
 <!--: S1 sim.runstrip (DASH.003) — which run, which vessel, still running? (SIM-01, SH-14). -->
-<cfinclude template="shared/open.cfm">
+<cfinclude template="../shared/open.cfm">
 <cfoutput><section data-component="sim.runstrip" data-endpoint="#cos_root#/data/sim.runstrip.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.runstrip', {
@@ -22,4 +22,4 @@ COS.component('sim.runstrip', {
     caption: function () { return ''; }
 });
 </script>
-<cfinclude template="shared/close.cfm">
+<cfinclude template="../shared/close.cfm">
