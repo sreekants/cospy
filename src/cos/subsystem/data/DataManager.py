@@ -169,24 +169,27 @@ class DataManager(Subsystem):
 		if self.storage is None:
 			return
 
-		db		= TransactionalDatabase()
-		db.open( self.storage )
+		try:
+			db		= TransactionalDatabase()
+			db.open( self.storage )
 
-		count 	= 0
-		tables	= 0
+			count 	= 0
+			tables	= 0
 
-		for p in self.partitions.values():
-			nrec	= p.flush(db)
-			if nrec == 0:
-				continue
-			tables	+= 1
-			count 	+= nrec
+			for p in self.partitions.values():
+				nrec	= p.flush(db)
+				if nrec == 0:
+					continue
+				tables	+= 1
+				count 	+= nrec
 
-		db.flush()
-		db.close()
+			db.flush()
+			db.close()
 
-		if (count > 0) and (self.trace==True):
-			self.sim.log.info( 'DataManager', f'Flushed {count} record(s) into {tables} table(s).' )
+			if (count > 0) and (self.trace==True):
+				self.sim.log.info( 'DataManager', f'Flushed {count} record(s) into {tables} table(s).' )
+		except Exception as e:
+			self.sim.log.warning( 'DataManager', f'Failed to flush records: {e}' )
 		return
 
 	def __build_partitions(self, ctxt:Context, config):
