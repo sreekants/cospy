@@ -1,5 +1,5 @@
 <!--: C1 run.picker (DASH.001) — choose the run under discussion (SH-01, SH-02). -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="run.picker" data-endpoint="#cos_root#/data/run.picker.data.cfm"></section></cfoutput>
 <script>
 COS.component('run.picker', {
@@ -29,4 +29,4 @@ COS.component('run.picker', {
     }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

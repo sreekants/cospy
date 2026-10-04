@@ -1,5 +1,5 @@
 <!--: V26 ves.coupling (DASH.049) — what the voyage cannot yet show, and which ticket enables it. No endpoint. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <section data-component="ves.coupling"></section>
 <script>
 COS.component('ves.coupling', {
@@ -17,4 +17,4 @@ COS.component('ves.coupling', {
     caption: function () { return 'Nothing here is made up.'; }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

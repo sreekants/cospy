@@ -1,5 +1,5 @@
 <!--: V15 ves.episode.clauses (DASH.038): the encounter at ?t= (or the nearest), with what is recorded in its window. -->
-<cfinclude template="/test/cos/shared/params.cfm">
+<cfinclude template="shared/params.cfm">
 <cfparam name="URL.t" default="-1">
 <cfquery name="v15_q" datasource="cos.bi">
 with en as (
@@ -22,4 +22,4 @@ where f.case_id = #cos_case# and f.vessel_id = #Int(cos_imo)# and f.source = 'co
 <cfquery name="v15_v" datasource="cos.vessels">
 select coalesce((select name from vessels where imo = '#Int(v15_q.tg)#'), '') as name
 </cfquery>
-{<cfinclude template="/test/cos/shared/meta.cfm">,"fnd":[<cfloop query="v15_f"><cfoutput>[#v15_f.tick#,"#URLEncodedFormat(v15_f.examiner)#","#URLEncodedFormat(v15_f.event)#"],</cfoutput></cfloop>null],"rows":[<cfloop query="v15_q"><cfoutput>{"k":"#v15_q.k#","s":#v15_q.s#,"e":#v15_q.e#,"tg":#v15_q.tg#,"name":"#URLEncodedFormat(v15_v.name)#","at":#v15_q.at#,"pc":#v15_q.pc#,"pct":#v15_q.pct#},</cfoutput></cfloop>null]}
+{<cfinclude template="shared/meta.cfm">,"fnd":[<cfloop query="v15_f"><cfoutput>[#v15_f.tick#,"#URLEncodedFormat(v15_f.examiner)#","#URLEncodedFormat(v15_f.event)#"],</cfoutput></cfloop>null],"rows":[<cfloop query="v15_q"><cfoutput>{"k":"#v15_q.k#","s":#v15_q.s#,"e":#v15_q.e#,"tg":#v15_q.tg#,"name":"#URLEncodedFormat(v15_v.name)#","at":#v15_q.at#,"pc":#v15_q.pc#,"pct":#v15_q.pct#},</cfoutput></cfloop>null]}

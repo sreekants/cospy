@@ -1,5 +1,5 @@
 <!--: S5 sim.kpis (DASH.007) — three figures, each opening into the component that explains it. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="sim.kpis" data-endpoint="#cos_root#/data/sim.kpis.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.kpis', {
@@ -29,4 +29,4 @@ COS.component('sim.kpis', {
     }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

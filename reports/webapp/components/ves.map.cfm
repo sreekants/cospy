@@ -1,5 +1,5 @@
 <!--: V4 ves.map (DASH.027) — the track: primary evidence, not yet recorded (REQ.037-01/02). No endpoint. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <section data-component="ves.map"></section>
 <script>
 COS.component('ves.map', {
@@ -35,4 +35,4 @@ COS.component('ves.map', {
     caption: function () { return 'No position is recorded for any vessel.'; }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

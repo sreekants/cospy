@@ -1,5 +1,5 @@
 <!--: S5 sim.kpis (DASH.007): three run figures. -->
-<cfinclude template="/test/cos/shared/params.cfm">
+<cfinclude template="shared/params.cfm">
 <cfquery name="s5_q" datasource="cos.bi">
 with fv as (select own_ship, max(cumulative) as rb, min(survival) as s from fact_risk_assessment where case_id = #cos_case# group by own_ship),
      top as (select own_ship, rb, s from fv order by rb desc limit 1)
@@ -20,4 +20,4 @@ select (select count(*) from fact_risk_assessment where case_id = #cos_case#) as
 <cfquery name="s5_v" datasource="cos.vessels">
 select coalesce((select name from vessels where imo = '#s5_q.imo#'), '') as name
 </cfquery>
-{<cfinclude template="/test/cos/shared/meta.cfm">,"rows":[<cfloop query="s5_q"><cfif s5_q.n GT 0><cfoutput>{"pc":#s5_q.pc#,"nc":#s5_q.nc#,"pp":#s5_q.pp#,"np":#s5_q.np#,"pl":#s5_q.pl#,"imo":#s5_q.imo#,"name":"#URLEncodedFormat(s5_v.name)#","rb":#s5_q.rb#,"surv":#s5_q.surv#,"enc":#s5_q.enc#,"enc0":#s5_q.enc0#},</cfoutput></cfif></cfloop>null]}
+{<cfinclude template="shared/meta.cfm">,"rows":[<cfloop query="s5_q"><cfif s5_q.n GT 0><cfoutput>{"pc":#s5_q.pc#,"nc":#s5_q.nc#,"pp":#s5_q.pp#,"np":#s5_q.np#,"pl":#s5_q.pl#,"imo":#s5_q.imo#,"name":"#URLEncodedFormat(s5_v.name)#","rb":#s5_q.rb#,"surv":#s5_q.surv#,"enc":#s5_q.enc#,"enc0":#s5_q.enc0#},</cfoutput></cfif></cfloop>null]}

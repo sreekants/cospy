@@ -1,5 +1,5 @@
 <!--: V6 ves.tl.rb (DASH.029) — how consequential risk accumulated, and where it jumped. Replaces risk.cfm. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="ves.tl.rb" data-endpoint="#cos_root#/data/ves.tl.rb.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.tl.rb', {
@@ -37,4 +37,4 @@ COS.component('ves.tl.rb', {
     }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

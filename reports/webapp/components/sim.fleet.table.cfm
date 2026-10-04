@@ -1,5 +1,5 @@
 <!--: S13 sim.fleet.table (DASH.015) — every vessel on equal terms; choose which voyage to examine. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="sim.fleet.table" data-endpoint="#cos_root#/data/sim.fleet.table.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.fleet.table', {
@@ -39,4 +39,4 @@ COS.component('sim.fleet.table', {
     }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

@@ -1,5 +1,5 @@
 <!--: S9 sim.findings.tree (DASH.011) — which recorder produced which findings. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="sim.findings.tree" data-endpoint="#cos_root#/data/sim.findings.tree.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.findings.tree', {
@@ -37,4 +37,4 @@ COS.component('sim.findings.tree', {
     }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

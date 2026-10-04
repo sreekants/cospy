@@ -1,5 +1,5 @@
 <!--: V9 ves.tl.findings (DASH.032) — every recorded finding on the voyage timeline, by source family. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="ves.tl.findings" data-endpoint="#cos_root#/data/ves.tl.findings.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.tl.findings', {
@@ -42,4 +42,4 @@ COS.component('ves.tl.findings', {
     }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

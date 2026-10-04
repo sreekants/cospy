@@ -1,5 +1,5 @@
 <!--: V14 ves.episodes (DASH.037) — the encounters of the voyage, in order, as citeable episodes. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="ves.episodes" data-endpoint="#cos_root#/data/ves.episodes.data.cfm"></section></cfoutput>
 <script>
 COS.component('ves.episodes', {
@@ -25,4 +25,4 @@ COS.component('ves.episodes', {
     caption: function (ctx, data) { return data.rows.length + ' encounters.'; }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

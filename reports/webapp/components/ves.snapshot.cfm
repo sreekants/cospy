@@ -1,5 +1,5 @@
 <!--: V12 ves.snapshot (DASH.035) — the vessel at one moment: the unit a debater cites. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="ves.snapshot" data-endpoint="#cos_root#/data/ves.snapshot.data.cfm"></section></cfoutput>
 <script>
 (function () {
@@ -28,4 +28,4 @@
     if (ctx) COS.on('time-cursor', function () { ctx.reload(); });
 })();
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

@@ -1,5 +1,5 @@
 <!--: S8 sim.findings.bysource (DASH.010) — how many findings came from law, local rules and practice, by zone. -->
-<cfinclude template="/test/cos/shared/open.cfm">
+<cfinclude template="shared/open.cfm">
 <cfoutput><section data-component="sim.findings.bysource" data-endpoint="#cos_root#/data/sim.findings.bysource.data.cfm"></section></cfoutput>
 <script>
 COS.component('sim.findings.bysource', {
@@ -47,4 +47,4 @@ COS.component('sim.findings.bysource', {
     }
 });
 </script>
-<cfinclude template="/test/cos/shared/close.cfm">
+<cfinclude template="shared/close.cfm">

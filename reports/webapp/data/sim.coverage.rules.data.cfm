@@ -1,5 +1,5 @@
 <!--: S7 sim.coverage.rules (DASH.009): encounters where each rule could apply, and breaches recorded. -->
-<cfinclude template="/test/cos/shared/params.cfm">
+<cfinclude template="shared/params.cfm">
 <cfquery name="s7_q" datasource="cos.bi">
 with cr as (select count(*) as n, sum(end_time = start_time) as z from fact_crossing where case_id = #cos_case#),
      gw as (select count(*) as n, sum(end_time = start_time) as z from fact_give_way where case_id = #cos_case#),
@@ -14,4 +14,4 @@ union all select 17, 'crossing (stand-on)', (select n from cr), coalesce((select
 union all select 0, 'all', (select n from cr) + (select n from gw) + (select n from ho) + (select n from ov),
        coalesce((select z from cr), 0) + coalesce((select z from gw), 0) + coalesce((select z from ho), 0) + coalesce((select z from ov), 0)
 </cfquery>
-{<cfinclude template="/test/cos/shared/meta.cfm">,"rows":[<cfloop query="s7_q"><cfif s7_q.n GT 0><cfoutput>{"rule":#s7_q.rule#,"enc":"#URLEncodedFormat(s7_q.enc)#","n":#s7_q.n#,"b":#s7_q.b#},</cfoutput></cfif></cfloop>null]}
+{<cfinclude template="shared/meta.cfm">,"rows":[<cfloop query="s7_q"><cfif s7_q.n GT 0><cfoutput>{"rule":#s7_q.rule#,"enc":"#URLEncodedFormat(s7_q.enc)#","n":#s7_q.n#,"b":#s7_q.b#},</cfoutput></cfif></cfloop>null]}
