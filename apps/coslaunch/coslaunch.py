@@ -10,13 +10,15 @@ from app import COSLaunch
 IMAGE=None
 CONFIG=None
 PORT=None
+BRIDGE=None
+ENVIRONMENT={}
 
 def get_app_info():
 	return {
 		"executable": "coslaunch.py",
 		"name"		: "COS Simulation Operating system",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?][-i image][-c|-config path/to/cos.ini][-p|-port port]"
+		"usage"		:[ 	"[-h][-?][-i image][-c|-config path/to/cos.ini][-p|-port port][-b|-bridge port][-e|-environment \"KEY=value:...\"]"
 					],
 					
 		"help"		:[
@@ -27,6 +29,10 @@ def get_app_info():
 			    ["config"	, ["Same as -c.", set_config]],
 			    ["p"		, ["RPC port (optional, IPC uses port+1).", set_port]],
 			    ["port"		, ["Same as -p.", set_port]],
+			    ["b"		, ["Bridge display HTTP port (optional, overrides network.yaml).", set_bridge]],
+			    ["bridge"	, ["Same as -b.", set_bridge]],
+			    ["e"		, ["Override cos.ini EnvironmentVariables, e.g. \"TRAFFIC=ldta:WEATHER=clearsky\".", set_environment]],
+			    ["environment"	, ["Same as -e.", set_environment]],
 			    ["image"	, ["Code directory.", None]]
 				]		
 		}
@@ -91,16 +97,36 @@ def set_port(port):
 	PORT	= int(port)
 	return
 
+def set_bridge(port):
+	global BRIDGE
+	if port.isdigit() == False or not (0 < int(port) < 65535):
+		print( f'[{port}] is not a valid port.')
+		sys.exit(-1)
+	BRIDGE	= int(port)
+	return
+
+def set_environment(text):
+	global ENVIRONMENT
+	# Settings are separated by ':' since values such as TRAFFIC=ldta,fleet contain commas
+	for item in text.split(':'):
+		key, sep, value	= item.partition('=')
+		key	= key.strip().upper()
+		if not sep or not key or not value.strip():
+			print( f'[{item}] is not a KEY=value environment setting.')
+			sys.exit(-1)
+		ENVIRONMENT[key]	= value.strip()
+	return
+
 def normalize_argv(argv):
 	""" getopt does not support single-dash long options, so map
-	-config/-image/-port/-help to their --long equivalents.
+	-config/-image/-port/-environment/-help to their --long equivalents.
 	"""
-	longopts	= ['config', 'image', 'port', 'help']
+	longopts	= ['config', 'image', 'port', 'bridge', 'environment', 'help']
 	return [ '-' + a if a.split('=')[0][1:] in longopts else a for a in argv ]
 
 def main():
 	try:
-		opts, args = getopt.getopt(normalize_argv(sys.argv[1:]), "h?i:c:p:d", ["help", "image=", "config=", "port="])
+		opts, args = getopt.getopt(normalize_argv(sys.argv[1:]), "h?i:c:p:b:e:d", ["help", "image=", "config=", "port=", "bridge=", "environment="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
@@ -114,6 +140,10 @@ def main():
 			set_config(arg)
 		elif opt in ("-p", "--port"):
 			set_port(arg)
+		elif opt in ("-b", "--bridge"):
+			set_bridge(arg)
+		elif opt in ("-e", "--environment"):
+			set_environment(arg)
 		elif opt == '-d':
 			global _debug               
 			_debug = 1                  
@@ -123,7 +153,9 @@ def main():
 	theApp.run( args, get_app_info(), {
 			'image' : IMAGE,
 			'config': CONFIG,
-			'port'	: PORT
+			'port'	: PORT,
+			'bridge_port': BRIDGE,
+			'environment': ENVIRONMENT
 			})
 	
 

@@ -4,6 +4,7 @@
 
 from cos.cluster.runtime.TemplateReplicator import TemplateReplicator, Declarations
 from cos.core.utilities.CaseId import case_id
+from cos.core.kernel.BootLoader import BootLoader
 
 import sys, uuid, os, random, re, configparser, yaml, csv
 
@@ -247,7 +248,7 @@ class ScenarioGenerator:
 
 		paths	= []
 		for module in cache[config]:
-			if (module.get('enable', True) == False) or (module.get('database') is None):
+			if (not BootLoader.is_enabled(module)) or (module.get('database') is None):
 				continue
 			path	= ScenarioGenerator.resolve( module['database'], settings )
 			if path not in paths:

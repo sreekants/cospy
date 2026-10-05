@@ -8,6 +8,7 @@
 
 ```
 python coslaunch.py [-h | -?] [-c | -config path] [-i | -image file] [-p | -port port]
+              [-b | -bridge port] [-e | -environment "KEY=value:..."]
 ```
 
 ## DESCRIPTION
@@ -24,6 +25,13 @@ The first log line after the banner reports the configuration file in use:
 
 ```
 (Kernel) Loading simulation from /path/to/cos.ini
+```
+
+When **-environment** overrides a variable, a warning for each override is
+logged just before that line:
+
+```
+(Kernel) *** OVERRIDE TRAFFIC=ldta replaces the value in the configuration file ***
 ```
 
 ## OPTIONS
@@ -52,6 +60,22 @@ and their value can follow as a separate argument or after `=`
   overrides the `port=` setting of the RPC transport in `network.yaml`. Use it
   to run more than one simulation on the same host. *port* must be a number
   between 1 and 65534.
+
+**-b** *port*, **-bridge** *port*
+: Serve the bridge display and its RPC endpoint on HTTP *port*. This overrides
+  the `port=` setting of `BridgeServer` in `network.yaml` (default 8756). Use it
+  with **-port** when running more than one simulation on the same host. Open
+  `http://localhost:`*port*`/` in a browser; see **bridge**(7).
+
+**-e** *settings*, **-environment** *settings*
+: Override variables in the `[EnvironmentVariables]` section of `cos.ini`.
+  *settings* is a list of `KEY=value` pairs separated by `:`, e.g.
+  `"TRAFFIC=ldta:WEATHER=clearsky"`. Keys are case-insensitive. A value may
+  contain commas (`TRAFFIC=ldta,fleet`) but not `:`. The overrides are
+  applied before the variables are resolved, so variables derived from them,
+  such as `SCENARIO`, use the new values. A key not in `cos.ini` is added.
+  Quote *settings* on the command line. The program exits if a setting is not
+  of the form `KEY=value`.
 
 ## ENVIRONMENT
 
@@ -82,7 +106,7 @@ The `cos` package (under `src/`) must be importable.
 
 **255**
 : The configuration file, image file or port given on the command line is
-  invalid.
+  invalid, or a **-environment** setting is not of the form `KEY=value`.
 
 ## EXAMPLES
 
@@ -98,13 +122,23 @@ Run a specific scenario:
 python coslaunch.py -config $COS_ROOT/config/simulation/no/alesund/cos.ini
 ```
 
+Run a scenario with a different traffic model and weather than its
+`cos.ini` sets:
+
+```
+python coslaunch.py -config $COS_ROOT/config/simulation/no/trondheim/cos.ini \
+    -environment "TRAFFIC=ldta:WEATHER=clearsky"
+```
+
 Run a second simulation next to one already on the default ports, then
 attach a visualiser to it:
 
 ```
-python coslaunch.py -config /path/to/cos.ini -port 6556
+python coslaunch.py -config /path/to/cos.ini -port 6556 -bridge 6756
 python ../cviz/cviz.py host localhost:6556
 ```
+
+and open the bridge display at `http://localhost:6756/`.
 
 ## BUGS
 
@@ -115,4 +149,4 @@ python ../cviz/cviz.py host localhost:6556
 
 ## SEE ALSO
 
-**cviz**(1), **costopic**(1), **cosservice**(1)
+**cviz**(1), **costopic**(1), **cosservice**(1), **bridge**(7) (`docs/tools/bridge.md`)

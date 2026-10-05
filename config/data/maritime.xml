@@ -12376,6 +12376,27 @@
  <FieldName>cumulative</FieldName>
  <Unit />
 </Measure>
+<Measure> <Name>ExposureBasis</Name>
+ <Type>string</Type>
+ <Display>Exposure basis</Display>
+ <Description>How exposure accumulates - rate (per period T) or change (the previous change-only rule)</Description>
+ <FieldName>exposure_basis</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ExposurePeriod</Name>
+ <Type>double</Type>
+ <Display>Exposure period</Display>
+ <Description>Reference period T of the network probabilities (rate basis)</Description>
+ <FieldName>exposure_period</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>ExposureDt</Name>
+ <Type>double</Type>
+ <Display>Exposure interval</Display>
+ <Description>Simulated time since the vessel&apos;s previous assessment</Description>
+ <FieldName>exposure_dt</FieldName>
+ <Unit>s</Unit>
+</Measure>
 <Measure> <Name>Depth</Name>
  <Type>double</Type>
  <Display>Depth</Display>
@@ -12809,6 +12830,107 @@
  <Display>Threshold</Display>
  <Description>alarm_threshold above which weather.capsize_risk is scored</Description>
  <FieldName>threshold</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>SimLog</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_sim_log</TableName>
+ <Dimensions>Location.gps</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the entry was made on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Simulated time of the entry</Description>
+ <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Faculty</Name>
+ <Type>string</Type>
+ <Display>Faculty</Display>
+ <Description>Faculty that acted on the request</Description>
+ <FieldName>faculty</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Faculty that made the request</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Vessel</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO the entry applies to - 0 for every vessel</Description>
+ <FieldName>vessel</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Event</Name>
+ <Type>string</Type>
+ <Display>Event</Display>
+ <Description>Event that prompted the request</Description>
+ <FieldName>event</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Action</Name>
+ <Type>string</Type>
+ <Display>Action</Display>
+ <Description>What was changed - e.g. exposure.period</Description>
+ <FieldName>action</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Reason</Name>
+ <Type>string</Type>
+ <Display>Reason</Display>
+ <Description>Reason given with the request</Description>
+ <FieldName>reason</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>OldValue</Name>
+ <Type>double</Type>
+ <Display>Old value</Display>
+ <Description>Value before the change</Description>
+ <FieldName>old_value</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>NewValue</Name>
+ <Type>double</Type>
+ <Display>New value</Display>
+ <Description>Value after the change</Description>
+ <FieldName>new_value</FieldName>
  <Unit />
 </Measure>
 </Measures>

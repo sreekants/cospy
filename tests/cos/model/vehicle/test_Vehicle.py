@@ -10,10 +10,13 @@ from cos.core.time.Clock import Clock
 
 
 class Queue:
+	bridge	= '/Bridge'
 	def __init__(self):
 		self.published	= []
 	def publish(self, msg, key, arg):
 		self.published.append( (msg, key, arg) )
+	def has_children(self, path):
+		return False		# No bridge display subscribed, so no vessel.state
 
 
 class VesselMoveTestCase(unittest.TestCase):

@@ -376,44 +376,115 @@ class Binding(dict):
 		return None
 
 
+class Exposure:
+	""" How assessments accumulate into a voyage total: the unit of exposure the
+	network's probabilities refer to (P3 Appendix F).
+
+	  rate     The probabilities are rates per reference period T. Every
+	           assessment is charged, weighted by the simulated time since the
+	           vessel's previous one. The default, with T = one hour.
+	  change   The previous rule: one charge per change of evidence, with no time
+	           basis. Kept to compare against.
+
+	Per-encounter and per-voyage bases, and per-hazard overrides, are not
+	implemented and are refused rather than ignored.
+	"""
+
+	BASES		= ( 'rate', 'change' )
+	PLANNED		= ( 'encounter', 'voyage' )
+	FIELDS		= ( 'basis', 'period' )
+
+	def __init__(self, basis='rate', period=3600.0):
+		""" Constructor
+		Arguments
+			basis -- 'rate' or 'change'
+			period -- Reference period T in simulated seconds (rate basis)
+		"""
+		if basis in self.PLANNED:
+			raise ValueError( f'Exposure basis {basis!r} is not implemented yet; use one of {self.BASES}' )
+		if basis not in self.BASES:
+			raise ValueError( f'Unknown exposure basis {basis!r}; use one of {self.BASES}' )
+		if float(period) <= 0:
+			raise ValueError( f'Exposure period must be positive, not {period}' )
+
+		self.basis		= basis
+		self.period		= float( period )
+		return
+
+	@staticmethod
+	def load(model:dict):
+		""" Reads the 'exposure' section of a model file, hourly rate when absent
+		Arguments
+			model -- The parsed model file (asv.model.yaml)
+		Returns
+			An Exposure
+		"""
+		section	= ( model or {} ).get( 'exposure' ) or {}
+		if 'hazards' in section:
+			raise ValueError( 'Per-hazard exposure overrides are not implemented yet' )
+		unknown	= set( section ) - set( Exposure.FIELDS )
+		if unknown:
+			raise ValueError( f'Unknown exposure setting(s): {sorted(unknown)}' )
+		return Exposure( section.get('basis', 'rate'), section.get('period', 3600.0) )
+
+	def __repr__(self):
+		return f'{self.basis}, T={self.period:g} s' if self.basis == 'rate' else self.basis
+
+
 class VoyageTrack:
 	""" Accumulated risk cost for one vessel over one voyage.
 
-	Two corrections to a naive running sum:
+	Survival weighting: a hazardous event earlier in the voyage would have ended
+	the mission, so an exposure later on is only incurred if the vessel got
+	there. Eq. (15) of the source paper omits this, which the authors note makes
+	it an over-estimate.
 
-	  1. Survival weighting. A hazardous event earlier in the voyage would have
-	     ended the mission, so an exposure later on is only incurred if the
-	     vessel got there. Eq. (15) of the source paper omits this, which the
-	     authors note makes it an over-estimate.
-	  2. One charge per distinct risk picture. The faculty samples on a timer,
-	     so an unchanged situation would otherwise be charged once per tick - a
-	     ten-minute encounter at 1 Hz would be counted six hundred times.
+	On the rate basis every assessment is charged in proportion to the time it
+	covers, dt / T, and survival decays by the probability of a hazard within
+	dt. Accumulation then grows with exposure time and does not depend on how
+	often the faculty samples. The change basis charges once per distinct
+	evidence configuration instead (see Exposure).
 	"""
 
-	def __init__(self):
+	def __init__(self, exposure:Exposure=None, start=0.0):
 		""" Constructor
+		Arguments
+			exposure -- How assessments accumulate; hourly rate when None
+			start -- Simulated time exposure starts from, in seconds
 		"""
+		self.exposure	= exposure or Exposure()
 		self.survival	= 1.0
 		self.cost		= 0.0
 		self.evidence	= UNASSESSED
 		self.charges	= 0
+		self.last		= float( start )
+		self.dt			= 0.0
 		return
 
-	def charge(self, cost, p_any, evidence):
-		""" Charges one exposure against the voyage, if the risk picture changed
+	def charge(self, cost, p_any, evidence, now):
+		""" Charges one assessment against the voyage
 		Arguments
 			cost -- Instantaneous expected economic loss
 			p_any -- Probability that any hazardous event occurs
 			evidence -- Evidence that produced this assessment
+			now -- Simulated time of the assessment, in seconds
 		Returns
-			The amount added to the voyage total, zero when nothing changed
+			The amount added to the voyage total
 		"""
-		if evidence == self.evidence:
-			return 0.0
+		self.dt		= max( float(now) - self.last, 0.0 )
+		self.last	= float( now )
 
-		increment		= self.survival * cost
+		if self.exposure.basis == 'change':
+			if evidence == self.evidence:
+				return 0.0
+			increment		= self.survival * cost
+			self.survival	*= (1.0 - p_any)
+		else:
+			share			= self.dt / self.exposure.period
+			increment		= self.survival * cost * share
+			self.survival	*= (1.0 - p_any) ** share		# no hazard within dt
+
 		self.cost		+= increment
-		self.survival	*= (1.0 - p_any)
 		self.evidence	= evidence
 		self.charges	+= 1
 		return increment

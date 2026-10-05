@@ -3023,6 +3023,9 @@ CREATE TABLE fact_risk_assessment
 	increment REAL,
 	survival REAL,
 	cumulative REAL,
+	exposure_basis VARCHAR(255),
+	exposure_period REAL,
+	exposure_dt REAL,
 	depth REAL,
 	depth_source VARCHAR(255)
 );
@@ -3125,4 +3128,25 @@ CREATE TABLE fact_capsize
 );
 
 CREATE INDEX idx_fact_capsize ON fact_capsize(dim_gps_id,dim_vessel_id);
+
+CREATE TABLE fact_sim_log
+(
+	dim_gps_id INTEGER,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	creation_time TIMESTAMP,
+	audit_status INTEGER,
+	case_id INTEGER,
+	tick INTEGER,
+	report_time REAL,
+	faculty VARCHAR(255),
+	source VARCHAR(255),
+	vessel INTEGER,
+	event VARCHAR(255),
+	action VARCHAR(255),
+	reason VARCHAR(255),
+	old_value REAL,
+	new_value REAL
+);
+
+CREATE INDEX idx_fact_sim_log ON fact_sim_log(dim_gps_id);
 

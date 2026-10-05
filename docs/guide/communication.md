@@ -22,6 +22,13 @@ The running example, *True North* in fog at Türkeli, is introduced in [one run,
 
 Start a simulation with `-port N` to use N and N+1 instead, so two simulations can run side by side.
 
+Browsers cannot open ZeroMQ sockets, so the simulation also serves a third, HTTP port (8756, or
+`-bridge N`). It hosts the OpenBridge bridge display and a JSON RPC endpoint, `/ws`, that reaches the same
+services. A browser does not subscribe to the event stream: it calls `Topic.subscribe` once to get its
+own queue, then polls it with `Topic.drain` every 200 ms. Each published batch is copied to every
+browser's queue, so browsers neither compete with each other nor take events from the ZeroMQ clients.
+See [bridge(7)](../tools/bridge.md).
+
 **The tools.**
 
 | Tool | Does |
@@ -30,6 +37,7 @@ Start a simulation with `-port N` to use N and N+1 instead, so two simulations c
 | `cviz` | Draws the map, zones, vessels and weather live, from the event stream |
 | `costopic` | Lists topics and reads or posts messages on them |
 | `cosservice` | Lists the object tree and describes an object |
+| bridge display | Shows one vessel's conning and traffic in a browser, served by the simulation itself |
 
 Each has a man page ([the index](INDEX.md)).
 

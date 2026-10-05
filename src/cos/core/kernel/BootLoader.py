@@ -149,9 +149,23 @@ class BootLoader:
 			return objects
 
 		for module in modules:
+			if not BootLoader.is_enabled(module):
+				sim.log.info( self.module, f'   - Module: {module.get("module")} (enable: false, skipped)' )
+				continue
 			self.__load_package( sim, config, objects, module, section )
 
 		return objects
+
+	@staticmethod
+	def is_enabled(module):
+		""" Checks a module entry's enable: key; a missing key means enabled
+		Arguments
+			module -- Module entry from a configuration file
+		"""
+		value	= module.get('enable', True)
+		if isinstance(value, str):
+			return value.strip().lower() not in ('false', '0', 'no', 'off')
+		return value is not False and value != 0
 
 	@staticmethod
 	def load_class(package):

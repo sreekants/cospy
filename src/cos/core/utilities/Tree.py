@@ -76,7 +76,7 @@ class TreeNode:
 			node -- Node to remove
 		"""
 		self.children.remove( node )
-		node.parent	= None
+		node._parent	= None
 		return True
 
 
@@ -86,7 +86,7 @@ class TreeNode:
 			target -- Target node
 		"""
 		for node in self.children:
-			node.parent	= target
+			node._parent	= target
 
 		target.children.extend( self.children )
 		self.children	= []
@@ -476,7 +476,7 @@ class Tree:
 		if node==None:
 			raise Exception( "Path not found." )
 
-		parent	= node.get_parent()
+		parent	= node.parent
 
 		if parent is None:
 			raise Exception( "Cannot remove root node." )

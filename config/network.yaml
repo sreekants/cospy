@@ -11,7 +11,15 @@ packages:
        module: cos.subsystem.network.RPCBroker
        config: transport=cos.core.network.RPCZMQTransport
 
-     - name: WebSocketBroker
-       enable: False
-       module: cos.subsystem.network.WebSocketBroker
-       config: transport=cos.core.network.WebSocketTransport
+     # Serves the OpenBridge bridge display and its JSON RPC endpoint (/ws) on one port.
+     # Add "enable: False" to the entry to run without it, e.g. for HPC batch runs.
+     #   host        127.0.0.1 is local only (reach HPC runs through an SSH tunnel);
+     #               0.0.0.0 lets a display on another machine connect
+     #   port        HTTP port; coslaunch -b/-bridge overrides it
+     #   root        built front end to serve; default samples/simulation/openbridge/dist in cospy
+     #   max_clients concurrent browser connections
+     #   queue_size  events held per browser before the oldest is dropped
+     #   idle_expiry seconds a browser may go without polling before its queue is removed
+     - name: BridgeServer
+       module: cos.subsystem.network.BridgeServer
+       config: host=127.0.0.1 port=8756 max_clients=16 queue_size=256 idle_expiry=30

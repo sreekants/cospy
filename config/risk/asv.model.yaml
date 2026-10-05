@@ -198,6 +198,18 @@ inference:
 # identically. The mapping below is arbitrary and harmless - that table is
 # symmetric, so either assignment gives the same matrix.
 
+# How the examiner accumulates this network's probabilities over a voyage (P3 Appendix F).
+# The network is evaluated on a snapshot of the situation, so its probabilities need a unit of
+# exposure before they can be summed along a voyage.
+#   basis: rate     the probabilities are rates per 'period' simulated seconds; every assessment
+#                   is charged in proportion to the time it covers (default, hourly)
+#   basis: change   one charge per change of evidence, with no time basis (the previous rule,
+#                   kept for comparison)
+# 'encounter' and 'voyage' bases and per-hazard overrides are planned and refused until built.
+exposure:
+  basis: rate
+  period: 3600
+
 sources:
   table_a6: "Kristensen et al. (2025), Table A.6"
   uniform_by_design: "Kristensen et al. (2025), Section 2.3 - uniform by design"

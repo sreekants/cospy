@@ -36,6 +36,8 @@ class MessageQueue:
 
 		self.ipcq		= Topic()
 		self.ipc		= '/IPC'
+		self.bridge		= '/Bridge'		# Parent of the per-browser queues the bridge server drains
+		self.bridge_only	= { 'vessel.state' }	# Events published to the bridge queues and not to /IPC
 
 		self.broker		= None
 		self.publisher	= None		# Bins viewer events per tick, if loaded
@@ -207,10 +209,62 @@ class MessageQueue:
 			arg -- Event argument
 		"""
 		if self.publisher is None:
+			self.fanout( self.bridge, msg, [arg] )
+			if msg in self.bridge_only:
+				return True
 			return self.push( self.ipc, msg, None, [arg] )
 
 		self.publisher.post( msg, key, arg )
 		return True
+
+	def create(self, path:str, maxsize:int=0):
+		""" Creates a queue, bounded when maxsize > 0; an existing queue is left as it is
+		Arguments
+			path -- Path of the queue
+			maxsize -- Bound on queued messages, dropping the oldest when full
+		"""
+		with self.lock:
+			node	= self.queues.get( path )
+			if node.data is None:
+				node.data	= Topic( maxsize )
+		return node.data
+
+	def remove(self, path:str):
+		""" Removes a queue and the queues under it
+		Arguments
+			path -- Path of the queue
+		"""
+		with self.lock:
+			if self.queues.find(path) is None:
+				return False
+			self.queues.remove( path )
+		return True
+
+	def has_children(self, path:str):
+		""" Checks if any queue exists directly under a path, e.g. a bridge client under /Bridge
+		Arguments
+			path -- Parent path
+		"""
+		with self.lock:
+			node	= self.queues.find(path)
+			return node is not None and len(node.children) > 0
+
+	def fanout(self, path:str, msg:str, arg=None):
+		""" Pushes a copy of a message to every queue directly under a path
+		Arguments
+			path -- Parent path, e.g. /Bridge
+			msg -- Message to push
+			arg -- Argument to the message
+		"""
+		with self.lock:
+			node	= self.queues.find(path)
+			if node is None:
+				return 0
+
+			slots	= [ child.data for child in node.children if child.data is not None ]
+			for slot in slots:
+				slot.queue.put( Event(None, msg, arg) )
+		return len(slots)
 
 	def push(self, path:str, msg:str, ctxt:Context=None, arg=None, depth=1):
 		""" Pushs a message to a queue

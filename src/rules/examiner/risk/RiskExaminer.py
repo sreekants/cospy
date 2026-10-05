@@ -2,7 +2,8 @@
 # Filename: RiskAssessment.py
 # Description: Bayesian risk-assessment faculty
 
-from rules.examiner.risk.RiskModel import HAZARDS, CURRENCY, Binding, VoyageTrack, LossMatrix, ConcernWeights
+from rules.examiner.risk.RiskModel import HAZARDS, CURRENCY, Binding, VoyageTrack, LossMatrix, ConcernWeights, Exposure
+from rules.examiner.risk.RiskExposure import RiskExposure
 from rules.examiner.risk.RiskModel import load, hazard_probabilities, individual_risk
 
 from maritime.model.zone.ZoneAwareness import ZoneAware
@@ -43,6 +44,11 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 	TOPIC		= '/Faculty/Risk/Assessment'
 	MESSAGE		= 'risk.assessment'
 
+	# Another faculty resets the exposure period T by sending a RiskExposure
+	# (see on_exposure_reset). Applied resets are logged to fact_sim_log.
+	EXPOSURE_TOPIC	= RiskExposure.TOPIC
+	EXPOSURE_RESET	= RiskExposure.MESSAGE
+
 	def __init__(self):
 		""" Constructor
 		"""
@@ -54,6 +60,11 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.weights	= ConcernWeights()	# Rw, from the same file
 		self.spatial	= SpatialZones()	# Sea.Type -> spatial zone, per territory
 		self.tracks		= {}		# Vessel guid -> VoyageTrack (COS-029-02)
+		self.exposure	= Exposure()	# how assessments accumulate; hourly rate unless the model says otherwise
+		self.started	= 0.0		# simulated time exposure counts from
+		self.configured	= self.exposure.period	# T as the model file sets it; a reset without a period restores it
+		self.recids		= {}		# Vessel guid -> database id, for the log
+		self.context	= None		# Simulation context, for requests that arrive without one
 		self.timer		= None
 		self.trace		= False
 		self.range		= 4000.0	# Encounter range for pair evidence [m], COLREG stage 2
@@ -107,6 +118,10 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.init_zones( ctxt, config, requires=['os'] )
 
 		self.__load_network( ctxt, config["network"] )
+		self.__load_exposure( ctxt, config["model"] )
+
+		ctxt.sim.ipc.subscribe( self.EXPOSURE_TOPIC, self )
+		self.subscribe( self.EXPOSURE_RESET, self.on_exposure_reset )
 		self.__load_bindings( ctxt, config["bindings"] )
 		self.__load_matrix( ctxt, config["territory"] )
 
@@ -124,6 +139,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		"""
 		self.cache_shapes( ctxt )
 		self.record_weights( ctxt )
+		self.started	= ctxt.sim.seconds()
+		self.context	= ctxt
 		return
 
 	def record_weights(self, ctxt:Context):
@@ -146,6 +163,9 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
 		"""
+		# Reset requests are applied here, on this faculty's thread, between passes
+		ctxt.ipc.pump_node( ctxt.ipc.get_node(self.EXPOSURE_TOPIC) )		# pump() skips the node itself
+
 		if (self.engine is None) or (self.timer.signaled() == False):
 			return
 
@@ -265,7 +285,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		key			= Ledger.identify( vessel )
 		imo			= Ledger.imo( vessel )
 		track		= self.track( key )
-		increment	= track.charge( cost, hazards['any'], evidence )
+		self.recids[key]	= Ledger.recid( vessel )
+		increment	= track.charge( cost, hazards['any'], evidence, ctxt.sim.seconds() )
 
 		report		= {
 			'vessel'		: key,
@@ -281,6 +302,9 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			'increment'		: increment,	# what was actually added to the voyage total
 			'survival'		: track.survival,
 			'cumulative'	: track.cost,
+			'exposure_basis'	: track.exposure.basis,
+			'exposure_period'	: track.exposure.period,
+			'exposure_dt'	: track.dt,		# simulated seconds this assessment covers
 			'evidence'		: evidence,
 			'target'		: Ledger.identify( target ) if target is not None else None,
 			'depth'			: depth,		# seabed beneath the vessel, as the depth node sees it
@@ -358,9 +382,55 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			key -- Vessel guid (COS-029-02)
 		"""
 		if key not in self.tracks:
-			self.tracks[key]	= VoyageTrack()
+			# Each voyage has its own copy, so T can be reset for one vessel
+			self.tracks[key]	= VoyageTrack( Exposure(self.exposure.basis, self.exposure.period), self.started )
 
 		return self.tracks[key]
+
+	def on_exposure_reset(self, ctxt:Context, arg):
+		""" Resets the exposure period T on request from another faculty, from the
+		next assessment on (P3 Appendix F). A request without a reason is refused.
+		Arguments
+			ctxt -- Context the request was pushed with; may be None
+			arg -- A RiskExposure, or its payload (RiskExposure.to_payload)
+		"""
+		ctxt	= self.context or ctxt
+		request	= RiskExposure.from_payload( arg )
+		vessel	= request.vessel
+
+		refused	= request.refusal()
+		if (refused is None) and (self.exposure.basis != 'rate'):
+			refused	= f'the exposure basis is {self.exposure.basis}, which has no period'
+		if refused:
+			ctxt.log.error( self.id, f'Exposure reset from {request.source or "unknown"} refused: {refused}' )
+			return
+
+		period	= self.configured if request.period is None else float( request.period )
+		if vessel is None:
+			old		= self.exposure.period
+			self.exposure.period	= period
+			for track in self.tracks.values():
+				track.exposure.period	= period
+			recid	= 0
+		else:
+			track	= self.track( vessel )
+			old		= track.exposure.period
+			track.exposure.period	= period
+			recid	= self.recids.get( vessel, -1 )		# -1: not yet assessed, so not yet identified
+
+		self.data( ctxt, 'sim_log', (
+			ctxt.sim.seconds(),
+			self.id,
+			request.source,
+			recid,
+			request.event,
+			'exposure.period',
+			request.reason,
+			old,
+			period,
+		) )
+		ctxt.log.info( self.id, f'Exposure period {old:g} s -> {period:g} s for {vessel or "every vessel"}: {request.reason}' )
+		return
 
 	def publish(self, ctxt:Context, vessel, report):
 		""" Publishes the assessment. Advisory only - a vessel that did not
@@ -402,6 +472,9 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			report['increment'],
 			report['survival'],
 			report['cumulative'],
+			report['exposure_basis'],
+			report['exposure_period'],
+			report['exposure_dt'],
 			report['depth'],
 			report['depth_source'],
 		) )
@@ -446,6 +519,21 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		ctxt.log.info( self.id, f'Loading Bayesian network : {file}' )
 
 		self.bn, self.engine	= load( path, HAZARDS )
+		return
+
+	def __load_exposure(self, ctxt:Context, file):
+		""" Reads how assessments accumulate from the model file's 'exposure'
+		section (P3 Appendix F); an hourly rate when there is no file or section
+		Arguments
+			ctxt -- Simulation context
+			file -- Model file path (asv.model.yaml), or None
+		"""
+		if file is not None:
+			path		= ctxt.sim.config.resolve( file )
+			self.exposure	= Exposure.load( yaml.safe_load(ctxt.sim.fs.read_file_as_bytes(path)) )
+		self.configured	= self.exposure.period
+
+		ctxt.log.info( self.id, f'Risk exposure basis : {self.exposure}' )
 		return
 
 	def __load_bindings(self, ctxt:Context, file):

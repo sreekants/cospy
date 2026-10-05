@@ -70,9 +70,12 @@ class Kernel:
 		"""
 		self.options	= settings
 		self.scheduler	= self.create_thread_pool()
-		self.config	= Configuration(configfile, settings['image'])
+		self.config	= Configuration(configfile, settings['image'], settings.get('environment'))
 		self.log	= Logger( self.config )
 		self.__init_debug()
+
+		for k, v in self.config.overrides.items():
+			self.log.warning( "Kernel", f"*** OVERRIDE {k}={v} replaces the value in the configuration file ***")
 
 		inifile		= self.config.inifile
 		if self.config.bootimage is None:

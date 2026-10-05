@@ -62,7 +62,7 @@ class Publisher(Subsystem):
 		return
 
 	def push(self, ipc):
-		""" Pushes each bin to /IPC as one event carrying all its arguments
+		""" Pushes each bin to /IPC, and a copy to every bridge queue, as one event carrying all its arguments
 		Arguments
 			ipc -- Message queue of the simulation
 		"""
@@ -70,7 +70,10 @@ class Publisher(Subsystem):
 			bins, self.bins	= self.bins, {}
 
 		for msg, args in bins.items():
-			ipc.push( ipc.ipc, msg, None, list(args.values()) )
+			batch	= list(args.values())
+			ipc.fanout( ipc.bridge, msg, batch )
+			if msg not in ipc.bridge_only:
+				ipc.push( ipc.ipc, msg, None, batch )
 		return
 
 

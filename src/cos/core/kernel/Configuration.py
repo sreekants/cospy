@@ -9,16 +9,18 @@ import os
 import re
 
 class Configuration:
-	def __init__(self, configfile=None, imagefile=None):
+	def __init__(self, configfile=None, imagefile=None, environment=None):
 		""" Constructor:
 		Arguments
 			configfile='cos.ini' -- File name of the configuration file
 			imagefile=None -- Boot image file (.tar file)
+			environment=None -- {KEY: value} overriding the EnvironmentVariables in the configuration file
 		"""
 
 		self.approot		= 'COS_CONFIG'
 		self.config			= None
 		self.bootimage		= None
+		self.overrides		= { k.upper(): v for k, v in (environment or {}).items() }
 
 		self.inifile		= self.__set_config_env(configfile)
 
@@ -73,6 +75,12 @@ class Configuration:
 		self.db		= self.__expand_root_path('Folders','DB')
 	
 		section		= 'EnvironmentVariables'
+
+		# Overrides replace the configured values before they are resolved,
+		# so variables derived from them, e.g. SCENARIO, follow the override.
+		for k, v in self.overrides.items():
+			self.parser.set(section, k, v)
+
 		variables	= self.get_keys(section)
 		for k in variables:
 			k = k.upper()

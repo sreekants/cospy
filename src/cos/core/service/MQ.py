@@ -19,8 +19,7 @@ class MQ(ORPCService):
 			message -- Message data
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def pop( self, domain, queuename, config ):
 		""" Pops a message from the queue
@@ -29,8 +28,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def peek( self, domain, queuename, config ):
 		""" Reads a message from a queue without popping it.
@@ -39,8 +37,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def move( self, domain, criteria, sourcequeuename, targetqueuename, config ):
 		""" Moves a queue
@@ -51,8 +48,7 @@ class MQ(ORPCService):
 			targetqueuename -- Destination queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def is_empty( self, domain, queuename, config ):
 		""" Checks if a queue is empty
@@ -61,8 +57,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def getcount( self, domain, queuename, config ):
 		""" Checks if a queue exists
@@ -71,8 +66,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def exists( self, domain, queuename, config ):
 		""" Removes all messages from a queue
@@ -81,8 +75,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def purge( self, domain, queuename, config ):
 		""" Removes all messages from a queue
@@ -91,8 +84,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def create( self, domain, queuename, config ):
 		""" Creates a new queue
@@ -101,8 +93,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def delete( self, domain, queuename, config ):
 		""" Deletes a queue
@@ -111,8 +102,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def locate( self, domain, criteria, config ):
 		""" Finds a queue given a criteria
@@ -121,8 +111,7 @@ class MQ(ORPCService):
 			criteria -- #TODO
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def list( self, domain, queuename, config ):
 		""" List all queue within a scope
@@ -131,8 +120,7 @@ class MQ(ORPCService):
 			queuename -- Queue name scope
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def get_property( self, domain, queuename, name, config ):
 		""" Returns a property of a queue
@@ -142,8 +130,7 @@ class MQ(ORPCService):
 			name -- Name of the object
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def set_property( self, domain, queuename, name, value, config ):
 		""" Sets a property of the queue
@@ -154,8 +141,7 @@ class MQ(ORPCService):
 			value -- #TODO
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def describe( self, domain, queuename, config ):
 		""" Describes a queue
@@ -164,8 +150,7 @@ class MQ(ORPCService):
 			queuename -- Queue name
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def add_route( self, domain, queuename, route, config ):
 		""" Adds a queue route
@@ -175,8 +160,7 @@ class MQ(ORPCService):
 			route -- Route to add
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def delete_route( self, domain, queuename, route, config ):
 		""" deletes a queue route
@@ -186,8 +170,7 @@ class MQ(ORPCService):
 			route -- Route to remove
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 	def is_route( self, domain, queuename, route, config ):
 		""" Checks if a route exists between a queue and a path
@@ -197,8 +180,7 @@ class MQ(ORPCService):
 			route -- Route queue path
 			config -- Configuration attributes
 		"""
-		# TODO: Implement your method here.
-		return 123456
+		raise NotImplementedError( 'MQ is not implemented; use the Topic service' )
 
 
 

@@ -12,6 +12,7 @@ from cos.core.kernel.Object import Object
 from cos.core.kernel.Context import Context
 from cos.core.simulation.Actor import Actor, ActorBehavior
 from cos.core.simulation.Snapshot import Snapshot
+from cos.behavior.control.RudderBehavior import RudderBehavior
 from cos.math.geometry.Rectangle import Rectangle
 from cos.core.utilities.ArgList import ArgList
 
@@ -50,6 +51,12 @@ class Vehicle(Object):
         self.fleet          = None
         
         self.actor.create( ctxt, self, config )
+
+        # Rudder estimate for bridge displays, unless the vessel configures its own control.dynamics
+        if ActorBehavior.CONTROL_DYNAMICS not in self.actor.behaviors:
+            steering    = RudderBehavior( ctxt, config )
+            self.actor.behaviors[steering.type]  = steering
+            steering.intialize( ctxt, self.actor, self, config )
 
         # Builds the values.
         self.build_values()
@@ -150,7 +157,58 @@ class Vehicle(Object):
             "signal": self.signal,
             "time": world.sim.clock.local.isoformat()     # Scenario local time, for the viewer's clock
             } )
+
+        if world.sim.ipc.has_children( world.sim.ipc.bridge ):
+            world.sim.ipc.publish( 'vessel.state', self.guid, self.bridge_state(world, rect, dx) )
         return
+
+    def bridge_state(self, world, rect, dx):
+        """ Builds the vessel.state event for bridge displays (SI units, angles clockwise from north)
+        Arguments
+        	world -- Reference ot the simulation world
+        	rect -- Bounding rectangle in metres
+        	dx -- Velocity in metres per simulated second; map y grows southward, as cviz draws it
+        """
+        now         = world.sim.clock.local
+        vx, vy      = float(dx[0]), float(dx[1])
+        sog         = float(np.hypot(vx, vy))
+        cog         = float(np.arctan2(vx, -vy) % (2*np.pi)) if sog > 1e-6 else None
+
+        # Heading follows course; with no leeway model they are the same. Held while stopped.
+        heading     = cog if cog is not None else getattr(self, '_bridge_heading', None)
+        rot         = None
+        last        = getattr(self, '_bridge_last', None)
+        if heading is not None and last is not None and last[0] is not None:
+            elapsed = (now - last[1]).total_seconds()
+            if elapsed > 0:
+                turn    = (heading - last[0] + np.pi) % (2*np.pi) - np.pi
+                rot     = float(turn / elapsed)
+        self._bridge_last       = (heading, now)
+        self._bridge_heading    = heading
+
+        steering    = self.actor.behaviors.get(ActorBehavior.CONTROL_DYNAMICS) if self.actor.behaviors else None
+        rudder, order   = steering.observe(rot, sog, now) if hasattr(steering, 'observe') else (None, None)
+
+        return {
+            "guid": self.guid,
+            "name": self.config.get('name'),
+            "imo": (self.config.get('identifier') or {}).get('imo'),
+            "time": now.isoformat(),
+            "x": rect.left + (rect.right-rect.left)/2.0,
+            "y": rect.top + (rect.bottom-rect.top)/2.0,
+            "lat": None,
+            "lon": None,
+            "heading": heading,
+            "cog": cog,
+            "sog": sog,
+            "stw": None,
+            "rot": rot,
+            "rudder": rudder,
+            "rudder_order": order,
+            "rudder_source": "estimated" if rudder is not None else None,
+            "propulsion": None,
+            "intent": str(self.intent)
+            }
 
     def sim_init(self, world, rect):
         """ Initialize the simulation

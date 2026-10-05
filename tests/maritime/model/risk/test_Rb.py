@@ -51,10 +51,19 @@ class Sim:
 			return open( path, 'rb' ).read()
 
 
+class Ipc:
+	def get_node(self, path):
+		return None
+
+	def pump_node(self, node):
+		return 0
+
+
 class Ctxt:
 	def __init__(self):
 		self.sim	= Sim()
 		self.log	= Log()
+		self.ipc	= Ipc()
 
 
 class Rules:
@@ -66,7 +75,9 @@ def report(exposure):
 			 'hazards': {'collision': 0.1, 'grounding': 0.0, 'loss_of_comms': 0.0, 'any': 0.1, 'sum': 0.1},
 			 'individual_risk': 0.0,
 			 'exposure': exposure, 'cost': sum(exposure.values()), 'increment': 0.0,
-			 'survival': 1.0, 'cumulative': 0.0, 'depth': 4000.0, 'depth_source': 'nominal' }
+			 'survival': 1.0, 'cumulative': 0.0,
+			 'exposure_basis': 'rate', 'exposure_period': 3600.0, 'exposure_dt': 1.0,
+			 'depth': 4000.0, 'depth_source': 'nominal' }
 
 
 class RecordTestCase(unittest.TestCase):
