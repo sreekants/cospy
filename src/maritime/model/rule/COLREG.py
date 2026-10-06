@@ -11,7 +11,7 @@ from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 from cos.lang.logic.Decision import Decision
 
-import queue, fnmatch
+import queue, fnmatch, re
 
 class COLREG(ScoredRule, Rule):
 	SOURCE		= SOURCE_COLREG
@@ -22,6 +22,10 @@ class COLREG(ScoredRule, Rule):
 		Rule.__init__(self, "COLREG")
 
 		self.sitations	= queue.Queue()
+
+		# RuleNN logs its failures to fact_colreg_rNN
+		number			= re.fullmatch( r'Rule(\d+)', self.__class__.__name__ )
+		self.failures	= f'colreg_r{int(number.group(1)):02d}' if number else None
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):
@@ -134,6 +138,7 @@ class COLREG(ScoredRule, Rule):
 		situation	= rule_ctxt.situation
 
 		entry		= self.score( ctxt, situation, clause )
+		self.log_failure( ctxt, situation, clause, entry['penalty'] if entry is not None else 0.0, err )
 		if entry is None:
 			self.note_unpriced( ctxt, clause )
 			return
@@ -143,7 +148,26 @@ class COLREG(ScoredRule, Rule):
 		subject		= Ledger.identify( target ) if target is not None else None
 
 		self.record_violation( ctxt, self.__class__.__name__, situation.os, clause, subject,
-							   entry['penalty'], entry.get('concern') )
+							   entry['penalty'], entry.get('concern'), entry.get('weight', 1.0) )
+		return
+
+	def log_failure(self, ctxt:Context, situation, clause:str, penalty:float, err):
+		""" Logs a failed clause, priced or not, to the rule's fact_colreg_rNN table
+		Arguments
+			ctxt -- Simulation context
+			situation -- Situation the clause failed in
+			clause -- The failed clause
+			penalty -- Its penalty, 0 when unpriced
+			err -- The failed decision
+		"""
+		if self.failures is None:
+			return
+
+		target	= getattr( situation, 'ts', None )
+		vessels	= f'own={Ledger.recid(situation.os)} target={Ledger.recid(target) if target is not None else "-"}'
+
+		# Field order matches fact_colreg_rNN in maritime.xml
+		self.data( ctxt, self.failures, (ctxt.sim.seconds(), clause, float(penalty), vessels, str(err)) )
 		return
 
 if __name__ == "__main__":

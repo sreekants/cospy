@@ -24,6 +24,7 @@ class Overtaking(Maneuver):
 			config -- Configuration attributes
 		"""
 		self.setup(ctxt, config)
+		self.init_watcher(ctxt, config)
 		return
 
 	def setup(self, ctxt:Context, config):

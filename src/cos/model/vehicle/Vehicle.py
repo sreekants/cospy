@@ -163,7 +163,7 @@ class Vehicle(Object):
         return
 
     def bridge_state(self, world, rect, dx):
-        """ Builds the vessel.state event for bridge displays (SI units, angles clockwise from north)
+        """ Builds the vessel.state event for bridge displays (SI units; heading and COG clockwise from map north, north_offset makes them true)
         Arguments
         	world -- Reference ot the simulation world
         	rect -- Bounding rectangle in metres
@@ -189,15 +189,22 @@ class Vehicle(Object):
         steering    = self.actor.behaviors.get(ActorBehavior.CONTROL_DYNAMICS) if self.actor.behaviors else None
         rudder, order   = steering.observe(rot, sog, now) if hasattr(steering, 'observe') else (None, None)
 
+        x           = rect.left + (rect.right-rect.left)/2.0
+        y           = rect.top + (rect.bottom-rect.top)/2.0
+        georef      = getattr(world, 'georef', None)
+        lat, lon    = georef.to_gps(x, y) if georef is not None else (None, None)
+        north       = georef.north_offset(x, y) if lat is not None else None
+
         return {
             "guid": self.guid,
             "name": self.config.get('name'),
             "imo": (self.config.get('identifier') or {}).get('imo'),
             "time": now.isoformat(),
-            "x": rect.left + (rect.right-rect.left)/2.0,
-            "y": rect.top + (rect.bottom-rect.top)/2.0,
-            "lat": None,
-            "lon": None,
+            "x": x,
+            "y": y,
+            "lat": lat,
+            "lon": lon,
+            "north_offset": north,
             "heading": heading,
             "cog": cog,
             "sog": sog,

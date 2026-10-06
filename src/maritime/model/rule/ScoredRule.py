@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Filename: ScoredRule.py
-# Description: Mixin recording a rule's violations into Ro through the shared Ledger
+# Description: Mixin posting a rule's violations to the ViolationInspector through the shared Ledger
 
 from maritime.model.zone.Ledger import Ledger, FindingGuard
 from cos.core.kernel.Context import Context
@@ -45,8 +45,8 @@ class ScoredRule:
 		return
 
 	def record_violation(self, ctxt:Context, raiser:str, vessel, event:str, subject,
-						 penalty:float, concern=None)->bool:
-		""" Records a priced violation once per occurrence
+						 penalty:float, concern=None, weight:float=1.0)->bool:
+		""" Posts a priced violation to the ViolationInspector once per occurrence
 		Arguments
 			ctxt -- Simulation context
 			raiser -- Id of the rule, as it should appear in the row
@@ -55,8 +55,9 @@ class ScoredRule:
 			subject -- What else the finding is about, e.g. the target ship
 			penalty -- Penalty score
 			concern -- A concern, or an event id that maps to one; None maps the clause
+			weight -- Rw from the score file, 1.0 when it declares none
 		Returns
-			True when a row was written
+			True when the violation was posted
 		"""
 		key		= ( Ledger.identify(vessel), event, subject )
 		if self.findings.admit( key, ctxt.sim.seconds() ) == False:
@@ -67,8 +68,8 @@ class ScoredRule:
 			concern	= rules.concern( concern )
 
 		shapes	= self.ledger.shapes( ctxt, vessel )
-		return self.ledger.record( ctxt, self.SOURCE, raiser, vessel, event, shapes,
-								   penalty, 0.0, concern )
+		return self.ledger.post( ctxt, self.SOURCE, raiser, vessel, event, shapes,
+								 penalty, 0.0, concern, weight )
 
 	@staticmethod
 	def clause_name(err)->str:

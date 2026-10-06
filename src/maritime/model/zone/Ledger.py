@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Filename: Ledger.py
-# Description: The one write path for observed violations (Ro) into fact_concern
+# Description: Posts observed violations (Ro, Rl, Rw) to the ViolationInspector, which alone writes fact_concern
 
 import yaml
 
@@ -8,6 +8,9 @@ from maritime.model.zone.ZoneRules import ZoneRules, SpatialZones
 from cos.core.kernel.Context import Context
 
 FACT		= 'fact_concern'
+
+CLEARING	= '/Faculty/Practice/Inspectors/ViolationInspector'		# Topic the ViolationInspector clears violations from
+VIOLATION	= 'violation.score'
 
 ZONES		= '$(CONFIG)/examiner/zones.yaml'
 TERRITORY	= '$(SIMULATION)/risk.yaml'
@@ -115,9 +118,11 @@ class FindingGuard:
 
 
 class Ledger:
-	""" Records observed violations into fact_concern.
+	""" Prices observed violations and posts them to the ViolationInspector.
 	"""
 	_shared		= None
+	clearing	= False		# Set by the ViolationInspector; without it posted violations are never written
+	_warned		= False
 
 	@classmethod
 	def shared(cls, ctxt:Context, owner:str):
@@ -291,9 +296,9 @@ class Ledger:
 		except (AttributeError, TypeError, ValueError):
 			return ''
 
-	def record(self, ctxt:Context, source:str, raiser:str, vessel, event:str,
-			   shapes, penalty:float, value=0.0, concern=None)->bool:
-		""" Writes one finding
+	def post(self, ctxt:Context, source:str, raiser:str, vessel, event:str,
+			 shapes, penalty:float, value=0.0, concern=None, weight:float=1.0)->bool:
+		""" Posts one finding to the ViolationInspector
 		Arguments
 			ctxt -- Simulation context
 			source -- SOURCE_EXAMINER, SOURCE_COLREG or SOURCE_LOCAL
@@ -301,11 +306,12 @@ class Ledger:
 			vessel -- Vessel in violation
 			event -- Violation identifier
 			shapes -- Map shapes enclosing the vessel
-			penalty -- Penalty score; zero is not recorded
+			penalty -- Penalty (Rl); zero is not posted
 			value -- Quantity behind the violation
 			concern -- Concern, when the caller knows it; else from the mapping
+			weight -- Rw from the score file, 1.0 by default
 		Returns
-			True when a row was written
+			True when the finding was posted
 		"""
 		if not penalty:
 			return False
@@ -315,21 +321,47 @@ class Ledger:
 			ctxt.log.error( raiser, f'Violation {event!r} maps to no concern; not recorded' )
 			return False
 
+		if (Ledger.clearing == False) and (Ledger._warned == False):
+			Ledger._warned	= True
+			ctxt.log.error( raiser, f'No ViolationInspector loaded: violations are not recorded; add it to rules.assurance.yaml' )
+
+		ctxt.ipc.push( CLEARING, VIOLATION, ctxt, {
+			'time'		: ctxt.sim.seconds(),
+			'vessel'	: self.recid( vessel ),
+			'source'	: source,
+			'raiser'	: raiser,
+			'event'		: event,
+			'area'		: self.area( shapes ),
+			'zone'		: self.zone( shapes ),
+			'concern'	: concern,
+			'penalty'	: float( penalty ),
+			'weight'	: float( weight ),
+			'value'		: float( value ),
+		} )
+		return True
+
+	@staticmethod
+	def record(ctxt:Context, finding:dict):
+		""" Writes one posted finding to fact_concern; only the ViolationInspector calls this
+		Arguments
+			ctxt -- Simulation context
+			finding -- Payload made by post()
+		"""
 		# vessel_id is the vessel IMO, as in every fact table; field order matches fact_concern in maritime.xml
 		ctxt.sim.data.push( FACT, (
-			ctxt.sim.seconds(),
-			self.recid( vessel ),
-			source,
-			raiser,
-			event,
-			self.area( shapes ),
-			self.zone( shapes ),
-			concern,
-			float( penalty ),
-			float( value ),
+			finding['time'],
+			finding['vessel'],
+			finding['source'],
+			finding['raiser'],
+			finding['event'],
+			finding['area'],
+			finding['zone'],
+			finding['concern'],
+			finding['penalty'],
+			finding['weight'],
+			finding['value'],
 		) )
-
-		return True
+		return
 
 
 if __name__ == "__main__":

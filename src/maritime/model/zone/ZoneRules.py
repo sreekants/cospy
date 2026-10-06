@@ -5,7 +5,7 @@
 # Zone-local regulation - a speed limit in a strait, an overtaking ban in a
 # narrow reach, a cargo class barred from internal waters - is data, not code.
 # It lives in config/examiner/zones.yaml so a scenario designer can retune a
-# jurisdiction without touching an examiner, exactly as score.json retunes a
+# jurisdiction without touching an examiner, exactly as score.yaml retunes a
 # Legata rule's penalties.
 #
 # Rules resolve in three layers, most specific winning:

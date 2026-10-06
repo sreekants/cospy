@@ -7,7 +7,9 @@ from maritime.model.zone.ZoneAwareness import ZoneAware
 from rules.examiner.risk.RiskModel import load
 from maritime.model.zone.Ledger import Ledger
 from cos.core.kernel.Context import Context
+from cos.core.kernel.Object import TERM_WRITE
 from cos.core.utilities.ArgList import ArgList
+from cos.model.situation.EpisodeWatcher import EpisodeWatcher, epoch_of
 
 import numpy as np
 import yaml
@@ -39,9 +41,12 @@ import yaml
 class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 	TOPIC		= '/Faculty/Concern/Weather'
 	MESSAGE		= 'vessel.capsize.risk'
+	EPOCH_MESSAGE	= 'vessel.capsize.epoch'
 	EVENT		= 'weather.capsize_risk'
 
 	WAVE_FIELD	= '/World/Weather/SEA_WAVE'
+
+	watcher		= None		# Set up in setup()
 
 	def __init__(self):
 		""" Constructor
@@ -54,6 +59,8 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 		self.waves		= []		# SEA_WAVE force fields
 		self.threshold	= 1.0
 		self.report_topic	= self.TOPIC
+		self.watcher	= None		# P(capsize) per vessel, against the alarm threshold
+		self.context	= None		# Simulation context, for the epoch callback
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):
@@ -67,6 +74,7 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 		settings		= self.rules.section( 'weather' )
 		self.threshold	= float( settings.get('alarm_threshold', 1.0) )
 		self.report_topic	= settings.get( 'report_topic', self.TOPIC )
+		self.watcher	= EpisodeWatcher( self.threshold, self.on_epoch, span=epoch_of(config) )
 
 		self.__load_network( ctxt, config["network"] or settings.get('network') )
 		self.__load_bands( ctxt, config["bindings"] or settings.get('bindings') )
@@ -160,6 +168,10 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 			self.threshold,
 		) )
 
+		if self.watcher is not None:
+			self.context	= ctxt
+			self.watcher.observe( Ledger.identify(vessel), capsize, ctxt.sim.tickcount(), (vessel, zone) )
+
 		if capsize >= self.threshold:
 			penalty	= self.violate( ctxt, vessel, self.EVENT, shapes, value=capsize,
 									detail=f'P(capsize) {capsize:.3f} from {evidence}' )
@@ -175,6 +187,45 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 		} )
 
 		return capsize
+
+	def on_epoch(self, epoch):
+		""" Publishes an epoch of P(capsize) at or above the alarm threshold
+		Arguments
+			epoch -- Ended epoch; its detail is the peak's (vessel, zone)
+		"""
+		vessel, zone	= epoch.detail
+		self.announce( self.context, self.report_topic, self.EPOCH_MESSAGE, {
+			'vessel'	: self.identify( vessel ),
+			'zone'		: zone,
+			'threshold'	: self.threshold,
+			'epoch'		: epoch.summary(),
+		} )
+		return
+
+	def end(self, ctxt:Context, rule_ctxt):
+		""" Ends the epochs of vessels not assessed this pass
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		if self.watcher is not None:
+			self.context	= ctxt
+			self.watcher.lapse( ctxt.sim.tickcount() )
+		return
+
+	def on_term(self, ctxt:Context, runlevel):
+		""" Publishes the epochs still open, before the DataManager writes out
+		Arguments
+			ctxt -- Simulation context
+			runlevel -- Termination run level; this acts at TERM_WRITE
+		"""
+		if runlevel != TERM_WRITE:
+			return
+
+		if self.watcher is not None:
+			self.context	= ctxt
+			self.watcher.flush( ctxt.sim.tickcount() )
+		return
 
 	def sea_state(self, vessel):
 		""" Magnitude of the sea wave field at the vessel

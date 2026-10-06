@@ -1,0 +1,50 @@
+# Scorecard for this location's local rules (Legata).
+#
+# scores    One entry per clause, by clause name:
+#   concern   Event id the violation scores into (mapped to a concern in config/examiner/zones.yaml)
+#   penalty   What the violation costs, in USD: Rl (REQ.041 DOC-041-01). Values are placeholders
+#   weight    Optional Rw for this clause; when absent the file's weight below applies
+#   filter    Optional vessel guids the clause is judged for; empty or absent means every vessel
+#   fact      Legacy fact name, not read
+#   type      'one-strike' marks a clause whose single breach is decisive
+#
+# weight    Rw for every clause without a weight of its own: an optional weight, default 1.0
+#           (REQ.041 DOC-041-02). It is recorded beside the penalty in fact_concern, not multiplied in.
+# basescore Penalty of an unlisted clause for ScoreCard.evaluate(); priced lookups ignore it.
+
+weight: 1.0
+basescore: 0.0
+scores:
+  Istanbul.Strait.Rule3.Heavy:
+    fact: score_berthing_risk
+    concern: Violation.BerthingRisk
+    penalty: 6
+  Istanbul.Strait.Rule3.DangerousCargo:
+    fact: score_hazardous_transport
+    concern: Violation.HazardousTransport
+    penalty: 42
+  Turkeli.Harbour.TSS.South-North:
+    fact: traffic
+    concern: Violation.WrongDirection
+    penalty: 100
+  Turkeli.Harbour.TSS.North-South:
+    fact: traffic
+    concern: Violation.WrongDirection
+    penalty: 100
+  Turkeli.Harbour.TSS.North-South.DistanceKeeping:
+    fact: traffic
+    concern: Violation.DistanceKeeping
+    penalty: 100
+  Turkeli.Harbour.TSS.South-North.DistanceKeeping:
+    fact: traffic
+    concern: Violation.DistanceKeeping
+    penalty: 100
+  Turkeli.Harbour.SpeedLimit:
+    fact: traffic
+    concern: Violation.SpeedLimit
+    penalty: 3
+  Turkeli.Bosphorous.DeepDraft:
+    fact: traffic
+    concern: Violation.DeepDraft
+    penalty: 1000000
+    type: one-strike

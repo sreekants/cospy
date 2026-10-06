@@ -28,6 +28,8 @@ class Type(Flag):
     STRAIT                      = 0x20001000
     HARBOUR                     = 0x20002000
     ARCHIPELAGIC_WATERS         = 0x20004000
+    NATURE_RESERVE              = 0x20008000    # protected marine area: speed, anchoring, seasonal closures
+    MILITARY_AREA               = 0x20010000    # military exercise or firing area: no entry while active
 
     # Navigation (&traffic)-related classifications
     WATERWAY                    = 0x40000002
@@ -40,6 +42,8 @@ class Type(Flag):
     DEEP_WATER_ROUTE            = 0x40040000
     PRECAUTIONARY_AREA          = 0x40050000
     AREA_TO_AVOID               = 0x40060000
+    ANCHORAGE                   = 0x40070000    # designated anchorage area
+    SPEED_ZONE                  = 0x40080000    # reach with a local speed limit (settings speed_limit=, knots)
 
 class Sea(Shape):
     def __init__(self, ctxt:Context, type, id, config ):

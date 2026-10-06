@@ -10,7 +10,7 @@ from cos.core.utilities.ArgList import ArgList
 from cos.lang.logic.Decision import Decision
 from cos.model.rule.Situation import Situation
 from maritime.model.rule.ScoredRule import ScoredRule
-from maritime.model.zone.Ledger import SOURCE_LOCAL
+from maritime.model.zone.Ledger import Ledger, SOURCE_LOCAL
 
 from typing import Any
 import queue, fnmatch
@@ -212,7 +212,9 @@ class InlandWaterRule(ScoredRule, Rule):
 		os			= situation.os
 
 		score		= self.score( ctxt, situation, clausename )
+		zone		= getattr( situation, 'zone', None )
 		if score is None:
+			self.log_failure( ctxt, os, zone, clausename, 0.0 )
 			self.note_unpriced( ctxt, clausename )
 			return
 
@@ -222,9 +224,23 @@ class InlandWaterRule(ScoredRule, Rule):
 			if os.id not in filter:
 				return
 
-		zone		= getattr( situation, 'zone', None )
+		self.log_failure( ctxt, os, zone, clausename, score['penalty'] )
 		self.record_violation( ctxt, self.regulation, os, clausename,
-							   getattr(zone, 'name', None), score['penalty'], score.get('concern') )
+							   getattr(zone, 'name', None), score['penalty'], score.get('concern'), score.get('weight', 1.0) )
+		return
+
+	def log_failure(self, ctxt:Context, vessel, zone, clause:str, penalty:float):
+		""" Logs a failed clause, priced or not, to fact_territorial
+		Arguments
+			ctxt -- Simulation context
+			vessel -- Own ship
+			zone -- Zone the vessel was in
+			clause -- The failed clause
+			penalty -- Its penalty, 0 when unpriced
+		"""
+		# Field order matches fact_territorial in maritime.xml
+		self.data( ctxt, 'territorial', (ctxt.sim.seconds(), self.regulation, clause, float(penalty),
+										 f'own={Ledger.recid(vessel)}', f'zone={getattr(zone, "name", "-")}') )
 		return
 
 	def on_overtaking(self, ctxt:Context, evt):

@@ -24,6 +24,7 @@ class Headon(Maneuver):
 			config -- Configuration attributes
 		"""
 		self.setup(ctxt, config)
+		self.init_watcher(ctxt, config)
 		return
 
 

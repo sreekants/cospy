@@ -97,7 +97,13 @@ class Rule(Faculty):
 		if penalty <= 0.0:
 			return None
 
-		return dict( entry, penalty=penalty )
+		try:
+			weight	= self.scorecard.weight_of( event )
+		except ValueError as e:
+			ctxt.log.error( self.id, f'Clause {event} has an unreadable weight: {e}' )
+			return None
+
+		return dict( entry, penalty=penalty, weight=weight )
 
 	def setup(self, ctxt:Context, config:ArgList):
 		""" Sets up the rule, loading its configurations

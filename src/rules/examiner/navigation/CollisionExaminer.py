@@ -5,7 +5,9 @@
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware, ENCOUNTERS
 from cos.core.kernel.Context import Context
+from cos.core.kernel.Object import TERM_WRITE
 from cos.core.utilities.ArgList import ArgList
+from cos.model.situation.EpisodeWatcher import EpisodeWatcher, epoch_of
 
 # REQUIREMENT:
 # Collision cost: the summed value of the two vessels involved, multiplied by a
@@ -29,7 +31,10 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 	TOPIC		= '/Faculty/Concern/Collision'
 	MESSAGE		= 'vessel.collision.cost'
 	EVENT		= 'collision.cost'
+	EPOCH_MESSAGE	= 'vessel.collision.epoch'
 	SITUATIONS	= ENCOUNTERS
+
+	watcher		= None		# Set up in setup() when report.dcpa is given
 
 	def __init__(self):
 		""" Constructor
@@ -40,6 +45,8 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 		self.fallback	= 0.0
 		self.report_topic	= self.TOPIC
 		self.report_at	= None		# DCPA under which an encounter is costed
+		self.watcher	= None		# DCPA per pair, against report_at
+		self.context	= None		# Simulation context, for the epoch callback
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):
@@ -58,6 +65,9 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 
 		at				= config["report.dcpa"]
 		self.report_at	= float( at ) if at is not None else None
+
+		if self.report_at is not None:
+			self.watcher	= EpisodeWatcher( self.report_at, self.on_epoch, span=epoch_of(config), below=True )
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -82,6 +92,11 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 
 		situation	= rule_ctxt.situation
 		dcpa		= rule_ctxt.resolve( '(OwnShip,TargetShip).DCPA' )
+
+		if self.watcher is not None:
+			self.context	= ctxt
+			key		= ( self.identify(situation.os), self.identify(situation.ts) )
+			self.watcher.observe( key, dcpa, ctxt.sim.tickcount() )
 
 		if (self.report_at is not None) and (dcpa is not None) and (dcpa > self.report_at):
 			return
@@ -124,6 +139,45 @@ class CollisionExaminer(ZoneAware, NavigationExaminer):
 		} )
 
 		return cost
+
+	def on_epoch(self, epoch):
+		""" Publishes an epoch of DCPA at or under report.dcpa
+		Arguments
+			epoch -- Ended epoch; its key is (own, target)
+		"""
+		own, target	= epoch.key
+		self.announce( self.context, self.report_topic, self.EPOCH_MESSAGE, {
+			'own'		: own,
+			'target'	: target,
+			'threshold'	: self.report_at,
+			'epoch'		: epoch.summary(),
+		} )
+		return
+
+	def end(self, ctxt:Context, rule_ctxt):
+		""" Ends the epochs of pairs not in an encounter this pass
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		if self.watcher is not None:
+			self.context	= ctxt
+			self.watcher.lapse( ctxt.sim.tickcount() )
+		return
+
+	def on_term(self, ctxt:Context, runlevel):
+		""" Publishes the epochs still open, before the DataManager writes out
+		Arguments
+			ctxt -- Simulation context
+			runlevel -- Termination run level; this acts at TERM_WRITE
+		"""
+		if runlevel != TERM_WRITE:
+			return
+
+		if self.watcher is not None:
+			self.context	= ctxt
+			self.watcher.flush( ctxt.sim.tickcount() )
+		return
 
 	def value(self, vessel)->float:
 		""" What a vessel is worth

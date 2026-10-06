@@ -12,6 +12,7 @@ from cos.model.environment.Environment import Environment
 from cos.model.environment.Weather import Weather
 from cos.model.environment.Actors import Actors
 from cos.model.environment.Scales import Scales
+from cos.model.environment.GeoReference import GeoReference
 
 class World(CompositeService):
 	def __init__(self):
@@ -30,6 +31,7 @@ class World(CompositeService):
 		self.actors		= self.add_component( Actors(self) )
 		self.weather	= self.add_component( Weather(self) )
 		self.scales		= Scales()
+		self.georef		= GeoReference()		# Replaced by the map's georeference in on_init
 		return
 
 	@property
@@ -48,6 +50,8 @@ class World(CompositeService):
 		CompositeService.on_init(self, ctxt, module)
 		self.scales.load( ctxt )
 		ctxt.sim.log.info( 'World', f'Map scale: {self.scales.map[0]:g} x {self.scales.map[1]:g} metres per map unit' )
+		self.georef		= GeoReference.load( ctxt )
+		ctxt.sim.log.info( 'World', f'Georeference: {self.georef.describe()}' )
 
 		# The simulated clock steps by the scales' seconds per tick (REQ-032-05, -06)
 		self.scales.load_time( ctxt.sim.config )

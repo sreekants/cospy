@@ -12,7 +12,7 @@ class AreaToAvoidRule(InlandWaterRule):
 	def __init__(self):
 		""" Constructor
 		"""
-		InlandWaterRule.__init__(self, None)
+		InlandWaterRule.__init__(self, 'Internal.AreaToAvoid')
 		return
 
 	def setup(self, ctxt:Context, config:ArgList):
@@ -33,7 +33,18 @@ class AreaToAvoidRule(InlandWaterRule):
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
 		"""
-		self.on_violate( ctxt, rule_ctxt, 'NO_ENTRY' )
+		if self.automata is not None:
+			return InlandWaterRule.evaluate_rule( self, ctxt, rule_ctxt )
+
+		# No rule set: every vessel inside an area to avoid is a NO_ENTRY violation
+		saved	= rule_ctxt.situation
+		try:
+			while not self.sitations.empty():
+				rule_ctxt.situation	= self.sitations.get()
+				if rule_ctxt.situation.zone.contains( rule_ctxt.situation.os.location ):
+					self.on_violate( ctxt, rule_ctxt, 'NO_ENTRY' )
+		finally:
+			rule_ctxt.situation	= saved
 		return
 
 

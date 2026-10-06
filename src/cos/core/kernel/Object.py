@@ -6,6 +6,10 @@ from cos.core.kernel.Context import Context
 from typing import Any
 import uuid
 
+# on_term run levels a module receives, in order: -5 first, -1 last; all precede every on_stop
+TERM_WRITE	= -5		# Modules write their last rows and posts
+TERM_CLEAR	= -1		# Clearing houses empty their queues
+
 class Object:
 	def __init__(self, type:str, id:str=None, guid:str=None ):
 		""" Constructor
@@ -139,18 +143,18 @@ class Object:
 		return
 
 	def on_stop(self, ctxt:Context, unused):
-		""" Callback for simulation shutdown
+		""" Callback for simulation shutdown; the DataManager has already written out, so write no data here
 		Arguments
 			ctxt -- Simulation context
 			unused -- Unused variable
 		"""
 		return
 
-	def on_term(self, ctxt:Context, unused):
-		""" Callback for simulation termination
+	def on_term(self, ctxt:Context, runlevel):
+		""" Callback for simulation termination, once per run level, before any on_stop
 		Arguments
 			ctxt -- Simulation context
-			unused -- Unused variable
+			runlevel -- 5 down to 1 for kernel subsystems; -5 up to -1 for modules (TERM_WRITE, TERM_CLEAR)
 		"""
 		return
 

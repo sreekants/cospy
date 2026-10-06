@@ -214,7 +214,7 @@ class ZoneAware:
 		return float(depth) - float(draught) - float(allowance)
 
 	def violate(self, ctxt:Context, vessel, event:str, shapes, value=0.0, detail=None, subject=None):
-		""" Records a violation, once per occurrence, and returns the penalty scored
+		""" Posts a violation to the ViolationInspector, once per occurrence, and returns the penalty scored
 		Arguments
 			ctxt -- Simulation context
 			vessel -- Vessel in violation
@@ -225,16 +225,16 @@ class ZoneAware:
 			subject -- What the finding is about beyond vessel and event, e.g.
 					   the target ship; defaults to the innermost area
 		Returns
-			The penalty, or 0.0 when the finding is already recorded
+			The penalty, or 0.0 when the finding is already posted
 		"""
 		key			= self.finding_key( vessel, event, shapes, subject )
 		if self.guard.admit( key, ctxt.sim.seconds() ) == False:
 			return 0.0
 
 		penalty		= self.rules.penalty( event )
-		recorded	= self.ledger.record( ctxt, SOURCE_EXAMINER, self.__class__.__name__,
-										  vessel, event, shapes, penalty, value )
-		if recorded == False:
+		posted		= self.ledger.post( ctxt, SOURCE_EXAMINER, self.__class__.__name__,
+										vessel, event, shapes, penalty, value )
+		if posted == False:
 			return 0.0
 
 		if detail is not None:

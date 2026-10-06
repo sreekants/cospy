@@ -34,7 +34,11 @@ class SeaBuilder(SeaBuilderBase):
 			"RECOMMENDED_ROUTE": (308000, "maritime.model.geography.RecommendedRoute"),
 			"DEEP_WATER_ROUTE": (309000, "maritime.model.geography.DeepwaterRoute"),
 			"PRECAUTIONARY_AREA": (310000, "maritime.model.geography.PrecautionaryRoute"),
-			"AREA_TO_AVOID": (311000, "maritime.model.geography.AreaToAvoid")
+			"AREA_TO_AVOID": (311000, "maritime.model.geography.AreaToAvoid"),
+			"ANCHORAGE": (312000, "maritime.model.geography.Anchorage"),
+			"SPEED_ZONE": (313000, "maritime.model.geography.SpeedZone"),
+			"NATURE_RESERVE": (314000, "maritime.model.geography.NatureReserve"),
+			"MILITARY_AREA": (315000, "maritime.model.geography.MilitaryArea")
 			} )
 
 		return

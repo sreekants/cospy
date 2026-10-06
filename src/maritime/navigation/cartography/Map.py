@@ -187,13 +187,13 @@ class Map(Service):
 		self.traffic	= []
 
 		for o in self.sea:
-			if o.type in [Type.TRAFFIC_SEPARATION_SCHEME, Type.SEPARATION_ZONE, Type.ROUNDABOUT, Type.INSHORE_TRAFFIC_ZONE, Type.AREA_TO_AVOID]:
+			if o.type in [Type.TRAFFIC_SEPARATION_SCHEME, Type.SEPARATION_ZONE, Type.ROUNDABOUT, Type.INSHORE_TRAFFIC_ZONE, Type.AREA_TO_AVOID, Type.MILITARY_AREA]:
 				self.traffic.append(o)
 
 			if o.type in [Type.TRAFFIC_SEPARATION_SCHEME, Type.INSHORE_TRAFFIC_ZONE]:
 				self.tss.append(o)
 
-			if o.type in [Type.AREA_TO_AVOID]:
+			if o.type in [Type.AREA_TO_AVOID, Type.MILITARY_AREA]:
 				self.noentry.append(o)
 		return
 

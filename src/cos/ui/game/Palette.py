@@ -45,6 +45,10 @@ ZONE_STYLES	= {
 	309000: ((110, 180, 240, 60),	(60, 140, 220, 200)),	# DEEP_WATER_ROUTE
 	310000: ((170, 160, 230, 50),	(120, 110, 210, 230)),	# PRECAUTIONARY_AREA: pale lavender-blue
 	311000: ((100, 120, 150, 110),	(70, 90, 120, 230)),	# AREA_TO_AVOID: grey steel-blue
+	312000: ((150, 190, 230, 40),	(90, 140, 200, 200)),	# ANCHORAGE: pale blue, outline-led
+	313000: ((160, 200, 235, 35),	(110, 160, 220, 160)),	# SPEED_ZONE: faint blue, outline-led
+	314000: ((110, 170, 160, 60),	(60, 130, 120, 200)),	# NATURE_RESERVE: sea green-blue
+	315000: ((120, 110, 150, 120),	(90, 70, 120, 240)),	# MILITARY_AREA: slate violet
 }
 
 

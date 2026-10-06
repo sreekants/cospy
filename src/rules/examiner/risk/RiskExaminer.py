@@ -14,12 +14,14 @@ from maritime.model.zone.Location import Location
 from cos.model.examiner.ConcernExaminer import ConcernExaminer
 from cos.core.kernel.Faculty import Faculty
 from cos.core.kernel.Context import Context
+from cos.core.kernel.Object import TERM_WRITE
 from cos.core.time.Ticker import Ticker
 from cos.core.utilities.ArgList import ArgList
 from cos.model.rule.Context import Context as RuleContext
 from cos.model.examiner.Precondition import PreconditionSet
 from cos.model.rule.Situation import Situation
 from cos.math.geometry.Distance import Distance
+from cos.model.situation.EpisodeWatcher import EpisodeWatcher, epoch_of
 
 # maritime.model.vessel.Builder's FLEET prototype. A controller is a flocking
 # driver, not a ship, and carries a FLEET-<hash8(guid)> tag rather than an IMO.
@@ -43,6 +45,9 @@ import yaml
 class RiskExaminer(ZoneAware, ConcernExaminer):
 	TOPIC		= '/Faculty/Risk/Assessment'
 	MESSAGE		= 'risk.assessment'
+	EPOCH_MESSAGE	= 'risk.epoch'
+	WATCHED		= ( 'collision', 'grounding' )		# Hazards whose probability is watched for epochs
+	watcher		= None		# Set up in setup()
 
 	# Another faculty resets the exposure period T by sending a RiskExposure
 	# (see on_exposure_reset). Applied resets are logged to fact_sim_log.
@@ -70,6 +75,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.range		= 4000.0	# Encounter range for pair evidence [m], COLREG stage 2
 		self.states		= {}		# Node -> state labels
 		self.rejected	= set()		# (node, state) pairs already logged
+		self.watcher	= None		# (vessel guid, hazard) -> P(hazard), against epoch.threshold
 
 		# Evidence bindings, simulation term -> BN node
 		self.bindings	={
@@ -112,6 +118,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		poll_at		= config["sample.frequency"]
 		self.timer	= Ticker( float(poll_at) if poll_at is not None else 1, ctxt.sim.clock )
 		self.range	= config.ToFloat( 'range', self.range )
+		self.watcher	= EpisodeWatcher( config.ToFloat('epoch.threshold', 0.1), self.on_epoch, span=epoch_of(config) )
 
 		# Zone awareness supplies the map shapes under a vessel, which the
 		# spatial classification of Rl needs.
@@ -180,6 +187,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 					self.assess( ctxt, rule_ctxt, vessel )
 				except Exception as e:
 					ctxt.log.error( self.id, f'{getattr(vessel, "name", vessel)}: {e}' )
+			if self.watcher is not None:
+				self.watcher.lapse( ctxt.sim.tickcount() )		# Vessels not assessed this pass
 		finally:
 			rule_ctxt.situation	= saved
 			self.reset_resolver( ctxt, rule_ctxt )
@@ -287,6 +296,10 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		track		= self.track( key )
 		self.recids[key]	= Ledger.recid( vessel )
 		increment	= track.charge( cost, hazards['any'], evidence, ctxt.sim.seconds() )
+
+		self.context	= ctxt
+		for hazard in (self.WATCHED if self.watcher is not None else ()):
+			self.watcher.observe( (key, hazard), hazards.get(hazard), ctxt.sim.tickcount(), (imo, zone) )
 
 		report		= {
 			'vessel'		: key,
@@ -430,6 +443,37 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			period,
 		) )
 		ctxt.log.info( self.id, f'Exposure period {old:g} s -> {period:g} s for {vessel or "every vessel"}: {request.reason}' )
+		return
+
+	def on_epoch(self, epoch):
+		""" Publishes an epoch of a hazard's probability at or above epoch.threshold
+		Arguments
+			epoch -- Ended epoch; its key is (vessel guid, hazard), its detail the peak's (imo, zone)
+		"""
+		key, hazard	= epoch.key
+		imo, zone	= epoch.detail
+		self.context.ipc.push( self.TOPIC, self.EPOCH_MESSAGE, self.context, {
+			'vessel'	: key,
+			'imo'		: imo,
+			'hazard'	: hazard,
+			'zone'		: zone,
+			'threshold'	: self.watcher.threshold,
+			'epoch'		: epoch.summary(),
+		}, 8 )
+		return
+
+	def on_term(self, ctxt:Context, runlevel):
+		""" Publishes the epochs still open, before the DataManager writes out
+		Arguments
+			ctxt -- Simulation context
+			runlevel -- Termination run level; this acts at TERM_WRITE
+		"""
+		if runlevel != TERM_WRITE:
+			return
+
+		if self.watcher is not None:
+			self.context	= ctxt
+			self.watcher.flush( ctxt.sim.tickcount() )
 		return
 
 	def publish(self, ctxt:Context, vessel, report):
