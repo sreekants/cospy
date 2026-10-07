@@ -1,7 +1,7 @@
 <!--: C2 run.provenance (DASH.002): how the run was measured. -->
 <cfinclude template="../shared/params.cfm">
 <cfquery name="c2_q" datasource="cos.bi">
-with g as (select tick - lag(tick) over (partition by own_ship order by tick) as gap
+with g as (select tick - lag(tick) over (partition by vessel_id order by tick) as gap
            from fact_risk_assessment where case_id = #cos_case#),
      d as (select exposure_dt as dt from fact_risk_assessment where case_id = #cos_case#)
 select (select count(*) from d) as n,

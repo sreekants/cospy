@@ -87,14 +87,15 @@ class Examiner(Faculty):
 		self.__load_scorecard( ctxt, config["scorecard"] )
 		return
 
-	def data(self, ctxt:Context, situation, values):
+	def data(self, ctxt:Context, situation, values, context=None):
 		""" Stores a score into the database
 		Arguments
 			ctxt -- Simulation context
 			situation -- Name of the situation. An associated fact_{situation} table must exist in the database
 			values -- A tuple of value for each field in the table
+			context -- DataContext for the table's dimension columns (own ship, position)
 		"""
-		ctxt.sim.data.push(f'fact_{situation}', values)
+		ctxt.sim.data.push(f'fact_{situation}', values, context)
 		return
 
 	def __load_scorecard(self, ctxt:Context, file)->Automata:

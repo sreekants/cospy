@@ -15,6 +15,7 @@ from cos.core.time.Clock import Clock, DEFAULT_STEP, DEFAULT_EPOCH
 from cos.core.utilities.Patterns import Manager
 
 from cos.core.utilities.CaseId import case_id
+from cos.core.utilities.EventId import EventId
 import os
 
 class Kernel:
@@ -85,6 +86,7 @@ class Kernel:
 		scenario_key 	= self.config.env.get('SCENARIO', None)
 		self.case_id	= case_id( scenario_key )		# Refuses an absent or empty key
 		self.log.info( "Kernel", f"Case id {self.case_id} for scenario '{scenario_key}'")
+		EventId.reset()		# Event ids are unique within this run
 
 		self.__init_clock()
 

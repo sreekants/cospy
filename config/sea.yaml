@@ -138,5 +138,26 @@ packages:
        args: Type=AREA_TO_AVOID
        database: $(MAP)/sea.s3db
 
+     - name: ANCHORAGE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.ANCHORAGE
+       args: Type=ANCHORAGE
+       database: $(MAP)/sea.s3db
 
+     - name: SPEED_ZONE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.SPEED_ZONE
+       args: Type=SPEED_ZONE
+       database: $(MAP)/sea.s3db
 
+     - name: NATURE_RESERVE
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.NATURE_RESERVE
+       args: Type=NATURE_RESERVE
+       database: $(MAP)/sea.s3db
+
+     - name: MILITARY_AREA
+       module: maritime.model.geography.SeaBuilder
+       service: Builder.MILITARY_AREA
+       args: Type=MILITARY_AREA
+       database: $(MAP)/sea.s3db

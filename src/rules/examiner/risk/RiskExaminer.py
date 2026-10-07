@@ -9,6 +9,9 @@ from rules.examiner.risk.RiskModel import load, hazard_probabilities, individual
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from maritime.model.zone.ZoneRules import ZoneRules, SpatialZones
 from maritime.model.zone.Ledger import Ledger
+from maritime.model.risk.RiskLog import RiskLog, ASSESSMENT, RR, SIM_LOG
+from cos.subsystem.data.DataContext import DataContext
+from cos.core.utilities.EventId import EventId
 from maritime.model.zone.Location import Location
 
 from cos.model.examiner.ConcernExaminer import ConcernExaminer
@@ -145,22 +148,8 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			config -- Configuration attributes
 		"""
 		self.cache_shapes( ctxt )
-		self.record_weights( ctxt )
 		self.started	= ctxt.sim.seconds()
 		self.context	= ctxt
-		return
-
-	def record_weights(self, ctxt:Context):
-		""" Records Rw once per run, unapplied to Rl (REQ-004-08)
-		Arguments
-			ctxt -- Simulation context
-		"""
-		if self.weights.errors():
-			return
-
-		now		= ctxt.sim.seconds()
-		for concern, weight in self.weights.normalised().items():
-			self.data( ctxt, 'rw', (now, concern, weight, float(self.weights.declared[concern])) )
 		return
 
 	def evaluate(self, ctxt:Context, rule_ctxt:RuleContext):
@@ -325,7 +314,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		}
 
 		self.publish( ctxt, vessel, report )
-		self.record( ctxt, report )
+		self.record( ctxt, report, DataContext.of( ctxt, vessel, report['recid'] ) )
 		return
 
 	def observe(self, ctxt:Context, rule_ctxt:RuleContext, situation):
@@ -431,7 +420,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			track.exposure.period	= period
 			recid	= self.recids.get( vessel, -1 )		# -1: not yet assessed, so not yet identified
 
-		self.data( ctxt, 'sim_log', (
+		RiskLog.post( ctxt, self.id, [ (SIM_LOG, (
 			ctxt.sim.seconds(),
 			self.id,
 			request.source,
@@ -441,7 +430,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			request.reason,
 			old,
 			period,
-		) )
+		)) ] )
 		ctxt.log.info( self.id, f'Exposure period {old:g} s -> {period:g} s for {vessel or "every vessel"}: {request.reason}' )
 		return
 
@@ -491,19 +480,23 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 
 		return
 
-	def record(self, ctxt:Context, report):
+	def record(self, ctxt:Context, report, context=None):
 		""" Records the assessment. Unconditional - the score is persisted whether
 		or not any vessel acted on it.
 		Arguments
 			ctxt -- Simulation context
 			report -- Assessment payload
+			context -- DataContext of the assessed vessel, for the dimension columns
 		"""
 		hazards		= report['hazards']
 
 		# The assessment rollup: one row per vessel per sample. CaseId is
 		# injected by the partition, so it is not passed here.
-		self.data( ctxt, 'risk_assessment', (
+		finding	= EventId.next()		# one risk finding, shared by its fact_rr rows
+		rows	= [ (ASSESSMENT, (
 			report['time'],
+			finding,
+			None,					# primary episode, once episodes are tagged (RQ0-01)
 			report['recid'],
 			report['zone'],
 			hazards['collision'],
@@ -516,37 +509,22 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			report['increment'],
 			report['survival'],
 			report['cumulative'],
+			report['matrix'],
 			report['exposure_basis'],
 			report['exposure_period'],
 			report['exposure_dt'],
 			report['depth'],
 			report['depth_source'],
-		) )
+		)) ]
 
-		# Rl itself, serialized whole as a MATLAB literal in one column. The
-		# fact schema is then fixed: a territory that adds a concern or a zone
-		# changes the shape of the literal and nothing else, with no column to
-		# add and no warehouse schema to regenerate.
-		#
-		# The axes are not in the row. Anything decoding these strings needs
-		# the order logged at startup - see __load_matrix - and that order must
-		# not be edited part way through a sweep.
-		self.data( ctxt, 'rl', (
-			report['time'],
-			report['recid'],
-			report['matrix'],
-		) )
+		# Rr long form: one row per concern, zeros included; they sum to the assessment's Rr
+		for concern, loss in report['exposure'].items():
+			rows.append( (RR, (
+				report['time'], finding, None, report['recid'], report['zone'], concern, loss,
+				None, None, None,	# onset, clause, source: violation findings only
+			)) )
 
-		# Rb long form: one row per concern, zeros included (REQ.018)
-		for concern, exposure in report['exposure'].items():
-			self.data( ctxt, 'rb', (
-				report['time'],
-				report['recid'],
-				report['zone'],
-				concern,
-				exposure,
-			) )
-
+		RiskLog.post( ctxt, self.id, rows, context )
 		return
 
 	def __load_network(self, ctxt:Context, file):

@@ -22,15 +22,15 @@ select coalesce(max(tick), 0) as mt, coalesce(max(creation_time), '') as w from 
 <cfset cos_maxtick = cos_tick.mt>
 <cfset cos_written = cos_tick.w>
 <cfquery name="cos_ves" datasource="cos.bi">
-select coalesce((select own_ship from fact_risk_assessment where case_id = #cos_case# and own_ship = #Int(URL.imo)# limit 1),
-                (select own_ship from fact_risk_assessment where case_id = #cos_case# group by own_ship order by count(*) desc, own_ship limit 1),
+select coalesce((select vessel_id from fact_risk_assessment where case_id = #cos_case# and vessel_id = #Int(URL.imo)# limit 1),
+                (select vessel_id from fact_risk_assessment where case_id = #cos_case# group by vessel_id order by count(*) desc, vessel_id limit 1),
                 0) as imo,
-       case when #Int(URL.imo)# > 0 and not exists (select 1 from fact_risk_assessment where case_id = #cos_case# and own_ship = #Int(URL.imo)#)
+       case when #Int(URL.imo)# > 0 and not exists (select 1 from fact_risk_assessment where case_id = #cos_case# and vessel_id = #Int(URL.imo)#)
             then 1 else 0 end as nf,
        case when #Int(URL.imo)# = 0 then 1 else 0 end as dflt
 </cfquery>
 <cfquery name="cos_span" datasource="cos.bi">
-select coalesce(min(tick), 0) as t0, coalesce(max(tick), 0) as t1 from fact_risk_assessment where case_id = #cos_case# and own_ship = #cos_ves.imo#
+select coalesce(min(tick), 0) as t0, coalesce(max(tick), 0) as t1 from fact_risk_assessment where case_id = #cos_case# and vessel_id = #cos_ves.imo#
 </cfquery>
 <cfset cos_imo = cos_ves.imo>
 <cfset cos_nf_imo = cos_ves.nf>

@@ -8,23 +8,23 @@ packages:
       # Situation evaluators (coverts incidents into situations)
      - name: Crossing
        module: maritime.situation.crossing.Crossing
-       arg: 
+       arg: epoch=10
 
      - name: GiveWay
        module: maritime.situation.giveway.Giveway
-       arg: 
+       arg: epoch=10
 
      - name: HeadOn
        module: maritime.situation.headon.Headon
-       arg: 
+       arg: epoch=10
 
      - name: Overtaking
        module: maritime.situation.overtaking.Overtaking
-       arg: 
+       arg: epoch=10
 
      - name: StandOn
        module: maritime.situation.standon.Standon
-       arg: 
+       arg: epoch=10
 
      - name: Traffic
        module: maritime.situation.traffic.Traffic

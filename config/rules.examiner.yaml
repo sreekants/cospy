@@ -9,16 +9,21 @@ packages:
      # The concern examiners read their zone-local rules, thresholds and
      # penalty scorecard from config/examiner/zones.yaml. 'zones' is the only
      # argument most of them need, and it defaults to that path when omitted.
+     #
+     # epoch: length, in ticks, of an EpisodeWatcher epoch (default 10). Grounding
+     # and Berthing score one near miss per epoch inside the margin; Collision and
+     # ExtremeWeather publish each epoch of DCPA under report.dcpa or P(capsize) at
+     # or above alarm_threshold on their report topic.
      - name: Approach
        module: rules.examiner.navigation.ApproachExaminer
 
      - name: Berthing
        module: rules.examiner.navigation.BerthingExaminer
-       config: zones=$(CONFIG)/examiner/zones.yaml
+       config: zones=$(CONFIG)/examiner/zones.yaml epoch=10
 
      - name: Collision
        module: rules.examiner.navigation.CollisionExaminer
-       config: zones=$(CONFIG)/examiner/zones.yaml report.dcpa=500
+       config: zones=$(CONFIG)/examiner/zones.yaml report.dcpa=500 epoch=10
 
      - name: DayTime
        module: rules.examiner.navigation.DayTimeExaminer
@@ -28,10 +33,11 @@ packages:
        config: zones=$(CONFIG)/examiner/zones.yaml
                network=$(CONFIG)/risk/capsize.model.xdsl
                bindings=$(CONFIG)/risk/capsize.model.yaml
+               epoch=10
 
      - name: Grounding
        module: rules.examiner.navigation.GroundingExaminer
-       config: zones=$(CONFIG)/examiner/zones.yaml
+       config: zones=$(CONFIG)/examiner/zones.yaml epoch=10
 
      - name: LaneDiscipline
        module: rules.examiner.navigation.LaneDisciplineExaminer

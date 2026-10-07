@@ -233,7 +233,7 @@ class ZoneAware:
 
 		penalty		= self.rules.penalty( event )
 		posted		= self.ledger.post( ctxt, SOURCE_EXAMINER, self.__class__.__name__,
-										vessel, event, shapes, penalty, value )
+										vessel, event, shapes, penalty, value, onset=self.guard.onset(key) )
 		if posted == False:
 			return 0.0
 

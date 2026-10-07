@@ -11,6 +11,7 @@ from cos.lang.logic.Decision import Decision
 from cos.model.rule.Situation import Situation
 from maritime.model.rule.ScoredRule import ScoredRule
 from maritime.model.zone.Ledger import Ledger, SOURCE_LOCAL
+from cos.subsystem.data.DataContext import DataContext
 
 from typing import Any
 import queue, fnmatch
@@ -239,8 +240,10 @@ class InlandWaterRule(ScoredRule, Rule):
 			penalty -- Its penalty, 0 when unpriced
 		"""
 		# Field order matches fact_territorial in maritime.xml
+		own		= Ledger.recid( vessel )
 		self.data( ctxt, 'territorial', (ctxt.sim.seconds(), self.regulation, clause, float(penalty),
-										 f'own={Ledger.recid(vessel)}', f'zone={getattr(zone, "name", "-")}') )
+										 f'own={own}', f'zone={getattr(zone, "name", "-")}'),
+				   DataContext.of( ctxt, vessel, own ) )
 		return
 
 	def on_overtaking(self, ctxt:Context, evt):

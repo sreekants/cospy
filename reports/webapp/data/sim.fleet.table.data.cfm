@@ -1,12 +1,12 @@
 <!--: S13 sim.fleet.table (DASH.015): one row per vessel. -->
 <cfinclude template="../shared/params.cfm">
 <cfquery name="s13_q" datasource="cos.bi">
-with ra as (select own_ship as v, cast(max(cumulative) as text) as rb, cast(min(survival) as text) as s,
+with ra as (select vessel_id as v, cast(max(cumulative) as text) as rb, cast(min(survival) as text) as s,
                    cast(max(p_collision) as text) as pc, cast(max(p_grounding) as text) as pg,
                    cast(min(p_comms_loss) as text) as pl0, cast(max(p_comms_loss) as text) as pl1
-            from fact_risk_assessment where case_id = #cos_case# group by own_ship),
+            from fact_risk_assessment where case_id = #cos_case# group by vessel_id),
      fc as (select vessel_id as v, sum(source = 'colreg') as nc, sum(source = 'examiner') as np
-            from fact_concern where case_id = #cos_case# group by vessel_id),
+            from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# group by vessel_id),
      en as (select own_ship as v, count(*) as n from (
               select own_ship from fact_crossing where case_id = #cos_case# union all
               select own_ship from fact_give_way where case_id = #cos_case# union all

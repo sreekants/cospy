@@ -11,12 +11,12 @@ pick as (select * from en order by case when #Int(URL.t)# between s and e then 0
                                    abs(s - (case when #Int(URL.t)# < 0 then 0 else #Int(URL.t)# end)) limit 1)
 select k, cast(s as text) as s, cast(e as text) as e, cast(s as integer) as si, cast(e as integer) as ei, tg,
        case when #Int(URL.t)# between s and e then 1 else 0 end as at,
-       coalesce((select cast(max(p_collision) as text) from fact_risk_assessment r where r.case_id = #cos_case# and r.own_ship = #Int(cos_imo)# and r.tick between pick.s and pick.e), 'null') as pc,
-       coalesce((select r.tick from fact_risk_assessment r where r.case_id = #cos_case# and r.own_ship = #Int(cos_imo)# and r.tick between pick.s and pick.e order by r.p_collision desc limit 1), -1) as pct
+       coalesce((select cast(max(p_collision) as text) from fact_risk_assessment r where r.case_id = #cos_case# and r.vessel_id = #Int(cos_imo)# and r.tick between pick.s and pick.e), 'null') as pc,
+       coalesce((select r.tick from fact_risk_assessment r where r.case_id = #cos_case# and r.vessel_id = #Int(cos_imo)# and r.tick between pick.s and pick.e order by r.p_collision desc limit 1), -1) as pct
 from pick
 </cfquery>
 <cfquery name="v15_f" datasource="cos.bi">
-select f.tick, f.examiner, f.event from fact_concern f
+select f.tick, f.examiner, f.event from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) f
 where f.case_id = #cos_case# and f.vessel_id = #Int(cos_imo)# and f.source = 'colreg' and f.tick between #Int(v15_q.si)# and #Int(v15_q.ei)#
 </cfquery>
 <cfquery name="v15_v" datasource="cos.vessels">

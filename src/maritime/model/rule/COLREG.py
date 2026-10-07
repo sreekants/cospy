@@ -6,6 +6,7 @@ from cos.model.rule.Rule import Rule
 from cos.model.rule.Automata import Automata
 from maritime.model.rule.ScoredRule import ScoredRule
 from maritime.model.zone.Ledger import Ledger, SOURCE_COLREG
+from cos.subsystem.data.DataContext import DataContext
 from cos.core.utilities.ArgList import ArgList
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
@@ -164,10 +165,12 @@ class COLREG(ScoredRule, Rule):
 			return
 
 		target	= getattr( situation, 'ts', None )
-		vessels	= f'own={Ledger.recid(situation.os)} target={Ledger.recid(target) if target is not None else "-"}'
+		own		= Ledger.recid( situation.os )
+		vessels	= f'own={own} target={Ledger.recid(target) if target is not None else "-"}'
 
 		# Field order matches fact_colreg_rNN in maritime.xml
-		self.data( ctxt, self.failures, (ctxt.sim.seconds(), clause, float(penalty), vessels, str(err)) )
+		self.data( ctxt, self.failures, (ctxt.sim.seconds(), clause, float(penalty), vessels, str(err)),
+				   DataContext.of( ctxt, situation.os, own ) )
 		return
 
 if __name__ == "__main__":

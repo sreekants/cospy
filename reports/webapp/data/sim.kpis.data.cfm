@@ -1,15 +1,15 @@
 <!--: S5 sim.kpis (DASH.007): three run figures. -->
 <cfinclude template="../shared/params.cfm">
 <cfquery name="s5_q" datasource="cos.bi">
-with fv as (select own_ship, max(cumulative) as rb, min(survival) as s from fact_risk_assessment where case_id = #cos_case# group by own_ship),
-     top as (select own_ship, rb, s from fv order by rb desc limit 1)
+with fv as (select vessel_id, max(cumulative) as rb, min(survival) as s from fact_risk_assessment where case_id = #cos_case# group by vessel_id),
+     top as (select vessel_id, rb, s from fv order by rb desc limit 1)
 select (select count(*) from fact_risk_assessment where case_id = #cos_case#) as n,
-       (select coalesce(cast(sum(penalty) as text), '0') from fact_concern where case_id = #cos_case# and source = 'colreg') as pc,
-       (select count(*) from fact_concern where case_id = #cos_case# and source = 'colreg') as nc,
-       (select coalesce(cast(sum(penalty) as text), '0') from fact_concern where case_id = #cos_case# and source = 'examiner') as pp,
-       (select count(*) from fact_concern where case_id = #cos_case# and source = 'examiner') as np,
-       (select coalesce(cast(sum(penalty) as text), '0') from fact_concern where case_id = #cos_case# and source not in ('colreg', 'examiner')) as pl,
-       coalesce((select own_ship from top), 0) as imo,
+       (select coalesce(cast(sum(penalty) as text), '0') from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# and source = 'colreg') as pc,
+       (select count(*) from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# and source = 'colreg') as nc,
+       (select coalesce(cast(sum(penalty) as text), '0') from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# and source = 'examiner') as pp,
+       (select count(*) from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# and source = 'examiner') as np,
+       (select coalesce(cast(sum(penalty) as text), '0') from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# and source not in ('colreg', 'examiner')) as pl,
+       coalesce((select vessel_id from top), 0) as imo,
        coalesce((select cast(rb as text) from top), 'null') as rb,
        coalesce((select cast(s as text) from top), 'null') as surv,
        (select count(*) from fact_crossing where case_id = #cos_case#) + (select count(*) from fact_give_way where case_id = #cos_case#)

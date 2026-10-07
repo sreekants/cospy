@@ -19,6 +19,9 @@
 #              because what a consequence is worth and where it happened are
 #              both national questions.
 #   zones      the map lookup the spatial classification of Rl needs.
+#
+# epoch is the length, in ticks, of an epoch of P(collision) or P(grounding) at or
+# above epoch.threshold; each ended epoch is published as 'risk.epoch'.
 
 packages:
   modules:  # Bayesian risk assessment
@@ -30,3 +33,5 @@ packages:
                bindings=$(CONFIG)/risk/risk.model.yaml
                territory=$(SIMULATION)/risk.yaml
                zones=$(CONFIG)/examiner/zones.yaml
+               epoch=10
+               epoch.threshold=0.1

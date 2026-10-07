@@ -1,13 +1,19 @@
 #!/usr/bin/python
 # Filename: Ledger.py
-# Description: Posts observed violations (Ro, Rl, Rw) to the ViolationInspector, which alone writes fact_concern
+# Description: Posts observed violations (Ro, Rl, Rw) to the ViolationInspector, which alone writes them
 
 import yaml
 
 from maritime.model.zone.ZoneRules import ZoneRules, SpatialZones
 from cos.core.kernel.Context import Context
+from cos.subsystem.data.DataContext import DataContext
+from cos.core.utilities.EventId import EventId
 
-FACT		= 'fact_concern'
+FACT_RO		= 'fact_ro'						# One row per finding in each of these four, sharing finding_id
+FACT_RL		= 'fact_rl'
+FACT_RW		= 'fact_rw'
+FACT_VA		= 'fact_violation_assessment'
+FACTS		= (FACT_RO, FACT_RL, FACT_RW, FACT_VA)
 
 CLEARING	= '/Faculty/Practice/Inspectors/ViolationInspector'		# Topic the ViolationInspector clears violations from
 VIOLATION	= 'violation.score'
@@ -74,6 +80,14 @@ class FindingGuard:
 			return True
 
 		return False
+
+	def onset(self, key):
+		""" First time the current occurrence was seen, or None
+		Arguments
+			key -- What the finding is about
+		"""
+		entry	= self.entries.get( key )
+		return entry[0] if entry else None
 
 	def clear(self, key):
 		""" Ends an occurrence the examiner saw end
@@ -297,7 +311,7 @@ class Ledger:
 			return ''
 
 	def post(self, ctxt:Context, source:str, raiser:str, vessel, event:str,
-			 shapes, penalty:float, value=0.0, concern=None, weight:float=1.0)->bool:
+			 shapes, penalty:float, value=0.0, concern=None, weight:float=1.0, onset=None)->bool:
 		""" Posts one finding to the ViolationInspector
 		Arguments
 			ctxt -- Simulation context
@@ -310,6 +324,7 @@ class Ledger:
 			value -- Quantity behind the violation
 			concern -- Concern, when the caller knows it; else from the mapping
 			weight -- Rw from the score file, 1.0 by default
+			onset -- Simulated seconds the condition began; now when not given
 		Returns
 			True when the finding was posted
 		"""
@@ -325,9 +340,14 @@ class Ledger:
 			Ledger._warned	= True
 			ctxt.log.error( raiser, f'No ViolationInspector loaded: violations are not recorded; add it to rules.assurance.yaml' )
 
+		recid	= self.recid( vessel )
+		now		= ctxt.sim.seconds()
 		ctxt.ipc.push( CLEARING, VIOLATION, ctxt, {
-			'time'		: ctxt.sim.seconds(),
-			'vessel'	: self.recid( vessel ),
+			'finding'	: EventId.next(),
+			'episode'	: None,						# primary episode, once episodes are tagged (RQ0-01)
+			'time'		: now,
+			'onset'		: now if onset is None else onset,
+			'vessel'	: recid,
 			'source'	: source,
 			'raiser'	: raiser,
 			'event'		: event,
@@ -337,32 +357,37 @@ class Ledger:
 			'penalty'	: float( penalty ),
 			'weight'	: float( weight ),
 			'value'		: float( value ),
+			'context'	: DataContext.of( ctxt, vessel, recid ),	# Where the vessel was when it happened
 		} )
 		return True
 
 	@staticmethod
 	def record(ctxt:Context, finding:dict):
-		""" Writes one posted finding to fact_concern; only the ViolationInspector calls this
+		""" Writes one posted finding to fact_ro, fact_rl, fact_rw and fact_violation_assessment; only the ViolationInspector calls this
 		Arguments
 			ctxt -- Simulation context
 			finding -- Payload made by post()
 		"""
-		# vessel_id is the vessel IMO, as in every fact table; field order matches fact_concern in maritime.xml
-		ctxt.sim.data.push( FACT, (
-			finding['time'],
-			finding['vessel'],
-			finding['source'],
-			finding['raiser'],
-			finding['event'],
-			finding['area'],
-			finding['zone'],
-			finding['concern'],
-			finding['penalty'],
-			finding['weight'],
-			finding['value'],
-		) )
+		# Field order matches maritime.xml; vessel_id is the vessel IMO, as in every fact table
+		head	= ( finding['time'], finding['finding'], finding['episode'], finding['vessel'],
+					finding['zone'], finding['concern'] )
+		tail	= ( finding['onset'], finding['event'], finding['source'] )
+		context	= finding.get( 'context' )
+
+		ctxt.sim.data.push( FACT_RO, head + (1.0,) + tail, context )
+		ctxt.sim.data.push( FACT_RL, head + (finding['penalty'],) + tail, context )
+		ctxt.sim.data.push( FACT_RW, head + (finding['weight'],) + tail, context )
+		ctxt.sim.data.push( FACT_VA, head + ( finding['event'], finding['source'],
+					Ledger.cost(finding) ), context )
 		return
 
+	@staticmethod
+	def cost(finding:dict)->float:
+		""" Rl x Ro x Rw of one finding, USD
+		Arguments
+			finding -- Payload made by post()
+		"""
+		return finding['penalty'] * 1.0 * finding['weight']
 
 if __name__ == "__main__":
 	test = FindingGuard()

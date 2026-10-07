@@ -4,7 +4,7 @@
 <cfquery name="v12_q" datasource="cos.bi">
 select tick, zone, coalesce(cast(depth as text), 'null') as d, coalesce(depth_source, '') as ds,
        cast(p_collision as text) as pc, cast(p_grounding as text) as pg, cast(cumulative as text) as c
-from fact_risk_assessment where case_id = #cos_case# and own_ship = #Int(cos_imo)#
+from fact_risk_assessment where case_id = #cos_case# and vessel_id = #Int(cos_imo)#
 order by case when #Int(URL.t)# < 0 then -tick else abs(tick - #Int(URL.t)#) end limit 1
 </cfquery>
 <cfquery name="v12_e" datasource="cos.bi">
@@ -17,6 +17,6 @@ union all select 'Overtaking', target_ship from fact_overtaking where case_id = 
 select imo, name from vessels
 </cfquery>
 <cfquery name="v12_f" datasource="cos.bi">
-select tick, examiner, event from fact_concern where case_id = #cos_case# and vessel_id = #Int(cos_imo)# and abs(tick - #Int(v12_q.tick)#) <= 20 order by tick
+select tick, examiner, event from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# and vessel_id = #Int(cos_imo)# and abs(tick - #Int(v12_q.tick)#) <= 20 order by tick
 </cfquery>
 {<cfinclude template="../shared/meta.cfm">,"names":[<cfloop query="v12_v"><cfoutput>["#URLEncodedFormat(v12_v.imo)#","#URLEncodedFormat(v12_v.name)#"],</cfoutput></cfloop>null],"enc":[<cfloop query="v12_e"><cfoutput>["#v12_e.k#",#v12_e.tg#],</cfoutput></cfloop>null],"fnd":[<cfloop query="v12_f"><cfoutput>[#v12_f.tick#,"#URLEncodedFormat(v12_f.examiner)#","#URLEncodedFormat(v12_f.event)#"],</cfoutput></cfloop>null],"rows":[<cfloop query="v12_q"><cfoutput>{"t":#v12_q.tick#,"zone":"#v12_q.zone#","d":#v12_q.d#,"ds":"#v12_q.ds#","pc":#v12_q.pc#,"pg":#v12_q.pg#,"c":#v12_q.c#},</cfoutput></cfloop>null]}

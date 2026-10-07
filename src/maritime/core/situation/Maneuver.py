@@ -4,6 +4,7 @@
 
 from maritime.core.situation.MaritimeEncounterSituation import MaritimeEncounterSituation
 from cos.core.kernel.Context import Context
+from cos.subsystem.data.DataContext import DataContext
 from cos.core.kernel.Object import TERM_WRITE
 from cos.model.rule.Context import Context as RuleContext
 from cos.model.situation.EpisodeWatcher import EpisodeWatcher, epoch_of
@@ -118,7 +119,7 @@ class Maneuver(MaritimeEncounterSituation):
 		for key in keys:
 			own, target, start, end	= self.open.pop( key )
 			if self.table is not None:
-				self.data( ctxt, self.table, (own, target, start, end) )
+				self.data( ctxt, self.table, (own, target, start, end), DataContext( own ) )	# No single position for an episode
 		return
 
 	def on_term(self, ctxt:Context, runlevel):

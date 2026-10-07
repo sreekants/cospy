@@ -3,8 +3,8 @@
       the store has no usable index on case/vessel, and a large run has ~4 000 encounters per vessel. -->
 <cfinclude template="../shared/params.cfm">
 <cfquery name="v14_q" datasource="cos.bi">
-with fc as materialized (select tick from fact_concern where case_id = #cos_case# and vessel_id = #Int(cos_imo)#),
-     ra as materialized (select tick, p_collision from fact_risk_assessment where case_id = #cos_case# and own_ship = #Int(cos_imo)#),
+with fc as materialized (select tick from (select o.case_id, o.tick, o.report_time, o.vessel_id, o.source, o.source as examiner, o.clause as event, o.zone as area, o.zone, o.concern, l.value as penalty, w.value as weight, null as value from fact_ro o join fact_rl l on l.case_id = o.case_id and l.finding_id = o.finding_id join fact_rw w on w.case_id = o.case_id and w.finding_id = o.finding_id) where case_id = #cos_case# and vessel_id = #Int(cos_imo)#),
+     ra as materialized (select tick, p_collision from fact_risk_assessment where case_id = #cos_case# and vessel_id = #Int(cos_imo)#),
      en as materialized (
   select 'Crossing' as k, start_time as s, end_time as e, target_ship as tg from fact_crossing where case_id = #cos_case# and own_ship = #Int(cos_imo)#
   union all select 'Give-way', start_time, end_time, target_ship from fact_give_way where case_id = #cos_case# and own_ship = #Int(cos_imo)#

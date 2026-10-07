@@ -2,7 +2,7 @@
 <cfinclude template="../shared/params.cfm">
 <cfquery name="v11_q" datasource="cos.bi">
 select tick, coalesce(cast(depth as text), 'null') as d, case when depth_source = 'nominal' then 1 else 0 end as nom
-from fact_risk_assessment where case_id = #cos_case# and own_ship = #Int(cos_imo)# and tick > #cos_since# order by tick
+from fact_risk_assessment where case_id = #cos_case# and vessel_id = #Int(cos_imo)# and tick > #cos_since# order by tick
 </cfquery>
 <cfquery name="v11_w" datasource="cos.bi">
 select coalesce(cast(max(p_capsize) as text), 'null') as pk, coalesce(cast(max(threshold) as text), 'null') as th, count(distinct payload_state) + count(distinct size_state) as ni, count(distinct wave_state) as nw, coalesce(max(wave_state), '') as w, count(distinct visibility_state) as nv, coalesce(max(visibility_state), '') as v

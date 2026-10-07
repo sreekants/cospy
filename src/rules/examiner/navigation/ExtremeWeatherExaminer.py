@@ -6,6 +6,8 @@ from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from rules.examiner.risk.RiskModel import load
 from maritime.model.zone.Ledger import Ledger
+from maritime.model.risk.RiskLog import RiskLog, CAPSIZE
+from cos.subsystem.data.DataContext import DataContext
 from cos.core.kernel.Context import Context
 from cos.core.kernel.Object import TERM_WRITE
 from cos.core.utilities.ArgList import ArgList
@@ -152,9 +154,10 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 		raw		= raw or {}
 
 		# Field order matches fact_capsize in maritime.xml
-		ctxt.sim.data.push( 'fact_capsize', (
+		own		= Ledger.recid( vessel )
+		RiskLog.post( ctxt, self.id, [ (CAPSIZE, (
 			ctxt.sim.seconds(),
-			Ledger.recid( vessel ),
+			own,
 			zone,
 			raw.get( 'wave_height' ),
 			evidence.get( 'wave_height' ),
@@ -166,7 +169,7 @@ class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
 			evidence.get( 'vessel_size' ),
 			capsize,
 			self.threshold,
-		) )
+		)) ], DataContext.of( ctxt, vessel, own ) )
 
 		if self.watcher is not None:
 			self.context	= ctxt

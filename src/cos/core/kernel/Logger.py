@@ -5,7 +5,7 @@
 from cos.core.kernel.Configuration import Configuration
 from cos.core.utilities.ActiveRecord import ActiveRecord
 from cos.core.time.Clock import utcnow
-import os, colorama
+import os, sqlite3, threading, colorama
 
 # Error codes match Win32 error log codes
 EVENTLOG_ERROR_TYPE				= 0x0001	# Log and exit
@@ -26,11 +26,11 @@ class LogFile:
 			self.model	= None
 			return
 
-		#If the content database does not exist, create it
-		if os.path.isfile(dbpath) == True:
-			self.model	= ActiveRecord.create(table, dbpath, table)
-		else:
-			self.model	= ActiveRecord.create(table, dbpath, table)
+		# Any simulation thread may log, so the connection is shared and writes are serialised
+		exists		= os.path.isfile( dbpath )
+		self.model	= ActiveRecord( table, sqlite3.connect(dbpath, check_same_thread=False), table )
+		self.lock	= threading.Lock()
+		if exists == False:
 			self.model.execute_sql( f'CREATE TABLE [{table}] ('\
 				'[id] INTEGER NULL, [creation_time] TIMESTAMP NULL,'\
 				'[module] VARCHAR(64) NULL, [log_type] INTEGER NULL,'\
@@ -52,8 +52,6 @@ class LogFile:
 
 		logtime	= utcnow().isoformat(timespec='microseconds')
 
-		print(text)
-
 		values = {
 			'creation_time':logtime,
 			'module':module,
@@ -61,7 +59,11 @@ class LogFile:
 			'description': text,
 			'category': 'SYSTEM',
 			'computer': '127.0.0.1' }
-		self.model.add( values )
+		try:
+			with self.lock:
+				self.model.add( values )
+		except sqlite3.Error as e:
+			print( f'Log file {self.path}: {e}' )		# a failed log write never stops the caller
 		return
 
 	def flush(self):
@@ -174,7 +176,7 @@ class Logger:
 		"""
 		self.__print_error(module, text)
 
-		if log_to_file == True:
+		if (log_to_file == True) and (getattr(self.settings, "file", None) is not None):
 			self.settings.file.error(module, text)
 		return
 
@@ -188,7 +190,7 @@ class Logger:
 		"""
 		self.__print_warning(module, text)
 
-		if log_to_file == True:
+		if (log_to_file == True) and (getattr(self.settings, "file", None) is not None):
 			self.settings.file.warning(module, text)
 		return
 

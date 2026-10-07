@@ -7,3 +7,23 @@ packages:
      - name: TestInspector
        module: rules.assurance.inspection.TestInspector
        config: file=$(SIMULATION)/undertest.yaml
+
+     # The ViolationInspector is the clearing house for violation costs. COLREG rules,
+     # territorial rules and examiners price and debounce their own findings, then
+     # post them to /Faculty/Practice/Inspectors/ViolationInspector; this inspector
+     # alone writes Ro, Rl (penalty) and Rw (weight) into fact_concern. Without it,
+     # violations are posted but never recorded, and the run log says so.
+     # Rule failures themselves are logged by the rules, every failure priced or not:
+     # COLREG RuleNN to fact_colreg_rNN, territorial rules to fact_territorial.
+     - name: ViolationInspector
+       module: rules.assurance.inspection.ViolationInspector
+
+     # The RiskInspector is the clearing house for risk records. The RiskExaminer posts each
+     # assessment (its fact_risk_assessment row and one fact_rr row per concern) and its
+     # exposure-period changes (fact_sim_log); the ExtremeWeatherExaminer posts each capsize
+     # assessment (fact_capsize). They post to /Faculty/Practice/Inspectors/RiskInspector, and
+     # this inspector alone writes those tables. It keeps each vessel's Cr (the sum of its Rr)
+     # and reports an assessment whose concern rows do not add up to Rr. Without it, risk
+     # records are posted but never written, and the run log says so.
+     - name: RiskInspector
+       module: rules.assurance.inspection.RiskInspector

@@ -69,7 +69,7 @@ class ScoredRule:
 
 		shapes	= self.ledger.shapes( ctxt, vessel )
 		return self.ledger.post( ctxt, self.SOURCE, raiser, vessel, event, shapes,
-								 penalty, 0.0, concern, weight )
+								 penalty, 0.0, concern, weight, self.findings.onset(key) )
 
 	@staticmethod
 	def clause_name(err)->str:

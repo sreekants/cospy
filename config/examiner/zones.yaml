@@ -134,7 +134,7 @@ concerns:
     collision.cost: traffic      # hull damage, as damage_other_vessel in Rl
     COLREG: traffic
 
-    # Event ids named by the local-rule scorecards (rule/score.json)
+    # Event ids named by the local-rule scorecards (rule/score.yaml)
     Violation.BerthingRisk: safety
     Violation.DeepDraft: safety
     Violation.DistanceKeeping: traffic

@@ -9,6 +9,7 @@ from cos.core.kernel.Context import Context
 from cos.subsystem.data.Partition import Partition, AUDIT_FIELDS
 from cos.core.utilities.ArgList import ArgList
 from cos.core.utilities.TransactionalDatabase import TransactionalDatabase
+import sqlite3, sys
 from cos.core.utilities.ActiveRecord import ActiveRecord
 from cos.core.time.Clock import utcnow
 
@@ -17,6 +18,9 @@ from xml.dom import minidom
 
 # Where the test inspector owning the vessels-under-test filter is published, if one is loaded
 FILTER_PATH	= '/Faculty/Practice/Inspectors'
+
+BACKLOG			= 100000	# Records held in memory before a failed flush is reported as an error
+FINAL_WAIT		= 60.0		# Seconds the last flush of a run waits for a reader to release the store
 
 class DataManagerThread(SimulationThread):
 	def __init__(self, sim):
@@ -59,6 +63,8 @@ class DataManager(Subsystem):
 		self.trace		= False
 		self.filter		= None		# Telemetry filter, found at the first push
 		self.filtered	= {}		# Topic -> rows withheld by the filter
+		self.backlog	= BACKLOG	# Error threshold on records held after failed flushes
+		self.over		= False		# The backlog is above the threshold
 		return
 
 	def on_init(self, ctxt:Context, module):
@@ -70,6 +76,8 @@ class DataManager(Subsystem):
 		Subsystem.on_init(self, ctxt, module)
 
 		config	= ArgList( module.get("config", "") )
+		if 'backlog' in config:
+			self.backlog	= int( config['backlog'] )
 		self.__build_partitions( ctxt, config )
 		return
 
@@ -103,7 +111,7 @@ class DataManager(Subsystem):
 		Subsystem.on_stop( self, ctxt, unused )
 		self.thread.stop()
 		self.thread.join()
-		self.flush()
+		self.flush( final=True )
 
 		for topic, count in sorted( self.filtered.items() ):
 			ctxt.log.info( 'DataManager', f'{count} row(s) of {topic} withheld: no vessel under test' )
@@ -116,14 +124,15 @@ class DataManager(Subsystem):
 		if self.thread is not None:
 			self.thread.stop()
 			self.thread.join()
-		self.flush()
+		self.flush( final=True )
 		return
 
-	def push(self, topic, data):
+	def push(self, topic, data, context=None):
 		""" Posts amessage to an IPC topic
 		Arguments
 			topic -- IPC topic
 			data -- Message payload
+			context -- DataContext filling the table's dimension columns; None leaves them NULL
 		"""
 		partition	= self.partitions.get(topic, None)
 		if partition is None:
@@ -140,7 +149,7 @@ class DataManager(Subsystem):
 			self.filtered[topic]	= self.filtered.get( topic, 0 ) + 1
 			return
 
-		partition.add( utcnow(), self.sim.tickcount(), data )
+		partition.add( utcnow(), self.sim.tickcount(), data, context )
 		return
 
 	def keeps(self, topic, partition, data)->bool:
@@ -163,33 +172,60 @@ class DataManager(Subsystem):
 
 		return self.filter.keeps( topic, partition.fields[AUDIT_FIELDS:], data )
 
-	def flush(self):
-		""" Flushes all the cached data to the file system.
+	def flush(self, final:bool=False):
+		""" Writes every queued record in one transaction; on failure requeues them for the next flush
+		Arguments
+			final -- The run's last flush, which waits for a reader instead of requeueing
 		"""
 		if self.storage is None:
 			return
 
+		taken	= [ (p, recs) for p, recs in ((p, p.take()) for p in self.partitions.values()) if recs ]
+		if not taken:
+			return
+
+		conn	= None
 		try:
-			db		= TransactionalDatabase()
-			db.open( self.storage )
-
-			count 	= 0
-			tables	= 0
-
-			for p in self.partitions.values():
-				nrec	= p.flush(db)
-				if nrec == 0:
-					continue
-				tables	+= 1
-				count 	+= nrec
-
-			db.flush()
+			conn	= sqlite3.connect( self.storage, timeout=FINAL_WAIT if final else 0.0 )	# never wait on a reader mid-run
+			db		= TransactionalDatabase( txn_batch=sys.maxsize )	# one commit per flush, so a failure leaves nothing behind
+			db.open( self.storage, conn )
+			count	= sum( p.write(db, recs) for p, recs in taken )
 			db.close()
-
-			if (count > 0) and (self.trace==True):
-				self.sim.log.info( 'DataManager', f'Flushed {count} record(s) into {tables} table(s).' )
 		except Exception as e:
-			self.sim.log.warning( 'DataManager', f'Failed to flush records: {e}' )
+			if (conn is not None) and conn.in_transaction:
+				conn.execute( 'ROLLBACK' )
+			for p, recs in taken:
+				p.restore( recs )
+			self.report( e, final )
+			return
+		finally:
+			if conn is not None:
+				conn.close()
+
+		if self.over and (self.queued() <= self.backlog):
+			self.over	= False
+			self.sim.log.info( 'DataManager', f'Backlog cleared; {self.queued()} record(s) queued' )
+		if self.trace == True:
+			self.sim.log.info( 'DataManager', f'Flushed {count} record(s) into {len(taken)} table(s).' )
+		return
+
+	def queued(self)->int:
+		""" Records held in memory, waiting to be written
+		"""
+		return sum( p.records.qsize() for p in self.partitions.values() )
+
+	def report(self, e, final:bool):
+		""" Reports a failed flush once the backlog passes its threshold, and always at the end of a run
+		Arguments
+			e -- The exception
+			final -- The run's last flush failed, so the queued records are lost
+		"""
+		held	= self.queued()
+		if final:
+			self.sim.log.error( 'DataManager', f'Last flush failed, {held} record(s) not written: {e}' )
+		elif (held > self.backlog) and (self.over == False):
+			self.over	= True
+			self.sim.log.error( 'DataManager', f'{held} record(s) held in memory, above the backlog limit {self.backlog}: {e}' )
 		return
 
 	def __build_partitions(self, ctxt:Context, config):
@@ -204,8 +240,8 @@ class DataManager(Subsystem):
 
 			self.__init_database(config)
 
-			for topic, fields in topics.items():
-				self.partitions[topic]	= Partition( ctxt, topic, fields )
+			for topic, (fields, dimensions) in topics.items():
+				self.partitions[topic]	= Partition( ctxt, topic, fields, dimensions )
 		except Exception as e:
 			ctxt.log.error( 'DataManager', f'Failed to initialize: {str(e)}' )
 
@@ -261,6 +297,7 @@ class DataManager(Subsystem):
 		topics		= {}
 		schema		= minidom.parseString( metadata )
 		facts		= schema.getElementsByTagName('Facts')[0]
+		columns		= DataManager.dimension_columns( schema )
 
 		for f in facts.getElementsByTagName('Fact'):
 			table		= f.getElementsByTagName('TableName')[0].childNodes[0].nodeValue
@@ -272,7 +309,15 @@ class DataManager(Subsystem):
 				type	= m.getElementsByTagName('Type')[0].childNodes[0].nodeValue
 				fields.append(field)
 
-			topics[table]	= fields
+			dimensions	= []
+			for path in DataManager.declared_dimensions( f ):
+				column	= columns.get( path )
+				if column is None:
+					ctxt.log.warning( 'DataManager', f'{table}: dimension {path} is not defined in the schema; not filled' )
+					continue
+				dimensions.append( (path.split('.')[-1], column) )
+
+			topics[table]	= (fields, dimensions)
 
 		'''
 		#TODO: REMOVE
@@ -282,6 +327,45 @@ class DataManager(Subsystem):
 		'''
 
 		return topics
+
+	@staticmethod
+	def declared_dimensions(fact)->list:
+		""" Dimension paths a fact declares, e.g. ['Location.gps', 'Fleet.vessel']
+		Arguments
+			fact -- <Fact> element
+		"""
+		for node in fact.childNodes:
+			if (node.nodeType == node.ELEMENT_NODE) and (node.tagName == 'Dimensions'):
+				text	= ''.join( c.nodeValue for c in node.childNodes if c.nodeType == c.TEXT_NODE )
+				return [ p.strip() for p in text.split(';') if p.strip() ]
+		return []
+
+	@staticmethod
+	def dimension_columns(schema)->dict:
+		""" Maps every 'Root.leaf' dimension path to its fact column, e.g. 'Location.gps' -> 'dim_gps_id'
+		Arguments
+			schema -- Parsed schema document
+		"""
+		def child(node, tag):
+			return next( (c for c in node.childNodes if c.nodeType == c.ELEMENT_NODE and c.tagName == tag), None )
+
+		def text(node, tag):
+			c	= child( node, tag )
+			return c.firstChild.nodeValue.strip() if (c is not None) and (c.firstChild is not None) else ''
+
+		def walk(root, node, out):
+			out[f'{root}.{text(node, "Name")}']	= text( node, 'TableName' ) + '_id'
+			leaves	= child( node, 'Leaves' )
+			for d in ([] if leaves is None else leaves.childNodes):
+				if (d.nodeType == d.ELEMENT_NODE) and (d.tagName == 'Dimension'):
+					walk( root, d, out )
+
+		out		= {}
+		top		= child( schema.documentElement, 'Dimensions' )
+		for d in ([] if top is None else top.childNodes):
+			if (d.nodeType == d.ELEMENT_NODE) and (d.tagName == 'Dimension'):
+				walk( text( d, 'Name' ), d, out )
+		return out
 
 if __name__ == "__main__":
 	test = DataManager()

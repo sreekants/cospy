@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Filename: ViolationInspector.py
-# Description: Clearing house for violation costs; the only writer of Ro, Rl and Rw into fact_concern
+# Description: Clearing house for violation costs; the only writer of Ro, Rl, Rw and the violation assessment
 
 from rules.assurance.inspection.Inspector import Inspector
 from maritime.model.zone.Ledger import Ledger, CLEARING, VIOLATION
@@ -33,7 +33,7 @@ class ViolationInspector(Inspector):
 		return
 
 	def on_violation(self, ctxt:Context, finding):
-		""" Records a posted violation into fact_concern
+		""" Records a posted violation
 		Arguments
 			ctxt -- Simulation context of the poster
 			finding -- Payload made by Ledger.post()
