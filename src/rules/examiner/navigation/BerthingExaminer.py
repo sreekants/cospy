@@ -3,6 +3,7 @@
 # Description: Implementation of the BerthingExaminer class
 
 from rules.examiner.navigation.GroundingExaminer import GroundingExaminer
+from cos.model.examiner.Examination import ExaminationType
 from cos.core.kernel.Context import Context
 
 # REQUIREMENT:
@@ -19,6 +20,7 @@ from cos.core.kernel.Context import Context
 
 
 class BerthingExaminer(GroundingExaminer):
+	EXAMINES	= ExaminationType.BERTHING
 	TOPIC		= '/Faculty/Concern/Berthing'
 	MESSAGE		= 'vessel.berthing'
 	ZONES		= 'berthing_zones'

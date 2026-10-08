@@ -2,9 +2,14 @@
 # Filename: VoyageEpisode.py
 # Description: Implementation of the VoyageEpisode class
 
-class VoyageEpisode:
+from cos.model.rule.Episode import Episode
+
+
+class VoyageEpisode(Episode):
 	def __init__(self):
-		print( "Hello" )
+		""" Constructor
+		"""
+		Episode.__init__( self )
 		return
 
 		

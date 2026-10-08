@@ -4,6 +4,7 @@
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 from cos.model.vehicle.Signal import Signal
@@ -30,6 +31,7 @@ import datetime
 
 
 class NightTimeExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.NIGHT_TIME
 	TOPIC		= '/Faculty/Concern/NightTime'
 	MESSAGE		= 'vessel.lights'
 	EVENT		= 'night.lights_missing'

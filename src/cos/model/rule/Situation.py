@@ -18,6 +18,7 @@ class Situation:
 		self.tss		= None
 		self.os			= OS
 		self.ts			= TS
+		self.context	= None		# Rule context the situation was observed in
 		return
 
 

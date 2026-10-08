@@ -96,6 +96,7 @@ class Vessel(Vehicle):
         self.operation      = 0
         self.status         = Status.UNKNOWN
         self.restriction    = Restriction.NONE
+        self.situations     = []        # Active situations; a faculty removes each when it ends
 
         Vessel.load_signals( ctxt )
 

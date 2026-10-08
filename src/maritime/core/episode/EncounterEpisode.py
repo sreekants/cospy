@@ -2,9 +2,14 @@
 # Filename: EncounterEpisode.py
 # Description: Implementation of the EncounterEpisode class
 
-class EncounterEpisode:
+from cos.model.rule.Episode import Episode
+
+
+class EncounterEpisode(Episode):
 	def __init__(self):
-		print( "Hello" )
+		""" Constructor
+		"""
+		Episode.__init__( self )
 		return
 
 		

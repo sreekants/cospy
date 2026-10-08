@@ -4,6 +4,7 @@
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from rules.examiner.risk.RiskModel import load
 from maritime.model.zone.Ledger import Ledger
 from maritime.model.risk.RiskLog import RiskLog, CAPSIZE
@@ -41,6 +42,7 @@ import yaml
 
 
 class ExtremeWeatherExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.EXTREME_WEATHER
 	TOPIC		= '/Faculty/Concern/Weather'
 	MESSAGE		= 'vessel.capsize.risk'
 	EPOCH_MESSAGE	= 'vessel.capsize.epoch'

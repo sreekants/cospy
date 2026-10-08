@@ -4,6 +4,7 @@
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 from cos.core.utilities.ArgList import ArgList
@@ -34,6 +35,7 @@ from cos.model.examiner.Precondition import PreconditionSet
 
 
 class SignalExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.SIGNAL
 	MESSAGE		= 'vessel.signal'
 	TOPIC		= ['/Faculty/Regulation/Rules']
 

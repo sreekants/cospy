@@ -80,6 +80,9 @@ class Vehicle(Object):
         if cargo is not None:
             for c in cargo.split(','):
                 self.cargo.add(c)
+
+        # Failures in effect, e.g. 'Comm.Failure'
+        self.failures   = ValueSet()
         return
 
     def describe(self):

@@ -3,6 +3,7 @@
 # Description: Implementation of the CargoExaminer class
 
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from cos.model.examiner.ConcernExaminer import ConcernExaminer
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
@@ -26,6 +27,7 @@ from cos.core.utilities.ArgList import ArgList
 
 
 class CargoExaminer(ZoneAware, ConcernExaminer):
+	EXAMINES	= ExaminationType.CARGO
 	TOPIC		= '/Faculty/Concern/Cargo'
 	MESSAGE		= 'vessel.cargo'
 

@@ -2,9 +2,14 @@
 # Filename: ViolationEpisode.py
 # Description: Implementation of the ViolationEpisode class
 
-class ViolationEpisode:
+from cos.model.rule.Episode import Episode
+
+
+class ViolationEpisode(Episode):
 	def __init__(self):
-		print( "Hello" )
+		""" Constructor
+		"""
+		Episode.__init__( self )
 		return
 
 		

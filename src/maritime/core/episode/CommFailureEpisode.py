@@ -2,9 +2,14 @@
 # Filename: CommFailureEpisode.py
 # Description: Implementation of the CommFailureEpisode class
 
-class CommFailureEpisode:
+from cos.model.rule.Episode import Episode
+
+
+class CommFailureEpisode(Episode):
 	def __init__(self):
-		print( "Hello" )
+		""" Constructor
+		"""
+		Episode.__init__( self )
 		return
 
 		

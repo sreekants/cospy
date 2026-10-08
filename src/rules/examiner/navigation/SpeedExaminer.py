@@ -4,6 +4,7 @@
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from rules.examiner.navigation.LaneDisciplineExaminer import LaneDisciplineExaminer
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
@@ -25,6 +26,7 @@ from cos.core.utilities.ArgList import ArgList
 
 
 class SpeedExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.SPEED
 	TOPIC			= '/Faculty/Concern/Speed'
 	MESSAGE			= 'vessel.speed'
 

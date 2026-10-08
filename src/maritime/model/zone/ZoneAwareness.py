@@ -17,21 +17,11 @@ from maritime.model.zone.Location import Location
 from cos.model.examiner.Precondition import PreconditionSet
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
-from cos.model.rule.Situation import Situation
 
-import queue
 
 # Situation attributes an examiner may declare a dependency on.
 SITUATION_ATTRIBUTES = ('os', 'ts', 'zone', 'eez', 'harbour',
 						'lane', 'mez', 'tss')
-
-# Encounter messages the conduct and situation faculties post (COS.023 L4)
-ENCOUNTER_MESSAGES	= ('vessel.approach', 'vessel.overtaking', 'vessel.crossing', 'vessel.headon')
-
-# Where an examiner's situations come from (COS.023 L5)
-ENCOUNTERS	= 'encounters'		# subscribed encounter messages
-SUBJECTS	= 'subjects'		# each vessel under test, alone
-
 
 class ZoneAware:
 	""" Zone rules, map lookup and violation recording for a concern examiner.
@@ -39,7 +29,7 @@ class ZoneAware:
 
 	# Finding scope; overridable per class under 'findings' in zones.yaml
 	FINDING		= {'scope': 'change'}
-	SITUATIONS	= SUBJECTS
+	EXAMINES	= None		# ExaminationType whose situations this examiner judges
 
 	def init_zones(self, ctxt:Context, config:ArgList, requires=None):
 		""" Loads the zone rules and declares the examiner's preconditions
@@ -60,59 +50,26 @@ class ZoneAware:
 		# examiner it is mixed into (RiskExaminer declares its own per group).
 		self.zone_gate	= PreconditionSet( {'vessel': list(requires or ['os'])} )
 
-		self.situations	= queue.Queue()
-		for message in ENCOUNTER_MESSAGES:
-			self.subscribe( message, self.on_encounter )
+		if self.EXAMINES is not None:
+			self.handle_examination( self.EXAMINES, self.examine_situation )
 		return
 
-	def on_encounter(self, ctxt:Context, evt):
-		""" Queues an encounter; ignored by examiners that iterate subjects
+	def examine_situation(self, ctxt:Context, situation):
+		""" Judges one situation in the rule context it was observed in, restoring the shared one afterwards (COS.007)
 		Arguments
 			ctxt -- Simulation context
-			evt -- (kind, own ship, target or EncounterEvent, ...)
+			situation -- Rule situation carried by an examination
 		"""
-		if self.SITUATIONS != ENCOUNTERS:
-			return
-
-		own		= evt[1]
-		target	= getattr( evt[2], 'TS', evt[2] )
-		self.situations.put( Situation(own, target) )
-		return
-
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Judges each situation in turn, restoring the shared one afterwards (COS.007)
-		Arguments
-			ctxt -- Simulation context
-			rule_ctxt -- Rule context
-		"""
-		saved	= rule_ctxt.situation
+		rule_ctxt	= situation.context
+		saved		= rule_ctxt.situation
 		try:
-			for situation in self.pending( rule_ctxt ):
-				rule_ctxt.situation	= situation
-				self.reset_resolver( ctxt, rule_ctxt )
-				self.judge( ctxt, rule_ctxt )
+			rule_ctxt.situation	= situation
+			self.reset_resolver( ctxt, rule_ctxt )
+			self.judge( ctxt, rule_ctxt )
 		finally:
 			rule_ctxt.situation	= saved
 			self.reset_resolver( ctxt, rule_ctxt )
 		return
-
-	def pending(self, rule_ctxt):
-		""" This pass's situations: queued encounters, or each subject alone
-		Arguments
-			rule_ctxt -- Rule context
-		"""
-		queued	= []
-		while not self.situations.empty():
-			queued.append( self.situations.get() )
-
-		if self.SITUATIONS == SUBJECTS:
-			subjects	= getattr( rule_ctxt, 'subjects', None ) or rule_ctxt.vessels or []
-			return [ Situation(vessel, None) for vessel in subjects ]
-
-		unique	= {}
-		for situation in queued:
-			unique.setdefault( (situation.os.id, situation.ts.id), situation )
-		return list( unique.values() )
 
 	@staticmethod
 	def reset_resolver(ctxt:Context, rule_ctxt):

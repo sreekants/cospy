@@ -4,6 +4,7 @@
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from maritime.model.zone.ZoneRules import ZoneRules
 from cos.core.kernel.Context import Context
 from cos.core.kernel.Object import TERM_WRITE
@@ -26,6 +27,7 @@ from cos.model.situation.EpisodeWatcher import EpisodeWatcher, epoch_of
 
 
 class GroundingExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.GROUNDING
 	TOPIC		= '/Faculty/Concern/Grounding'
 	MESSAGE		= 'vessel.grounding'
 	

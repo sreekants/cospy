@@ -7,6 +7,7 @@ from cos.model.rule.ScoreCard import ScoreCard
 from cos.core.kernel.Faculty import Faculty
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
+from cos.model.examiner.Examination import Examination, ExaminationType, EXAMINATION
 
 class Examiner(Faculty):
 	def __init__(self, type):
@@ -16,8 +17,11 @@ class Examiner(Faculty):
 		"""
 		Faculty.__init__( self, self.category, type )
 
-		self.automata	= None
-		self.scorecard	= ScoreCard()
+		self.automata		= None
+		self.scorecard		= ScoreCard()
+		self.examinations	= {}		# ExaminationType -> handler(ctxt, body)
+		self.subscribe( EXAMINATION, self.on_examination )
+		self.handle_examination( ExaminationType.EPOCH_EPISODE, self.on_epoch_episode )
 		return
 
 	@property
@@ -46,31 +50,51 @@ class Examiner(Faculty):
 		return
 
 
-	def begin(self, ctxt:Context, situation):
-		""" Triggers the begining of a situation
+	def handle_examination(self, type:ExaminationType, handler):
+		""" Registers the handler for one type of examination
 		Arguments
-			ctxt -- Simulation context
-			situation -- Situation reference
+			type -- Examination type
+			handler -- Callable(ctxt, body)
 		"""
-		# print( f'begin {self.scope}/{self.id}' )
+		if getattr( self, 'examinations', None ) is None:
+			# Examiners built without __init__, e.g. in tests
+			self.examinations	= { ExaminationType.EPOCH_EPISODE: self.on_epoch_episode }
+		self.examinations[type]	= handler
 		return
 
-	def end(self, ctxt:Context, situation):
-		""" Triggers the conclusion of a situation
+	def on_examination(self, ctxt:Context, examination:Examination):
+		""" Examines what an examination carries; any other type is ignored
 		Arguments
 			ctxt -- Simulation context
-			situation -- Situation reference
+			examination -- Examination received on a subscribed topic
 		"""
-		# print( f'end {self.scope}/{self.id}' )
+		handler	= (getattr( self, 'examinations', None ) or {}).get( getattr(examination, 'type', None) )
+		if handler is None:
+			return
+
+		# A failing examiner must not stop delivery to the others
+		try:
+			handler( ctxt, examination.body )
+		except Exception as e:
+			ctxt.log.error( self.id, f'{examination.type.name}: {e}' )
 		return
 
-	def evaluate(self, ctxt:Context, situation):
-		""" Evaluates the expression
+	def on_epoch_episode(self, ctxt:Context, episode):
+		""" Closes the examiner's own periods at the end of an epoch
 		Arguments
 			ctxt -- Simulation context
-			situation -- Situation reference
+			episode -- Ended EpochEpisode
 		"""
-		pass
+		self.end( ctxt, episode.context )
+		return
+
+	def end(self, ctxt:Context, rule_ctxt):
+		""" Ends whatever the examiner keeps open across situations
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context of the pass that ended the epoch
+		"""
+		return
 
 	# No score() here: examiners record through ZoneAware.violate() (REQ.017)
 

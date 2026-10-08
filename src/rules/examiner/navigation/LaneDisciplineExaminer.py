@@ -3,7 +3,8 @@
 # Description: Implementation of the LaneDisciplineExaminer class
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
-from maritime.model.zone.ZoneAwareness import ZoneAware, ENCOUNTERS
+from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 
@@ -22,10 +23,10 @@ from cos.core.utilities.ArgList import ArgList
 
 
 class LaneDisciplineExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.ENCOUNTER
 	TOPIC		= '/Faculty/Concern/Lane'
 	MESSAGE		= 'vessel.lane'
 	EVENT		= 'lane.overtaking_prohibited'
-	SITUATIONS	= ENCOUNTERS
 
 	OVERTAKING	= ('overtaking', 'overtake', 'overtaking_to_port', 'overtaking_to_starboard')
 

@@ -7,6 +7,7 @@ from rules.examiner.risk.RiskExposure import RiskExposure
 from rules.examiner.risk.RiskModel import load, hazard_probabilities, individual_risk
 
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from maritime.model.zone.ZoneRules import ZoneRules, SpatialZones
 from maritime.model.zone.Ledger import Ledger
 from maritime.model.risk.RiskLog import RiskLog, ASSESSMENT, RR, SIM_LOG
@@ -46,11 +47,14 @@ import yaml
 # is unit-tested by verify_accumulation.py.
 
 class RiskExaminer(ZoneAware, ConcernExaminer):
+	EXAMINES	= ExaminationType.RISK
 	TOPIC		= '/Faculty/Risk/Assessment'
 	MESSAGE		= 'risk.assessment'
 	EPOCH_MESSAGE	= 'risk.epoch'
 	WATCHED		= ( 'collision', 'grounding' )		# Hazards whose probability is watched for epochs
 	watcher		= None		# Set up in setup()
+	passing		= None		# Rule context of the pass being examined
+	sampling	= False		# Whether that pass is a sample
 
 	# Another faculty resets the exposure period T by sending a RiskExposure
 	# (see on_exposure_reset). Applied resets are logged to fact_sim_log.
@@ -152,36 +156,42 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 		self.context	= ctxt
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt:RuleContext):
-		""" Evaluates risk for every vessel under assessment.
-		Invoked by COLREG.Evaluator.monitor() once the situation faculties have run.
+	def examine_situation(self, ctxt:Context, situation):
+		""" Assesses the vessel of one situation, on passes that are samples
 		Arguments
 			ctxt -- Simulation context
-			rule_ctxt -- Rule context
+			situation -- Rule situation carried by an examination; its os is the vessel under assessment
 		"""
-		# Reset requests are applied here, on this faculty's thread, between passes
-		ctxt.ipc.pump_node( ctxt.ipc.get_node(self.EXPOSURE_TOPIC) )		# pump() skips the node itself
+		rule_ctxt	= situation.context
 
-		if (self.engine is None) or (self.timer.signaled() == False):
+		# Once per pass: apply reset requests between passes, then decide whether this pass samples
+		if rule_ctxt is not self.passing:
+			self.passing	= rule_ctxt
+			ctxt.ipc.pump_node( ctxt.ipc.get_node(self.EXPOSURE_TOPIC) )		# pump() skips the node itself
+			self.sampling	= (self.engine is not None) and self.timer.signaled()
+
+		vessel	= situation.os
+		if (self.sampling == False) or (self.running == False) or (self.tracked( vessel ) == False):
 			return
 
 		saved	= rule_ctxt.situation
 		try:
-			for vessel in rule_ctxt.subjects:
-				if self.running == False:
-					break
-				if self.tracked( vessel ) == False:
-					continue
-				try:
-					self.assess( ctxt, rule_ctxt, vessel )
-				except Exception as e:
-					ctxt.log.error( self.id, f'{getattr(vessel, "name", vessel)}: {e}' )
-			if self.watcher is not None:
-				self.watcher.lapse( ctxt.sim.tickcount() )		# Vessels not assessed this pass
+			self.assess( ctxt, rule_ctxt, vessel )
+		except Exception as e:
+			ctxt.log.error( self.id, f'{getattr(vessel, "name", vessel)}: {e}' )
 		finally:
 			rule_ctxt.situation	= saved
 			self.reset_resolver( ctxt, rule_ctxt )
+		return
 
+	def end(self, ctxt:Context, rule_ctxt:RuleContext):
+		""" Ends the epochs of vessels not assessed in a pass that sampled
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context of the pass that ended the epoch
+		"""
+		if self.sampling and (rule_ctxt is self.passing) and (self.watcher is not None):
+			self.watcher.lapse( ctxt.sim.tickcount() )
 		return
 
 	@staticmethod

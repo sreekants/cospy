@@ -3,7 +3,8 @@
 # Description: Implementation of the CollisionExaminer class
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
-from maritime.model.zone.ZoneAwareness import ZoneAware, ENCOUNTERS
+from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from cos.core.kernel.Context import Context
 from cos.core.kernel.Object import TERM_WRITE
 from cos.core.utilities.ArgList import ArgList
@@ -28,11 +29,11 @@ from cos.model.situation.EpisodeWatcher import EpisodeWatcher, epoch_of
 
 
 class CollisionExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.ENCOUNTER
 	TOPIC		= '/Faculty/Concern/Collision'
 	MESSAGE		= 'vessel.collision.cost'
 	EVENT		= 'collision.cost'
 	EPOCH_MESSAGE	= 'vessel.collision.epoch'
-	SITUATIONS	= ENCOUNTERS
 
 	watcher		= None		# Set up in setup() when report.dcpa is given
 

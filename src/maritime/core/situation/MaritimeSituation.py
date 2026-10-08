@@ -7,12 +7,16 @@ from maritime.core.situation.Types import *
 from cos.model.situation.EncounterSituation import *
 from cos.core.kernel.Context import Context
 from cos.math.geometry.Distance import Distance
+from cos.model.examiner.Examination import Examination, ExaminationType, EXAMINATION
 
 
-REGULATION_TOPICS	= [ '/Faculty/Regulation/Rules', '/Faculty/Practice/Examiners' ]
+PRACTICE_FACULTIES	= '/Faculty/Situation/Practice'		# Faculties that turn situations into examinations
+REGULATION_TOPICS	= [ '/Faculty/Regulation/Rules', PRACTICE_FACULTIES ]
 
 
 class MaritimeSituation(EncounterSituation):
+	TOPIC	= None		# Well-known topic a derived faculty posts its ended situations to
+
 	def __init__(self, type, scope='Situation/Maritime'):
 		""" Constructor
 		Arguments
@@ -30,12 +34,39 @@ class MaritimeSituation(EncounterSituation):
 			msg -- Message describing the regulation event
 			arg -- Opaque argument to pass as context
 		"""
-		# Rules and examiners are separate namespaces, each addressed explicitly (REQ.027)
+		# Rules and the practice faculties are separate namespaces, each addressed explicitly (REQ.027)
 		self.post( ctxt, REGULATION_TOPICS, msg, arg )
 
 		# Notify the vessel
 		if vessel is not None:
 			vessel.notify( ctxt, msg, arg )
+		return
+
+	def activate(self, vessel:Vessel, situation):
+		""" Adds a situation to a vessel's active situations
+		Arguments
+			vessel -- Vessel the situation concerns
+			situation -- Situation that has begun
+		"""
+		active	= getattr( vessel, 'situations', None )
+		if (active is not None) and (situation not in active):
+			active.append( situation )
+		return
+
+	def conclude(self, ctxt:Context, vessel:Vessel, type:ExaminationType, situation):
+		""" Posts an ended situation as an examination to the faculty's well-known topic, and removes it from the vessel's active situations
+		Arguments
+			ctxt -- Simulation context
+			vessel -- Vessel the situation concerns
+			type -- Examination type naming what the situation is
+			situation -- Situation that has ended
+		"""
+		if self.TOPIC is not None:
+			self.post( ctxt, [self.TOPIC], EXAMINATION, Examination(type, situation) )
+
+		active	= getattr( vessel, 'situations', None )
+		if (active is not None) and (situation in active):
+			active.remove( situation )
 		return
 
 	def for_each_in_range(self, ctxt:Context, rule_ctxt:RuleContext, range, vessels, objects, fn, arg=None):

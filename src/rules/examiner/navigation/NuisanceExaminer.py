@@ -4,6 +4,7 @@
 
 from rules.examiner.navigation.NavigationExaminer import NavigationExaminer
 from maritime.model.zone.ZoneAwareness import ZoneAware
+from cos.model.examiner.Examination import ExaminationType
 from maritime.regulation.colreg import Classification
 from cos.model.vehicle.Signal import Signal
 from maritime.model.vessel.Vessel import Vessel
@@ -18,11 +19,12 @@ from cos.core.utilities.ArgList import ArgList
 #   restricted_visibility  a nuisance in clear visibility outside an encounter (Rule 35)
 #   encounter              a nuisance outside an encounter (Rule 34)
 #
-# A vessel is in an encounter from the first encounter message naming it until it
+# A vessel is in an encounter from the first encounter examination naming it until it
 # has been named in none for encounter_release seconds (config/evaluator.yaml).
 
 
 class NuisanceExaminer(ZoneAware, NavigationExaminer):
+	EXAMINES	= ExaminationType.NUISANCE
 	EVENT		= 'signal.nuisance'
 
 	# Once per (vessel, signal) for the run: the signal is the finding's subject
@@ -45,6 +47,7 @@ class NuisanceExaminer(ZoneAware, NavigationExaminer):
 			config -- Configuration attributes
 		"""
 		self.init_zones( ctxt, config, requires=['os'] )
+		self.handle_examination( ExaminationType.ENCOUNTER, self.on_encounter )
 		Vessel.load_signals( ctxt )
 		return
 
@@ -57,15 +60,14 @@ class NuisanceExaminer(ZoneAware, NavigationExaminer):
 		self.cache_shapes( ctxt )
 		return
 
-	def on_encounter(self, ctxt:Context, evt):
+	def on_encounter(self, ctxt:Context, situation):
 		""" Records that both vessels of an encounter are engaged
 		Arguments
 			ctxt -- Simulation context
-			evt -- (kind, own ship, target or EncounterEvent, ...)
+			situation -- Encounter situation (own ship, target)
 		"""
 		now		= ctxt.sim.seconds()
-		target	= getattr( evt[2], 'TS', evt[2] )
-		for vessel in ( evt[1], target ):
+		for vessel in ( situation.os, situation.ts ):
 			if vessel is not None:
 				self.engaged[ self.identify(vessel) ]	= now
 		return
@@ -121,7 +123,7 @@ class NuisanceExaminer(ZoneAware, NavigationExaminer):
 		if last is None:
 			return False
 
-		# Measured from the previous pass, so messages delivered after this pass began still count
+		# Measured from the previous pass, so encounters examined after this pass began still count
 		since	= self.previous if self.previous is not None else now
 		return last >= since - Classification.THRESHOLDS.release
 

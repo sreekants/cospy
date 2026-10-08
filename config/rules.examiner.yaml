@@ -1,10 +1,62 @@
 packages:
   modules:  # Examiner modules
-     # Drives every examiner under /Faculty/Practice/Examiners, separately from
-     # the COLREG evaluator that drives the rules, with its own cadence (REQ.028).
+     # Drives the practice faculties and inspectors, separately from the COLREG
+     # evaluator that drives the rules, with its own cadence (REQ.028, REQ.051).
      - name: Practice.Evaluator
        module: maritime.practice.PracticeEvaluator
        config: sample.frequency=1 resolvers=$(CONFIG)/legata.yaml
+
+     # Practice faculties (REQ.051): each continuous check has one, which posts
+     # every situation it observes as an Examination to /Faculty/Practice/Examiners.
+     # Examiners examine nothing else. Practice.Evaluator drives them in this order
+     # each pass; the epoch faculty always runs last.
+     #   examination  ExaminationType the check posts
+     #   situations   subjects (each vessel under test) or encounters (each
+     #                encounter reported since the last pass, once)
+     #   ticks        epoch length in ticks; 1 ends an epoch every pass
+     - name: Encounters.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=ENCOUNTER situations=encounters
+
+     - name: Grounding.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=GROUNDING situations=subjects
+
+     - name: Berthing.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=BERTHING situations=subjects
+
+     - name: Speed.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=SPEED situations=subjects
+
+     - name: NightTime.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=NIGHT_TIME situations=subjects
+
+     - name: Signal.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=SIGNAL situations=subjects
+
+     - name: Nuisance.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=NUISANCE situations=subjects
+
+     - name: Cargo.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=CARGO situations=subjects
+
+     - name: ExtremeWeather.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=EXTREME_WEATHER situations=subjects
+
+     - name: Risk.Faculty
+       module: maritime.practice.PracticeFaculty
+       config: examination=RISK situations=subjects
+
+     - name: Epoch.Faculty
+       module: maritime.practice.EpochFaculty
+       config: ticks=1
 
      # The concern examiners read their zone-local rules, thresholds and
      # penalty scorecard from config/examiner/zones.yaml. 'zones' is the only
