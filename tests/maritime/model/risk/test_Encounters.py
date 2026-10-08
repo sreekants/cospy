@@ -8,7 +8,8 @@ import numpy as np
 import yaml
 
 from tests.maritime.model.risk.test_ConcernWeights import source_module, CONFIG
-from tests.maritime.model.risk.test_Rb import Ctxt as RbCtxt
+from tests.examination import examine_pass
+from tests.maritime.model.risk.test_Rr import Ctxt as RbCtxt
 
 RiskExaminer	= source_module( 'rules.examiner.risk.RiskExaminer' ).RiskExaminer
 RiskModel		= source_module( 'rules.examiner.risk.RiskModel' )
@@ -98,8 +99,8 @@ class EncounterTestCase(unittest.TestCase):
 		rule_ctxt	= RuleContext( vessels, subjects )
 		rule_ctxt.size	= size
 		ctxt		= Ctxt()
-		exam.evaluate( ctxt, rule_ctxt )
-		exam.evaluate( ctxt, rule_ctxt )
+		examine_pass( exam, ctxt, rule_ctxt )
+		examine_pass( exam, ctxt, rule_ctxt )
 		self.assertEqual( len(ctxt.log.errors), errors, ctxt.log.errors )
 		self.assertEqual( rule_ctxt.situation, 'shared' )
 		return exam.reports
@@ -147,7 +148,7 @@ class EncounterTestCase(unittest.TestCase):
 		twin		= Vessel(1, 20000, 0)
 		twin.id		= 'twin'
 		exam		= examiner()
-		exam.evaluate( Ctxt(), RuleContext([Vessel(1, 0, 0), Vessel(2, 50, 0), twin]) )
+		examine_pass( exam, Ctxt(), RuleContext([Vessel(1, 0, 0), Vessel(2, 50, 0), twin]) )
 		self.assertEqual( sorted(exam.tracks), ['twin', 'v1', 'v2'] )
 		self.assertEqual( exam.tracks['v1'].charges, 1 )
 

@@ -110,12 +110,12 @@ class CMergeApp:
 
 	@staticmethod
 	def tables(path):
-		""" The data tables of a database: every table but enumerations
+		""" The data tables of a database: every table but enumerations and run tables
 		Arguments
 			path -- Database path
 		"""
 		conn	= sqlite3.connect( path )
-		tables	= [ t for t in ActiveRecord.tables(conn) if not Metadata.is_enumuration(t) ]
+		tables	= [ t for t in ActiveRecord.tables(conn) if not (Metadata.is_enumuration(t) or Metadata.is_run_table(t)) ]
 		conn.close()
 		return tables
 

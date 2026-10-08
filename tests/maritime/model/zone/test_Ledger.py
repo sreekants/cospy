@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # Filename: test_Ledger.py
-# Description: Test cases for the Ro write path (PLAN-E1, REQ.017-019)
+# Description: Test cases for the Ro write path through the ViolationInspector (PLAN-E1, REQ.017-019)
 
 import os, sys, datetime, importlib, unittest
 from xml.dom import minidom
 
-from maritime.model.zone.Ledger import Ledger, FindingGuard, FACT, SOURCE_EXAMINER, SOURCE_COLREG
+from maritime.model.risk.RiskLog import RiskLog, CLEARING as RISK_CLEARING, RECORD as RISK_RECORD
+from maritime.model.zone.Ledger import Ledger, FindingGuard, FACT_RO, FACT_RL, FACT_RW, FACT_VA, FACTS, SOURCE_EXAMINER, SOURCE_COLREG, CLEARING, VIOLATION
 from maritime.model.zone.ZoneRules import ZoneRules
 from maritime.model.zone.ZoneAwareness import ZoneAware
 from maritime.model.rule.ScoredRule import ScoredRule
@@ -43,10 +44,25 @@ class Log:
 		pass
 
 
+def findings(ctxt):
+	""" Rows of fact_ro: one per finding """
+	return [ row for topic, row in ctxt.sim.data.rows if topic == FACT_RO ]
+
+
+def declared(table):
+	""" Field names of a fact table in maritime.xml """
+	doc		= minidom.parse( os.path.join(CONFIG, 'data', 'maritime.xml') )
+	for fact in doc.getElementsByTagName('Fact'):
+		if fact.getElementsByTagName('TableName')[0].childNodes[0].nodeValue == table:
+			return [ m.getElementsByTagName('FieldName')[0].childNodes[0].nodeValue
+					 for m in fact.getElementsByTagName('Measure') ]
+	return None
+
+
 class Data:
 	def __init__(self):
 		self.rows	= []
-	def push(self, topic, row):
+	def push(self, topic, row, context=None):
 		self.rows.append( (topic, row) )
 
 
@@ -82,13 +98,30 @@ class Sim:
 		return self.clock
 	def seconds(self):
 		return (self.clock - datetime.datetime( 2026, 1, 1 )).total_seconds()
+	def tickcount(self):
+		return int( self.seconds() )		# One-second ticks
 	def advance(self, seconds):
 		self.clock	= self.clock + datetime.timedelta( seconds=seconds )
 
 
 class IPC:
-	def push(self, *args):
-		pass
+	""" Hands each posted violation to a ViolationInspector at once, as the evaluator's pump would """
+	def __init__(self):
+		self.inspector		= None
+		self.risk			= None
+		Ledger.clearing		= True		# An inspector is loaded
+		RiskLog.clearing	= True
+	def push(self, topic, msg=None, ctxt=None, arg=None, depth=1):
+		if (topic == CLEARING) and (msg == VIOLATION):
+			if self.inspector is None:
+				from rules.assurance.inspection.ViolationInspector import ViolationInspector
+				self.inspector	= ViolationInspector()
+			self.inspector.on_violation( ctxt, arg )
+		elif (topic == RISK_CLEARING) and (msg == RISK_RECORD):
+			if self.risk is None:
+				from rules.assurance.inspection.RiskInspector import RiskInspector
+				self.risk	= RiskInspector()
+			self.risk.on_record( ctxt, arg )
 
 
 class Ctxt:
@@ -202,35 +235,45 @@ class LedgerTestCase(unittest.TestCase):
 		self.ledger	= Ledger()
 		self.ledger.load( self.ctxt, 'test' )
 
-	def test_row_matches_the_declared_schema(self):
-		self.ledger.record( self.ctxt, SOURCE_EXAMINER, 'GroundingExaminer', Vessel(9000001, recid=101),
+	def test_rows_match_the_declared_schema(self):
+		self.ledger.post( self.ctxt, SOURCE_EXAMINER, 'GroundingExaminer', Vessel(9000001, recid=101),
 							'grounding.contact', self.ledger.shapes(self.ctxt, Vessel(1)), 95.0, -0.5 )
 
-		topic, row	= self.ctxt.sim.data.rows[0]
-		self.assertEqual( topic, FACT )
+		written	= dict( self.ctxt.sim.data.rows )
+		self.assertEqual( sorted(written), sorted(FACTS) )			# one row in each table per finding
+		named	= {}
+		for table, row in written.items():
+			fields	= declared( table )
+			self.assertEqual( len(row) + AUDIT_FIELDS, len(fields), table )
+			named[table]	= dict( zip(fields[AUDIT_FIELDS:], row) )
 
-		doc		= minidom.parse( os.path.join(CONFIG, 'data', 'maritime.xml') )
-		for fact in doc.getElementsByTagName('Fact'):
-			if fact.getElementsByTagName('TableName')[0].childNodes[0].nodeValue == FACT:
-				fields	= [ m.getElementsByTagName('FieldName')[0].childNodes[0].nodeValue
-							for m in fact.getElementsByTagName('Measure') ]
-		self.assertEqual( len(row) + AUDIT_FIELDS, len(fields) )
+		ro	= named[FACT_RO]
+		self.assertEqual( (ro['vessel_id'], ro['source'], ro['clause'], ro['zone'], ro['concern'], ro['value']),
+						  (101, SOURCE_EXAMINER, 'grounding.contact', 'port', 'safety', 1.0) )
+		self.assertEqual( named[FACT_RL]['value'], 95.0 )
+		self.assertEqual( named[FACT_RW]['value'], 1.0 )			# No score file weight: Rw is 1
+		self.assertEqual( len({ n[t]['finding_id'] for t in FACTS for n in (named,) }), 1 )	# one shared finding id
+		self.assertEqual( named[FACT_VA]['cost'], 95.0 )
 
-		named	= dict( zip(fields[AUDIT_FIELDS:], row) )
-		self.assertEqual( named['vessel_id'], 101 )
-		self.assertEqual( named['source'], SOURCE_EXAMINER )
-		self.assertEqual( named['event'], 'grounding.contact' )
-		self.assertEqual( named['area'], 'Turkeli.Harbour' )
-		self.assertEqual( named['zone'], 'port' )
-		self.assertEqual( named['concern'], 'safety' )
-		self.assertEqual( named['penalty'], 95.0 )
+	def test_a_score_file_weight_is_recorded_beside_the_penalty(self):
+		self.ledger.post( self.ctxt, SOURCE_EXAMINER, 'X', Vessel(1), 'grounding.contact', [], 95.0, weight=0.5 )
+		written	= dict( self.ctxt.sim.data.rows )
+		self.assertEqual( (written[FACT_RL][6], written[FACT_RW][6]), (95.0, 0.5) )	# value: penalty, weight
+		self.assertEqual( written[FACT_VA][-1], 47.5 )								# Rl x Ro x Rw
+
+	def test_onset_defaults_to_the_time_posted(self):
+		self.ledger.post( self.ctxt, SOURCE_EXAMINER, 'X', Vessel(1), 'grounding.contact', [], 95.0 )
+		self.ledger.post( self.ctxt, SOURCE_EXAMINER, 'X', Vessel(2), 'grounding.contact', [], 95.0, onset=-4.0 )
+		rows	= findings( self.ctxt )
+		self.assertEqual( rows[0][7], rows[0][0] )
+		self.assertEqual( rows[1][7], -4.0 )
 
 	def test_zero_penalty_is_not_recorded(self):
-		self.assertFalse( self.ledger.record(self.ctxt, SOURCE_EXAMINER, 'X', Vessel(1), 'grounding.contact', [], 0.0) )
+		self.assertFalse( self.ledger.post(self.ctxt, SOURCE_EXAMINER, 'X', Vessel(1), 'grounding.contact', [], 0.0) )
 		self.assertEqual( self.ctxt.sim.data.rows, [] )
 
 	def test_unmapped_event_is_not_recorded(self):
-		self.assertFalse( self.ledger.record(self.ctxt, SOURCE_EXAMINER, 'X', Vessel(1), 'made.up', [], 1.0) )
+		self.assertFalse( self.ledger.post(self.ctxt, SOURCE_EXAMINER, 'X', Vessel(1), 'made.up', [], 1.0) )
 		self.assertEqual( self.ctxt.sim.data.rows, [] )
 		self.assertTrue( self.ctxt.log.errors )
 
@@ -260,25 +303,25 @@ class ZoneAwareTestCase(unittest.TestCase):
 
 	def test_hundred_ticks_aground_is_one_finding(self):
 		self.tick( Vessel(1), 100 )
-		self.assertEqual( len(self.ctxt.sim.data.rows), 1 )
+		self.assertEqual( len(findings(self.ctxt)), 1 )
 
 	def test_ground_refloat_ground_is_two_findings(self):
 		vessel	= Vessel(1)
 		self.tick( vessel, 20 )
 		self.exam.settle( vessel, 'grounding.contact', self.shapes )		# Clear water seen
 		self.tick( vessel, 20 )
-		self.assertEqual( len(self.ctxt.sim.data.rows), 2 )
+		self.assertEqual( len(findings(self.ctxt)), 2 )
 
 	def test_two_vessels_both_recorded(self):
 		self.tick( Vessel(1), 1 )
 		self.tick( Vessel(2), 1 )
-		self.assertEqual( len(self.ctxt.sim.data.rows), 2 )
+		self.assertEqual( len(findings(self.ctxt)), 2 )
 
 	def test_finding_count_is_invariant_to_duration(self):
 		# Held for 10 or 300 ticks, one finding either way
 		self.tick( Vessel(1), 10 )
 		self.tick( Vessel(2), 300 )
-		self.assertEqual( len(self.ctxt.sim.data.rows), 2 )
+		self.assertEqual( len(findings(self.ctxt)), 2 )
 
 
 class NightKeyTestCase(unittest.TestCase):
@@ -307,13 +350,13 @@ class NightKeyTestCase(unittest.TestCase):
 		ctxt.sim.clock	= datetime.datetime( 2026, 9, 26, 2, 0, 0 )
 		for v in (Vessel(1), Vessel(2)):
 			exam.score( ctxt, v, shapes, rules, missing, missing )
-		self.assertEqual( len(ctxt.sim.data.rows), 2 )
+		self.assertEqual( len(findings(ctxt)), 2 )
 
 		# The next night is a new finding for each
 		ctxt.sim.clock	= datetime.datetime( 2026, 9, 26, 22, 0, 0 )
 		for v in (Vessel(1), Vessel(2)):
 			exam.score( ctxt, v, shapes, rules, missing, missing )
-		self.assertEqual( len(ctxt.sim.data.rows), 4 )
+		self.assertEqual( len(findings(ctxt)), 4 )
 
 
 class ClauseNameTestCase(unittest.TestCase):
@@ -325,6 +368,29 @@ class ClauseNameTestCase(unittest.TestCase):
 		clause		= automata.definition.root.children[0]
 		body		= clause.children[0]
 		self.assertEqual( ScoredRule.clause_name(body), 'COLREG.Rule14.a' )
+
+
+class RuleWeightTestCase(unittest.TestCase):
+	""" REQ.041 DOC-041-02: a rule's score file weight reaches fact_rw """
+
+	def test_record_violation_passes_the_weight_to_the_ledger(self):
+		class Recorder:
+			rules	= ZoneRules()
+			def __init__(self):
+				self.calls	= []
+			def shapes(self, ctxt, vessel):
+				return []
+			def post(self, *args):
+				self.calls.append( args )
+				return True
+		rule			= ScoredRule()
+		rule.SOURCE		= SOURCE_COLREG
+		rule.ledger		= Recorder()
+		rule.ledger.rules.vocabulary	= ['safety']
+		rule.findings	= FindingGuard()
+		ctxt			= Ctxt()
+		self.assertTrue( rule.record_violation(ctxt, 'Rule35', Vessel(1), 'COLREG.Rule35.a', None, 50.0, 'safety', 0.5) )
+		self.assertEqual( rule.ledger.calls[0][-4:-1], (0.0, 'safety', 0.5) )		# value, concern, weight
 
 
 if __name__ == '__main__':

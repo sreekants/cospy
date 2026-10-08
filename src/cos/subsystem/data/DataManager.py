@@ -152,6 +152,20 @@ class DataManager(Subsystem):
 		partition.add( utcnow(), self.sim.tickcount(), data, context )
 		return
 
+	def record_run(self, rows):
+		""" Writes the run record into the working set's configs table, replacing rows of the same name
+		Arguments
+			rows -- List of (name, type, value)
+		"""
+		conn	= ActiveRecord.connect( self.storage )
+		try:
+			conn.executemany( 'DELETE FROM configs WHERE name = ?', [ (r[0],) for r in rows ] )
+			conn.executemany( 'INSERT INTO configs (name, type, value) VALUES (?, ?, ?)', rows )
+			conn.commit()
+		finally:
+			conn.close()
+		return
+
 	def keeps(self, topic, partition, data)->bool:
 		""" Whether a row passes the vessels-under-test filter (REQ.024)
 		Arguments

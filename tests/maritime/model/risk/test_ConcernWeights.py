@@ -121,14 +121,6 @@ class RecordingTestCase(unittest.TestCase):
 		engine	= Engine( uniform['cost'] )
 		self.assertEqual( LossMatrix(uniform).matrix(engine), LossMatrix(skewed).matrix(engine) )
 
-	def test_fact_rw_width_matches_the_schema(self):
-		doc	= minidom.parse( os.path.join(CONFIG, 'data', 'maritime.xml') )
-		for fact in doc.getElementsByTagName('Fact'):
-			if fact.getElementsByTagName('TableName')[0].childNodes[0].nodeValue == 'fact_rw':
-				fields	= [ m.getElementsByTagName('FieldName')[0].childNodes[0].nodeValue
-							for m in fact.getElementsByTagName('Measure') ]
-		self.assertEqual( fields[AUDIT_FIELDS:], ['report_time', 'concern', 'weight', 'declared'] )
-
 	def test_bad_weights_stop_the_examiner_at_load(self):
 		RiskExaminer	= source_module( 'rules.examiner.risk.RiskExaminer' ).RiskExaminer
 

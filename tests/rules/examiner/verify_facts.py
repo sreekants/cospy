@@ -13,7 +13,10 @@ SCHEMA		= os.path.join( ROOT, 'config', 'data', 'maritime.xml' )
 ZONES		= os.path.join( ROOT, 'config', 'examiner', 'zones.yaml' )
 TERRITORY	= os.path.join( ROOT, 'config', 'simulation', 'tk', 'turkeli', 'risk.yaml' )
 
-RO			= 'fact_concern'
+RO			= 'fact_ro'
+RL			= 'fact_rl'
+RW			= 'fact_rw'
+VA			= 'fact_violation_assessment'
 AUDIT		= ['creation_time', 'audit_status', 'case_id', 'tick']
 AUDIT_REGISTER	= 1000
 DERIVED		= ('id',)			# Columns the table adds that the schema does not declare
@@ -153,7 +156,7 @@ def main():
 				  + (f' - zones {outside}' if outside else '')
 				  + (f' - concerns {bad_concern}' if bad_concern else '') )
 
-	zero	= count( db, f'select count(*) from {RO} where penalty is null or penalty <= 0' )
+	zero	= count( db, f'select count(*) from {RL} where value is null or value <= 0' )
 	report.check( 'E1-X5', zero == 0, f'{zero} rows with no penalty' )
 
 	colreg	= count( db, f"select count(*) from {RO} where source = 'colreg'" )
@@ -172,8 +175,8 @@ def main():
 
 	if args.baseline:
 		base	= sqlite3.connect( f'file:{args.baseline}?mode=ro', uri=True )
-		mine	= dict( db.execute(f'select source||"/"||event, count(*) from {RO} group by 1') )
-		theirs	= dict( base.execute(f'select source||"/"||event, count(*) from {RO} group by 1') )
+		mine	= dict( db.execute(f'select source||"/"||clause, count(*) from {RO} group by 1') )
+		theirs	= dict( base.execute(f'select source||"/"||clause, count(*) from {RO} group by 1') )
 		report.check( 'E1-X8', mine == theirs, f'{sum(mine.values())} rows here, {sum(theirs.values())} in the baseline' )
 		for k in sorted( set(mine) | set(theirs) ):
 			if mine.get(k) != theirs.get(k):
@@ -181,34 +184,54 @@ def main():
 	else:
 		report.skip( 'E1-X8', 'no --baseline' )
 
-	matrix	= db.execute( f'select zone, concern, count(*), sum(penalty) from {RO} '
-						  f'group by zone, concern order by zone, concern' ).fetchall()
+	matrix	= db.execute( f'select o.zone, o.concern, count(*), sum(l.value) from {RO} o join {RL} l '
+						  f'on l.case_id = o.case_id and l.finding_id = o.finding_id '
+						  f'group by o.zone, o.concern order by o.zone, o.concern' ).fetchall()
 	report.check( 'E1-X9', len(matrix) > 0, f'Ro is one aggregation over {RO}, {len(matrix)} (zone, concern) cells' )
 	for zone, concern, n, total in matrix:
 		report.info( f'{zone:20} {concern:14} {n:>6} rows  {total:>12.1f}' )
 
-	# ---- Rb long form (REQ.018) ---------------------------------------------
-	print( 'Rb' )
-	rb		= count( db, 'select count(*) from fact_rb' )
-	if rb == 0:
-		report.skip( 'RB-X1', 'fact_rb is empty; nothing to reconcile' )
+	# ---- One finding, four tables (RQ0) -------------------------------------
+	print( 'Findings' )
+	if ro == 0:
+		report.skip( 'RO-X1', f'{RO} is empty' )
+		report.skip( 'RO-X2', f'{RO} is empty' )
 	else:
-		short	= db.execute( 'select report_time, vessel_id, count(distinct concern) from fact_rb '
-							  'group by report_time, vessel_id having count(distinct concern) != ?',
+		keys	= {}
+		for table in (RO, RL, RW, VA):
+			keys[table]	= set( db.execute(f'select case_id, finding_id from {table}') )
+		odd		= [ t for t in keys if keys[t] != keys[RO] ]
+		report.check( 'RO-X1', not odd, f'{len(keys[RO])} findings, each in {RO}, {RL}, {RW} and {VA}'
+					  + (f' - differs in {odd}' if odd else '') )
+
+		off		= count( db, f'select count(*) from {VA} a join {RL} l on l.case_id = a.case_id and l.finding_id = a.finding_id '
+							 f'join {RW} w on w.case_id = a.case_id and w.finding_id = a.finding_id '
+							 f'where abs(a.cost - l.value * w.value) > 1e-9 * max(1.0, abs(a.cost))' )
+		report.check( 'RO-X2', off == 0, f'violation assessment cost equals Rl x Ro x Rw'
+					  + (f' - {off} rows differ' if off else '') )
+
+	# ---- Rr long form (RQ0) -------------------------------------------------
+	print( 'Rr' )
+	rr		= count( db, 'select count(*) from fact_rr' )
+	if rr == 0:
+		report.skip( 'RR-X1', 'fact_rr is empty; nothing to reconcile' )
+	else:
+		short	= db.execute( 'select case_id, finding_id, count(distinct concern) from fact_rr '
+							  'group by case_id, finding_id having count(distinct concern) != ?',
 							  (len(vocabulary),) ).fetchall()
-		report.check( 'RB-X1', not short, f'every sample has a row for each of the {len(vocabulary)} concerns'
+		report.check( 'RR-X1', not short, f'every sample has a row for each of the {len(vocabulary)} concerns'
 					  + (f' - {len(short)} samples short' if short else '') )
 
-		concerns	= { c for (c,) in db.execute('select distinct concern from fact_rb') }
-		zones		= { z for (z,) in db.execute('select distinct zone from fact_rb') }
-		report.check( 'RB-X2', (concerns == vocabulary) and zones <= spatial,
-					  f'Rb indexed on the Ro basis: concerns {sorted(concerns)}, zones {sorted(zones)}' )
+		concerns	= { c for (c,) in db.execute('select distinct concern from fact_rr') }
+		zones		= { z for (z,) in db.execute('select distinct zone from fact_rr') }
+		report.check( 'RR-X2', (concerns == vocabulary) and zones <= spatial,
+					  f'Rr indexed on the Ro basis: concerns {sorted(concerns)}, zones {sorted(zones)}' )
 
-		off		= db.execute( 'select a.report_time, a.own_ship, a.cost, sum(b.exposure) '
-							  'from fact_risk_assessment a join fact_rb b '
-							  'on a.report_time = b.report_time and a.own_ship = b.vessel_id and a.case_id = b.case_id '
-							  'group by a.id having abs(a.cost - sum(b.exposure)) > 1e-6 * max(1.0, abs(a.cost))' ).fetchall()
-		report.check( 'RB-X3', not off, f'cost equals the sum of each sample\'s exposure'
+		off		= db.execute( 'select a.finding_id, a.rr, sum(b.value) '
+							  'from fact_risk_assessment a join fact_rr b '
+							  'on a.case_id = b.case_id and a.finding_id = b.finding_id '
+							  'group by a.id having abs(a.rr - sum(b.value)) > 1e-6 * max(1.0, abs(a.rr))' ).fetchall()
+		report.check( 'RR-X3', not off, f'Rr equals the sum of each assessment\'s concern rows'
 					  + (f' - {len(off)} samples differ' if off else '') )
 
 	# ---- Baselines on one row (REQ.020) -------------------------------------
@@ -217,7 +240,7 @@ def main():
 		report.skip( 'IR-X1', 'fact_risk_assessment is empty' )
 	else:
 		bad		= count( db, 'select count(*) from fact_risk_assessment where individual_risk is null '
-							 'or individual_risk < 0 or individual_risk > 1 or p_any_hazard is null or cost is null' )
+							 'or individual_risk < 0 or individual_risk > 1 or p_any_hazard is null or rr is null' )
 		report.check( 'IR-X1', bad == 0, f'EL, P_HE and IR on every one of {ra} rows, IR in [0, 1]'
 					  + (f' - {bad} rows fail' if bad else '') )
 

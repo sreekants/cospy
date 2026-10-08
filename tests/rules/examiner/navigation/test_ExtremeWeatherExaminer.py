@@ -7,10 +7,12 @@ import types, unittest
 import numpy as np
 
 from tests.maritime.model.risk.test_ConcernWeights import source_module, CONFIG
+from tests.examination import examine, examine_subjects, end_epoch
 
 import os
-from tests.maritime.model.zone.test_Ledger import Ctxt, Shape
+from tests.maritime.model.zone.test_Ledger import Ctxt, Shape, IPC
 from tests.maritime.model.zone.test_Practice import RuleContext
+from cos.core.kernel.Object import TERM_WRITE
 
 ExtremeWeatherExaminer	= source_module( 'rules.examiner.navigation.ExtremeWeatherExaminer' ).ExtremeWeatherExaminer
 VesselModel				= source_module( 'cos.behavior.motion.VesselModel' ).VesselModel
@@ -69,7 +71,7 @@ class ExtremeWeatherExaminerTestCase(unittest.TestCase):
 
 	def judge(self, ship, hs=None, visibility=CLEAR):
 		self.exam.waves	= [ Field(hs) ] if hs is not None else []
-		self.exam.evaluate( self.ctxt, Pass(ship, visibility) )
+		examine_subjects( self.exam, self.ctxt, Pass(ship, visibility) )
 
 	def rows(self, table):
 		return [ row[1] for row in self.ctxt.sim.data.rows if row[0] == table ]
@@ -95,7 +97,7 @@ class ExtremeWeatherExaminerTestCase(unittest.TestCase):
 		row	= self.capsize()
 		self.assertLess( row['p_capsize'], row['threshold'] )
 		self.assertEqual( (row['vessel'], row['zone'], row['wave_height'], row['wave_state']), (1, 'Turkeli.Strait', 0.3, 'calm') )
-		self.assertEqual( self.rows('fact_concern'), [] )
+		self.assertEqual( self.rows('fact_ro'), [] )
 
 	def test_no_wave_field_leaves_the_wave_unobserved(self):
 		self.judge( Ship(1) )
@@ -141,7 +143,62 @@ class ExtremeWeatherExaminerTestCase(unittest.TestCase):
 		self.judge( ship, 12.0, FOG )
 		row	= self.capsize()
 		self.assertGreaterEqual( row['p_capsize'], row['threshold'] )
-		self.assertEqual( [ r[4] for r in self.rows('fact_concern') ], ['weather.capsize_risk'] )
+		self.assertEqual( [ r[8] for r in self.rows('fact_ro') ], ['weather.capsize_risk'] )
+
+
+class Posts(IPC):
+	""" IPC stand-in that keeps what was pushed, and clears violations as the shared stub does """
+	def __init__(self):
+		IPC.__init__( self )
+		self.posts	= []
+	def push(self, topic, message, ctxt, payload, priority=None):
+		self.posts.append( (topic, message, payload) )
+		IPC.push( self, topic, message, ctxt, payload, priority )
+
+
+class CapsizeEpochTestCase(unittest.TestCase):
+	def setUp(self):
+		self.ctxt	= Ctxt( [Shape('Turkeli.Strait', 'STRAIT')] )
+		self.ctxt.ipc	= Posts()
+		self.exam	= ExtremeWeatherExaminer()
+		self.exam.id, self.exam.callbacks	= 'ExtremeWeather', {}
+		self.exam.setup( self.ctxt, {'zones': None, 'territory': None,
+									 'network': '$(CONFIG)/risk/capsize.model.xdsl',
+									 'bindings': '$(CONFIG)/risk/capsize.model.yaml'} )
+		self.exam.cache_shapes( self.ctxt )
+
+	def assess(self, risks):
+		""" Reports one P(capsize) per tick, ending each pass as the evaluator does """
+		ship	= Ship( 1 )
+		for capsize in risks:
+			self.exam.report( self.ctxt, ship, {}, capsize )
+			self.exam.end( self.ctxt, None )
+			self.ctxt.sim.advance( 1 )
+
+	def epochs(self):
+		return [ p for t, m, p in self.ctxt.ipc.posts if m == ExtremeWeatherExaminer.EPOCH_MESSAGE ]
+
+	def test_an_epoch_at_or_above_the_alarm_is_published_with_its_peak(self):
+		self.assess( [0.1, 0.3, 0.6, 0.4, 0.1] )
+		epochs	= self.epochs()
+		self.assertEqual( len(epochs), 1 )
+		self.assertEqual( epochs[0]['threshold'], 0.25 )
+		self.assertEqual( epochs[0]['zone'], 'Turkeli.Strait' )
+		self.assertEqual( (epochs[0]['epoch']['peak'], epochs[0]['epoch']['samples'], epochs[0]['epoch']['reason']), (0.6, 3, 'released') )
+
+	def test_findings_are_unchanged(self):
+		self.assess( [0.3]*3 + [0.1] )
+		self.assertEqual( [ r[1][8] for r in self.ctxt.sim.data.rows if r[0] == 'fact_ro' ], ['weather.capsize_risk'] )
+
+	def test_a_long_epoch_is_cut_at_ten_ticks(self):
+		self.assess( [0.3]*25 + [0.1] )
+		self.assertEqual( [ e['epoch']['reason'] for e in self.epochs() ], ['span', 'span', 'released'] )
+
+	def test_open_epochs_are_published_at_termination(self):
+		self.assess( [0.3]*3 )
+		self.ctxt.sim.advance( -1 )
+		self.exam.on_term( self.ctxt, TERM_WRITE )
+		self.assertEqual( [ e['epoch']['reason'] for e in self.epochs() ], ['stop'] )
 
 if __name__ == '__main__':
     unittest.main()

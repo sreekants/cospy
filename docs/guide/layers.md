@@ -71,7 +71,7 @@ name, since every class loaded from configuration lives in a file of the same na
 | `model/rule`, `model/zone` | 0.8k | `COLREG` and `InlandWaterRule`, the rule bases; the `ZoneAware` mixin, `ZoneRules`, `SpatialZones` |
 | `core/situation` | 0.3k | `MaritimeSituation` → `MaritimeEncounterSituation` / `MaritimeConductSituation`; `Maneuver`; encounter types |
 | `situation/*`, `conduct/*` | 0.8k | The monitors: crossing, head-on, give-way, overtaking, stand-on, traffic; collision, grounding, harbour, narrow channel, obstruction |
-| `regulation/colreg` | 0.5k | `Evaluator`, the service that drives monitors, rules and examiners; its `Resolver` and `API` |
+| `regulation/colreg` | 0.5k | `Evaluator`, the service that drives monitors and rules; its `Resolver` and `API` |
 | `regulation/{inland,internal}` | 0.2k | Zone rule classes used by local rules: harbour, inshore traffic, traffic lane, traffic separation scheme, waterway |
 | `behavior/vessels` | 0.8k | `PlannedVesselBehavior` and its subclasses (container ship, ferry, fishing vessel, yacht, …); `VesselManeuvers` |
 | `device/communication` | 1.1k | AIS, GPS, gyro and magnetic compasses, radar, echosounder |
@@ -81,7 +81,7 @@ name, since every class loaded from configuration lives in a file of the same na
 
 | Class | Why you need to know it |
 |---|---|
-| `maritime.regulation.colreg.Evaluator` | The one service that calls monitors, rules and examiners ([regulation.md](regulation.md#how-the-evaluator-drives-monitors-rules-and-examiners)) |
+| `maritime.regulation.colreg.Evaluator` | The service that calls monitors and rules; examiners act only on posted examinations ([regulation.md](regulation.md#how-the-evaluator-drives-monitors-rules-and-examiners)) |
 | `maritime.model.vessel.Vessel` | The vessel: identity, ship model, status (under way, anchored, aground) and its behaviours |
 | `maritime.model.vessel.Builder` | Reads `vessel.s3db`; filters vessels by `scenario=` tag against `TRAFFIC` |
 | `maritime.core.situation.MaritimeSituation` | Base of every monitor; posts situations to the rules and records `fact_…` rows |

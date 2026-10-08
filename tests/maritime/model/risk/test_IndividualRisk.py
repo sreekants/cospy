@@ -5,8 +5,9 @@
 import os, unittest
 
 from tests.maritime.model.risk.test_ConcernWeights import source_module, CONFIG
+from tests.examination import examine_pass
 from cos.subsystem.data.Partition import AUDIT_FIELDS
-from tests.maritime.model.risk.test_Rb import fields, report
+from tests.maritime.model.risk.test_Rr import fields, report
 from tests.maritime.model.risk.test_Encounters import examiner, Ctxt, RuleContext, Vessel
 
 RiskModel		= source_module( 'rules.examiner.risk.RiskModel' )
@@ -54,11 +55,11 @@ class RecordTestCase(unittest.TestCase):
 		values	= dict( zip(names, row) )
 		self.assertEqual( values['individual_risk'], 0.0123 )
 		self.assertEqual( values['p_any_hazard'], r['hazards']['any'] )
-		self.assertEqual( values['cost'], r['cost'] )
+		self.assertEqual( values['rr'], r['cost'] )
 
 	def test_assessment_uses_the_same_inference_as_cost(self):
 		exam	= examiner()
-		exam.evaluate( Ctxt(), RuleContext([Vessel(1, 0, 0), Vessel(2, 50, 0)]) )
+		examine_pass( exam, Ctxt(), RuleContext([Vessel(1, 0, 0), Vessel(2, 50, 0)]) )
 		r		= exam.reports[1]
 
 		engine	= RiskModel.load( NETWORK, RiskModel.HAZARDS )[1]

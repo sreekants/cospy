@@ -122,8 +122,9 @@ change even when no import changes.
 | `/Services/API/<Name>` | the remote services in `cos.core.service` (`config/api.yaml`) | tools, through the proxies in `cos.core.api` ([communication.md](communication.md)) |
 | `/Faculty/Situation/Maritime/…` | situation and conduct monitors (`maritime.situation`, `maritime.conduct`) | `Evaluator.monitor()` |
 | `/Faculty/Situation/Incident`, `/Faculty/Situation/Processors` | nothing in the current configuration | `Evaluator.monitor()`, as pre- and post-processing hooks |
+| `/Faculty/Situation/Practice/…` | practice faculties (`PracticeFaculty`, `EpochFaculty`; `config/rules.examiner.yaml`) | `PracticeEvaluator.evaluate()` |
 | `/Faculty/Regulation/Rules/…` | COLREG rules and local rules (`Rule`) | `Evaluator.evaluate()` |
-| `/Faculty/Regulation/Examiner/…` | examiners (`Examiner`) | `Evaluator.evaluate()`, in the same pass as the rules |
+| `/Faculty/Practice/Examiners/…` | examiners (`Examiner`) | no caller: each examines the `Examination`s posted under this path |
 | `/World/Land` | `LandBuilder` | the world's collision check, `LandResolver`, the evaluator, zone-aware examiners, `Map` |
 | `/World/Sea` | `SeaBuilder` (`cos` and `maritime`) | the evaluator, `SeaResolver`, zone rules and zone-aware examiners, inland rules, `Map` |
 | `/World/Sky` | `SkyBuilder` | `Environment` |

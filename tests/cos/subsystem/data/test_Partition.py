@@ -29,7 +29,7 @@ class PartitionTestCase(unittest.TestCase):
 
 	def test_row_carries_the_tick_and_a_utc_creation_time(self):
 		self.partition.add( utcnow(), 17, (17.0, 3.5) )
-		self.partition.flush( self.db )
+		self.partition.write( self.db, self.partition.take() )
 
 		row	= self.db.rows[0]
 		self.assertEqual( row['tick'], '17' )
@@ -42,7 +42,7 @@ class PartitionTestCase(unittest.TestCase):
 
 	def test_none_is_written_as_null(self):
 		self.partition.add( utcnow(), 3, (3.0, None) )
-		self.partition.flush( self.db )
+		self.partition.write( self.db, self.partition.take() )
 		self.assertIsNone( self.db.rows[0]['value'] )
 
 if __name__ == '__main__':

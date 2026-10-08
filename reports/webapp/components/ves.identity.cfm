@@ -5,7 +5,7 @@
 <script>
 COS.component('ves.identity', {
     code: 'V1', title: 'Vessel', hint: 'Which vessel this page is about.', vessel: true, static: true,
-    mock: function () { return { rows: [{ name: 'MOCK TRUE NORTH', imo: '9000003', settings: 'ship.model=$(CONFIG)/vehicle/ship/ferry.yaml' }] }; },
+    mock: function () { return { rows: [{ name: 'MOCK TRUE NORTH', imo: '9000003', settings: 'ship.model=$(CONFIG)/vehicle/ship/ferry.yaml', role: 'under test' }] }; },
     render: function (ctx, data) {
         var r = data.rows[0], m = /ship\.model=\S*\/([\w.-]+)\.yaml/.exec(r.settings || '');
         if (ctx.mode === 'live' && ctx.meta.imo_default && COS.state.get('imo', '0') === '0') COS.state.set({ imo: r.imo });
@@ -13,7 +13,7 @@ COS.component('ves.identity', {
         var cells = [
             ['Name', COS.esc(r.name)], ['IMO', COS.esc(r.imo)],
             ['Ship model', m ? COS.esc(m[1]) : miss('not in the register')],
-            ['Role', miss('not recorded — REQ.037-08')],
+            ['Role', r.role ? COS.esc(r.role) : miss('not recorded — REQ.037-08')],
             ['Length / draught', miss('not in the register')],
             ['', '<a href="' + COS.esc(COS.link('sim.cfm')) + '">← Back to the run</a>']
         ];

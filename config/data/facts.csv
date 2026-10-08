@@ -1226,22 +1226,71 @@ Approach,OwnShip,int,OwnShip,Own Ship
 Approach,TargetShip,int,TargetShip,Target Ship
 Approach,ReportTime,double,Report time,Time,
 Approach,Distance,double,Distance,Distance,
-Concern,CaseId,int,Scenario Key, Scenario hash key,
-Concern,Tick,int,Simulation tick the record was judged on,Simulation tick,
-Concern,ReportTime,double,Report time, Time,
-Concern,VesselId,int,Vessel IMO,Vessel IMO,
-Concern,Source,string,Producer family - examiner colreg or local,Source,
-Concern,Examiner,string,Examiner class or rule that raised the finding,Raised by,
-Concern,Event,string,Violation identifier,Event,
-Concern,Area,string,Innermost named map shape the vessel was in,Area,
-Concern,Zone,string,Spatial zone - the i index of Ro as in fact_rl,Zone,
-Concern,Concern,string,Cross-cutting concern - the j index of Ro as in fact_rl,Concern,
-Concern,Penalty,float,Penalty score from the scorecard,Penalty,
-Concern,Value,float,Quantity behind the violation,Value,
+Ro,CaseId,int,Scenario Key, Scenario hash key,
+Ro,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Ro,ReportTime,double,Simulated time of the finding or assessment,Time,s
+Ro,FindingId,int,Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding,Finding,
+Ro,EpisodeId,int,Primary episode of the finding,Episode,
+Ro,VesselId,int,Vessel IMO,Vessel IMO,
+Ro,Zone,string,Spatial zone the vessel was in,Zone,
+Ro,Concern,string,Cross-cutting concern,Concern,
+Ro,Value,float,Violation count of the finding - always 1,Value,
+Ro,Onset,double,Simulated time the condition began - empty on Rr,Onset,s
+Ro,Clause,string,Clause or event identifier - empty on Rr,Clause,
+Ro,Source,string,Producer family - colreg local or examiner - empty on Rr,Source,
+Rl,CaseId,int,Scenario Key, Scenario hash key,
+Rl,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Rl,ReportTime,double,Simulated time of the finding or assessment,Time,s
+Rl,FindingId,int,Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding,Finding,
+Rl,EpisodeId,int,Primary episode of the finding,Episode,
+Rl,VesselId,int,Vessel IMO,Vessel IMO,
+Rl,Zone,string,Spatial zone the vessel was in,Zone,
+Rl,Concern,string,Cross-cutting concern,Concern,
+Rl,Value,float,Clause penalty from the jurisdiction's score file,Value,USD
+Rl,Onset,double,Simulated time the condition began - empty on Rr,Onset,s
+Rl,Clause,string,Clause or event identifier - empty on Rr,Clause,
+Rl,Source,string,Producer family - colreg local or examiner - empty on Rr,Source,
+Rw,CaseId,int,Scenario Key, Scenario hash key,
+Rw,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Rw,ReportTime,double,Simulated time of the finding or assessment,Time,s
+Rw,FindingId,int,Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding,Finding,
+Rw,EpisodeId,int,Primary episode of the finding,Episode,
+Rw,VesselId,int,Vessel IMO,Vessel IMO,
+Rw,Zone,string,Spatial zone the vessel was in,Zone,
+Rw,Concern,string,Cross-cutting concern,Concern,
+Rw,Value,float,Optional clause weight from the score file - 1 when none is declared,Value,
+Rw,Onset,double,Simulated time the condition began - empty on Rr,Onset,s
+Rw,Clause,string,Clause or event identifier - empty on Rr,Clause,
+Rw,Source,string,Producer family - colreg local or examiner - empty on Rr,Source,
+Rr,CaseId,int,Scenario Key, Scenario hash key,
+Rr,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Rr,ReportTime,double,Simulated time of the finding or assessment,Time,s
+Rr,FindingId,int,Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding,Finding,
+Rr,EpisodeId,int,Primary episode of the finding,Episode,
+Rr,VesselId,int,Vessel IMO,Vessel IMO,
+Rr,Zone,string,Spatial zone the vessel was in,Zone,
+Rr,Concern,string,Cross-cutting concern,Concern,
+Rr,Value,float,The network's expected loss for this concern at one assessment,Value,USD
+Rr,Onset,double,Simulated time the condition began - empty on Rr,Onset,s
+Rr,Clause,string,Clause or event identifier - empty on Rr,Clause,
+Rr,Source,string,Producer family - colreg local or examiner - empty on Rr,Source,
+ViolationAssessment,CaseId,int,Scenario Key, Scenario hash key,
+ViolationAssessment,Tick,int,Simulation tick the record was judged on,Simulation tick,
+ViolationAssessment,ReportTime,double,Simulated time of the finding or assessment,Time,s
+ViolationAssessment,FindingId,int,Violation finding this row compounds,Finding,
+ViolationAssessment,EpisodeId,int,Primary episode of the finding,Episode,
+ViolationAssessment,VesselId,int,Vessel IMO,Vessel IMO,
+ViolationAssessment,Zone,string,Spatial zone the vessel was in,Zone,
+ViolationAssessment,Concern,string,Cross-cutting concern,Concern,
+ViolationAssessment,Clause,string,Clause or event identifier,Clause,
+ViolationAssessment,Source,string,Producer family - colreg local or examiner,Source,
+ViolationAssessment,Cost,float,Rl x Ro x Rw of this finding,Cost,USD
 RiskAssessment,CaseId,int,Scenario Key, Scenario hash key,
 RiskAssessment,Tick,int,Simulation tick the record was judged on,Simulation tick,
-RiskAssessment,ReportTime,double,Report time, Time,
-RiskAssessment,OwnShip,int,Vessel IMO,Vessel IMO,
+RiskAssessment,ReportTime,double,Simulated time of the finding or assessment,Time,s
+RiskAssessment,FindingId,int,Risk finding - one assessment - shared with its Rr rows,Finding,
+RiskAssessment,EpisodeId,int,Primary episode of the assessment,Episode,
+RiskAssessment,VesselId,int,Vessel IMO,Vessel IMO,
 RiskAssessment,Zone,string,Spatial zone the vessel was in,Zone,
 RiskAssessment,PCollision,float,Probability of collision,P(collision),
 RiskAssessment,PGrounding,float,Probability of grounding,P(grounding),
@@ -1249,33 +1298,36 @@ RiskAssessment,PCommsLoss,float,Probability of losing the AUV link,P(comms loss)
 RiskAssessment,PAnyHazard,float,Exact joint probability that any hazard occurs,P(any hazard),
 RiskAssessment,PSumHazard,float,Sum of the marginals - an upper bound kept for comparison,Sum of marginals,
 RiskAssessment,IndividualRisk,float,P(harm_to_humans = fatality) - individual risk of Kristensen et al. eq. (4) - not monetised,Individual risk,
-RiskAssessment,Cost,float,Instantaneous expected loss summed over Rl,Expected Loss,
-RiskAssessment,Increment,float,Survival-weighted amount added to the voyage total,Increment,
+RiskAssessment,Rr,float,Expected loss at this assessment - the sum of its Rr rows,Rr,USD
+RiskAssessment,Increment,float,Survival-weighted amount added to the running total,Increment,USD
 RiskAssessment,Survival,float,Probability of reaching this point without a hazardous event,Survival,
-RiskAssessment,Cumulative,float,Cumulative expected loss for the voyage,Cumulative Loss,
-RiskAssessment,ExposureBasis,string,How exposure accumulates - rate (per period T) or change (the previous change-only rule),Exposure basis,
+RiskAssessment,Cumulative,float,Survival-weighted path risk of the vessel in the run (Appendix F) - not Cr which is the sum of Rr,Path risk,USD
+RiskAssessment,Matrix,text,Network expected loss as a MATLAB literal - rows are zones and columns concerns in the order logged at startup,Loss matrix,USD
+RiskAssessment,ExposureBasis,string,How exposure accumulates - rate (per period T) or change,Exposure basis,
 RiskAssessment,ExposurePeriod,double,Reference period T of the network probabilities (rate basis),Exposure period,s
 RiskAssessment,ExposureDt,double,Simulated time since the vessel's previous assessment,Exposure interval,s
 RiskAssessment,Depth,double,Seabed depth beneath the vessel - the risk network's depth evidence,Depth,m
-RiskAssessment,DepthSource,string,measured off a map shape or nominal from the location or zone fallback (REQ.022),Depth source,
-Rw,CaseId,int,Scenario Key, Scenario hash key,
-Rw,Tick,int,Simulation tick the record was judged on,Simulation tick,
-Rw,ReportTime,double,Report time, Time,
-Rw,Concern,string,Cross-cutting concern - the j index of Rw,Concern,
-Rw,Weight,float,Normalised weight of the concern - weights sum to 1,Weight,
-Rw,Declared,float,Weight as declared in the territory risk file,Declared,
-Rb,CaseId,int,Scenario Key, Scenario hash key,
-Rb,Tick,int,Simulation tick the record was judged on,Simulation tick,
-Rb,ReportTime,double,Report time - the sample as in fact_risk_assessment, Time,
-Rb,VesselId,int,Vessel IMO,Vessel IMO,
-Rb,Zone,string,Spatial zone - the i index as in fact_concern,Zone,
-Rb,Concern,string,Cross-cutting concern - the j index as in fact_concern,Concern,
-Rb,Exposure,float,Expected loss this concern contributes to the sample,Exposure,USD
-Rl,CaseId,int,Scenario Key, Scenario hash key,
-Rl,Tick,int,Simulation tick the record was judged on,Simulation tick,
-Rl,ReportTime,double,Report time, Time,
-Rl,OwnShip,int,Vessel IMO,Vessel IMO,
-Rl,Matrix,string,Rl serialized as a MATLAB literal - rows are spatial zones and columns are concerns in the order logged at startup - all values USD,Rl,USD
+RiskAssessment,DepthSource,string,measured off a map shape or nominal from the location or zone fallback,Depth source,
+Episode,CaseId,int,Scenario Key, Scenario hash key,
+Episode,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Episode,ReportTime,double,Simulated time of the finding or assessment,Time,s
+Episode,EpisodeId,int,Episode identifier from EventId - with CaseId unique across a sweep,Episode,
+Episode,Kind,string,Kind of occurrence - encounter epoch violation voyage ...,Kind,
+Episode,Detector,string,Component that opened and closed the episode,Detector,
+Episode,VesselId,int,Vessel IMO,Vessel IMO,
+Episode,TargetId,int,Counterparty IMO - empty when none,Counterparty,
+Episode,StartTime,double,Simulated time the episode started,Start,s
+Episode,EndTime,double,Simulated time the episode ended,End,s
+Episode,Outcome,string,Outcome where the kind has one,Outcome,
+Clause,CaseId,int,Scenario Key, Scenario hash key,
+Clause,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Clause,ReportTime,double,Simulated time of the finding or assessment,Time,s
+Clause,Clause,string,Clause or event identifier,Clause,
+Clause,Source,string,Producer family - colreg local or examiner,Source,
+Clause,Concern,string,Cross-cutting concern the clause scores into,Concern,
+Clause,Penalty,float,Rl - penalty in the score file,Penalty,USD
+Clause,Weight,float,Rw - weight in the score file - 1 when none is declared,Weight,
+Clause,File,text,Score file the clause was loaded from,File,
 UnderTest,CaseId,int,Scenario Key, Scenario hash key,
 UnderTest,Tick,int,Simulation tick the record was judged on,Simulation tick,
 UnderTest,ReportTime,double,Report time,Time,
@@ -1312,3 +1364,11 @@ SimLog,Action,string,What was changed - e.g. exposure.period,Action,
 SimLog,Reason,string,Reason given with the request,Reason,
 SimLog,OldValue,double,Value before the change,Old value,
 SimLog,NewValue,double,Value after the change,New value,
+Territorial,CaseId,int,Scenario Key, Scenario hash key,
+Territorial,Tick,int,Simulation tick the record was judged on,Simulation tick,
+Territorial,ReportTime,double,Report time,Time,s
+Territorial,Regulation,string,Territorial regulation the clause belongs to,Regulation,
+Territorial,Clause,string,Clause ID,Clause identifier,
+Territorial,Penalty,float,Penalty from the score file - 0 when the clause is unpriced,Penalty,USD
+Territorial,Situation,string,Vessel in the situation,Situation description,
+Territorial,Info,string,Zone the vessel was in,Additional information,

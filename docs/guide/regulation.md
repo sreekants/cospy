@@ -105,7 +105,7 @@ computes. The paper calls resolvers *probes* into the simulated world.
 | Local rules | `$(SIMULATION)/rules.yaml`, per site | Every vessel inside the site's named zones | A priced row in `fact_concern` |
 | Examiners | `config/rules.examiner.yaml`, `config/rules.risk.yaml` | Specific concerns: approach, berthing, collision, grounding, lane discipline, weather, risk | Priced rows in `fact_concern`; the risk examiner writes its own tables |
 
-**Scorecards.** A local rule's `score.json` gives each clause a price, an event id such as
+**Scorecards.** A local rule's `score.yaml` gives each clause a price, an event id such as
 `Violation.DeepDraft` and, optionally, the vessels it applies to. The event id maps to a cross-cutting
 *concern* (safety, traffic, environmental, operational) in the `concerns:` block of
 `config/examiner/zones.yaml`; a scorecard naming an unmapped id stops the rule at load. COLREG rules have
@@ -134,25 +134,38 @@ vocabulary in resolvers and their prices in scorecards means a lawyer can read a
 add a term, and an analyst can change a price, each without touching the others' work.
 
 **In our example.** `WaterwayRule` loaded `turkeli.legata` for zones named `Turkeli*`, checked every
-vessel in them each time it ran, and priced *True North*'s broken DeepDraft clause from `score.json`:
+vessel in them each time it ran, and priced *True North*'s broken DeepDraft clause from `score.yaml`:
 30 rows, 1,000,000 each.
 
 ---
 
 ## How the evaluator drives monitors, rules and examiners
 
-The COLREG evaluator (`maritime.regulation.colreg.Evaluator`) is the one service that calls the
-faculties on this page. On each of its ticks it builds a fresh rule context, which holds the
-resolver, the world, the vessels and the API, and makes two kinds of pass:
+The COLREG evaluator (`maritime.regulation.colreg.Evaluator`) drives the monitors and the rules. On
+each of its ticks it builds a fresh rule context, which holds the resolver, the world, the vessels and
+the API, and makes two kinds of pass:
 
 | Pass | Timer | Calls | In order |
 |---|---|---|---|
-| `monitor()` | 0.5 s | every monitor under `/Faculty/Situation/…` | incident hooks, maritime situations and conduct, processor hooks |
-| `evaluate()` | the evaluator's `sample.frequency` | every faculty under `/Faculty/Regulation/…`, both rules and examiners | `begin` on all, then `evaluate` on all, then `end` on all |
+| `monitor()` | 0.5 s | every monitor under `/Faculty/Situation/Maritime/…` | incident hooks, maritime situations and conduct, processor hooks |
+| `evaluate()` | the evaluator's `sample.frequency` | every rule under `/Faculty/Regulation/Rules/…` | `begin` on all, then `evaluate` on all, then `end` on all |
 
-Examiners are therefore not a separate stage: they sit next to the rules in the object tree
-(`/Faculty/Regulation/Examiner/…`) and run in the same pass, each deciding for itself, through its
-own timer and preconditions, whether it has anything to score.
+Examiners are not driven at all. The practice evaluator (`maritime.practice.PracticeEvaluator`,
+`config/rules.examiner.yaml`) runs its own pass, with its own rule context and `sample.frequency`:
+
+1. Each **practice faculty** (`maritime.practice.PracticeFaculty`, one configured instance per
+   continuous check) observes the situations of its check: one per vessel under test, or one per
+   encounter reported by the monitors since the last pass. It adds each to the vessel's active
+   situations (`vessel.situations`), and when the situation ends posts it to
+   `/Faculty/Practice/Examiners` as an `Examination`: a `type`, a member of `ExaminationType`, and a
+   `body`, the situation.
+2. The evaluator delivers those examinations at once, within the pass. Every examiner listens under
+   `/Faculty/Practice/Examiners` and handles the types it declares; it examines nothing else.
+3. The **epoch faculty** (`maritime.practice.EpochFaculty`) runs last. Once an `EpochEpisode` of its
+   configured ticks has lasted, it posts it, and each examiner ends the periods it keeps open.
+4. The inspectors under `/Faculty/Practice/Inspectors` run `begin`, `evaluate` and `end`.
+
+A faculty never names an examiner, and an examiner never surveys the world on a pass of its own.
 
 ## How a term is resolved
 

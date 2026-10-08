@@ -13,6 +13,7 @@ from cos.model.environment.Weather import Weather
 from cos.model.environment.Actors import Actors
 from cos.model.environment.Scales import Scales
 from cos.model.environment.GeoReference import GeoReference
+from cos.subsystem.world.RunRecord import RunRecord
 
 class World(CompositeService):
 	def __init__(self):
@@ -60,6 +61,24 @@ class World(CompositeService):
 		speedup	= 'none' if self.scales.speedup is None else f'{self.scales.speedup:g}x'
 		ctxt.sim.log.info( 'World', f'Time scale: {self.scales.seconds_per_tick:g} simulated s per tick '
 									f'(speed-up {speedup}, delta_t {self.scales.dt:g} s)' )
+		self.record_run( ctxt )
+		return
+
+	def record_run(self, ctxt:Context):
+		""" Writes the run and its map into the BI store's configs table (REQ-048-02)
+		Arguments
+			ctxt -- Simulation context
+		"""
+		data	= ctxt.sim.objects.get( '/Services/Kernel/DataManager' )
+		if (data is None) or (data.storage is None):
+			ctxt.sim.log.warning( 'World', 'Run record not written: no BI store' )
+			return
+		try:
+			rows	= RunRecord.rows( ctxt, self.georef )
+			data.record_run( rows )
+			ctxt.sim.log.info( 'World', f'Run record: {len(rows)} configs row(s) in {data.storage}' )
+		except Exception as e:
+			ctxt.sim.log.error( 'World', f'Run record not written: {str(e)}' )
 		return
 
 	def on_start(self, ctxt:Context, config):

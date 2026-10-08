@@ -9,8 +9,9 @@ from maritime.model.zone.ZoneAwareness import ZoneAware
 from maritime.model.resolver.SeaResolver import SeaResolver
 from tests.maritime.model.zone.test_Ledger import Ctxt, Shape, Vessel, CONFIG
 from tests.maritime.model.zone.test_Practice import RuleContext as PracticeRuleContext
+from tests.examination import examine_subjects
 from tests.maritime.model.risk.test_ConcernWeights import source_module
-from tests.maritime.model.risk.test_Rb import fields, report
+from tests.maritime.model.risk.test_Rr import fields, report
 from maritime.model.zone.ZoneRules import ZoneRules
 from cos.subsystem.data.Partition import AUDIT_FIELDS
 
@@ -197,8 +198,8 @@ class FallbackFindingTestCase(unittest.TestCase):
 
 		vessel	= Vessel( 1 )
 		vessel.draft	= 25.0			# Aground in 5 m of water, afloat in 4 000 m
-		exam.evaluate( ctxt, PracticeRuleContext([vessel]) )
-		return [ row[1][4] for row in ctxt.sim.data.rows ]
+		examine_subjects( exam, ctxt, PracticeRuleContext([vessel]) )
+		return [ row[1][8] for row in ctxt.sim.data.rows if row[0] == 'fact_ro' ]
 
 	def test_grounding(self):
 		self.assertEqual( self.run_examiner(GroundingExaminer, Shape('Open', 'STRAIT')), [] )

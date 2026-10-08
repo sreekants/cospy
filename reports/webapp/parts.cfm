@@ -33,7 +33,8 @@
 <tr><td><code>ves.findings.log</code></td><td><a href="components/ves.findings.log.cfm">standalone</a> · <a href="components/ves.findings.log.cfm?mock=1">mock</a></td><td><a href="data/ves.findings.log.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.identity</code></td><td><a href="components/ves.identity.cfm">standalone</a> · <a href="components/ves.identity.cfm?mock=1">mock</a></td><td><a href="data/ves.identity.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.kpis</code></td><td><a href="components/ves.kpis.cfm">standalone</a> · <a href="components/ves.kpis.cfm?mock=1">mock</a></td><td><a href="data/ves.kpis.data.cfm">endpoint</a></td></tr>
-<tr><td><code>ves.map</code></td><td><a href="components/ves.map.cfm">standalone</a> · <a href="components/ves.map.cfm?mock=1">mock</a></td><td>—</td></tr>
+<tr><td><code>ves.map</code></td><td><a href="components/ves.map.cfm">standalone</a> · <a href="components/ves.map.cfm?mock=1">mock</a></td><td><a href="data/ves.map.data.cfm">endpoint</a></td></tr>
+<tr><td><code>ves.map.violations</code></td><td><a href="components/ves.map.violations.cfm">standalone</a> · <a href="components/ves.map.violations.cfm?mock=1">mock</a></td><td><a href="data/ves.map.violations.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.rb.byconcern</code></td><td><a href="components/ves.rb.byconcern.cfm">standalone</a> · <a href="components/ves.rb.byconcern.cfm?mock=1">mock</a></td><td><a href="data/ves.rb.byconcern.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.rb.matrix</code></td><td><a href="components/ves.rb.matrix.cfm">standalone</a> · <a href="components/ves.rb.matrix.cfm?mock=1">mock</a></td><td><a href="data/ves.rb.matrix.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.ro.matrix</code></td><td><a href="components/ves.ro.matrix.cfm">standalone</a> · <a href="components/ves.ro.matrix.cfm?mock=1">mock</a></td><td><a href="data/ves.ro.matrix.data.cfm">endpoint</a></td></tr>

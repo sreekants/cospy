@@ -12142,11 +12142,11 @@
 </Measures>
 
 </Fact>
-<Fact> <Name>Concern</Name>
+<Fact> <Name>Ro</Name>
  <Type>Fact</Type>
  <Display />
  <Description />
- <TableName>fact_concern</TableName>
+ <TableName>fact_ro</TableName>
  <Dimensions>Location.gps;Fleet.vessel</Dimensions>
 
  <Measures><Measure> <Name>CreationTime</Name>
@@ -12180,8 +12180,22 @@
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
- <Description>Report time</Description>
+ <Description>Simulated time of the finding or assessment</Description>
  <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>FindingId</Name>
+ <Type>int</Type>
+ <Display>Finding</Display>
+ <Description>Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding</Description>
+ <FieldName>finding_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>EpisodeId</Name>
+ <Type>int</Type>
+ <Display>Episode</Display>
+ <Description>Primary episode of the finding</Description>
+ <FieldName>episode_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>VesselId</Name>
@@ -12191,61 +12205,472 @@
  <FieldName>vessel_id</FieldName>
  <Unit />
 </Measure>
-<Measure> <Name>Source</Name>
- <Type>string</Type>
- <Display>Source</Display>
- <Description>Producer family - examiner colreg or local</Description>
- <FieldName>source</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Examiner</Name>
- <Type>string</Type>
- <Display>Raised by</Display>
- <Description>Examiner class or rule that raised the finding</Description>
- <FieldName>examiner</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Event</Name>
- <Type>string</Type>
- <Display>Event</Display>
- <Description>Violation identifier</Description>
- <FieldName>event</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Area</Name>
- <Type>string</Type>
- <Display>Area</Display>
- <Description>Innermost named map shape the vessel was in</Description>
- <FieldName>area</FieldName>
- <Unit />
-</Measure>
 <Measure> <Name>Zone</Name>
  <Type>string</Type>
  <Display>Zone</Display>
- <Description>Spatial zone - the i index of Ro as in fact_rl</Description>
+ <Description>Spatial zone the vessel was in</Description>
  <FieldName>zone</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Concern</Name>
  <Type>string</Type>
  <Display>Concern</Display>
- <Description>Cross-cutting concern - the j index of Ro as in fact_rl</Description>
+ <Description>Cross-cutting concern</Description>
  <FieldName>concern</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Penalty</Name>
- <Type>float</Type>
- <Display>Penalty</Display>
- <Description>Penalty score from the scorecard</Description>
- <FieldName>penalty</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Value</Name>
  <Type>float</Type>
  <Display>Value</Display>
- <Description>Quantity behind the violation</Description>
+ <Description>Violation count of the finding - always 1</Description>
  <FieldName>value</FieldName>
  <Unit />
+</Measure>
+<Measure> <Name>Onset</Name>
+ <Type>double</Type>
+ <Display>Onset</Display>
+ <Description>Simulated time the condition began - empty on Rr</Description>
+ <FieldName>onset</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause</Display>
+ <Description>Clause or event identifier - empty on Rr</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Producer family - colreg local or examiner - empty on Rr</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Rl</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_rl</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Simulated time of the finding or assessment</Description>
+ <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>FindingId</Name>
+ <Type>int</Type>
+ <Display>Finding</Display>
+ <Description>Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding</Description>
+ <FieldName>finding_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>EpisodeId</Name>
+ <Type>int</Type>
+ <Display>Episode</Display>
+ <Description>Primary episode of the finding</Description>
+ <FieldName>episode_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone the vessel was in</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Value</Name>
+ <Type>float</Type>
+ <Display>Value</Display>
+ <Description>Clause penalty from the jurisdiction&apos;s score file</Description>
+ <FieldName>value</FieldName>
+ <Unit>USD</Unit>
+</Measure>
+<Measure> <Name>Onset</Name>
+ <Type>double</Type>
+ <Display>Onset</Display>
+ <Description>Simulated time the condition began - empty on Rr</Description>
+ <FieldName>onset</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause</Display>
+ <Description>Clause or event identifier - empty on Rr</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Producer family - colreg local or examiner - empty on Rr</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Rw</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_rw</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Simulated time of the finding or assessment</Description>
+ <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>FindingId</Name>
+ <Type>int</Type>
+ <Display>Finding</Display>
+ <Description>Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding</Description>
+ <FieldName>finding_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>EpisodeId</Name>
+ <Type>int</Type>
+ <Display>Episode</Display>
+ <Description>Primary episode of the finding</Description>
+ <FieldName>episode_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone the vessel was in</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Value</Name>
+ <Type>float</Type>
+ <Display>Value</Display>
+ <Description>Optional clause weight from the score file - 1 when none is declared</Description>
+ <FieldName>value</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Onset</Name>
+ <Type>double</Type>
+ <Display>Onset</Display>
+ <Description>Simulated time the condition began - empty on Rr</Description>
+ <FieldName>onset</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause</Display>
+ <Description>Clause or event identifier - empty on Rr</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Producer family - colreg local or examiner - empty on Rr</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Rr</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_rr</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Simulated time of the finding or assessment</Description>
+ <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>FindingId</Name>
+ <Type>int</Type>
+ <Display>Finding</Display>
+ <Description>Finding identifier from EventId - with CaseId unique across a sweep - shared by the rows of one finding</Description>
+ <FieldName>finding_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>EpisodeId</Name>
+ <Type>int</Type>
+ <Display>Episode</Display>
+ <Description>Primary episode of the finding</Description>
+ <FieldName>episode_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone the vessel was in</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Value</Name>
+ <Type>float</Type>
+ <Display>Value</Display>
+ <Description>The network&apos;s expected loss for this concern at one assessment</Description>
+ <FieldName>value</FieldName>
+ <Unit>USD</Unit>
+</Measure>
+<Measure> <Name>Onset</Name>
+ <Type>double</Type>
+ <Display>Onset</Display>
+ <Description>Simulated time the condition began - empty on Rr</Description>
+ <FieldName>onset</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause</Display>
+ <Description>Clause or event identifier - empty on Rr</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Producer family - colreg local or examiner - empty on Rr</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>ViolationAssessment</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_violation_assessment</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Simulated time of the finding or assessment</Description>
+ <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>FindingId</Name>
+ <Type>int</Type>
+ <Display>Finding</Display>
+ <Description>Violation finding this row compounds</Description>
+ <FieldName>finding_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>EpisodeId</Name>
+ <Type>int</Type>
+ <Display>Episode</Display>
+ <Description>Primary episode of the finding</Description>
+ <FieldName>episode_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Zone</Name>
+ <Type>string</Type>
+ <Display>Zone</Display>
+ <Description>Spatial zone the vessel was in</Description>
+ <FieldName>zone</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Concern</Name>
+ <Type>string</Type>
+ <Display>Concern</Display>
+ <Description>Cross-cutting concern</Description>
+ <FieldName>concern</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause</Display>
+ <Description>Clause or event identifier</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Producer family - colreg local or examiner</Description>
+ <FieldName>source</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Cost</Name>
+ <Type>float</Type>
+ <Display>Cost</Display>
+ <Description>Rl x Ro x Rw of this finding</Description>
+ <FieldName>cost</FieldName>
+ <Unit>USD</Unit>
 </Measure>
 </Measures>
 
@@ -12288,15 +12713,29 @@
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
- <Description>Report time</Description>
+ <Description>Simulated time of the finding or assessment</Description>
  <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>FindingId</Name>
+ <Type>int</Type>
+ <Display>Finding</Display>
+ <Description>Risk finding - one assessment - shared with its Rr rows</Description>
+ <FieldName>finding_id</FieldName>
  <Unit />
 </Measure>
-<Measure> <Name>OwnShip</Name>
+<Measure> <Name>EpisodeId</Name>
+ <Type>int</Type>
+ <Display>Episode</Display>
+ <Description>Primary episode of the assessment</Description>
+ <FieldName>episode_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
  <Type>int</Type>
  <Display>Vessel IMO</Display>
  <Description>Vessel IMO</Description>
- <FieldName>own_ship</FieldName>
+ <FieldName>vessel_id</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Zone</Name>
@@ -12348,19 +12787,19 @@
  <FieldName>individual_risk</FieldName>
  <Unit />
 </Measure>
-<Measure> <Name>Cost</Name>
+<Measure> <Name>Rr</Name>
  <Type>float</Type>
- <Display>Expected Loss</Display>
- <Description>Instantaneous expected loss summed over Rl</Description>
- <FieldName>cost</FieldName>
- <Unit />
+ <Display>Rr</Display>
+ <Description>Expected loss at this assessment - the sum of its Rr rows</Description>
+ <FieldName>rr</FieldName>
+ <Unit>USD</Unit>
 </Measure>
 <Measure> <Name>Increment</Name>
  <Type>float</Type>
  <Display>Increment</Display>
- <Description>Survival-weighted amount added to the voyage total</Description>
+ <Description>Survival-weighted amount added to the running total</Description>
  <FieldName>increment</FieldName>
- <Unit />
+ <Unit>USD</Unit>
 </Measure>
 <Measure> <Name>Survival</Name>
  <Type>float</Type>
@@ -12371,15 +12810,22 @@
 </Measure>
 <Measure> <Name>Cumulative</Name>
  <Type>float</Type>
- <Display>Cumulative Loss</Display>
- <Description>Cumulative expected loss for the voyage</Description>
+ <Display>Path risk</Display>
+ <Description>Survival-weighted path risk of the vessel in the run (Appendix F) - not Cr which is the sum of Rr</Description>
  <FieldName>cumulative</FieldName>
- <Unit />
+ <Unit>USD</Unit>
+</Measure>
+<Measure> <Name>Matrix</Name>
+ <Type>text</Type>
+ <Display>Loss matrix</Display>
+ <Description>Network expected loss as a MATLAB literal - rows are zones and columns concerns in the order logged at startup</Description>
+ <FieldName>matrix</FieldName>
+ <Unit>USD</Unit>
 </Measure>
 <Measure> <Name>ExposureBasis</Name>
  <Type>string</Type>
  <Display>Exposure basis</Display>
- <Description>How exposure accumulates - rate (per period T) or change (the previous change-only rule)</Description>
+ <Description>How exposure accumulates - rate (per period T) or change</Description>
  <FieldName>exposure_basis</FieldName>
  <Unit />
 </Measure>
@@ -12407,18 +12853,119 @@
 <Measure> <Name>DepthSource</Name>
  <Type>string</Type>
  <Display>Depth source</Display>
- <Description>measured off a map shape or nominal from the location or zone fallback (REQ.022)</Description>
+ <Description>measured off a map shape or nominal from the location or zone fallback</Description>
  <FieldName>depth_source</FieldName>
  <Unit />
 </Measure>
 </Measures>
 
 </Fact>
-<Fact> <Name>Rw</Name>
+<Fact> <Name>Episode</Name>
  <Type>Fact</Type>
  <Display />
  <Description />
- <TableName>fact_rw</TableName>
+ <TableName>fact_episode</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Simulated time of the finding or assessment</Description>
+ <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>EpisodeId</Name>
+ <Type>int</Type>
+ <Display>Episode</Display>
+ <Description>Episode identifier from EventId - with CaseId unique across a sweep</Description>
+ <FieldName>episode_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Kind</Name>
+ <Type>string</Type>
+ <Display>Kind</Display>
+ <Description>Kind of occurrence - encounter epoch violation voyage ...</Description>
+ <FieldName>kind</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Detector</Name>
+ <Type>string</Type>
+ <Display>Detector</Display>
+ <Description>Component that opened and closed the episode</Description>
+ <FieldName>detector</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>VesselId</Name>
+ <Type>int</Type>
+ <Display>Vessel IMO</Display>
+ <Description>Vessel IMO</Description>
+ <FieldName>vessel_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>TargetId</Name>
+ <Type>int</Type>
+ <Display>Counterparty</Display>
+ <Description>Counterparty IMO - empty when none</Description>
+ <FieldName>target_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>StartTime</Name>
+ <Type>double</Type>
+ <Display>Start</Display>
+ <Description>Simulated time the episode started</Description>
+ <FieldName>start_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>EndTime</Name>
+ <Type>double</Type>
+ <Display>End</Display>
+ <Description>Simulated time the episode ended</Description>
+ <FieldName>end_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Outcome</Name>
+ <Type>string</Type>
+ <Display>Outcome</Display>
+ <Description>Outcome where the kind has one</Description>
+ <FieldName>outcome</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Clause</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_clause</TableName>
  <Dimensions>Location.gps</Dimensions>
 
  <Measures><Measure> <Name>CreationTime</Name>
@@ -12452,162 +12999,51 @@
 <Measure> <Name>ReportTime</Name>
  <Type>double</Type>
  <Display>Time</Display>
- <Description>Report time</Description>
+ <Description>Simulated time of the finding or assessment</Description>
  <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause</Display>
+ <Description>Clause or event identifier</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Source</Name>
+ <Type>string</Type>
+ <Display>Source</Display>
+ <Description>Producer family - colreg local or examiner</Description>
+ <FieldName>source</FieldName>
  <Unit />
 </Measure>
 <Measure> <Name>Concern</Name>
  <Type>string</Type>
  <Display>Concern</Display>
- <Description>Cross-cutting concern - the j index of Rw</Description>
+ <Description>Cross-cutting concern the clause scores into</Description>
  <FieldName>concern</FieldName>
  <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty</Display>
+ <Description>Rl - penalty in the score file</Description>
+ <FieldName>penalty</FieldName>
+ <Unit>USD</Unit>
 </Measure>
 <Measure> <Name>Weight</Name>
  <Type>float</Type>
  <Display>Weight</Display>
- <Description>Normalised weight of the concern - weights sum to 1</Description>
+ <Description>Rw - weight in the score file - 1 when none is declared</Description>
  <FieldName>weight</FieldName>
  <Unit />
 </Measure>
-<Measure> <Name>Declared</Name>
- <Type>float</Type>
- <Display>Declared</Display>
- <Description>Weight as declared in the territory risk file</Description>
- <FieldName>declared</FieldName>
+<Measure> <Name>File</Name>
+ <Type>text</Type>
+ <Display>File</Display>
+ <Description>Score file the clause was loaded from</Description>
+ <FieldName>file</FieldName>
  <Unit />
-</Measure>
-</Measures>
-
-</Fact>
-<Fact> <Name>Rb</Name>
- <Type>Fact</Type>
- <Display />
- <Description />
- <TableName>fact_rb</TableName>
- <Dimensions>Location.gps;Fleet.vessel</Dimensions>
-
- <Measures><Measure> <Name>CreationTime</Name>
- <Type>time</Type>
- <Display>Creation time</Display>
- <Description>Creation time</Description>
- <FieldName>creation_time</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>AuditStatus</Name>
- <Type>int</Type>
- <Display>Audit status</Display>
- <Description>Audit status</Description>
- <FieldName>audit_status</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>CaseId</Name>
- <Type>int</Type>
- <Display>Scenario hash key</Display>
- <Description>Scenario Key</Description>
- <FieldName>case_id</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Tick</Name>
- <Type>int</Type>
- <Display>Simulation tick</Display>
- <Description>Simulation tick the record was judged on</Description>
- <FieldName>tick</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>ReportTime</Name>
- <Type>double</Type>
- <Display>Time</Display>
- <Description>Report time - the sample as in fact_risk_assessment</Description>
- <FieldName>report_time</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>VesselId</Name>
- <Type>int</Type>
- <Display>Vessel IMO</Display>
- <Description>Vessel IMO</Description>
- <FieldName>vessel_id</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Zone</Name>
- <Type>string</Type>
- <Display>Zone</Display>
- <Description>Spatial zone - the i index as in fact_concern</Description>
- <FieldName>zone</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Concern</Name>
- <Type>string</Type>
- <Display>Concern</Display>
- <Description>Cross-cutting concern - the j index as in fact_concern</Description>
- <FieldName>concern</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Exposure</Name>
- <Type>float</Type>
- <Display>Exposure</Display>
- <Description>Expected loss this concern contributes to the sample</Description>
- <FieldName>exposure</FieldName>
- <Unit>USD</Unit>
-</Measure>
-</Measures>
-
-</Fact>
-<Fact> <Name>Rl</Name>
- <Type>Fact</Type>
- <Display />
- <Description />
- <TableName>fact_rl</TableName>
- <Dimensions>Location.gps;Fleet.vessel</Dimensions>
-
- <Measures><Measure> <Name>CreationTime</Name>
- <Type>time</Type>
- <Display>Creation time</Display>
- <Description>Creation time</Description>
- <FieldName>creation_time</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>AuditStatus</Name>
- <Type>int</Type>
- <Display>Audit status</Display>
- <Description>Audit status</Description>
- <FieldName>audit_status</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>CaseId</Name>
- <Type>int</Type>
- <Display>Scenario hash key</Display>
- <Description>Scenario Key</Description>
- <FieldName>case_id</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Tick</Name>
- <Type>int</Type>
- <Display>Simulation tick</Display>
- <Description>Simulation tick the record was judged on</Description>
- <FieldName>tick</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>ReportTime</Name>
- <Type>double</Type>
- <Display>Time</Display>
- <Description>Report time</Description>
- <FieldName>report_time</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>OwnShip</Name>
- <Type>int</Type>
- <Display>Vessel IMO</Display>
- <Description>Vessel IMO</Description>
- <FieldName>own_ship</FieldName>
- <Unit />
-</Measure>
-<Measure> <Name>Matrix</Name>
- <Type>string</Type>
- <Display>Rl</Display>
- <Description>Rl serialized as a MATLAB literal - rows are spatial zones and columns are concerns in the order logged at startup - all values USD</Description>
- <FieldName>matrix</FieldName>
- <Unit>USD</Unit>
 </Measure>
 </Measures>
 
@@ -12931,6 +13367,86 @@
  <Display>New value</Display>
  <Description>Value after the change</Description>
  <FieldName>new_value</FieldName>
+ <Unit />
+</Measure>
+</Measures>
+
+</Fact>
+<Fact> <Name>Territorial</Name>
+ <Type>Fact</Type>
+ <Display />
+ <Description />
+ <TableName>fact_territorial</TableName>
+ <Dimensions>Location.gps;Fleet.vessel</Dimensions>
+
+ <Measures><Measure> <Name>CreationTime</Name>
+ <Type>time</Type>
+ <Display>Creation time</Display>
+ <Description>Creation time</Description>
+ <FieldName>creation_time</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>AuditStatus</Name>
+ <Type>int</Type>
+ <Display>Audit status</Display>
+ <Description>Audit status</Description>
+ <FieldName>audit_status</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>CaseId</Name>
+ <Type>int</Type>
+ <Display>Scenario hash key</Display>
+ <Description>Scenario Key</Description>
+ <FieldName>case_id</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Tick</Name>
+ <Type>int</Type>
+ <Display>Simulation tick</Display>
+ <Description>Simulation tick the record was judged on</Description>
+ <FieldName>tick</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>ReportTime</Name>
+ <Type>double</Type>
+ <Display>Time</Display>
+ <Description>Report time</Description>
+ <FieldName>report_time</FieldName>
+ <Unit>s</Unit>
+</Measure>
+<Measure> <Name>Regulation</Name>
+ <Type>string</Type>
+ <Display>Regulation</Display>
+ <Description>Territorial regulation the clause belongs to</Description>
+ <FieldName>regulation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Clause</Name>
+ <Type>string</Type>
+ <Display>Clause identifier</Display>
+ <Description>Clause ID</Description>
+ <FieldName>clause</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Penalty</Name>
+ <Type>float</Type>
+ <Display>Penalty</Display>
+ <Description>Penalty from the score file - 0 when the clause is unpriced</Description>
+ <FieldName>penalty</FieldName>
+ <Unit>USD</Unit>
+</Measure>
+<Measure> <Name>Situation</Name>
+ <Type>string</Type>
+ <Display>Situation description</Display>
+ <Description>Vessel in the situation</Description>
+ <FieldName>situation</FieldName>
+ <Unit />
+</Measure>
+<Measure> <Name>Info</Name>
+ <Type>string</Type>
+ <Display>Additional information</Display>
+ <Description>Zone the vessel was in</Description>
+ <FieldName>info</FieldName>
  <Unit />
 </Measure>
 </Measures>

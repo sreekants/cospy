@@ -41,7 +41,7 @@ docs/guide/
 ├── sweeps.md            from one run to a thousand: scenario generation, case identity, merging
 ├── synthesis.md         levels and timescales · the parts compared · combinations · many waters
 ├── layers.md            src/ package by package: sizes, key classes, layering and naming rules
-├── support.md           config/, templates/, tests/, tools/, samples/, idl/, papers/
+├── support.md           config/, templates/, tests/, tools/, samples/, idl/
 ├── extending.md         how to add an examiner, a rule, a resolver, a behaviour or a location
 ├── scaffolding.md       what exists only as a stub, and what is not wired in
 ├── glossary.md          every term, and the four words that mean more than one thing
@@ -142,7 +142,6 @@ A module existing is not evidence that a feature exists. See [`scaffolding.md`](
 | `tools/` | Location and weather generators (`mapping/`), database utilities (`dbtools/`), a rule evaluator (`colreg/`) |
 | `idl/` | Interface contracts for the remote API, one `.idl` per service |
 | `samples/` | Standalone examples: a minimal simulation (`minsim`) and an OpenBridge conning-display prototype |
-| `papers/` | The research the platform serves: the ER 2024 paper and current work |
 | `docs/` | This guide, the tools' man pages (`docs/tools/`), taxonomies, references, and the generated API pages (`mkdocs`) |
 | `build/` | Run output: the system log and metrics databases |
 
@@ -173,7 +172,6 @@ Details of each are in [`support.md`](support.md).
 
 | Subject | Location |
 |---|---|
-| Design and research context | `papers/reference/ER2024__Safety_Assurances_in_Autonomous_Vessels.pdf` |
 | Kernel, runner, boot loader | `src/cos/core/kernel`, `src/cos/core/simulation` |
 | Subsystems | `src/cos/subsystem` |
 | World building, weather | `src/cos/model`, `config/land.yaml`, `sea.yaml`, `sky.yaml`, `weather.yaml` |
@@ -194,9 +192,8 @@ Details of each are in [`support.md`](support.md).
 
 | For | Read |
 |---|---|
-| The research this platform was built for | Sreedharan, Ramachandran, Røsæg and Rokseth, *Safety Assurances in Autonomous Vessels* (ER 2024), `papers/reference/` |
+| The research this platform was built for | Sreedharan, Ramachandran, Røsæg and Rokseth, *Safety Assurances in Autonomous Vessels* (ER 2024) |
 | The rule language, Legata | Sreedharan et al., *Legata*, CS&Law 2025 |
-| The risk formalism used in current work | `papers/IEEE-Access/DEFINITIONS.md` |
 | Building a location: land, sea, vessels | [`MAPGEN.md`](../../tools/mapping/MAPGEN.md), [`SHIPGEN.md`](../../tools/mapping/SHIPGEN.md) |
 | Generating weather | [`WEATHERGEN.md`](../../tools/mapping/WEATHERGEN.md) |
 | Running the programs | the man pages for [coslaunch](../tools/coslaunch.md), [cviz](../tools/cviz.md), [costopic](../tools/costopic.md), [cosservice](../tools/cosservice.md) |

@@ -91,7 +91,7 @@ is fog. The traffic level is `hdta`, high density.
    Legata in `rule/turkeli.legata`. One clause says a vessel in the zone named `Turkeli.TSS.SpeedZone1`
    must have a draft under 10. *Draft* is how deep the hull sits in the water; deep ships are
    restricted in the strait. *True North* entered that zone, and the clause failed.
-7. **Price.** The site's scorecard, `rule/score.json`, prices a broken `Turkeli.Bosphorous.DeepDraft`
+7. **Price.** The site's scorecard, `rule/score.yaml`, prices a broken `Turkeli.Bosphorous.DeepDraft`
    clause at 1,000,000 under the concern `Violation.DeepDraft`, for this vessel only.
 8. **Record.** The rule hands the data manager a row for `fact_concern`, the one table that holds
    `Ro`: the vessel's IMO number (9627837), the rule and clause that fired, the map area, the spatial
@@ -147,6 +147,18 @@ Startup then runs in a fixed order, like the run levels of a computer's operatin
 
 Shutdown is the same in reverse: run levels 5 down to 1 (`on_term`), then modules and subsystems stop
 (`on_stop`), and the data manager writes whatever it still holds.
+
+Every `on_term` call comes before the first `on_stop`. Modules receive their run levels negated, -5
+first and -1 last. The data manager is a module loaded first, so it writes out in its own `on_stop`
+before any other module stops: a module's last rows belong in `on_term`, never in `on_stop`.
+
+| Run level | Constant | What modules do |
+|---|---|---|
+| -5 | `TERM_WRITE` | Write their last rows and posts: open epochs, encounters and approaches |
+| -1 | `TERM_CLEAR` | Clearing houses empty their queues: the `ViolationInspector` writes `fact_concern` |
+
+On abort (`Simulation.abort()`), the data manager writes out before the kernel stops, so rows written
+during shutdown are lost.
 
 **Stepping.** The runner calls `on_timer` on every service registered under `/Services`, then sleeps
 30 ms, and repeats. `RunCycles` in `[ProcessManager]` sets how many steps a run lasts. The default,

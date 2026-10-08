@@ -375,6 +375,42 @@
         return inst;
     };
 
+    /* Map frame at equal ground scale: the box height follows its width, so a map is never stretched.
+       pts are [lon, lat]; returns the box height, the grid and the axis ranges. */
+    COS.mapFrame = function (box, pts, opts) {
+        var o = Object.assign({ left: 88, right: 32, top: 36, bottom: 40, min: 240, max: 640, pad: 0.1 }, opts || {});
+        var xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; });
+        var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+        var k = Math.cos((y0 + y1) / 2 * Math.PI / 180);
+        var gx = Math.max((x1 - x0) * k, 1e-5) * (1 + 2 * o.pad), gy = Math.max(y1 - y0, 1e-5) * (1 + 2 * o.pad);
+        var w = Math.max(box.clientWidth, 200) - o.left - o.right, h = w * gy / gx;
+        var lo = o.min - o.top - o.bottom, hi = o.max - o.top - o.bottom;
+        if (h > hi) { h = hi; gx = gy * w / h; }		/* too tall: widen the longitude span */
+        else if (h < lo) { h = lo; gy = gx * h / w; }	/* too flat: widen the latitude span */
+        var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+        return { height: Math.round(h + o.top + o.bottom), grid: { left: o.left, right: o.right, top: o.top, bottom: o.bottom },
+                 x: [cx - gx / k / 2, cx + gx / k / 2], y: [cy - gy / 2, cy + gy / 2] };
+    };
+
+    /* Redraws a map with its latest redraw function when its box changes width (a tab shown, a window resized) */
+    COS.mapWatch = function (box, redraw) {
+        box.__mapRedraw = redraw;
+        if (box.__mapWatch || !window.ResizeObserver) return;
+        var last = box.clientWidth;
+        box.__mapWatch = new ResizeObserver(function () {
+            var w = box.clientWidth;
+            if (w && Math.abs(w - last) > 2) { last = w; box.__mapRedraw(); }
+        });
+        box.__mapWatch.observe(box);
+    };
+
+    /* Sets a map chart's height after COS.chart, which sizes a box only when it creates the chart */
+    COS.mapHeight = function (inst, box, height) {
+        if (!inst || box.style.height === height + 'px') return;
+        box.style.height = height + 'px';
+        inst.resize({ width: box.clientWidth, height: height });
+    };
+
     COS.axis = function (name, extra) {
         return Object.assign({
             name: name, nameLocation: 'middle', nameGap: 44,

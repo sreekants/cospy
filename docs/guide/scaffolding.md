@@ -25,7 +25,7 @@ nothing hands a situation to never fails, whatever happens at sea
 
 ## Examiners with no evaluation
 
-Eight of the 18 examiners are stubs whose `evaluate` returns without doing anything:
+Eight of the examiners are stubs that declare no examination type, so they examine nothing:
 
 | Examiner | Package |
 |---|---|
@@ -34,7 +34,7 @@ Eight of the 18 examiners are stubs whose `evaluate` returns without doing anyth
 | `CustomsExaminer`, `ZoneViolationExaminer` | `rules/examiner/security` |
 
 Seven of them are the same 24-line template with a different name. All are listed in
-`config/rules.examiner.yaml`, so eight stub examiners load and run in every evaluation pass, and record
+`config/rules.examiner.yaml`, so eight stub examiners load, receive every examination, and record
 nothing. `TestInspector`, once a ninth stub here, is now an inspector (`rules/assurance`).
 
 ## Empty manifests

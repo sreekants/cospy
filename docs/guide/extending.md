@@ -119,16 +119,17 @@ Local rules are site law: they apply to every vessel inside the site's named zon
    Use only terms a resolver provides. The own-ship terms in use today include `OS.Velocity`,
    `OS.Draft`, `OS.Cargo` and `OS.Weight`; zone terms take the form `(OS,<ZoneType>).Name`.
 
-2. **Price it** in the site's `rule/score.json`: each clause gets a price, a concern and, optionally, the
-   vessels it applies to. The concern is an event id mapped in the `concerns:` block of
-   `config/examiner/zones.yaml`. An unpriced clause is not recorded; the log names it once.
+2. **Price it** in the site's `rule/score.yaml`: each clause gets a price, a concern and, optionally, the
+   vessels it applies to and a `weight`. The concern is an event id mapped in the `concerns:` block of
+   `config/examiner/zones.yaml`. The weight (`Rw`) defaults to the file's `weight:`, itself 1.0 when
+   absent, and is recorded beside the penalty. An unpriced clause is not recorded; the log names it once.
 3. **List it** in the site's `rules.yaml`. Local rules reuse the zone rule classes; only the configuration
    differs:
 
    ```yaml
    - name: Istanbul.Turkeli.Zone
      module: maritime.regulation.internal.WaterwayRule
-     config: sample.frequency=1 automata=$(SIMULATION)/rule/turkeli.legata scorecard=$(SIMULATION)/rule/score.json zonekey=Turkeli*
+     config: sample.frequency=1 automata=$(SIMULATION)/rule/turkeli.legata scorecard=$(SIMULATION)/rule/score.yaml zonekey=Turkeli*
    ```
 
    `zonekey=` selects the sea zones, by name pattern, whose vessels the rule checks. Use

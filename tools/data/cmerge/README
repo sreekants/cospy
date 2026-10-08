@@ -6,5 +6,6 @@ runs.txt names one maritime.workingset.s3db per line (relative paths are taken f
 list's folder; blank lines and # comments are skipped). Each database is copied, its copy
 renumbered by cos.data.bi.Builder so ids do not collide, and every row merged into a fresh,
 empty replica of the template (default config/data/maritime.s3db). Only id and dim_*_id
-columns are renumbered; case_id and vessel_id are copied unchanged. The sources are never
-written.
+columns are renumbered, except dim_gps_id and dim_vessel_id (a Morton code and an IMO);
+case_id and vessel_id are copied unchanged. The configs table describes a single run and is
+not merged: the output keeps the template's configs. The sources are never written.

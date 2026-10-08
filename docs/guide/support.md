@@ -77,12 +77,11 @@ by hand.
 `docs/tools/`.
 What each does is in [communication.md](communication.md#talking-to-a-running-simulation).
 
-## `idl/`, `samples/`, `papers/`, `docs/`, `build/`
+## `idl/`, `samples/`, `docs/`, `build/`
 
 | Folder | Holds |
 |---|---|
 | `idl/` | Interface contracts for the remote API, one per service (`World.idl`, `Vessel.idl`, `Topic.idl`, …) |
 | `samples/simulation/` | `minsim`, a minimal simulation, and `openbridge`, a prototype OpenBridge conning display |
-| `papers/` | `reference/` (the ER 2024 paper and background) and `IEEE-Access/` (current work, including `DEFINITIONS.md` for the risk formalism) |
 | `docs/` | This guide; `taxonomies/` (jurisdiction, protocol, traffic and vessel classifications); `references/` (the consolidated COLREG text); the `mkdocs` site and its generated API pages |
 | `build/` | Run output: `syslog.s3db` (the log) and `metrics.s3db` |
