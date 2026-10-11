@@ -1,7 +1,7 @@
-<!--: V1 ves.identity (DASH.024): register entry for the vessel, and its role from fact_under_test. -->
+<!--: V1 ves.identity (DASH.024): register entry for the vessel (with its behaviour and trip, as the CViz infobox), and its role from fact_under_test. -->
 <cfinclude template="../shared/params.cfm">
 <cfquery name="v1_q" datasource="cos.vessels">
-select name, imo, coalesce(settings, '') as settings from vessels where imo = '#Int(cos_imo)#'
+select name, imo, coalesce(settings, '') as settings, coalesce(behavior, '') as behavior from vessels where imo = '#Int(cos_imo)#'
 </cfquery>
 <cfquery name="v1_r" datasource="cos.bi">
 select case when exists (select 1 from fact_under_test where case_id = #cos_case# and filtered = 1 and vessel_id = #Int(cos_imo)#) then 'under test'
@@ -9,4 +9,4 @@ select case when exists (select 1 from fact_under_test where case_id = #cos_case
             when exists (select 1 from fact_under_test where case_id = #cos_case#) then 'under test (every vessel, no list)'
             else '' end as role
 </cfquery>
-{<cfinclude template="../shared/meta.cfm">,"rows":[<cfloop query="v1_q"><cfoutput>{"name":"#URLEncodedFormat(v1_q.name)#","imo":"#URLEncodedFormat(v1_q.imo)#","settings":"#URLEncodedFormat(v1_q.settings)#","role":"#URLEncodedFormat(v1_r.role)#"},</cfoutput></cfloop>null]}
+{<cfinclude template="../shared/meta.cfm">,"rows":[<cfloop query="v1_q"><cfoutput>{"name":"#URLEncodedFormat(v1_q.name)#","imo":"#URLEncodedFormat(v1_q.imo)#","settings":"#URLEncodedFormat(v1_q.settings)#","behavior":"#URLEncodedFormat(v1_q.behavior)#","role":"#URLEncodedFormat(v1_r.role)#"},</cfoutput></cfloop>null]}

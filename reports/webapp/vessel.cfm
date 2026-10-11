@@ -31,6 +31,7 @@
   <div class="span-12"><cfinclude template="components/ves.map.violations.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.zone.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.rb.cfm"></div>
+  <div class="span-12"><cfinclude template="components/ves.tl.ro.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.hazards.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.findings.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.encounters.cfm"></div>
