@@ -60,11 +60,23 @@ class Arrow:
 		if ctxt.layer != self.layer:
 			return
 
+		self.draw( screen, ctxt.encoder.transform_polygon )
+		return
+
+	def draw(self, screen, transform=None):
+		""" Draws the arrow
+		Arguments
+			screen -- Reference ot the simulation screen
+			transform=None -- Maps the arrow's points to screen coordinates; None if they already are
+		"""
+		if transform is None:
+			transform	= lambda points: [ (int(p[0]), int(p[1])) for p in points ]
+
 		head_height	= self.head[1]
 		arrow 		= self.start - self.end
 		body_length = arrow.length() - abs(head_height)
 
-		pygame.draw.polygon(screen, self.color, ctxt.encoder.transform_polygon(self.arrowhead) )
+		pygame.draw.polygon(screen, self.color, transform(self.arrowhead) )
 
 		# Stop weird shapes when the arrow is shorter than arrow head
 		if body_length >= 0:
@@ -83,7 +95,7 @@ class Arrow:
 				body[i] += translation
 				body[i] += self.start
 
-			pygame.draw.polygon(screen, self.color, ctxt.encoder.transform_polygon(body) )
+			pygame.draw.polygon(screen, self.color, transform(body) )
 
 if __name__ == "__main__":
 	pygame.init()
@@ -109,7 +121,7 @@ if __name__ == "__main__":
 		center = pygame.Vector2(WIDTH / 2, HEIGHT / 2)
 		end = pygame.Vector2(pygame.mouse.get_pos())
 		arrow = Arrow(center, end, 1, 6, 8, pygame.Color("red"))
-		arrow.render(None, SCREEN)
+		arrow.draw(SCREEN)
 
 		pygame.display.flip()
 
