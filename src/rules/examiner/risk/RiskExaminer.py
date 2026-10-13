@@ -311,9 +311,10 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			'individual_risk'	: ir,		# P(harm_to_humans = fatality), IR [K, eq. (4)]
 			'exposure'		: concerns,		# Rl row: concern -> expected economic loss
 			'cost'			: cost,			# instantaneous expected loss
-			'increment'		: increment,	# what was actually added to the voyage total
+			'increment'		: increment,	# what was added to the voyage total
 			'survival'		: track.survival,
-			'cumulative'	: track.cost,
+			'cumulative'	: track.cost,	# plain sum, no survival weighting
+			'cumulative_survival'	: track.weighted,
 			'exposure_basis'	: track.exposure.basis,
 			'exposure_period'	: track.exposure.period,
 			'exposure_dt'	: track.dt,		# simulated seconds this assessment covers
@@ -519,6 +520,7 @@ class RiskExaminer(ZoneAware, ConcernExaminer):
 			report['increment'],
 			report['survival'],
 			report['cumulative'],
+			report['cumulative_survival'],
 			report['matrix'],
 			report['exposure_basis'],
 			report['exposure_period'],

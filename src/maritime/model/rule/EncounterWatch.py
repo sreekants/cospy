@@ -22,7 +22,7 @@ class EncounterWatch:
 		self.name		= NAMES[role]
 		self.dcpa		= dcpa
 		self.range		= range
-		self.onsets		= {}		# (own id, target id) -> [onset time, last distance]
+		self.onsets		= {}		# (own id, target id) -> [onset time, last distance, target velocity under way]
 		return
 
 	def observe(self, ctxt, rule_ctxt, rule):
@@ -47,7 +47,7 @@ class EncounterWatch:
 
 				if onset is None:
 					if self.begins( own, target ):
-						self.onsets[key]	= [now, distance]
+						self.onsets[key]	= [now, distance, EncounterWatch.course( target, None )]
 					continue
 
 				if distance > onset[1]:
@@ -56,10 +56,12 @@ class EncounterWatch:
 					if distance <= self.range:
 						situation	= Situation( own, target )
 						situation.maneuvers[self.name]	= onset[0]		# The role at onset, read by EncounterSituation
+						situation.ts_course				= onset[2]
 						rule.add_situation( situation )
 					continue
 
 				onset[1]	= distance
+				onset[2]	= EncounterWatch.course( target, onset[2] )
 		return
 
 	def begins(self, own, target)->bool:
@@ -91,6 +93,16 @@ class EncounterWatch:
 		"""
 		fo, ft	= getattr( own, 'fleet', None ), getattr( target, 'fleet', None )
 		return ((fo is not None) and (fo is ft)) or (fo is target) or (ft is own)
+
+	@staticmethod
+	def course(target, last):
+		""" Target velocity if under way, else the last one seen
+		Arguments
+			target -- Target ship
+			last -- Velocity last seen under way
+		"""
+		v	= np.asarray( target.velocity, dtype=float )[:2]
+		return v.copy() if np.any( v ) else last
 
 	@staticmethod
 	def offset(own, target):

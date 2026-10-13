@@ -15,11 +15,13 @@ import cos.ui.gui.Style as Style
 from cos.core.api.World import World
 from cos.core.kernel.ObjectManager import ObjectManager
 from cos.core.kernel.ParameterManager import ParameterManager
+from cos.core.network.ZMQTransport import ZMQTransport
 
 import numpy as np
 import datetime
 import math
 import random
+import time
 import pygame
 
 from cos.ui.game.Config import(
@@ -36,10 +38,31 @@ SEA_COLOR			= (135, 206, 250)
 PICK_RADIUS			= 12		# Pixels around a vessel that a click selects it
 SELECT_COLOR		= (0, 0, 0)	# Ring around the selected vessel
 CLOCK_MARGIN		= 10		# Pixels between the clock and the screen corner
+RETRY_INTERVAL		= 3.0		# Seconds between attempts to reach a lost simulation
+PROBE_TIMEOUT		= 1000		# Milliseconds a connection attempt waits for the simulation
 
 class VirtualWorld:
 	def __init__(self):
 		""" Constructor
+		"""
+		self.info		= Infobox()
+		self.parms		= ParameterManager()
+		self.world		= World()
+		self.dispatch	= Dispatcher(self)
+
+		self.debug		= False
+		self.show_zones	= True		# Ctrl+Z hides zone shapes (TSS, fairways, harbours...)
+		self.zone_overlay	= None		# Translucent layer the zone shapes draw onto (Palette)
+
+		self.connected		= False		# True while a simulation answers and its world is built
+		self.next_attempt	= 0.0		# Wall time of the next connection attempt
+		self.attempts		= 0			# Failed attempts since the connection was lost
+
+		self.reset()
+		return
+
+	def reset(self):
+		""" Discards the world built from a simulation
 		"""
 		# Create groups to hold enemy sprites, cloud sprites, and all sprites
 		# - self.vessel is used for collision detection and position updates
@@ -55,20 +78,12 @@ class VirtualWorld:
 
 		self.reliefs	= []	# Traversable bodies (Sea)
 		self.bodies		= []	# Obstructon bodies (Land)
-		self.info		= Infobox()
 
 		self.objects	= ObjectManager()
-		self.parms		= ParameterManager()
-		self.world		= World()
-		self.dispatch	= Dispatcher(self)
 		self.encoder	= Encoder()
 
 		self.background	= None
 		self.scaled		= None		# (scale, surface) cache of the background at the current zoom
-
-		self.debug		= False
-		self.show_zones	= True		# Ctrl+Z hides zone shapes (TSS, fairways, harbours...)
-		self.zone_overlay	= None		# Translucent layer the zone shapes draw onto (Palette)
 		self.relief_order	= None		# Draw order of self.reliefs, rebuilt when it changes
 
 		self.metres		= (1.0, 1.0)	# Metres per map unit (map.unit.metres), set by the Builder
@@ -123,18 +138,99 @@ class VirtualWorld:
 		# Initialize I/O devices
 		self.iodevice	= [Keyboard(self), Mouse(self), Gamepad(self)]
 
-		# Build the world
-		builder	= Builder()
-		builder.build( self )
-
-		# Add the COS to the world
-		bbox	= self.cos.rect
-		rect	= [bbox.left, bbox.top, bbox.right-bbox.left, bbox.bottom-bbox.top]
-		self.register( 'cos', self.cos )
-
-		# Initialize communication
+		# Initialize communication; the event socket reconnects by itself
 		self.ipc	= RPCAgent()
 		self.ipc.connect()
+
+		# Build the world, or wait for a simulation to come up
+		self.connect()
+		return
+
+	def connect(self):
+		""" Tries to reach the simulation and build its world
+		Returns
+			True if the world was built
+		"""
+		self.next_attempt	= time.time() + RETRY_INTERVAL
+		self.attempts		= self.attempts + 1
+
+		try:
+			# A short probe first, so a missing simulation does not freeze the window for long
+			timeout	= self.world.transport.timeout
+			self.world.transport.set_timeout( PROBE_TIMEOUT )
+			try:
+				self.world.play()
+			finally:
+				self.world.transport.set_timeout( timeout )
+
+			self.reset()
+			builder	= Builder()
+			builder.build( self )
+
+			# Add the COS to the world
+			self.register( 'cos', self.cos )
+		except Exception as e:
+			if not isinstance(e, TimeoutError):
+				print( f'Could not build the world: {e}' )
+			self.reset()
+			return False
+
+		host, port		= ZMQTransport.get_host()
+		print( f'Connected to the simulation on {host}:{port}' )
+		self.connected	= True
+		self.attempts	= 0
+		return True
+
+	def disconnect(self):
+		""" Drops the world of a simulation that stopped answering
+		"""
+		host, port		= ZMQTransport.get_host()
+		print( f'Lost the simulation on {host}:{port}; retrying every {RETRY_INTERVAL:g} s' )
+		self.connected		= False
+		self.next_attempt	= time.time()
+		self.reset()
+		return
+
+	def wait(self):
+		""" Runs one frame while disconnected: keeps the window responsive and retries the simulation
+		Returns
+			False if the user closed the window
+		"""
+		try:
+			if self.handle_events() == False:
+				return False
+		except TimeoutError:
+			pass						# A device's RPC call (e.g. the gamepad) found no simulation
+
+		self.ipc.drain()				# Events still queued from the previous run
+
+		if time.time() >= self.next_attempt:
+			self.render_disconnected( 'Connecting' )
+			pygame.display.flip()
+			if self.connect():
+				return True
+
+		self.render_disconnected( 'Disconnected' )
+		pygame.display.flip()
+		self.clock.tick(30)
+		return True
+
+	def render_disconnected(self, state):
+		""" Shows that no simulation is connected and where cviz is looking for one
+		Arguments
+			state -- Text leading the message
+		"""
+		host, port	= ZMQTransport.get_host()
+		message		= f'{state}: waiting for a simulation on {host}:{port} (attempt {self.attempts + 1})'
+
+		self.screen.fill( SEA_COLOR )
+		text	= self.clock_font.render( message, True, Style.TEXT_PRIMARY )
+		box		= text.get_rect().inflate( 24, 12 )
+		box.center	= self.screen.get_rect().center
+
+		pygame.draw.rect( self.screen, Style.BOX_COLOR, box )
+		pygame.draw.rect( self.screen, Style.BORDER_COLOR, box, width=1 )
+		self.screen.blit( text, text.get_rect(center=box.center) )
 		return
 
 
@@ -410,19 +506,28 @@ class VirtualWorld:
 		"""
 		# Our main loop
 		while True:
-			# Listen and handle events
-			if self.listen() == False:
-				break
+			if not self.connected:
+				if self.wait() == False:
+					break
+				continue
 
-			# Update the animation
-			self.update()
+			try:
+				# Listen and handle events
+				if self.listen() == False:
+					break
 
-			# Render the sprites
-			self.render()
+				# Update the animation
+				self.update()
 
-			# Handle game logic
-			if self.play() == False:
-				break
+				# Render the sprites
+				self.render()
+
+				# Handle game logic
+				if self.play() == False:
+					break
+			except TimeoutError:
+				self.disconnect()
+				continue
 
 			# Flip everything to the display
 			pygame.display.flip()

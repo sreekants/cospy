@@ -434,16 +434,14 @@ class Exposure:
 class VoyageTrack:
 	""" Accumulated risk cost for one vessel over one voyage.
 
-	Survival weighting: a hazardous event earlier in the voyage would have ended
-	the mission, so an exposure later on is only incurred if the vessel got
-	there. Eq. (15) of the source paper omits this, which the authors note makes
-	it an over-estimate.
+	cost is the plain sum of the charges, with no conditioning on past
+	consequence. weighted is the survival-weighted total (Appendix F), kept for
+	comparison: each charge times the probability of no hazard so far.
 
 	On the rate basis every assessment is charged in proportion to the time it
 	covers, dt / T, and survival decays by the probability of a hazard within
-	dt. Accumulation then grows with exposure time and does not depend on how
-	often the faculty samples. The change basis charges once per distinct
-	evidence configuration instead (see Exposure).
+	dt. The change basis charges once per distinct evidence configuration
+	instead (see Exposure).
 	"""
 
 	def __init__(self, exposure:Exposure=None, start=0.0):
@@ -455,6 +453,7 @@ class VoyageTrack:
 		self.exposure	= exposure or Exposure()
 		self.survival	= 1.0
 		self.cost		= 0.0
+		self.weighted	= 0.0		# survival-weighted total
 		self.evidence	= UNASSESSED
 		self.charges	= 0
 		self.last		= float( start )
@@ -469,7 +468,7 @@ class VoyageTrack:
 			evidence -- Evidence that produced this assessment
 			now -- Simulated time of the assessment, in seconds
 		Returns
-			The amount added to the voyage total
+			The amount added to the voyage total, unweighted by survival
 		"""
 		self.dt		= max( float(now) - self.last, 0.0 )
 		self.last	= float( now )
@@ -477,12 +476,13 @@ class VoyageTrack:
 		if self.exposure.basis == 'change':
 			if evidence == self.evidence:
 				return 0.0
-			increment		= self.survival * cost
-			self.survival	*= (1.0 - p_any)
+			share	= 1.0
 		else:
-			share			= self.dt / self.exposure.period
-			increment		= self.survival * cost * share
-			self.survival	*= (1.0 - p_any) ** share		# no hazard within dt
+			share	= self.dt / self.exposure.period
+
+		increment		= cost * share
+		self.weighted	+= self.survival * increment
+		self.survival	*= (1.0 - p_any) ** share		# no hazard within dt
 
 		self.cost		+= increment
 		self.evidence	= evidence

@@ -62,10 +62,15 @@ class ColregResolver(Resolver):
 		if (self.tr is None) or (self.tr.is_valid() == False) or (self.tr.ts is None):
 			return None
 
-		if not np.any( self.tr.ts.velocity ):
-			return None
+		ts	= self.tr.ts
+		if not np.any( ts.velocity ):
+			# A target stopped since the closest approach keeps the course it last held under way
+			v	= getattr( self.encounter, 'ts_course', None )
+			if v is None:
+				return None
+			ts	= Heading( ts.location, v )
 
-		return abs( bearing(self.tr.ts, self.tr.os) ) < 90.0
+		return abs( bearing(ts, self.tr.os) ) < 90.0
 
 	@simproperty
 	def EncounterSituation(self)->str:
@@ -94,6 +99,18 @@ class ColregResolver(Resolver):
 
 		self.situation	= situation
 		return self.situation
+
+
+class Heading:
+	def __init__(self, location, velocity):
+		""" A vessel's position with a course it no longer holds
+		Arguments
+			location -- Position
+			velocity -- Velocity
+		"""
+		self.location	= location
+		self.velocity	= velocity
+		return
 
 
 def passing_side(os, ts)->str:

@@ -18,6 +18,7 @@ class Situation:
 		self.tss		= None
 		self.os			= OS
 		self.ts			= TS
+		self.ts_course	= None		# Target velocity last seen under way, for a target judged stopped
 		self.context	= None		# Rule context the situation was observed in
 		return
 

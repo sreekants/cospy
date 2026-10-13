@@ -81,6 +81,21 @@ class RPCAgent:
 
 		return
 
+	def drain(self, maxmsg=1000):
+		""" Discards queued events, e.g. those of a simulation that is gone
+		Arguments
+			maxmsg -- Most events to discard in one call
+		"""
+		if self.socket is None:
+			return
+
+		for n in range (maxmsg):
+			try:
+				self.socket.recv_multipart( zmq.NOBLOCK )
+			except zmq.Again:
+				break
+		return
+
 
 
 if __name__ == "__main__":

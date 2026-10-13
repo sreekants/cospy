@@ -13,7 +13,7 @@ At startup the examiner loads a Bayesian network from `config/risk/risk.model.xd
 - Group-gated bindings make each family of evidence declare the situation it depends on, separating inapplicable terms from unobserved ones.
 - Hazard probabilities are combined with the exact joint from the network, never by summing the marginals as eq. (14) of the source paper does.
 - Expected losses are summed across consequence nodes, which is valid unconditionally and correct physically — one collision can damage both vessels and harm a person.
-- Cumulative voyage cost is survival-weighted, so an exposure later in a voyage is only charged if the vessel got there.
+- Cumulative voyage cost is the plain sum of the charges, with no conditioning on past consequence. The survival-weighted total is recorded beside it (`cumulative_survival`) for comparison.
 - Charges once per distinct evidence configuration, so a ten-minute encounter sampled at 1 Hz is not counted six hundred times.
 - Recording is unconditional and publishing advisory, which gives a natural controlled experiment: the same scenario with a vessel subscribing and not subscribing is comparable on cumulative cost.
 - The eq. (14) sum is still recorded alongside the exact joint, so the divergence between them is queryable across a whole sweep.

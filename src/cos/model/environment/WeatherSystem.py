@@ -123,6 +123,9 @@ class WeatherSystem(Object):
 			self.timer	= Ticker( float(self.poll_at), clock )
 		else:
 			self.timer	= None
+
+		self.clock		= clock
+		self.turned_at	= clock.seconds if clock is not None else None	# Simulated time of the last rotation
 		return
 
 	def scale_vector(self, V, scale ):
@@ -245,12 +248,19 @@ class WeatherSystem(Object):
 		Arguments
 			world -- Reference ot the simulation world
 		"""
+		# Vr is a rate in rad/s, so turn by the simulated seconds since the last update
+		elapsed		= 1.0
+		if self.clock is not None:
+			now				= self.clock.seconds
+			elapsed			= now - self.turned_at
+			self.turned_at	= now
+
 		for n in range(0, len(self.data)):
 			sample	= self.data[n]
 			Vx		= sample[1]
-			deg		= sample[2][0][0]
+			deg		= sample[2][0][0] * elapsed
 
-			if abs(deg) < EPSILON:
+			if deg == 0.0:
 				continue
 
 			x			= Vx[0][0]

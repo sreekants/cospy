@@ -108,13 +108,13 @@ class LinearMotionBehavior(MotionBehavior):
 			t -- Time on the simulation clock
 		"""
 		dt			= self.seconds( world )
+		grad		= self.apply_force(world, self.dx)*dt
 		if not np.any(self.θ):
-			return self.x + self.dx*dt
+			return self.x + grad
 
 		θ			= np.radians( self.θ[0] )
 		cosθ, sinθ	= np.cos(θ), np.sin(θ*(t.timestep/100))
 
-		grad		= self.apply_force(world, self.dx)*dt
 		dx 			= grad[0]
 		dy 			= grad[1]
 		delta		= np.array(

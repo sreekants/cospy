@@ -66,8 +66,9 @@ class ZMQTransport:
 			host	= DEFAULT_HOST
 
 		print( "Connecting to {}".format(host) )
-		context = zmq.Context()
+		context = zmq.Context.instance()
 		self.socket = context.socket(zmq.REQ)
+		self.socket.setsockopt(zmq.LINGER, 0)		# Closing never waits on an unanswered request
 		self.socket.connect (host)
 		return self.socket
 
@@ -124,7 +125,8 @@ class ZMQTransport:
 
 		self.socket.send_multipart( req )
 		if self.socket.poll(self.timeout) == 0:
-			raise Exception( "Connection timed out." )
+			self.close()		# A REQ socket left waiting for a reply cannot send again; the next call rebinds
+			raise TimeoutError( "Connection timed out." )
 
 		return ZMQFrame.decode( self.socket.recv_multipart() )
 
