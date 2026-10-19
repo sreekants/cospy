@@ -22,7 +22,8 @@ cones are added by REQ-056-01: `Light.Allround.GreenWhite` (trawling), `Light.Al
 
 ## File-level condition
 
-**Legata.** `OS.Operation has 'Vessel.Operation.FISHING'`.
+**Legata.** `OS.Operation is Vessel.Operation.Fishing`. It was a quoted string, which never matched,
+until 2026-10-19 (LEGATA.003).
 
 **Caveats.** Not compiled (LEGATA.002). There is no clause for it to scope.
 

@@ -31,6 +31,9 @@ class RestrictedAbilityManeuver(PlannedVesselBehavior):
         return PlannedVesselBehavior.ioctl(self, op, arg)
 
     def on_at_waypoint(self, world, t, n, pt):
+        if self.begin_row( world, pt ):
+            return
+
         if len(pt[3]):
             activity  = pt[3].split('(')
 

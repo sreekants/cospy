@@ -8,7 +8,7 @@ define: {
 
 # Fishing Vessels
 condition: { 
-    : OS.Operation has 'Vessel.Operation.FISHING'
+    : OS.Operation is Vessel.Operation.Fishing
 }
 
 # (a) A vessel engaged in fishing, whether underway or at anchor, shall exhibit only the

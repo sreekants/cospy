@@ -162,11 +162,12 @@ class Symbol:
 			return
 
 		def IN(self, value) -> bool:
-			return True if (self.value[0]>= value)  and (self.value[1]>= value) else False
+			# Both bounds inclusive, as NumericRange
+			return True if (self.value[0] <= value) and (value <= self.value[1]) else False
 
 		def BETWEEN(self, value) -> bool:
 			return True if (self.value[0]< value)  and (self.value[1]> value) else False
-		
+
 		def tostring(self) -> str:
 			""" TODO: tostring
 			""" 

@@ -7,7 +7,7 @@ define: {
 }
 
 condition: {
-    : (OS, TS).Distance in Vessel.Collision.TimeToEncounter.AlertRange
+    : (OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.AlertRange
 
     # Trigger rule 5 overriding other conditions. Useful for rules in cross-reference.
     : OS.Restriction in ['COLREG.Rule5.*']  
@@ -21,7 +21,7 @@ condition: {
 clause['COLREG.Rule5/Sight']:{
     : {
         condition: {
-            : (OS, TS).Distance in Vessel.Collision.TimeToEncounter.VisibleRange
+            : (OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.VisibleRange
         }
         assure: { 
             : OS.Intent has 'Operation.Lookout.*' 
@@ -29,24 +29,3 @@ clause['COLREG.Rule5/Sight']:{
     }
 }
 
-clause['COLREG.Rule5/Radar']:{
-    : {
-        condition: {
-            : (OS, TS).Distance in Vessel.Collision.TimeToEncounter.RadioRange
-        }
-        assure: { 
-            : OS.Intent has 'Operation.Lookout.Radio*' 
-        }
-    }
-}
-
-clause['COLREG.Rule5/Sonar']:{
-    : {
-        condition: {
-            : (OS, TS).Distance in Vessel.Collision.TimeToEncounter.SonarRange
-        }
-        assure: { 
-            : OS.Intent has 'Operation.Lookout.Sonar*' 
-        }
-    }
-}

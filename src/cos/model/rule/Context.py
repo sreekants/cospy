@@ -6,7 +6,27 @@ from cos.model.rule.Situation import Situation
 from cos.lang.symbol.Symbol import Symbol, SymbolType
 from cos.core.kernel.Context import Context as KernelContext
 
-import fnmatch
+import fnmatch, math, statistics
+
+# Unit functions convert to the base units terms resolve to: metres and metres per second
+UNITS	= {
+	'meters'	: 1.0,
+	'miles'		: 1852.0,				# Nautical miles
+	'feets'		: 0.3048,
+	'knot'		: 1852.0 / 3600.0,
+	'kmph'		: 1.0 / 3.6,
+	'nmphtokmph': 1.852,
+}
+
+MATH	= {
+	'abs'		: lambda args: abs( args[0] ),
+	'min'		: lambda args: min( args ),
+	'max'		: lambda args: max( args ),
+	'floor'		: lambda args: math.floor( args[0] ),
+	'mean'		: lambda args: statistics.mean( args ),
+	'std'		: lambda args: statistics.pstdev( args ),
+	'count'		: lambda args: len( args[0] ),
+}
 
 class Context:
 	def __init__(self, ctxt:KernelContext, resolver, world, vessels, api):
@@ -184,6 +204,9 @@ class Context:
 		if isinstance(expr, Symbol.AngularRange):
 			return Symbol.AngularRange(self.resolve(expr.value[0]), self.resolve(expr.value[1]))
 
+		if isinstance(expr, Symbol.Function):
+			return self.call( expr )
+
 		if isinstance(expr, SymbolType):
 			expr	= expr.value
 
@@ -191,6 +214,29 @@ class Context:
 			return expr
 
 		return self.resolver.resolve(self, expr)
+
+	def call(self, function):
+		""" Value of a unit or math function used as an operand, e.g. meters(20) or abs(x)
+		Arguments
+			function -- Symbol.Function
+		Returns
+			The value, or None when an argument does not resolve
+		"""
+		name, args	= function.value
+		if (name not in UNITS) and (name not in MATH):
+			return function.evaluate( self )
+
+		values	= [ self.resolve(a) for a in (args or []) ]
+		if any( v is None for v in values ):
+			return None
+
+		if (len( values ) != 1) and (name not in ('min', 'max', 'mean', 'std')):
+			raise RuntimeError( f'{name}() takes one argument, got {len(values)}' )
+
+		if name in UNITS:
+			return float( values[0] ) * UNITS[name]
+
+		return MATH[name]( values )
 
 	def evaluate(self, method, args):
 		""" Evaluates an API method

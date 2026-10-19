@@ -12,6 +12,8 @@ from cos.core.utilities.Errors import ErrorCode
 import os, sys, pickle
 
 class Automata:
+	SUPPORTED_COMMANDS	= ( 'fail', 'continue' )
+
 	def __init__(self, rule):
 		""" Constructor
 		Arguments
@@ -282,7 +284,27 @@ class Automata:
 		""" 
 		for a in assurances:
 			# print(f'assure: {a}')
+			Automata.check_assurance( a )
 			define.ASSURE(a)
+		return
+
+	@staticmethod
+	def check_assurance( assurance ):
+		""" Refuses an assurance the evaluator would skip as a success
+		Arguments
+			assurance -- Assurance statement as the parser builds it
+		Raises
+			RuntimeError for apply, a nested clause, and any command other than fail and continue
+		"""
+		opcode, body	= assurance[0]
+		if opcode == '!':
+			raise RuntimeError( f"apply '{body}' is not supported: it would pass without evaluating anything" )
+
+		if (opcode == '^') and (body[1] not in Automata.SUPPORTED_COMMANDS):
+			raise RuntimeError( f"'{body[1]}' is not supported: it would pass without doing anything" )
+
+		if opcode == '%':
+			raise RuntimeError( "a clause nested in an assurance is not supported: it would pass without evaluating anything" )
 		return
 
 	def __add_precedent(self, precedent):

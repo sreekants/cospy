@@ -113,10 +113,11 @@ class SignalExaminer(ZoneAware, NavigationExaminer):
 			signal -- Signals shown, as one token
 		"""
 		shapes, _rules, _depth	= self.survey( vessel )
+		encounter				= rule_ctxt.situation		# situation is its classification, a string or None
 
 		payload	= {
-			'vessel'	: situation.os,
-			'target'	: situation.ts,
+			'vessel'	: encounter.os,
+			'target'	: encounter.ts,
 			'time'		: ctxt.sim.now(),
 			'zone'		: self.zone_name( shapes ),
 			'intent'	: intent,

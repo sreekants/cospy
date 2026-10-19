@@ -56,7 +56,7 @@ clause['COLREG.Rule19.e']:{
             : OS.Status in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]
          }
         assure: {
-            : (OS, TS).SlowedSinceOnset is true
+            : OS.Velocity <= OS.SteerageSpeed
         }
     }
 }

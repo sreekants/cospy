@@ -6,8 +6,8 @@
 | Driver | `rules.colreg.rule19.Rule19` (`src/rules/colreg/rule19/Rule19.py`) |
 | Loaded by | `rules.colreg.yaml`, entry `Rule19` |
 | Terms | `ColregResolver` (`SafeSpeed`, `WithinSafeSpeed`, `Paired`, `OnsetSpeed`, `ForwardAtOnset`, `InSightAtOnset`, `SlowedSinceOnset`), `TargetResolver` (`Visibility`), `VesselResolver` (`Status`) |
-| Settings | `legata.yaml` colreg resolver `stopping.lengths=15`; `definitions.s3db` `Vessel.RestrictedVisibility.Range` = 2.0 nm; ship model `maneuverability.service_speed` (knots) |
-| Tests | `tests/maritime/model/colreg/test_Rule19.py` (12) |
+| Settings | `legata.yaml` colreg resolver `stopping.lengths=15`; `definitions.s3db` `Vessel.RestrictedVisibility.Range` = 2.0 nm; ship model `maneuverability.service_speed` and `steerage_speed` (m/s) |
+| Tests | `tests/maritime/model/colreg/test_Rule19.py` (15) |
 | Status | (b) safe speed and (e) judged; (b) engines ready, (c) and (d) not judged |
 | Reviewed | 2026-10-19 |
 
@@ -84,8 +84,10 @@ ship model (`physics.length`), service speed from `maneuverability.service_speed
 from the scenario.
 
 **Caveats.**
-- **Nothing is judged today.** No ship model in `vehicle/ship/` has a `service_speed`, so
-  `SafeSpeed` is 0 and the condition fails. The service speeds need sourcing per ship type.
+- **Service speeds are sourced per ship model** (2026-10-19), in m/s, with the source in each
+  YAML comment (MAN Energy Solutions propulsion-trend papers, builder datasheets, published
+  specifications of the reference vessels). (b) is judged for every ship model. A model without
+  one is skipped, with a warning once per model type (LEGATA.052).
 - k = 15 is a regulatory upper bound, not the ship's own stopping performance, so the safe speed
   is conservative for a ship that stops better than the limit.
 - Assuming stopping distance grows with the square of speed (constant deceleration) is a
@@ -148,14 +150,17 @@ not on its own.
 - **condition:** visibility restricted, `(OS, TS).ForwardAtOnset is true`, and
   `(OS, TS).InSightAtOnset is false`;
 - **excluded:** `(OS, TS).OnsetSpeed <= 0`, or own ship not underway;
-- **assured:** `(OS, TS).SlowedSinceOnset is true`.
+- **assured:** `OS.Velocity <= OS.SteerageSpeed`. Until 2026-10-19 it assured
+  `SlowedSinceOnset`, so any reduction complied (LEGATA.053).
 
 **Interpretation.**
 - *Risk of collision* (the "except where" clause) is the encounter watch's own test. An encounter
   begins only when the vessels are closing, within 4 km, with a predicted passing distance under
   500 m.
 - *Forward of her beam:* the other vessel bore less than 90° from own ship's course at the start.
-- *Reduce her speed:* own ship passed the closest approach slower than at the start.
+- *Reduce her speed to the minimum at which she can be kept on her course:* at the closest
+  approach own ship is no faster than her ship model's `steerage_speed`. A ship model without one
+  is not judged.
 - An own ship already stopped at the start has no way to take off and is not judged.
 - Each encounter is judged once, after the closest approach, on what held at its start. A
   vessel is not flagged before she has had time to react, and each encounter is one finding.
@@ -164,8 +169,11 @@ not on its own.
 approach is own ship's speed on the pass after the range starts to open.
 
 **Caveats.**
-- Only "slower than at onset" is judged, not "the minimum at which she can be kept on her
-  course". No ship model has a steerage speed, so a token reduction complies.
+- The steerage speed is 4 knots (2.06 m/s) for the merchant ship and ferry models: the midpoint
+  of the "3.5–4.5 knots" manoeuvring speed in MAN's *Basic Principles of Ship Propulsion*. The tug,
+  AUV, yachts and motorboat have no sourced steerage speed and are not judged under (e).
+- No behaviour slows to steerage speed in fog, so every judged vessel that does not stop will
+  breach (e) in a run with restricted visibility.
 - Taking all way off "if necessary" and navigating "with extreme caution" are not judged.
 - The fog-signal trigger is not modelled separately. Only container ships, ferries and fishing
   vessels sound fog signals (Rule 35), and the encounter trigger stands in for it: both need the other vessel forward of
@@ -178,8 +186,7 @@ approach is own ship's speed on the pass after the range starts to open.
 
 ## Open issues
 
-- Sourced `service_speed` values for the ship models (for (b)).
-- A steerage speed per ship model (for (e)).
+- Steerage speeds for the tug, AUV, yacht and motorboat models (for (e)).
 - A course-change term (COS.041), for (d) and for whether the action in (e) came in time.
 - Something that sets `Vessel.Engine.ON` (engines ready, (b)).
 - Per-area or time-varying visibility (for (a)).

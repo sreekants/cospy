@@ -101,10 +101,16 @@ class Decision(TreeNode):
 		# TODO: Simplify evaluation logic with polymorphism
 		match t:
 			case 'function':
-				return e.evaluate(ctxt.ctxt)
+				# An API call such as add() or set() is an action; it succeeds unless it reports otherwise
+				result	= e.evaluate(ctxt.ctxt)
+				return ErrorCode.S_OK if result is None else result
 			
 			case 'expression':
 				return Decision.evaluate_terms(ctxt.ctxt, e)
+
+			case 'command':
+				# Automata.SUPPORTED_COMMANDS: fail fails the assurance, continue passes it
+				return ErrorCode.S_FALSE if e == 'fail' else ErrorCode.S_OK
 		
 		if self.trace == True:
 			print(f'Evaluating {self.name} assurance expressions:')

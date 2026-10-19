@@ -2,23 +2,27 @@
 # Status        : TODO
 
 define: {
-    OS: OwnShip
+    OS: OwnShip,
+    TS: TargetShip
 }
 
 
 # Sailing Vessels underway and Vessels under Oars
 condition: { 
-    :(OS.Type is Vessel.Type.Sailing) or
-	 (OS.Operation in ['Vessel.Operation.SAILING', 'Vessel.Operation.OARED'])
+    :OS.Type is Vessel.Type.Sailing
 }
 
 # (a) A sailing vessel underway shall exhibit:
 # (i) sidelights;
 # (ii) a sternlight.
-clause['COLREG.Rule24.a']:{
+clause['COLREG.Rule25.a']:{
     :{
         condition: { 
-			:OS.Type is Vessel.Type.PowerDriven
+			:(OS.Type is Vessel.Type.Sailing) and (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]) and
+			 (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
+		}
+		exclude:{
+			:(OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Operation is Vessel.Operation.Fishing)
 		}
         assure: { 
             :OS.Signal.ON has 'Light.Sidelight'

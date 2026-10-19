@@ -6,7 +6,7 @@
 | Driver | `rules.colreg.rule8.Rule8` (`src/rules/colreg/rule8/Rule8.py`), constructor only |
 | Loaded by | `rules.colreg.yaml`, entry `Rule8` |
 | Simulation | `maritime.behavior.vessels.VesselManeuvers` (avoiding action), `Classification`, `EncounterWatch` |
-| Terms | `OS.Intent`, `(OS, TS).Distance`, `(OS, TS).Visible`, `(OS, TS).TimeToClosestApproachPoint`, `OS.AngularVelocity`, `OS.Acceleration`, `OS.MinimumSafe*`; constants `Vessel.Collision.TimeToEncounter.*`, `Vessel.Reaction.AmpleTime` |
+| Terms | `OS.Intent`, `(OS, TS).Distance`, `(OS, TS).Visible`, `(OS, TS).TimeToEncounter`, `(OS, TS).TimeToClosestApproachPoint`, `OS.AngularVelocity`, `OS.Acceleration`, `OS.MinimumSafe*`; constants `Vessel.Collision.TimeToEncounter.*`, `Vessel.Reaction.AmpleTime` |
 | Tests | none |
 | Status | Not judged. Six clauses on intents and course or speed change, not fed; the outcome, passing at a safe distance, is judged per encounter by Rules 12–15 and 18 |
 | Reviewed | 2026-10-19 |
@@ -37,11 +37,16 @@ never fed.
 
 ## File-level condition
 
-**Legata.** `(OS.COLREG.Mode is true) and ((OS, TS).Distance <
+**Legata.** `(OS.COLREG.Mode is true) and ((OS, TS).TimeToEncounter in
 Vessel.Collision.TimeToEncounter.SituationRange)`.
 
 **Caveats.** Not compiled (LEGATA.002). `OS.COLREG.Mode` is never set, and `SituationRange` is a
 placeholder `(0, 10)`.
+
+**TimeToEncounter (2026-10-19).** Every Rule 8 clause compares `(OS, TS).TimeToEncounter`, the
+range over the closing speed in seconds, with the `TimeToEncounter` ranges, by `in` or `not in`.
+They compared the distance in metres, and `<` or `>` against a range raised (LEGATA.004). The
+ranges are still placeholders.
 
 ## (a) Positive, in ample time, good seamanship
 
@@ -49,9 +54,9 @@ placeholder `(0, 10)`.
 > the circumstances of the case admit, be positive, made in ample time and with due regard to the
 > observance of good seamanship.
 
-**Legata.** `clause['COLREG.Rule8.a/COLAV']`: within `AlertRange`, assures, as OR'd lines,
-`OS.Intent has 'Manouever.CollisionAvoidance.*'` or `(OS,TS).TimeToClosestApproachPoint >
-Vessel.Reaction.AmpleTime`.
+**Legata.** `clause['COLREG.Rule8.a/COLAV']`: within `AlertRange`, assures both
+`OS.Intent has 'Manouever.CollisionAvoidance.*'` and `(OS,TS).TimeToClosestApproachPoint >
+Vessel.Reaction.AmpleTime` (assurance lines are AND'd).
 
 **Caveats.**
 - Only `Decelerate` is raised, by container ships and ferries (see (e)); no course alteration
@@ -70,7 +75,7 @@ Vessel.Reaction.AmpleTime`.
 - **condition:** in sight, or within `RadioRange`;
 - **excluded:** no turn or no acceleration;
 - **assured:** `OS.AngularVelocity > OS.MinimumSafeAngularVelocity` and `OS.Acceleration >
-  OS.MinimumSafeAcceleration`, as OR'd lines.
+  OS.MinimumSafeAcceleration`, both (assurance lines are AND'd).
 
 **In the simulation.** Speed changes come in proportional, gradual steps, which is a succession
 of small alterations by construction.

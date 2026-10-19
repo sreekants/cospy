@@ -2,7 +2,8 @@
 # Status        : REVIEW
 
 define: {
-    OS: OwnShip
+    OS: OwnShip,
+    TS: TargetShip
 }
 
 condition: {
@@ -50,7 +51,7 @@ clause['COLREG.Rule9.b/SmallVessel']:{
 clause['COLREG.Rule9.c/Fishing']:{
     : {
         condition: {
-            : (OS.Operation has 'Vessel.Operation.Fishing')
+            : (OS.Operation is Vessel.Operation.Fishing)
         }
         assure: { 
             : (OS, TS).Distance > Sea.NarrowChannel.SafeDistance
@@ -75,7 +76,7 @@ clause['COLREG.Rule9.e.i.a/AssureCOLREGRule13']:{
             : (OS.Intent has 'Manouever.Overtaking.*')
         }
         assure: { 
-            : apply 'COLREG.Rule34.c.i*'
+            : (OS.Signal.ON has 'Sound.Blast.Prolonged.2x.Short.1x') or (OS.Signal.ON has 'Sound.Blast.Prolonged.2x.Short.2x')
         }
     }
 }
@@ -86,7 +87,7 @@ clause['COLREG.Rule9.e.i.b/AssureCOLREGRule13']:{
             : (OS.Intent has 'Manouever.Overtaken.*')
         }
         assure: { 
-            : apply 'COLREG.Rule34.c.i*'
+            : OS.Signal.ON has 'Sound.Blast.ProlongedShort.2x'
         }
     }
 }
@@ -97,22 +98,12 @@ clause['COLREG.Rule9.e.i.c/AssureCOLREGRule13']:{
             : (OS.Intent has 'Manouever.DenyOvertake.*')
         }
         assure: { 
-            : apply 'COLREG.Rule34.d*'
+            : OS.Signal.ON has 'Sound.Blast.Short.5x'
         }
     }
 }
 
 # (ii) This Rule does not relieve the overtaking vessel of her obligation under Rule 13.
-clause['COLREG.Rule9.e.ii/AssureCOLREGRule13']:{
-    : {
-        condition: {
-            : (OS.Intent has 'Manouever.Overtaking.*')
-        }
-        assure: { 
-            : apply 'COLREG.Rule13.*'
-        }
-    }
-}
 
 # (f) A vessel nearing a bend or an area of a narrow channel or fairway where other vessels
 # may be obscured by an intervening obstruction shall navigate with particular alertness
@@ -123,7 +114,7 @@ clause['COLREG.Rule9.f/TurningBlindspot']:{
             : [OS.Position, Map.Sea@ShoreLine].Curvature > 20
         }
         assure: { 
-            : OS.Intent in ['Signal']
+            : OS.Signal.ON has 'Sound.Blast.Prolonged.1x'
         }
     }
 }
@@ -135,7 +126,7 @@ clause['COLREG.Rule9.g/Anchor']:{
             : OS.Position.Territory has 'Territory.NarrowChannel'
         }
         assure: { 
-            : OS.Intent not in ['*Anchoring*']
+            : OS.Status not in [Vessel.Status.ANCHORED]
         }
     }
 }

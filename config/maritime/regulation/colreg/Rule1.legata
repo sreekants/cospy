@@ -15,7 +15,6 @@ precedent['COLREG.Rule1.a']:{
          }
         assure: { 
             : set(OS.Mode, 'COLREG', true)
-            : abort     # No further processing
         }
     }
 }

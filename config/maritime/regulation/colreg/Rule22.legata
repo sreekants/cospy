@@ -17,7 +17,7 @@ define: {
 clause['COLREG.Rule22.a']:{
     : {
         condition: { 
-            : OS.Length > meters(50)
+            : OS.Length >= 50
          }
         assure: { 
             : OS.Equipment.MastheadLight.Range >= miles(6) 
@@ -39,7 +39,7 @@ clause['COLREG.Rule22.a']:{
 clause['COLREG.Rule22.b.Large']:{
     : {
         condition: { 
-            : OS.Length in range(meters(20), meters(50))
+            : (OS.Length >= 20) and (OS.Length < 50)
          }
         assure: { 
             : OS.Equipment.MastheadLight.Range >= miles(5) 
@@ -54,7 +54,7 @@ clause['COLREG.Rule22.b.Large']:{
 clause['COLREG.Rule22.b.Small']:{
     : {
         condition: { 
-            : OS.Length in range(meters(12), meters(20))
+            : (OS.Length >= 12) and (OS.Length < 20)
          }
         assure: { 
             : OS.Equipment.MastheadLight.Range >= miles(3) 
@@ -75,7 +75,7 @@ clause['COLREG.Rule22.b.Small']:{
 clause['COLREG.Rule22.c']:{
     : {
         condition: { 
-            : OS.Length < meters(12)
+            : OS.Length < 12
          }
         assure: { 
             : OS.Equipment.MastheadLight.Range >= miles(2) 

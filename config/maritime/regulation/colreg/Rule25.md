@@ -6,8 +6,8 @@
 | Driver | `rules.colreg.rule25.Rule25` (`src/rules/colreg/rule25/Rule25.py`), constructor only |
 | Loaded by | `rules.colreg.yaml`, entry `Rule25` |
 | Terms | `OS.Type`, `OS.Operation`, `OS.Signal.ON` |
-| Tests | none |
-| Status | Not judged. One misnamed clause, not fed. Reworked by REQ.057 (REQ-057-02, open) |
+| Tests | `tests/maritime/model/colreg/test_Rule25.py` (4) |
+| Status | Not judged in a run: one clause, (a), not fed. Corrected 2026-10-19 (LEGATA.068). (d) and the feed are REQ-057-02 (open) |
 | Reviewed | 2026-10-19 |
 
 ## How the rule is employed
@@ -27,21 +27,22 @@ restricted visibility, and no shape.
 
 **Caveats.**
 - Not compiled (LEGATA.002).
-- `SAILING` and `OARED` are not `Operation` members. Vessels under oars are not modelled.
-- Neither underway nor night is tested.
+- Since 2026-10-19 it is `OS.Type is Vessel.Type.Sailing`. It tested `SAILING` and `OARED` as
+  quoted `Operation` strings, which never matched (LEGATA.003). Vessels under oars are not
+  modelled.
 
 ## (a) Sidelights and sternlight
 
 > A sailing vessel underway shall exhibit: (i) sidelights; (ii) a sternlight.
 
-**Legata.** `clause['COLREG.Rule24.a']` (named for Rule 24 by mistake): condition `OS.Type is
-Vessel.Type.PowerDriven`, assures `Light.Sidelight` and `Light.Sternlight` (OR'd).
+**Legata.** `clause['COLREG.Rule25.a']`: a sailing vessel, underway (Rule 3(i)), in the Rule 20
+window (night or restricted visibility), not under command, restricted or fishing. Assures
+`Light.Sidelight` and `Light.Sternlight` (both: assurance lines are AND'd).
 
-**Caveats.**
-- The clause name is wrong (`Rule24.a`, a COS.022 finding).
-- The condition tests power-driven where the rule is about sailing vessels, so once the file
-  condition were compiled the clause could never apply.
-- The OR'd lines pass with one light.
+Corrected on 2026-10-19 (LEGATA.068):
+- Renamed from `COLREG.Rule24.a`, which clashed with Rule 24's own clause.
+- The condition tested a power-driven vessel, so a sailing vessel was never judged.
+- Underway and the Rule 20 window were added.
 
 ## (b) Combined lantern under 20 m; (c) optional red-over-green
 
@@ -86,6 +87,5 @@ modelled.
 
 ## Open issues
 
-- REQ-057-02: rewrite (a) and (d) for sailing vessels underway at night or in restricted
-  visibility, named `COLREG.Rule25.*`, and feed every vessel.
+- REQ-057-02: a clause for (d), and feed every vessel. (a) is corrected.
 - REQ-059-01: `SailingVessel` runs `VesselSignals`.

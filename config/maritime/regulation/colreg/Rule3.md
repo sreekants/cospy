@@ -37,6 +37,19 @@ the member's own name (`Vessel.Status.RESTRICTED`) or in CamelCase (`Vessel.Type
 | 400000 | `WIG` | `WIG` |
 | 800000 | `Fleet` | `FLEET` (a `META_VESSEL`) |
 
+**Operations from the trip plan.** A trip row's action sets the vessel's operation from the row's
+waypoint until the next waypoint (`PlannedVesselBehavior.begin_row`), then restores the operation
+it had:
+
+| Action | `Operation` | Rule |
+|---|---|---|
+| `towing(tow length)` | `TOWING`, and `vessel.tow_length` in metres (the action is in map units) | 24(a) |
+| `pushing` | `PUSHING` (pushing ahead) | 24(c) |
+| `pilotage` | `PILOTAGE` | 29 |
+| `flight` | `FLIGHT` (WIG craft taking off, landing or in flight near the surface) | 23(c) |
+
+`FishingVessel` sets `FISHING` itself; a row operation takes precedence over it for the row.
+
 The driver's `on_aground` handler only prints the event. It judges nothing.
 
 ## (a) Vessel
@@ -233,7 +246,10 @@ profile's visibility range (`weather/profiles.yaml`). Visibility is *restricted*
 
 **Definition.** `Type.WIG` (`0x00200001`, which includes the power-driven bit), class `WIG`.
 
-**Caveats.** No scenario has a WIG craft. Flight modes are not modelled.
+**In the simulation.** The flight phase is a trip row: `flight` sets `Operation.FLIGHT` until the
+next waypoint (Rule 23(c)).
+
+**Caveats.** No scenario has a WIG craft.
 
 ## Open issues
 

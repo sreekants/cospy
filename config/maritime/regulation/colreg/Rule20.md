@@ -103,8 +103,10 @@ window wraps midnight. It shares its hour test (`Clock.within_hours`) with `Nigh
 > The lights prescribed by these Rules shall, if carried, also be exhibited from sunrise to sunset in
 > restricted visibility and may be exhibited in all other circumstances when it is deemed necessary.
 
-**Legata.** None. Decided (REQ-056-04): restricted visibility is `(OS, TS).Visibility <
-Vessel.RestrictedVisibility.Range` (2 nm), as in Rules 19 and 35.
+**Legata.** None of its own. Decided (REQ-056-04): restricted visibility is `(OS, TS).Visibility <
+Vessel.RestrictedVisibility.Range` (2 nm), as in Rules 19 and 35. Since 2026-10-19 the light
+clauses of Rules 23, 24 and 25 apply when `((OS, TS).Night is true) or ((OS, TS).Visibility <
+Vessel.RestrictedVisibility.Range)` (LEGATA.008).
 
 **In the simulation.** By day in restricted visibility a vessel shows its lights and its shapes
 together.
@@ -116,7 +118,8 @@ or nowhere.
 
 > The Rules concerning shapes shall be complied with by day.
 
-**Legata.** None. Shape clauses are to apply when `(OS, TS).Night` is false (REQ.057).
+**Legata.** None of its own. Shape clauses apply when `(OS, TS).Night is false`: since 2026-10-19
+the Rule 24 diamond clauses do (LEGATA.008), and REQ.057 adds the shapes of Rules 26, 27 and 30.
 
 **In the simulation.** Day is the complement of the night window; dawn and dusk are not
 distinguished. The `Shape.*` names are in the vocabulary (REQ-056-01).

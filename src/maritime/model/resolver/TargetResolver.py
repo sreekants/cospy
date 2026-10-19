@@ -250,12 +250,6 @@ class TargetResolver(Resolver):
 		return self.Position()
 
 	@simproperty
-	def TimeToEncounter(self):
-		""" Symbol property - TimeToEncounter, as TCPA
-		"""
-		return self.TCPA()
-
-	@simproperty
 	def Visible(self):
 		""" Symbol property - Visible: the target is within visual range (Rule 3(k))
 		"""
@@ -306,6 +300,23 @@ class TargetResolver(Resolver):
 			return None
 
 		return self.get_cpa()[0]
+
+	@simproperty
+	def TimeToEncounter(self):
+		""" Symbol property - TimeToEncounter, the range over the closing speed: the component of the
+		relative velocity along the line of sight to the target. Seconds; None when not closing
+		"""
+		if not self.is_valid():
+			return None
+
+		d		= ( np.asarray(self.ts.location, dtype=float) - np.asarray(self.os.location, dtype=float) )[:2]
+		v		= ( np.asarray(self.os.velocity, dtype=float) - np.asarray(self.ts.velocity, dtype=float) )[:2]
+		rng		= float( np.linalg.norm(d) )
+		if rng == 0.0:
+			return 0.0
+
+		closing	= float( v @ d ) / rng
+		return rng / closing if closing > 0.0 else None
 
 	@simproperty
 	def OnCollisionCourse(self):

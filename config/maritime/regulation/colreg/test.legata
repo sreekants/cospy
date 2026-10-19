@@ -32,14 +32,17 @@ clause['COLREG.Rule24.a']:{
             :OS.Signal.ON has 'Light.Sidelight'
             :OS.Signal.ON has 'Light.Sternlight'
             :OS.Signal.ON has 'Light.TowingLight'
-            :{
-				condition: { 
-					:OS.Length > meters(200)
-				}
-				assure: { 
-					:OS.Signal.ON has 'Light.Diamond'
-				}
-			}	
+        }
+    }
+}
+
+clause['COLREG.Rule24.a.v']:{
+    :{
+        condition: { 
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Length > meters(200))
+		}
+        assure: { 
+            :OS.Signal.ON has 'Shape.Diamond'
         }
     }
 }

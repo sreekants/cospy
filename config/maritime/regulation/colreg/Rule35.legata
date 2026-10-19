@@ -19,10 +19,10 @@ clause['COLREG.Rule35.a']:{
               (OS.Velocity > Vessel.MakingWay.Speed)
             }
         exclude: {
-            : ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing))
+            : ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation in [Vessel.Operation.Fishing, Vessel.Operation.TOWING, Vessel.Operation.PUSHING]))
             }
         assure:{
-            : OS.FogSignal is true
+            : OS.Signal.ON has 'Sound.Foghorn.Prolonged.1x'
         }
     }
 }
@@ -37,10 +37,10 @@ clause['COLREG.Rule35.b']:{
               (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]) and (OS.Velocity <= Vessel.MakingWay.Speed)
             }
         exclude: {
-            : ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing))
+            : ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation in [Vessel.Operation.Fishing, Vessel.Operation.TOWING, Vessel.Operation.PUSHING]))
             }
         assure:{
-            : OS.FogSignal is true
+            : OS.Signal.ON has 'Sound.Foghorn.Prolonged.2x'
         }
     }
 }
@@ -54,11 +54,11 @@ clause['COLREG.Rule35.b']:{
 clause['COLREG.Rule35.c']:{
     :{
         condition: {
-            : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing)) and
+            : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation in [Vessel.Operation.Fishing, Vessel.Operation.TOWING, Vessel.Operation.PUSHING])) and
               (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND])
             }
         assure:{
-            : OS.FogSignal is true
+            : OS.Signal.ON has 'Sound.Foghorn.Prolonged.Short.2x'
         }
     }
 }

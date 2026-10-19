@@ -21,6 +21,12 @@ clause['COLREG.Rule15/KeepClear']:{
         condition: {
             : ((OS, TS).EncounterSituation is 'GiveWay') and (OS.Type is Vessel.Type.PowerDriven) and (TS.Type is Vessel.Type.PowerDriven)
             }
+        exclude: {
+            : OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : OS.Operation is Vessel.Operation.Fishing
+            : TS.Operation is Vessel.Operation.Fishing
+            }
         assure:{
             : (OS, TS).Distance >= Vessel.Collision.PassingDistance
         }
@@ -31,6 +37,12 @@ clause['COLREG.Rule15/CrossAstern']:{
     :{
         condition: {
             : ((OS, TS).EncounterSituation is 'GiveWay') and (OS.Type is Vessel.Type.PowerDriven) and (TS.Type is Vessel.Type.PowerDriven)
+            }
+        exclude: {
+            : OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : OS.Operation is Vessel.Operation.Fishing
+            : TS.Operation is Vessel.Operation.Fishing
             }
         assure:{
             : (OS, TS).AheadOfTarget is false

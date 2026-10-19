@@ -15,9 +15,10 @@ import math
 
 STOPPING_LENGTHS	= 15.0		# Ship lengths of track reach in a full-astern stop (IMO MSC.137(76), 5.3.1)
 METRES_PER_NM		= 1852.0
-MS_PER_KNOT			= 1852.0 / 3600.0
 
 class ColregResolver(Resolver):
+	unjudged	= set()		# Ship model types already reported as lacking a service speed
+
 	def __init__(self, resolver):
 		""" Constructor
 		Arguments
@@ -30,6 +31,7 @@ class ColregResolver(Resolver):
 		self.situation	= None
 		self.encounter	= None		# The rule situation being judged
 		self.stopping	= STOPPING_LENGTHS
+		self.log		= None
 		return
 
 	def init(self, ctxt, cfg):
@@ -50,6 +52,7 @@ class ColregResolver(Resolver):
 			rulectxt -- Rule context
 		""" 
 		self.tr.reset( ctxt, rulectxt )
+		self.log		= getattr( ctxt, 'log', None )
 		self.situation	= None
 		self.encounter	= getattr( rulectxt, 'situation', None )
 		return
@@ -104,11 +107,26 @@ class ColregResolver(Resolver):
 		model	= getattr( os, 'model', None )
 		service	= getattr( model, 'service_speed', None )
 		length	= float( model.ship.length ) if model is not None else 0.0
+		if service is None:
+			self.report_unjudged( model )
 		if (service is None) or (length <= 0.0) or (self.tr.visibility is None):
 			return 0.0
 
 		half	= self.tr.visibility * METRES_PER_NM / 2.0
-		return float( service ) * MS_PER_KNOT * math.sqrt( half / (self.stopping * length) )
+		return float( service ) * math.sqrt( half / (self.stopping * length) )
+
+	def report_unjudged(self, model):
+		""" Warns once per ship model type that Rule 19(b) is skipped for want of a service speed
+		Arguments
+			model -- Ship model, or None
+		"""
+		kind	= getattr( model, 'type', None ) or 'unknown'
+		if (kind in ColregResolver.unjudged) or (self.log is None):
+			return
+
+		ColregResolver.unjudged.add( kind )
+		self.log.warning( 'ColregResolver', f'Rule 19(b) not judged for ship model {kind!r}: no maneuverability.service_speed' )
+		return
 
 	@simproperty
 	def WithinSafeSpeed(self)->bool:

@@ -3,7 +3,7 @@
 # Description: Implementation of the VesselBehavior class
 
 from maritime.navigation.cartography.Map import Map
-from maritime.model.vessel.Vessel import Vessel, Operation
+from maritime.model.vessel.Vessel import Vessel, Operation, Status
 from cos.core.time.Ticker import Ticker
 from cos.behavior.motion.PathFollowingMotionBehavior import PathFollowingMotionBehavior
 from cos.math.geometry.Distance import Distance
@@ -13,6 +13,17 @@ from math import atan2, cos, sin, degrees, radians
 
 import csv, random, re
 import numpy as np
+
+LOOKOUT			= 'Operation.Lookout.Sight'		# Rule 5: move() looks for the vessels in range every update
+NOT_UNDERWAY	= ( Status.ANCHORED, Status.MOORED, Status.FASTENED, Status.AGROUND )
+
+# Trip actions that set the vessel's operation for their row: from their waypoint to the next
+ROW_OPERATIONS	= {
+	'towing'	: Operation.TOWING,			# towing(tow length, map units)
+	'pushing'	: Operation.PUSHING,
+	'pilotage'	: Operation.PILOTAGE,
+	'flight'	: Operation.FLIGHT,			# WIG craft
+}
 
 
 class PlannedVesselBehavior(PathFollowingMotionBehavior):
@@ -36,6 +47,8 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 		self.log			= ctxt.log if ctxt is not None else None
 		self.unknown		= set()		# Trip actions already reported as unknown
+		self.row_operation	= None		# Operation of the trip row being sailed, from ROW_OPERATIONS
+		self.base_operation	= None		# Vessel operation before that row
 		return
 
 	def intialize(self, ctxt, actor, vehicle, config:dict):
@@ -78,6 +91,7 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		if self.syncops is not None:
 			for fn in self.syncops:
 				fn(self, world, t, self.dx)
+		self.keep_lookout()
 
 		# Check for watchs		
 		for v in self.watchdogs.values():
@@ -87,6 +101,19 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		return rect, dx
 
 	
+	def keep_lookout(self):
+		""" Declares the look-out while the vessel is underway (Rule 3(i)), and withdraws it otherwise
+		"""
+		vessel	= self.vehicle
+		if vessel is None:
+			return
+
+		if vessel.status in NOT_UNDERWAY:
+			vessel.intent.reset( LOOKOUT )
+		else:
+			vessel.intent.set( LOOKOUT )
+		return
+
 	def anchor(self, duration):
 		self.movable        = False
 		self.dx				= np.zeros(3)		# At rest: vessel.velocity reads dx
@@ -219,7 +246,43 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 	def on_watch_course(self, ctxt):
 		return
 
+	def begin_row(self, world, pt)->bool:
+		""" Starts the trip row at a waypoint: ends the last row's operation and starts this row's
+		Arguments
+			world -- Reference ot the simulation world
+			pt -- Waypoint reached
+		Returns
+			True when the row's action is a row operation
+		"""
+		action		= pt[3].strip() if (len(pt) > 3) and pt[3] else ''
+		name		= action.split('(')[0].strip()
+		operation	= ROW_OPERATIONS.get( name )
+
+		vessel		= self.vehicle
+		if self.row_operation is not None:
+			vessel.operation	= self.base_operation
+			vessel.tow_length	= 0.0
+			self.row_operation	= None
+
+		if operation is None:
+			return False
+
+		self.base_operation	= vessel.operation
+		self.row_operation	= operation
+		vessel.operation	= operation
+		if operation == Operation.TOWING:
+			args	= re.search( r'\((.*)\)', action )
+			try:
+				# Trip actions are authored in map units; the simulation runs in metres
+				vessel.tow_length	= world.scales.length( float(args[1]) ) if args and args[1].strip() else 0.0
+			except ValueError:
+				self.on_unknown_action( action )
+		return True
+
 	def on_at_waypoint(self, world, t, n, pt):
+		if self.begin_row( world, pt ):
+			return
+
 		if len(pt[3]):
 			activity  = pt[3].split('(')
 

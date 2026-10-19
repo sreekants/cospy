@@ -152,6 +152,32 @@ class VesselResolver(Resolver):
 		""" 
 		return self.vessel.model.ship.width if self.vessel.model is not None else 0.0
 
+	@simproperty
+	def TowLength(self)->float:
+		""" Length of the tow in metres, stern to the after end of the tow; 0 when not towing (Rule 24)
+		"""
+		return float( getattr(self.vessel, 'tow_length', 0.0) or 0.0 )
+
+	@simproperty
+	def MaxSpeed(self):
+		""" Ship model's maximum speed in metres per second; None without one (Rule 23(d)(ii))
+		"""
+		return self.model_speed( 'max_speed' )
+
+	@simproperty
+	def SteerageSpeed(self):
+		""" Ship model's minimum steerage speed in metres per second; None without one (Rule 19(e))
+		"""
+		return self.model_speed( 'steerage_speed' )
+
+	def model_speed(self, name:str):
+		""" A ship model speed in metres per second, or None
+		Arguments
+			name -- Ship model attribute
+		"""
+		speed	= getattr( getattr(self.vessel, 'model', None), name, None )
+		return float( speed ) if speed is not None else None
+
 if __name__ == "__main__":
 	test = VesselResolver()
 

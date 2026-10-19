@@ -5,16 +5,15 @@
 | Legata | `Rule5.legata` |
 | Driver | `rules.colreg.rule5.Rule5` (`src/rules/colreg/rule5/Rule5.py`), constructor only |
 | Loaded by | `rules.colreg.yaml`, entry `Rule5` |
-| Terms | `(OS, TS).Distance`, `OS.Intent`, `OS.Restriction`; constants `Vessel.Collision.TimeToEncounter.{AlertRange, VisibleRange, RadioRange, SonarRange}` |
-| Tests | none |
-| Status | Not judged. Three clauses, not fed; their intents are never raised |
+| Terms | `(OS, TS).TimeToEncounter`, `OS.Intent`, `OS.Restriction`; constants `Vessel.Collision.TimeToEncounter.{AlertRange, VisibleRange}` |
+| Tests | `tests/maritime/behavior/vessels/test_TripRows.py` (LookoutTestCase, 3) |
+| Status | Not judged in a run: one clause (Sight), not fed. Planned vessels declare the look-out intent while underway (2026-10-19). Radar and Sonar removed (LEGATA.014, LEGATA.015) |
 | Reviewed | 2026-10-19 |
 
 ## How the rule is employed
 
-**In Legata.** Rule 5 is written as three clauses, one per means of look-out (sight, radar,
-sonar). Each assures that own ship has declared a look-out intent while a target is in the
-range of that means. The driver feeds nothing, so none is evaluated.
+**In Legata.** Rule 5 is one clause, Sight. It assures that own ship has declared a look-out
+intent while a target is in visible range. The driver feeds nothing, so it is not evaluated.
 
 **In the simulation.** Look-out is part of vessel behaviour, not a declared intent. Each pass, a
 vessel behaviour queries the world for the vessels within `behavior.range_visibility` of the
@@ -32,33 +31,40 @@ can breach Rule 5.
 
 **Legata.**
 - **file-level condition,** either line:
-  - `(OS, TS).Distance in Vessel.Collision.TimeToEncounter.AlertRange`;
+  - `(OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.AlertRange`;
   - `OS.Restriction in ['COLREG.Rule5.*']`.
-- `clause['COLREG.Rule5/Sight']`: within `VisibleRange`, assures `OS.Intent has
-  'Operation.Lookout.*'`.
-- `clause['COLREG.Rule5/Radar']`: within `RadioRange`, assures `OS.Intent has
-  'Operation.Lookout.Radio*'`.
-- `clause['COLREG.Rule5/Sonar']`: within `SonarRange`, assures `OS.Intent has
-  'Operation.Lookout.Sonar*'`.
+- `clause['COLREG.Rule5/Sight']`: with `(OS, TS).TimeToEncounter in VisibleRange`, assures
+  `OS.Intent has 'Operation.Lookout.*'`.
 
-**Interpretation.** A proper look-out is a declared intent per means, required whenever a target
-is within that means' range. "Hearing" is not represented.
+**Removed on 2026-10-19.**
+- `COLREG.Rule5/Radar` tested radio, not radar, and radar use is Rule 7(b) (LEGATA.014).
+- `COLREG.Rule5/Sonar` encoded a requirement COLREG does not contain (LEGATA.015). If sonar
+  look-out is wanted, it belongs in a MASS or site rule under its own name.
 
-**In the simulation.** See above: look-out is implicit in each behaviour's nearest-vessel query.
+**Interpretation.** A proper look-out is a declared intent, required whenever a target is in
+visible range. "Hearing" and other means are not represented.
+
+**In the simulation.** Look-out is an intent (decided 2026-10-19). `PlannedVesselBehavior`
+declares `Operation.Lookout.Sight` on every update while the vessel is underway (status none of
+`ANCHORED`, `MOORED`, `FASTENED`, `AGROUND`), since its `move()` queries the vessels in range on
+every update; it withdraws the intent otherwise. Behaviours not built on `PlannedVesselBehavior`
+(`AnchoredVessel`, fleets) declare none.
+
+`(OS, TS).TimeToEncounter` is the range over the closing speed (the relative velocity along the
+line of sight), in seconds, and has no value when the vessels are not closing (LEGATA.004).
 
 **Caveats.**
 - Not fed, so never evaluated.
-- No behaviour raises an `Operation.Lookout.*` intent, so once fed every clause would fail for
-  every vessel (COS.041).
+- The intent is declared whenever the behaviour runs, so it records that the query ran, not
+  that a target was detected.
 - The file-level condition is not compiled (LEGATA.002). Its two lines would be OR'd, and the
   second tests `Restriction`, an enum, against a string pattern.
-- All ranges are placeholder `NumericRange (0, 10)` compared with metres.
+- Both ranges are still placeholder `NumericRange (0, 10)`, now read as seconds (LEGATA.004).
 - The behaviour's look-out is perfect within `range_visibility`, and it ignores visibility,
   darkness and obstruction.
 - "Full appraisal of the situation" is not judged.
 
 ## Open issues
 
-- Decide whether look-out is judged at all, given that the simulation's look-out is perfect. If
-  it is, the behaviours must raise look-out intents, which needs declarable intents (COS.041).
-- Fix the constant names and give them sourced values.
+- Sourced values, in seconds, for `AlertRange` and `VisibleRange`.
+- Feed the rule.

@@ -53,10 +53,14 @@ class VesselModel:
 
 
 		maneuver = config.get('maneuverability',None)
-		self.service_speed	= None		# Knots; Rule 19(b) is not judged without it
+		self.service_speed	= None		# Metres per second; Rule 19(b) is not judged without it
+		self.steerage_speed	= None		# Metres per second, the least speed at which she answers the helm; Rule 19(e)
+		self.max_speed		= None		# Metres per second; Rule 23(d)(ii)
 		if maneuver:
 			self.max_yaw_rate 	= maneuver['max_yaw_rate']  # degrees per timestep
 			self.service_speed	= maneuver.get( 'service_speed' )
+			self.steerage_speed	= maneuver.get( 'steerage_speed' )
+			self.max_speed		= maneuver.get( 'max_speed' )
 
 
 		self.__load_behavior(config)

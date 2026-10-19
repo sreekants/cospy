@@ -29,22 +29,23 @@ no intensity or range (see Rule 20). The clauses are never fed.
 > light, 2 miles; a white, red, green or yellow all-round light, 2 miles.
 
 **Legata.**
-- `clause['COLREG.Rule22.a']`: `OS.Length > meters(50)`.
-- `clause['COLREG.Rule22.b.Large']`: `OS.Length in range(meters(20), meters(50))`.
-- `clause['COLREG.Rule22.b.Small']`: `OS.Length in range(meters(12), meters(20))`.
-- `clause['COLREG.Rule22.c']`: `OS.Length < meters(12)`.
+- `clause['COLREG.Rule22.a']`: `OS.Length >= 50`.
+- `clause['COLREG.Rule22.b.Large']`: `OS.Length` from 20 to under 50.
+- `clause['COLREG.Rule22.b.Small']`: `OS.Length` from 12 to under 20.
+- `clause['COLREG.Rule22.c']`: `OS.Length < 12`.
 
-Each assures `OS.Equipment.<Light>.Range >= miles(n)` for the masthead, side, stern, towing and
-signal (all-round) lights. The lines are OR'd.
+The bounds were corrected on 2026-10-19 (LEGATA.054–057): (a) missed vessels of exactly 50 m,
+and `range(meters(…))` raised. Each assures `OS.Equipment.<Light>.Range >= miles(n)` for the
+masthead, side, stern, towing and signal (all-round) lights. Assurance lines are AND'd.
 
 **Interpretation.** Each vessel's fitted lights would carry a range, compared with the minimum
 for its length.
 
 **Caveats.**
 - `OS.Equipment.*` is not a term, and ship models have no light equipment.
-- The assurance lines are OR'd, so meeting any one minimum would pass the clause.
-- (a) tests `> 50`, where the rule says 50 m *or more*.
-- `meters()` and `miles()` are not known to be Legata functions.
+- Every light type is required on every vessel, towing or not; Rule 22 sets ranges only for the
+  lights a vessel carries.
+- `miles()` is nautical miles in metres (1852 m).
 - Vessel length is `physics.length` from the ship model, which is a category value, not the
   individual vessel's length.
 

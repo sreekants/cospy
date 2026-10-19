@@ -26,12 +26,12 @@ signals:
   # Navigation lights, by the names the COLREG rules test
   Light.Masthead.Forward.1x:    { class: navigation, rule: "COLREG 23(a)(i)" }
   Light.Masthead.Forward.2x:    { class: navigation, rule: "COLREG 23(a)(ii)" }
+  Light.Masthead.Forward.3x:    { class: navigation, rule: "COLREG 24(a)(i), tow over 200 m" }
   Light.Masthead.Abaft:         { class: navigation, rule: "COLREG 23(a)(ii)" }
   Light.Sidelight:              { class: navigation, rule: "COLREG 21(b), 23(a)(iii)" }
   Light.Sternlight:             { class: navigation, rule: "COLREG 21(c), 23(a)(iv)" }
   Light.TowingLight:            { class: navigation, rule: "COLREG 21(d), 24" }
   Light.Allround.White:         { class: navigation, rule: "COLREG 23(d)" }
-  Light.Diamond:                { class: navigation, rule: "COLREG 24" }
   Light.Flashing.Yellow:        { class: navigation, rule: "COLREG 23(b)" }
   Light.Flashing.Red:           { class: navigation, rule: "COLREG 23(c)" }
   Light.Allround.GreenWhite:    { class: navigation, rule: "COLREG 26(b)(i), trawling" }
@@ -43,6 +43,7 @@ signals:
   Light.Deck:                   { class: navigation, rule: "COLREG 30(c)" }
 
   # Day shapes, shown by day
+  Shape.Diamond:                { class: navigation, rule: "COLREG 24(a)(v), 24(e)(iii), tow over 200 m" }
   Shape.Cones.ApexTogether:     { class: navigation, rule: "COLREG 26(b)(i), 26(c)(i)" }
   Shape.Ball.1x:                { class: navigation, rule: "COLREG 30(a)(i)" }
   Shape.Ball.2x:                { class: navigation, rule: "COLREG 27(a)(ii)" }
@@ -65,6 +66,10 @@ signals:
   Sound.Blast.Short.2x:         { class: encounter, rule: "COLREG 34(a)(i), altering to port" }
   Sound.Blast.Short.3x:         { class: encounter, rule: "COLREG 34(a)(i), astern propulsion" }
   Sound.Blast.Short.5x:         { class: encounter, rule: "COLREG 34(d), doubt" }
+  Sound.Blast.Prolonged.1x:     { class: encounter, rule: "COLREG 34(e), nearing a bend" }
+  Sound.Blast.Prolonged.2x.Short.1x: { class: encounter, rule: "COLREG 34(c)(i), overtaking on the starboard side" }
+  Sound.Blast.Prolonged.2x.Short.2x: { class: encounter, rule: "COLREG 34(c)(i), overtaking on the port side" }
+  Sound.Blast.ProlongedShort.2x: { class: encounter, rule: "COLREG 34(c)(ii), agreeing to be overtaken" }
   Light.Flash.1x:               { class: encounter, rule: "COLREG 34(b)(i), altering to starboard" }
   Light.Flash.2x:               { class: encounter, rule: "COLREG 34(b)(i), altering to port" }
   Light.Flash.3x:               { class: encounter, rule: "COLREG 34(b)(i), astern propulsion" }

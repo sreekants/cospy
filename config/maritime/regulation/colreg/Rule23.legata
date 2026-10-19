@@ -2,11 +2,12 @@
 # Status        : REVIEW
 
 define: {
-    OS: OwnShip
+    OS: OwnShip,
+    TS: TargetShip
 }
 
 condition: { 
-    :OS.Operation has 'Vessel.Operation.UNDERWAY'
+    :(OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND])
 }
 
 # Power-driven Vessels underway
@@ -22,10 +23,12 @@ condition: {
 clause['COLREG.Rule23.a']:{
     : {
         condition: { 
-            :OS.Type is Vessel.Type.PowerDriven
+            :(OS.Type is Vessel.Type.PowerDriven) and (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]) and
+             (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
         }
 		exclude:{
-            :OS.Length < meters(12)		# Rule23.d.i
+            :OS.Length < 12
+            :(OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Operation is Vessel.Operation.Fishing)
 		}
         assure: { 
             :OS.Signal.ON has 'Light.Masthead.Forward.1x'
@@ -38,10 +41,12 @@ clause['COLREG.Rule23.a']:{
 clause['COLREG.Rule23.a.ii']:{
     : {
         condition: { 
-            :OS.Type is Vessel.Type.PowerDriven
+            :(OS.Type is Vessel.Type.PowerDriven) and (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]) and
+             (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
         }
 		exclude:{
-            :OS.Length < meters(50)     # Rule23.d.i  (includes less than 12 meters in length)
+            :OS.Length < 50
+            :(OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Operation is Vessel.Operation.Fishing)
 		}
         assure: { 
             :OS.Signal.ON has 'Light.Masthead.Abaft'
@@ -53,16 +58,6 @@ clause['COLREG.Rule23.a.ii']:{
 # (b) An air-cushion vessel when operating in the non-displacement mode shall, in
 # addition to the lights prescribed in paragraph (a) of this Rule exhibit an all-round
 # flashing yellow light.
-clause['COLREG.Rule23.b']:{
-    : {
-        condition: { 
-            :OS.Type is Vessel.Type.AirCushion
-        }
-        assure: { 
-            :OS.Signal.ON has 'Light.Flashing.Yellow'
-        }
-    }
-}
 
 # (c) A WIG craft only when taking off, landing and in flight near the surface shall, in
 # addition to the lights prescribed in paragraph (a) of this Rule, exhibit a high intensity
@@ -70,10 +65,14 @@ clause['COLREG.Rule23.b']:{
 clause['COLREG.Rule23.c']:{
     : {
         condition: { 
-            :OS.Type is Vessel.Type.WIG
+            :(OS.Type is Vessel.Type.WIG) and (OS.Operation is Vessel.Operation.FLIGHT) and
+             (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
         }
         assure: { 
             :OS.Signal.ON has 'Light.Flashing.Red'
+            :OS.Signal.ON has 'Light.Masthead.Forward.1x'
+            :OS.Signal.ON has 'Light.Sidelight'
+            :OS.Signal.ON has 'Light.Sternlight'
         }
     }
 }
@@ -85,14 +84,17 @@ clause['COLREG.Rule23.c']:{
 clause['COLREG.Rule23.d.i']:{
     : {
         condition: { 
-            :OS.Type is Vessel.Type.PowerDriven
+            :(OS.Type is Vessel.Type.PowerDriven) and (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]) and
+             (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
         }
 		exclude:{
-            :OS.Length > meters(12)
+            :OS.Length >= 12
+            :(OS.Length < 7) and (OS.MaxSpeed <= knot(7))
+            :(OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Operation is Vessel.Operation.Fishing)
 		}
         assure: { 
-            :OS.Signal.ON has 'Light.Allround.White'
-            :OS.Signal.ON has 'Light.Sidelight'
+            :((OS.Signal.ON has 'Light.Masthead.Forward.1x') and (OS.Signal.ON has 'Light.Sidelight') and (OS.Signal.ON has 'Light.Sternlight')) or
+             ((OS.Signal.ON has 'Light.Allround.White') and (OS.Signal.ON has 'Light.Sidelight'))
         }
     }
 }
@@ -105,13 +107,15 @@ clause['COLREG.Rule23.d.i']:{
 clause['COLREG.Rule23.d.ii']:{
     : {
         condition: { 
-            :OS.Type is Vessel.Type.PowerDriven
+            :(OS.Type is Vessel.Type.PowerDriven) and (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]) and
+             (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range)) and
+             (OS.Length < 7) and (OS.MaxSpeed <= knot(7))
         }
 		exclude:{
-            :(OS.Length > meters(7)) and (OS.Velocity > knot(7))
+            :(OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Operation is Vessel.Operation.Fishing)
 		}
         assure: { 
-            :OS.Signal.ON has 'Light.Allround.White'
+            :((OS.Signal.ON has 'Light.Masthead.Forward.1x') and (OS.Signal.ON has 'Light.Sidelight') and (OS.Signal.ON has 'Light.Sternlight')) or (OS.Signal.ON has 'Light.Allround.White')
         }
     }
 }

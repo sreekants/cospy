@@ -41,8 +41,12 @@ class Operation(Flag):
     TRANSPORT           = 0x00000100   # Transport vessel
     CARGO               = 0x00001000   # Cargo and pcosisions vessel
     SERVICE             = 0x00002000   # Laying, servicing or picking up a navigation mark, submarine cable or pipeline etc.
+    TOWING              = 0x00010000   # Towing another vessel astern (Rule 24(a))
+    PUSHING             = 0x00020000   # Pushing ahead or towing alongside (Rule 24(c))
+    PILOTAGE            = 0x00040000   # Pilot vessel on pilotage duty (Rule 29)
     SAFETY              = 0x00100000   # Safety operation etc.
     MILITARY            = 0x00200000   # Military operation etc.
+    FLIGHT              = 0x00400000   # WIG craft taking off, landing or in flight near the surface (Rule 23(c))
 
 class Status(Flag):
     """Status of the vessel (by AIS/COLREG standards)"""
@@ -98,6 +102,7 @@ class Vessel(Vehicle):
         self.recid          = int( identifier["imo"] )     # Vessel IMO: the vessel's id in every fact table
 
         self.operation      = 0
+        self.tow_length     = 0.0       # Metres, stern of the towing vessel to the after end of the tow (Rule 24)
         self.status         = Status.UNKNOWN
         self.restriction    = Restriction.NONE
         self.situations     = []        # Active situations; a faculty removes each when it ends

@@ -24,11 +24,13 @@ condition: {
 clause['COLREG.Rule10.b.i']:{
     : {
         condition: { :TSS is not empty }
+        exclude: {
+            : (OS.Status in [Vessel.Status.RESTRICTED]) and (OS.Operation is Vessel.Operation.SAFETY)
+            : (OS.Status in [Vessel.Status.RESTRICTED]) and (OS.Operation is Vessel.Operation.SERVICE)
+        }
         assure: { 
             :OS.Position in TSS.Area
             :OS.Heading in TSS.SafeHeading
-            :OS.Velocity <= TSS.SafeVelocity
-            :(OS,TS).Distance >= TSS.SafeDistance
             }
     }
 }
@@ -37,6 +39,10 @@ clause['COLREG.Rule10.b.i']:{
 clause['COLREG.Rule10.b.ii']:{
     : {
         condition: { :TSS is not empty }
+        exclude: {
+            : (OS.Status in [Vessel.Status.RESTRICTED]) and (OS.Operation is Vessel.Operation.SAFETY)
+            : (OS.Status in [Vessel.Status.RESTRICTED]) and (OS.Operation is Vessel.Operation.SERVICE)
+        }
         assure: { 
             :[OS.Position, TSS.SeparationZone].Distance > TSS.SeparationDistance
             :[OS.Position, TSS.SeparationLine].Distance > TSS.SeparationDistance
@@ -74,8 +80,7 @@ clause['COLREG.Rule10.c']:{
     : {
         condition: { :(TSS is not empty) and (OS.Intent in ['TrafficSeparationScheme.Crossing']) }
         assure: { 
-            :[OS.Position, TSS.ExitZone].Distance in TSS.SafeDistance
-            :abs((OS.Heading, TSS.SafeHeading).Gradient) in range(87.5,92.5)  # 5 degree margin of error  
+            :abs((OS.Heading, TSS.SafeHeading).Gradient) in range(87.5,92.5)
             }
     }
 }
@@ -92,8 +97,7 @@ clause['COLREG.Rule10.d.i']:{
                        (OS.Intent not in ['Destination.Enter', 'Destination.Leave','Emergency.*'])
          }
         assure: { 
-            :(OS.Length in range(0, 20)) or 
-             (OS.Operation in ['Vessel.Operation.Sailing', 'Vessel.Operation.Fishing'])
+            :(OS.Length < 20) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing)
             }
     }
 }
@@ -119,18 +123,20 @@ clause['COLREG.Rule10.d.ii']:{
 # a separation zone or cross a separation line except:
 # (i) in cases of emergency to avoid immediate danger;
 # (ii) to engage in fishing within a separation zone.
-clause['COLREG.Rule10.e.i']:{
+clause['COLREG.Rule10.e']:{
     : {
-        condition: { 
-            : (TSS is not empty) and 
-              (OS.Position in TSS.SeparationZone) and
-              (OS.Intent in ['Emergency.*'])
-            : (TSS is not empty) and 
-              (OS.Position in TSS.SeparationZone) and
-              (OS.Operation has 'Vessel.Operation.FISHING')    # TODO: Why not sailing??
-         }
+        condition: { : TSS is not empty }
+        exclude: {
+            : OS.Intent has 'TrafficSeparationScheme.Crossing'
+            : OS.Intent has 'TrafficSeparationScheme.Enter'
+            : OS.Intent has 'TrafficSeparationScheme.Exit'
+            : OS.Intent has 'Emergency.*'
+            : OS.Operation is Vessel.Operation.Fishing
+            : (OS.Status in [Vessel.Status.RESTRICTED]) and (OS.Operation is Vessel.Operation.SAFETY)
+            : (OS.Status in [Vessel.Status.RESTRICTED]) and (OS.Operation is Vessel.Operation.SERVICE)
+        }
         assure: { 
-            : clear             # Clear all violations
+            : OS.Position not in TSS.SeparationZone
         }
     }
 }
@@ -164,8 +170,11 @@ clause['COLREG.Rule10.g']:{
 clause['COLREG.Rule10.h']:{
     : {
         condition: { 
-            : [OS.Position, Map.Sea@TrafficSeparationScheme].Distance not in Area.TrafficSeparationScheme.SafeRange
+            : TSS is empty
          }
+        exclude: {
+            : OS.Intent has 'TrafficSeparationScheme.Enter'
+        }
         assure: { 
             : [OS.Position, Map.Sea@TrafficSeparationScheme].Distance > Area.TrafficSeparationScheme.SafeZoneClearance
         }
@@ -177,7 +186,7 @@ clause['COLREG.Rule10.i']:{
     : {
         condition: { 
             : (TSS is not empty) and 
-              (OS.Operation has 'Vessel.Operation.FISHING')    # TODO: Why not sailing??
+              (OS.Operation is Vessel.Operation.Fishing)
          }
         assure: { 
             : (OS, TS).Distance > Area.TrafficSeparationScheme.SafeSmallVesselClearance
@@ -192,7 +201,8 @@ clause['COLREG.Rule10.j']:{
     : {
         condition: { 
             : (TSS is not empty) and 
-              (OS.Length in range(0, 20))
+              ((OS.Length < 20) or (OS.Type is Vessel.Type.Sailing)) and
+              (TS.Type is Vessel.Type.PowerDriven)
          }
         assure: { 
             : (OS, TS).Distance > Area.TrafficSeparationScheme.SafeSmallVesselClearance
@@ -204,34 +214,7 @@ clause['COLREG.Rule10.j']:{
 # (k) A vessel restricted in her ability to manoeuvre when engaged in an operation for the maintenance
 # of safety of navigation in a traffic separation scheme is exempted from complying with this Rule to
 # the extent necessary to carry out the operation.
-clause['COLREG.Rule10.k']:{
-    : {
-        condition: { 
-            : (TSS is not empty) and 
-              (OS.Status in [Vessel.Status.RESTRICTED]) and
-              (OS.Operation has 'Vessel.Operation.SAFETY')                            
-
-         }
-        assure: { 
-            : clear             # Clear all violations
-            : abort             # No further processing
-        }
-    }
-}
 
 # (l) A vessel restricted in her ability to manoeuvre when engaged in an operation for the laying,
 # servicing or picking up of a submarine cable, within a traffic separation scheme, is exempted from
 # complying with this Rule to the extent necessary to carry out the operation.
-clause['COLREG.Rule10.l']:{
-    : {
-        condition: { 
-            : (TSS is not empty) and 
-              (OS.Status in [Vessel.Status.RESTRICTED]) and
-              (OS.Operation has 'Vessel.Operation.SERVICE')
-         }
-        assure: { 
-            : clear             # Clear all violations
-            : abort             # No further processing
-        }
-    }
-}

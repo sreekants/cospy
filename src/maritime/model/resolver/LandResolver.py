@@ -13,7 +13,7 @@ import math
 
 # How far ahead the own ship's current course is projected to decide whether
 # it is heading for land. Matches the order of magnitude of the other
-# look-ahead placeholders in this vocabulary (see TargetResolver.TimeToEncounter).
+# look-ahead placeholders in this vocabulary.
 GROUNDING_HORIZON = 300.0		# seconds
 
 class LandResolver(Resolver):

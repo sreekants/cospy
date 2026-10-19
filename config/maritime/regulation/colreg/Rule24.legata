@@ -2,12 +2,13 @@
 # Status        : REVIEW
 
 define: {
-    OS: OwnShip
+    OS: OwnShip,
+    TS: TargetShip
 }
 
 
 condition: { 
-    :OS.Operation in ['Vessel.Operation.TOWING','Vessel.Operation.PUSHING','Vessel.Operation.PUSHED']
+    :OS.Operation in [Vessel.Operation.TOWING, Vessel.Operation.PUSHING]
 }
 
 # Towing and Pushing
@@ -25,21 +26,45 @@ condition: {
 clause['COLREG.Rule24.a']:{
     :{
         condition: { 
-			:(OS.Type is Vessel.Type.PowerDriven)
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation is Vessel.Operation.TOWING) and (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
 		}
         assure: { 
-            :OS.Signal.ON has 'Light.Masthead.Forward.2x'
             :OS.Signal.ON has 'Light.Sidelight'
             :OS.Signal.ON has 'Light.Sternlight'
             :OS.Signal.ON has 'Light.TowingLight'
-            :{
-				condition: { 
-					:OS.Length > meters(200)
-				}
-				assure: { 
-					:OS.Signal.ON has 'Light.Diamond'
-				}
-			}	
+        }
+    }
+}
+
+clause['COLREG.Rule24.a.i']:{
+    :{
+        condition: { 
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation is Vessel.Operation.TOWING) and (OS.TowLength <= 200) and (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Masthead.Forward.2x'
+        }
+    }
+}
+
+clause['COLREG.Rule24.a.i/LongTow']:{
+    :{
+        condition: { 
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation is Vessel.Operation.TOWING) and (OS.TowLength > 200) and (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
+		}
+        assure: { 
+            :OS.Signal.ON has 'Light.Masthead.Forward.3x'
+        }
+    }
+}
+
+clause['COLREG.Rule24.a.v']:{
+    :{
+        condition: { 
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation is Vessel.Operation.TOWING) and ((OS, TS).Night is false) and (OS.TowLength > 200)
+		}
+        assure: { 
+            :OS.Signal.ON has 'Shape.Diamond'
         }
     }
 }
@@ -50,10 +75,12 @@ clause['COLREG.Rule24.a']:{
 clause['COLREG.Rule24.b']:{
     : {
         condition: { 
-			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation has 'Vessel.Operation.PUSHED')
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation has 'Vessel.Operation.PUSHED') and (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
 		}
         assure: { 
-            :apply 'COLREG.Rule23*'
+            :OS.Signal.ON has 'Light.Masthead.Forward.1x'
+            :OS.Signal.ON has 'Light.Sidelight'
+            :OS.Signal.ON has 'Light.Sternlight'
         }
     }
 }
@@ -69,11 +96,8 @@ clause['COLREG.Rule24.b']:{
 clause['COLREG.Rule24.c']:{
     : {
         condition: { 
-			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation has 'Vessel.Operation.PUSHING')
+			:(OS.Type is Vessel.Type.PowerDriven) and (OS.Operation is Vessel.Operation.PUSHING) and (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
         }
-		exclude: {
-			: OS.Trait has 'Vessel.Trait.CompositeUnit'
-		}
         assure: { 
             :OS.Signal.ON has 'Light.Masthead.Forward.2x'
             :OS.Signal.ON has 'Light.Sidelight'
@@ -87,10 +111,11 @@ clause['COLREG.Rule24.c']:{
 clause['COLREG.Rule24.d']:{
     : {
         condition: { 
-			:OS.Type is Vessel.Type.PowerDriven
+			:(OS.Type is Vessel.Type.PowerDriven) and ((OS.Operation is Vessel.Operation.TOWING) or (OS.Operation is Vessel.Operation.PUSHING)) and
+			 (OS.Length >= 50) and (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
 		}
         assure: { 
-            :apply 'COLREG.Rule23*'
+            :OS.Signal.ON has 'Light.Masthead.Abaft'
         }
     }
 }
@@ -104,19 +129,22 @@ clause['COLREG.Rule24.d']:{
 clause['COLREG.Rule24.e']:{
     : {
         condition: { 
-			:OS.Operation has 'Vessel.Operation.TOWED'
+			:(OS.Operation has 'Vessel.Operation.TOWED') and (((OS, TS).Night is true) or ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range))
 		}
         assure: { 
             :OS.Signal.ON has 'Light.Sidelight'
             :OS.Signal.ON has 'Light.Sternlight'
-            :{
-				condition: { 
-					:OS.Length > meters(200)
-				}
-				assure: { 
-					:OS.Signal.ON has 'Light.Diamond'
-				}
-			}	
+        }
+    }
+}
+
+clause['COLREG.Rule24.e.iii']:{
+    :{
+        condition: { 
+			:(OS.Operation has 'Vessel.Operation.TOWED') and ((OS, TS).Night is false) and (OS.Length > 200)
+		}
+        assure: { 
+            :OS.Signal.ON has 'Shape.Diamond'
         }
     }
 }

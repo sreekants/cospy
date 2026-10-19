@@ -5,9 +5,9 @@
 | Legata | `Rule35.legata` |
 | Driver | `rules.colreg.rule35.Rule35` (`src/rules/colreg/rule35/Rule35.py`) |
 | Loaded by | `rules.colreg.yaml`, entry `Rule35` |
-| Terms | `OwnShipResolver` (`FogSignal`), `TargetResolver` (`Visibility`), `VesselResolver` (`Type`, `Status`, `Operation`, `Velocity`); constants `Vessel.RestrictedVisibility.Range` (2.0 nm), `Vessel.MakingWay.Speed` (0.25) |
+| Terms | `VesselResolver` (`Signal.ON`, `Type`, `Status`, `Operation`, `Velocity`), `TargetResolver` (`Visibility`); constants `Vessel.RestrictedVisibility.Range` (2.0 nm), `Vessel.MakingWay.Speed` (0.25) |
 | Simulation | Signal vocabulary `Sound.Foghorn*`, `Sound.Bell*`, `Sound.Gong`; `VesselSignals.fog_signals`; `NuisanceExaminer` |
-| Tests | `tests/maritime/model/colreg/test_Rule35.py` (8) |
+| Tests | `tests/maritime/model/colreg/test_Rule35.py` (11) |
 | Status | (a)–(c) judged; (d)–(k) not. REQ.057 (REQ-057-06, open) adds (d) and (g)–(j). Container ships, ferries and fishing vessels sound fog signals; not exercised in a run, as no scenario has restricted visibility |
 | Reviewed | 2026-10-19 |
 
@@ -16,8 +16,10 @@
 `Rule35.feed()` adds every vessel under test alone (`Situation(own, None)`) on every pass. A
 breach that lasts is recorded once per occurrence by the rule's finding guards (10 s release).
 
-A fog signal is a `Sound.Foghorn*` name in the vessel's `signal` set (see Rules 20 and 32).
-`OS.FogSignal` is true when any such name is raised.
+A fog signal is a `Sound.Foghorn*` name in the vessel's `signal` set (see Rules 20 and 32). Each
+clause assures its own signal in `OS.Signal.ON`. Until 2026-10-19 each assured `OS.FogSignal is
+true`, which any fog signal satisfied (LEGATA.069–071); `OS.FogSignal` remains for the nuisance
+check.
 
 **In the simulation.** `VesselSignals.fog_signals` raises the signal for the vessel's state
 (Rule 20) while the scenario visibility is under `Vessel.RestrictedVisibility.Range`, and lowers
@@ -54,13 +56,12 @@ the rule reads it in a live tick is untested: no scenario has restricted visibil
 **Legata.** `clause['COLREG.Rule35.a']`:
 - **condition:** restricted visibility, power-driven, `OS.Velocity > Vessel.MakingWay.Speed`;
 - **excluded:** not under command, restricted, sailing or fishing (they owe (c));
-- **assured:** `OS.FogSignal is true`.
+- **assured:** `OS.Signal.ON has 'Sound.Foghorn.Prolonged.1x'`.
 
 **In the simulation.** `Sound.Foghorn.Prolonged.1x` while the behaviour's speed (`dx`) is above
 `Vessel.MakingWay.Speed`, at every length.
 
 **Caveats.**
-- Any fog signal passes, not specifically one prolonged blast.
 - The 2-minute interval is not judged.
 - The 0.25 making-way speed is unsourced.
 - Making way is the behaviour's speed, not the speed through the water.
@@ -73,12 +74,10 @@ the rule reads it in a live tick is untested: no scenario has restricted visibil
 
 **Legata.** `clause['COLREG.Rule35.b']`: as (a), but underway as Rule 3(i) defines it (status none
 of `ANCHORED`, `MOORED`, `FASTENED`, `AGROUND`) and `OS.Velocity <= Vessel.MakingWay.Speed`.
+Assures `OS.Signal.ON has 'Sound.Foghorn.Prolonged.2x'`.
 
 **Interpretation.** Underway is tested by exclusion because a vessel's status stays `UNKNOWN`
 until it first weighs anchor.
-
-**Caveats.** As (a): any fog signal passes, so a stopped vessel sounding one prolonged blast
-complies.
 
 **In the simulation.** `Sound.Foghorn.Prolonged.2x` at or below the making-way speed. An
 anchored vessel, with zero speed, sounds (g) instead.
@@ -92,15 +91,16 @@ anchored vessel, with zero speed, sounds (g) instead.
 > short blasts.
 
 **Legata.** `clause['COLREG.Rule35.c']`: restricted visibility; not under command, restricted,
-sailing or fishing; and underway as Rule 3(i) defines it. Assures `OS.FogSignal is true`.
+sailing or fishing; and underway as Rule 3(i) defines it. Assures `OS.Signal.ON has
+'Sound.Foghorn.Prolonged.Short.2x'`.
 
 **In the simulation.** `Sound.Foghorn.Prolonged.Short.2x` for the not under command,
 restricted, trawling, fishing and sailing rows, whether making way or not.
 
 **Caveats.**
-- Any fog signal passes: a sailing or fishing vessel sounding the power-driven
-  `Sound.Foghorn.Prolonged.1x` complies.
-- Constrained by draught, towing and pushing are not modelled (Rules 3(h), 24).
+- Constrained by draught is not modelled (Rule 3(h)). Towing and pushing are trip-row operations
+  (Rule 3); since 2026-10-19 (c) covers them and (a), (b) exclude them. `VesselSignals` has no
+  towing row, so a towing vessel sounds the power-driven signal and would breach (c).
 - `NOT_UNDER_COMMAND` and `RESTRICTED` are never set (REQ-059-03), so in a run (c) applies to
   sailing and fishing vessels only.
 
@@ -182,7 +182,7 @@ length, which (i) and (j) allow, so no alternative signal is modelled.
 > A pilot vessel when engaged on pilotage duty may in addition to the signals prescribed in paragraphs
 > (a), (b) or (g) of this Rule sound an identity signal consisting of four short blasts.
 
-**Legata.** None. Pilotage is not modelled (Rule 29).
+**Legata.** None. The identity signal is optional. Pilotage is a trip-row operation (Rule 29).
 
 ## Related: fog signals outside restricted visibility
 
@@ -193,6 +193,5 @@ encounter (`signal.nuisance`).
 
 - REQ-059-01, -04: the other behaviours sound the fog signals.
 - REQ-057-06: (d) and (g)–(j).
-- Test the specific signal per clause instead of `FogSignal`.
 - A run with restricted visibility, to confirm the signals are raised before the rule reads them.
 - Restricted visibility by place and time.

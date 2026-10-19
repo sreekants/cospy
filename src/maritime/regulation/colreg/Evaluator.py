@@ -31,6 +31,7 @@ class Evaluator(Service):
 
 		self.monitor_timer	= None			# Monitor every half second
 		self.filter			= None			# Vessels under test, from the Monitors faculty
+		self.errors			= set()			# (rule, step, message) already logged
 		return
 
 	def on_start(self, ctxt:Context, config):
@@ -143,19 +144,36 @@ class Evaluator(Service):
 			ctxt -- Simulation context
 		"""
 
-		try:
-			rule_ctxt = self.context( ctxt )
+		rule_ctxt = self.context( ctxt )
 
-			# Initialize, evaluate, then finalize the rules for scoring; stopping on abort
-			for step in ('begin', 'evaluate', 'end'):
-				for r in self.rules:
-					if self.running == False:
-						return
+		# Initialize, evaluate, then finalize the rules for scoring; stopping on abort
+		for step in ('begin', 'evaluate', 'end'):
+			for r in self.rules:
+				if self.running == False:
+					return
+				# One failing rule must not skip the others
+				try:
 					getattr(r, step)(ctxt, rule_ctxt)
-		except Exception as e:
-			ctxt.log.error( 'RuleEvaluator', f'Runtime error: {str(e)}' )
-		
+				except Exception as e:
+					self.report( ctxt, r, step, e )
 
+		return
+
+	def report(self, ctxt:Context, rule, step:str, e:Exception):
+		""" Logs a rule's runtime error, once per rule, step and message
+		Arguments
+			ctxt -- Simulation context
+			rule -- Rule that raised
+			step -- 'begin', 'evaluate' or 'end'
+			e -- Exception raised
+		"""
+		name	= getattr( rule, 'name', None ) or type( rule ).__name__
+		key		= ( name, step, str(e) )
+		if key in self.errors:
+			return
+
+		self.errors.add( key )
+		ctxt.log.error( 'RuleEvaluator', f'Runtime error in {name}.{step}: {type(e).__name__}: {e}' )
 		return
 
 	def context(self, ctxt:Context)->RuleContext:

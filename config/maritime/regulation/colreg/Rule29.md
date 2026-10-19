@@ -6,20 +6,21 @@
 | Driver | `rules.colreg.rule29.Rule29` (`src/rules/colreg/rule29/Rule29.py`), constructor only |
 | Loaded by | `rules.colreg.yaml`, entry `Rule29` |
 | Tests | none |
-| Status | Not judged. Pilotage is not modelled |
+| Status | Not judged. Pilotage is a trip-row operation (2026-10-19); no clause and no pilot lights yet |
 | Reviewed | 2026-10-19 |
 
 ## How the rule is employed
 
-No vessel is engaged on pilotage duty. `Operation` has no pilot member, and no behaviour boards
-or carries a pilot. Lights would be names in the `signal` set (see Rule 20). The white-over-red
+A vessel is engaged on pilotage duty for a trip row whose action is `pilotage`: it sets
+`Operation.PILOTAGE` until the next waypoint (Rule 3). No behaviour boards or carries a pilot. Lights would be names in the `signal` set (see Rule 20). The white-over-red
 all-round lights are not in the vocabulary.
 
 ## File-level condition
 
-**Legata.** `OS.Operation has 'Vessel.Operation.PILOT'`.
+**Legata.** `OS.Operation is Vessel.Operation.PILOTAGE`. It tested a quoted `PILOT`, not a member,
+until 2026-10-19 (LEGATA.003).
 
-**Caveats.** Not compiled (LEGATA.002). `PILOT` is not an `Operation` member.
+**Caveats.** Not compiled (LEGATA.002). There is no clause for it to scope.
 
 ## (a) On pilotage duty
 
@@ -39,5 +40,6 @@ all-round lights are not in the vocabulary.
 
 ## Open issues
 
-- A pilot vessel type or operation, if pilot boats are to appear in scenarios. Then the
-  vocabulary name and clauses on the pattern of REQ.057.
+- The white-over-red all-round lights in the vocabulary, and clauses for (a) on the pattern of
+  REQ.057.
+- `VesselSignals` rows for pilotage.

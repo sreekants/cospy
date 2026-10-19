@@ -48,8 +48,9 @@
 course to starboard to pass astern.
 
 **Caveats.**
-- Both vessels must be power-driven (a condition in each clause, COS.056). A crossing with a
-  sailing vessel is left to Rule 18(a).
+- Both vessels must be power-driven (a condition in each clause, COS.056), and neither may be
+  not under command, restricted or engaged in fishing (exclusions since 2026-10-19, LEGATA.050,
+  LEGATA.051). A crossing with such a vessel, or with a sailing vessel, is left to Rule 18(a).
 - "If the circumstances of the case admit" is not tested: crossing ahead is a breach whatever
   the circumstances.
 - The 100 m passing distance, and the 4 km and 500 m onset thresholds, are unvalidated.

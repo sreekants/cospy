@@ -6,9 +6,9 @@
 | Driver | `rules.colreg.rule10.Rule10` (`src/rules/colreg/rule10/Rule10.py`); subscribes to `vessel.crossing` and queues nothing |
 | Loaded by | `rules.colreg.yaml`, entry `Rule10` |
 | Simulation | Map shapes `TrafficSeparationScheme` (sea layer); lane settings in `location.yaml` `sea.tss`; `Map.in_tss()`; `VesselManeuvers.tss_avoidance`; site-generated local clauses |
-| Terms | `TSS` (`OwnShip.TrafficSeparationScheme`, `TSSResolver`), `TSS.*`, `[OS, Map.Sea@TrafficSeparationScheme].Distance`, `OS.Intent`, `OS.Status`, `OS.Operation`, `OS.Length`; `clear`, `abort`, `continue` |
+| Terms | `TSS` (`OwnShip.TrafficSeparationScheme`, `TSSResolver`), `TSS.*`, `[OS, Map.Sea@TrafficSeparationScheme].Distance`, `OS.Intent`, `OS.Status`, `OS.Operation`, `OS.Length`, `OS.Type`, `TS.Type`; `continue` |
 | Tests | none |
-| Status | Not judged as COLREG. Fifteen clauses, not fed; the TSS model behind them is incomplete. Behaviours follow the lanes; local site clauses cover parts of (b)(i), (e) and (g) |
+| Status | Not judged as COLREG. Thirteen clauses, not fed; the TSS model behind them is incomplete. Behaviours follow the lanes; local site clauses cover parts of (b)(i), (e) and (g) |
 | Reviewed | 2026-10-19 |
 
 ## How the rule is employed
@@ -51,24 +51,20 @@ in Area.ProximityRange`, or `OS.Restriction in ['COLREG.Rule10.*']`.
 
 ## (b)(i) Proceed in the lane, in the direction of flow
 
-**Legata.** `clause['COLREG.Rule10.b.i']`: with `TSS is not empty`, four OR'd assurances:
-- `OS.Position in TSS.Area`;
-- `OS.Heading in TSS.SafeHeading`;
-- `OS.Velocity <= TSS.SafeVelocity`;
-- `(OS,TS).Distance >= TSS.SafeDistance`.
+**Legata.** `clause['COLREG.Rule10.b.i']`: with `TSS is not empty`, assures both
+`OS.Position in TSS.Area` and `OS.Heading in TSS.SafeHeading` (assurance lines are AND'd). A
+restricted vessel on a `SAFETY` or `SERVICE` operation is excluded ((k), (l)). The speed and
+separation lines were removed on 2026-10-19: they are not in Rule 10(b)(i) (LEGATA.040).
 
 **In the simulation.** Lane direction is not enforced (`get_tss_bearing()` returns `None`). Each lane's
 heading is `TSS.SafeHeading`, from `location.yaml`.
 
-**Caveats.**
-- The lines are OR'd, so any one of them passes the clause.
-- The speed and distance tests are not in Rule 10(b)(i).
-- Most `TSS.*` terms do not resolve.
+**Caveats.** Most `TSS.*` terms do not resolve (LEGATA.007).
 
 ## (b)(ii) Keep clear of separation lines and zones
 
 **Legata.** `clause['COLREG.Rule10.b.ii']`: distance to `TSS.SeparationZone` and
-`TSS.SeparationLine` above `TSS.SeparationDistance`.
+`TSS.SeparationLine` above `TSS.SeparationDistance`. The (k) and (l) exclusions apply.
 
 **Interpretation.** The clearance is per location, optionally per lane, from `location.yaml`
 `sea.tss.separation_distance`.
@@ -96,7 +92,9 @@ next waypoint neither is declared.
 ## (c) Avoid crossing lanes; cross at right angles
 
 **Legata.** `clause['COLREG.Rule10.c']`: on the intent `TrafficSeparationScheme.Crossing`, heading
-relative to the lane in `range(87.5, 92.5)`.
+relative to the lane in `range(87.5, 92.5)`. An exit-zone distance line, unrelated to crossing,
+was removed on 2026-10-19 (LEGATA.041). `abs()` and `range()` evaluate since the same date
+(LEGATA.005, LEGATA.006).
 
 **In the simulation.** `VesselActions.tss_crossing` (ferries) declares
 `TrafficSeparationScheme.Crossing` for as long as the ferry is inside a scheme. A ferry is taken
@@ -110,21 +108,25 @@ to cross whatever its heading; ferries do not declare Enter or Exit.
 
 **Legata.**
 - `Rule10.d.i`: in an inshore traffic zone, without a destination or emergency intent, only
-  vessels under 20 m, sailing or fishing.
+  vessels under 20 m (`OS.Length < 20`), sailing (`OS.Type`) or fishing (`OS.Operation`). The
+  length and sailing tests could never match until 2026-10-19 (LEGATA.042).
 - `Rule10.d.ii`: with such an intent, `continue`.
 
 **Caveats.**
-- Sailing is tested as an `Operation`; it is a `Type`.
+- "When she can safely use the appropriate traffic lane" is not tested.
 - No map has inshore traffic zones, and the destination and emergency intents are not raised.
 
 ## (e) Separation zones: enter only in emergency or to fish
 
-**Legata.** `Rule10.e.i`: in the separation zone, with an emergency intent or while fishing,
-`clear` (clears the findings).
+**Legata.** `clause['COLREG.Rule10.e']`: in a scheme, assures `OS.Position not in
+TSS.SeparationZone`, excluding a vessel crossing, joining or leaving (the TSS intents), one with
+an emergency intent, one engaged in fishing, and the (k) and (l) operations. It replaced
+`Rule10.e.i` on 2026-10-19, which only granted the exceptions with a `clear` that did nothing
+(LEGATA.043).
 
 **Caveats.**
-- The clause only clears. Nothing asserts the prohibition itself.
-- `vessel.operation` is never set.
+- Crossing a separation line is not tested: lines are not shapes.
+- `TSS.SeparationZone` is not a term (LEGATA.007).
 
 ## (f) Particular caution near terminations
 
@@ -143,32 +145,41 @@ to cross whatever its heading; ferries do not declare Enter or Exit.
 
 ## (h) Not using a scheme: avoid it by a wide margin
 
-**Legata.** `Rule10.h`: outside `SafeRange`, assures the distance to the scheme is above
-`SafeZoneClearance`.
+**Legata.** `Rule10.h`: a vessel outside a scheme and not declaring
+`TrafficSeparationScheme.Enter` keeps the distance to the scheme above `SafeZoneClearance`. Until
+2026-10-19 it tested the distance only once the vessel was already outside the range, so it could
+not fail (LEGATA.045).
 
 **In the simulation.** `tss_avoidance` keeps sailing and fishing vessels out of schemes.
 
-**Caveats.** The constants are not declared. Whether a vessel is "using" a scheme is not
-modelled.
+**Caveats.**
+- The constants are not declared.
+- "Using" a scheme is read as being in it or declaring entry. "Near it" is not tested, so the
+  margin applies at any distance; it holds trivially far away.
 
 ## (i) Fishing; (j) under 20 m or sailing: not to impede lane traffic
 
-**Legata.** `Rule10.i` (fishing) and `Rule10.j` (length under 20 m): assure a distance to the
-target above `SafeSmallVesselClearance` or `TSS.SmallVessel.SafeDistance`.
+**Legata.** `Rule10.i` (`OS.Operation is Vessel.Operation.Fishing`) and `Rule10.j` (under 20 m or
+sailing, towards a power-driven target): assure a distance to the target above
+`SafeSmallVesselClearance` and `TSS.SmallVessel.SafeDistance`. On 2026-10-19 (i)'s fishing test
+became a constant, and (j) gained sailing vessels, the power-driven target and a length test that
+matches (LEGATA.046, LEGATA.047).
 
 **Caveats.**
-- (j) omits sailing vessels.
 - "Impeding" is reduced to a distance.
-- `TS` is used without the lane-following test.
+- The target is not tested for following a lane.
 - The constants are not declared.
 
 ## (k) Restricted vessel maintaining safety; (l) restricted vessel laying or servicing a cable
 
-**Legata.** `Rule10.k` and `Rule10.l`: a restricted vessel engaged in `SAFETY` or `SERVICE`,
-`clear` and `abort`.
+**Legata.** No clause of their own since 2026-10-19. A restricted vessel engaged in a `SAFETY` or
+`SERVICE` operation is excluded from (b)(i), (b)(ii) and (e): lane direction and separation zones,
+"to the extent necessary". The former clauses used `clear` and `abort`, which did nothing, and
+quoted strings that never matched (LEGATA.048, LEGATA.049).
 
 **Caveats.**
 - `Status.RESTRICTED` is never set (REQ.059-03).
+- `SERVICE` covers navigation marks and pipelines too, not only cables.
 
 ## Open issues
 
@@ -176,4 +187,3 @@ target above `SafeSmallVesselClearance` or `TSS.SmallVessel.SafeDistance`.
   inshore zones. Then terms for each (COS.022 follow-up).
 - Feed by zone, as the local rules do. Then decide how the local clauses and these clauses
   share (b)(i), (e) and (g).
-- Join the OR'd (b)(i) lines with `and`.

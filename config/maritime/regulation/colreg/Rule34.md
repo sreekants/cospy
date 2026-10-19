@@ -14,7 +14,10 @@
 
 **What exists.**
 - **Vocabulary:** `Sound.Blast.Short.1x`, `.2x`, `.3x` (starboard, port, astern) and `.5x`
-  (doubt), and the light equivalents `Light.Flash.1x`–`.5x`, all of class `encounter`.
+  (doubt), and the light equivalents `Light.Flash.1x`–`.5x`. Since 2026-10-19 also
+  `Sound.Blast.Prolonged.2x.Short.1x` and `.Short.2x` (34(c)(i)), `Sound.Blast.ProlongedShort.2x`
+  (34(c)(ii)) and `Sound.Blast.Prolonged.1x` (34(e)), for Rule 9(e) and (f). All are of class
+  `encounter`.
 - **`SignalExaminer`** collects, on each change, own ship's declared intent and the encounter
   situation (`(OwnShip,TargetShip).EncounterSituation`). It publishes the pair on
   `/Faculty/Regulation/Rules` as `vessel.signal`. It judges nothing, so that Rule 34 can own the
@@ -72,11 +75,10 @@ not modelled (Rule 32).
 > indicate her agreement by the following signal on her whistle: one prolonged, one short, one
 > prolonged and one short blast, in that order.
 
-**Legata.** None. Rule 9(d) and (e) `apply` clauses named `COLREG.Rule34.c.i*` and `34.d*`, which
-do not exist.
+**Legata.** None. Rule 9(e)(i) tests these signals directly in `OS.Signal.ON` (it applied clauses
+named `COLREG.Rule34.c.i*` and `34.d*`, which do not exist, until 2026-10-19).
 
-**Caveats.** No vocabulary names exist for these signals. Narrow channels cannot be identified
-(Rule 9).
+**Caveats.** Narrow channels cannot be identified (Rule 9).
 
 ## (d) Doubt: at least five short blasts
 
@@ -88,8 +90,9 @@ do not exist.
 
 **Legata.** None.
 
-**Interpretation needed.** "Doubt" could be read as: the stand-on vessel at close quarters while
-the give-way vessel has not acted. That needs Rule 17's action measure.
+**Interpretation.** A vessel is in doubt when its risk in an encounter with a vessel in sight
+exceeds a risk threshold set in its ship model, so each vessel class can have its own (REQ.065).
+Not yet implemented: the risk measure, the ship-model key and its values are open.
 
 ## (e) Bends; (f) whistles more than 100 m apart
 
@@ -105,7 +108,6 @@ the give-way vessel has not acted. That needs Rule 17's action measure.
 
 ## Open issues
 
-- Deferred by REQ.056. The prerequisites are a course- and speed-change term (COS.041),
+- Deferred by REQ.056; the work is REQ.065. The prerequisites are a course- and speed-change term (COS.041),
   manoeuvre intents raised by behaviours, and a Rule 34 subscriber to `SignalExaminer`'s
   `vessel.signal` posts.
-- Vocabulary names for (c) and (e).

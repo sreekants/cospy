@@ -38,20 +38,15 @@ The Legata clauses would judge whether own ship had raised alert intents. They a
 > conditions to determine if risk of collision exists. If there is any doubt such risk shall be deemed
 > to exist.
 
-**Legata.**
-- `clause['COLREG.Rule7.a.Alert']`: within `AlertRange`, assures `OS.Intent in
-  ['Alert.SituationAvoidance', 'Alert.CollisionAvoidance']`.
-- `clause['COLREG.Rule7.a.Situation']`: within `SituationRange`, assures `OS.Intent has
-  'Alert.CollisionAvoidance'`.
+**Legata.** None. Applied by the classifier (see above), not judged as a duty.
 
-**Interpretation.** Determining risk is shown by raising an alert intent.
+**Removed on 2026-10-19.** `COLREG.Rule7.a.Alert` and its duplicate `COLREG.Rule7.a.Situation`
+required an alert intent whenever a target was within a placeholder range. No behaviour raises
+the intents, both ranges were `(0, 10)` compared with metres, and `<` against a range raised
+(LEGATA.020, LEGATA.021).
 
 **In the simulation.** Risk is computed exactly from true positions and velocities (CPA), so it
 is never in doubt.
-
-**Caveats.**
-- No behaviour raises an `Alert.*` intent.
-- `AlertRange` and `SituationRange` are placeholder ranges `(0, 10)` compared with metres.
 
 ## (b) Proper use of radar
 
@@ -78,7 +73,7 @@ is never in doubt.
 > Such risk shall be deemed to exist if the compass bearing of an approaching vessel does not
 > appreciably change;
 
-**Legata.** `clause['COLREG.Rule7.d.i']`: within `AlertRange` and `(TS, OS).Heading.Gradient <
+**Legata.** `clause['COLREG.Rule7.d.i']`: with `(OS, TS).TimeToEncounter` in `AlertRange` and `(TS, OS).Heading.Gradient <
 Vessel.Collision.Heading.Collide`, assures `OS.Intent has 'Alert.CollisionAvoidance'`.
 
 **In the simulation.** Equivalent to a small DCPA while closing: `EncounterWatch.at_risk()` and
@@ -91,9 +86,11 @@ Vessel.Collision.Heading.Collide`, assures `OS.Intent has 'Alert.CollisionAvoida
 > such risk may sometimes exist even when an appreciable bearing change is evident, particularly when
 > approaching a very large vessel or a tow or when approaching a vessel at close range.
 
-**Legata.** `clause['COLREG.Rule7.d.ii']`, three OR'd lines:
+**Legata.** `clause['COLREG.Rule7.d.ii']`, three OR'd condition lines, each with
+`(OS, TS).TimeToEncounter` in a range:
 - a large target (`TS.Weight in Vessel.Class.LargeVessel`);
-- own ship towing (`OS.Operation has 'Vessel.Operation.TOWING'`);
+- a target that is towing (`TS.Operation is Vessel.Operation.TOWING`). Until 2026-10-19 it
+  tested own ship towing, as a string that never matched (LEGATA.024);
 - within `SituationRange`.
 
 Each assures `Alert.CollisionAvoidance`.
@@ -103,7 +100,7 @@ between vessel positions, not hull outlines.
 
 **Caveats.**
 - `Vessel.Class.LargeVessel` is not declared.
-- Towing is a `Restriction`, not an `Operation`.
+- The ranges are placeholder `(0, 10)`, read as seconds of `TimeToEncounter` (LEGATA.004).
 
 ## Open issues
 

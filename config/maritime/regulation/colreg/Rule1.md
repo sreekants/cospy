@@ -31,7 +31,8 @@ The driver feeds nothing, so the precedent in `Rule1.legata` is never evaluated.
 
 **Legata.** `precedent['COLREG.Rule1.a']`:
 - **condition:** `OS.Position.Territory in ['Territory.HighSea', 'Territory.Navigable']`;
-- **assured:** `set(OS.Mode, 'COLREG', true)`, then `abort`.
+- **assured:** `set(OS.Mode, 'COLREG', true)`. Its `abort` line was removed on 2026-10-19: `abort`
+  did nothing, and the compiler now refuses it (LEGATA.011).
 
 **Interpretation.** The precedent marks a vessel as subject to COLREG when it is on the high seas
 or in connected navigable waters. Other rules could then test that mark (Rule 7 tests

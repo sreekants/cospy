@@ -44,9 +44,7 @@ showing a correctly fitted light (see Rule 20). Colour, arc and position are not
   Rules 13(b) and 14(b) use geometry instead (bearing sectors that match the arcs: 22.5° abaft the
   beam, and dead ahead).
 - Red and green sidelights are one name. A vessel cannot show only one of them.
-- `Light.Diamond` sits in the light namespace, but it is a shape (Rule 24).
 
 ## Open issues
 
-- Rename `Light.Diamond` to a `Shape.*` name, with the shapes of REQ-056-01.
 - Light arcs, if a rule needs another vessel's view of own ship's lights.

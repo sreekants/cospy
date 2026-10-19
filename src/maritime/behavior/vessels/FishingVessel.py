@@ -36,7 +36,7 @@ class FishingVessel(PlannedVesselBehavior):
             t -- Time on the simulation clock
             dx -- Velocity the behaviour has set
         """
-        b.vehicle.operation = b.mode
+        b.vehicle.operation = b.row_operation or b.mode
         return dx
 
     def ioctl(self, op, arg):
@@ -68,6 +68,9 @@ class FishingVessel(PlannedVesselBehavior):
         return resumed
 
     def on_at_waypoint(self, world, t, n, pt):
+        if self.begin_row( world, pt ):
+            return
+
         if len(pt[3]):
             activity  = pt[3].split('(')
 
