@@ -16,9 +16,6 @@ class TrafficZone(Sea):
 			config -- Configuration attributes
 		"""
 		Sea.__init__( self, ctxt, type, id, config )
-
-		self.safe_distance	= self.get_float_property(config, 'safe_distance')
-		self.safe_heading	= self.get_float_property(config, 'safe_heading')
 		return
 
 

@@ -17,8 +17,8 @@ physics:
     deadweight: 9000
     linear_damping_coeff: 500000000
     length: 190             # metres, length overall
-    width: 3
-    draft: 100
+    width: 25.4    # metres, greatest breadth; source: PIANC WG235 (2022) Freight RoRo Ships, interpolated 5,000-10,000 dwt
+    draft: 7.1         # metres; source: PIANC WG235 (2022) Freight RoRo Ships, fully laden, interpolated 5,000-10,000 dwt
     momentum: 0.92
     relative_size: "large"
 
@@ -48,7 +48,21 @@ behavior:
 
     stop_on_traffic     : true
 
+pipeline:
+    # Steps a planned vessel behaviour runs, by name; the table of steps is
+    # maritime.behavior.vessels.VesselPipeline. An unknown step, a step in the wrong list, or a
+    # step its behaviour class cannot run stops the vessel's build.
+    #   ops     -- each update the vessel can move, in order: each step adjusts the velocity the
+    #              previous one left
+    #   postops -- after the vessel has moved; they may assume it moved
+    #   syncops -- every update, moving or not (at anchor, halted, end of path)
+    # Cargo ship: strict TSS lane compliance, stops for traffic; declares its manoeuvres; shows its signals
+    ops             : [ tss_compliance, stop_for_safety, overtaking_distance, apply_momentum ]
+    postops         : [ collision_avoidance, tss_lane ]
+    syncops         : [ navigation_lights, day_shapes, fog_signals ]
+
 cargo:
+    manifest        : [vehicles]   # Cargo classes carried, matched against zones.yaml restricted_cargo; 'none' declares an empty hold
     # Cargo properties
     # Vessel type
         # - Container ships (standardized boxes), 

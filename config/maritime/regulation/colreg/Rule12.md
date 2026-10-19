@@ -107,6 +107,8 @@ side is judged as `Unknown` here, where (b) would give a tack.
 - `SailingVessel` behaviours do not steer by the wind. Whether they give way correctly depends on
   their speed-based separation manoeuvres, not on Rule 12.
 - No scenario yet has sailing vessels meeting in wind, so the rule has not been judged in a run.
+- The exclusions are repeated in each clause, because a file-level `condition:` block is not
+  compiled (LEGATA.002).
 - Terms return a value, never "unknown": `Windward` is false in a calm. A term returning `None`
   raises `Unresolved variable`.
 

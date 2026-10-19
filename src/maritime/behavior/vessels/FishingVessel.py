@@ -3,7 +3,6 @@
 # Description: Implementation of the FishingVessel class
 
 from maritime.behavior.vessels.PlannedVesselBehavior import PlannedVesselBehavior
-from maritime.behavior.vessels.VesselManeuvers import VesselManeuvers
 from maritime.model.vessel.Vessel import Vessel, Operation, Status
 
 from math import atan2, cos, sin, degrees, radians
@@ -15,34 +14,58 @@ import re
 class FishingVessel(PlannedVesselBehavior):
     def __init__(self, ctxt, config):
         PlannedVesselBehavior.__init__(self, ctxt, config)
-                
-        # Sequence of behavior operations
-        self.ops = [
-            # VesselManeuvers.tss_avoidance,
-            VesselManeuvers.overtaking_distance,
-            VesselManeuvers.apply_momentum,
 
-            VesselManeuvers.fishing_slowdown
-        ]
-
-        self.postops = [
-            VesselManeuvers.restore_speed
-        ]
+        self.fishing_trip   = False     # A fishing(...) trip action is running
+        self.fishing_ioctl  = False     # ioctl('operation.fishing') is in effect
 
         self.reverse    = True
         return
+
+    def update_mode(self):
+        """ Fishing while a fishing trip action runs or the fishing ioctl is in effect, else transport
+        """
+        self.mode   = Operation.FISHING if (self.fishing_trip or self.fishing_ioctl) else Operation.TRANSPORT
+        return
+
+    @staticmethod
+    def declare_operation(b, world, t, dx):
+        """ Sets the vessel's operation from the behaviour's mode, so the rules and signals read it
+        Arguments
+            b -- Vessel behaviour
+            world -- Reference ot the simulation world
+            t -- Time on the simulation clock
+            dx -- Velocity the behaviour has set
+        """
+        b.vehicle.operation = b.mode
+        return dx
 
     def ioctl(self, op, arg):
         """Switch between TRANSPORT and FISHING modes at runtime."""
 
         if op == 'operation.fishing':
-            self.mode   = Operation.FISHING
+            self.fishing_ioctl  = True
+            self.update_mode()
             return True
         elif op == 'operation.transport':
-            self.mode   = Operation.TRANSPORT
+            self.fishing_ioctl  = False
+            self.update_mode()
             return True
 
         return PlannedVesselBehavior.ioctl(self, op, arg)
+
+    def on_end_path(self, world, t, n, pt):
+        """ Ends a fishing trip action when its random walk is done and the trip resumes
+        Arguments
+            world -- Reference ot the simulation world
+            t -- Time on the simulation clock
+            n -- Waypoint index
+            pt -- Waypoint
+        """
+        resumed = PlannedVesselBehavior.on_end_path(self, world, t, n, pt)
+        if resumed and self.fishing_trip:
+            self.fishing_trip   = False
+            self.update_mode()
+        return resumed
 
     def on_at_waypoint(self, world, t, n, pt):
         if len(pt[3]):
@@ -67,6 +90,8 @@ class FishingVessel(PlannedVesselBehavior):
 
                         PlannedVesselBehavior.random_walk( path, dist, self.position, nways, sog )
                         self.plan( path )
+                        self.fishing_trip   = True
+                        self.update_mode()
                         return
 
             

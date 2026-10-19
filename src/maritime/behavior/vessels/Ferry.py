@@ -3,7 +3,6 @@
 # Description: Implementation of the Ferry class
 
 from maritime.behavior.vessels.PlannedVesselBehavior import PlannedVesselBehavior
-from maritime.behavior.vessels.VesselManeuvers import VesselManeuvers
 
 
 # Specification: medium momentum, fast heading, crosses TSS perpendicularly.
@@ -11,15 +10,6 @@ from maritime.behavior.vessels.VesselManeuvers import VesselManeuvers
 class Ferry(PlannedVesselBehavior):
     def __init__(self, ctxt, config):
         PlannedVesselBehavior.__init__(self, ctxt, config)
-
-        # Sequence of behavior operations
-        self.ops = [
-            VesselManeuvers.tss_compliance,
-            VesselManeuvers.overtaking_distance,
-            VesselManeuvers.apply_momentum,
-
-            VesselManeuvers.crossing_slowdown
-        ]
 
         self.reverse    = True
         return

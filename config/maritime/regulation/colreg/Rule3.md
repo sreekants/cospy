@@ -87,10 +87,10 @@ not become power-driven (see (c)).
 (`VesselManeuvers.fishing_slowdown`).
 
 **Caveats.**
-- `vessel.operation` is never set: it starts at 0, and the fishing behaviour sets only its
-  behaviour's `mode`. So every fishing branch in Rules 18, 26 and 35 is inert in a run
-  (REQ.059-02).
-- The kind of gear (trawl, nets, trolling) is not modelled.
+- `FishingVessel` sets `vessel.operation` from its `mode` (REQ.059-02): `FISHING` while a
+  `fishing(...)` trip action runs or the ioctl is on, `TRANSPORT` otherwise. Other behaviours
+  leave it at 0.
+- The kind of gear is the ship model's `fishing.gear`: `trawl` or `other` (Rule 26).
 
 ## (e) Seaplane
 
@@ -133,7 +133,7 @@ It can be set only by a test.
 | (ii) | `DREDGING` (surveying and underwater operations are not separate) |
 | (iii) | `TRANSPORTING` |
 | (iv) | `LAUNCHING` |
-| (v) | `PEACE_KEEEPING` (mine clearance) |
+| (v) | `MINE_CLEARANCE` |
 | (vi) | `TOWING` |
 | — | `OTHER`, `NONE` |
 
@@ -143,7 +143,6 @@ It can be set only by a test.
 - `Restriction` also holds `DRAUGHT` and `VISIBILITY`, which are not causes under (g). See (h)
   and (l).
 - Surveying and underwater operations share `DREDGING`.
-- The member name `PEACE_KEEEPING` is misspelled.
 
 ## (h) Vessel constrained by her draught
 
@@ -192,7 +191,13 @@ vessel record or the ship model (`physics.draft`), with bounds checked against `
 **Definition.** Ship model `physics.length` (metres, length overall) and `physics.width`. Terms:
 `OS.Length` and `OS.Width`.
 
-**Caveats.** `physics.width` is 3 in all 16 ship models: a placeholder, not the breadth.
+**In the simulation.** Each ship model's breadth is sourced and cited in its `width:` comment: PIANC WG235
+(2022) beams for the merchant classes, interpolated by deadweight as the draughts are, and builder or
+broker figures for the named small craft. `test_Breadth.py` checks that each breadth is cited and lies
+between 0 and the length.
+
+**Caveats.** A ship model is a category, not one ship: every vessel of a type has the same
+length and breadth.
 
 ## (k) In sight of one another
 
@@ -232,10 +237,8 @@ profile's visibility range (`weather/profiles.yaml`). Visibility is *restricted*
 
 ## Open issues
 
-- Set `vessel.operation` from the fishing behaviour (REQ.059-02), and `restrict()` from
-  `RestrictedAbilityManeuver` (REQ.059-03).
+- Call `restrict()` from `RestrictedAbilityManeuver` (REQ.059-03).
 - Something that sets `NOT_UNDER_COMMAND`, `MOORED` and `FASTENED`.
 - Give `Restriction.DRAUGHT` its own value.
 - Set an initial status (`UNDERWAY`) for vessels that start under way.
-- Sourced breadths in the ship models.
 - Sailing vessels under power, (c).

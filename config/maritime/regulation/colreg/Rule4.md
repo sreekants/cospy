@@ -42,7 +42,8 @@ another vessel". That duty belongs to Rules 6 and 19, not Rule 4.
 - `TS` is used but not declared.
 - `AlertRange` is a placeholder range `(0, 10)` compared with metres.
 - `Vessel.Velocity.ReducedSpeed` is not declared in `definitions.s3db`.
-- No behaviour sets either intent, and `'Manoeuverer.Course.SafeZone'` is misspelled.
+- Container ships and ferries declare `Decelerate` (Rule 8(e)); no behaviour sets the safe-zone
+  intent, and `'Manoeuverer.Course.SafeZone'` is misspelled.
 - The two assurance lines are OR'd.
 
 ## Open issues

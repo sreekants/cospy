@@ -17,9 +17,9 @@ physics:
     deadweight: 4
     linear_damping_coeff: 500000000
     length: 15             # metres, length overall
-    width: 3
+    width: 4.3     # metres, greatest breadth; source: Princess F50 (15.6 m), beam 4.34 m, princess.co.uk
     momentum: 0.92
-    draft: 100
+    draft: 1.25        # metres; source: Princess F50 Mk1 (15.6 m, 19.2 t half load), full-load draught, yachtbuyer.com
     momentum: 0.92
     relative_size: "small"
 
@@ -47,6 +47,7 @@ behavior:
     stop_on_traffic     : true
 
 cargo:
+    manifest        : [none]   # Cargo classes carried, matched against zones.yaml restricted_cargo; 'none' declares an empty hold
     humans_present  : 10
 
 devices:

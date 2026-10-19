@@ -99,6 +99,37 @@ class Clock:
 		"""
 		return self.tick
 
+def hour_of(now):
+	""" Local hour of a clock reading
+	Arguments
+		now -- A datetime, or simulated seconds since midnight of the first day
+	"""
+	if now is None:
+		return None
+
+	if isinstance( now, datetime.datetime ):
+		return now.hour
+
+	try:
+		return int( (float(now) // 3600) % 24 )
+	except (TypeError, ValueError):
+		return None
+
+def within_hours(hour, start, end)->bool:
+	""" Whether an hour falls in a daily window, which wraps midnight when start > end
+	Arguments
+		hour -- Hour of the day, None when unknown
+		start -- First hour in the window
+		end -- First hour after the window
+	"""
+	if (hour is None) or (start == end):
+		return False
+
+	if start > end:
+		return (hour >= start) or (hour < end)
+
+	return start <= hour < end
+
 def utcnow():
 	""" Returns the host time in UTC, for timestamps of real-time events
 	"""

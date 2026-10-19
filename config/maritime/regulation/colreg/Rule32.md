@@ -38,7 +38,7 @@ REQ-056-01 adds `Sound.Bell`, `Sound.Bell.Strokes.3x` and `Sound.Gong` (Rule 35(
   "at intervals of not more than 2 minutes" of Rule 35 reduces to "raised".
 - Hearing range is not modelled: any vessel can "hear" any signal.
 - `OS.FogSignal` matches `Sound.Foghorn*`, which is any fog signal, not the one the vessel owes
-  (Rule 35).
+  (Rule 35). It does not match the bell or gong.
 
 ## Open issues
 

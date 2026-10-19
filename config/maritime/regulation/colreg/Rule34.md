@@ -26,7 +26,8 @@
 - Rule 34 does not subscribe to `vessel.signal`.
 - No behaviour raises an intent for an alteration of course or astern propulsion. No behaviour
   alters course to avoid collision at all (Rule 8).
-- No behaviour sounds a manoeuvring signal.
+- No behaviour sounds a manoeuvring signal. `VesselSignals` leaves `encounter` signals alone
+  and never raises them.
 
 So whether a signal accompanied a manoeuvre cannot yet be judged.
 

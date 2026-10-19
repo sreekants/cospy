@@ -13,6 +13,7 @@ from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 
 from cos.core.utilities.ArgList import ArgList
+from cos.core.time.Clock import hour_of, within_hours
 
 import numpy as np
 import math, yaml
@@ -43,6 +44,9 @@ class TargetResolver(Resolver):
 
 		self.collision_dcpa	= 100.0		# Metres; evaluator.yaml r_min_cpa
 		self.visibility		= 10.0		# Nautical miles, until the weather profile says otherwise
+		self.night_from		= 20		# Local hours; the window wraps midnight
+		self.night_to		= 6
+		self.sim			= None
 		return
 
 	def init(self, ctxt, cfg):
@@ -54,6 +58,8 @@ class TargetResolver(Resolver):
 		args	= ArgList( (cfg or {}).get('config') )
 		self.collision_dcpa	= float( args['collision.dcpa'] or self.collision_dcpa )
 		self.visibility		= float( args['visibility.default'] or self.visibility )
+		self.night_from		= int( args['night.from'] if args['night.from'] is not None else self.night_from )
+		self.night_to		= int( args['night.to'] if args['night.to'] is not None else self.night_to )
 
 		weather	= ( getattr(ctxt.sim.config, 'env', None) or {} ).get( 'WEATHER', None )
 		try:
@@ -75,6 +81,7 @@ class TargetResolver(Resolver):
 		self.distance	= None
 		self.velocity	= None
 		self.cpa		= None
+		self.sim		= getattr( ctxt, 'sim', None )
 		situation		= rulectxt.situation
 
 		if situation is not None:
@@ -262,6 +269,19 @@ class TargetResolver(Resolver):
 		""" Symbol property - Visibility in nautical miles, from the weather profile
 		"""
 		return self.visibility
+
+	@simproperty
+	def Night(self)->bool:
+		""" Symbol property - Night, whether the simulation clock is between night.from and night.to
+		"""
+		return self.is_night( getattr(self.sim, 'localtime', lambda: None)() )
+
+	def is_night(self, now)->bool:
+		""" Whether a clock reading falls in the night window
+		Arguments
+			now -- Local time, a datetime or simulated seconds
+		"""
+		return within_hours( hour_of(now), self.night_from, self.night_to )
 
 	@simproperty
 	def DCPA(self):

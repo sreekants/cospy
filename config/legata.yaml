@@ -34,11 +34,13 @@ language:
      # distance in metres under which a closing pair is OnCollisionCourse
      # (evaluator.yaml r_min_cpa). Visibility is the midpoint of the scenario
      # WEATHER profile's range in config/weather/profiles.yaml, in nautical miles;
-     # visibility.default applies when the profile has none.
+     # visibility.default applies when the profile has none. night.from and night.to:
+     # local hours of (OS, TS).Night, the window wrapping midnight (the defaults of
+     # examiner/zones.yaml). Vessel behaviours read the same values to show their lights.
      - scope: 'target'
        prefix: null
        module: maritime.model.resolver.TargetResolver
-       config: collision.dcpa=100 visibility.default=10
+       config: collision.dcpa=100 visibility.default=10 night.from=20 night.to=6
 
      - scope: 'tss'
        prefix: null
@@ -55,10 +57,14 @@ language:
        module: maritime.model.resolver.TargetShipResolver
        config: 
 
+     # COLREG terms (COS.022). stopping.lengths: ship lengths of track reach in a full-astern stop
+     # from service speed, the IMO upper bound (MSC.137(76) Standards for ship manoeuvrability, 5.3.1);
+     # Rule 19(b) takes the stopping distance to grow with the square of speed up to it, and a safe
+     # speed as one that stops the ship within half the visibility.
      - scope: 'colreg'
        prefix: null
        module: maritime.model.resolver.ColregResolver
-       config: 
+       config: stopping.lengths=15
 
      - scope: 'fleet'
        prefix: null

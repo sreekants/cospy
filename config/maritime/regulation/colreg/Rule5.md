@@ -5,7 +5,7 @@
 | Legata | `Rule5.legata` |
 | Driver | `rules.colreg.rule5.Rule5` (`src/rules/colreg/rule5/Rule5.py`), constructor only |
 | Loaded by | `rules.colreg.yaml`, entry `Rule5` |
-| Terms | `(OS, TS).Distance`, `OS.Intent`, `OS.Restriction`; constants `Vessel.Collision.TimeToEncounter.{AlertRange, VisibleRange, RadioRange, SonicRange}` |
+| Terms | `(OS, TS).Distance`, `OS.Intent`, `OS.Restriction`; constants `Vessel.Collision.TimeToEncounter.{AlertRange, VisibleRange, RadioRange, SonarRange}` |
 | Tests | none |
 | Status | Not judged. Three clauses, not fed; their intents are never raised |
 | Reviewed | 2026-10-19 |
@@ -38,7 +38,7 @@ can breach Rule 5.
   'Operation.Lookout.*'`.
 - `clause['COLREG.Rule5/Radar']`: within `RadioRange`, assures `OS.Intent has
   'Operation.Lookout.Radio*'`.
-- `clause['COLREG.Rule5/Sonar']`: within `SonicRange`, assures `OS.Intent has
+- `clause['COLREG.Rule5/Sonar']`: within `SonarRange`, assures `OS.Intent has
   'Operation.Lookout.Sonar*'`.
 
 **Interpretation.** A proper look-out is a declared intent per means, required whenever a target
@@ -53,8 +53,6 @@ is within that means' range. "Hearing" is not represented.
 - The file-level condition is not compiled (LEGATA.002). Its two lines would be OR'd, and the
   second tests `Restriction`, an enum, against a string pattern.
 - All ranges are placeholder `NumericRange (0, 10)` compared with metres.
-  `Vessel.Collision.TimeToEncounter.SonicRange` is not declared; the declared constant is
-  `SonarRange`.
 - The behaviour's look-out is perfect within `range_visibility`, and it ignores visibility,
   darkness and obstruction.
 - "Full appraisal of the situation" is not judged.

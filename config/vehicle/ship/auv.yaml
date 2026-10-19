@@ -18,8 +18,8 @@ physics:
     deadweight: 0.2
     linear_damping_coeff: 500000000
     length: 5              # metres, length overall
-    width: 3
-    draft: 40
+    width: 0.75    # metres, greatest breadth; source: Kongsberg HUGIN 3000 datasheet: 750 mm hull diameter, as the draught
+    draft: 0.75        # metres; source: Kongsberg HUGIN 3000 datasheet: 5.4 m long, 750 mm diameter; draws its diameter when surfaced
     momentum: 0.75
     relative_size: "tiny"
 
@@ -50,6 +50,7 @@ behavior:
     stop_on_traffic     : false
 
 cargo:
+    manifest        : [none]   # Cargo classes carried, matched against zones.yaml restricted_cargo; 'none' declares an empty hold
     humans_present  : 0       # unmanned
    
 devices:

@@ -2,7 +2,8 @@
 # Status        : IMPLEMENTED (COS.022) - fed by Rule14.py, judged at the closest point of approach
 
 define: {
-    OS: OwnShip
+    OS: OwnShip,
+    TS: TargetShip
 }
 
 
@@ -18,7 +19,7 @@ define: {
 clause['COLREG.Rule14.a']:{
     :{
         condition: {
-            : (OS, TS).HeadOn is true
+            : ((OS, TS).HeadOn is true) and (OS.Type is Vessel.Type.PowerDriven) and (TS.Type is Vessel.Type.PowerDriven)
             }
         assure:{
             : (OS, TS).PassingSide is 'Port'

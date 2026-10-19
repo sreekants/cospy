@@ -48,8 +48,8 @@
 course to starboard to pass astern.
 
 **Caveats.**
-- The watch does not check that both vessels are power-driven. A power-driven vessel giving way
-  to a crossing sailing vessel is judged by both Rule 15 and Rule 18(a).
+- Both vessels must be power-driven (a condition in each clause, COS.056). A crossing with a
+  sailing vessel is left to Rule 18(a).
 - "If the circumstances of the case admit" is not tested: crossing ahead is a breach whatever
   the circumstances.
 - The 100 m passing distance, and the 4 km and 500 m onset thresholds, are unvalidated.
@@ -57,5 +57,4 @@ course to starboard to pass astern.
 
 ## Open issues
 
-- Restrict the watch to power-driven pairs, or exclude them from Rule 18.
 - Check the run's 8 breaches case by case.

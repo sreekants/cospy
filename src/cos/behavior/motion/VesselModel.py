@@ -8,6 +8,7 @@ import numpy as np
 import yaml
 
 KG_PER_TONNE	= 1000.0
+FISHING_GEAR	= ('trawl', 'other')
 
 class VesselModel:
 	def __init__(self):
@@ -115,8 +116,12 @@ class VesselModel:
 			self.activity 	= activity['activity']  
 
 		activity = config.get('fishing',None)
+		self.fishing_gear	= 'other'		# Rule 26: 'trawl' (b) or 'other' (c)
 		if activity:
 			self.fishing_aft_dist 	= activity['fishing_aft_dist']  # metres; min distance from aft of any vessel while fishing
+			self.fishing_gear		= activity.get( 'gear', 'other' )
+			if self.fishing_gear not in FISHING_GEAR:
+				raise ValueError( f'VesselModel: fishing gear {self.fishing_gear!r} must be one of {FISHING_GEAR}' )
 
 		return
 

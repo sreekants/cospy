@@ -18,8 +18,8 @@ physics:
     deadweight: 40
     linear_damping_coeff: 500000000
     length: 40             # metres, length overall
-    width: 3
-    draft: 40
+    width: 10.0    # metres, greatest breadth; source: Austal 40 m passenger catamaran (LOA 40.1 m), moulded beam; PIANC ferry rows are monohulls
+    draft: 2.1         # metres; source: PIANC WG235 (2022) Ferries, fully laden, smallest row (200 dwt, LOA 43 m)
     momentum: 0.75
     relative_size: "small"
 
@@ -50,7 +50,21 @@ behavior:
 
     stop_on_traffic     : true
 
+pipeline:
+    # Steps a planned vessel behaviour runs, by name; the table of steps is
+    # maritime.behavior.vessels.VesselPipeline. An unknown step, a step in the wrong list, or a
+    # step its behaviour class cannot run stops the vessel's build.
+    #   ops     -- each update the vessel can move, in order: each step adjusts the velocity the
+    #              previous one left
+    #   postops -- after the vessel has moved; they may assume it moved
+    #   syncops -- every update, moving or not (at anchor, halted, end of path)
+    # Ferry: crosses schemes, slows to pass fore or aft of lane traffic; declares its manoeuvres; shows its signals
+    ops             : [ tss_compliance, overtaking_distance, apply_momentum, crossing_slowdown ]
+    postops         : [ collision_avoidance, tss_crossing ]
+    syncops         : [ navigation_lights, day_shapes, fog_signals ]
+
 cargo:
+    manifest        : [passengers]   # Cargo classes carried, matched against zones.yaml restricted_cargo; 'none' declares an empty hold
     humans_present  : 300
     
 devices:

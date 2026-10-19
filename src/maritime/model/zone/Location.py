@@ -40,12 +40,14 @@ class Location:
 		"""
 		self.path			= None
 		self.nominal_depth	= nominal_depth
+		self.tss			= {}		# Traffic separation scheme defaults: safe_distance, separation_distance
+		self.lanes			= {}		# Lane shape name or dotted prefix -> its settings, e.g. safe_heading
 		self.queries		= 0
 		self.fallbacks		= 0
 		return
 
 	def load(self, ctxt:Context, path:str):
-		""" Reads location.depth.nominal from path
+		""" Reads location.sea.depth.nominal and the optional location.sea.tss from path
 		Arguments
 			ctxt -- Simulation context
 			path -- Resolved path of location.yaml
@@ -55,14 +57,70 @@ class Location:
 		except Exception as e:
 			raise ValueError( f'No location settings in {path}: {e}' )
 
-		depth	= ((config.get('location', {}) or {}).get('depth', {}) or {})
-		nominal	= depth.get( 'nominal' )
-		if isinstance(nominal, bool) or not isinstance(nominal, (int, float)) or nominal <= 0:
-			raise ValueError( f'{path}: location.depth.nominal must be a positive depth in metres, not {nominal!r}' )
+		location	= config.get( 'location', {} ) or {}
+		if 'depth' in location:
+			raise ValueError( f'{path}: location.depth has moved to location.sea.depth' )
+
+		sea		= location.get( 'sea', {} ) or {}
+		nominal	= (sea.get( 'depth', {} ) or {}).get( 'nominal' )
+		if not Location.positive( nominal ):
+			raise ValueError( f'{path}: location.sea.depth.nominal must be a positive depth in metres, not {nominal!r}' )
+
+		tss		= sea.get( 'tss', {} ) or {}
+		self.tss	= Location.lane_settings( path, 'location.sea.tss', {k: v for k, v in tss.items() if k != 'lanes'} )
+		self.lanes	= { str(name): Location.lane_settings(path, f'location.sea.tss.lanes.{name}', settings or {})
+						for name, settings in (tss.get( 'lanes', {} ) or {}).items() }
 
 		self.path			= path
 		self.nominal_depth	= float( nominal )
 		return
+
+	@staticmethod
+	def lane_settings(path:str, where:str, settings:dict)->dict:
+		""" Checks TSS settings: distances positive, a heading in degrees
+		Arguments
+			path -- Location file, for the error
+			where -- Key the settings were read from, for the error
+			settings -- The settings
+		Raises
+			ValueError on an unknown key or a bad value
+		"""
+		checked	= {}
+		for key, value in settings.items():
+			if key in ('safe_distance', 'separation_distance'):
+				if not Location.positive( value ):
+					raise ValueError( f'{path}: {where}.{key} must be a positive distance in metres, not {value!r}' )
+			elif key == 'safe_heading':
+				if isinstance(value, bool) or not isinstance(value, (int, float)) or not (0 <= value < 360):
+					raise ValueError( f'{path}: {where}.safe_heading must be degrees in [0, 360), not {value!r}' )
+			else:
+				raise ValueError( f'{path}: {where}.{key} is not a TSS setting' )
+			checked[key]	= float( value )
+		return checked
+
+	@staticmethod
+	def positive(value)->bool:
+		""" Whether a setting is a positive number, not a boolean
+		Arguments
+			value -- Setting read from the file
+		"""
+		return (not isinstance(value, bool)) and isinstance(value, (int, float)) and (value > 0)
+
+	def lane(self, name:str, key:str):
+		""" A TSS setting for a lane: the longest lane entry naming it, else the scheme default
+		Arguments
+			name -- Shape name of the lane, e.g. Copenhagen.TSS.Northbound.4.1
+			key -- safe_distance, safe_heading or separation_distance
+		Returns
+			The value, or None when the location sets none
+		"""
+		name	= name or ''
+		matches	= [ entry for entry, settings in self.lanes.items()
+					if (key in settings) and ((name == entry) or name.startswith(entry + '.')) ]
+		if matches:
+			return self.lanes[max( matches, key=len )][key]
+
+		return self.tss.get( key )
 
 	def seabed_depth(self, measured, nominal=None):
 		""" The measured depth, or the nominal depth when the map reports none

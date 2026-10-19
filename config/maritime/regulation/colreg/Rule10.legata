@@ -38,8 +38,8 @@ clause['COLREG.Rule10.b.ii']:{
     : {
         condition: { :TSS is not empty }
         assure: { 
-            :[OS.Position, TSS.SeparationZone].Distance > TSS.SafeZone.SeparationDistance
-            :[OS.Position, TSS.SeparationLine].Distance > TSS.
+            :[OS.Position, TSS.SeparationZone].Distance > TSS.SeparationDistance
+            :[OS.Position, TSS.SeparationLine].Distance > TSS.SeparationDistance
             }
     }
 }
@@ -207,8 +207,6 @@ clause['COLREG.Rule10.j']:{
 clause['COLREG.Rule10.k']:{
     : {
         condition: { 
-            : (TSS is not empty) and 
-              (OS.Status in [Vessel.Status.MOORED, Vessel.Status.AGROUND, Vessel.Status.UNDERWAY])
             : (TSS is not empty) and 
               (OS.Status in [Vessel.Status.RESTRICTED]) and
               (OS.Operation has 'Vessel.Operation.SAFETY')                            

@@ -9,24 +9,10 @@ define:{
 
 # (a) This Rule applies to vessels not in sight of one another when navigating in
 # or near an area of restricted visibility.
-#
-# Restricted visibility is the scenario's visibility under Vessel.RestrictedVisibility.Range (nautical
-# miles), as in Rule 35. "Not in sight" is judged at the onset of an encounter: the target was beyond
-# the visibility. A vessel that is not underway (Rule 3(i)) is excluded. These are conditions in each
-# clause because a file-level condition is not compiled (LEGATA.002).
 
 # (b) Every vessel shall proceed at a safe speed adapted to the prevailing
 # circumstances and conditions of restricted visibility. A power-driven vessel
 # shall have engines ready for immediate manoeuvre.
-#
-# Judged on every vessel alone, each pass. Safe speed is the speed at which own ship can stop within
-# half the visibility:
-#   (OS, TS).SafeSpeed       -- metres per second; stopping distance taken to grow with the square of
-#                               speed to stopping.lengths ship lengths at the ship model's service_speed
-#                               (legata.yaml, default 15: IMO MSC.137(76) 5.3.1)
-#   (OS, TS).WithinSafeSpeed -- own ship is no faster than SafeSpeed
-# A ship model without a service_speed has no safe speed, and (b) is not judged for it.
-# Engines ready for immediate manoeuvre is not judged: no behaviour sets Vessel.Engine.ON.
 clause['COLREG.Rule19.b']:{
     : {
         condition: {
@@ -44,8 +30,6 @@ clause['COLREG.Rule19.b']:{
 
 # (c) Every vessel shall have due regard to the prevailing circumstances and
 # conditions of restricted visibility when complying with the Rules of Section I of this Part.
-#
-# Not judged: a general duty, judged through the Section I rules themselves.
 
 # (d) A vessel which detects by radar alone the presence of another vessel
 # shall determine if a closequarters situation is developing and/or risk of
@@ -55,24 +39,12 @@ clause['COLREG.Rule19.b']:{
 # (i) an alteration of course to port for a vessel forward of the beam, other than for a vessel
 # being overtaken;
 # (ii) an alteration of course towards a vessel abeam or abaft the beam.
-#
-# Not judged yet: needs a course-change term (COS.041); no behaviour sets OS.Manouever.
 
 # (e) Except where it has been determined that a risk of collision does not exist, every vessel which
 # hears apparently forward of her beam the fog signal of another vessel, or which cannot avoid a close
 # quarters situation with another vessel forward of her beam, shall reduce her speed to the minimum
 # at which she can be kept on her course. She shall if necessary take all her way off and in any event
 # navigate with extreme caution until danger of collision is over.
-#
-# Judged once per encounter at risk of collision, after the closest approach, on what held at onset:
-#   (OS, TS).ForwardAtOnset -- the target bore less than 90 degrees from own ship's course
-#   (OS, TS).InSightAtOnset -- the target was within the visibility
-#   (OS, TS).OnsetSpeed     -- own ship's speed, metres per second
-#   (OS, TS).SlowedSinceOnset -- own ship is slower now than at onset
-# Own ship complies when she passed the closest approach slower than at onset. "To the minimum at
-# which she can be kept on her course" is not judged: no ship model has a steerage speed. An own ship
-# stopped at onset has no way to take off. The fog-signal trigger is covered by the encounter: both
-# need the other vessel forward of the beam at risk of collision.
 clause['COLREG.Rule19.e']:{
     : {
         condition: {

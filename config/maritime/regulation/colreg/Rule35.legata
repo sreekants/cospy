@@ -12,10 +12,6 @@ define: {
 # prescribed in this Rule shall be used as follows:
 # (a) A power-driven vessel making way through the water shall sound at intervals of
 # not more than 2 minutes one prolonged blast.
-#
-# Restricted visibility is the scenario's visibility under Vessel.RestrictedVisibility.Range (nautical
-# miles); making way is moving faster than Vessel.MakingWay.Speed. OS.FogSignal says a fog signal is
-# being sounded, not which one, so (a) to (c) check that a signal is sounded at all.
 clause['COLREG.Rule35.a']:{
     :{
         condition: {
@@ -38,7 +34,7 @@ clause['COLREG.Rule35.b']:{
     :{
         condition: {
             : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and (OS.Type is Vessel.Type.PowerDriven) and
-              (OS.Status is Vessel.Status.UNDERWAY) and (OS.Velocity <= Vessel.MakingWay.Speed)
+              (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]) and (OS.Velocity <= Vessel.MakingWay.Speed)
             }
         exclude: {
             : ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing))
@@ -55,14 +51,11 @@ clause['COLREG.Rule35.b']:{
 # prescribed in paragraphs (a) or (b) of this Rule sound at intervals of not more than 2
 # minutes three blasts in succession, namely one prolonged followed by two short
 # blasts.
-#
-# Constrained by draught and towing or pushing are not modelled separately (Restriction.DRAUGHT
-# shares its value with TRANSPORTING), so they are not covered.
 clause['COLREG.Rule35.c']:{
     :{
         condition: {
             : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and ((OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]) or (OS.Type is Vessel.Type.Sailing) or (OS.Operation is Vessel.Operation.Fishing)) and
-              (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.AGROUND])
+              (OS.Status not in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND])
             }
         assure:{
             : OS.FogSignal is true

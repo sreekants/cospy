@@ -21,6 +21,9 @@
 - **Judgement:** the situation is queued once the range opens past the closest approach. The
   watch claims no role.
 
+The exclusions are repeated in each clause, because a file-level `condition:` block is not
+compiled (LEGATA.002).
+
 ## (a) Power-driven vessel keeps out of the way
 
 > A power-driven vessel underway shall keep out of the way of: (i) a vessel not under command; (ii) a
@@ -37,10 +40,8 @@
 **Interpretation.** *Keep out of the way:* passed at 100 m or more at the closest approach.
 
 **Caveats.**
-- Nothing sets `NOT_UNDER_COMMAND` or `RESTRICTED`, and `vessel.operation` is never set
-  (REQ.059-02, -03). In a run, (a) applies only to power-driven vessels meeting sailing vessels.
-- In a crossing, the same vessel is also judged by Rule 15, because the crossing watch does not
-  check vessel types.
+- Nothing sets `NOT_UNDER_COMMAND` or `RESTRICTED` (REQ.059-03). In a run, (a) applies to
+  power-driven vessels meeting sailing vessels or fishing vessels while fishing (Rule 26).
 - Rules 9 and 10 are not fed, so their precedence is not applied.
 
 ## (b) Sailing vessel keeps out of the way
@@ -92,7 +93,6 @@ restricted.
 
 ## Open issues
 
-- Set operation and restriction status from behaviour (REQ.059-02, -03). Until then (b) and (c)
-  cannot fire.
-- Resolve the Rule 15 / Rule 18(a) overlap.
+- Set restriction status from behaviour (REQ.059-03). Until then the not-under-command and
+  restricted branches of (b) and (c) cannot fire.
 - Model constrained by draught, for (d).

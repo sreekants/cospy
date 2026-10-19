@@ -66,7 +66,7 @@ class Restriction(Flag):
     DRAUGHT             = 0x00000100   # Resticted by draught in relation to available depth and width of navigable water
     VISIBILITY          = 0x00000200   # Visibility restricted
     LAUNCHING           = 0x01000000   # Engaged in launching or recovery of aircraft
-    PEACE_KEEEPING      = 0x02000000   # Engaged in mine clearance operations etc.
+    MINE_CLEARANCE      = 0x02000000   # Engaged in mine clearance operations etc.
     OTHER               = 0x80000000   # Catch-all for remaining values
 
 class Vessel(Vehicle):

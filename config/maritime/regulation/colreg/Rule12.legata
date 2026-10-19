@@ -7,22 +7,9 @@ define: {
 }
 
 # Sailing Vessels
-#
-# Judged once per encounter at risk of collision, after the closest approach: own ship kept out of
-# the way when she passed at Vessel.Collision.PassingDistance or more. Each vessel's tack, and which
-# of them is to windward, are taken from the wind acting on it at the onset of the encounter, so a
-# vessel that tacks or bears away to give way keeps the duty she had.
-#   (OS, TS).Tack, (OS, TS).TargetTack -- 'Port', 'Starboard', or 'Unknown' when stopped, in a calm,
-#                                         or with the wind dead ahead or astern
-#   (OS, TS).Windward                  -- own ship was upwind of the target; false in a calm
-# When own ship's tack is unknown, (a) is judged symmetrically: she keeps out of the way.
-# Overtaking is left to Rule 13. A vessel not under command, restricted or fishing is left to Rule 18,
-# as is a sailing vessel meeting one. A vessel that is not underway (Rule 3(i)) keeps out of the way
-# of no one. These are exclusions in each clause because a file-level condition is not compiled.
 
 # (a) When two sailing vessels are approaching one another, so as to involve risk of collision, one of
 # them shall keep out of the way of the other as follows;
-# Own ship's tack unknown: the symmetric reading of (a)
 clause['COLREG.Rule12.a']:{
     : {
         condition: {
@@ -113,5 +100,3 @@ clause['COLREG.Rule12.a.iii']:{
 # (b) For the purposes of this Rule the windward side shall be deemed to be the side opposite to that
 # on which the mainsail is carried or, in the case of a square-rigged vessel, the side opposite to that on
 # which the largest fore-and-aft sail is carried.
-#
-# Not modelled: no vessel carries a sail plan, so the windward side is taken from the wind itself.

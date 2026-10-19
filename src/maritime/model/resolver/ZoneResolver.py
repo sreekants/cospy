@@ -5,6 +5,7 @@
 from maritime.model.resolver.TargetResolver import TargetResolver
 from maritime.model.vessel.Vessel import Vessel, Status
 from maritime.model.geography.TrafficSeparationScheme import TrafficSeparationScheme
+from maritime.model.zone.Location import Location
 from cos.model.resolver.Resolver import Resolver, simproperty
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
@@ -23,6 +24,7 @@ class ZoneResolver(Resolver):
 
 		self.zone		= zone
 		self.vessel		= vessel
+		self.ctxt		= None
 		return
 
 	def reset(self, ctxt:Context, rulectxt:RuleContext):
@@ -31,6 +33,7 @@ class ZoneResolver(Resolver):
 			ctxt -- Simulation context
 			rulectxt -- TODO
 		""" 
+		self.ctxt	= ctxt
 		if rulectxt.situation is not None:
 			self.zone		= rulectxt.situation.zone
 			self.vessel		= rulectxt.situation.os
@@ -57,20 +60,32 @@ class ZoneResolver(Resolver):
 
 	@simproperty
 	def SafeDistance(self):
-		""" TODO: SafeDistance
-		""" 
-		if self.zone is None:
-			return 0.0
-		return self.zone.safe_distance
+		""" Metres to keep from other vessels in the lane, from location.yaml sea.tss; 0 when unset
+		"""
+		return self.tss( 'safe_distance' )
+
+	@simproperty
+	def SeparationDistance(self):
+		""" Metres to keep clear of the scheme's separation line or zone, from location.yaml sea.tss; 0 when unset
+		"""
+		return self.tss( 'separation_distance' )
 
 	@simproperty
 	def SafeHeading(self):
-		""" TODO: SafeHeading
-		""" 
-		if self.zone is None:
+		""" Simulator heading of the lane's traffic flow, from location.yaml sea.tss.lanes; 0 when unset
+		"""
+		return self.tss( 'safe_heading' )
+
+	def tss(self, key:str)->float:
+		""" A TSS setting of the situation's zone, 0 when there is no zone or the location sets none
+		Arguments
+			key -- safe_distance, safe_heading or separation_distance
+		"""
+		if (self.zone is None) or (self.ctxt is None):
 			return 0.0
 
-		return self.zone.safe_heading
+		value	= Location.shared( self.ctxt ).lane( self.zone.name, key )
+		return value if value is not None else 0.0
 
 
 class MaritimeZoneResolver(ZoneResolver):

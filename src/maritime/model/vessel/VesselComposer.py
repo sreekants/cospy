@@ -3,6 +3,7 @@
 # Description: Types of vessels and their properties, states and characteristics
 
 from maritime.model.vessel.Vessel import Vessel, Type
+from maritime.behavior.vessels.VesselPipeline import VesselPipeline
 from cos.behavior.motion.VesselModel import VesselModel
 from cos.core.kernel.Context import Context
 from cos.core.kernel.Configuration import Configuration
@@ -35,6 +36,7 @@ class VesselComposer:
         Vessel.check_draught( ctxt, vessel, filename )
         self.load_manifest( vessel, modelconfig )
         self.build_profile(ctxt, vessel, modelconfig)
+        VesselPipeline.configure( ctxt, vessel.actor.motion, (modelconfig or {}).get('pipeline'), modelfile )
         return
 
     def build_profile(self, ctxt:Context, vessel:Vessel, modelconfig ):

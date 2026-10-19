@@ -8,6 +8,7 @@ from cos.model.examiner.Examination import ExaminationType
 from cos.core.kernel.Context import Context
 from cos.core.utilities.ArgList import ArgList
 from cos.model.vehicle.Signal import Signal
+from cos.core.time.Clock import hour_of, within_hours
 from maritime.model.vessel.Vessel import Vessel
 
 import datetime
@@ -156,24 +157,8 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		Arguments
 			ctxt -- Simulation context
 			rules -- Merged zone rules
-		Note
-			night_from > night_to, so the window wraps midnight and the test is
-			a disjunction rather than a range.
 		"""
-		hour	= self.hour( ctxt )
-		if hour is None:
-			return False
-
-		start	= int( rules.get('night_from', 20) )
-		end		= int( rules.get('night_to', 6) )
-
-		if start == end:
-			return False
-
-		if start > end:
-			return (hour >= start) or (hour < end)
-
-		return start <= hour < end
+		return within_hours( self.hour(ctxt), int(rules.get('night_from', 20)), int(rules.get('night_to', 6)) )
 
 	def night(self, ctxt:Context, rules):
 		""" Which night it is: the date the current night began
@@ -206,17 +191,7 @@ class NightTimeExaminer(ZoneAware, NavigationExaminer):
 		Arguments
 			ctxt -- Simulation context
 		"""
-		now	= ctxt.sim.localtime()
-		if now is None:
-			return None
-
-		if isinstance( now, datetime.datetime ):
-			return now.hour
-
-		try:
-			return int( (float(now) // 3600) % 24 )
-		except (TypeError, ValueError):
-			return None
+		return hour_of( ctxt.sim.localtime() )
 
 	@staticmethod
 	def missing(vessel, required):

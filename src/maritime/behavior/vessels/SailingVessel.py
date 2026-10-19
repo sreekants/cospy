@@ -3,7 +3,6 @@
 # Description: Implementation of the SailingVessel class
 
 from maritime.behavior.vessels.PlannedVesselBehavior import PlannedVesselBehavior
-from maritime.behavior.vessels.VesselManeuvers import VesselManeuvers
 from maritime.model.vessel.Vessel import Vessel, Operation, Status
 
 from math import atan2, cos, sin, degrees, radians
@@ -15,19 +14,6 @@ import re
 class SailingVessel(PlannedVesselBehavior):
     def __init__(self, ctxt, config):
         PlannedVesselBehavior.__init__(self, ctxt, config)
-                
-        # Sequence of behavior operations
-        self.ops = [
-            # VesselManeuvers.tss_avoidance,
-            VesselManeuvers.overtaking_distance,
-            VesselManeuvers.apply_momentum,
-
-            VesselManeuvers.crossing_slowdown
-         ]
-
-        self.postops = [
-            VesselManeuvers.restore_speed
-        ]
 
         self.reverse    = True
         return

@@ -54,7 +54,8 @@ placeholder `(0, 10)`.
 Vessel.Reaction.AmpleTime`.
 
 **Caveats.**
-- No behaviour raises a `Manouever.CollisionAvoidance.*` intent.
+- Only `Decelerate` is raised, by container ships and ferries (see (e)); no course alteration
+  intent is.
 - `TimeToClosestApproachPoint` is not a term (it is `TCPA`), and `Vessel.Reaction.AmpleTime` is
   not declared.
 - When action began is not recorded, so "ample time" cannot be judged (COS.041).
@@ -122,6 +123,13 @@ has 'Manouever.CollisionAvoidance.CloseQuarterAvoidance'`.
 
 **In the simulation.** The main form of avoiding action (see above). Rule 19(e) judges a speed
 reduction in restricted visibility.
+
+`VesselActions.collision_avoidance` (container ships, ferries) declares
+`Manouever.CollisionAvoidance.Decelerate` while the behaviour is slowing for another vessel, and
+resets it once clear. Slowing means that a separation step the behaviour runs
+(`overtaking_distance`, `crossing_slowdown`) is scaling speed below 1, or that `stop_for_safety`
+holds `Speed.SlowdownForTraffic`. The intent records the cause, not a measured deceleration: it
+stays while the vessel holds a reduced speed.
 
 **Caveats.**
 - `OS.Acceleration <= 0` also holds for a vessel at constant speed, so the clause would pass

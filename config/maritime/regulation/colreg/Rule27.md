@@ -7,7 +7,7 @@
 | Loaded by | `rules.colreg.yaml`, entry `Rule27` |
 | Simulation | `Status.NOT_UNDER_COMMAND`, `Status.RESTRICTED` with `Restriction.*` (Rule 3(f), (g)); `RestrictedAbilityManeuver` behaviour |
 | Tests | none |
-| Status | Not judged. Text only. REQ.057 (REQ-057-04, open) adds (a) and (b) |
+| Status | Not judged. Text only. `VesselSignals` has rows for (a) and (b), but nothing sets the states. REQ.057 (REQ-057-04, open) adds the clauses |
 | Reviewed | 2026-10-19 |
 
 ## How the rule is employed
@@ -41,6 +41,9 @@ in `vessel.restriction`, are set by `Vessel.state()` and `Vessel.restrict()` (Ru
 visibility, `Shape.Ball.2x` by day, and sidelights and a sternlight when making way (speed above
 `Vessel.MakingWay.Speed`).
 
+**In the simulation.** `VesselSignals` shows exactly that. Not under command outranks every
+state but aground (Rule 20), so a vessel not under command that is also fishing shows (a).
+
 ## (b) Restricted in her ability to manoeuvre
 
 > A vessel restricted in her ability to manoeuvre, except a vessel engaged in mineclearance operations,
@@ -54,10 +57,16 @@ visibility, `Shape.Ball.2x` by day, and sidelights and a sternlight when making 
 
 **Legata.** None. REQ-057-04 plans (i)–(iii).
 
+**In the simulation.** `VesselSignals` shows `Light.Allround.RedWhiteRed` and
+`Shape.BallDiamondBall`, and when making way `Light.Sidelight`, `Light.Sternlight` and
+`Light.Masthead.Forward.1x`, adding `Light.Masthead.Abaft` at 50 m or more. "A masthead light or
+lights" is read as Rule 23(a)'s masthead lights. Restricted outranks fishing and anchored.
+
 **Caveats.**
 - `state()` clears the restriction, so a restricted vessel that anchors loses its RESTRICTED
   status. (b)(iv) cannot hold.
-- Mine clearance (`Restriction.PEACE_KEEEPING`) must be excluded.
+- Mine clearance (`Restriction.MINE_CLEARANCE`) must be excluded. `VesselSignals` does not
+  read the restriction, so a mine-clearance vessel would show (b).
 
 ## (c)–(f) Towing, dredging and underwater, diving, mine clearance
 
@@ -85,10 +94,13 @@ visibility, `Shape.Ball.2x` by day, and sidelights and a sternlight when making 
 
 **Legata.** None. (g) is to be an exclusion in REQ-057-04's clauses. (h) is a definition.
 
+**In the simulation.** The exemption of (g) is not taken: a vessel under 12 m shows the signals
+of (a) or (b).
+
 ## Open issues
 
 - REQ-059-03: `RestrictedAbilityManeuver` calls `restrict(Restriction.OTHER)`. Something must also
   set `NOT_UNDER_COMMAND`, for example a breakdown event.
 - REQ-056-03 and REQ-057-04: clauses on `OS.Status`.
-- REQ.058: `VesselSignals` raises the lights and shapes.
+- REQ-059-01: `RestrictedAbilityManeuver` runs `VesselSignals`.
 - Keep the restriction when a restricted vessel anchors, for (b)(iv).

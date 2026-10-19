@@ -59,10 +59,9 @@ proposes 5 × the vessel's width.
 > vessel which can safely navigate only within a narrow channel or fairway.
 
 **Legata.** `clause['COLREG.Rule9.b/SmallVessel']`: when `(OS.Length < 20) or (OS.Type is
-Vessel.Type.PowerDriven)`, assures `(OS, TS).Distance > Sea.NarrowChannel.SafeDistance`.
+Vessel.Type.Sailing)`, assures `(OS, TS).Distance > Sea.NarrowChannel.SafeDistance`.
 
 **Caveats.**
-- The condition names power-driven where the rule says sailing.
 - `TS` is used but not declared.
 - "Can safely navigate only within the channel" is not tested.
 - `Sea.NarrowChannel.SafeDistance` is not declared.
@@ -75,7 +74,8 @@ Vessel.Type.PowerDriven)`, assures `(OS, TS).Distance > Sea.NarrowChannel.SafeDi
 **Legata.** `clause['COLREG.Rule9.c/Fishing']`: when `OS.Operation has
 'Vessel.Operation.Fishing'`, assures the same distance as (b).
 
-**Caveats.** `vessel.operation` is never set (REQ.059-02). The other caveats are those of (b).
+**Caveats.** Only the `FishingVessel` behaviour sets `vessel.operation`, and only while fishing
+(Rule 26). The other caveats are those of (b).
 
 ## (d) Shall not cross so as to impede
 
@@ -83,11 +83,10 @@ Vessel.Type.PowerDriven)`, assures `(OS, TS).Distance > Sea.NarrowChannel.SafeDi
 > which can safely navigate only within such channel or fairway. The latter vessel may use the sound
 > signal prescribed in Rule 34(d) if in doubt as to the intention of the crossing vessel.
 
-**Legata.** `clause['COLREG.Rule9.d']`: when overtaking (`OS.Intent has
-'Manouever.Overtaking.*'`), `apply 'COLREG.Rule34.c.i'`.
+**Legata.** None. The former clause tested overtaking, a copy of (e)(i), and was removed (COS.054).
 
-**Caveats.** The clause tests overtaking, not crossing, and delegates to Rule 34(c)(i), the
-overtaking signal, instead of 34(d). It is a copy of (e)(i).
+**Caveats.** Not judged. Crossing a channel needs channel shapes with an axis, a term for a
+vessel that can navigate only within the channel, and a measure of impeding.
 
 ## (e) Overtaking that needs the other vessel's action
 
@@ -145,5 +144,6 @@ channel.
   zone rules already name shapes, so Rule 9 could be fed by zone, as the local rules are
   (COLREG.COVERAGE).
 - Channel limits, for (a).
-- Correct (b), (d) and (e)(i)(b).
+- A channel-crossing model, for (d).
+- Correct (e)(i)(b), which applies 34(c)(i) where 34(c)(ii) is meant.
 - Wait for Rule 34 before relying on `apply`.

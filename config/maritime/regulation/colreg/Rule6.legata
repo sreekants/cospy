@@ -88,19 +88,6 @@ clause['COLREG.Rule6.a.vi/DepthClearance']:{
 
 # (b) Additionally, by vessels with operational radar:
 # (i) the characteristics, efficiency and limitations of the radar equipment;
-clause['COLREG.Rule6.b.i/Radar']:{
-    : {
-        condition: {
-            :[OS.Position, Map.Sea].Draft < Situation.Type.MinimumDraft
-        }
-        assure: { 
-            :add(OS, 'COLREG.SafeSpeed', 'NoRadar') 
-        }
-        otherwise: { 
-            :del(OS, 'COLREG.SafeSpeed', 'NoRadar') 
-        }
-    }
-}
 
 # (ii) any constraints imposed by the radar range scale in use;
 

@@ -5,7 +5,7 @@
 | Legata | `Rule10.legata` |
 | Driver | `rules.colreg.rule10.Rule10` (`src/rules/colreg/rule10/Rule10.py`); subscribes to `vessel.crossing` and queues nothing |
 | Loaded by | `rules.colreg.yaml`, entry `Rule10` |
-| Simulation | Map shapes `TrafficSeparationScheme` (sea layer); `Map.in_tss()`, `Map.get_tss_bearing()`; `VesselManeuvers.tss_compliance`, `tss_avoidance`; site-generated local clauses |
+| Simulation | Map shapes `TrafficSeparationScheme` (sea layer); lane settings in `location.yaml` `sea.tss`; `Map.in_tss()`; `VesselManeuvers.tss_avoidance`; site-generated local clauses |
 | Terms | `TSS` (`OwnShip.TrafficSeparationScheme`, `TSSResolver`), `TSS.*`, `[OS, Map.Sea@TrafficSeparationScheme].Distance`, `OS.Intent`, `OS.Status`, `OS.Operation`, `OS.Length`; `clear`, `abort`, `continue` |
 | Tests | none |
 | Status | Not judged as COLREG. Fifteen clauses, not fed; the TSS model behind them is incomplete. Behaviours follow the lanes; local site clauses cover parts of (b)(i), (e) and (g) |
@@ -16,10 +16,9 @@
 **In the simulation.** Traffic separation schemes are map shapes. Vessel behaviours use them in
 two ways:
 
-- `tss_compliance` (container ships, ferries, yachts, motorboats): inside a scheme, the heading
-  is turned towards the lane bearing (`Map.get_tss_bearing()`) whenever it is off by more than
-  `behavior.tss_angle_tol` (30°), by at most 3 × `max_yaw_rate` per tick. Lane direction is
-  enforced by construction.
+- `tss_compliance` (container ships, ferries, yachts, motorboats) would turn the heading towards
+  the lane bearing when it is off by more than `behavior.tss_angle_tol` (30°). It never does:
+  `Map.get_tss_bearing()` is a stub that returns `None`, so lane direction is not enforced.
 - `tss_avoidance` (sailing and fishing vessels): a vessel that drifts into a scheme is put back
   where it was and given a random new heading. These vessels keep out of schemes by
   construction.
@@ -28,9 +27,14 @@ two ways:
 (e) and (g) as zone clauses. As committed they cannot run: their zone keys are empty and shapes
 are missing (COLREG.COVERAGE).
 
+**Lane settings.** Each location's `location.yaml` holds them under `sea.tss`: a default
+`safe_distance`, an optional `separation_distance`, and per lane its `safe_heading`. Map databases
+hold no zone settings. `ZoneResolver` reads them through `Location.lane()` as `TSS.SafeDistance`,
+`TSS.SafeHeading` and `TSS.SeparationDistance`, each 0 when the location sets none.
+
 **In Legata.** The clauses assume a full TSS model: lanes, separation zones and lines, entry and
-exit zones, safe headings and speeds. `TSSResolver` provides about 4 of the roughly 12
-properties used. The driver queues nothing.
+exit zones, safe headings and speeds. The resolver provides about 5 of the roughly 12 properties
+used. The driver queues nothing.
 
 ## (a) Application
 
@@ -53,7 +57,8 @@ in Area.ProximityRange`, or `OS.Restriction in ['COLREG.Rule10.*']`.
 - `OS.Velocity <= TSS.SafeVelocity`;
 - `(OS,TS).Distance >= TSS.SafeDistance`.
 
-**In the simulation.** `tss_compliance` keeps headings within 30° of the lane bearing.
+**In the simulation.** Lane direction is not enforced (`get_tss_bearing()` returns `None`). Each lane's
+heading is `TSS.SafeHeading`, from `location.yaml`.
 
 **Caveats.**
 - The lines are OR'd, so any one of them passes the clause.
@@ -63,11 +68,15 @@ in Area.ProximityRange`, or `OS.Restriction in ['COLREG.Rule10.*']`.
 ## (b)(ii) Keep clear of separation lines and zones
 
 **Legata.** `clause['COLREG.Rule10.b.ii']`: distance to `TSS.SeparationZone` and
-`TSS.SeparationLine` above a safe distance.
+`TSS.SeparationLine` above `TSS.SeparationDistance`.
+
+**Interpretation.** The clearance is per location, optionally per lane, from `location.yaml`
+`sea.tss.separation_distance`.
 
 **Caveats.**
-- The second line is truncated (`> TSS.`) and would fail to compile once reached.
-- The maps have no separation zones or lines.
+- No location sets a separation distance, so the term is 0 and the clause holds trivially.
+- Separation zones are shapes (305000) in some maps. Separation lines are not shapes, and
+  `TSS.SeparationZone` and `TSS.SeparationLine` are not terms.
 
 ## (b)(iii) Join and leave at the termination, or at a small angle
 
@@ -75,15 +84,26 @@ in Area.ProximityRange`, or `OS.Restriction in ['COLREG.Rule10.*']`.
 intents `TrafficSeparationScheme.Enter` and `.Exit`, near the entry or exit zone, with the
 heading in `TSS.SafeZone.EntryHeading` or `ExitHeading`.
 
-**Caveats.** No behaviour raises these intents. Entry and exit zones are not modelled.
+**In the simulation.** `VesselActions.tss_lane` (container ships) declares
+`TrafficSeparationScheme.Enter` on a leg that starts outside a scheme and whose next waypoint is
+inside one, and `.Exit` on a leg from inside to a waypoint outside. Inside is `Map.in_tss()` on
+the vessel's rectangle, now and moved to the next waypoint; the path between is not tested. A
+leg that passes through a scheme between two waypoints outside it declares neither. Without a
+next waypoint neither is declared.
+
+**Caveats.** Entry and exit zones are not modelled.
 
 ## (c) Avoid crossing lanes; cross at right angles
 
 **Legata.** `clause['COLREG.Rule10.c']`: on the intent `TrafficSeparationScheme.Crossing`, heading
 relative to the lane in `range(87.5, 92.5)`.
 
+**In the simulation.** `VesselActions.tss_crossing` (ferries) declares
+`TrafficSeparationScheme.Crossing` for as long as the ferry is inside a scheme. A ferry is taken
+to cross whatever its heading; ferries do not declare Enter or Exit.
+
 **Caveats.**
-- No crossing intent is raised.
+- Any ferry movement inside a scheme counts as crossing, including one along a lane.
 - The ±2.5° band is unsourced. The rule says "as nearly as practicable".
 
 ## (d) Inshore traffic zones
@@ -148,8 +168,6 @@ target above `SafeSmallVesselClearance` or `TSS.SmallVessel.SafeDistance`.
 `clear` and `abort`.
 
 **Caveats.**
-- (k)'s first line exempts every moored, aground or underway vessel in a scheme, which is
-  nearly all of them.
 - `Status.RESTRICTED` is never set (REQ.059-03).
 
 ## Open issues
@@ -158,4 +176,4 @@ target above `SafeSmallVesselClearance` or `TSS.SmallVessel.SafeDistance`.
   inshore zones. Then terms for each (COS.022 follow-up).
 - Feed by zone, as the local rules do. Then decide how the local clauses and these clauses
   share (b)(i), (e) and (g).
-- Repair the truncated (b)(ii) line, the OR'd (b)(i) lines and the (k) exemption.
+- Join the OR'd (b)(i) lines with `and`.

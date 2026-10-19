@@ -2,7 +2,8 @@
 # Status        : IMPLEMENTED (COS.022) - fed by Rule15.py, judged at the closest point of approach
 
 define: {
-    OS: OwnShip
+    OS: OwnShip,
+    TS: TargetShip
 }
 
 
@@ -18,7 +19,7 @@ define: {
 clause['COLREG.Rule15/KeepClear']:{
     :{
         condition: {
-            : (OS, TS).EncounterSituation is 'GiveWay'
+            : ((OS, TS).EncounterSituation is 'GiveWay') and (OS.Type is Vessel.Type.PowerDriven) and (TS.Type is Vessel.Type.PowerDriven)
             }
         assure:{
             : (OS, TS).Distance >= Vessel.Collision.PassingDistance
@@ -29,7 +30,7 @@ clause['COLREG.Rule15/KeepClear']:{
 clause['COLREG.Rule15/CrossAstern']:{
     :{
         condition: {
-            : (OS, TS).EncounterSituation is 'GiveWay'
+            : ((OS, TS).EncounterSituation is 'GiveWay') and (OS.Type is Vessel.Type.PowerDriven) and (TS.Type is Vessel.Type.PowerDriven)
             }
         assure:{
             : (OS, TS).AheadOfTarget is false

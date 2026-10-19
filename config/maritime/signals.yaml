@@ -9,7 +9,7 @@
 # Prefixes:
 #     Light.*   lights (COLREG Part C, Rules 20-31, and the light signals of Rule 34)
 #     Sound.*   sound signals (COLREG Part D, Rules 32-37)
-#     Shape.*   day shapes (Rules 24-30); none listed yet
+#     Shape.*   day shapes (Rules 24-30)
 #
 # class says when a signal may be shown. NuisanceExaminer judges it:
 #     navigation             shown by status and time of day, encounter or not. Never a nuisance;
@@ -34,12 +34,31 @@ signals:
   Light.Diamond:                { class: navigation, rule: "COLREG 24" }
   Light.Flashing.Yellow:        { class: navigation, rule: "COLREG 23(b)" }
   Light.Flashing.Red:           { class: navigation, rule: "COLREG 23(c)" }
+  Light.Allround.GreenWhite:    { class: navigation, rule: "COLREG 26(b)(i), trawling" }
+  Light.Allround.RedWhite:      { class: navigation, rule: "COLREG 26(c)(i), other fishing" }
+  Light.Allround.Red.2x:        { class: navigation, rule: "COLREG 27(a)(i) not under command, 30(d)(i) aground" }
+  Light.Allround.RedWhiteRed:   { class: navigation, rule: "COLREG 27(b)(i), restricted in ability to manoeuvre" }
+  Light.Anchor.Forward:         { class: navigation, rule: "COLREG 30(a)(i)" }
+  Light.Anchor.Aft:             { class: navigation, rule: "COLREG 30(a)(ii)" }
+  Light.Deck:                   { class: navigation, rule: "COLREG 30(c)" }
+
+  # Day shapes, shown by day
+  Shape.Cones.ApexTogether:     { class: navigation, rule: "COLREG 26(b)(i), 26(c)(i)" }
+  Shape.Ball.1x:                { class: navigation, rule: "COLREG 30(a)(i)" }
+  Shape.Ball.2x:                { class: navigation, rule: "COLREG 27(a)(ii)" }
+  Shape.Ball.3x:                { class: navigation, rule: "COLREG 30(d)(ii)" }
+  Shape.BallDiamondBall:        { class: navigation, rule: "COLREG 27(b)(ii)" }
 
   # Fog signals (Rule 35). Sound.Foghorn* matches every one of them.
   Sound.Foghorn:                { class: restricted_visibility, rule: "COLREG 35" }
   Sound.Foghorn.Prolonged.1x:   { class: restricted_visibility, rule: "COLREG 35(a)" }
   Sound.Foghorn.Prolonged.2x:   { class: restricted_visibility, rule: "COLREG 35(b)" }
   Sound.Foghorn.Prolonged.Short.2x: { class: restricted_visibility, rule: "COLREG 35(c)" }
+
+  # Bell and gong (Rule 35(g), (h)), for vessels at anchor and aground. Not matched by Sound.Foghorn*.
+  Sound.Bell:                   { class: restricted_visibility, rule: "COLREG 35(g)" }
+  Sound.Bell.Strokes.3x:        { class: restricted_visibility, rule: "COLREG 35(h)" }
+  Sound.Gong:                   { class: restricted_visibility, rule: "COLREG 35(g), vessels of 100 m or more" }
 
   # Manoeuvring and warning signals (Rule 34), to a vessel in sight
   Sound.Blast.Short.1x:         { class: encounter, rule: "COLREG 34(a)(i), altering to starboard" }

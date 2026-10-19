@@ -13,7 +13,12 @@
 ## How the rule is employed
 
 Lights are names in a vessel's `signal` set (see Rule 20). Sailing vessels are `Type.SAILING`
-(Rule 3(c)). The one clause is never fed, and no behaviour raises sailing lights.
+(Rule 3(c)). The one clause is never fed. `SailingVessel` does not yet run `VesselSignals`
+(REQ-059-01).
+
+**In the simulation.** `VesselSignals` shows the sailing row for a `Type.SAILING` vessel with no
+other state (Rule 20): `Light.Sidelight` and `Light.Sternlight` at every length, at night or in
+restricted visibility, and no shape.
 
 ## File-level condition
 
@@ -49,6 +54,9 @@ Vessel.Type.PowerDriven`, assures `Light.Sidelight` and `Light.Sternlight` (OR'd
 
 **Legata.** None. Both are options about light arrangement.
 
+**In the simulation.** Neither option is taken: a sailing vessel shows separate sidelights and
+sternlight.
+
 **Caveats.** Neither the combined lantern nor the red-over-green lights have vocabulary names, so
 (c)'s prohibition cannot be judged.
 
@@ -63,6 +71,9 @@ Vessel.Type.PowerDriven`, assures `Light.Sidelight` and `Light.Sternlight` (OR'd
 
 **Legata.** None. REQ-057-02 covers (d) with `Light.Allround.White`.
 
+**In the simulation.** A sailing vessel under 7 m shows the lights of (a); the torch is not
+modelled.
+
 ## (e) Sail and machinery: cone apex downwards
 
 > A vessel proceeding under sail when also being propelled by machinery shall exhibit forward where it
@@ -70,10 +81,11 @@ Vessel.Type.PowerDriven`, assures `Light.Sidelight` and `Light.Sternlight` (OR'd
 
 **Legata.** None.
 
-**Caveats.** Sailing under power is not modelled (Rule 3(c)), and there is no shape name.
+**Caveats.** Sailing under power is not modelled (Rule 3(c)), and there is no shape name. A
+`Type.SAILING` vessel always shows sailing signals, also when its behaviour motors.
 
 ## Open issues
 
 - REQ-057-02: rewrite (a) and (d) for sailing vessels underway at night or in restricted
   visibility, named `COLREG.Rule25.*`, and feed every vessel.
-- REQ.058 and REQ.059: `SailingVessel` raises its lights.
+- REQ-059-01: `SailingVessel` runs `VesselSignals`.

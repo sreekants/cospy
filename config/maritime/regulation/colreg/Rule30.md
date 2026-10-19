@@ -7,7 +7,7 @@
 | Loaded by | `rules.colreg.yaml`, entry `Rule30` |
 | Simulation | `Status.ANCHORED` (`Vessel.anchored()`), `Status.AGROUND` (`Vessel.aground()`, grounding conduct) |
 | Tests | none |
-| Status | Not judged. Text only. REQ.057 (REQ-057-05, open) adds (a)–(f) |
+| Status | Not judged. Text only. `VesselSignals` shows (a), (c) and (d) for container ships, ferries and fishing vessels. REQ.057 (REQ-057-05, open) adds the clauses |
 | Reviewed | 2026-10-19 |
 
 ## How the rule is employed
@@ -19,8 +19,12 @@
 
 **Lights and shapes** are names in the `signal` set (see Rule 20). REQ-056-01 adds
 `Light.Anchor.Forward`, `Light.Anchor.Aft`, `Light.Deck`, `Shape.Ball.1x`, `Shape.Ball.3x` and
-`Light.Allround.Red.2x`. `Light.Allround.White` already exists. REQ-059-05 has anchoring and
-grounding raise them.
+`Light.Allround.Red.2x`. `Light.Allround.White` already exists. `VesselSignals` raises them from
+the status, also while the vessel is at anchor and does not move (REQ-059-05). `AnchoredVessel`
+does not run it yet (REQ-059-04).
+
+**At rest.** `anchor()` sets the behaviour's velocity to zero, so an anchored vessel is not making
+way (Rules 26, 27, 35).
 
 ## File-level condition
 
@@ -38,6 +42,9 @@ grounding raise them.
 **Legata.** None. REQ-057-05: `Light.Anchor.Forward` and `Light.Anchor.Aft` at night or in
 restricted visibility, `Shape.Ball.1x` by day.
 
+**In the simulation.** As planned. A vessel fishing at anchor shows the fishing signals instead
+(Rule 26(a)); a restricted vessel the signals of Rule 27(b) only.
+
 ## (b) Under 50 m: one all-round white light
 
 > A vessel of less than 50 metres in length may exhibit an all-round white light where it can best be
@@ -45,12 +52,16 @@ restricted visibility, `Shape.Ball.1x` by day.
 
 **Legata.** None. To be an alternative in (a)'s clause.
 
+**In the simulation.** Not taken: every length shows both anchor lights.
+
 ## (c) Deck lights
 
 > A vessel at anchor may, and a vessel of 100 metres and more in length shall, also use the available
 > working or equivalent lights to illuminate her decks.
 
 **Legata.** None. REQ-057-05: `Light.Deck` for vessels of 100 m or more.
+
+**In the simulation.** `Light.Deck` only at 100 m or more; the "may" below 100 m is not taken.
 
 ## (d) Aground
 
@@ -60,6 +71,8 @@ restricted visibility, `Shape.Ball.1x` by day.
 
 **Legata.** None. REQ-057-05: the anchor lights plus `Light.Allround.Red.2x` at night,
 `Shape.Ball.3x` by day.
+
+**In the simulation.** As planned, with no deck lights. Aground outranks every other state.
 
 **Caveats.** The grounding conduct sets `AGROUND` on contact and `UNDERWAY` once the vessel is
 free. A vessel touching the seabed for one tick would owe the signals for that tick.
@@ -74,11 +87,14 @@ free. A vessel touching the seabed for one tick would owe the signals for that t
 
 **Legata.** None. To be exclusions.
 
+**In the simulation.** Neither exemption is taken: small vessels show the full signals.
+
 **Caveats.** (e)'s "not in or near a narrow channel, fairway or anchorage" cannot be tested,
 because the territory term is fixed at high sea (Rule 9).
 
 ## Open issues
 
 - REQ-057-05: clauses for (a)–(f), and feed every vessel.
-- REQ-059-05: anchoring and grounding raise the signals.
-- `MOORED` and `FASTENED` are never set; Rule 30 does not cover them anyway.
+- REQ-059-01, -04: the other behaviours and `AnchoredVessel` show the signals.
+- `MOORED` and `FASTENED` are never set; Rule 30 does not cover them anyway. `VesselSignals`
+  shows nothing for them.

@@ -10,7 +10,7 @@
 # Type names must match cos.model.geography.Sea.Type members exactly.
 #
 # nominal_depth (REQ.022): the seabed depth assumed where no map shape reports one. The base is
-# location.depth.nominal in $(SIMULATION)/location.yaml (4000 m, open sea). A shape's settings,
+# location.sea.depth.nominal in $(SIMULATION)/location.yaml (4000 m, open sea). A shape's settings,
 # a named zone or a Sea.Type may lower it, e.g. for an inland waterway with no bathymetry:
 #     types:
 #       WATERWAY:
@@ -30,9 +30,14 @@ zones:
     berthing_margin: 1.0
     grounding_margin: 2.0
 
-    # Which zone types each examiner is answerable for. Berthing is an inland
-    # concern, grounding a seagoing one; keeping the split here rather than in
-    # code lets a jurisdiction move the boundary.
+    # A seabed contact or near miss is berthing when the vessel is at or below
+    # berthing_speed [m/s] within berthing_distance [m] of land, in any zone;
+    # every other one is grounding (COS.049).
+    berthing_speed: 1.0
+    berthing_distance: 50.0
+
+    # Which margin applies: berthing_margin in the berthing zone types, and
+    # grounding_margin elsewhere. They no longer decide which examiner answers.
     berthing_zones:
       - INTERNAL_WATERS
       - HARBOUR

@@ -18,8 +18,8 @@ physics:
     deadweight: 100
     linear_damping_coeff: 500000000
     length: 25             # metres, length overall
-    width: 3
-    draft: 10
+    width: 8.3     # metres, greatest breadth; source: PIANC WG235 (2022) Fishing Vessels > 200 GT, smallest row (200 dwt, LOA 38 m), as the draught
+    draft: 3.7         # metres; source: PIANC WG235 (2022) Fishing Vessels > 200 GT, fully laden, smallest row (200 dwt, LOA 38 m)
     momentum: 0.10
     relative_size: "tiny"
 
@@ -48,11 +48,27 @@ behavior:
 
     stop_on_traffic     : true
 
+pipeline:
+    # Steps a planned vessel behaviour runs, by name; the table of steps is
+    # maritime.behavior.vessels.VesselPipeline. An unknown step, a step in the wrong list, or a
+    # step its behaviour class cannot run stops the vessel's build.
+    #   ops     -- each update the vessel can move, in order: each step adjusts the velocity the
+    #              previous one left
+    #   postops -- after the vessel has moved; they may assume it moved
+    #   syncops -- every update, moving or not (at anchor, halted, end of path)
+    # Fishing vessel: keeps clear while fishing; needs the FishingVessel behaviour (fishing_slowdown, declare_operation)
+    ops             : [ overtaking_distance, apply_momentum, fishing_slowdown ]
+    postops         : [ restore_speed ]
+    syncops         : [ declare_operation, navigation_lights, day_shapes, fog_signals ]
+
 # Activity behaviors
 fishing:
     fishing_aft_dist : 1000.0  # metres; min distance from aft of any vessel while fishing
+    gear             : other   # COLREG Rule 26 lights and shapes: 'trawl' (26(b)) or 'other' (26(c));
+                               # missing means 'other', any other value fails when the model loads
 
 cargo:
+    manifest        : [fish]   # Cargo classes carried, matched against zones.yaml restricted_cargo; 'none' declares an empty hold
     humans_present  : 3
 
 devices:

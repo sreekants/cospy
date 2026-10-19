@@ -43,7 +43,8 @@ whichever side the vessels' tracks give. The 5 breaches in the run are vessels t
 starboard to starboard.
 
 **Caveats.**
-- `head_on()` does not check that both vessels are power-driven: every vessel type is judged.
+- Both vessels must be power-driven (a condition in the clause, COS.056). A head-on meeting with a
+  sailing vessel, or one not under command, restricted or fishing, is left to Rule 18.
 - The alteration to starboard itself is not judged, only the side of the pass. A pass to port
   that needed no alteration complies.
 - Passing distance is not judged.
@@ -77,6 +78,4 @@ would treat them so.
 
 ## Open issues
 
-- Restrict the test to power-driven vessels, or document applying it to every vessel.
-- Register the `HeadOn` role so Rules 12 and 18 skip head-on pairs, consistent with Rules 13–15.
 - Check the run's 5 breaches case by case.

@@ -96,12 +96,11 @@ Situation.Type.MinimumDraft`, add `LowDepth`; otherwise `del`.
 
 ## (b)(i)–(vi) Vessels with operational radar
 
-**Legata.** `clause['COLREG.Rule6.b.i/Radar']` adds `NoRadar`. Its condition is a copy of
-(a)(vi)'s depth test, not a radar test. (b)(ii)–(vi) have no clause.
+**Legata.** None. The former (b)(i) clause tested water depth, a copy of (a)(vi), and was removed
+(COS.053).
 
-**Caveats.**
-- Radar is not modelled: no vessel has radar equipment or a range scale.
-- The (b)(i) condition is wrong.
+**Caveats.** Radar is not modelled: no vessel has radar equipment or a range scale. Judging (b)
+needs radar on the ship models and a term for it.
 
 ## Open issues
 

@@ -167,8 +167,8 @@ approach is own ship's speed on the pass after the range starts to open.
 - Only "slower than at onset" is judged, not "the minimum at which she can be kept on her
   course". No ship model has a steerage speed, so a token reduction complies.
 - Taking all way off "if necessary" and navigating "with extreme caution" are not judged.
-- The fog-signal trigger is not modelled separately. Vessels do not sound fog signals yet
-  (REQ.058, REQ.059), and the encounter trigger stands in for it: both need the other vessel forward of
+- The fog-signal trigger is not modelled separately. Only container ships, ferries and fishing
+  vessels sound fog signals (Rule 35), and the encounter trigger stands in for it: both need the other vessel forward of
   the beam at risk of collision. A fog signal heard from a vessel not at risk is not judged.
 - The 4 km range and 500 m passing distance are unvalidated constants, shared with Rules 12, 15
   and 18.

@@ -100,8 +100,10 @@ refused at setup (`COLREG.check_signals()`). A scenario can add State-specific s
 **Legata.** None.
 
 **In the simulation.**
-- Traffic separation schemes are map shapes (`TrafficSeparationScheme` in the sea layer). Vessel
-  behaviours steer with them (`VesselManeuvers.tss_compliance`, `tss_avoidance`).
+- Traffic separation schemes are map shapes (`TrafficSeparationScheme` in the sea layer), with
+  their lane settings in `location.yaml` (`sea.tss`). Sailing and fishing vessels keep out of them
+  (`VesselManeuvers.tss_avoidance`). `tss_compliance` would steer other vessels along a lane, but
+  `Map.get_tss_bearing()` is a stub, so it never does.
 - Rule 10 holds the duties inside a scheme.
 
 **Caveats.** Whether a scheme in a map is IMO-adopted is not recorded.

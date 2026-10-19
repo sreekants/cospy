@@ -37,7 +37,7 @@ clause['COLREG.Rule9.a/KeepNearCoast']:{
 clause['COLREG.Rule9.b/SmallVessel']:{
     : {
         condition: {
-            : (OS.Length < 20) or (OS.Type is Vessel.Type.PowerDriven)
+            : (OS.Length < 20) or (OS.Type is Vessel.Type.Sailing)
         }
         assure: { 
             : (OS, TS).Distance > Sea.NarrowChannel.SafeDistance
@@ -61,16 +61,6 @@ clause['COLREG.Rule9.c/Fishing']:{
 # (d) A vessel shall not cross a narrow channel or fairway if such crossing impedes the passage of a
 # vessel which can safely navigate only within such channel or fairway. The latter vessel may use the
 # sound signal prescribed in Rule 34(d) if in doubt as to the intention of the crossing vessel.
-clause['COLREG.Rule9.d']:{
-    : {
-        condition: {
-            : (OS.Intent has 'Manouever.Overtaking.*')
-        }
-        assure: { 
-            : apply 'COLREG.Rule34.c.i'
-        }
-    }
-}
 
 # (e)
 # (i) In a narrow channel or fairway when overtaking can take place only if the vessel to be

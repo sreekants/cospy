@@ -24,9 +24,10 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 		self.mode 			= Operation.TRANSPORT
 		self.xscale			= 1.0
 
-		# Sequence of behavior operations
+		# Steps set from the ship model's pipeline (VesselPipeline)
 		self.ops 			= None
 		self.postops		= None
+		self.syncops		= None		# Synchronise vessel state after move(), every update, moving or not
 		self.nearest		= []
 
 		# Behavior watchdogs, counted in simulated seconds
@@ -74,6 +75,10 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 
 		rect, dx	=  PathFollowingMotionBehavior.update(self, world, t, config)
 
+		if self.syncops is not None:
+			for fn in self.syncops:
+				fn(self, world, t, self.dx)
+
 		# Check for watchs		
 		for v in self.watchdogs.values():
 			if (v is not None) and (v[0].signaled() == True):
@@ -84,6 +89,7 @@ class PlannedVesselBehavior(PathFollowingMotionBehavior):
 	
 	def anchor(self, duration):
 		self.movable        = False
+		self.dx				= np.zeros(3)		# At rest: vessel.velocity reads dx
 		self.add_watch( 'anchor', duration, self.on_end_anchor )
 		self.vehicle.anchored()
 		return

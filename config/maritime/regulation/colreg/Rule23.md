@@ -7,15 +7,19 @@
 | Loaded by | `rules.colreg.yaml`, entry `Rule23` |
 | Terms | `OS.Type`, `OS.Length`, `OS.Velocity`, `OS.Signal.ON`, `OS.Operation`; functions `meters()`, `knot()` |
 | Tests | none |
-| Status | Not judged. Six clauses, not fed; nothing raises the lights. Reworked by REQ.057 (open) |
+| Status | Not judged. Six clauses, not fed. `VesselSignals` shows the lights for container ships and ferries. Reworked by REQ.057 (open) |
 | Reviewed | 2026-10-19 |
 
 ## How the rule is employed
 
 Lights are names in a vessel's `signal` set (see Rule 20). Each clause assures that the lights
 for own ship's type and length are in `OS.Signal.ON`. The driver feeds nothing (REQ-057-09
-requires it to feed every vessel under test). No behaviour raises navigation lights (REQ.058,
-REQ.059). Once fed, every clause would fail.
+requires it to feed every vessel under test).
+
+**In the simulation.** `VesselSignals` shows the power-driven row for a vessel whose state is
+none of the others (Rule 20) and whose type is not sailing. Status `UNKNOWN`, before a vessel
+first weighs anchor, counts as underway. A fishing vessel not engaged in fishing is power-driven
+(Rule 26(e)).
 
 Today, missing lights at night are scored outside COLREG by `NightTimeExaminer`, from the
 per-zone `required_lights` in `examiner/zones.yaml`.
@@ -42,6 +46,10 @@ per-zone `required_lights` in `examiner/zones.yaml`.
   lines, `Light.Masthead.Forward.1x`, `Light.Sidelight` and `Light.Sternlight`.
 - `clause['COLREG.Rule23.a.ii']`: power-driven, excluding length under 50 m. Assures
   `Light.Masthead.Abaft`.
+
+**In the simulation.** From 12 m: `Light.Masthead.Forward.1x`, `Light.Sidelight` and
+`Light.Sternlight`. `Light.Masthead.Abaft` is shown only at 50 m or more: the option to show it
+below 50 m is not taken. The lights do not depend on making way.
 
 **Caveats.**
 - The OR'd assurance lines pass with any one light. They should be one `and`-joined line.
@@ -86,6 +94,10 @@ scenario has a WIG craft.
   knots. Assures `Light.Allround.White`.
 - (iii): none (light position).
 
+**In the simulation.** Under 12 m the alternative of (d)(i) is always taken:
+`Light.Allround.White` and `Light.Sidelight`, with no masthead light or sternlight. (d)(ii) is
+not distinguished: a vessel under 7 m shows the same lights, sidelights included.
+
 **Caveats.**
 - (d)(i) is an alternative ("may in lieu"), but the clause makes it a requirement. A small
   vessel showing the lights of (a) instead would fail.
@@ -96,5 +108,5 @@ scenario has a WIG craft.
 
 - REQ.057 (REQ-057-01): review (a), (c) and (d) against the text, join the assurances with
   `and`, add the night or restricted-visibility condition, and feed every vessel.
-- REQ.058 and REQ.059: behaviours that raise the lights.
+- REQ-059-01: the other power-driven behaviours (Motorboat, Yacht) show the lights.
 - The underway test (REQ-056-07).
