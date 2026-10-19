@@ -32,6 +32,8 @@ class VesselComposer:
         model       = ctxt.sim.fs.read_file_as_bytes(filename)
 
         modelconfig = self.load_model(ctxt, vessel, model)
+        Vessel.check_draught( ctxt, vessel, filename )
+        self.load_manifest( vessel, modelconfig )
         self.build_profile(ctxt, vessel, modelconfig)
         return
 
@@ -61,6 +63,22 @@ class VesselComposer:
         vessel.model.displace( vessel.weight )         # The vessel's own weight drives its dynamics
         return config
 
+
+    @staticmethod
+    def load_manifest(vessel:Vessel, modelconfig):
+        """ Gives a vessel its ship model's cargo manifest when its own record declares none
+        Arguments
+        	vessel -- Vessel object
+        	modelconfig -- Ship model configuration
+        """
+        cargo   = getattr( vessel, 'cargo', None )
+        if (cargo is None) or (len( cargo ) > 0):
+            return
+
+        manifest    = ((modelconfig or {}).get('cargo') or {}).get('manifest') or []
+        for c in ([manifest] if isinstance(manifest, str) else manifest):
+            cargo.add( str(c) )
+        return
 
     def add_device(self, ctxt:Context, vessel:Vessel, devices ):
         """ Adds a devices to the vessel

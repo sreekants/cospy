@@ -6,6 +6,7 @@ from cos.model.geography.Shape import Shape
 from cos.core.kernel.Context import Context
 
 from enum import Enum, Flag
+from cos.core.utilities.ArgList import ArgList
 
 class Type(Flag):
     """Enum for the different types of sea terrain."""
@@ -66,6 +67,13 @@ class Sea(Shape):
         """ Nominal depth of the sea
         """
         return self.depth
+
+    @property
+    def depth_max(self):
+        """ Deep edge of a depth band (settings depth_max=), or None for a sounding or an open-ended band
+        """
+        value   = ArgList( self.config.get('settings', None) or '' )['depth_max']
+        return float( value ) if value is not None else None
 
 
 

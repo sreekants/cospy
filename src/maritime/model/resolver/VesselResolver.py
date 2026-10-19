@@ -127,8 +127,11 @@ class VesselResolver(Resolver):
 
 	@simproperty
 	def Draft(self):
-		""" Returns the draft
+		""" Draught in metres: the vessel record's, else the ship model's
 		""" 
+		draft	= getattr( self.vessel, 'draft', None )
+		if draft is not None:
+			return draft
 		return self.vessel.model.draft if self.vessel.model is not None else 0.0
 
 	@simproperty

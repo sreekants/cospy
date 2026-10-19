@@ -1,29 +1,64 @@
 # COLREG.Rule12 :
-# Status        : REVIEW
+# Status        : IMPLEMENTED (COS.022) - (a); fed by Rule12.py with every encounter at risk but overtaking
 
 define: {
     OS: OwnShip,
     TS: TargetShip
 }
 
-condition: {
-    : (OS, TS).Distance < Vessel.Collision.TimeToEncounter.AlertRange
-}
-
-
 # Sailing Vessels
+#
+# Judged once per encounter at risk of collision, after the closest approach: own ship kept out of
+# the way when she passed at Vessel.Collision.PassingDistance or more. Each vessel's tack, and which
+# of them is to windward, are taken from the wind acting on it at the onset of the encounter, so a
+# vessel that tacks or bears away to give way keeps the duty she had.
+#   (OS, TS).Tack, (OS, TS).TargetTack -- 'Port', 'Starboard', or 'Unknown' when stopped, in a calm,
+#                                         or with the wind dead ahead or astern
+#   (OS, TS).Windward                  -- own ship was upwind of the target; false in a calm
+# When own ship's tack is unknown, (a) is judged symmetrically: she keeps out of the way.
+# Overtaking is left to Rule 13. A vessel not under command, restricted or fishing is left to Rule 18,
+# as is a sailing vessel meeting one. A vessel that is not underway (Rule 3(i)) keeps out of the way
+# of no one. These are exclusions in each clause because a file-level condition is not compiled.
+
 # (a) When two sailing vessels are approaching one another, so as to involve risk of collision, one of
 # them shall keep out of the way of the other as follows;
+# Own ship's tack unknown: the symmetric reading of (a)
+clause['COLREG.Rule12.a']:{
+    : {
+        condition: {
+            : (OS.Type is Vessel.Type.Sailing) and (TS.Type is Vessel.Type.Sailing) and
+              ((OS, TS).Tack is 'Unknown')
+         }
+        exclude: {
+            : OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : OS.Operation is Vessel.Operation.Fishing
+            : TS.Operation is Vessel.Operation.Fishing
+            : OS.Status in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]
+         }
+        assure: {
+            : (OS, TS).Distance >= Vessel.Collision.PassingDistance
+        }
+    }
+}
+
 # (i) when each has the wind on a different side, the vessel which has the wind on the port
 # side shall keep out of the way of the other;
 clause['COLREG.Rule12.a.i']:{
-    :{
-        condition: { 
-            : ((OS, TS).Beam in ['Position.Abeam']) and
-              ([OS.Position, Weather.Wind].Direction in range(180,360))
-            }
-        assure:{
-            : OS.Intent has 'Manouever.Course.Alteration'
+    : {
+        condition: {
+            : (OS.Type is Vessel.Type.Sailing) and (TS.Type is Vessel.Type.Sailing) and
+              ((OS, TS).Tack is 'Port') and ((OS, TS).TargetTack is 'Starboard')
+         }
+        exclude: {
+            : OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : OS.Operation is Vessel.Operation.Fishing
+            : TS.Operation is Vessel.Operation.Fishing
+            : OS.Status in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]
+         }
+        assure: {
+            : (OS, TS).Distance >= Vessel.Collision.PassingDistance
         }
     }
 }
@@ -31,13 +66,22 @@ clause['COLREG.Rule12.a.i']:{
 # (ii) when both have the wind on the same side, the vessel which is to windward shall keep
 # out of the way of the vessel which is to leeward;
 clause['COLREG.Rule12.a.ii']:{
-    :{
-        condition: { 
-            : ( ((OS, TS).Beam in ['Position.Abeam']) and
-                ([OS.Position, Weather.Wind].Direction in range(0,180)))
-            }
-        assure:{
-            : OS.Intent has 'Manouever.Course.Alteration'
+    : {
+        condition: {
+            : (OS.Type is Vessel.Type.Sailing) and (TS.Type is Vessel.Type.Sailing) and
+              ((((OS, TS).Tack is 'Port') and ((OS, TS).TargetTack is 'Port')) or
+               (((OS, TS).Tack is 'Starboard') and ((OS, TS).TargetTack is 'Starboard'))) and
+              ((OS, TS).Windward is true)
+         }
+        exclude: {
+            : OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : OS.Operation is Vessel.Operation.Fishing
+            : TS.Operation is Vessel.Operation.Fishing
+            : OS.Status in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]
+         }
+        assure: {
+            : (OS, TS).Distance >= Vessel.Collision.PassingDistance
         }
     }
 }
@@ -46,13 +90,21 @@ clause['COLREG.Rule12.a.ii']:{
 # determine with certainty whether the other vessel has the wind on the port or on the
 # starboard side, she shall keep out of the way of the other.
 clause['COLREG.Rule12.a.iii']:{
-    :{
-        condition: { 
-            : ((OS, TS).Direction in ['Position.Starboard']) and
-              ([OS.Position, Weather.Wind].Direction in range(180,360))
-            }
-        assure:{
-            : OS.Intent has 'Manouever.Encounter.Avoidance'
+    : {
+        condition: {
+            : (OS.Type is Vessel.Type.Sailing) and (TS.Type is Vessel.Type.Sailing) and
+              ((OS, TS).Tack is 'Port') and ((OS, TS).TargetTack is 'Unknown') and
+              ((OS, TS).Windward is false)
+         }
+        exclude: {
+            : OS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : TS.Status in [Vessel.Status.NotUnderCommand, Vessel.Status.RESTRICTED]
+            : OS.Operation is Vessel.Operation.Fishing
+            : TS.Operation is Vessel.Operation.Fishing
+            : OS.Status in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]
+         }
+        assure: {
+            : (OS, TS).Distance >= Vessel.Collision.PassingDistance
         }
     }
 }
@@ -61,9 +113,5 @@ clause['COLREG.Rule12.a.iii']:{
 # (b) For the purposes of this Rule the windward side shall be deemed to be the side opposite to that
 # on which the mainsail is carried or, in the case of a square-rigged vessel, the side opposite to that on
 # which the largest fore-and-aft sail is carried.
-
-################################################################
-# clause['COLREG.Rule12.b'] {}
-# Definitions of wind directions are implied in angle ranges 
-# in previous clauses
-################################################################
+#
+# Not modelled: no vessel carries a sail plan, so the windward side is taken from the wind itself.

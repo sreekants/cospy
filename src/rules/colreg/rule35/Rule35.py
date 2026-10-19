@@ -63,8 +63,8 @@ class Rule35(COLREG):
 		COLREG.__init__(self)
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Judges every vessel under test on each pass; the finding guard keeps one row per episode
+	def feed(self, ctxt:Context, rule_ctxt):
+		""" Adds every vessel under test on each pass; the finding guards keep one row per episode
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
@@ -72,8 +72,6 @@ class Rule35(COLREG):
 		vessels		= rule_ctxt.vessels or []
 		for own in getattr( rule_ctxt, 'subjects', None ) or vessels:
 			self.add_situation( Situation(own, None) )
-
-		COLREG.evaluate( self, ctxt, rule_ctxt )
 		return
 
 

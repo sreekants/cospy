@@ -370,8 +370,8 @@ class Builder(BuilderBaseClass):
 		composer	= VesselComposer()
 		composer.build( ctxt, inst, args, config )
 
-		# A copy made by count= carries its own load of its class's deadweight
-		if (guid in Builder.copies) and (inst.model is not None):
+		# A copy made by count= carries its own load of its class's deadweight, unless the record sets cargo_weight=
+		if (guid in Builder.copies) and (inst.model is not None) and (inst.cargo_weight is None):
 			u			= zlib.crc32( f'load/{guid}'.encode() ) / 0xFFFFFFFF
 			inst.weight	= inst.model.lightship + (LOAD[0] + u*(LOAD[1] - LOAD[0])) * inst.model.deadweight
 			inst.model.displace( inst.weight )

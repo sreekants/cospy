@@ -24,10 +24,14 @@ class ScoredRule:
 		settings		= dict( findings.get('default', {}) or {} )
 		settings.update( findings.get('rules', {}) or {} )
 
-		self.findings	= FindingGuard( scope=settings.get('scope', 'change'),
-										release=settings.get('release', 10.0),
-										interval=settings.get('interval'),
-										dwell=settings.get('dwell', 0.0) )
+		def guard():
+			return FindingGuard( scope=settings.get('scope', 'change'),
+								 release=settings.get('release', 10.0),
+								 interval=settings.get('interval'),
+								 dwell=settings.get('dwell', 0.0) )
+
+		self.findings	= guard()
+		self.logged		= guard()		# Failures logged once per occurrence, as the ledger counts them
 		self.unpriced	= set()
 		return
 

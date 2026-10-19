@@ -11,10 +11,11 @@ from cos.math.geometry.Rectangle import Rectangle
 
 from enum import Enum, Flag
 from typing import Any
-import math, random
+import math, random, os, yaml
 import numpy as np
 
 SIGNALS     = '$(CONFIG)/maritime/signals.yaml'     # Signal vocabulary (REQ.036)
+EVALUATOR   = '$(CONFIG)/evaluator.yaml'            # Draught bounds (COS.049)
 
 def afloat(vessels)->list:
     """ The vessels at sea: every vessel but the meta vessels, such as fleet controllers
@@ -91,6 +92,9 @@ class Vessel(Vehicle):
         self.imo            = identifier["imo"]
         self.mmsi           = identifier["mmsi"]
         self.weight         = config['weight']     # Tonnes; None or 0 falls back to the category mass
+        settings            = ArgList( config.get('settings', '') or '' )
+        self.draft          = settings['draft']             # Metres; None falls back to the ship model
+        self.cargo_weight   = settings['cargo_weight']      # Tonnes of cargo aboard; None leaves the weight to the record or model
         self.recid          = int( identifier["imo"] )     # Vessel IMO: the vessel's id in every fact table
 
         self.operation      = 0
@@ -114,17 +118,59 @@ class Vessel(Vehicle):
 
     @property
     def weight(self):
-        """ Displacement in tonnes: the vessel record's, else the ship model's, else None
+        """ Displacement in tonnes: the vessel record's weight, else the ship model's lightship plus the
+        record's cargo_weight, else the ship model's mass, else None
         """
         if self.instance_weight:
             return float( self.instance_weight )
 
         model   = getattr( self, 'model', None )
-        return model.mass if model is not None else None
+        if model is None:
+            return None
+
+        cargo   = self.cargo_weight
+        return model.lightship + cargo if cargo is not None else model.mass
 
     @weight.setter
     def weight(self, value):
         self.instance_weight    = value
+
+    @property
+    def cargo_weight(self):
+        """ Tonnes of cargo aboard from the vessel record's settings (cargo_weight=), or None
+        Raises
+        	ValueError when the setting is not a number of tonnes, 0 or more
+        """
+        value   = getattr( self, 'instance_cargo_weight', None )
+        if value is None:
+            return None
+
+        try:
+            tonnes  = float( value )
+        except ValueError:
+            raise ValueError( f'vessel.s3db settings of {self.name}: cargo_weight={value} is not a number of tonnes' )
+        if tonnes < 0.0:
+            raise ValueError( f'vessel.s3db settings of {self.name}: cargo_weight={value} is negative' )
+        return tonnes
+
+    @cargo_weight.setter
+    def cargo_weight(self, value):
+        self.instance_cargo_weight  = value
+
+    @property
+    def draft(self):
+        """ Draught in metres: the vessel record's settings, else the ship model's, else None
+        """
+        override    = getattr( self, 'instance_draft', None )
+        if override:
+            return float( override )
+
+        model   = getattr( self, 'model', None )
+        return float( model.draft ) if model is not None else None
+
+    @draft.setter
+    def draft(self, value):
+        self.instance_draft     = value
 
     @property
     def heading(self):
@@ -145,6 +191,51 @@ class Vessel(Vehicle):
             return None
 
         return Signal.configure( config.resolve(SIGNALS), getattr(ctxt, 'log', None) )
+
+    bounds  = {}        # Resolved evaluator.yaml path -> (draught_max, draught_length_ratio_max)
+
+    @staticmethod
+    def check_draught(ctxt, vessel, source:str):
+        """ Raises when a vessel declares a draught too deep for any ship or for its length
+        Arguments
+        	ctxt -- Simulation context
+        	vessel -- Vessel with its ship model loaded
+        	source -- Ship model file the draught came from, unless the vessel record overrides it
+        Raises
+        	ValueError naming the source, the draught and the bound it exceeds
+        """
+        draft   = vessel.draft
+        model   = getattr( vessel, 'model', None )
+        if (draft is None) or (model is None):
+            return
+
+        limit, ratio    = Vessel.draught_bounds( ctxt )
+        if getattr( vessel, 'instance_draft', None ):
+            source  = f'vessel.s3db settings of {vessel.name}'
+
+        length  = float( model.ship.length )
+        if (limit is not None) and (draft > limit):
+            raise ValueError( f'{source}: draught {draft} m exceeds draught_max {limit} m' )
+        if (ratio is not None) and (length > 0.0) and (draft > ratio*length):
+            raise ValueError( f'{source}: draught {draft} m exceeds draught_length_ratio_max {ratio} of length {length} m' )
+        return
+
+    @staticmethod
+    def draught_bounds(ctxt)->tuple:
+        """ Draught bounds from evaluator.yaml, read once per file
+        Arguments
+        	ctxt -- Simulation context
+        Returns
+        	(draught_max, draught_length_ratio_max), each None when not configured
+        """
+        path    = ctxt.sim.config.resolve( EVALUATOR )
+        if path not in Vessel.bounds:
+            config  = {}
+            if os.path.exists( path ):
+                with open( path, 'rb' ) as f:
+                    config  = (yaml.safe_load( f ) or {}).get( 'evaluator', {} ) or {}
+            Vessel.bounds[path] = ( config.get('draught_max'), config.get('draught_length_ratio_max') )
+        return Vessel.bounds[path]
 
     def describe(self):
         """ Returns a description of the vessel

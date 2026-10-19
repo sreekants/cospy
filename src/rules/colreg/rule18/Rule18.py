@@ -3,6 +3,10 @@
 # Description: Implementation of COLREG Rule
 
 from maritime.model.rule.COLREG import COLREG
+from maritime.model.rule.EncounterWatch import EncounterWatch
+from maritime.core.situation.Types import Encounter
+from cos.core.kernel.Context import Context
+from cos.core.utilities.ArgList import ArgList
 
 '''
 Responsibilities between Vessels
@@ -39,10 +43,37 @@ power-driven vessel.
 '''
 
 class Rule18(COLREG):
+	RANGE	= 4000.0	# Metres within which an onset is recorded (evaluator.yaml r_colregs_2_max)
+	DCPA	= 500.0		# Metres of predicted passing distance that is a risk of collision
+
 	def __init__(self):
 		""" Constructor
 		"""
 		COLREG.__init__(self)
+
+		# Every encounter at risk; overtaking is Rule 13's
+		self.watch	= EncounterWatch( None, self.DCPA, self.RANGE, excluded=(Encounter.OTGW, Encounter.OTSO) )
+		return
+
+	def setup(self, ctxt:Context, config:ArgList):
+		""" Sets up the rule and its encounter thresholds
+		Arguments
+			ctxt -- Simulation context
+			config -- Configuration attributes
+		"""
+		COLREG.setup( self, ctxt, config )
+
+		self.watch.dcpa		= float( config['encounter.dcpa'] or self.DCPA )
+		self.watch.range	= float( config['encounter.range'] or self.RANGE )
+		return
+
+	def feed(self, ctxt:Context, rule_ctxt):
+		""" Queues encounters at risk, once past their closest approach
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		self.watch.observe( ctxt, rule_ctxt, self )
 		return
 
 

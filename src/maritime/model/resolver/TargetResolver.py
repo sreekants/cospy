@@ -208,7 +208,7 @@ class TargetResolver(Resolver):
 		if not self.is_valid():
 			return None
 
-		return list( getattr(self.ts, 'intent', None) or [] )
+		return list( getattr(self.ts, 'signal', None) or [] )
 
 	@simproperty
 	def Position(self):

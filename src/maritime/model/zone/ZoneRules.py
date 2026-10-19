@@ -177,6 +177,19 @@ class ZoneRules:
 
 		return min( depths ) if depths else None
 
+	@staticmethod
+	def depth_bound(shapes):
+		""" Deepest the seabed can be beneath a vessel: the shallowest deep edge among its depth bands
+		Arguments
+			shapes -- Map shapes enclosing the vessel
+		Returns
+			Depth in metres, or None when no shape is a bounded band, i.e. the reading is a sounding
+		"""
+		bounds	= [ s.depth_max for s in shapes
+					if getattr(s, 'depth_max', None) is not None ]
+
+		return min( bounds ) if bounds else None
+
 	def nominal_depth(self, shapes):
 		""" Nominal depth the zones set for where the map reports none (REQ-022-06).
 		The most specific layer wins - a shape's own settings, then its named zone, then its

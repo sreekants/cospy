@@ -47,14 +47,13 @@ class Rule13(COLREG):
 		self.watch.range	= float( config['encounter.range'] or self.RANGE )
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Queues overtaking encounters that have passed their closest approach, then judges them
+	def feed(self, ctxt:Context, rule_ctxt):
+		""" Queues overtaking encounters that have passed their closest approach
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
 		"""
 		self.watch.observe( ctxt, rule_ctxt, self )
-		COLREG.evaluate( self, ctxt, rule_ctxt )
 		return
 
 	def on_start(self, ctxt:Context, config):

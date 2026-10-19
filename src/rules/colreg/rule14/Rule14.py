@@ -50,14 +50,13 @@ class Rule14(COLREG):
 		self.dcpa	= float( config['headon.dcpa'] or self.DCPA )
 		return
 
-	def evaluate(self, ctxt:Context, rule_ctxt):
-		""" Queues head-on encounters that have passed their closest approach, then judges them
+	def feed(self, ctxt:Context, rule_ctxt):
+		""" Queues head-on encounters that have passed their closest approach
 		Arguments
 			ctxt -- Simulation context
 			rule_ctxt -- Rule context
 		"""
 		self.observe( ctxt, rule_ctxt )
-		COLREG.evaluate( self, ctxt, rule_ctxt )
 		return
 
 	def observe(self, ctxt:Context, rule_ctxt):

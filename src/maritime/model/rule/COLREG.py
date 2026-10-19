@@ -11,6 +11,10 @@ from cos.core.utilities.ArgList import ArgList
 from cos.core.kernel.Context import Context
 from cos.model.rule.Context import Context as RuleContext
 from cos.lang.logic.Decision import Decision
+from cos.lang.logic.Expression import BinaryExpression, CompositeExpression, UnaryExpression
+from cos.lang.symbol.Symbol import Symbol
+from cos.core.utilities.Errors import ErrorCode
+from maritime.model.vessel.Vessel import Vessel
 
 import queue, fnmatch, re
 
@@ -37,6 +41,28 @@ class COLREG(ScoredRule, Rule):
 		"""
 		Rule.setup( self, ctxt, config )
 		self.init_scoring( ctxt )
+		self.check_signals( ctxt, config['automata'] )
+		return
+
+	def check_signals(self, ctxt:Context, file:str):
+		""" Raises when a clause names a signal outside the signal vocabulary
+		Arguments
+			ctxt -- Simulation context
+			file -- Legata file the clauses came from
+		"""
+		vocabulary	= Vessel.load_signals( ctxt )
+		if (vocabulary is None) or (self.automata is None):
+			return
+
+		def visit(found:list, node):
+			for expression in node.conditions + node.exceptions + node.assurances + node.precedents:
+				found	+= [ (self.clause_name(node), name) for name in signal_names(expression) ]
+			return ErrorCode.ERROR_CONTINUE
+
+		found	= []
+		self.automata.definition.traverse( visit, found )
+		for clause, name in found:
+			vocabulary.check( name, f'{file}: {clause}' )
 		return
 
 	def begin(self, ctxt:Context, rule_ctxt):
@@ -59,7 +85,16 @@ class COLREG(ScoredRule, Rule):
 		"""
 		Rule.evaluate(self, ctxt, rule_ctxt)
 
+		self.feed( ctxt, rule_ctxt )
 		self.__evaluate_rule( ctxt, rule_ctxt )
+		return
+
+	def feed(self, ctxt:Context, rule_ctxt:RuleContext):
+		""" Adds this pass's situations with add_situation; a rule overrides it, the default adds none
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
 		return
 
 	def add_situation(self, situation):
@@ -153,7 +188,7 @@ class COLREG(ScoredRule, Rule):
 		return
 
 	def log_failure(self, ctxt:Context, situation, clause:str, penalty:float, err):
-		""" Logs a failed clause, priced or not, to the rule's fact_colreg_rNN table
+		""" Logs a failed clause, priced or not, to the rule's fact_colreg_rNN table once per occurrence
 		Arguments
 			ctxt -- Simulation context
 			situation -- Situation the clause failed in
@@ -165,6 +200,12 @@ class COLREG(ScoredRule, Rule):
 			return
 
 		target	= getattr( situation, 'ts', None )
+
+		# Same key as record_violation, so a row and its finding count the same occurrence
+		key		= ( Ledger.identify(situation.os), clause, Ledger.identify(target) if target is not None else None )
+		if self.logged.admit( key, ctxt.sim.seconds() ) == False:
+			return
+
 		own		= Ledger.recid( situation.os )
 		vessels	= f'own={own} target={Ledger.recid(target) if target is not None else "-"}'
 
@@ -172,6 +213,30 @@ class COLREG(ScoredRule, Rule):
 		self.data( ctxt, self.failures, (ctxt.sim.seconds(), clause, float(penalty), vessels, str(err)),
 				   DataContext.of( ctxt, situation.os, own ) )
 		return
+
+def signal_names(expression)->list:
+	""" Signal names an expression tests: the strings compared with a .Signal. term
+	Arguments
+		expression -- Parsed Legata expression, or a list or tuple of them
+	"""
+	if isinstance( expression, (list, tuple) ):
+		return [ name for e in expression for name in signal_names(e) ]
+
+	if isinstance( expression, CompositeExpression ):
+		return signal_names( expression.components )
+
+	if isinstance( expression, BinaryExpression ):
+		term	= expression.lhs
+		if isinstance( term, Symbol.Variable ) and ('.Signal.' in f'{term.value}.'):
+			values	= expression.rhs if isinstance( expression.rhs, (list, tuple) ) else [expression.rhs]
+			return [ v.value for v in values if isinstance(v, Symbol.String) ]
+		return signal_names( [expression.lhs, expression.rhs] )
+
+	if isinstance( expression, UnaryExpression ):
+		return signal_names( expression.lhs )
+
+	return []
+
 
 if __name__ == "__main__":
 	test = COLREG()

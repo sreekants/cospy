@@ -7,15 +7,12 @@ from cos.model.examiner.Examination import ExaminationType
 from cos.core.kernel.Context import Context
 
 # REQUIREMENT:
-# Berthing: the inland counterpart of grounding. A vessel in internal waters,
-# a harbour or a waterway that stands closer to the shore than its draught
-# allows has berthed, whether or not it meant to.
+# Berthing: seabed contact while berthing, i.e. at or below berthing_speed
+# within berthing_distance of land (config/examiner/zones.yaml), in any zone.
+# Every other contact is a grounding (COS.049).
 #
 # The arithmetic is identical to GroundingExaminer's, so this subclasses it and
-# changes only which zone types it answers for, which margin it reads, and
-# which events it scores - all four of which are names looked up in
-# config/examiner/zones.yaml. Sharing the computation keeps the two concerns
-# from drifting apart as the depth model improves.
+# changes only which situation it answers for and which events it scores.
 
 
 
@@ -27,6 +24,7 @@ class BerthingExaminer(GroundingExaminer):
 	MARGIN		= 'berthing_margin'
 	CONTACT		= 'berthing.contact'
 	NEAR_MISS	= 'berthing.margin'
+	BERTHING	= True
 
 	def __init__(self):
 		""" Constructor
@@ -34,10 +32,7 @@ class BerthingExaminer(GroundingExaminer):
 		GroundingExaminer.__init__(self)
 		return
 
-	# No method overrides are needed. The inherited scorer reads self.TOPIC,
-	# self.MESSAGE, self.ZONES, self.MARGIN, self.CONTACT and self.NEAR_MISS,
-	# so redeclaring those six names above is the whole of the difference
-	# between berthing and grounding.
+	# No method overrides are needed: the inherited scorer reads the names above.
 
 
 if __name__ == "__main__":

@@ -1,98 +1,90 @@
 # COLREG.Rule19: Conduct of Vessels in Restricted Visibility
+# Status        : IMPLEMENTED (COS.022) - (b) safe speed, (e); fed by Rule19.py with every vessel under
+#                 test alone, and every encounter at risk once past its closest approach
 
 define:{
     OS: OwnShip,
     TS: TargetShip
 }
 
-# (a) This Rule applies to vessels not in sight of one another when navigating in 
+# (a) This Rule applies to vessels not in sight of one another when navigating in
 # or near an area of restricted visibility.
-condition: {
-    : (
-        ((OS, TS).Visible is true) and
-        ([OS.Position, Map.Sky@RestrictedVisibility].Distance in Area.Proximity.SafeRange)
-      )
+#
+# Restricted visibility is the scenario's visibility under Vessel.RestrictedVisibility.Range (nautical
+# miles), as in Rule 35. "Not in sight" is judged at the onset of an encounter: the target was beyond
+# the visibility. A vessel that is not underway (Rule 3(i)) is excluded. These are conditions in each
+# clause because a file-level condition is not compiled (LEGATA.002).
 
-    # Trigger rule 19 overriding other conditions. Useful for rules in cross-reference.
-    : OS.Restriction in ['COLREG.Rule19.*']  
-}
-
-# (b) Every vessel shall proceed at a safe speed adapted to the prevailing 
-# circumstances and conditions of restricted visibility. A power-driven vessel 
+# (b) Every vessel shall proceed at a safe speed adapted to the prevailing
+# circumstances and conditions of restricted visibility. A power-driven vessel
 # shall have engines ready for immediate manoeuvre.
+#
+# Judged on every vessel alone, each pass. Safe speed is the speed at which own ship can stop within
+# half the visibility:
+#   (OS, TS).SafeSpeed       -- metres per second; stopping distance taken to grow with the square of
+#                               speed to stopping.lengths ship lengths at the ship model's service_speed
+#                               (legata.yaml, default 15: IMO MSC.137(76) 5.3.1)
+#   (OS, TS).WithinSafeSpeed -- own ship is no faster than SafeSpeed
+# A ship model without a service_speed has no safe speed, and (b) is not judged for it.
+# Engines ready for immediate manoeuvre is not judged: no behaviour sets Vessel.Engine.ON.
 clause['COLREG.Rule19.b']:{
     : {
-        condition: { 
-            :(OS.Type is Vessel.Type.PowerDriven) and 
-             (OS.Velocity in Vessel.RestrictedVisibility.Speed.SafeRange)
-         }
-        assure: { 
-            :OS.EngineState in ['Vessel.Engine.ON'] 
-        }
-    }
-}
-
-# (c) Every vessel shall have due regard to the prevailing circumstances and 
-# conditions of restricted visibility when complying with the Rules of Section I of this Part.
-clause['COLREG.Rule19.c']:{
-    : {
-        condition: { : OS.Situation in [Sea.Zone.Situation.Circumstances.*] }
-        assure: { : abort }     # Abort further processing of the rule
-    }
-}
-
-# (d) A vessel which detects by radar alone the presence of another vessel 
-# shall determine if a closequarters situation is developing and/or risk of 
-# collision exists. 
-clause['COLREG.Rule19.d']:{
-    : {
         condition: {
-            : ((OS, TS).Detect in ['Radio.*', 'Sonar.*']) and
-              ((OS, TS).Encounter in [
-                'Risk.CloseQuarters', 
-                'Risk.Collision'
-                ])
-        }
-
-        # If so, she shall take avoiding action in ample time, 
-        # provided that when such action consists of an alteration of course, so far 
-        # as possible the following shall be avoided:
-        # (i) an alteration of course to port for a vessel forward of the beam, other than for a vessel
-        # being overtaken;
-        # (ii) an alteration of course towards a vessel abeam or abaft the beam.
+            : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and ((OS, TS).SafeSpeed > 0)
+         }
         exclude: {
-            : (OS, TS).Beam in ['Position.Abeam']
-            : (OS, TS).Beam in ['Position.Abaft']
-        }
-        assure: { 
-            :OS.Manouever in [
-                'Manouever.Course.Alteration'
-                ]
+            : (OS, TS).Paired is true
+            : OS.Status in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]
+         }
+        assure: {
+            : (OS, TS).WithinSafeSpeed is true
         }
     }
 }
+
+# (c) Every vessel shall have due regard to the prevailing circumstances and
+# conditions of restricted visibility when complying with the Rules of Section I of this Part.
+#
+# Not judged: a general duty, judged through the Section I rules themselves.
+
+# (d) A vessel which detects by radar alone the presence of another vessel
+# shall determine if a closequarters situation is developing and/or risk of
+# collision exists. If so, she shall take avoiding action in ample time,
+# provided that when such action consists of an alteration of course, so far
+# as possible the following shall be avoided:
+# (i) an alteration of course to port for a vessel forward of the beam, other than for a vessel
+# being overtaken;
+# (ii) an alteration of course towards a vessel abeam or abaft the beam.
+#
+# Not judged yet: needs a course-change term (COS.041); no behaviour sets OS.Manouever.
 
 # (e) Except where it has been determined that a risk of collision does not exist, every vessel which
 # hears apparently forward of her beam the fog signal of another vessel, or which cannot avoid a close
 # quarters situation with another vessel forward of her beam, shall reduce her speed to the minimum
 # at which she can be kept on her course. She shall if necessary take all her way off and in any event
 # navigate with extreme caution until danger of collision is over.
+#
+# Judged once per encounter at risk of collision, after the closest approach, on what held at onset:
+#   (OS, TS).ForwardAtOnset -- the target bore less than 90 degrees from own ship's course
+#   (OS, TS).InSightAtOnset -- the target was within the visibility
+#   (OS, TS).OnsetSpeed     -- own ship's speed, metres per second
+#   (OS, TS).SlowedSinceOnset -- own ship is slower now than at onset
+# Own ship complies when she passed the closest approach slower than at onset. "To the minimum at
+# which she can be kept on her course" is not judged: no ship model has a steerage speed. An own ship
+# stopped at onset has no way to take off. The fog-signal trigger is covered by the encounter: both
+# need the other vessel forward of the beam at risk of collision.
 clause['COLREG.Rule19.e']:{
     : {
-        condition: { 
-            : TS.FogSignal is true
-            : ((OS, TS).Beam in ['Position.Forward']) and
-              ((OS, TS).TimeToEncounter in Vessel.Collision.TimeToEncounter.SafeRange) 
-        }
+        condition: {
+            : ((OS, TS).Visibility < Vessel.RestrictedVisibility.Range) and
+              ((OS, TS).ForwardAtOnset is true) and ((OS, TS).InSightAtOnset is false)
+         }
         exclude: {
-            : (OS, TS).TimeToEncounter not in Vessel.Collision.TimeToEncounter.SafeRange
-        }
-        assure: { 
-            : OS.Acceleration < 0         # Reduce speed
-            : (OS, TS).Heading.Gradient > 0     # Turn away
+            : (OS, TS).OnsetSpeed <= 0
+            : OS.Status in [Vessel.Status.ANCHORED, Vessel.Status.MOORED, Vessel.Status.FASTENED, Vessel.Status.AGROUND]
+         }
+        assure: {
+            : (OS, TS).SlowedSinceOnset is true
         }
     }
 }
-
-
-

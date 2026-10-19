@@ -6,11 +6,16 @@ from maritime.model.resolver.TargetResolver import TargetResolver
 from maritime.model.vessel.Vessel import Vessel, Status
 from cos.model.resolver.Resolver import Resolver, simproperty
 from cos.core.kernel.Context import Context
+from cos.core.utilities.ArgList import ArgList
 from cos.model.rule.Context import Context as RuleContext
 from maritime.regulation.colreg.Classification import classify, bearing, NAMES
 
 import numpy as np
 import math
+
+STOPPING_LENGTHS	= 15.0		# Ship lengths of track reach in a full-astern stop (IMO MSC.137(76), 5.3.1)
+METRES_PER_NM		= 1852.0
+MS_PER_KNOT			= 1852.0 / 3600.0
 
 class ColregResolver(Resolver):
 	def __init__(self, resolver):
@@ -24,6 +29,17 @@ class ColregResolver(Resolver):
 		self.tr			= resolver.get('target')
 		self.situation	= None
 		self.encounter	= None		# The rule situation being judged
+		self.stopping	= STOPPING_LENGTHS
+		return
+
+	def init(self, ctxt, cfg):
+		""" Reads the stopping distance from legata.yaml
+		Arguments
+			ctxt -- Simulation context
+			cfg -- This resolver's legata.yaml entry
+		"""
+		args			= ArgList( (cfg or {}).get('config') )
+		self.stopping	= float( args['stopping.lengths'] or self.stopping )
 		return
 
 	
@@ -53,6 +69,87 @@ class ColregResolver(Resolver):
 			return 'Unknown'
 
 		return passing_side( self.tr.os, self.tr.ts )
+
+	@simproperty
+	def Tack(self)->str:
+		""" Simulation property: Tack - side own ship had the wind on at onset, 'Port', 'Starboard' or 'Unknown' (Rule 12)
+		"""
+		return (getattr( self.encounter, 'onset', None ) or {}).get( 'tack', 'Unknown' )
+
+	@simproperty
+	def TargetTack(self)->str:
+		""" Simulation property: TargetTack - side the target had the wind on at onset (Rule 12)
+		"""
+		return (getattr( self.encounter, 'onset', None ) or {}).get( 'target_tack', 'Unknown' )
+
+	@simproperty
+	def Windward(self)->bool:
+		""" Simulation property: Windward - own ship was upwind of the target at onset; false in a calm (Rule 12)
+		"""
+		return (getattr( self.encounter, 'onset', None ) or {}).get( 'windward' ) or False
+
+	@simproperty
+	def Paired(self)->bool:
+		""" Simulation property: Paired - the situation has a target ship
+		"""
+		return getattr( self.encounter, 'ts', None ) is not None
+
+	@simproperty
+	def SafeSpeed(self)->float:
+		""" Simulation property: SafeSpeed - metres per second at which own ship stops within half the
+		visibility; stopping distance grows with the square of speed to STOPPING_LENGTHS at service speed;
+		0 without a service speed or length (Rule 19(b))
+		"""
+		os		= self.tr.os if self.tr is not None else None
+		model	= getattr( os, 'model', None )
+		service	= getattr( model, 'service_speed', None )
+		length	= float( model.ship.length ) if model is not None else 0.0
+		if (service is None) or (length <= 0.0) or (self.tr.visibility is None):
+			return 0.0
+
+		half	= self.tr.visibility * METRES_PER_NM / 2.0
+		return float( service ) * MS_PER_KNOT * math.sqrt( half / (self.stopping * length) )
+
+	@simproperty
+	def WithinSafeSpeed(self)->bool:
+		""" Simulation property: WithinSafeSpeed - own ship is no faster than SafeSpeed; true without one (Rule 19(b))
+		"""
+		safe	= self.SafeSpeed()
+		if safe <= 0.0:
+			return True
+
+		return float( np.linalg.norm(np.asarray(self.tr.os.velocity, dtype=float)[:2]) ) <= safe
+
+	@simproperty
+	def SlowedSinceOnset(self)->bool:
+		""" Simulation property: SlowedSinceOnset - own ship is slower than at the onset of the encounter;
+		true without an onset (Rule 19(e))
+		"""
+		onset	= self.OnsetSpeed()
+		os		= self.tr.os if self.tr is not None else None
+		if (onset <= 0.0) or (os is None):
+			return True
+
+		return float( np.linalg.norm(np.asarray(os.velocity, dtype=float)[:2]) ) < onset
+
+	@simproperty
+	def OnsetSpeed(self)->float:
+		""" Simulation property: OnsetSpeed - own ship's speed at the onset of the encounter; 0 without one (Rule 19(e))
+		"""
+		return (getattr( self.encounter, 'onset', None ) or {}).get( 'speed' ) or 0.0
+
+	@simproperty
+	def ForwardAtOnset(self)->bool:
+		""" Simulation property: ForwardAtOnset - the target was forward of own ship's beam at onset; false without one (Rule 19(e))
+		"""
+		return (getattr( self.encounter, 'onset', None ) or {}).get( 'forward' ) or False
+
+	@simproperty
+	def InSightAtOnset(self)->bool:
+		""" Simulation property: InSightAtOnset - the target was within visual range at onset; true when unknown (Rule 19(a))
+		"""
+		sight	= (getattr( self.encounter, 'onset', None ) or {}).get( 'in_sight' )
+		return True if sight is None else sight
 
 	@simproperty
 	def AheadOfTarget(self)->bool:

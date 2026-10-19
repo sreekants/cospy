@@ -5,6 +5,7 @@
 from cos.math.risk.ConditionalProbabilityTable import apply_all, read
 from rules.examiner.risk.ASVCPT import read as read_model
 from rules.examiner.risk.RiskModel import CURRENCY, LossMatrix
+from cos.core.kernel.Configuration import Configuration
 
 import xml.etree.ElementTree as ET
 import numpy as np
@@ -52,9 +53,8 @@ KINDS = (CONSEQUENCE, HE, DYNAMIC, STATIC)
 #
 # This module needs a territory only to print an illustrative expected loss in
 # its report; the network it builds carries no costs at all.
-TERRITORY = os.path.normpath(os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), *([os.pardir] * 4),
-    "config", "simulation", "no", "trondheim", "risk.yaml"))
+TERRITORY = os.path.join(Configuration.resolve_path("$(COS_ROOT)/config"),
+    "simulation", "no", "trondheim", "risk.yaml")
 
 
 def build(model):
@@ -227,8 +227,7 @@ def report(bn, network, tables):
 # The paths this command line defaults to. They are declared at the entry
 # point, not in the modules that consume them: one place names a file, and a
 # caller that wants another supplies it.
-CONFIG_DIR = os.path.normpath(os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), *([os.pardir] * 4), "config"))
+CONFIG_DIR = Configuration.resolve_path("$(COS_ROOT)/config")    # The tree runs load, as cos.ini resolves CONFIG
 
 MODEL = os.path.join(CONFIG_DIR, "risk", "asv.model.yaml")
 DEPLOYED = os.path.join(CONFIG_DIR, "risk", "risk.model.xdsl")

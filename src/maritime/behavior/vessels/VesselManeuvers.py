@@ -209,7 +209,7 @@ class VesselManeuvers:
 		if (b.anchor_watch is not None) and (b.anchor_watch.signaled() == True):
 			b.movable        = True
 			b.anchor_watch   = None
-			b.vehicle.underway()
+			b.vehicle.under_way()
 
 		return target_dx
 

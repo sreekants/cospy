@@ -11,18 +11,23 @@ from cos.core.kernel.Object import TERM_WRITE
 from cos.core.utilities.ArgList import ArgList
 from cos.model.situation.EpisodeWatcher import EpisodeWatcher, epoch_of
 
+import math
+
 # REQUIREMENT:
 # Grounding: a vessel at sea standing into water too shallow for its draught.
 #
 # The map reports a nominal depth per sea shape, so the test is the under-keel
 # clearance - depth less draught less the vessel's own allowance - against the
-# margin the zone demands. Negative clearance is contact with the seabed; a
-# positive clearance under the margin is a near miss, scored more lightly.
+# margin the zone demands. Contact with the seabed is scored only when certain:
+# when even the deep edge of the depth band (depth_max) leaves no clearance.
+# Any other clearance under the margin, a possible contact included, is a near
+# miss, scored more lightly.
 #
 # NOTE:
-# Berthing is the same arithmetic in inland water and lives in
-# BerthingExaminer; which zone types each is answerable for is declared in
-# config/examiner/zones.yaml, not here, so a jurisdiction can move the line.
+# Berthing is the same arithmetic and lives in BerthingExaminer. The situation
+# decides which answers: slow and close to land is berthing, anything else is
+# grounding (COS.049). The zone type only picks the margin, through
+# berthing_zones and grounding_zones in config/examiner/zones.yaml.
 
 
 
@@ -35,6 +40,7 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 	MARGIN		= 'grounding_margin'
 	CONTACT		= 'grounding.contact'
 	NEAR_MISS	= 'grounding.margin'
+	BERTHING	= False		# Answers for contacts outside a berthing situation
 
 	watcher		= None		# Set up in setup(); without it a near miss is scored on every pass
 
@@ -81,8 +87,8 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 		vessel		= rule_ctxt.situation.os
 		shapes, rules, depth	= self.survey( vessel )
 
-		# Answerable only for the zone types this examiner owns.
-		if ZoneRules.applies_in( rules, self.ZONES, shapes ) == False:
+		# Berthing and grounding split by situation, in every zone
+		if self.berthing( vessel, rules ) != self.BERTHING:
 			return
 
 		# A nominal reading is clear water, whichever layer set it (REQ-022-A4)
@@ -108,7 +114,7 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 			depth -- Seabed depth beneath the vessel
 			clearance -- Water left beneath the keel
 		"""
-		margin	= float( rules.get(self.MARGIN, 0.0) or 0.0 )
+		margin	= self.margin( rules, shapes )
 		key		= self.identify( vessel )
 
 		if self.watcher is not None:
@@ -121,7 +127,7 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 			self.settle( vessel, self.NEAR_MISS, shapes )
 			return 0.0
 
-		if clearance > 0.0:
+		if self.certain( vessel, shapes, clearance ) == False:
 			if self.watcher is not None:
 				return 0.0		# A near miss is scored once per epoch, in on_epoch()
 			return self.report( ctxt, vessel, self.NEAR_MISS, shapes, depth, clearance, margin )
@@ -129,6 +135,61 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 		if self.watcher is not None:
 			self.contacted.add( key )
 		return self.report( ctxt, vessel, self.CONTACT, shapes, depth, clearance, margin )
+
+	def certain(self, vessel, shapes, clearance)->bool:
+		""" Whether a vessel is certainly on the seabed: no clearance even at the band's deep edge
+		Arguments
+			vessel -- Vessel under examination
+			shapes -- Map shapes enclosing the vessel
+			clearance -- Clearance at the band's shallow reading
+		"""
+		if clearance > 0.0:
+			return False
+
+		bound	= ZoneRules.depth_bound( shapes )
+		if bound is None:
+			return True			# A sounding, or a map without band edges
+
+		deepest	= self.clearance( vessel, bound )
+		return (deepest is not None) and (deepest <= 0.0)
+
+	@staticmethod
+	def margin(rules, shapes)->float:
+		""" Under-keel margin the zone demands: berthing_margin in a berthing zone, else grounding_margin
+		Arguments
+			rules -- Merged zone rules
+			shapes -- Map shapes enclosing the vessel
+		"""
+		key	= 'berthing_margin' if ZoneRules.applies_in( rules, 'berthing_zones', shapes ) else 'grounding_margin'
+		return float( rules.get(key, 0.0) or 0.0 )
+
+	def berthing(self, vessel, rules)->bool:
+		""" Whether a vessel is berthing: at or below berthing_speed within berthing_distance of land
+		Arguments
+			vessel -- Vessel under examination
+			rules -- Merged zone rules
+		"""
+		speed, distance	= rules.get( 'berthing_speed' ), rules.get( 'berthing_distance' )
+		velocity		= getattr( vessel, 'velocity', None )
+		if (speed is None) or (distance is None) or (velocity is None):
+			return False
+
+		if math.hypot( velocity[0], velocity[1] ) > float( speed ):
+			return False
+
+		land	= self.distance_to_land( vessel )
+		return (land is not None) and (land <= float( distance ))
+
+	def distance_to_land(self, vessel):
+		""" Metres from a vessel to the nearest land boundary, or None without land, as (OwnShip,Map.Land).Distance
+		Arguments
+			vessel -- Vessel under examination
+		"""
+		position	= getattr( vessel, 'location', None )
+		if (position is None) or (len( self.land or [] ) == 0):
+			return None
+
+		return min( shape.area.clearance(position[0], position[1]) for shape in self.land )
 
 	def report(self, ctxt:Context, vessel, event:str, shapes, depth, clearance, margin, epoch=None):
 		""" Records a finding and announces it
@@ -142,8 +203,10 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 			margin -- Margin the zone demands
 			epoch -- Epoch the near miss closes, if any
 		"""
+		bound	= ZoneRules.depth_bound( shapes )
+		band	= f' (band to {bound:g} m)' if bound is not None else ''
 		penalty	= self.violate( ctxt, vessel, event, shapes, value=clearance,
-								detail=f'depth {depth:.1f} m, clearance {clearance:.2f} m, '
+								detail=f'depth {depth:.1f} m{band}, clearance {clearance:.2f} m, '
 									   f'margin {margin:.2f} m' )
 
 		payload	= {
@@ -153,6 +216,7 @@ class GroundingExaminer(ZoneAware, NavigationExaminer):
 			'event'		: event,
 			'depth'		: depth,
 			'clearance'	: clearance,
+			'depth_max'	: bound,
 			'margin'	: margin,
 			'penalty'	: penalty,
 		}
