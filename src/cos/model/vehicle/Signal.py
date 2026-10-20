@@ -6,7 +6,7 @@ from cos.model.vehicle.ValueSet import ValueSet
 
 import fnmatch, os, yaml
 
-CLASSES		= ('navigation', 'restricted_visibility', 'encounter')
+CLASSES		= ('navigation', 'restricted_visibility', 'encounter', 'distress')
 
 
 class Vocabulary:

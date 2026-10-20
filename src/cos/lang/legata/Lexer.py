@@ -3,6 +3,19 @@
 # Description: Lexer for the Legata(Maritime) vocabulary
 
 import ply.lex as lex
+import re
+
+class IllegalCharacter(TypeError):
+    def __init__(self, char:str, lineno:int):
+        """ Constructor
+        Arguments
+            char -- The character no token matches
+            lineno -- Physical line it is on
+        """
+        TypeError.__init__(self, f"line {lineno}: Illegal character '{char}'")
+        self.char       = char
+        self.lineno     = lineno
+        return
 
 class Lexer:
     reserved = {
@@ -140,9 +153,8 @@ class Lexer:
 
     # Error handling rule
     def t_error(self, t):
-        print("Illegal character '%s'" % t.value[0])
-        t.lexer.skip(1)
-        return
+        # Skipping would drop the character silently and compile what is left of the clause
+        raise IllegalCharacter( t.value[0], t.lexer.lineno )
 
     # Build the lexer
     def build(self,**kwargs):
@@ -171,8 +183,9 @@ class Lexer:
         return t
 
     def t_STRING(self, t):
-        r'["\'](?:\\.|[^\'\\])*["\']'
-        t.value = t.value[1:len(t.value)-1]    
+        r'"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\''
+        # Each quote style closes only on its own quote; a backslash escapes the next character
+        t.value = re.sub( r'\\(.)', r'\1', t.value[1:-1] )
         return t
 
     def t_COMMENT(self, t):

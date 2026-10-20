@@ -3,7 +3,7 @@
 # Description: Parser for the Legata(Maritime) vocabulary
 
 from cos.lang.legata.Definition import Definition
-from cos.lang.legata.Lexer import Lexer
+from cos.lang.legata.Lexer import Lexer, IllegalCharacter
 from cos.lang.legata.Expression import *
 from cos.lang.symbol.Symbol import *
 
@@ -11,12 +11,19 @@ import ply.yacc as yacc
 
 
 class Parser:
+    # Only consulted to settle shift/reduce choices; see p_expression
+    precedence  = (
+        ('nonassoc', 'LOWEST'),
+        ('left', 'OR', 'AND'),
+    )
+
     def __init__(self, automata=None, evaluator=None):
         self.parser     = None
         self.filename   = None
         self.automata   = automata
         self.eval       = evaluator
         self.debug      = False
+        self.origin     = None          # (file, line, physical line) from the last line directive
         return
 
     def build(self,**kwargs):
@@ -43,17 +50,23 @@ class Parser:
             self.filename	= path
 
         data    = self.preprocess(data, path)
-        if len(data) == 0:
+        if len(data.strip()) == 0:
             return
-        
+
         # TODO: Preprocess file for imports
-        self.parser.parse(data)
+        # This parser's own lexer, not PLY's last-built global one, counting lines from 1 for each text
+        self.origin                 = None
+        self.lexer.lexer.lineno     = 1
+        try:
+            self.parser.parse(data, lexer=self.lexer.lexer)
+        except IllegalCharacter as e:
+            raise TypeError( f"{self.position(e.lineno)} Illegal character '{e.char}'" ) from None
         self.__dump()
         self.__generate_automata()
         return
 
     def preprocess(self, data:str, path:str=None):
-        data    = data.strip()
+        # Not stripped: leading blank lines count towards the line numbers in messages
         return data
 
     def __dump(self):
@@ -84,6 +97,7 @@ class Parser:
             return
 
         # Consolidate all the blocks into variables.
+        # Definitions, defaults and line directives were applied while parsing
         for block in blocks:
             btype   = block[0]
             bvalue  = block[1]
@@ -109,7 +123,8 @@ class Parser:
         """
         code_blocks : declaration
         code_blocks : line_indicator
-        code_blocks : code_blocks declaration 
+        code_blocks : code_blocks declaration
+        code_blocks : code_blocks line_indicator
         """
         self.fold(p, 2)
         return
@@ -141,9 +156,10 @@ class Parser:
 
     def p_global_clauses(self, p):
         """
-        global_clauses : clauses
+        global_clauses : clause
         """
-        p[0]    = ('clauses', p[1])
+        # One clause per declaration; code_blocks repeats them
+        p[0]    = ('clauses', [p[1]])
         return
 
     def p_global_definitions(self, p):
@@ -158,14 +174,6 @@ class Parser:
         global_defaults : defaults
         """
         p[0]    = ('defaults', p[1])
-        return
-
-    def p_clauses(self, p):
-        """
-        clauses : clause
-        clauses : clauses clause 
-        """
-        self.fold(p, 2)
         return
 
     def p_clause(self, p):
@@ -285,10 +293,20 @@ class Parser:
 
     def p_compound_action(self, p):
         """
-        compound_action : action_expression
+        compound_action : expression
         compound_action : compound_action AND action_expression
         compound_action : compound_action OR action_expression
         """
+        self.fold_logic_expression( p, 'compound action' )
+        return
+
+    def p_compound_action_call(self, p):
+        """
+        compound_action : functional_expression AND action_expression
+        compound_action : functional_expression OR action_expression
+        """
+        # A call opens a compound only when an operator follows; alone it is an assurance_call
+        p[1]    = [('?', p[1])]
         self.fold_logic_expression( p, 'compound action' )
         return
 
@@ -401,8 +419,10 @@ class Parser:
     def p_expression(self, p):
         """
         expression : simple_expression
-        expression : compound_expression
+        expression : compound_expression %prec LOWEST
         """
+        # In an assurance, AND or OR after '(a)' extends the compound expression rather than
+        # closing it as the first operand of a compound action; LOWEST makes that shift explicit
         self.move(p)
         return
 
@@ -454,23 +474,25 @@ class Parser:
         subject_comparison : subject EQ rvalue
         subject_comparison : subject NEQ rvalue
         """
+        # Bare expressions, as 'is', 'has' and 'in' build, so tree walkers such as
+        # COLREG.signal_names() see every comparison the same way
         opcode  = p[2]
         lhs     = p[1]
         rhs     = p[3]
         match opcode:
             case '<':
-                p[0]    = Symbol.Operator(LT(lhs,rhs))
+                p[0]    = LT(lhs,rhs)
             case '>':
-                p[0]    = Symbol.Operator(GT(lhs,rhs))
+                p[0]    = GT(lhs,rhs)
             case '<=':
-                p[0]    = Symbol.Operator(LTE(lhs,rhs))
+                p[0]    = LTE(lhs,rhs)
             case '>=':
-                p[0]    = Symbol.Operator(GTE(lhs,rhs))
+                p[0]    = GTE(lhs,rhs)
             case '==':
-                p[0]    = Symbol.Operator(EQ(lhs,rhs))
+                p[0]    = EQ(lhs,rhs)
             case '!=':
-                p[0]    = Symbol.Operator(NEQ(p[1], p[3]))
-               
+                p[0]    = NEQ(lhs,rhs)
+
         return
 
     def p_subject_is_object(self, p):
@@ -496,16 +518,17 @@ class Parser:
 
     def p_subject_is_range(self, p):
         """
-        subject_is_range : subject IS range_expression
+        subject_is_range : subject IS range_literal
         """
-        p[0]    = IS(p[1], p[4])
+        # Context.IS is equality; against a list or range 'is' means membership, as 'in'
+        p[0]    = IN(p[1], p[3])
         return
 
     def p_subject_is_not_range(self, p):
         """
-        subject_is_range : subject IS NOT range_expression
+        subject_is_range : subject IS NOT range_literal
         """
-        p[0]    = IS_NOT(p[1], p[4])
+        p[0]    = NOT_IN(p[1], p[4])
         return
 
     def p_subject_in_range(self, p):
@@ -524,7 +547,6 @@ class Parser:
 
     def p_rvalue(self, p):
         """
-        rvalue : object
         rvalue : identifier
         rvalue : number
         rvalue : boolean
@@ -533,14 +555,29 @@ class Parser:
         """
         self.move(p)
         return
+
+    def p_rvalue_empty(self, p):
+        """
+        rvalue : EMPTY
+        """
+        p[0]    = None
+        return
     
     def p_range_expression(self, p):
         """
-        range_expression : array
-        range_expression : range    
-        range_expression : angle    
+        range_expression : range_literal
         range_expression : identifier
         """
+        self.move(p)
+        return
+
+    def p_range_literal(self, p):
+        """
+        range_literal : array
+        range_literal : range
+        range_literal : angle
+        """
+        # 'x is <identifier>' is an equality test, so only a literal makes 'is' a range test
         self.move(p)
         return
 
@@ -572,7 +609,6 @@ class Parser:
         """
         computed_variable : intersection_variable
         computed_variable : tuple_variable
-        computed_variable : functional_expression
         """
         self.move(p)
         return
@@ -648,19 +684,6 @@ class Parser:
         p[0]    = (lvalue, rvalue)
         return 
 
-    def p_object(self, p):
-        """
-        object : identifier
-        object : EMPTY
-        """
-
-        if p[1] == 'empty':
-            p[0]    = None
-        else:
-            self.move(p)
-
-        return
-
     def p_array(self, p):
         """
         array : LBRACE arglist RBRACE
@@ -679,6 +702,7 @@ class Parser:
     def p_arg(self, p):
         """
         arg : computed_variable
+        arg : functional_expression
         arg : identifier
         arg : number
         arg : boolean
@@ -718,37 +742,19 @@ class Parser:
         """
         value : identifier
         value : constant
+        value : number
         """
         self.move(p)
         return
 
     def p_constant(self, p):
         """
-        constant : FLOAT
-        constant : INTEGER
         constant : STRING
         """
-        if isinstance(p[1], float):
-            p[0]    = Symbol.Float(p[1])
-            return
-        elif isinstance(p[1], int):
-            p[0]    = Symbol.Integer(p[1])
-            return
-        elif isinstance(p[1], str):
-            p[0]    = Symbol.String(p[1])
-            return
-        
-        p[0]    = Symbol.Variable(p[1])
+        # Numbers are 'number' only, so INTEGER and FLOAT have one reading
+        p[0]    = Symbol.String(p[1])
         return
 
-    def p_string(self, p):
-        """
-        string : STRING
-        """
-        
-        p[0]    = ('string', p[1])
-        return
-    
     def p_identifier(self, p):
         """
         identifier : IDENTIFIER
@@ -787,38 +793,27 @@ class Parser:
         """
         number : INTEGER
         number : FLOAT
+        number : MINUS INTEGER
+        number : MINUS FLOAT
         """
-        val    = p[1]
-
-        if isinstance(val, int):
-            p[0]    = Symbol.Integer(p[1])
-            return
-        elif isinstance(val, float):
-            p[0]    = Symbol.Float(p[1])
-            return
-        
-        if val.isdecimal():
-            p[0]    = Symbol.Integer(p[1])
-        elif val.replace('.', '', 1).isdigit() :
-            p[0]    = Symbol.Float(p[1])
-
+        val     = p[1] if len(p) == 2 else -p[2]
+        p[0]    = Symbol.Integer(val) if isinstance(val, int) else Symbol.Float(val)
         return
 
     def p_line_indicator(self, p):
         """
         line_indicator : LINE INTEGER STRING
         """
-        file        = p[3]
-        lineno      = p[2]
+        # As C's #line: the next source line is line INTEGER of file STRING
+        self.origin = (p[3], p[2], p.lineno(1) + 1)
+        p[0]        = ('line', (p[3], p[2]))
         return
 
     def p_error(self, p):
-        if self.filename is not None:
-            context = self.filename
-        else:
-            context = 'line'
-            
-        raise TypeError( f"{context}:{p.lexer.lineno} Unknown text at {p.value} [{p.type}]")
+        if p is None:
+            raise TypeError( f"{self.position(self.lexer.lexer.lineno)} Unexpected end of input" )
+
+        raise TypeError( f"{self.position(p.lexer.lineno)} Unknown text at {p.value} [{p.type}]")
     
         
     def resolve(self, p, var):
@@ -904,11 +899,19 @@ class Parser:
         return
     
     def here(self, p):
-        if self.filename is not None:
-            context = self.filename
-        else:
-            context = 'line'
-        return f'{context}:{p.lexer.lineno}'
+        return self.position(p.lexer.lineno)
+
+    def position(self, lineno:int)->str:
+        """ file:line of a physical line, mapped through the last line directive
+        Arguments
+            lineno -- Physical line in the parsed text
+        """
+        if self.origin is not None:
+            file, line, physical    = self.origin
+            return f'{file}:{line + lineno - physical}'
+
+        context = self.filename if self.filename is not None else 'line'
+        return f'{context}:{lineno}'
 
     def throw(self, p, ex):
         raise RuntimeError( f'{self.here(p)} {ex}' )

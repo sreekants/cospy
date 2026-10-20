@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # Filename: VesselSignals.py
-# Description: Lights, day shapes and fog signals a vessel shows for its state (COLREG Rules 23, 25, 26, 27, 30, 35)
+# Description: Lights, day shapes and fog signals a vessel shows for its state (COLREG Rules 23, 25-30, 35, 37)
 
-from maritime.model.vessel.Vessel import Type, Status, Operation
+from maritime.model.vessel.Vessel import Type, Status, Operation, Restriction
 from maritime.model.resolver.TargetResolver import TargetResolver
 from maritime.model.resolver.VesselDeclarationsResolver import VesselDeclarationsResolver
 from cos.model.vehicle.Signal import Signal
@@ -59,6 +59,37 @@ TABLE	= {
 		'sounds': [ ('Sound.Bell', None), ('Sound.Bell.Strokes.3x', None), ('Sound.Gong', 'length >= 100') ],
 	},
 	'moored': { 'lights': [], 'shapes': [], 'sounds': [] },
+	'motor_sailing': {												# Rule 25 (e): a power-driven vessel, with the cone by day; Rule 35 (a), (b)
+		'lights': [ ('Light.Masthead.Forward.1x', 'length >= 12'), ('Light.Masthead.Abaft', 'length >= 50'),
+					('Light.Sidelight', None), ('Light.Sternlight', 'length >= 12'), ('Light.Allround.White', 'length < 12') ],
+		'shapes': [ ('Shape.Cone.ApexDown', None) ],
+		'sounds': [ ('Sound.Foghorn.Prolonged.1x', 'making way'), ('Sound.Foghorn.Prolonged.2x', 'not making way') ],
+	},
+	'constrained': {												# Rule 28: Rule 23's lights and the optional red lights or cylinder; Rule 35 (c)
+		'lights': [ ('Light.Masthead.Forward.1x', 'length >= 12'), ('Light.Masthead.Abaft', 'length >= 50'),
+					('Light.Sidelight', None), ('Light.Sternlight', 'length >= 12'), ('Light.Allround.White', 'length < 12'),
+					('Light.Allround.Red.3x', None) ],
+		'shapes': [ ('Shape.Cylinder', None) ],
+		'sounds': [ ('Sound.Foghorn.Prolonged.Short.2x', None) ],
+	},
+	'mine_clearance': {												# Rule 27 (f): Rule 23's lights and three green lights or balls; Rule 35 (c)
+		'lights': [ ('Light.Allround.Green.3x', None), ('Light.Masthead.Forward.1x', None),
+					('Light.Masthead.Abaft', 'length >= 50'), ('Light.Sidelight', None), ('Light.Sternlight', None) ],
+		'shapes': [ ('Shape.Ball.3x', None) ],
+		'sounds': [ ('Sound.Foghorn.Prolonged.Short.2x', None) ],
+	},
+	'pilotage': {													# Rule 29 (a); Rule 30 (a) at anchor; Rule 35 (a), (b), (g)
+		'lights': [ ('Light.Allround.WhiteRed', None), ('Light.Sidelight', 'underway'), ('Light.Sternlight', 'underway'),
+					('Light.Anchor.Forward', 'anchored'), ('Light.Anchor.Aft', 'anchored'), ('Light.Deck', 'anchored, length >= 100') ],
+		'shapes': [ ('Shape.Ball.1x', 'anchored') ],
+		'sounds': [ ('Sound.Foghorn.Prolonged.1x', 'making way'), ('Sound.Foghorn.Prolonged.2x', 'underway, not making way'),
+					('Sound.Bell', 'anchored') ],
+	},
+	'distress': {													# Rule 37, Annex IV 1 (i), (g), (b)
+		'lights': [ ('Light.Distress.Flare', None) ],
+		'shapes': [ ('Shape.Distress.FlagBall', None) ],
+		'sounds': [ ('Sound.Distress.Continuous', None) ],
+	},
 }
 
 WHEN	= {
@@ -70,6 +101,10 @@ WHEN	= {
 	'making way'				: lambda s: s.making_way,
 	'not making way'			: lambda s: not s.making_way,
 	'making way, length >= 50'	: lambda s: s.making_way and (s.length >= 50),
+	'underway'					: lambda s: not s.anchored,
+	'anchored'					: lambda s: s.anchored,
+	'anchored, length >= 100'	: lambda s: s.anchored and (s.length >= 100),
+	'underway, not making way'	: lambda s: (not s.anchored) and (not s.making_way),
 }
 
 PREFIX	= { 'lights': 'Light.', 'shapes': 'Shape.', 'sounds': 'Sound.' }
@@ -113,26 +148,41 @@ class VesselSignals:
 		Arguments
 			vessel -- Vessel
 		"""
+		# Status.DISTRESS falls through to the vessel's type and operation; required() adds the
+		# distress row to that, since distress does not lift the duty to show lights (Rule 37)
 		status	= vessel.status
 		if status == Status.AGROUND:
 			return 'aground'
 		if status == Status.NOT_UNDER_COMMAND:
 			return 'not_under_command'
 		if status == Status.RESTRICTED:
+			# Constrained by draught is not restricted in ability to manoeuvre (Rule 3(g), (h))
+			restriction	= getattr( vessel, 'restriction', Restriction.NONE )
+			if restriction == Restriction.DRAUGHT:
+				return 'constrained'
+			if restriction == Restriction.MINE_CLEARANCE:
+				return 'mine_clearance'
 			return 'restricted'
 
 		# Fishing at anchor shows the fishing signals (Rule 35(d))
 		operation	= getattr( vessel, 'operation', 0 ) or 0
-		if Operation.FISHING.value & (operation.value if isinstance(operation, Operation) else int(operation)):
+		flags		= operation.value if isinstance(operation, Operation) else int(operation)
+		if Operation.FISHING.value & flags:
 			gear	= getattr( getattr(vessel, 'model', None), 'fishing_gear', 'other' )
 			return 'trawling' if gear == 'trawl' else 'fishing'
+
+		# A pilot vessel on duty shows its own lights at anchor too (Rule 29(a)(iii))
+		if Operation.PILOTAGE.value & flags:
+			return 'pilotage'
 
 		if status == Status.ANCHORED:
 			return 'anchored'
 		if status in (Status.MOORED, Status.FASTENED):
 			return 'moored'
 
-		kind	= getattr( vessel, 'vessel_type', vessel.type )
+		kind	= getattr( vessel, 'vessel_type', None ) or getattr( vessel, 'type', None )
+		if kind == Type.MOTOR_SAILING:
+			return 'motor_sailing'
 		if isinstance( kind, Type ) and (Type.SAILING in kind):
 			return 'sailing'
 
@@ -150,9 +200,14 @@ class VesselSignals:
 		model	= getattr( vessel, 'model', None )
 		facts	= types.SimpleNamespace(
 			length		= float( model.ship.length ) if model is not None else 0.0,
-			making_way	= speed > making_way )
+			making_way	= speed > making_way,
+			anchored	= vessel.status == Status.ANCHORED )
 
-		return [ name for name, when in TABLE[VesselSignals.state(vessel)][kind] if WHEN[when](facts) ]
+		rows	= TABLE[VesselSignals.state(vessel)][kind]
+		if vessel.status == Status.DISTRESS:
+			rows	= rows + TABLE['distress'][kind]
+
+		return [ name for name, when in rows if WHEN[when](facts) ]
 
 	@staticmethod
 	def show(vessel, kind:str, names:list):

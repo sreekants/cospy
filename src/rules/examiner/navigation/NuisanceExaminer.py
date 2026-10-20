@@ -18,6 +18,8 @@ from cos.core.utilities.ArgList import ArgList
 #   navigation             never a nuisance (Rules 20-31 require it by status and time)
 #   restricted_visibility  a nuisance in clear visibility outside an encounter (Rule 35)
 #   encounter              a nuisance outside an encounter (Rule 34)
+#   distress               never a nuisance here; Rule 37 judges a distress signal shown
+#                          by a vessel not in distress
 #
 # A vessel is in an encounter from the first encounter examination naming it until it
 # has been named in none for encounter_release seconds (config/evaluator.yaml).

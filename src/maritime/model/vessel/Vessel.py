@@ -29,7 +29,8 @@ class Type(Flag):
 
     POWER_DRIVEN        = 0x00000001   # Power driven vessel propelled by machinery
     SAILING             = 0x00000100   # Sail driven vessel
-    SEAPLANE            = 0x00100001   # Sea plane
+    MOTOR_SAILING       = 0x00000101   # Under sail and machinery at once: power-driven (Rule 3(b)), with a cone by day (Rule 25(e))
+    SEAPLANE           = 0x00100001   # Sea plane
     WIG                 = 0x00200001   # Wing in ground crafts
     META_VESSEL         = 0x10000000   # Meta vessel (for grouping and other purposes)         
     FLEET               = 0x10001000   # Fleet of vessels
@@ -58,6 +59,7 @@ class Status(Flag):
     UNDERWAY            = 0x00000100        # Underway using engine
     NOT_UNDER_COMMAND   = 0x00000200        # Not under command
     RESTRICTED          = 0x00001000
+    DISTRESS            = 0x00002000        # In distress and requiring assistance (Rule 37, Annex IV)
 
 
 class Restriction(Flag):
@@ -67,7 +69,7 @@ class Restriction(Flag):
     TRANSPORTING        = 0x00000100   # Replenishment or transferring persons, pcosisions or cargo while underway;
     DREDGING            = 0x00010000   # Dredging vessel
     TOWING              = 0x00020000   # Engaged in a towing operation
-    DRAUGHT             = 0x00000100   # Resticted by draught in relation to available depth and width of navigable water
+    DRAUGHT             = 0x00000400   # Constrained by draught in relation to available depth and width of navigable water (Rule 28)
     VISIBILITY          = 0x00000200   # Visibility restricted
     LAUNCHING           = 0x01000000   # Engaged in launching or recovery of aircraft
     MINE_CLEARANCE      = 0x02000000   # Engaged in mine clearance operations etc.

@@ -159,6 +159,12 @@ class VesselResolver(Resolver):
 		return float( getattr(self.vessel, 'tow_length', 0.0) or 0.0 )
 
 	@simproperty
+	def FishingGear(self)->str:
+		""" Ship model's fishing gear, 'trawl' (Rule 26(b)) or 'other' (Rule 26(c)); 'other' without one
+		"""
+		return getattr( getattr(self.vessel, 'model', None), 'fishing_gear', None ) or 'other'
+
+	@simproperty
 	def MaxSpeed(self):
 		""" Ship model's maximum speed in metres per second; None without one (Rule 23(d)(ii))
 		"""

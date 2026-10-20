@@ -3,6 +3,8 @@
 # Description: Implementation of COLREG Rule
 
 from maritime.model.rule.COLREG import COLREG
+from cos.core.kernel.Context import Context
+from cos.model.rule.Situation import Situation
 
 '''
 Vessels not under Command or Restricted in their Ability to
@@ -71,6 +73,17 @@ class Rule27(COLREG):
 		""" Constructor
 		""" 
 		COLREG.__init__(self)
+		return
+
+	def feed(self, ctxt:Context, rule_ctxt):
+		""" Adds every vessel under test on each pass; the finding guards keep one row per episode
+		Arguments
+			ctxt -- Simulation context
+			rule_ctxt -- Rule context
+		"""
+		vessels		= rule_ctxt.vessels or []
+		for own in getattr( rule_ctxt, 'subjects', None ) or vessels:
+			self.add_situation( Situation(own, None) )
 		return
 
 
