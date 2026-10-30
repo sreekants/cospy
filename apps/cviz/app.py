@@ -11,7 +11,7 @@ import importlib
 # View name -> (module, class) of its world; imported on demand, so each view needs only its own renderer
 VIEWS	= {
 	"2d":	("cos.tools.cviz.VirtualWorld", "VirtualWorld"),
-	"3d":	("cos.ui.3d.VirtualWorld3D", "VirtualWorld3D"),
+	"3d":	("cos.tools.cviz.VirtualWorld3D", "VirtualWorld3D"),
 }
 
 class CViz:
