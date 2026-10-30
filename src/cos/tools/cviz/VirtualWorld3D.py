@@ -4,8 +4,8 @@
 
 from cos.tools.cviz.RPCAgent import RPCAgent
 from cos.tools.cviz.Dispatcher import Dispatcher
-from .ShipClass import ShipClass
-from .HullBuilder import HullBuilder
+from cos.tools.cviz.ShipClass import ShipClass
+from cos.tools.cviz.HullBuilder import HullBuilder
 from cos.ui.game import Palette
 
 from cos.core.api.World import World
