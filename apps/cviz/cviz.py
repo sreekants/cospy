@@ -5,7 +5,7 @@
 import os, shutil, getopt, sys
 import os.path
 
-from app import CViz
+from app import CViz, VIEWS
 
 
 def get_app_info():
@@ -13,12 +13,13 @@ def get_app_info():
 		"executable": "cviz.py",
 		"name"		: "COS Simulation Visualizer",
 		"version"	: "Version: 1.0 [07 Mar 2018]",
-		"usage"		:[ 	"[-h][-?] [host hostname:port]"
+		"usage"		:[ 	"[-h][-?][-v 2d|3d] [host hostname:port]"
 					],
-					
+
 		"help"		:[
 			    ["h"	, ["Print help.", usage]],
 			    ["?"	, ["Print help.", usage]],
+			    ["v"	, ["View: 2d (map, default) or 3d (threepp).", None]],
 			    ["host"	, ["Service host (eg: localhost:5556).", None]]
 				]		
 		}
@@ -55,19 +56,26 @@ def usage():
 
 def main():
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "hi:d", ["help"])
+		opts, args = getopt.getopt(sys.argv[1:], "hi:dv:", ["help", "view="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
+
+	view	= "2d"
 	for opt, arg in opts:
 		if opt in ("-h", "--help"):
-			usage()                     
-			sys.exit()                  
+			usage()
+			sys.exit()
 		elif opt == '-d':
-			global _debug               
-			_debug = 1                  
+			global _debug
+			_debug = 1
+		elif opt in ("-v", "--view"):
+			view	= arg.lower()
+			if view not in VIEWS:
+				print( f'[{arg}] is not a view; use one of {", ".join(VIEWS)}.' )
+				sys.exit(2)
 
-	theApp = CViz()
+	theApp = CViz( view )
 	theApp.run( args, get_app_info() )
 	
 
