@@ -32,6 +32,10 @@
     /* status: data flags only, never vessels (UX P6) */
     --critical: #d03b3b; --warning: #fab219; --good: #0ca30c;
     --mock: #7a5c00; --mock-bg: #fff4d6;
+
+    /* COLREG paragraph states (DASH.077): finding red steps by episodes, judged green, did-not-arise grey */
+    --state-finding-1: #f4a3a2; --state-finding-2: #e86b6a; --state-finding-3: #d03b3b; --state-finding-4: #8f1d1d;
+    --state-clear: #1baf7a; --state-clear-inferred: #a8dfc9; --state-na: #e3e2dd; --state-blank: #ffffff; --state-hatch: #52514e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -48,6 +52,8 @@
         --seq-0: #1a1a19; --seq-1: #0d366b; --seq-2: #104281; --seq-3: #184f95; --seq-4: #1c5cab;
         --seq-5: #256abf; --seq-6: #2a78d6; --seq-7: #5598e7; --seq-8: #9ec5f4;
         --mock: #f5d27a; --mock-bg: #3a2f10;
+        --state-finding-1: #6b2524; --state-finding-2: #a33433; --state-finding-3: #d44c4b; --state-finding-4: #f08f8e;
+        --state-clear: #199e70; --state-clear-inferred: #1d4d3c; --state-na: #3a3a37; --state-blank: #1a1a19; --state-hatch: #c3c2b7;
     }
 }
 
@@ -149,4 +155,21 @@ a.cos-tile:hover, button.cos-tile:hover { border-color: var(--accent); cursor: p
 .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: baseline; }
 .cos-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
 .cos-chart { width: 100%; }
+.cos-legend .dim { opacity: .4; }
+.swatch.hatch { background: repeating-linear-gradient(-45deg, var(--state-hatch) 0 1px, transparent 1px 4px); border: 1px solid var(--state-hatch); }
+.swatch.hatch-heavy { border-width: 2px; }
+.swatch.dotted { background-image: radial-gradient(var(--state-hatch) 0.8px, transparent 1px); background-size: 3px 3px; }
+.swatch.outline { border: 1px solid var(--text-muted); }
+
+/* ---------------------------------------------------------------- generated text (V39) */
+.cos-story { font-size: 13.5px; line-height: 1.5; max-height: 620px; overflow: auto; }
+.cos-story h3 { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-secondary); margin: 10px 0 4px; }
+.cos-story h3:first-child { margin-top: 0; }
+.cos-story p { margin: 0 0 6px; }
+.cos-story h4 { font-size: 13.5px; margin: 8px 0 2px; }
+.cos-story .go { color: var(--accent); cursor: pointer; background: none; border: 0; padding: 0; font: inherit; text-align: left; }
+.cos-story .go:hover { text-decoration: underline; }
+.cos-story sup.ref { color: var(--text-muted); font-size: 10px; cursor: help; margin-left: 1px; }
+.cos-story ul { margin: 0 0 6px; padding-left: 18px; }
+.cos-story .more { font: inherit; font-size: 12px; color: var(--accent); background: none; border: 1px solid var(--line); border-radius: 4px; padding: 1px 8px; cursor: pointer; }
 .cos-footer { margin-top: 16px; }

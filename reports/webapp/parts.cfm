@@ -45,6 +45,8 @@
 <tr><td><code>ves.tl.hazards</code></td><td><a href="components/ves.tl.hazards.cfm">standalone</a> · <a href="components/ves.tl.hazards.cfm?mock=1">mock</a></td><td><a href="data/ves.tl.hazards.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.tl.rb</code></td><td><a href="components/ves.tl.rb.cfm">standalone</a> · <a href="components/ves.tl.rb.cfm?mock=1">mock</a></td><td><a href="data/ves.tl.rb.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.tl.ro</code></td><td><a href="components/ves.tl.ro.cfm">standalone</a> · <a href="components/ves.tl.ro.cfm?mock=1">mock</a></td><td><a href="data/ves.tl.ro.data.cfm">endpoint</a></td></tr>
+<tr><td><code>ves.colreg.dial</code></td><td><a href="components/ves.colreg.dial.cfm">standalone</a> · <a href="components/ves.colreg.dial.cfm?mock=1">mock</a></td><td><a href="data/ves.colreg.dial.data.cfm">endpoint</a></td></tr>
+<tr><td><code>ves.summary</code></td><td><a href="components/ves.summary.cfm">standalone</a> · <a href="components/ves.summary.cfm?mock=1">mock</a></td><td><a href="data/ves.summary.data.cfm">endpoint</a></td></tr>
 <tr><td><code>ves.tl.zone</code></td><td><a href="components/ves.tl.zone.cfm">standalone</a> · <a href="components/ves.tl.zone.cfm?mock=1">mock</a></td><td><a href="data/ves.tl.zone.data.cfm">endpoint</a></td></tr>
 </tbody></table></div></section>
 </main>

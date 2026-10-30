@@ -829,6 +829,37 @@
         return show;
     };
 
+    /* ---------------------------------------------------------------- COLREG paragraphs and episodes (DASH.077, DASH.078) */
+
+    COS.colreg = {
+        GEOMETRY: '1',		/* colreg.paragraphs.json version the dial is drawn for */
+        GAP: 15,			/* findings of one clause closer than this (s) are one episode (REQ-066-05) */
+        /* COLREG.Rule14.a -> { rule: '14', para: '14(a)' }; COLREG.Rule15/CrossAstern -> { rule: '15', para: null } */
+        parse: function (clause) {
+            var m = /^COLREG\.Rule(\d+)(?:\.([a-z]))?/.exec(clause || '');
+            return m ? { rule: String(+m[1]), para: m[2] ? (+m[1]) + '(' + m[2] + ')' : null } : null;
+        },
+        /* rows: [{ clause, t, ... }]; returns [{ clause, t0, t1, rows }] in time order */
+        episodes: function (rows) {
+            var by = {}, out = [];
+            rows.slice().sort(function (a, b) { return a.t - b.t; }).forEach(function (r) {
+                var e = by[r.clause];
+                if (e && r.t - e.t1 <= COS.colreg.GAP) { e.t1 = r.t; e.rows.push(r); return; }
+                by[r.clause] = e = { clause: r.clause, t0: r.t, t1: r.t, rows: [r] };
+                out.push(e);
+            });
+            return out.sort(function (a, b) { return a.t0 - b.t0; });
+        },
+        /* Static JSON files under data/, fetched once per page */
+        file: (function () {
+            var cache = {};
+            return function (name) {
+                if (!cache[name]) cache[name] = COS.fetch(COS.root + '/data/' + name).then(function (res) { return res.data; });
+                return cache[name];
+            };
+        })()
+    };
+
     /* Incremental time series merge: rows carry `tick`; meta.since echoes the request. */
     COS.mergeRows = function (old, fresh, keyFn) {
         var seen = {};

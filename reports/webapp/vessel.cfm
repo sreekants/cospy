@@ -29,6 +29,8 @@
 
 <div class="cos-tabpanel cos-grid" role="tabpanel" id="tab-voyage" data-tabpanel="voyage" hidden>
   <div class="span-12"><cfinclude template="components/ves.map.violations.cfm"></div>
+  <div class="span-6"><cfinclude template="components/ves.summary.cfm"></div>
+  <div class="span-6"><cfinclude template="components/ves.colreg.dial.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.zone.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.rb.cfm"></div>
   <div class="span-12"><cfinclude template="components/ves.tl.ro.cfm"></div>
