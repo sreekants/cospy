@@ -2,8 +2,6 @@
 # Filename: Vehicle.py
 # Description: Types of vessels and their properties, states and characteristics
 
-from turtle import position
-
 from cos.model.vehicle.Intent import Intent
 from cos.model.vehicle.Signal import Signal
 from cos.model.vehicle.Engine import Engine
@@ -16,7 +14,6 @@ from cos.behavior.control.RudderBehavior import RudderBehavior
 from cos.math.geometry.Rectangle import Rectangle
 from cos.core.utilities.ArgList import ArgList
 
-from enum import Enum, Flag
 import numpy as np
 
 
