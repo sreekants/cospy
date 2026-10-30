@@ -1,0 +1,1782 @@
+{
+	"name": "colreg.paragraphs",
+	"version": "1",
+	"source": "COLREG 1972 as amended (Res. A.919(22); Part F, Res. A.1085(28)); paragraphs taken from the rule text quoted in config/maritime/regulation/colreg/Rule*.legata",
+	"order": "Rules 1-41, then Annexes I-IV; paragraphs in the order of the rule text; clockwise from 12 o'clock on the dial",
+	"weight": "Angle weight per entry; 1 = equal angle per paragraph; a rule without lettered paragraphs is one entry",
+	"paragraphs": [
+		{
+			"rule": "1",
+			"paragraph": "1(a)",
+			"sub": [],
+			"title": "Application",
+			"label": "These Rules shall apply to all vessels upon the high seas and in all waters connected …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "1",
+			"paragraph": "1(b)",
+			"sub": [],
+			"title": "Application",
+			"label": "Nothing in these Rules shall interfere with the operation of special rules made by an …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "1",
+			"paragraph": "1(c)",
+			"sub": [],
+			"title": "Application",
+			"label": "Nothing in these Rules shall interfere with the operation of any special rules made by …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "1",
+			"paragraph": "1(d)",
+			"sub": [],
+			"title": "Application",
+			"label": "Traffic separation schemes may be adopted by the Organization for the purpose of these …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "1",
+			"paragraph": "1(e)",
+			"sub": [],
+			"title": "Application",
+			"label": "Whenever the Government concerned shall have determined that a vessel of special …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "2",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Responsibility",
+			"label": "Responsibility",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(a)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The word 'vessel includes every description of water craft, including nondisplacement …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(b)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The term 'power-driven vessel' means any vessel propelled by machinery.",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(c)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The term 'sailing vessel' means any vessel under sail provided that propelling machinery, …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(d)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The term 'vessel engaged in fishing' means any vessel fishing with nets, lines, trawls or …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(e)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The word 'seaplane' includes any aircraft designed to manoeuvre on the water.",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(f)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The term 'vessel not under command' means a vessel which through some exceptional …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(g)",
+			"sub": [
+				"3(g)(i)",
+				"3(g)(ii)",
+				"3(g)(iii)",
+				"3(g)(iv)",
+				"3(g)(v)",
+				"3(g)(vi)"
+			],
+			"title": "General Definitions",
+			"label": "The term 'vessel restricted in her ability to manoeuvre' means a vessel which from the …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(h)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The term 'vessel constrained by her draught' means a power-driven vessel which because of …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(i)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The word 'underway' means that a vessel is not at anchor, or made fast to the shore, or …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(j)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The words 'length' and 'breadth' of a vessel mean her length overall and greatest breadth.",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(k)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "Vessels shall be deemed to be in sight of one another only when one can be observed …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(l)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The term 'restricted visibility' means any condition in which visibility is restricted by …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "3",
+			"paragraph": "3(m)",
+			"sub": [],
+			"title": "General Definitions",
+			"label": "The term 'Wing-In-Ground (WIG) craft' means a multimodal craft which, in its main …",
+			"part": "A",
+			"weight": 1
+		},
+		{
+			"rule": "4",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Application",
+			"label": "Application",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "5",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Look-out",
+			"label": "Look-out",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "6",
+			"paragraph": "6(a)",
+			"sub": [
+				"6(a)(i)",
+				"6(a)(ii)",
+				"6(a)(iii)",
+				"6(a)(iv)",
+				"6(a)(v)",
+				"6(a)(vi)"
+			],
+			"title": "Safe Speed",
+			"label": "By all vessels: (i) the state of visibility; (ii) the traffic density including …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "6",
+			"paragraph": "6(b)",
+			"sub": [
+				"6(b)(i)",
+				"6(b)(ii)",
+				"6(b)(iii)",
+				"6(b)(iv)",
+				"6(b)(v)",
+				"6(b)(vi)"
+			],
+			"title": "Safe Speed",
+			"label": "Additionally, by vessels with operational radar: (i) the characteristics, efficiency and …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "7",
+			"paragraph": "7(a)",
+			"sub": [],
+			"title": "Risk of Collision",
+			"label": "Every vessel shall use all available means appropriate to the prevailing circumstances …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "7",
+			"paragraph": "7(b)",
+			"sub": [],
+			"title": "Risk of Collision",
+			"label": "Proper use shall be made of radar equipment if fitted and operational, including …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "7",
+			"paragraph": "7(c)",
+			"sub": [],
+			"title": "Risk of Collision",
+			"label": "Assumptions shall not be made on the basis of scanty information, especially scanty radar …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "7",
+			"paragraph": "7(d)",
+			"sub": [
+				"7(d)(i)",
+				"7(d)(ii)"
+			],
+			"title": "Risk of Collision",
+			"label": "In determining if risk of collision exists the following considerations shall be among …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "8",
+			"paragraph": "8(a)",
+			"sub": [],
+			"title": "Action to avoid Collision",
+			"label": "Any action to avoid collision shall be taken in accordance with the Rules of this Part …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "8",
+			"paragraph": "8(b)",
+			"sub": [],
+			"title": "Action to avoid Collision",
+			"label": "Any alteration of course and/or speed to avoid collision, shall, if the circumstances of …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "8",
+			"paragraph": "8(c)",
+			"sub": [],
+			"title": "Action to avoid Collision",
+			"label": "If there is sufficient sea room, alteration of course alone may be the most effective …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "8",
+			"paragraph": "8(d)",
+			"sub": [],
+			"title": "Action to avoid Collision",
+			"label": "Action taken to avoid collision with another vessel shall be such as to result in passing …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "8",
+			"paragraph": "8(e)",
+			"sub": [],
+			"title": "Action to avoid Collision",
+			"label": "If necessary to avoid collision or allow more to assess the situation, a vessel shall …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "8",
+			"paragraph": "8(f)",
+			"sub": [
+				"8(f)(i)",
+				"8(f)(ii)",
+				"8(f)(iii)"
+			],
+			"title": "Action to avoid Collision",
+			"label": "(i) A vessel which, by any of these Rules, is required not to impede the passage or safe …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "9",
+			"paragraph": "9(a)",
+			"sub": [],
+			"title": "Narrow Channels",
+			"label": "A vessel proceeding along the course of a narrow channel or fairway shall keep as near to …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "9",
+			"paragraph": "9(b)",
+			"sub": [],
+			"title": "Narrow Channels",
+			"label": "A vessel of less than 20 metres in length or a sailing vessel shall not impede the …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "9",
+			"paragraph": "9(c)",
+			"sub": [],
+			"title": "Narrow Channels",
+			"label": "A vessel engaged in fishing shall not impede the passage of any other vessel navigating …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "9",
+			"paragraph": "9(d)",
+			"sub": [],
+			"title": "Narrow Channels",
+			"label": "A vessel shall not cross a narrow channel or fairway if such crossing impedes the passage …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "9",
+			"paragraph": "9(e)",
+			"sub": [
+				"9(e)(i)",
+				"9(e)(ii)"
+			],
+			"title": "Narrow Channels",
+			"label": "(i) In a narrow channel or fairway when overtaking can take place only if the vessel to …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "9",
+			"paragraph": "9(f)",
+			"sub": [],
+			"title": "Narrow Channels",
+			"label": "A vessel nearing a bend or an area of a narrow channel or fairway where other vessels may …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "9",
+			"paragraph": "9(g)",
+			"sub": [],
+			"title": "Narrow Channels",
+			"label": "Any vessel shall, if the circumstances of the case admit, avoid anchoring in a narrow …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(a)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "This Rule Applies to traffic separation schemes adopted by the Organization and does not …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(b)",
+			"sub": [
+				"10(b)(i)",
+				"10(b)(ii)",
+				"10(b)(iii)"
+			],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel using a traffic separation scheme shall: (i) proceed in the appropriate traffic …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(c)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel shall so far as practicable avoid crossing traffic lanes, but if obliged to do …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(d)",
+			"sub": [
+				"10(d)(i)",
+				"10(d)(ii)"
+			],
+			"title": "Traffic Separation Schemes",
+			"label": "(i) A vessel shall not use an inshore traffic zone when she can safely use the …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(e)",
+			"sub": [
+				"10(e)(i)",
+				"10(e)(ii)"
+			],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel, other than a crossing vessel, or a vessel joining or leaving a lane shall not …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(f)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel navigating in areas near the terminations of traffic separation schemes shall do …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(g)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel shall so far as practicable avoid anchoring in a traffic separation scheme or in …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(h)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel not using a traffic separation scheme shall avoid it by as wide a margin as is …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(i)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel engaged in fishing shall not impede the passage of any vessel following a …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(j)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel of less than 20 meters in length or a sailing vessel shall not impede the safe …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(k)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel restricted in her ability to manoeuvre when engaged in an operation for the …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "10",
+			"paragraph": "10(l)",
+			"sub": [],
+			"title": "Traffic Separation Schemes",
+			"label": "A vessel restricted in her ability to manoeuvre when engaged in an operation for the …",
+			"part": "B-I",
+			"weight": 1
+		},
+		{
+			"rule": "11",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Application",
+			"label": "Application",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "12",
+			"paragraph": "12(a)",
+			"sub": [
+				"12(a)(i)",
+				"12(a)(ii)",
+				"12(a)(iii)"
+			],
+			"title": "Sailing Vessels",
+			"label": "When two sailing vessels are approaching one another, so as to involve risk of collision, …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "12",
+			"paragraph": "12(b)",
+			"sub": [],
+			"title": "Sailing Vessels",
+			"label": "For the purposes of this Rule the windward side shall be deemed to be the side opposite …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "13",
+			"paragraph": "13(a)",
+			"sub": [],
+			"title": "Overtaking",
+			"label": "Notwithstanding anything contained in the Rules of Part B, Sections I and II any vessel …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "13",
+			"paragraph": "13(b)",
+			"sub": [],
+			"title": "Overtaking",
+			"label": "A vessel shall be deemed to be overtaking when coming up with another vessel from a …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "13",
+			"paragraph": "13(c)",
+			"sub": [],
+			"title": "Overtaking",
+			"label": "When a vessel is in any doubt as to whether she is overtaking another, she shall assume …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "13",
+			"paragraph": "13(d)",
+			"sub": [],
+			"title": "Overtaking",
+			"label": "Any subsequent alteration of the bearing between the two vessels shall not make the …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "14",
+			"paragraph": "14(a)",
+			"sub": [],
+			"title": "Head-on Situation",
+			"label": "When two power-driven vessels are meeting on reciprocal or nearly reciprocal courses so …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "14",
+			"paragraph": "14(b)",
+			"sub": [],
+			"title": "Head-on Situation",
+			"label": "Such a situation shall be deemed to exist when a vessel sees the other ahead or nearly …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "14",
+			"paragraph": "14(c)",
+			"sub": [],
+			"title": "Head-on Situation",
+			"label": "When a vessel is in any doubt as to whether such a situation exists she shall assume that …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "15",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Crossing Situation",
+			"label": "Crossing Situation",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "16",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Action by Give-way Vessel",
+			"label": "Action by Give-way Vessel",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "17",
+			"paragraph": "17(a)",
+			"sub": [
+				"17(a)(i)",
+				"17(a)(ii)"
+			],
+			"title": "Action by Stand-on Vessel",
+			"label": "(i) Where one of two vessels is to keep out of the way the other shall keep her course …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "17",
+			"paragraph": "17(b)",
+			"sub": [],
+			"title": "Action by Stand-on Vessel",
+			"label": "When, from any cause, the vessel required to keep her course and speed finds herself so …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "17",
+			"paragraph": "17(c)",
+			"sub": [],
+			"title": "Action by Stand-on Vessel",
+			"label": "A power-driven vessel which takes action in a crossing situation in accordance with …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "17",
+			"paragraph": "17(d)",
+			"sub": [],
+			"title": "Action by Stand-on Vessel",
+			"label": "This Rule does not relieve the give-way vessel of her obligation to keep out of the way",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "18",
+			"paragraph": "18(a)",
+			"sub": [
+				"18(a)(i)",
+				"18(a)(ii)",
+				"18(a)(iii)",
+				"18(a)(iv)"
+			],
+			"title": "Responsibilities between Vessels",
+			"label": "A power-driven vessel underway shall keep out of the way of: (i) a vessel not under …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "18",
+			"paragraph": "18(b)",
+			"sub": [
+				"18(b)(i)",
+				"18(b)(ii)",
+				"18(b)(iii)"
+			],
+			"title": "Responsibilities between Vessels",
+			"label": "A sailing vessel underway shall keep out of the way of: (i) a vessel not under command; …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "18",
+			"paragraph": "18(c)",
+			"sub": [
+				"18(c)(i)",
+				"18(c)(ii)"
+			],
+			"title": "Responsibilities between Vessels",
+			"label": "A vessel engaged in fishing when underway shall, so far as possible, keep out of the way …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "18",
+			"paragraph": "18(d)",
+			"sub": [
+				"18(d)(i)",
+				"18(d)(ii)"
+			],
+			"title": "Responsibilities between Vessels",
+			"label": "(i) Any vessel other than a vessel not under command or a vessel restricted in her …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "18",
+			"paragraph": "18(e)",
+			"sub": [],
+			"title": "Responsibilities between Vessels",
+			"label": "A seaplane on the water shall, in general, keep well clear of all vessels and avoid …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "18",
+			"paragraph": "18(f)",
+			"sub": [
+				"18(f)(i)",
+				"18(f)(ii)"
+			],
+			"title": "Responsibilities between Vessels",
+			"label": "(i) A WIG craft shall, when taking off, landing and in flight near the surface, keep well …",
+			"part": "B-II",
+			"weight": 1
+		},
+		{
+			"rule": "19",
+			"paragraph": "19(a)",
+			"sub": [],
+			"title": "Conduct of vessels in restricted visibility",
+			"label": "This Rule applies to vessels not in sight of one another when navigating in or near an …",
+			"part": "B-III",
+			"weight": 1
+		},
+		{
+			"rule": "19",
+			"paragraph": "19(b)",
+			"sub": [],
+			"title": "Conduct of vessels in restricted visibility",
+			"label": "Every vessel shall proceed at a safe speed adapted to the prevailing circumstances and …",
+			"part": "B-III",
+			"weight": 1
+		},
+		{
+			"rule": "19",
+			"paragraph": "19(c)",
+			"sub": [],
+			"title": "Conduct of vessels in restricted visibility",
+			"label": "Every vessel shall have due regard to the prevailing circumstances and conditions of …",
+			"part": "B-III",
+			"weight": 1
+		},
+		{
+			"rule": "19",
+			"paragraph": "19(d)",
+			"sub": [
+				"19(d)(i)",
+				"19(d)(ii)"
+			],
+			"title": "Conduct of vessels in restricted visibility",
+			"label": "A vessel which detects by radar alone the presence of another vessel shall determine if a …",
+			"part": "B-III",
+			"weight": 1
+		},
+		{
+			"rule": "19",
+			"paragraph": "19(e)",
+			"sub": [],
+			"title": "Conduct of vessels in restricted visibility",
+			"label": "Except where it has been determined that a risk of collision does not exist, every vessel …",
+			"part": "B-III",
+			"weight": 1
+		},
+		{
+			"rule": "20",
+			"paragraph": "20(a)",
+			"sub": [],
+			"title": "Application",
+			"label": "Rules in this Part shall be complied with in all weathers.",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "20",
+			"paragraph": "20(b)",
+			"sub": [],
+			"title": "Application",
+			"label": "The Rules concerning lights shall be complied with from sunset to sunrise, and during …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "20",
+			"paragraph": "20(c)",
+			"sub": [],
+			"title": "Application",
+			"label": "The lights prescribed by these Rules shall, if carried, also be exhibited from sunrise to …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "20",
+			"paragraph": "20(d)",
+			"sub": [],
+			"title": "Application",
+			"label": "The Rules concerning shapes shall be complied with by day.",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "20",
+			"paragraph": "20(e)",
+			"sub": [],
+			"title": "Application",
+			"label": "The lights and shapes specified in these Rules shall comply with the pcosisions of Annex …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "21",
+			"paragraph": "21(a)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "'Masthead light' means a white light placed over the fore and aft centerline of the …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "21",
+			"paragraph": "21(b)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "'Sidelights' means a green light on the starboard side and a red light on the port side …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "21",
+			"paragraph": "21(c)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "'Sternlight' means a white light placed as nearly as practicable at the stern showing an …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "21",
+			"paragraph": "21(d)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "'Towing light' means a yellow light having the same characteristics as the 'sternlight' …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "21",
+			"paragraph": "21(e)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "'All round light' means a light showing an unbroken light over an arc of the horizon of …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "21",
+			"paragraph": "21(f)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "'Flashing light' means a light flashing at regular intervals at a frequency of 120 …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "22",
+			"paragraph": "22(a)",
+			"sub": [],
+			"title": "Visibility of Lights",
+			"label": "In vessels of 50 metres or more in length: - a masthead light, 6 miles; - a sidelight, 3 …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "22",
+			"paragraph": "22(b)",
+			"sub": [],
+			"title": "Visibility of Lights",
+			"label": "In vessels of 12 metres or more in length but less than 50 m in length: - a masthead …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "22",
+			"paragraph": "22(c)",
+			"sub": [],
+			"title": "Visibility of Lights",
+			"label": "In vessels of less than 12 metres in length: - a masthead light, 2 miles, - a sidelight, …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "22",
+			"paragraph": "22(d)",
+			"sub": [],
+			"title": "Visibility of Lights",
+			"label": "In inconspicuous, partly submerged vessels or objects being towed; a white allround …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "23",
+			"paragraph": "23(a)",
+			"sub": [
+				"23(a)(i)",
+				"23(a)(ii)",
+				"23(a)(iii)",
+				"23(a)(iv)"
+			],
+			"title": "Power-driven Vessels underway",
+			"label": "A power-driven vessel underway shall exhibit: (i) a masthead light forward; (ii) a second …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "23",
+			"paragraph": "23(b)",
+			"sub": [],
+			"title": "Power-driven Vessels underway",
+			"label": "An air-cushion vessel when operating in the non-displacement mode shall, in addition to …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "23",
+			"paragraph": "23(c)",
+			"sub": [],
+			"title": "Power-driven Vessels underway",
+			"label": "A WIG craft only when taking off, landing and in flight near the surface shall, in …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "23",
+			"paragraph": "23(d)",
+			"sub": [
+				"23(d)(i)",
+				"23(d)(ii)",
+				"23(d)(iii)"
+			],
+			"title": "Power-driven Vessels underway",
+			"label": "(i) A power-driven vessel of less than 12 meters in length may in lieu of the lights …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(a)",
+			"sub": [
+				"24(a)(i)",
+				"24(a)(ii)",
+				"24(a)(iii)",
+				"24(a)(iv)",
+				"24(a)(v)"
+			],
+			"title": "Towing and Pushing",
+			"label": "A power-driven vessel when towing shall exhibit: (i) instead of the light prescribed in …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(b)",
+			"sub": [],
+			"title": "Towing and Pushing",
+			"label": "When a pushing vessel and a vessel being pushed ahead are rigidly connected in a …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(c)",
+			"sub": [
+				"24(c)(i)",
+				"24(c)(ii)",
+				"24(c)(iii)"
+			],
+			"title": "Towing and Pushing",
+			"label": "A power-driven vessel when pushing ahead or towing alongside, except in the case of a …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(d)",
+			"sub": [],
+			"title": "Towing and Pushing",
+			"label": "A power-driven vessel to which paragraph (a) or (c) of this Rule applies shall also …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(e)",
+			"sub": [
+				"24(e)(i)",
+				"24(e)(ii)",
+				"24(e)(iii)"
+			],
+			"title": "Towing and Pushing",
+			"label": "A vessel or object being towed, other than those mentioned in paragraph (g) of this Rule, …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(f)",
+			"sub": [
+				"24(f)(i)",
+				"24(f)(ii)"
+			],
+			"title": "Towing and Pushing",
+			"label": "Pcosided that any number of vessels being towed alongside or pushed in a group shall be …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(g)",
+			"sub": [
+				"24(g)(i)",
+				"24(g)(ii)",
+				"24(g)(iii)",
+				"24(g)(iv)"
+			],
+			"title": "Towing and Pushing",
+			"label": "An inconspicuous, partly submerged vessel or object, or combination of such vessels or …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(h)",
+			"sub": [],
+			"title": "Towing and Pushing",
+			"label": "Where from any sufficient cause it is impracticable for a vessel or object being towed to …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "24",
+			"paragraph": "24(i)",
+			"sub": [],
+			"title": "Towing and Pushing",
+			"label": "Where from any sufficient cause it is impracticable for a vessel not normally engaged in …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "25",
+			"paragraph": "25(a)",
+			"sub": [
+				"25(a)(i)",
+				"25(a)(ii)"
+			],
+			"title": "Sailing Vessels underway and Vessels under Oars",
+			"label": "A sailing vessel underway shall exhibit: (i) sidelights; (ii) a sternlight.",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "25",
+			"paragraph": "25(b)",
+			"sub": [],
+			"title": "Sailing Vessels underway and Vessels under Oars",
+			"label": "In a sailing vessel of less than 20 metres in length the lights prescribed in paragraph …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "25",
+			"paragraph": "25(c)",
+			"sub": [],
+			"title": "Sailing Vessels underway and Vessels under Oars",
+			"label": "A sailing vessel underway may, in addition to the lights prescribed in paragraph (a) of …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "25",
+			"paragraph": "25(d)",
+			"sub": [
+				"25(d)(i)",
+				"25(d)(ii)"
+			],
+			"title": "Sailing Vessels underway and Vessels under Oars",
+			"label": "(i) A sailing vessel of less than 7 metres in length shall, if practicable, exhibit the …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "25",
+			"paragraph": "25(e)",
+			"sub": [],
+			"title": "Sailing Vessels underway and Vessels under Oars",
+			"label": "A vessel proceeding under sail when also being propelled by machinery shall exhibit …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "26",
+			"paragraph": "26(a)",
+			"sub": [],
+			"title": "Fishing Vessels",
+			"label": "A vessel engaged in fishing, whether underway or at anchor, shall exhibit only the lights …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "26",
+			"paragraph": "26(b)",
+			"sub": [
+				"26(b)(i)",
+				"26(b)(ii)",
+				"26(b)(iii)"
+			],
+			"title": "Fishing Vessels",
+			"label": "A vessel when engaged in trawling, by which is meant the dragging through the water of a …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "26",
+			"paragraph": "26(c)",
+			"sub": [
+				"26(c)(i)",
+				"26(c)(ii)",
+				"26(c)(iii)"
+			],
+			"title": "Fishing Vessels",
+			"label": "A vessel engaged in fishing, other than trawling, shall exhibit: (i) two all-round lights …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "26",
+			"paragraph": "26(d)",
+			"sub": [],
+			"title": "Fishing Vessels",
+			"label": "The additional signals described in Annex II to these Regulations apply to a vessel …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "26",
+			"paragraph": "26(e)",
+			"sub": [],
+			"title": "Fishing Vessels",
+			"label": "A vessel when not engaged in fishing shall not exhibit the lights or shapes prescribed in …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(a)",
+			"sub": [
+				"27(a)(i)",
+				"27(a)(ii)",
+				"27(a)(iii)"
+			],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "A vessel not under command shall exhibit: (i) two all-round red lights in a vertical line …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(b)",
+			"sub": [
+				"27(b)(i)",
+				"27(b)(ii)",
+				"27(b)(iii)",
+				"27(b)(iv)"
+			],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "A vessel restricted in her ability to manoeuvre, except a vessel engaged in mineclearance …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(c)",
+			"sub": [],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "A power-driven vessel engaged in a towing operation such as severely restricts the towing …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(d)",
+			"sub": [
+				"27(d)(i)",
+				"27(d)(ii)",
+				"27(d)(iii)"
+			],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "A vessel engaged in dredging or underwater operations, when restricted in her ability to …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(e)",
+			"sub": [
+				"27(e)(i)",
+				"27(e)(ii)"
+			],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "Whenever the size of a vessel engaged in diving operations makes it impracticable to …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(f)",
+			"sub": [],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "A vessel engaged in mineclearance operations shall in addition to the lights prescribed …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(g)",
+			"sub": [],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "Vessels of less than 12 metres in length, except those engaged in diving operations, …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "27",
+			"paragraph": "27(h)",
+			"sub": [],
+			"title": "Vessels not under command or restricted in their ability to manoeuvre",
+			"label": "The signals prescribed in this Rule are not signals of vessels in distress and requiring …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "28",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Vessels constrained by their draught",
+			"label": "Vessels constrained by their draught",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "29",
+			"paragraph": "29(a)",
+			"sub": [
+				"29(a)(i)",
+				"29(a)(ii)",
+				"29(a)(iii)"
+			],
+			"title": "Pilot Vessels",
+			"label": "A vessel engaged on pilotage duty shall exhibit: (i) at or near the masthead, two …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "29",
+			"paragraph": "29(b)",
+			"sub": [],
+			"title": "Pilot Vessels",
+			"label": "A pilot vessel when not engaged on pilotage duty shall exhibit the lights or shapes …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "30",
+			"paragraph": "30(a)",
+			"sub": [
+				"30(a)(i)",
+				"30(a)(ii)"
+			],
+			"title": "Anchored Vessels and Vessels aground",
+			"label": "A vessel at anchor shall exhibit where it can best be seen: (i) in the fore part, an …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "30",
+			"paragraph": "30(b)",
+			"sub": [],
+			"title": "Anchored Vessels and Vessels aground",
+			"label": "A vessel of less than 50 metres in length may exhibit an all-round white light where it …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "30",
+			"paragraph": "30(c)",
+			"sub": [],
+			"title": "Anchored Vessels and Vessels aground",
+			"label": "A vessel at anchor may, and a vessel of 100 metres and more in length shall, also use the …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "30",
+			"paragraph": "30(d)",
+			"sub": [
+				"30(d)(i)",
+				"30(d)(ii)"
+			],
+			"title": "Anchored Vessels and Vessels aground",
+			"label": "A vessel aground shall exhibit the lights prescribed in paragraph (a) or (b) of this Rule …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "30",
+			"paragraph": "30(e)",
+			"sub": [],
+			"title": "Anchored Vessels and Vessels aground",
+			"label": "A vessel of less than 7 metres in length, when at anchor, not in or near a narrow …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "30",
+			"paragraph": "30(f)",
+			"sub": [],
+			"title": "Anchored Vessels and Vessels aground",
+			"label": "A vessel of less than 12 metres in length, when aground, shall not be required to exhibit …",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "31",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Seaplanes",
+			"label": "Seaplanes",
+			"part": "C",
+			"weight": 1
+		},
+		{
+			"rule": "32",
+			"paragraph": "32(a)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "The word 'whistle' means any sound signalling appliance capable of producing the …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "32",
+			"paragraph": "32(b)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "The term 'short blast' means a blast of about one second's duration.",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "32",
+			"paragraph": "32(c)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "The term 'prolonged blast' means a blast of from four to six seconds's duration. …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "33",
+			"paragraph": "33(a)",
+			"sub": [],
+			"title": "Equipment for Sound Signals",
+			"label": "A vessel of 12 metres or more in length shall be provided with a whistle, a vessel of 20 …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "33",
+			"paragraph": "33(b)",
+			"sub": [],
+			"title": "Equipment for Sound Signals",
+			"label": "A vessel of less than 12 metres in length shall not be obliged to carry the sound …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "34",
+			"paragraph": "34(a)",
+			"sub": [],
+			"title": "Manoeuvring and Warning Signals",
+			"label": "When vessels are in sight of one another, a power-driven vessel underway, when …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "34",
+			"paragraph": "34(b)",
+			"sub": [
+				"34(b)(i)",
+				"34(b)(ii)",
+				"34(b)(iii)"
+			],
+			"title": "Manoeuvring and Warning Signals",
+			"label": "Any vessel may supplement the whistle signals prescribed in paragraph (a) of this Rule by …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "34",
+			"paragraph": "34(c)",
+			"sub": [
+				"34(c)(i)",
+				"34(c)(ii)"
+			],
+			"title": "Manoeuvring and Warning Signals",
+			"label": "When in sight of one another in a narrow channel or fairway: (i) a vessel intending to …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "34",
+			"paragraph": "34(d)",
+			"sub": [],
+			"title": "Manoeuvring and Warning Signals",
+			"label": "When vessels in sight of one another are approaching each other and from any cause either …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "34",
+			"paragraph": "34(e)",
+			"sub": [],
+			"title": "Manoeuvring and Warning Signals",
+			"label": "A vessel nearing a bend or an area of a channel or fairway where other vessels may be …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "34",
+			"paragraph": "34(f)",
+			"sub": [],
+			"title": "Manoeuvring and Warning Signals",
+			"label": "If whistles are fitted on a vessel at a distance apart of more than 100 metres, one …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(a)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A power-driven vessel making way through the water shall sound at intervals of not more …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(b)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A power-driven vessel underway but stopped and making no way through the water shall …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(c)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A vessel not under command, a vessel restricted in her ability to manoeuvre, a vessel …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(d)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A vessel engaged in fishing, when at anchor, and a vessel restricted in her ability to …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(e)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A vessel towed or if more than one vessel is towed the last vessel of the tow, if manned, …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(f)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "When a pushing vessel and a vessel being pushed ahead are rigidly connected in a …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(g)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A vessel at anchor shall at intervals of not more than one minute ring the bell rapidly …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(h)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A vessel aground shall give the bell signal and if required the gone signal prescribed in …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(i)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A vessel of 12 metres or more but less than 20 metres in length shall not be obliged to …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(j)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A vessel of less than 12 metres in length shall not be obliged to give the abovementioned …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "35",
+			"paragraph": "35(k)",
+			"sub": [],
+			"title": "Sound Signals in restricted Visibility",
+			"label": "A pilot vessel when engaged on pilotage duty may in addition to the signals prescribed in …",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "36",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Signals to attract Attention",
+			"label": "Signals to attract Attention",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "37",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Distress signals",
+			"label": "Distress signals",
+			"part": "D",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(a)",
+			"sub": [],
+			"title": "Exemptions",
+			"label": "The installation of lights with ranges prescribed in Rule 22, until four years after the …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(b)",
+			"sub": [],
+			"title": "Exemptions",
+			"label": "The installation of lights with colour specifications as prescribed in Section 7 of Annex …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(c)",
+			"sub": [],
+			"title": "Exemptions",
+			"label": "The repositioning of lights as a result of conversion from Imperial to metric units and …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(d)",
+			"sub": [
+				"38(d)(i)",
+				"38(d)(ii)"
+			],
+			"title": "Exemptions",
+			"label": "(i) The repositioning of masthead lights on vessels of less than 150 meters in length, …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(e)",
+			"sub": [],
+			"title": "Exemptions",
+			"label": "The repositioning of masthead lights resulting from the prescriptions of Section 2(b) of …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(f)",
+			"sub": [],
+			"title": "Exemptions",
+			"label": "The repositioning of sidelights resulting from the prescriptions of Sections 2(g) and …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(g)",
+			"sub": [],
+			"title": "Exemptions",
+			"label": "The requirements for sound signal appliances prescribed in Annex III to these …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "38",
+			"paragraph": "38(h)",
+			"sub": [],
+			"title": "Exemptions",
+			"label": "The repositioning of all-round lights resulting from the prescription of Section 9(b) of …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "39",
+			"paragraph": "39(a)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "Audit means a systematic, independent and documented process for obtaining audit evidence …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "39",
+			"paragraph": "39(b)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "Audit Scheme means the IMO Member State Audit Scheme established by the Organization and …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "39",
+			"paragraph": "39(c)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "Code for Implementation means the IMO Instruments Implementation Code (III Code) adopted …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "39",
+			"paragraph": "39(d)",
+			"sub": [],
+			"title": "Definitions",
+			"label": "Audit Standard means the Code for Implementation. …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "40",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Application",
+			"label": "Application",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "41",
+			"paragraph": "41(a)",
+			"sub": [],
+			"title": "Verification of compliance",
+			"label": "Every Contracting Party shall be subject to periodic audits by the Organization in …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "41",
+			"paragraph": "41(b)",
+			"sub": [],
+			"title": "Verification of compliance",
+			"label": "The Secretary-General of the Organization shall have responsibility for administering the …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "41",
+			"paragraph": "41(c)",
+			"sub": [],
+			"title": "Verification of compliance",
+			"label": "Every Contracting Party shall have responsibility for facilitating the conduct of the …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "41",
+			"paragraph": "41(d)",
+			"sub": [
+				"41(d)(i)",
+				"41(d)(ii)"
+			],
+			"title": "Verification of compliance",
+			"label": "Audit of all Contracting Parties shall be: (i) based on an overall schedule developed by …",
+			"part": "E–F",
+			"weight": 1
+		},
+		{
+			"rule": "Annex I",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Positioning and technical details of lights and shapes",
+			"label": "Positioning and technical details of lights and shapes",
+			"part": "Annex",
+			"weight": 1
+		},
+		{
+			"rule": "Annex II",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Additional signals for fishing vessels fishing in close proximity",
+			"label": "Additional signals for fishing vessels fishing in close proximity",
+			"part": "Annex",
+			"weight": 1
+		},
+		{
+			"rule": "Annex III",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Technical details of sound signal appliances",
+			"label": "Technical details of sound signal appliances",
+			"part": "Annex",
+			"weight": 1
+		},
+		{
+			"rule": "Annex IV",
+			"paragraph": "—",
+			"sub": [],
+			"title": "Distress signals",
+			"label": "Distress signals",
+			"part": "Annex",
+			"weight": 1
+		}
+	]
+}
